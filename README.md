@@ -42,11 +42,6 @@ To send periodic notification emails to users, run the following `rake` task usi
     
 # Development 
 
-To populate the database with development data, use:
-
-    bundle exec rake db:sample
-
-To force all emails to be sent to your email address, instead of their intended target, populate the `SENDGRID_FORCE_TO_ADDRESS` environment variable in your `.env` file
 
 ## CartoDB integration
 

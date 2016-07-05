@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-////= require underscore/underscore
+//= require underscore/underscore
 //= require backbone/backbone
 //= require_self
 //= require_tree ./helpers/
