@@ -1,0 +1,46 @@
+/* General layout */
+$body-max-width:      1400px;
+$wrapper-padding:          50px;
+$wrapper-tablet-padding:   30px;
+$wrapper-mobile-padding:   15px;
+
+/* Font families */
+$font-family-1: "Montserrat", sans-serif;
+
+/* Font sizes */
+$font-size-tiny:     11px;
+$font-size-x-small:  12px;
+$font-size-small:    13px;
+$font-size-normal:   15px;
+$font-size-medium:   20px;
+$font-size-x-medium: 27px;
+$font-size-big:      30px;
+$font-size-x-big:    55px;
+$font-size-huge:     65px;
+$font-size-x-huge:   78px;
+
+/* Font weights */
+$font-weight-light:  300;
+$font-weight-normal: 400;
+$font-weight-bold:   700;
+
+/* Colors */
+$color-1:  #5aade4;
+$color-2:  #0f3046;
+$color-3:  #fff;
+$color-4:  #68299b;
+$color-5:  #fbfbfb;
+
+/* Breakpoints */
+$breakpoint-mobile-small:  320px;
+$breakpoint-mobile-large:  425px;
+$breakpoint-tablet:        768px;
+$breakpoint-laptop:       1024px;
+
+/* Media queries */
+$mq-mobile-small: "screen and (min-width: #{$breakpoint-mobile-small})";
+$mq-mobile-large: "screen and (min-width: #{$breakpoint-mobile-large})";
+$mq-tablet:       "screen and (min-width: #{$breakpoint-tablet})";
+$mq-laptop:       "screen and (min-width: #{$breakpoint-laptop})";
+
+$mq-body-width: "screen and (min-width: #{$body-max-width})";

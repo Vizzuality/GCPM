@@ -13,6 +13,7 @@ gem 'gon'
 gem 's3'
 gem 'activeadmin', git: 'http://github.com/activeadmin/activeadmin'
 gem 'active_admin_theme'
+gem 'turbolinks', '~> 5.0.0'
 
 # Assets pipeline
 gem 'uglifier', '>= 1.3.0'

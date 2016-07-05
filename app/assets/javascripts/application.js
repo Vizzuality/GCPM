@@ -13,4 +13,20 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
+////= require underscore/underscore
+//= require backbone/backbone
+//= require_self
+//= require_tree ./helpers/
+//= require_tree ./views/
+//= require dispatcher
+
+(function() {
+
+  'use strict';
+
+  this.App = {
+    View:   {},
+    Helper: {}
+  };
+
+}).call(this);

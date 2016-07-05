@@ -1,0 +1,57 @@
+<div class="c-header">
+
+  <div class="desktop-secondary-menu">
+    <div class="wrapper">
+      <ul>
+        <li><a disabled><%= t 'submit_project' %></a></li>
+        <li><a disabled><%= t 'language' %></a></li>
+        <li><a disabled><%= t 'search' %></a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wrapper">
+    <div class="desktop-menu">
+      <div class="logo">
+        <%= link_to(home_path) do %>
+          <h1>Global cancer project map</h1>
+        <% end %>
+      </div>
+      <ul>
+        <li class="<%= active_page?(map_path) ? '-active' : '' %>"><%= link_to (t 'map'), map_path %></a></li>
+        <li class="<%= active_page?(countries_path) ? '-active' : '' %>"><%= link_to (t 'countries'), countries_path %></a></li>
+        <li class="<%= active_page?(cancers_path) ? '-active' : '' %>"><%= link_to (t 'cancer_types'), cancers_path %></a></li>
+        <li class="<%= active_page?(about_path) ? '-active' : '' %>"><%= link_to (t 'about'), about_path %></a></li>
+        <li><a disabled><%= t 'login' %></a></li>
+        <li><a disabled><%= t 'sign_up' %></a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mobile-drawer js-mobile-drawer">
+    <ul class="menu">
+      <li class="<%= active_page?(map_path) ? '-active' : '' %>"><%= link_to (t 'map'), map_path %></a></li>
+      <li class="<%= active_page?(countries_path) ? '-active' : '' %>"><%= link_to (t 'countries'), countries_path %></a></li>
+      <li class="<%= active_page?(cancers_path) ? '-active' : '' %>"><%= link_to (t 'cancer_types'), cancers_path %></a></li>
+      <li class="<%= active_page?(about_path) ? '-active' : '' %>"><%= link_to (t 'about'), about_path %></a></li>
+      <li><a disabled><%= t 'login' %></a></li>
+      <li><a disabled><%= t 'sign_up' %></a></li>
+    </ul>
+  </div>
+
+  <div class="wrapper">
+    <div class="mobile-menu">
+      <div class="logo">
+        <%= link_to(home_path) do %>
+          <h1>Global cancer project map</h1>
+        <% end %>
+      </div>
+      <div class="hamburger-menu js-hamburger-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -20,4 +20,13 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  map: "Map"
+  countries: "Countries"
+  cancer_types: "Cancer types"
+  about: "About"
+  login: "Login"
+  sign_up: "Sign up"
+  submit_project: "Submit a project"
+  language: "Language"
+  search: "Search"
+  follow_us: "Follow us"
