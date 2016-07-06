@@ -17,7 +17,7 @@
  * 		- "-mobile-large-{1-4, 2/3, ...}": styles apply for large mobile+
  * 		- "-tablet-{1-4, 2/3, ...}":       styles apply for tablet+
  * 		- "-laptop-{1-4, 2/3, ...}":       styles apply for laptop+
- * 		
+ *
  */
 .c-card-grid {
   display: flex;
@@ -88,6 +88,11 @@
         &.\-#{$breakpoint}-2-3 { flex-basis: 66.66%; }
         &.\-#{$breakpoint}-3-4 { flex-basis: 75%;    }
       }
+    }
+
+    > .c-button {
+      display: inline-block;
+      margin-top: 10px;
     }
 
   }
