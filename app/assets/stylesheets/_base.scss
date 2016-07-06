@@ -31,6 +31,7 @@ a {
   text-decoration: none;
 
   &[disabled] {
+    display: inline-block;
     cursor: pointer;
     opacity: .3;
   }

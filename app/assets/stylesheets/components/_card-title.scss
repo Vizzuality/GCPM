@@ -1,0 +1,36 @@
+/**
+ *
+ *	<h4 class="c-card-title">{Content goes here}</h4>
+ *
+ * 	Optional classes:
+ * 		- "-border-1":   blue border ($color-1)
+ * 		- "-border-2": orange border ($color-6)
+ * 		- "-border-3": purple border ($color-4)
+ */
+.c-card-title {
+  margin:  0;
+  padding: 0;
+  font-size: $font-size-x-small;
+  text-transform: uppercase;
+  color: rgba($color-2, .5);
+
+  &.-border-1,
+  &.-border-2,
+  &.-border-3 {
+    position: relative;
+    padding-bottom: 23px;
+
+    &:after {
+      content: '';
+      position: absolute;
+      left:   0;
+      bottom: 0;
+      width:  10px;
+      height:  3px;
+    }
+  }
+
+  &.-border-1:after { background-color: $color-1; }
+  &.-border-2:after { background-color: $color-6; }
+  &.-border-3:after { background-color: $color-4; }
+}
