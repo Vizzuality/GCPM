@@ -118,7 +118,7 @@
       flex-basis: 20px;
       flex-shrink: 0;
       cursor: pointer;
-      z-index: 1;
+      z-index: 3;
 
       > span {
         display: block;
@@ -139,6 +139,7 @@
     will-change: transform;
     transition: transform .3s ease-out;
     background: $color-3;
+    z-index: 2;
 
     @media screen and (min-width: 870px) {
       display: none;
