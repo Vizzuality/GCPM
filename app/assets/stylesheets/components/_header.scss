@@ -46,7 +46,7 @@
         h1 {
           height: 46px;
           margin: 0;
-          text-indent: calc(-100vw - 1000px);
+          text-indent: -10000px;
           background: asset-url('logo@2x.png') no-repeat left top;
           background-size: 100%;
         }
