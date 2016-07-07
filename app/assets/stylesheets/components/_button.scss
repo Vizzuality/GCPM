@@ -37,8 +37,14 @@
     box-shadow: 0px 7px 15px 0px rgba(0, 0, 0, .10);
   }
 
-  &.-color-2 { color: $color-6; }
-  &.-color-3 { color: $color-4; }
+  &.-color-2 { 
+    color: $color-6;
+    border: 1px solid $color-6;
+  }
+  &.-color-3 { 
+    color: $color-4; 
+    border: 1px solid $color-4;
+  }
 
   &.-respect-text {
     font-size: inherit;
@@ -64,11 +70,12 @@
 
   &.-inverse {
     color: $color-3;
-    border-color: $color-3 !important;
+    border-color: $color-3;
 
     &.-filled {
       background: $color-3;
       color: $color-1;
+      border-color: $color-3;
 
       &.-color-2 { color: $color-6; }
       &.-color-3 { color: $color-4; }
