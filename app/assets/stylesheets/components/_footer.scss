@@ -44,7 +44,7 @@
 
         &.-notext > a {
           display: block;
-          text-indent: calc(-100vw - 1000px);
+          text-indent: -10000px;
         }
 
         &.-linkedin > a {
