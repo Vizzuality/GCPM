@@ -2,11 +2,11 @@
  *
  * 	Preferred markup (for accessibility matter):
  *	<ul class="c-section-menu">
- *		<li class="section-menu-item">Data</li> // Optional?
- *		<li class="section-menu-item">Projects</li>
- *		<li class="section-menu-item">People</li>
- *		<li class="section-menu-item">Events</li>
- *		<li class="section-menu-item">Posts</li> // Optional?
+ *		<li class="section-menu-item"><%= link_to (t 'data'), {path} %></li> // Optional?
+ *		<li class="section-menu-item"><%= link_to (t 'projects'), {path} %></li>
+ *		<li class="section-menu-item"><%= link_to (t 'people'), {path} %></li>
+ *		<li class="section-menu-item"><%= link_to (t 'events'), {path} %></li>
+ *		<li class="section-menu-item"><%= link_to (t 'posts'), {path} %></li> // Optional?
  *	</ul>
  *
  *	Colors modifiers (for the background):
@@ -28,14 +28,20 @@
  	&.-b-color-3 { background-color: $color-4 }
 	
 	.section-menu-item {
-		list-style: none;
 		padding: 12px 24px;
-		color: $color-3;
+
+		& a {
+			color: $color-3;
+		}
 
 		&.-active {
 			box-shadow: inset 0 0 2px 0 lightgrey;
 			color: $color-2;
 			background-color: $color-3;
+
+			& a {
+				color: $color-2;
+			}
 		}
 	}
  }
