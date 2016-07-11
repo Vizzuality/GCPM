@@ -1,8 +1,8 @@
 /**
  *
- *	<h1 class="c-title -huge">   {Title goes here} </h1>
- *	<h1 class="c-title -big">    {Title goes here} </h1>
- *	<h2 class="c-title -medium"> {Title goes here} </h2>
+ *  <h1 class="c-title -huge">   {Title goes here} </h1>
+ *  <h1 class="c-title -big">    {Title goes here} </h1>
+ *  <h2 class="c-title -medium"> {Title goes here} </h2>
  *  <h3 class="c-title -normal"> {Title goes here} </h3>
  *  <h3 class="c-title -small">  {Title goes here} </h3>
  *
@@ -10,11 +10,11 @@
  *  hierarchy (especially usefull for accessibility matters).
  *
  *  The different modifiers are:
- *  	- "-huge":    usually a special title
- *  	- "-big":     usually the title of the page
- *  	- "-medium":  usually the title of a section
- *  	- "-normal":  usually the title of an article (DEFAULT style)
- *   	- "-inverse": make the title white-ish (for darker/colorfull backgrounds)
+ *    - "-huge":    usually a special title
+ *    - "-big":     usually the title of the page
+ *    - "-medium":  usually the title of a section
+ *    - "-normal":  usually the title of an article (DEFAULT style)
+ *    - "-inverse": make the title white-ish (for darker/colorfull backgrounds)
  */
 
 .c-title {
