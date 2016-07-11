@@ -19,7 +19,7 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-# Short alphabetically
+# Sort alphabetically
 
 en:
   about: "About"
@@ -44,9 +44,9 @@ en:
   sign_up: "Sign up"
   submit_project: "Submit a project"
   total_events: "Total events"
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
