@@ -6,69 +6,57 @@
  *			<div class="initials"> {User's initials} </div>
  *			<img src="{Path}" alt="{User name}'s profile picture'" />
  *		</div>
- *		<h3 class="c-title -small"> { User Name } </h3>
- *		<p class="university"> { University } </p>
- *		<p class="qualification"> { Qualification } </p>
+ *		<h3 class="c-title -small -color-4"> {...} </h3>
+ *		<p class="university -color-4"> {...} </p>
+ *		<p class="qualification -color-3"> {...} </p>
  *	</div>
  *
- *	Box sizes   
- *  	- "-medium"  
+ *	Box sizes
+ *  	- "-medium"
  *  	- "-normal" (DEFAULT style)
- *  	- "-small"  
+ *  	- "-small"
  *
  *	Colors modifiers (for the text):
- *		- "-color-1": blue     	  ($color-1)
+ *		- "-color-1": blue     	($color-1)
  *		- "-color-2": orange 	  ($color-6)
  *		- "-color-3": purple 	  ($color-4)
- *		- "-color-4": dark-blue   ($color-2) 
+ *		- "-color-4": dark-blue ($color-2)
  *
  *
  */
 
- .c-user-summary-info {
-	display: flex;
-	flex-flow: column;
-	align-items: center;
-	width: 200px;
+.c-user-summary-info {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: 200px;
 
-		&.-medium { width: 250px; }
-		&.-small { width: 120px; }
+  &.-medium { width: 250px; }
+  &.-small { width: 120px; }
 
-	.c-title.-small {
-		margin-top: 20px;
-		margin-bottom: 3px;
-		font-family: $font-family-1;
-		color: $color-2;
-		text-align: center;
+  & * {
+    &.-color-1 { color: $color-1; }
+    &.-color-2 { color: $color-6; }
+    &.-color-3 { color: $color-4; }
+    &.-color-4 { color: $color-2; }
+  }
 
-		&.-color-1 { color: $color-1; }
-		&.-color-2 { color: $color-6; }
-		&.-color-3 { color: $color-4; }
-	}
+  .c-title.-small {
+    margin-top: 20px;
+    margin-bottom: 3px;
+    font-family: $font-family-1;
+    text-align: center;
+  }
 
-	p {
-		margin: 0;
-		font-size: $font-size-normal;
-		font-weight: $font-weight-light;
-		text-transform: capitalize;
-		text-align: center;
-	}
+  p {
+    margin: 0;
+    font-size: $font-size-normal;
+    font-weight: $font-weight-light;
+    text-transform: capitalize;
+    text-align: center;
+  }
 
-	.university {
-		color: $color-2;
-		opacity: .7;
-
-		&.-color-1 { color: $color-1; }
-		&.-color-2 { color: $color-6; }
-		&.-color-3 { color: $color-4; }
-	}
-
-	.qualification {
-		color: $color-4;
-
-		&.-color-1 { color: $color-1; }
-		&.-color-2 { color: $color-6; }
-		&.-color-4 { color: $color-2; }
-
-	}
- }
+  .university {
+    opacity: .7;
+  }
+}
