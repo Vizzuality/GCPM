@@ -34,17 +34,20 @@ ActiveRecord::Schema.define(version: 20160629161041) do
     t.string   "city"
     t.string   "country"
     t.string   "country_iso"
+    t.string   "country_code"
     t.float    "latitude"
     t.float    "longitude"
-    t.text     "address"
+    t.text     "line_1"
+    t.text     "line_2"
+    t.text     "line_3"
     t.string   "postcode"
-    t.boolean  "primary",         default: false
+    t.boolean  "primary",          default: false
     t.string   "state"
     t.string   "state_code"
-    t.string   "geonames_city"
+    t.integer  "geonames_city_id"
     t.integer  "organization_id"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.index ["organization_id"], name: "index_addresses_on_organization_id", using: :btree
   end
 
@@ -73,9 +76,12 @@ ActiveRecord::Schema.define(version: 20160629161041) do
     t.string   "name"
     t.string   "acronym"
     t.string   "grid_id"
+    t.string   "email_address"
+    t.integer  "established"
     t.integer  "organization_type_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.index ["grid_id"], name: "index_organizations_on_grid_id", using: :btree
     t.index ["organization_type_id"], name: "index_organizations_on_organization_type_id", using: :btree
   end
 
