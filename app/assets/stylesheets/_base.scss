@@ -40,6 +40,15 @@ p {
   line-height: 1.6;
 }
 
+li {
+  list-style: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
 .wrapper {
   padding: 0 $wrapper-mobile-padding;
 
