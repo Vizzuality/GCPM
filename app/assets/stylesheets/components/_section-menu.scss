@@ -2,7 +2,8 @@
  *
  *  Preferred markup (for accessibility matter):
  *    <ul class="c-section-menu">
- *      <li class="item"><%= link_to (t 'Data'), {path} %></li> // Optional?
+ *      <li class="item"><%= link_to (t '{ Item name }'), {path} %></li>
+ *      <li class="item"><%= link_to (t '{ Item name }'), {path} %></li>
  *      <li class="item"><%= link_to (t '{ Item name }'), {path} %></li>
  *    </ul>
  *
@@ -13,9 +14,21 @@
   bottom: 0;
   left: 0;
   display: flex;
-  width: 100%;
+  margin: 0 0 0 $wrapper-mobile-padding;
   font-family: $font-family-1;
   font-weight: $font-weight-bold;
+  font-size: $font-size-medium;
+
+
+  @media #{$mq-mobile-large} {
+    margin: 0 0 0 $wrapper-tablet-padding;
+  }
+
+  @media #{$mq-tablet} {
+    margin: 0 0 0 $wrapper-padding;
+  }
+
+
   font-size: $font-size-x-medium;
 
   &:after {
