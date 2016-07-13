@@ -4,5 +4,9 @@
  *
  */
 .c-map {
-	height: 450px;
+	position: relative;
+
+	.map {
+		height: 450px;
+	}
 }
