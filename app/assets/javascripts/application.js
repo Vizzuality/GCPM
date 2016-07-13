@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require leaflet
 //= require turbolinks
 //= require underscore/underscore
 //= require backbone/backbone
@@ -24,7 +25,9 @@
   'use strict';
 
   this.App = {
-    View:   {},
+    View: {},
+    Model: {},
+    Collection: {},
     Helper: {}
   };
 

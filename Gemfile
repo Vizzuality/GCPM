@@ -40,6 +40,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-moment'
   gem 'rails-assets-hammerjs'
   gem 'rails-assets-jquery-hammerjs'
+  gem 'rails-assets-leaflet'
 end
 
 # Active record
