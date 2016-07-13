@@ -1,11 +1,12 @@
 /**
  *
- *	<h4 class="c-card-title">{Content goes here}</h4>
+ *  <h4 class="c-card-title">{Content goes here}</h4>
  *
- * 	Optional classes:
- * 		- "-border-1":   blue border ($color-1)
- * 		- "-border-2": orange border ($color-6)
- * 		- "-border-3": purple border ($color-4)
+ *  Optional classes:
+ *    - "-border-1":   blue border ($color-1)
+ *    - "-border-2": orange border ($color-6)
+ *    - "-border-3": purple border ($color-4)
+ *    - "-border-4": purple border ($color-3)
  */
 .c-card-title {
   margin:  0;
@@ -16,7 +17,8 @@
 
   &.-border-1,
   &.-border-2,
-  &.-border-3 {
+  &.-border-3,
+  &.-border-4 {
     position: relative;
     padding-bottom: 23px;
 
@@ -33,4 +35,5 @@
   &.-border-1:after { background-color: $color-1; }
   &.-border-2:after { background-color: $color-6; }
   &.-border-3:after { background-color: $color-4; }
+  &.-border-4:after { background-color: $color-3; }
 }

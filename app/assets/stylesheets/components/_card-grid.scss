@@ -1,24 +1,38 @@
 /**
  *
- *	<div class="c-card-grid">
- *		<div class="card -1-4">{Card content goes here}</div>
- *		<div class="card -1-4">{Card content goes here}</div>
- *		{...}
- *	</div>
+ *  <div class="c-card-grid">
+ *    <div class="card -1-4">{Card content goes here}</div>
+ *    <div class="card -1-4">{Card content goes here}</div>
+ *    {...}
+ *  </div>
  *
- * 	Card grid classes:
- * 		- "-1-4": 1/4 of row's width
- * 		- "-1-3": 1/3 of row's width
- * 		- "-1-2": 1/2 of row's width
- * 		- "-2-3": 2/3 of row's width
- * 		- "-3-4": 3/4 of row's width
+ *  Card grid classes:
+ *    - "-1-4": 1/4 of row's width
+ *    - "-1-3": 1/3 of row's width
+ *    - "-1-2": 1/2 of row's width
+ *    - "-2-3": 2/3 of row's width
+ *    - "-3-4": 3/4 of row's width
+ *    - "-1-1": 1/1 of row's width
  *
- * 	Additionnaly, the classes can be used for the responsiveness:
- * 		- "-mobile-large-{1-4, 2-3, ...}": styles apply for large mobile+
- * 		- "-tablet-{1-4, 2-3, ...}":       styles apply for tablet+
- * 		- "-laptop-{1-4, 2-3, ...}":       styles apply for laptop+
+ *  Additionally, the classes can be used for the responsiveness:
+ *    - "-mobile-large-{1-4, 2-3, ...}": styles apply for large mobile+
+ *    - "-tablet-{1-4, 2-3, ...}":       styles apply for tablet+
+ *    - "-laptop-{1-4, 2-3, ...}":       styles apply for laptop+
+ *
+ *  Card content size classes:
+ *    - "-content-1-4": 1/4 of row's width
+ *    - "-content-1-3": 1/3 of row's width
+ *    - "-content-1-2": 1/2 of row's width
+ *    - "-content-2-3": 2/3 of row's width
+ *    - "-content-3-4": 3/4 of row's width
+ *    - "-content-1-1": 1/1 of row's width
+ *
+ *  Card text colour classes:
+ *    - "-color-1": black DEAFULT
+ *    - "-color-2": white
  *
  */
+
 .c-card-grid {
   display: flex;
   align-items: stretch;
@@ -73,6 +87,7 @@
     &.\-1-2 { width: 50%;    }
     &.\-2-3 { width: calc(2 / 3 * 100%); }
     &.\-3-4 { width: 75%;    }
+    &.\-1-1 { width: 100%;    }
 
     /* Specific sizes relying on the screen size */
     $breakpoints: (
@@ -88,8 +103,20 @@
         &.\-#{$breakpoint}-1-2 { width: 50%;    }
         &.\-#{$breakpoint}-2-3 { width: calc(2 / 3 * 100%); }
         &.\-#{$breakpoint}-3-4 { width: 75%;    }
+        &.\-#{$breakpoint}-1-1 { width: 100%;    }
       }
     }
+
+    /* Content size */
+    &.\-content-1-4 > * { width: 25%;    }
+    &.\-content-1-3 > * { width: calc(100% / 3); }
+    &.\-content-1-2 > * { width: 50%;    }
+    &.\-content-2-3 > * { width: calc(2 / 3 * 100%); }
+    &.\-content-3-4 > * { width: 75%;    }
+    &.\-content-1-1 > * { width: 100%;    }
+
+    &.-color-1 > * { color: $color-2 }
+    &.-color-2 > * { color: $color-3 }
 
     > .c-tag-list { margin-top: 7px; }
 
