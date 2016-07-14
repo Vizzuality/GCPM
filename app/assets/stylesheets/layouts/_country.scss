@@ -1,0 +1,41 @@
+
+.c-section-intro {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  padding-top: 60px;
+  padding-bottom: 130px;
+  background: linear-gradient(to right, #672b9b , #5665bf);
+
+  @media #{$mq-tablet} {
+    flex-flow: row;
+  }
+
+  .intro-info {
+    width: 100%;
+
+    @media #{$mq-tablet} {
+      width: 61.6%;
+    }
+
+    .c-title {
+      margin: 0;
+      margin-bottom: 30px;
+    }
+  }
+
+  .country-buttons {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-end;
+
+    .c-button {
+      margin-bottom: 10px;
+    }
+
+    .-inverse.-filled.btn-follow {
+      width: 100%;
+      color: #5665bf;
+    }
+  }
+}

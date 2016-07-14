@@ -16,20 +16,20 @@
  *    - "-color-1": blue   ($color-1)
  *    - "-color-2": orange ($color-6)
  *    - "-color-3": purple ($color-4)
- *    - "-color-4": white  ($color-3) - DEFAULT, optional class
- *    - "-color-5": dark   ($color-2)
+ *    - "-color-4": white  ($color-3)
+ *    - "-color-5": dark   ($color-2) - DEFAULT, optional class
  */
 
 .c-numbers-grid {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  color: $color-3;
+  color: $color-2;
 
   &.-color-1 { color: $color-1; }
   &.-color-2 { color: $color-6; }
   &.-color-3 { color: $color-4; }
-  &.-color-5 { color: $color-2; }
+  &.-color-4 { color: $color-3; }
 
   @media #{$mq-mobile-large} {
     flex-flow: row wrap;
