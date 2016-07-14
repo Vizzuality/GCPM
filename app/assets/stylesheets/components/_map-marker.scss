@@ -1,0 +1,29 @@
+/**
+ *
+ *  <div class="c-marker">
+ *  	<div class="arc"></div>
+ *  	<div class="value">{ value }</div>
+ *  </div>
+ *
+ */
+
+
+.c-marker {
+	background: $color-3;
+	border-radius: 50%;
+	box-shadow: $shadow-1;
+
+	.arc {
+
+	}
+
+	.value {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%,-50%);		
+		font-size: $font-size-big;
+		font-weight: $font-weight-bold;
+		color: $color-2;
+	}
+}

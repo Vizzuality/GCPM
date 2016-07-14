@@ -22,6 +22,9 @@
       }
     },
 
+    model: new (Backbone.Model.extend({
+      defaults: {}
+    })),
 
     initialize: function(settings) {
       if (!this.el) {
@@ -31,24 +34,35 @@
       var opts = settings && settings.options ? settings.options : {};
       this.options = _.extend({}, this.defaults, opts);
 
+      this.layers = settings.layers;
+
       this.createMap();
+
+      this.listeners();
     },
 
-    /**
+    listeners: function() {
+      this.layers.on('sync reset', this.renderLayers.bind(this));
+    },
+
+
+
+    /************
+     * MAP
+     * - createMap
      * Instantiates a Leaflet map object
      */
     createMap: function() {
       if (!this.map) {
         this.map = L.map(this.el.id, this.options.map);
-
         this.setBasemap();
-
       } else {
         console.info('Map already exists.');
       }
     },
 
     /**
+     * - removeMap
      * Destroys the map and clears all related event listeners
      */
     removeMap: function() {
@@ -60,7 +74,11 @@
       }
     },
 
-    /**
+
+
+    /************
+     * BASEMAP
+     * - setBasemap
      * Add a basemap to map
      * @param {String} basemapUrl http://{s}.tile.osm.org/{z}/{x}/{y}.png
      */
@@ -76,6 +94,7 @@
     },
 
     /**
+     * - unsetBasemap
      * Remove basemap from mapView
      */
     unsetBasemap: function() {
@@ -86,7 +105,11 @@
       }
     },
 
-    /**
+
+
+    /************
+     * LAYERS
+     * - renderLayers
      * Render or remove layers by Layers Collection
      */
     renderLayers: function() {
@@ -98,10 +121,10 @@
           this.removeLayer(layerData);
         }
       }, this);
-      this.fitBounds();
     },
 
     /**
+     * - addLayer
      * Add a layer instance to map
      * @param {Object} layerData
      */
@@ -114,7 +137,7 @@
       if (!this.map) {
         throw 'Create a map before add a layer.';
       }
-      
+
       var layer = this.model.get(layerData.id);
 
       if (!!layer) {
@@ -133,27 +156,30 @@
               layer.setOpacity(layerData.opacity);
               layer.setZIndex(1000-layerData.order);
             }.bind(this));
+
+            this.setLayer(layerInstance, layerData);
           break;
 
           case 'marker':
-            var options = { locations: this.locations.getMapLocations() };
-            layerInstance = new App.Helper.MarkerLayer(this.map, options);
-            layerInstance.create(function(layer) {
-              layer.setOpacity(layerData.opacity);
-              layer.setZIndex(1000-layerData.order);
+            var markers = new App.Collection.Markers();
+            markers.fetch().done(function(){
+              console.log(markers.toJSON());
+              var options = { markers: markers.toJSON() };
+              layerInstance = new App.Helper.MarkerLayer(this.map, options);
+              layerInstance.create(function(layer) {
+                layer.setOpacity(layerData.opacity);
+                layer.setZIndex(1000-layerData.order);
+              }.bind(this));
+
+              this.setLayer(layerInstance, layerData);
+
             }.bind(this));
           break;
 
           default:
             layerInstance = null;
+            this.setLayer(layerInstance, layerData);
         }
-
-        if (layerInstance) {
-          this.model.set(layerData.id, layerInstance);
-        } else {
-          throw 'Layer type hasn\'t been defined or it doesn\'t exist.';
-        }
-
       } else {
         if (layer.layer) {
           layer.layer.setOpacity(layerData.opacity);
@@ -164,6 +190,20 @@
     },
 
     /**
+     * - setLayer
+     * Store the layer in the model
+     * @param  {Object} layerData
+     */
+    setLayer: function(layerInstance, layerData) {
+      if (layerInstance) {
+        this.model.set(layerData.id, layerInstance);
+      } else {
+        throw 'Layer type hasn\'t been defined or it doesn\'t exist.';
+      }
+    },
+
+    /**
+     * - removeLayer
      * Remove a specific layer on map
      * @param  {Object} layerData
      */

@@ -13,11 +13,19 @@
 //= require jquery
 //= require jquery_ujs
 //= require leaflet
+//= require handlebars
 //= require turbolinks
 //= require underscore/underscore
 //= require backbone/backbone
 //= require_self
+
+//= require_tree ./templates
+//= require_tree ./helpers/
+//= require_tree ./collections/
 //= require_tree ./views/
+
+//= require main
+//= require router
 //= require dispatcher
 
 (function() {

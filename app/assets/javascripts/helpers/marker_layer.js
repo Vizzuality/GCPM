@@ -4,14 +4,11 @@
 
   App.Helper = App.Helper || {};
 
-  /**
-   * A wrapper for Marker layers
-   * More info: http://docs.cartodb.com/cartodb-platform/cartodb-js.html
-   */
-  
-  App.Helper.MarkerLayer = Backbone.View.extend({
+  App.Helper.MarkerLayer = App.Helper.Class.extend({
 
     defaults: {},
+
+    template: HandlebarsTemplates['marker'],
 
     // tooltipEl: $('#locationTooltipView'),
     // tooltipTpl: HandlebarsTemplates['locationsTooltipTpl'],
@@ -22,8 +19,7 @@
       }
       var opts = settings || {};
       this.options = _.extend({}, this.defaults, opts);
-      
-      this.map = map;
+      this.map = map;      
     },
 
     /**
@@ -31,10 +27,22 @@
      * @param  {Function} callback
      */
     create: function(callback) {
-      // var locations = this.options.locations; 
+      var markers = this.options.markers;
 
-      this.markers = _.map(locations, function(l){
+      this.markers = _.map(markers, function(marker){
+
+        var template = this.template(marker),
+            size = this.getIconSize(marker.value);
+
+        var icon = new L.divIcon({
+          iconSize: [size,size],
+          className: 'c-marker',
+          html: template
+        });
         
+        return L.marker(marker.center, {
+          icon: icon
+        });
         // var lat = l.geometry.coordinates[1];
         // var lng = l.geometry.coordinates[0];
         // var category = l.properties.category;
@@ -56,11 +64,9 @@
 
       }.bind(this));
 
-      // Add to map
-      _.each(this.markers, function(marker){
-        marker.addTo(this.map);
-      }.bind(this));
-
+      var group = L.featureGroup(this.markers).addTo(this.map);
+      // Fit bounds to see all the markers
+      this.map.fitBounds(group.getBounds());
     },
 
     /**
@@ -80,6 +86,13 @@
       }
     },
 
+    getIconSize: function(value) {
+      var constant = 30,
+          multiplier = 15,
+          size = Math.round(constant + (Math.log(value) * multiplier));
+      
+      return size;
+    },
 
     _onMouseover: function(e) {
       // var pos = this.map.latLngToContainerPoint(e.target._latlng);
@@ -131,4 +144,4 @@
 
   });
 
-})(this);
+})(this.App);
