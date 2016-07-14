@@ -1,0 +1,26 @@
+/**
+ *
+ *  Preferred markup (for accessibility matter):
+ *   <div class="c-section-intro">
+ *      { content }
+ *      { section-menu }
+ *    </div>
+ *
+ *  Section menu template
+ *    <ul class="c-section-menu">
+ *      <li class="item"><%= link_to (t 'data'), '/' %></li>
+ *      <li class="item"><%= link_to (t '{ name }'), { path } %></li>
+ *    </ul>
+ *
+ */
+
+.c-section-intro {
+  position: relative;
+  width: 100%;
+  min-height: 60px; // In case there is not content
+
+  > .c-section-menu {
+    position: absolute;
+    bottom: 0;
+  }
+}
