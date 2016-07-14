@@ -2,6 +2,8 @@
 
   'use strict';
 
+  App.View = App.View || {};
+
   App.View.Map = Backbone.View.extend({
 
     el: '#map',
