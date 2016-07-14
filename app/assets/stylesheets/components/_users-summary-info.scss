@@ -3,23 +3,11 @@
  *  Preferred markup (for accessibility matter):
  *    <div class="c-users-summary-info">
  *      <div class="user-summary-info">
- *        <div class="c-user-profile-picture -big">
- *          <div class="initials"> {User's initials} </div>
- *          <img src="{Path}" alt="{User name}'s profile picture'" />
- *        </div>
- *        <h3 class="c-title -small -color-4"> {...} </h3>
- *        <p class="university -color-4"> {...} </p>
- *        <p class="qualification -color-3"> {...} </p>
+ *        { content }
  *      </div>
  *
  *      <div class="user-summary-info">
- *        <div class="c-user-profile-picture -big">
- *          <div class="initials"> {User's initials} </div>
- *          <img src="{Path}" alt="{User name}'s profile picture'" />
- *        </div>
- *        <h3 class="c-title -small -color-4"> {...} </h3>
- *        <p class="university -color-4"> {...} </p>
- *        <p class="qualification -color-3"> {...} </p>
+ *        { content }
  *      </div>
  *    </div>
  *
@@ -38,29 +26,23 @@
 
   @media #{$mq-mobile-large} {
     flex-flow: row wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
   }
+
+  &.-color-1 .specification { color: $color-1; }
+  &.-color-2 .specification { color: $color-6; }
+  &.-color-3 .specification { color: $color-4; }
+  &.-color-4 .specification { color: $color-2; }
 
   .user-summary-info {
     display: flex;
     flex-flow: column;
     align-items: center;
-    margin-bottom: 30px;
+    margin-top: 15px;
+    margin-bottom: 15px;
 
     @media #{$mq-mobile-large} {
-      margin-right: 55px;
-      margin-bottom: 70px;
-    }
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-    & * {
-      &.-color-1 { color: $color-1; }
-      &.-color-2 { color: $color-6; }
-      &.-color-3 { color: $color-4; }
-      &.-color-4 { color: $color-2; }
+      margin: 35px 30px;
     }
 
     .c-title.-small {
@@ -78,7 +60,7 @@
       text-align: center;
     }
 
-    .university {
+    .subtitle {
       opacity: .7;
     }
   }
