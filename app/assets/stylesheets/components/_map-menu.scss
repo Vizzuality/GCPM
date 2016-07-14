@@ -1,58 +1,71 @@
 /**
  *
- *   <div class="c-map-menu">
+ *  <div class="c-map-menu wrapper">
  *    <ul class="list">
  *      <li class="item">
- *      <svg class="icon icon-">
- *        <use xlink:href="#icon-"></use>
- *      </svg>
+ *        <svg class="icon icon-">
+ *          <use xlink:href="#icon-"></use>
+ *        </svg>
+ *        { content }
+ *      </li>
  *    </ul>
  *    <ul class="list">
  *      <li class="item">
  *        <svg class="icon icon-">
  *          <use xlink:href="#icon-"></use>
  *        </svg>
+ *        { content }
  *      </li>
  *    </ul>
  *  </div>
  *
+ *  Sets component or element as hidden ( on mobile/tablet or desktop )
+ *    - "-mb-hidden"
+ *    - "-dk-hidden"
  *
- *  Sets tab state
- *    - -active: underlines the selected tab
- *
- *  Colors modifiers (for the underline):
- *    - "-color-1": blue   ($color-1)
- *    - "-color-2": orange ($color-6)
- *    - "-color-3": purple ($color-4) - DEFAULT, optional class
+ *  Colors modifiers (for the text):
+ *    - "-color-1": blue      ($color-1)
+ *    - "-color-2": orange    ($color-6)
+ *    - "-color-3": purple    ($color-4)
+ *    - "-color-4": dark-blue ($color-2) - DEFAULT
  */
 
 .c-map-menu {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 15px 60px;
+  padding-top: 13px;
+  padding-bottom: 13px;
 
   .list {
     display: flex;
+    text-transform: uppercase;
+    font-weight: $font-weight-bold;
+    font-size: 12px;
 
-    &.item {
+    & .item {
+      display: flex;
+      align-items: center;
       margin-right: 35px;
 
       &:last-child {
         margin-right: 0;
       }
 
-      & a {
-        color: $color-1;
+      &.-color-1 { color: $color-1; }
+      &.-color-2 { color: $color-6; }
+      &.-color-3 { color: $color-4; }
 
-        &.-color-1 { color: $color-1; }
-        &.-color-2 { color: $color-6; }
-        &.-color-3 { color: $color-4; }
-      }
+    }
+
+    .icon {
+      width: 12px;
+      height: 12px;
+      margin-right: 6px;
     }
   }
 
-  &.-mobile-hidden {
+  .-mb-hidden {
     display: none;
 
     @media #{$mq-tablet} {
@@ -60,7 +73,7 @@
     }
   }
 
-  &.-desktop-hidden {
+  .-dk-hidden {
     display: flex;
 
     @media #{$mq-tablet} {
