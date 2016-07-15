@@ -4,7 +4,7 @@
 			"lat": 37,
 			"lng": -95
 		},
-		
+
 		"name": "North America",
 
 		"value": 1736,
@@ -25,10 +25,10 @@
 	},
 	{
 		"center": {
-			"lat": 10,
-			"lng": 10
+			"lat": -5,
+			"lng": -50
 		},
-		
+
 		"name": "South America",
 
 		"value": 200,
@@ -49,10 +49,10 @@
 	},
 	{
 		"center": {
-			"lat": 20,
+			"lat": 10,
 			"lng": 20
 		},
-		
+
 		"name": "Europe",
 
 		"value": 905,
@@ -73,10 +73,10 @@
 	},
 	{
 		"center": {
-			"lat": 30,
-			"lng": 30
+			"lat": 50,
+			"lng": 10
 		},
-		
+
 		"name": "Africa",
 
 		"value": 200,
@@ -98,9 +98,9 @@
 	{
 		"center": {
 			"lat": 40,
-			"lng": 40
+			"lng": 80
 		},
-		
+
 		"name": "Asia",
 
 		"value": 44,

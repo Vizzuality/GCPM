@@ -23,6 +23,7 @@
     },
 
     start: function() {
+      Backbone.history.stop();
       Backbone.history.start({ pushState: true });
     },
 
@@ -30,7 +31,7 @@
       var layersCollection = new App.Collection.Layers();
 
       // var locationsModel = new (Backbone.Model.extend({ defaults: { category: null }}))();
-      
+
       // var locationsCollection = new App.Collection.LocationsCollection({ categories: locationsModel});
 
       var mapView = new App.View.Map({
@@ -52,7 +53,7 @@
       // this.locationView = new App.View.LocationView({
       //   locations: locationsCollection
       // });
-      
+
       this.initGlobalViews();
     },
 

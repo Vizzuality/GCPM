@@ -10,6 +10,9 @@
 
     template: HandlebarsTemplates['marker'],
 
+    colors: [
+      '#5aade4', '#f57823', '#68299b', '#CCC'
+    ],
     // tooltipEl: $('#locationTooltipView'),
     // tooltipTpl: HandlebarsTemplates['locationsTooltipTpl'],
 
@@ -19,7 +22,7 @@
       }
       var opts = settings || {};
       this.options = _.extend({}, this.defaults, opts);
-      this.map = map;      
+      this.map = map;
     },
 
     /**
@@ -30,40 +33,29 @@
       var markers = this.options.markers;
 
       this.markers = _.map(markers, function(marker){
+        var size = this.getSize(marker.value),
+            svg = this.getSVG(marker);
 
-        var template = this.template(marker),
-            size = this.getIconSize(marker.value);
-
+        // Create icon
         var icon = new L.divIcon({
           iconSize: [size,size],
           className: 'c-marker',
-          html: template
+          html: this.template({
+            value: marker.value,
+            svg: this.getHtmlString(svg)
+          })
         });
-        
+
+        // Return a leaflet marker
         return L.marker(marker.center, {
           icon: icon
-        });
-        // var lat = l.geometry.coordinates[1];
-        // var lng = l.geometry.coordinates[0];
-        // var category = l.properties.category;
-
-        // return new L.circleMarker([lat,lng], {
-        //   // Stroke
-        //   color: '#FFF',
-        //   weight: 1,
-        //   data: l.properties,
-        //   // Fill
-        //   fillColor: this.colors[category],
-        //   fillOpacity: 0.9,
-        //   radius: 10,
-        //   className: 'm-marker'
-
-        // }).on('mouseover', this._onMouseover.bind(this))
-        //   .on('mouseout', this._onMouseout.bind(this))
-        //   .on('click', this._onMouseclick.bind(this));
+        }).on('mouseover', this._onMouseover.bind(this))
+          .on('mouseout', this._onMouseout.bind(this))
+          .on('click', this._onMouseclick.bind(this));
 
       }.bind(this));
 
+      // Group the markers and add them to the map
       var group = L.featureGroup(this.markers).addTo(this.map);
       // Fit bounds to see all the markers
       this.map.fitBounds(group.getBounds());
@@ -78,7 +70,7 @@
           marker.off('mouseover')
                 .off('mouseout')
                 .off('click');
-          this.map.removeLayer(marker);  
+          this.map.removeLayer(marker);
         }.bind(this)));
         this.markers = null;
       } else {
@@ -86,12 +78,63 @@
       }
     },
 
-    getIconSize: function(value) {
+    getSize: function(value) {
       var constant = 30,
           multiplier = 15,
           size = Math.round(constant + (Math.log(value) * multiplier));
-      
+
       return size;
+    },
+
+    getSVG: function(marker) {
+      console.log(marker);
+
+      var marker = marker,
+          size = this.getSize(marker.value),
+          total = marker.value,
+          pi = Math.PI;
+
+
+      // Create an svg element
+      var svg = document.createElementNS(d3.ns.prefix.svg, 'svg');
+
+      // Set the svg with the arc
+      var vis = d3.select(svg)
+                  .attr('width', size)
+                  .attr('height', size)
+
+      // Add each arc to the svg element
+      var angle = 0;
+      _.each(marker.cancer_types, function(cancer, i){
+        var degrees = Math.round(360*(cancer.value/total));
+        // Create an arc
+        var arc = d3.svg.arc()
+          .innerRadius(size/2 - 10)
+          .outerRadius(size/2 - 5)
+          .startAngle(angle * (pi/180)) //converting from degs to radians
+          .endAngle((angle + degrees) * (pi/180)) //converting from degs to radians
+
+        vis.append("path")
+          .attr("d", arc)
+          .attr("fill", this.colors[i])
+          .attr("stroke-width", 2)
+          .attr("stroke", "white")
+          .attr("transform", "translate("+size/2+","+size/2+")");
+
+        angle = angle + Math.round(360*cancer.value/total);
+
+      }.bind(this));
+
+      return svg;
+    },
+
+    getHtmlString: function(xmlNode) {
+      if (typeof window.XMLSerializer != "undefined") {
+        return (new window.XMLSerializer()).serializeToString(xmlNode);
+      } else if (typeof xmlNode.xml != "undefined") {
+        return xmlNode.xml;
+      }
+      return "";
     },
 
     _onMouseover: function(e) {
@@ -127,7 +170,7 @@
       //   var currentMarker = _.find(this.markers, function(marker) {
       //     return (marker.options.data.cartodb_id == id);
       //   });
-        
+
       //   currentMarker.bringToFront();
       //   currentMarker.setRadius(25);
       // }
@@ -137,8 +180,8 @@
       // if (!!this.markers && !!this.markers.length) {
       //   // set default radius to all markers
       //   _.each(this.markers, function(marker){
-      //     marker.setRadius(10);  
-      //   }.bind(this));      
+      //     marker.setRadius(10);
+      //   }.bind(this));
       // }
     }
 

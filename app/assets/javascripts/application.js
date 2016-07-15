@@ -17,6 +17,7 @@
 //= require turbolinks
 //= require underscore/underscore
 //= require backbone/backbone
+//= require d3
 //= require_self
 
 //= require_tree ./templates
