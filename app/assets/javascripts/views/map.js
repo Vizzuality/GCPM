@@ -3,7 +3,7 @@
   'use strict';
 
   App.View = App.View || {};
-  
+
   App.View.Map = Backbone.View.extend({
 
     el: '#map',
@@ -11,7 +11,7 @@
     defaults: {
       map: {
         zoom: 3,
-        center: [0, 0],
+        // center: [0, 0],
         scrollWheelZoom: false
       },
       basemap: {
@@ -42,7 +42,7 @@
     },
 
     listeners: function() {
-      this.layers.on('sync reset', this.renderLayers.bind(this));
+      this.layers.on('sync reset change', this.renderLayers.bind(this));
     },
 
 
@@ -161,10 +161,16 @@
           break;
 
           case 'marker':
-            var markers = new App.Collection.Markers();
+            var markers = new App.Collection.Markers({
+              type: layerData.slug
+            });
+
             markers.fetch().done(function(){
-              console.log(markers.toJSON());
-              var options = { markers: markers.toJSON() };
+              var options = {
+                markers: markers.toJSON(),
+                type: layerData.slug
+              };
+
               layerInstance = new App.Helper.MarkerLayer(this.map, options);
               layerInstance.create(function(layer) {
                 layer.setOpacity(layerData.opacity);

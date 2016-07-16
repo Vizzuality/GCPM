@@ -10,9 +10,17 @@
 
     template: HandlebarsTemplates['marker'],
 
-    colors: [
-      '#5aade4', '#f57823', '#68299b', '#CCC'
-    ],
+    colors: {
+      'project-markers': ['#5aade4', '#f57823', '#68299b', '#CCC'],
+      'people-markers': ['#FFF', '#8653AF'],
+      'event-markers': ['#FFF', '#F59356'],
+    },
+
+    strokeColors: {
+      'project-markers': '#FFF',
+      'people-markers': '#68299b',
+      'event-markers': '#f57823',
+    },
     // tooltipEl: $('#locationTooltipView'),
     // tooltipTpl: HandlebarsTemplates['locationsTooltipTpl'],
 
@@ -39,7 +47,7 @@
         // Create icon
         var icon = new L.divIcon({
           iconSize: [size,size],
-          className: 'c-marker',
+          className: 'c-marker ' + this.options.type,
           html: this.template({
             value: marker.value,
             svg: this.getHtmlString(svg)
@@ -87,8 +95,6 @@
     },
 
     getSVG: function(marker) {
-      console.log(marker);
-
       var marker = marker,
           size = this.getSize(marker.value),
           total = marker.value,
@@ -105,23 +111,23 @@
 
       // Add each arc to the svg element
       var angle = 0;
-      _.each(marker.cancer_types, function(cancer, i){
-        var degrees = Math.round(360*(cancer.value/total));
+      _.each(marker.segments, function(segment, i){
+        var degrees = Math.round(360*(segment.value/total));
         // Create an arc
         var arc = d3.svg.arc()
           .innerRadius(size/2 - 10)
-          .outerRadius(size/2 - 5)
+          .outerRadius(size/2 - 4)
           .startAngle(angle * (pi/180)) //converting from degs to radians
           .endAngle((angle + degrees) * (pi/180)) //converting from degs to radians
 
-        vis.append("path")
-          .attr("d", arc)
-          .attr("fill", this.colors[i])
-          .attr("stroke-width", 2)
-          .attr("stroke", "white")
-          .attr("transform", "translate("+size/2+","+size/2+")");
+        vis.append('path')
+          .attr('d', arc)
+          .attr('fill', this.colors[this.options.type][i])
+          .attr('stroke-width', 2)
+          .attr('stroke', this.strokeColors[this.options.type])
+          .attr('transform', 'translate('+size/2+','+size/2+')');
 
-        angle = angle + Math.round(360*cancer.value/total);
+        angle = angle + Math.round(360*segment.value/total);
 
       }.bind(this));
 
@@ -129,9 +135,9 @@
     },
 
     getHtmlString: function(xmlNode) {
-      if (typeof window.XMLSerializer != "undefined") {
+      if (typeof window.XMLSerializer != 'undefined') {
         return (new window.XMLSerializer()).serializeToString(xmlNode);
-      } else if (typeof xmlNode.xml != "undefined") {
+      } else if (typeof xmlNode.xml != 'undefined') {
         return xmlNode.xml;
       }
       return "";

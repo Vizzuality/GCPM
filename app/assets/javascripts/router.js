@@ -5,7 +5,11 @@
   App.Router = Backbone.Router.extend({
 
     routes: {
+      // map
       'map': 'map',
+      'map/projects': 'map',
+      'map/people': 'map',
+      'map/events': 'map',
     },
 
     params: new (Backbone.Model.extend()),
@@ -99,6 +103,15 @@
      */
     _serializeParams: function() {
       return this.params ? $.param(this.params.attributes) : null;
+    },
+
+    /**
+     * - getParams
+     * Return params
+     * @return {Object}
+     */
+    getParams: function() {
+      return this._unserializeParams();
     }
 
   });

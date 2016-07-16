@@ -8,20 +8,44 @@
     layers: [
       {
         id: 1,
-        slug: 'all',
-        name: 'All',
+        slug: 'project-markers',
+        name: 'Project markers',
         type: 'marker',
-        description: 'Region markers',
+        description: 'Project markers',
         color: 'red',
         opacity: 1,
         order: 1000,
-        active: true,
+        active: false,
         published: true
-      }
+      },
+      {
+        id: 2,
+        slug: 'people-markers',
+        name: 'People markers',
+        type: 'marker',
+        description: 'People markers',
+        color: 'red',
+        opacity: 1,
+        order: 1000,
+        active: false,
+        published: true
+      },
+      {
+        id: 3,
+        slug: 'event-markers',
+        name: 'Events markers',
+        type: 'marker',
+        description: 'Events markers',
+        color: 'red',
+        opacity: 1,
+        order: 1000,
+        active: false,
+        published: true
+      },
     ],
 
     initialize: function() {
-
+      this.getLayers();
     },
 
     comparator: function(d) {
@@ -29,10 +53,21 @@
     },
 
     // Reset the collection with the default data
-    getData: function() {
+    getLayers: function() {
       this.reset(this.layers);
       this.sort();
+    },
+
+    toggleLayers: function(activeLayers) {
+      _.map(activeLayers, function(slug) {
+        var layer = this.findWhere({
+          slug: slug
+        });
+        layer.set({ active: true });
+      }.bind(this))
     }
+
+
   });
 
 

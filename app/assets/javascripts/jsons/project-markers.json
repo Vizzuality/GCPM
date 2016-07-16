@@ -9,7 +9,7 @@
 
 		"value": 1736,
 
-		"cancer_types": [{
+		"segments": [{
 			"name": "Breast",
 			"value": 500
 		},{
@@ -33,7 +33,7 @@
 
 		"value": 200,
 
-		"cancer_types": [{
+		"segments": [{
 			"name": "Breast",
 			"value": 100
 		},{
@@ -57,7 +57,7 @@
 
 		"value": 905,
 
-		"cancer_types": [{
+		"segments": [{
 			"name": "Breast",
 			"value": 500
 		},{
@@ -81,7 +81,7 @@
 
 		"value": 200,
 
-		"cancer_types": [{
+		"segments": [{
 			"name": "Breast",
 			"value": 50
 		},{
@@ -105,7 +105,7 @@
 
 		"value": 44,
 
-		"cancer_types": [{
+		"segments": [{
 			"name": "Breast",
 			"value": 24
 		},{
