@@ -47,7 +47,7 @@
         // Create icon
         var icon = new L.divIcon({
           iconSize: [size,size],
-          className: 'c-marker ' + this.options.type,
+          className: 'c-marker -' + this.options.type,
           html: this.template({
             value: marker.value,
             svg: this.getHtmlString(svg)

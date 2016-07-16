@@ -11,28 +11,42 @@
 .c-marker {
 	border-radius: 50%;
 	box-shadow: $shadow-1;
+  background: $color-3;
 
-  &.project-markers {
+
+  &.-project-markers {
     background: $color-3;
 
     .value {
       color: $color-2;
     }
+
+    &:hover {
+      background: darken($color-3, 2.5%);
+    }
   }
 
-  &.people-markers {
+  &.-people-markers {
     background: $color-4;
 
     .value {
       color: $color-3;
     }
+
+    &:hover {
+      background: darken($color-4, 2.5%);
+    }
   }
 
-  &.event-markers {
+  &.-event-markers {
     background: $color-6;
 
     .value {
       color: $color-3;
+    }
+
+    &:hover {
+      background: darken($color-6, 2.5%);
     }
   }
 
@@ -49,4 +63,6 @@
 		font-weight: $font-weight-bold;
 		color: $color-2;
 	}
+
+
 }
