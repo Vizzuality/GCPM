@@ -1,4 +1,18 @@
 
+/**
+ *
+ *  Preferred markup (for accessibility matter):
+ *
+ *    <div class="c-section-intro wrapper -color-4">
+ *      <div class="intro-info">
+ *        { Content }
+ *      </div>
+ *      { c-buttons-group } // Optioinal
+ *      { c-section-menu } // Optional
+ *    </div>
+ *
+ **/
+
 .c-section-intro {
   display: flex;
   flex-flow: column;
@@ -21,21 +35,6 @@
     .c-title {
       margin: 0;
       margin-bottom: 30px;
-    }
-  }
-
-  .country-buttons {
-    display: flex;
-    flex-flow: column;
-    align-items: flex-end;
-
-    .c-button {
-      margin-bottom: 10px;
-    }
-
-    .-inverse.-filled.btn-follow {
-      width: 100%;
-      color: #5665bf;
     }
   }
 }
