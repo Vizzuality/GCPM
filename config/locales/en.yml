@@ -24,6 +24,7 @@
 en:
   about: "About"
   articles: "Articles"
+  breast: "Breast"
   cancer_types: "Cancer types"
   countries: "Countries"
   data: "Data"
@@ -40,6 +41,8 @@ en:
   new_organization: "New organization"
   new_post: "New post"
   new_project: "New project"
+  non_melanoma_skin_cancer: "Non-melanoma skin cancer"
+  other: "Other"
   people: "People"
   posts: "Posts"
   project_update: "Project update"
@@ -50,4 +53,5 @@ en:
   search: "Search"
   sign_up: "Sign up"
   submit_project: "Submit a project"
+  trachea_bronchus_and_lung: "Trachea, bronchus and lung"
   total_events: "Total events"

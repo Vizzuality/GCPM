@@ -257,6 +257,7 @@ GEM
     rails-assets-jquery-hammerjs (2.0.0)
       rails-assets-hammerjs (~> 2.0.0)
       rails-assets-jquery (~> 2.1.0)
+    rails-assets-leaflet (0.7.7)
     rails-assets-moment (2.13.0)
     rails-assets-normalize-css (4.1.1)
     rails-assets-underscore (1.8.3)
@@ -393,6 +394,7 @@ DEPENDENCIES
   rails-assets-html2canvas
   rails-assets-imagesloaded-packaged
   rails-assets-jquery-hammerjs!
+  rails-assets-leaflet!
   rails-assets-moment!
   rails-assets-normalize-css!
   rails-assets-underscore!

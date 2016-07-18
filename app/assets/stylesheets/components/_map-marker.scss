@@ -1,0 +1,68 @@
+/**
+ *
+ *  <div class="c-marker">
+ *  	<div class="arc"></div>
+ *  	<div class="value">{ value }</div>
+ *  </div>
+ *
+ */
+
+
+.c-marker {
+	border-radius: 50%;
+	box-shadow: $shadow-1;
+  background: $color-3;
+
+
+  &.-project-markers {
+    background: $color-3;
+
+    .value {
+      color: $color-2;
+    }
+
+    &:hover {
+      background: darken($color-3, 2.5%);
+    }
+  }
+
+  &.-people-markers {
+    background: $color-4;
+
+    .value {
+      color: $color-3;
+    }
+
+    &:hover {
+      background: darken($color-4, 2.5%);
+    }
+  }
+
+  &.-event-markers {
+    background: $color-6;
+
+    .value {
+      color: $color-3;
+    }
+
+    &:hover {
+      background: darken($color-6, 2.5%);
+    }
+  }
+
+	.arc {
+
+	}
+
+	.value {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%,-50%);
+		font-size: $font-size-big;
+		font-weight: $font-weight-bold;
+		color: $color-2;
+	}
+
+
+}

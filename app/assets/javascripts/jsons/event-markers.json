@@ -1,0 +1,92 @@
+[
+  {
+    "center": {
+      "lat": 37,
+      "lng": -95
+    },
+
+    "name": "North America",
+
+    "value": 150,
+
+    "segments": [{
+      "name": "Public",
+      "value": 100
+    },{
+      "name": "Private",
+      "value": 50
+    }]
+  },
+  {
+    "center": {
+      "lat": -5,
+      "lng": -50
+    },
+
+    "name": "South America",
+
+    "value": 75,
+
+    "segments": [{
+      "name": "Public",
+      "value": 25
+    },{
+      "name": "Private",
+      "value": 50
+    }]
+  },
+  {
+    "center": {
+      "lat": 10,
+      "lng": 20
+    },
+
+    "name": "Europe",
+
+    "value": 400,
+
+    "segments": [{
+      "name": "Public",
+      "value": 200
+    },{
+      "name": "Private",
+      "value": 200
+    }]
+  },
+  {
+    "center": {
+      "lat": 50,
+      "lng": 10
+    },
+
+    "name": "Africa",
+
+    "value": 50,
+
+    "segments": [{
+      "name": "Public",
+      "value": 30
+    },{
+      "name": "Private",
+      "value": 20
+    }]
+  },
+  {
+    "center": {
+      "lat": 40,
+      "lng": 80
+    },
+
+    "name": "Asia",
+
+    "value": 55,
+
+    "segments": [{
+      "name": "Public",
+      "value": 45
+    },{
+      "name": "Private",
+      "value": 10
+    }]
+  }
+]

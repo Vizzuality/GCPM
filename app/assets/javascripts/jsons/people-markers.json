@@ -1,0 +1,92 @@
+[
+  {
+    "center": {
+      "lat": 37,
+      "lng": -95
+    },
+
+    "name": "North America",
+
+    "value": 700,
+
+    "segments": [{
+      "name": "Leads",
+      "value": 500
+    },{
+      "name": "Collaborators",
+      "value": 200
+    }]
+  },
+  {
+    "center": {
+      "lat": -5,
+      "lng": -50
+    },
+
+    "name": "South America",
+
+    "value": 150,
+
+    "segments": [{
+      "name": "Leads",
+      "value": 100
+    },{
+      "name": "Collaborators",
+      "value": 50
+    }]
+  },
+  {
+    "center": {
+      "lat": 10,
+      "lng": 20
+    },
+
+    "name": "Europe",
+
+    "value": 700,
+
+    "segments": [{
+      "name": "Leads",
+      "value": 500
+    },{
+      "name": "Collaborators",
+      "value": 200
+    }]
+  },
+  {
+    "center": {
+      "lat": 50,
+      "lng": 10
+    },
+
+    "name": "Africa",
+
+    "value": 70,
+
+    "segments": [{
+      "name": "Leads",
+      "value": 50
+    },{
+      "name": "Collaborators",
+      "value": 20
+    }]
+  },
+  {
+    "center": {
+      "lat": 40,
+      "lng": 80
+    },
+
+    "name": "Asia",
+
+    "value": 34,
+
+    "segments": [{
+      "name": "Leads",
+      "value": 24
+    },{
+      "name": "Collaborators",
+      "value": 10
+    }]
+  }
+]

@@ -2,6 +2,8 @@
 
   'use strict';
 
+  App.View = App.View || {};
+
   App.View.MobileHeader = Backbone.View.extend({
 
     el: document.body,
