@@ -1,6 +1,12 @@
 
 .country {
   .c-section-intro {
-    background: linear-gradient(to bottom, transparent, #672b9b);
+    height: 900px;
+
+    .intro-info {
+      background: linear-gradient(to bottom, transparent, $color-4);
+    }
   }
+
+
 }

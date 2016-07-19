@@ -1,44 +1,46 @@
 <section class="country">
-  <div class="c-section-intro wrapper -color-4">
-    <div class="intro-info">
-      <h1 class="c-title -big">Egypt</h1>
-      <div class="c-numbers-grid">
-        <div class="number-info">
-          <label class="title">Projects</label>
-          <p class="number">18</p>
-        </div>
-        <div class="number-info">
-          <label class="title">Organizations</label>
-          <p class="number">12</p>
-        </div>
-        <div class="number-info">
-          <label class="title">Events</label>
-          <p class="number">12</p>
-        </div>
-        <div class="number-info">
-          <label class="title">Daly datasets</label>
-          <p class="number">5</p>
+  <div class="c-section-intro -color-4">
+    <div class="intro-info wrapper">
+      <div class="info">
+        <h1 class="c-title -big">Egypt</h1>
+        <div class="c-numbers-grid">
+          <div class="number-info">
+            <label class="title">Projects</label>
+            <p class="number">18</p>
+          </div>
+          <div class="number-info">
+            <label class="title">Organizations</label>
+            <p class="number">12</p>
+          </div>
+          <div class="number-info">
+            <label class="title">Events</label>
+            <p class="number">12</p>
+          </div>
+          <div class="number-info">
+            <label class="title">Daly datasets</label>
+            <p class="number">5</p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="c-buttons-group">
-      <a href="/" class="c-button -inverse -filled btn-follow">Follow</a>
-      <div>
-        <a href="/" class="c-button -inverse">+ Project</a>
-        <a href="/" class="c-button -inverse">+ Post</a>
-        <a href="/" class="c-button -inverse">+ Event</a>
+      <div class="c-buttons-group">
+        <a href="/" class="c-button -inverse -filled btn-follow">Follow</a>
+        <div>
+          <a href="/" class="c-button -inverse">+ Project</a>
+          <a href="/" class="c-button -inverse">+ Post</a>
+          <a href="/" class="c-button -inverse">+ Event</a>
+        </div>
       </div>
+      <ul class="c-section-menu wrapper">
+        <li class="item -active"><%= link_to (t 'data'), '/' %></li>
+        <li class="item"><%= link_to (t 'projects'), '/' %></li>
+        <li class="item"><%= link_to (t 'people'), '/' %></li>
+        <li class="item"><%= link_to (t 'events'), '/' %></li>
+        <li class="item"><%= link_to (t 'post'), '/' %></li>
+      </ul>
     </div>
-    <ul class="c-section-menu wrapper">
-      <li class="item -active"><%= link_to (t 'data'), '/' %></li>
-      <li class="item"><%= link_to (t 'projects'), '/' %></li>
-      <li class="item"><%= link_to (t 'people'), '/' %></li>
-      <li class="item"><%= link_to (t 'events'), '/' %></li>
-      <li class="item"><%= link_to (t 'post'), '/' %></li>
-    </ul>
   </div>
 
-  <div class="country-data"></div>
+  <div class="country-data">
     <div class="c-legend-map-container">
       <div class="c-map"></div>
 

@@ -2,12 +2,14 @@
  *
  *  Preferred markup (for accessibility matter):
  *
- *    <div class="c-section-intro wrapper">
- *      <div class="intro-info">
- *        { Content }
+ *    <div class="c-section-intro">
+ *      <div class="c-section-intro wrapper">
+ *        <div class="info">
+ *          { Content }
+ *        </div>
+ *        { c-buttons-group } // Optioinal
+ *        { c-section-menu } // Optional
  *      </div>
- *      { c-buttons-group } // Optioinal
- *      { c-section-menu } // Optional
  *    </div>
  *
  *  Color modifiers (for the text):
@@ -21,40 +23,48 @@
 
 .c-section-intro {
   position: relative;
-  width: 100%;
-  min-height: 60px; // In case there is not content
-  color: $color-2;
-  display: flex;
-  flex-flow: column;
-  justify-content: space-between;
-  padding-top: 60px;
-  padding-bottom: 130px;
-
-  @media #{$mq-tablet} {
-    flex-flow: row;
-  }
-
-  .intro-info {
-    width: 100%;
-
-    @media #{$mq-tablet} {
-      width: 61.6%;
-    }
-
-    .c-title {
-      margin: 0;
-      margin-bottom: 30px;
-    }
-  }
 
   &.-color-1 * { color: $color-1; }
   &.-color-2 * { color: $color-6; }
   &.-color-3 * { color: $color-4; }
   &.-color-4 * { color: $color-3; }
 
-  > .c-section-menu {
+  .intro-info {
     position: absolute;
     bottom: 0;
     left: 0;
+    width: 100%;
+    min-height: 60px; // In case there is not content
+    color: $color-2;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    padding-top: 60px;
+    padding-bottom: 130px;
+
+    @media #{$mq-tablet} {
+      flex-flow: row;
+    }
+
+    .info {
+      width: 100%;
+
+      @media #{$mq-tablet} {
+        width: 61.6%;
+      }
+
+      .c-title {
+        margin: 0;
+        margin-bottom: 30px;
+      }
+    }
+
+    > .c-section-menu {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
   }
 }
+
+
