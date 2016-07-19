@@ -12,7 +12,6 @@
 .c-legend-map-container {
   display: flex;
   flex-flow: column;
-  height: 560px;
 
   @media #{$mq-tablet} {
     flex-flow: row;

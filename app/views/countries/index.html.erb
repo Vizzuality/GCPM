@@ -1,3 +1,4 @@
+
 <section class="country">
   <div class="c-section-intro -color-4">
     <div class="intro-info wrapper">
@@ -30,8 +31,8 @@
           <a href="/" class="c-button -inverse">+ Event</a>
         </div>
       </div>
-      <ul class="c-section-menu wrapper">
-        <li class="item -active"><%= link_to (t 'data'), '/' %></li>
+      <ul class="c-section-menu wrapper -color-0">
+        <li class="item"><%= link_to (t 'data'), '/', { :class => "-active"} %></li>
         <li class="item"><%= link_to (t 'projects'), '/' %></li>
         <li class="item"><%= link_to (t 'people'), '/' %></li>
         <li class="item"><%= link_to (t 'events'), '/' %></li>
@@ -57,5 +58,3 @@
     </div>
   </div>
 </section>
-
-
