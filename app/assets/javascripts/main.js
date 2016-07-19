@@ -20,6 +20,7 @@
 
     listeners: function() {
       this.listenTo(this.router, 'route:map', this.mapPage);
+      this.listenTo(this.router, 'route:countries', this.countryPage);
     },
 
     start: function() {
@@ -28,6 +29,22 @@
     },
 
     mapPage: function() {
+      var params = this.router.getParams();
+
+      var layersCollection = new App.Collection.Layers();
+
+      var mapView = new App.View.Map({
+        layers: layersCollection,
+      });
+
+      layersCollection.toggleLayers([
+        params.type || 'project-markers'
+      ]);
+
+      this.initGlobalViews();
+    },
+
+    countryPage: function() {
       var params = this.router.getParams();
 
       var layersCollection = new App.Collection.Layers();

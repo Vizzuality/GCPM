@@ -1,0 +1,30 @@
+
+/**
+ *
+ *  Preferred markup (for accessibility matter):
+ *
+ *    <div class="c-buttons-group">
+ *      <a href="{ path }" class="c-button -inverse -filled btn-follow">{ Content }</a>
+ *      <div>
+ *        <a href="{ path }" class="c-button -inverse">{ Content }</a>
+ *        <a href="{ path }" class="c-button -inverse">{ Content }</a>
+ *        <a href="{ path }" class="c-button -inverse">{ Content }</a>
+ *      </div>
+ *    </div>
+ *
+ **/
+
+.c-buttons-group {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-end;
+
+    .c-button {
+      margin-bottom: 10px;
+    }
+
+    .-inverse.-filled.btn-follow {
+      width: 100%;
+      color: #5665bf;
+    }
+  }
