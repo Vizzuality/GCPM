@@ -7,9 +7,7 @@
     routes: {
       // map
       'map': 'map',
-      'map/projects': 'map',
-      'map/people': 'map',
-      'map/events': 'map',
+      'countries': 'countries',
     },
 
     params: new (Backbone.Model.extend()),
