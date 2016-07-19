@@ -1,40 +1,6 @@
 
-/**
- *
- *  Preferred markup (for accessibility matter):
- *
- *    <div class="c-section-intro wrapper -color-4">
- *      <div class="intro-info">
- *        { Content }
- *      </div>
- *      { c-buttons-group } // Optioinal
- *      { c-section-menu } // Optional
- *    </div>
- *
- **/
-
-.c-section-intro {
-  display: flex;
-  flex-flow: column;
-  justify-content: space-between;
-  padding-top: 60px;
-  padding-bottom: 130px;
-  background: linear-gradient(to right, #672b9b , #5665bf);
-
-  @media #{$mq-tablet} {
-    flex-flow: row;
-  }
-
-  .intro-info {
-    width: 100%;
-
-    @media #{$mq-tablet} {
-      width: 61.6%;
-    }
-
-    .c-title {
-      margin: 0;
-      margin-bottom: 30px;
-    }
+.country {
+  .c-section-intro {
+    background: linear-gradient(to bottom, transparent, #672b9b);
   }
 }
