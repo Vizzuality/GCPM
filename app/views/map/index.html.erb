@@ -8,21 +8,50 @@
 </div>
 
 <!-- c-map-menu -->
-<div class="c-map-menu wrapper">
+<div id="map-menu" class="c-map-menu wrapper">
   <ul class="list">
-    <li class="item">
+    <li class="item btn-mapmenu-action" data-action="Layers/toggle">
       <svg class="c-svg">
         <use xlink:href="#icon-"></use>
       </svg>
-      { content }
+      Layers
+    </li>
+    
+    <li class="item btn-mapmenu-action" data-action="Event/toggle">
+      <svg class="c-svg">
+        <use xlink:href="#icon-"></use>
+      </svg>
+      Add event
+    </li>
+    
+    <li class="item btn-mapmenu-action" data-action="Save/toggle">
+      <svg class="c-svg">
+        <use xlink:href="#icon-"></use>
+      </svg>
+      Save map
     </li>
   </ul>
+
   <ul class="list">
-    <li class="item">
+    <li class="item btn-mapmenu-action" data-action="Download/toggle">
       <svg class="c-svg">
         <use xlink:href="#icon-"></use>
       </svg>
-      { content }
+      Download
+    </li>
+
+    <li class="item btn-mapmenu-action" data-action="Sortby/toggle">
+      <svg class="c-svg">
+        <use xlink:href="#icon-"></use>
+      </svg>
+      Sort by
+    </li>
+
+    <li class="item btn-mapmenu-action" data-action="Filters/toggle">
+      <svg class="c-svg">
+        <use xlink:href="#icon-"></use>
+      </svg>
+      Filter
     </li>
   </ul>
 </div>
@@ -144,7 +173,7 @@
     <p>Qualifying Donec sed odio dui. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Curabitur tempus ...</p>
   </div>
 
-  <div class="card -mobile-large-1-2 -tablet-2-3 -content-1-2 -color-2 new-post-background">
+  <div class="card -tablet-2-3 -content-1-2 -color-2 new-post-background">
     <h4 class="c-card-title -border-4"><%= t 'new_post' %></h4>
     <a>
       <h3 class="c-title">Qualifying Multi-Transcript Signatures for Active Surveillance of Prostate Cancer</h3>
