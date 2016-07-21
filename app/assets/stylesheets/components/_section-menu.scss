@@ -1,0 +1,70 @@
+/**
+ *
+ *  Preferred markup (for accessibility matter):
+ *    <ul class="c-section-menu">
+ *      <li class="item"><%= link_to (t '{ Item name }'), {path} %></li>
+ *      <li class="item"><%= link_to (t '{ Item name }'), {path} %></li>
+ *      <li class="item"><%= link_to (t '{ Item name }'), {path} %></li>
+ *    </ul>
+ *
+ *  Colors modifiers (for the outline and/or background and/or text):
+ *    - "-color-0": transparent
+ *    - "-color-1": blue   ($color-1) - DEFAULT, optional class
+ *    - "-color-2": orange ($color-6)
+ *    - "-color-3": purple ($color-4)
+ *    - "-color-4": white  ($color-3)
+ *
+ */
+
+.c-section-menu {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  margin: 0 0 0 $wrapper-mobile-padding;
+  font-family: $font-family-1;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-medium;
+
+  @media #{$mq-mobile-large} {
+    margin: 0 0 0 $wrapper-tablet-padding;
+  }
+
+  @media #{$mq-tablet} {
+    margin: 0 0 0 $wrapper-padding;
+  }
+
+  &.-color-0:after { background: transparent; }
+  &.-color-2:after { background: $color-6; }
+  &.-color-3:after { background: $color-4; }
+  &.-color-4:after { background: $color-3; }
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+    background: $color-1;
+    opacity: .7;
+  }
+
+  li {
+    position: relative;
+    z-index: 2;
+
+    a {
+      display: block;
+      color: $color-3;
+      padding: 12px 24px;
+
+      &:hover, &.-active {
+        box-shadow: inset 0 0 2px 0 lightgrey;
+        color: $color-2;
+        background-color: $color-3;
+      }
+    }
+  }
+}

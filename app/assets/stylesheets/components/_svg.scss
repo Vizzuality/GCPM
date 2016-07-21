@@ -1,0 +1,42 @@
+/**
+ *
+ *  <svg class="c-svg icon icon-{ name }">
+ *    <use xlink:href="#icon-{ name }"></use>
+ *  </svg>
+ *
+ *  Svg icon sizes classes:
+ *    - "-big"
+ *    - "-medium"
+ *    - "-normal"
+ *    - "-small" - DEFAULT, optional class
+ *    - "-smaller"
+ *
+ */
+
+.c-svg {
+  width: 12px;
+  height: 12px;
+
+  &.-big {
+    width: 34px;
+    height: 34px;
+  }
+
+  &.-medium {
+    width: 21px;
+    height: 21px;
+  }
+
+  &.-normal {
+    width: 17px;
+    height: 17px;
+  }
+
+  &.-smaller {
+    width: 5px;
+    height: 5px;
+  }
+}
+
+
+

@@ -1,0 +1,112 @@
+/**
+ *
+ *  Preferred markup (for accessibility matter):
+ *  <button class="c-button"> {Button content goes here} </button>
+ *
+ *  Alternative markup for links:
+ *  <a href="/" class="c-button"> {Button content goes here} </a>
+ *
+ *  Colors modifiers (for the outline and/or background and/or text):
+ *    - "-color-1": blue   ($color-1) - DEFAULT, optional class
+ *    - "-color-2": orange ($color-6)
+ *    - "-color-3": purple ($color-4)
+ *    - "-color-4": white  ($color-3)
+ *    - "-color-5": dark   ($color-2)
+ *
+ *  Other modifiers:
+ *    - "-filled": button filled with the color (default outlined)
+ *    - "-inverse": white button with colored text
+ *    - "-respect-text": let the default text styles
+ *    - "-circle": circle button with grey border and default text color, can't
+ *    be combined with any modifier
+ *
+ */
+
+.c-button {
+  display: inline-block;
+  padding: 10px 30px;
+  font-size: $font-size-x-small;
+  font-weight: $font-weight-bold;
+  text-transform: uppercase;
+  color: $color-1;
+  border: 1px solid $color-1;
+  background: transparent;
+  /* The cursor property needs to be specified for the buttons made with a
+   * "button" HTML markup */
+  cursor: pointer;
+  transition: box-shadow .15s;
+  text-align: center;
+
+  &:hover {
+    box-shadow: 0px 7px 15px 0px rgba(0, 0, 0, .10);
+  }
+
+  &.-color-2 {
+    color: $color-6;
+    border: 1px solid $color-6;
+  }
+
+  &.-color-3 {
+    color: $color-4;
+    border: 1px solid $color-4;
+  }
+
+  &.-color-4 {
+    color: $color-3;
+    border: 1px solid $color-3;
+  }
+
+  &.-color-5 {
+    color: $color-2;
+    border: 1px solid $color-2;
+  }
+
+  &.-respect-text {
+    font-size: inherit;
+    font-weight: inherit;
+    text-transform: none;
+  }
+
+  &.-filled {
+    color: $color-3;
+    background: $color-1;
+    border-color: $color-1;
+
+    &.-color-2 {
+      background: $color-6;
+      border-color: $color-6;
+    }
+
+    &.-color-3 {
+      background: $color-4;
+      border-color: $color-4;
+    }
+  }
+
+  &.-inverse {
+    color: $color-3;
+    border-color: $color-3;
+
+    &.-filled {
+      background: $color-3;
+      color: $color-1;
+      border-color: $color-3;
+
+      &.-color-2 { color: $color-6; }
+      &.-color-3 { color: $color-4; }
+    }
+  }
+
+  &.-circle {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 20px;
+    width: 140px;
+    height: 140px;
+    line-height: 1.5;
+    text-align: center;
+    color: inherit;
+    border-radius: 100%;
+    border-color: rgba($color-2, .15);
+  }
+}

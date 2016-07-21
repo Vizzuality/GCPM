@@ -12,4 +12,32 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require leaflet
+//= require handlebars
+//= require turbolinks
+//= require underscore/underscore
+//= require backbone/backbone
+//= require d3
+//= require_self
+
+//= require_tree ./templates
+//= require_tree ./helpers/
+//= require_tree ./collections/
+//= require_tree ./views/
+
+//= require main
+//= require router
+//= require dispatcher
+
+(function() {
+
+  'use strict';
+
+  this.App = {
+    View: {},
+    Model: {},
+    Collection: {},
+    Helper: {}
+  };
+
+}).call(this);

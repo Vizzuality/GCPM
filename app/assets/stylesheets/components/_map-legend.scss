@@ -1,0 +1,42 @@
+
+/**
+ *
+ *  <div class="c-map-legend">
+ *    <h3 class="c-title -normal"> {Title goes here} </h3>
+ *    <ul class="legend">
+ *      <li class="item"><div class="legend-icon -color-x"></div>{ Content }</li>
+ *      <li class="item"><div class="legend-icon -color-x"></div>{ Content }</li>
+ *    </ul>
+ *  </div>
+ *
+ *  Colors modifiers (for the underline):
+ *    - "-color-x": Colors scale
+ *
+ */
+
+.c-map-legend {
+  > .c-title {
+    margin-bottom: 20px;
+  }
+
+  .legend {
+
+    > .item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .legend-icon {
+      width: 15px;
+      height: 15px;
+      margin-right: 10px;
+
+      &.-color-1 { background-color: #68299b; }
+      &.-color-2 { background-color: #7f49aa; }
+      &.-color-3 { background-color: #a681c4; }
+      &.-color-4 { background-color: #c4acd8; }
+      &.-color-5 { background-color: #d9cae6; }
+    }
+  }
+}

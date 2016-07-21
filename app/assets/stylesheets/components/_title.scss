@@ -1,0 +1,50 @@
+/**
+ *
+ *  <h1 class="c-title -huge">   {Title goes here} </h1>
+ *  <h1 class="c-title -big">    {Title goes here} </h1>
+ *  <h2 class="c-title -medium"> {Title goes here} </h2>
+ *  <h3 class="c-title -normal"> {Title goes here} </h3>
+ *  <h3 class="c-title -small">  {Title goes here} </h3>
+ *
+ *  The HTML scructure should be respected to give the document a correct
+ *  hierarchy (especially usefull for accessibility matters).
+ *
+ *  The different modifiers are:
+ *    - "-huge":    usually a special title
+ *    - "-big":     usually the title of the page
+ *    - "-medium":  usually the title of a section
+ *    - "-normal":  usually the title of an article (DEFAULT style)
+ *    - "-inverse": make the title white-ish (for darker/colorfull backgrounds)
+ */
+
+.c-title {
+  margin: 25px 0 0 0;
+  font-size: $font-size-x-medium;
+  letter-spacing: -0.5px;
+  line-height: 1.3;
+
+  &.-huge {
+    font-size: $font-size-x-huge;
+    letter-spacing: -2px;
+    line-height: 63px;
+  }
+
+  &.-big {
+    font-size: $font-size-x-big;
+    letter-spacing: -1.7px;
+    line-height: 55px;
+  }
+
+  &.-medium {
+    font-size: $font-size-big;
+    letter-spacing: -0.7px;
+  }
+
+  &.-small {
+    font-size: $font-size-medium;
+    letter-spacing: -0.5px;
+  }
+
+  &.-inverse { color: $color-3; }
+
+}

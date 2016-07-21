@@ -1,0 +1,122 @@
+[
+	{
+		"center": {
+			"lat": 37,
+			"lng": -95
+		},
+
+		"name": "North America",
+
+		"value": 1736,
+
+		"segments": [{
+			"name": "Breast",
+			"value": 500
+		},{
+			"name": "Non-melanoma skin cancer",
+			"value": 200
+		},{
+			"name": "Trachea, bronchus and lung",
+			"value": 36
+		},{
+			"name": "Other",
+			"value": 1000
+		}]
+	},
+	{
+		"center": {
+			"lat": -5,
+			"lng": -50
+		},
+
+		"name": "South America",
+
+		"value": 200,
+
+		"segments": [{
+			"name": "Breast",
+			"value": 100
+		},{
+			"name": "Non-melanoma skin cancer",
+			"value": 50
+		},{
+			"name": "Trachea, bronchus and lung",
+			"value": 25
+		},{
+			"name": "Other",
+			"value": 25
+		}]
+	},
+	{
+		"center": {
+			"lat": 10,
+			"lng": 20
+		},
+
+		"name": "Europe",
+
+		"value": 905,
+
+		"segments": [{
+			"name": "Breast",
+			"value": 500
+		},{
+			"name": "Non-melanoma skin cancer",
+			"value": 200
+		},{
+			"name": "Trachea, bronchus and lung",
+			"value": 5
+		},{
+			"name": "Other",
+			"value": 200
+		}]
+	},
+	{
+		"center": {
+			"lat": 50,
+			"lng": 10
+		},
+
+		"name": "Africa",
+
+		"value": 200,
+
+		"segments": [{
+			"name": "Breast",
+			"value": 50
+		},{
+			"name": "Non-melanoma skin cancer",
+			"value": 20
+		},{
+			"name": "Trachea, bronchus and lung",
+			"value": 30
+		},{
+			"name": "Other",
+			"value": 100
+		}]
+	},
+	{
+		"center": {
+			"lat": 40,
+			"lng": 80
+		},
+
+		"name": "Asia",
+
+		"value": 44,
+
+		"segments": [{
+			"name": "Breast",
+			"value": 24
+		},{
+			"name": "Non-melanoma skin cancer",
+			"value": 10
+		},{
+			"name": "Trachea, bronchus and lung",
+			"value": 5
+		},{
+			"name": "Other",
+			"value": 5
+		}]
+	}
+]
