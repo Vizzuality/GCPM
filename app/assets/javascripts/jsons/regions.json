@@ -1,0 +1,65 @@
+[
+  {
+    "name": "África",
+    "id": "afr",
+    "countries": [
+      {
+        "name": "Algeria",
+        "id": "alg",
+        "iso": "ALG"
+      },
+      {
+        "name": "Congo",
+        "id": "cong",
+        "iso": "CNG"
+      },
+      {
+        "name": "Kenya",
+        "id": "ken",
+        "iso": "KEN"
+      }
+    ]
+  },
+  {
+    "name": "Europe",
+    "id": "eur",
+    "countries": [
+      {
+        "name": "France",
+        "id": "fr",
+        "iso": "FR"
+      },
+      {
+        "name": "Italy",
+        "id": "ita",
+        "iso": "ITA"
+      },
+      {
+        "name": "Spain",
+        "id": "spa",
+        "iso": "SPA"
+      }
+    ]
+  },
+  {
+    "name": "America",
+    "id": "amer",
+    "countries": [
+      {
+        "name": "United States",
+        "id": "us",
+        "iso": "US"
+      },
+      {
+        "name": "Brazil",
+        "id": "brz",
+        "iso": "BRZ"
+      },
+      {
+        "name": "Canada",
+        "id": "can",
+        "iso": "CAN"
+      }
+    ]
+  }
+]

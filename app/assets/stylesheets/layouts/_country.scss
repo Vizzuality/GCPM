@@ -1,4 +1,15 @@
 
+.country-index {
+  padding-top: 230px;
+  padding-bottom: 100px;
+
+  .search {
+    width: 100%;
+    border: none;
+    margin-bottom: 60px;
+  }
+}
+
 .country {
   .c-section-intro {
     height: 900px;
@@ -12,3 +23,5 @@
     }
   }
 }
+
+
