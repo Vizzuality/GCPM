@@ -8,53 +8,7 @@
 </div>
 
 <!-- c-map-menu -->
-<div id="map-menu" class="c-map-menu wrapper">
-  <ul class="list">
-    <li class="item btn-mapmenu-action" data-action="Layers/toggle">
-      <svg class="c-svg">
-        <use xlink:href="#icon-"></use>
-      </svg>
-      Layers
-    </li>
-    
-    <li class="item btn-mapmenu-action" data-action="Event/toggle">
-      <svg class="c-svg">
-        <use xlink:href="#icon-"></use>
-      </svg>
-      Add event
-    </li>
-    
-    <li class="item btn-mapmenu-action" data-action="Save/toggle">
-      <svg class="c-svg">
-        <use xlink:href="#icon-"></use>
-      </svg>
-      Save map
-    </li>
-  </ul>
-
-  <ul class="list">
-    <li class="item btn-mapmenu-action" data-action="Download/toggle">
-      <svg class="c-svg">
-        <use xlink:href="#icon-"></use>
-      </svg>
-      Download
-    </li>
-
-    <li class="item btn-mapmenu-action" data-action="Sortby/toggle">
-      <svg class="c-svg">
-        <use xlink:href="#icon-"></use>
-      </svg>
-      Sort by
-    </li>
-
-    <li class="item btn-mapmenu-action" data-action="Filters/toggle">
-      <svg class="c-svg">
-        <use xlink:href="#icon-"></use>
-      </svg>
-      Filter
-    </li>
-  </ul>
-</div>
+<%= render partial: "map-menu" %>
 
 <!-- c-grid-proyects -->
 <div class="c-card-grid">

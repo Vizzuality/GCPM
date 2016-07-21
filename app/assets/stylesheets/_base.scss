@@ -27,7 +27,12 @@ body {
 }
 
 a {
+  color: $color-1;
   text-decoration: none;
+
+  &:hover {
+    color: lighten($color-1, 10%);
+  }
 
   &[disabled] {
     display: inline-block;

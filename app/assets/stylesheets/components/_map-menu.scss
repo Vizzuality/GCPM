@@ -34,19 +34,26 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding-top: 13px;
-  padding-bottom: 13px;
 
   .list {
     display: flex;
-    text-transform: uppercase;
-    font-weight: $font-weight-bold;
-    font-size: 12px;
 
-    & .item {
+    > li {
+      margin-right: 35px;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    .item {
+      @extend %reset-btn;
       display: flex;
       align-items: center;
-      margin-right: 35px;
+      padding: 13px 0; 
+      font-weight: $font-weight-bold;
+      font-size: 12px;      
+      text-transform: uppercase;
+      cursor: pointer;
 
       &:last-child {
         margin-right: 0;
