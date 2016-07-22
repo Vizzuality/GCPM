@@ -1,0 +1,20 @@
+{{!-- BACKDROP --}}
+<div class="modal-backdrop btn-modal-close"></div>
+{{!-- WINDOW --}}
+<div class="modal-window">
+  <button href="#" class="modal-close btn-modal-close">
+    <svg><use xlink:href="#shape-close"></use></svg>
+  </button>
+  
+  <div class="modal-wrapper {{#if footer}}-has-footer{{/if}}">
+    <div class="modal-content">
+
+    </div>
+    
+    {{#if footer}}
+      <div class="modal-footer">
+        
+      </div>
+    {{/if}}
+  </div>
+</div>

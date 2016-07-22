@@ -1,0 +1,331 @@
+//<div class="c-modal">
+// 	<div class="modal-backdrop btn-modal-close"></div>
+//
+// 	<div class="modal-window">
+// 	  <button href="#" class="btn-modal-close">
+// 	  	<svg><use xlink:href="#shape-close"></use></svg>
+// 	  </button>
+// 	  
+// 	  <div class="modal-wrapper {{#if footer}}-has-footer{{/if}}">
+// 	    <div class="modal-content">
+// 	    	{ content }
+// 	    </div>
+// 	    
+// 	    {{#if footer}}
+// 	      <div class="modal-footer">
+// 	      	{ content }
+// 	      </div>
+// 	    {{/if}}
+// 	  </div>
+// 	</div>
+//</div>
+
+
+// Layout
+.c-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1101;
+  width: 100%;
+  height: 100%;
+  display: none;
+  
+  &.-active {
+    display: block;
+
+    .modal-backdrop {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-window {
+      opacity: 1;
+      visibility: visible;     
+      @media #{$mq-tablet}{
+        transform: translate(-50%,-50%);
+      }
+    }
+  }
+
+  .modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s $easeInOutSine;
+    background: rgba(255,255,255,0.25);
+  }
+
+  .modal-window {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0s $easeInOutSine;
+
+    @media #{$mq-tablet}{
+      left: 50%; top: 50%;
+      width: 500px;
+      height: auto;
+      min-height: 100px;
+      transform: translate(-50%,-60%);
+    }
+
+    .modal-close {
+      display: block;
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      width: 40px;
+      height: 40px;
+      z-index: 20;
+
+      svg{
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 20px;
+        height: 20px;
+        margin: auto;
+      }
+    }
+  }
+}
+
+
+.modal-window {
+  background: $color-3;
+  border: none;
+  box-shadow: $shadow-1;
+
+  // GRADIENTS
+  &:before, &:after {
+    content: "";
+    position: absolute;
+    height: 20px;
+    width: calc(100% - 8px);
+    left: 0;
+  }
+
+  &:before {
+    top: 0;
+    background: linear-gradient(top,rgba($color-3,1),rgba($color-3,0));
+  }
+
+  &:after {
+    bottom: 0;
+    background: linear-gradient(top,rgba($color-3,0),rgba($color-3,1));
+  }
+
+  // MODAL CLOSE BTN
+  .modal-close {
+    svg {
+      fill: $color-2;
+    }
+
+    &:hover {
+      svg {
+        fill: lighten($color-2,10%);
+      }
+    }
+  }
+
+  // MODAL WRAPPER
+  .modal-wrapper{
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100%;
+    max-height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    @media #{$mq-tablet}{
+      max-height: 450px;
+    }
+
+    &.-has-footer {
+      border-bottom: 66px solid transparent;
+    }
+
+    .modal-content {
+      height: auto;
+      width: 100%;
+      outline: none;
+
+      font-size: 15px;
+      color: $color-2;
+    }
+  }
+}
+
+// MODAL HEADER
+.modal-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: $color-3;
+  z-index: 2;
+  padding: 20px;
+  @include clearfix();
+
+  // GRADIENTS
+  .gradient {
+    content: "";
+    position: absolute;
+    height: 15px;
+    width: 100%;
+    left: 0;
+    top: 100%;
+    background: linear-gradient(top,rgba($color-3,1),rgba($color-3,0));
+  }
+
+  ul {
+    margin: 15px 0;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%,0);
+    float: left;
+    padding: 4px;
+    display: flex;
+    justify-content: center;
+    border: 1px solid $color-1;
+    border-radius: 45px;
+
+    li {
+      font-size: 19px;
+      padding: 10px 20px 7px;
+      color: $color-2;
+      cursor: pointer;
+      font-weight: 500;
+      border-radius: 40px;
+      
+      &:hover {
+        background: lighten($color-3,1%);
+        text-decoration: underline;
+      }
+     
+      &.-active {
+        color: $color-3;
+        background: $color-1;
+      }
+    }
+  }
+}
+
+// MODAL FOOTER
+.modal-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: $color-3;
+  z-index: 2;
+  padding: 15px 0;
+  @include clearfix();
+  border-top: 1px solid $color-5;
+  
+  // GRADIENTS
+  .gradient {
+    content: "";
+    position: absolute;
+    height: 15px;
+    width: calc(100% - 10px);
+    left: 0;
+    bottom: 100%;
+    border-bottom: 1px solid $color-5;
+    background: linear-gradient(top,rgba($color-3,0),rgba($color-3,1));
+  }
+
+}
+
+// MODAL ARROWS
+.modal-arrows {
+  display: none;
+  @media #{$mq-tablet} {
+    display: block;
+  }  
+  
+  .btn-direction{
+    position: absolute;
+    top: 50%;
+    transform: translate(0,-50%);
+    
+    &.-left{
+      right: 100%;
+    }
+    
+    &.-right{
+      left: 100%;
+    }
+    
+    .icon{
+      padding: 10px;
+      width: 60px;
+      height: 60px;
+      svg{
+        stroke: $color-3;
+      }
+    }
+  }  
+}
+
+// MODAL CONTENT
+.modal-content {
+  font-size: 13px;
+
+  br {
+    display: none;
+  }
+
+  strong {
+    font-weight: 500;
+  }
+
+  ul {
+    list-style-type: disc;
+    color: $color-2;
+    font-size: 13px;
+
+    > li{
+      list-style-type: disc;
+      padding: 10px 0 0;
+      margin-left: 20px;
+      line-height: 1.25;
+
+      > p {
+        margin: 0;
+      }
+
+      &:first-child{
+        padding: 0;
+      }
+    }
+  }
+
+  p {
+    line-height: 1.5;
+    margin-bottom: 10px;
+    margin-top: 10px;
+
+    a:not(.btn) {
+      color: $color-1;
+      
+      &:hover{
+        color: lighten($color-1,5%);
+      }
+    }
+  }
+}
