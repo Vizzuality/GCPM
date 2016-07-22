@@ -3,10 +3,25 @@
   padding-top: 230px;
   padding-bottom: 100px;
 
+  #search {
+    font-weight: $font-weight-bold;
+    outline: none;
+  }
+
   .search {
     width: 100%;
     border: none;
     margin-bottom: 60px;
+  }
+
+  .c-button {
+    margin-bottom: 70px;
+  }
+
+  .c-card-title {
+    font-size: $font-size-x-medium;
+    text-transform: capitalize;
+    margin-bottom: 25px;
   }
 }
 

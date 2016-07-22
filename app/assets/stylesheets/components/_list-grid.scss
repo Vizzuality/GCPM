@@ -23,6 +23,11 @@
 
   & .item {
     width: 50%;
+    margin-bottom: 35px;
+
+    &:last-child {
+      margin-bottom: 80px;
+    }
 
     /* Default sizes */
     &.\-1-4 { width: 25%;    }

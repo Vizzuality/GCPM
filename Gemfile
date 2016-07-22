@@ -41,6 +41,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-hammerjs'
   gem 'rails-assets-jquery-hammerjs'
   gem 'rails-assets-leaflet'
+  gem 'rails-assets-fuse'
 end
 
 # Active record
