@@ -82,7 +82,6 @@
 
           self.drawCountries(false, result);
         } else {
-          this.value = 'Type the country name_';
           self.drawCountries(true);
         }
       });

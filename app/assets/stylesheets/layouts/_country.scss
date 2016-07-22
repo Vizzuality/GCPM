@@ -1,21 +1,37 @@
 
 .country-index {
-  padding-top: 230px;
-  padding-bottom: 100px;
+  padding-top: 10px;
+  padding-bottom: 50px;
 
-  #search {
-    font-weight: $font-weight-bold;
-    outline: none;
+  @media #{$mq-tablet} {
+    padding-top: 230px;
+    padding-bottom: 100px;
   }
 
-  .search {
+  #search {
     width: 100%;
     border: none;
-    margin-bottom: 60px;
+    margin-bottom: 20px;
+    font-size: $font-size-x-medium;
+    font-weight: $font-weight-bold;
+    outline: none;
+
+    @media #{$mq-tablet} {
+      margin-bottom: 60px;
+      font-size: $font-size-huge;
+    }
+
+    &::-webkit-input-placeholder {
+      color: $color-2;
+    }
   }
 
   .c-button {
-    margin-bottom: 70px;
+    margin-bottom: 40px;
+
+    @media #{$mq-tablet} {
+      margin-bottom: 70px;
+    }
   }
 
   .c-card-title {
