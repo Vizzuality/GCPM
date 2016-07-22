@@ -137,6 +137,7 @@
     width: 100%;
     height: 100%;
     padding: $wrapper-tablet-padding;
+    visibility: hidden;
     opacity: 0;
     will-change: opacity;
     transition: opacity .3s ease-out;
@@ -148,6 +149,7 @@
     }
 
     &.-opened {
+      visibility: visible;
       opacity: 1;
 
       /* The hamburger icon transform into a close one */

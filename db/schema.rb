@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160629161041) do
+ActiveRecord::Schema.define(version: 20160721141137) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,13 @@ ActiveRecord::Schema.define(version: 20160629161041) do
     t.index ["organization_id"], name: "index_addresses_on_organization_id", using: :btree
   end
 
+  create_table "addresses_investigators", id: false, force: :cascade do |t|
+    t.integer "address_id"
+    t.integer "investigator_id"
+    t.index ["address_id"], name: "index_addresses_investigators_on_address_id", using: :btree
+    t.index ["investigator_id"], name: "index_addresses_investigators_on_investigator_id", using: :btree
+  end
+
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -68,8 +75,62 @@ ActiveRecord::Schema.define(version: 20160629161041) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  create_table "cancer_types", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "cancer_types_projects", id: false, force: :cascade do |t|
+    t.integer "project_id"
+    t.integer "cancer_type_id"
+    t.index ["cancer_type_id"], name: "index_cancer_types_projects_on_cancer_type_id", using: :btree
+    t.index ["project_id"], name: "index_cancer_types_projects_on_project_id", using: :btree
+  end
+
+  create_table "countries", force: :cascade do |t|
+    t.string   "country_name"
+    t.string   "region_name"
+    t.string   "country_iso"
+    t.string   "region_iso"
+    t.string   "country_centroid"
+    t.string   "region_centroid"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  create_table "investigators", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "position_title"
+    t.text     "website"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "members", force: :cascade do |t|
+    t.integer  "project_id"
+    t.integer  "organization_id"
+    t.integer  "investigator_id"
+    t.integer  "membership_type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["investigator_id"], name: "index_members_on_investigator_id", using: :btree
+    t.index ["membership_type"], name: "index_members_on_membership_type", using: :btree
+    t.index ["organization_id"], name: "index_members_on_organization_id", using: :btree
+    t.index ["project_id"], name: "index_members_on_project_id", using: :btree
+  end
+
   create_table "organization_types", force: :cascade do |t|
     t.string "name"
+  end
+
+  create_table "organization_types_organizations", id: false, force: :cascade do |t|
+    t.integer "organization_id"
+    t.integer "organization_type_id"
+    t.index ["organization_id"], name: "index_organization_types_organizations_on_organization_id", using: :btree
+    t.index ["organization_type_id"], name: "index_organization_types_organizations_on_organization_type_id", using: :btree
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -83,6 +144,30 @@ ActiveRecord::Schema.define(version: 20160629161041) do
     t.datetime "updated_at",           null: false
     t.index ["grid_id"], name: "index_organizations_on_grid_id", using: :btree
     t.index ["organization_type_id"], name: "index_organizations_on_organization_type_id", using: :btree
+  end
+
+  create_table "project_types", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "project_types_projects", id: false, force: :cascade do |t|
+    t.integer "project_id"
+    t.integer "project_type_id"
+    t.index ["project_id"], name: "index_project_types_projects_on_project_id", using: :btree
+    t.index ["project_type_id"], name: "index_project_types_projects_on_project_type_id", using: :btree
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string   "title"
+    t.text     "summary"
+    t.text     "project_website"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "status"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
 end

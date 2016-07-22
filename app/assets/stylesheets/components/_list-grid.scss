@@ -25,6 +25,14 @@
     width: 50%;
     margin-bottom: 35px;
 
+    & .country-link {
+      color: $color-2;
+
+      &:hover {
+        opacity: .5;
+      }
+    }
+
     &:last-child {
       margin-bottom: 80px;
     }
