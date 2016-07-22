@@ -1,4 +1,4 @@
-class CancersController < ApplicationController
+class CancerTypesController < ApplicationController
   def index
     @title = t 'cancer_types'
   end
