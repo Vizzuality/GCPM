@@ -22,6 +22,19 @@
  *
  */
 
+%reset-btn {
+  -webkit-appearance: none;
+  border: 1px solid transparent;
+  background: none;
+  outline: none;
+  box-shadow: none;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: inherit;
+}
+
+
 .c-button {
   display: inline-block;
   padding: 10px 30px;

@@ -8,24 +8,7 @@
 </div>
 
 <!-- c-map-menu -->
-<div class="c-map-menu wrapper">
-  <ul class="list">
-    <li class="item">
-      <svg class="c-svg">
-        <use xlink:href="#icon-"></use>
-      </svg>
-      { content }
-    </li>
-  </ul>
-  <ul class="list">
-    <li class="item">
-      <svg class="c-svg">
-        <use xlink:href="#icon-"></use>
-      </svg>
-      { content }
-    </li>
-  </ul>
-</div>
+<%= render partial: "map-menu" %>
 
 <!-- c-grid-proyects -->
 <div class="c-card-grid">
@@ -144,7 +127,7 @@
     <p>Qualifying Donec sed odio dui. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Curabitur tempus ...</p>
   </div>
 
-  <div class="card -mobile-large-1-2 -tablet-2-3 -content-1-2 -color-2 new-post-background">
+  <div class="card -tablet-2-3 -content-1-2 -color-2 new-post-background">
     <h4 class="c-card-title -border-4"><%= t 'new_post' %></h4>
     <a>
       <h3 class="c-title">Qualifying Multi-Transcript Signatures for Active Surveillance of Prostate Cancer</h3>
