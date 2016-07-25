@@ -11,8 +11,9 @@
 #  updated_at      :datetime         not null
 #
 
-require 'rails_helper'
-
-RSpec.describe Member, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+class Membership < ApplicationRecord
+  belongs_to :project
+  belongs_to :investigator
+  belongs_to :organization
+  enum membership_type: [:main, :secondary, :funding]
 end

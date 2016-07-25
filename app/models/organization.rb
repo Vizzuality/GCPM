@@ -16,8 +16,8 @@
 class Organization < ApplicationRecord
   has_many :addresses
   belongs_to :organization_type
-  has_many :members
-  has_many :investigators, through: :members
+  has_many :memberships
+  has_many :investigators, through: :memberships
   accepts_nested_attributes_for :addresses, allow_destroy: true
-  has_many :projects, through: :members
+  has_many :projects, through: :memberships
 end

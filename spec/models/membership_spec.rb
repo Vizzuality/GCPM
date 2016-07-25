@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: members
+# Table name: memberships
 #
 #  id              :integer          not null, primary key
 #  project_id      :integer
@@ -11,9 +11,8 @@
 #  updated_at      :datetime         not null
 #
 
-class Member < ApplicationRecord
-  belongs_to :project
-  belongs_to :investigator
-  belongs_to :organization
-  enum membership_type: [:main, :secondary, :funding]
+require 'rails_helper'
+
+RSpec.describe Membership, :type => :model do
+  pending "add some examples to (or delete) #{__FILE__}"
 end
