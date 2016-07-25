@@ -5,7 +5,6 @@
 #  id               :integer          not null, primary key
 #  city             :string
 #  country          :string
-#  country_iso      :string
 #  country_code     :string
 #  latitude         :float
 #  longitude        :float

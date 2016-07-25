@@ -46,10 +46,6 @@ end
 # Active record
 gem 'pg', '~> 0.18'
 
-group :staging do
-  gem 'rails_12factor'
-end
-
 group :development, :test do
   gem 'teaspoon-mocha', git: 'http://github.com/modeset/teaspoon', branch: 'rails_5'
   gem 'hirb'
