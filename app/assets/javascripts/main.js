@@ -29,14 +29,18 @@
     },
 
     mapPage: function() {
-      var params = this.router.getParams();
+      var params = this.router.getParams(),
+          layersCollection = new App.Collection.Layers();
 
-      var layersCollection = new App.Collection.Layers();
-
+      // Views
       var mapView = new App.View.Map({
         layers: layersCollection,
       });
+      var mapMenuView = new App.View.MapMenu({
+        layers: layersCollection,
+      });
 
+      // Sync layers
       layersCollection.toggleLayers([
         params.type || 'project-markers'
       ]);
