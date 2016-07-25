@@ -33,9 +33,11 @@ staging:
   database: gcpm_staging
   username: <%= ENV['GCPM_DATABASE_USER'] %>
   password: <%= ENV['GCPM_DATABASE_PASSWORD'] %>
+  host: localhost
 
 production:
   <<: *default
   database: gcpm_production
   username: <%= ENV['GCPM_DATABASE_USER'] %>
   password: <%= ENV['GCPM_DATABASE_PASSWORD'] %>
+  host: localhost
