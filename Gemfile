@@ -66,6 +66,7 @@ group :development do
   gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
   # Deploy
   gem 'capistrano', '3.5'
+  gem 'capistrano-env-config'
   gem 'capistrano-rails'
   gem 'capistrano-bundler'
   gem 'capistrano-rvm'

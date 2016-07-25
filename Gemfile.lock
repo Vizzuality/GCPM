@@ -122,6 +122,9 @@ GEM
     capistrano-bundler (1.1.4)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
+    capistrano-env-config (0.3.0)
+      capistrano (~> 3.0)
+      dotenv (~> 2.0)
     capistrano-harrow (0.5.1)
     capistrano-passenger (0.2.0)
       capistrano (~> 3.0)
@@ -363,6 +366,7 @@ DEPENDENCIES
   bourbon
   capistrano (= 3.5)
   capistrano-bundler
+  capistrano-env-config
   capistrano-passenger
   capistrano-rails
   capistrano-rvm
