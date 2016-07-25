@@ -22,12 +22,5 @@ set :rvm_map_bins, fetch(:rvm_map_bins, []).push('rvmsudo')
 namespace :deploy do
   after :finishing, 'deploy:cleanup'
   after 'deploy:publishing', 'deploy:restart'
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      within release_path do
-        execute :rake, 'cache:clear'
-      end
-    end
-  end
 end
 
