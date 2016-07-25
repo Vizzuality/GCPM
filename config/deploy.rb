@@ -6,7 +6,7 @@ set :repo_url, 'git@github.com:Vizzuality/GCPM.git'
 set :passenger_restart_with_touch, true
 
 set :rvm_type, :auto
-set :rvm_ruby_version, '2.3.0-p0'
+set :rvm_ruby_version, '2.3.0'
 set :rvm_roles, [:app, :web, :db]
 
 set :branch, 'master'
