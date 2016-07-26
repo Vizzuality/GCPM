@@ -14,7 +14,7 @@
 
     initialize: function() {
       // Initialize Parent
-      this.__super__.initialize.apply(this, arguments);
+      this.constructor.__super__.initialize.apply(this);
       // Inits
       this.render();
       this.listeners();

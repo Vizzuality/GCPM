@@ -183,7 +183,6 @@
   left: 0;
   width: 100%;
   background: $color-3;
-  z-index: 2;
   padding: 20px;
   @include clearfix();
 
@@ -227,7 +226,6 @@
   left: 0;
   width: 100%;
   background: $color-3;
-  z-index: 2;
   padding: 15px 0;
   @include clearfix();
   border-top: 1px solid $color-5;

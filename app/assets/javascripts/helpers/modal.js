@@ -13,7 +13,7 @@
     })),
 
     events: {
-      'click .btn-modal-close' : 'hide'
+      'click .js-btn-modal-close' : 'hide'
     },
 
     initialize: function() {
