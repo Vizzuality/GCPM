@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get '/',          to: 'home#index',      as: 'home'
   get '/map',       to: 'map#index',       as: 'map'
   get '/countries', to: 'countries#index', as: 'countries'
   get '/cancer-types',   to: 'cancer_types#index',   as: 'cancers'
