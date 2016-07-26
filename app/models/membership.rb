@@ -12,8 +12,8 @@
 #
 
 class Membership < ApplicationRecord
+  enum membership_type: [:main, :secondary, :funding]
   belongs_to :project
   belongs_to :investigator
   belongs_to :organization
-  enum membership_type: [:main, :secondary, :funding]
 end

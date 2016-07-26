@@ -1,242 +1,236 @@
-country_name,country_iso,region_iso,region_name,country_centroid,region_centroid
-Afghanistan,AFG,EMR,Eastern Mediterranean,"{""type"":""Point"",""coordinates"":[66.0084494537942,33.8362696431712]}","{""type"":""Point"",""coordinates"":[39.3715507254052,25.6516486435833]}"
-Aland,ALD,,,"{""type"":""Point"",""coordinates"":[20.0555820572155,60.1864470940731]}",
-Albania,ALB,EUR,Europe,"{""type"":""Point"",""coordinates"":[20.0538191642002,41.1424828349511]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Algeria,DZA,AFR,Africa,"{""type"":""Point"",""coordinates"":[2.65309038803477,28.1488873603532]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-American Samoa,ASM,,,"{""type"":""Point"",""coordinates"":[-170.398920922058,-14.2549435111901]}",
-Andorra,AND,EUR,Europe,"{""type"":""Point"",""coordinates"":[1.56075624120752,42.5413265253232]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Angola,AGO,AFR,Africa,"{""type"":""Point"",""coordinates"":[17.5369846566531,-12.2923203620274]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Anguilla,AIA,,,"{""type"":""Point"",""coordinates"":[-63.0626681662031,18.2269359399548]}",
-Antarctica,ATA,,,"{""type"":""Point"",""coordinates"":[19.9083978529721,-80.5082193413703]}",
-Antigua and Barbuda,ATG,AMR,America,"{""type"":""Point"",""coordinates"":[-61.7917324622562,17.2843802356027]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-Argentina,ARG,AMR,America,"{""type"":""Point"",""coordinates"":[-65.1781886320746,-35.3875470285781]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-Armenia,ARM,EUR,Europe,"{""type"":""Point"",""coordinates"":[44.9323011718922,40.2881341964328]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Aruba,ABW,,,"{""type"":""Point"",""coordinates"":[-69.9742007499592,12.5169352691053]}",
-Ashmore and Cartier Islands,ATC,,,"{""type"":""Point"",""coordinates"":[123.586367786587,-12.4325771765577]}",
-Australia,AUS,WPR,Western Pacific,"{""type"":""Point"",""coordinates"":[134.491118751904,-25.732310684616]}","{""type"":""Point"",""coordinates"":[116.983181883096,13.1541697534531]}"
-Austria,AUT,EUR,Europe,"{""type"":""Point"",""coordinates"":[14.130672958419,47.5856569254508]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Azerbaijan,AZE,EUR,Europe,"{""type"":""Point"",""coordinates"":[47.5421098985575,40.2891199247234]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Bahrain,BHR,EMR,Eastern Mediterranean,"{""type"":""Point"",""coordinates"":[50.5438669474495,26.049177849445]}","{""type"":""Point"",""coordinates"":[39.3715507254052,25.6516486435833]}"
-Bangladesh,BGD,SEAR,South-East Asia,"{""type"":""Point"",""coordinates"":[90.2419999095764,23.8456777628712]}","{""type"":""Point"",""coordinates"":[94.3414464235754,15.8732684424615]}"
-Barbados,BRB,AMR,America,"{""type"":""Point"",""coordinates"":[-59.5612172743668,13.1810540175191]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-Belarus,BLR,EUR,Europe,"{""type"":""Point"",""coordinates"":[28.0335668721683,53.53188043526]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Belgium,BEL,EUR,Europe,"{""type"":""Point"",""coordinates"":[4.63996114075134,50.6374613037757]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Belize,BLZ,AMR,America,"{""type"":""Point"",""coordinates"":[-88.6938883646203,17.2083188953249]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-Benin,BEN,AFR,Africa,"{""type"":""Point"",""coordinates"":[2.32874161216618,9.6412150349648]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Bermuda,BMU,,,"{""type"":""Point"",""coordinates"":[-64.7565801979823,32.310714196636]}",
-Bhutan,BTN,SEAR,South-East Asia,"{""type"":""Point"",""coordinates"":[90.4044600818258,27.4217564491744]}","{""type"":""Point"",""coordinates"":[94.3414464235754,15.8732684424615]}"
-Bolivia,BOL,AMR,America,"{""type"":""Point"",""coordinates"":[-64.6847536013517,-16.7068790400509]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-Bosnia and Herzegovina,BIH,EUR,Europe,"{""type"":""Point"",""coordinates"":[17.773408271544,44.171733992128]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Botswana,BWA,AFR,Africa,"{""type"":""Point"",""coordinates"":[23.7989770909714,-22.1857737662801]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Brazil,BRA,AMR,America,"{""type"":""Point"",""coordinates"":[-53.0924814310442,-10.7808596762201]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-British Indian Ocean Territory,IOT,,,"{""type"":""Point"",""coordinates"":[72.2988148230797,-7.14433121956459]}",
-British Virgin Islands,VGB,,,"{""type"":""Point"",""coordinates"":[-64.5028631937275,18.5098841288172]}",
-Brunei,BRN,WPR,Western Pacific,"{""type"":""Point"",""coordinates"":[114.727245845441,4.51650038748624]}","{""type"":""Point"",""coordinates"":[116.983181883096,13.1541697534531]}"
-Bulgaria,BGR,EUR,Europe,"{""type"":""Point"",""coordinates"":[25.2175126266167,42.7685226670042]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Burkina Faso,BFA,AFR,Africa,"{""type"":""Point"",""coordinates"":[-1.75552708839229,12.2695498832529]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Burundi,BDI,AFR,Africa,"{""type"":""Point"",""coordinates"":[29.8750826945732,-3.35742533613606]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Cambodia,KHM,WPR,Western Pacific,"{""type"":""Point"",""coordinates"":[104.902804346211,12.7155626094625]}","{""type"":""Point"",""coordinates"":[116.983181883096,13.1541697534531]}"
-Cameroon,CMR,AFR,Africa,"{""type"":""Point"",""coordinates"":[12.7369847465657,5.6930593905529]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Canada,CAN,AMR,America,"{""type"":""Point"",""coordinates"":[-98.2938994464131,61.3764627432318]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-Cape Verde,CPV,AFR,Africa,"{""type"":""Point"",""coordinates"":[-23.9672397660169,15.9361402424859]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Cayman Islands,CYM,,,"{""type"":""Point"",""coordinates"":[-80.8770258927258,19.4263311635148]}",
-Central African Republic,CAF,AFR,Africa,"{""type"":""Point"",""coordinates"":[20.464809335291,6.56632212922487]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Chad,TCD,AFR,Africa,"{""type"":""Point"",""coordinates"":[18.6462513844773,15.3330762866566]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Chile,CHL,AMR,America,"{""type"":""Point"",""coordinates"":[-71.3643727120121,-37.7436220064918]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-China,CHN,WPR,Western Pacific,"{""type"":""Point"",""coordinates"":[103.831572138619,36.5601153323013]}","{""type"":""Point"",""coordinates"":[116.983181883096,13.1541697534531]}"
-Colombia,COL,AMR,America,"{""type"":""Point"",""coordinates"":[-73.0838425104235,3.90941099125651]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-Comoros,COM,AFR,Africa,"{""type"":""Point"",""coordinates"":[43.6801642831497,-11.8842165320115]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Cook Islands,COK,WPR,Western Pacific,"{""type"":""Point"",""coordinates"":[-158.791213604876,-19.8145085499271]}","{""type"":""Point"",""coordinates"":[116.983181883096,13.1541697534531]}"
-Costa Rica,CRI,AMR,America,"{""type"":""Point"",""coordinates"":[-84.1935977833319,9.97330942040159]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-Croatia,HRV,EUR,Europe,"{""type"":""Point"",""coordinates"":[16.3985484873628,45.0677261790089]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Cuba,CUB,AMR,America,"{""type"":""Point"",""coordinates"":[-79.0352114857275,21.6252980133963]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-Curaçao,CUW,,,"{""type"":""Point"",""coordinates"":[-68.9713056069421,12.1938210893964]}",
-Cyprus,CYP,EUR,Europe,"{""type"":""Point"",""coordinates"":[32.9894801034929,34.9151652970483]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Czech Republic,CZE,EUR,Europe,"{""type"":""Point"",""coordinates"":[15.3141035695486,49.7324481057994]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Democratic Republic of the Congo,COD,AFR,Africa,"{""type"":""Point"",""coordinates"":[23.6451134169132,-2.87980080524533]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Denmark,DNK,EUR,Europe,"{""type"":""Point"",""coordinates"":[10.0513900384038,55.9653776049047]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Djibouti,DJI,EMR,Eastern Mediterranean,"{""type"":""Point"",""coordinates"":[42.5664533213664,11.750156034763]}","{""type"":""Point"",""coordinates"":[39.3715507254052,25.6516486435833]}"
-Dominica,DMA,AMR,America,"{""type"":""Point"",""coordinates"":[-61.3569197683636,15.4364413790002]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-Dominican Republic,DOM,AMR,America,"{""type"":""Point"",""coordinates"":[-70.4965858091086,18.8963660554993]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-East Timor,TLS,SEAR,South-East Asia,"{""type"":""Point"",""coordinates"":[125.851073956788,-8.82377794589219]}","{""type"":""Point"",""coordinates"":[94.3414464235754,15.8732684424615]}"
-Ecuador,ECU,AMR,America,"{""type"":""Point"",""coordinates"":[-78.7722798878507,-1.42624024539155]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-Egypt,EGY,EMR,Eastern Mediterranean,"{""type"":""Point"",""coordinates"":[29.8612110039212,26.4929212411641]}","{""type"":""Point"",""coordinates"":[39.3715507254052,25.6516486435833]}"
-El Salvador,SLV,AMR,America,"{""type"":""Point"",""coordinates"":[-88.872215352021,13.7364528331653]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-Equatorial Guinea,GNQ,AFR,Africa,"{""type"":""Point"",""coordinates"":[10.3328962274174,1.70696682578179]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Eritrea,ERI,AFR,Africa,"{""type"":""Point"",""coordinates"":[38.8529483599774,15.3575128253482]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Estonia,EST,EUR,Europe,"{""type"":""Point"",""coordinates"":[25.5357944814772,58.6710146560677]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Ethiopia,ETH,AFR,Africa,"{""type"":""Point"",""coordinates"":[39.6005601935365,8.62294767761304]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Falkland Islands,FLK,,,"{""type"":""Point"",""coordinates"":[-59.3761023206062,-51.733307714921]}",
-Faroe Islands,FRO,,,"{""type"":""Point"",""coordinates"":[-6.87055477607525,62.0740272548197]}",
-Federated States of Micronesia,FSM,WPR,Western Pacific,"{""type"":""Point"",""coordinates"":[155.196362209173,7.04492172668834]}","{""type"":""Point"",""coordinates"":[116.983181883096,13.1541697534531]}"
-Fiji,FJI,WPR,Western Pacific,"{""type"":""Point"",""coordinates"":[163.408088783556,-17.4475646320886]}","{""type"":""Point"",""coordinates"":[116.983181883096,13.1541697534531]}"
-Finland,FIN,EUR,Europe,"{""type"":""Point"",""coordinates"":[26.2707949188874,64.495359044444]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-France,FRA,EUR,Europe,"{""type"":""Point"",""coordinates"":[-2.75526305103322,42.1800916922528]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-French Polynesia,PYF,,,"{""type"":""Point"",""coordinates"":[-145.052037270372,-15.1887835893329]}",
-French Southern and Antarctic Lands,ATF,,,"{""type"":""Point"",""coordinates"":[68.9918137221,-49.064848436522]}",
-Gabon,GAB,AFR,Africa,"{""type"":""Point"",""coordinates"":[11.789570669372,-0.591659992711982]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Gambia,GMB,AFR,Africa,"{""type"":""Point"",""coordinates"":[-15.3975671976139,13.449738171406]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Georgia,GEO,EUR,Europe,"{""type"":""Point"",""coordinates"":[43.5075268544333,42.168800534162]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Germany,DEU,EUR,Europe,"{""type"":""Point"",""coordinates"":[10.3814940079017,51.1063633282237]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Ghana,GHA,AFR,Africa,"{""type"":""Point"",""coordinates"":[-1.21652198248777,7.95394975664051]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Greece,GRC,EUR,Europe,"{""type"":""Point"",""coordinates"":[22.9748187855072,39.0511812243103]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Greenland,GRL,,,"{""type"":""Point"",""coordinates"":[-41.3457124684694,74.73598389569]}",
-Grenada,GRD,AMR,America,"{""type"":""Point"",""coordinates"":[-61.656682383414,12.1533724043988]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-Guam,GUM,,,"{""type"":""Point"",""coordinates"":[144.77193912035,13.4437930176088]}",
-Guatemala,GTM,AMR,America,"{""type"":""Point"",""coordinates"":[-90.3601558303913,15.6959770338361]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-Guernsey,GGY,,,"{""type"":""Point"",""coordinates"":[-2.53163470679729,49.4845173700611]}",
-Guinea,GIN,AFR,Africa,"{""type"":""Point"",""coordinates"":[-10.9430613473468,10.4346490077169]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Guinea Bissau,GNB,AFR,Africa,"{""type"":""Point"",""coordinates"":[-14.9775135436489,12.0269259607419]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Guyana,GUY,AMR,America,"{""type"":""Point"",""coordinates"":[-58.9801099406094,4.79345997051215]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-Haiti,HTI,AMR,America,"{""type"":""Point"",""coordinates"":[-72.6908741658903,18.9383713025561]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-Heard Island and McDonald Islands,HMD,,,"{""type"":""Point"",""coordinates"":[73.5052101890139,-53.0888170255189]}",
-Honduras,HND,AMR,America,"{""type"":""Point"",""coordinates"":[-86.6254556959048,14.8206768077077]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-Hong Kong S.A.R.,HKG,,,"{""type"":""Point"",""coordinates"":[114.131447371546,22.3846393055427]}",
-Hungary,HUN,EUR,Europe,"{""type"":""Point"",""coordinates"":[19.3967591698094,47.163243571699]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Iceland,ISL,EUR,Europe,"{""type"":""Point"",""coordinates"":[-18.5964459670406,64.9983158504626]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-India,IND,SEAR,South-East Asia,"{""type"":""Point"",""coordinates"":[79.6157206707263,22.8879519600984]}","{""type"":""Point"",""coordinates"":[94.3414464235754,15.8732684424615]}"
-Indian Ocean Territories,IOA,,,"{""type"":""Point"",""coordinates"":[104.619397435858,-10.6921740927251]}",
-Indonesia,IDN,SEAR,South-East Asia,"{""type"":""Point"",""coordinates"":[117.270441955278,-2.22296240249234]}","{""type"":""Point"",""coordinates"":[94.3414464235754,15.8732684424615]}"
-Iran,IRN,EMR,Eastern Mediterranean,"{""type"":""Point"",""coordinates"":[54.2769437960388,32.5707222199373]}","{""type"":""Point"",""coordinates"":[39.3715507254052,25.6516486435833]}"
-Iraq,IRQ,EMR,Eastern Mediterranean,"{""type"":""Point"",""coordinates"":[43.7449810393797,33.0398101409132]}","{""type"":""Point"",""coordinates"":[39.3715507254052,25.6516486435833]}"
-Ireland,IRL,EUR,Europe,"{""type"":""Point"",""coordinates"":[-8.14504426443892,53.1782213061145]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Isle of Man,IMN,,,"{""type"":""Point"",""coordinates"":[-4.53489608650219,54.2283439412466]}",
-Israel,ISR,EUR,Europe,"{""type"":""Point"",""coordinates"":[34.9960300346214,31.4439614213194]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Italy,ITA,EUR,Europe,"{""type"":""Point"",""coordinates"":[12.0718066609354,42.7865012868829]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Ivory Coast,CIV,AFR,Africa,"{""type"":""Point"",""coordinates"":[-5.56900017052345,7.62796642320811]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Jamaica,JAM,AMR,America,"{""type"":""Point"",""coordinates"":[-77.3188100596362,18.1552262880389]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-Japan,JPN,WPR,Western Pacific,"{""type"":""Point"",""coordinates"":[137.978294381611,37.5511344720931]}","{""type"":""Point"",""coordinates"":[116.983181883096,13.1541697534531]}"
-Jersey,JEY,,,"{""type"":""Point"",""coordinates"":[-2.12743081433135,49.2210642114472]}",
-Jordan,JOR,EMR,Eastern Mediterranean,"{""type"":""Point"",""coordinates"":[36.7709408266685,31.2455875338769]}","{""type"":""Point"",""coordinates"":[39.3715507254052,25.6516486435833]}"
-Kazakhstan,KAZ,EUR,Europe,"{""type"":""Point"",""coordinates"":[67.2959618871314,48.1606512125274]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Kenya,KEN,AFR,Africa,"{""type"":""Point"",""coordinates"":[37.8224398057361,0.550764513426703]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Kiribati,KIR,WPR,Western Pacific,"{""type"":""Point"",""coordinates"":[-51.5228078690024,0.615222138780176]}","{""type"":""Point"",""coordinates"":[116.983181883096,13.1541697534531]}"
-Kosovo,KOS,,,"{""type"":""Point"",""coordinates"":[20.873744025956,42.5728834979902]}",
-Kuwait,KWT,EMR,Eastern Mediterranean,"{""type"":""Point"",""coordinates"":[47.5946164702103,29.3400312219248]}","{""type"":""Point"",""coordinates"":[39.3715507254052,25.6516486435833]}"
-Kyrgyzstan,KGZ,EUR,Europe,"{""type"":""Point"",""coordinates"":[74.541669486764,41.4619185843644]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Laos,LAO,WPR,Western Pacific,"{""type"":""Point"",""coordinates"":[103.737872492359,18.5023014117136]}","{""type"":""Point"",""coordinates"":[116.983181883096,13.1541697534531]}"
-Latvia,LVA,EUR,Europe,"{""type"":""Point"",""coordinates"":[24.9086217574951,56.8518194767844]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Lebanon,LBN,EMR,Eastern Mediterranean,"{""type"":""Point"",""coordinates"":[35.8799361541043,33.9203591052017]}","{""type"":""Point"",""coordinates"":[39.3715507254052,25.6516486435833]}"
-Lesotho,LSO,AFR,Africa,"{""type"":""Point"",""coordinates"":[28.2286230612086,-29.5797304242297]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Liberia,LBR,AFR,Africa,"{""type"":""Point"",""coordinates"":[-9.3198642259657,6.45223283263937]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Libya,LBY,EMR,Eastern Mediterranean,"{""type"":""Point"",""coordinates"":[18.0096067193539,27.0302777237835]}","{""type"":""Point"",""coordinates"":[39.3715507254052,25.6516486435833]}"
-Liechtenstein,LIE,,,"{""type"":""Point"",""coordinates"":[9.54090028872932,47.1382064296817]}",
-Lithuania,LTU,EUR,Europe,"{""type"":""Point"",""coordinates"":[23.8882490001133,55.3270234682994]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Luxembourg,LUX,EUR,Europe,"{""type"":""Point"",""coordinates"":[6.07176396745131,49.7668242760397]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Macao S.A.R,MAC,,,"{""type"":""Point"",""coordinates"":[113.5501964246,22.1577871588939]}",
-Macedonia,MKD,EUR,Europe,"{""type"":""Point"",""coordinates"":[21.6838303813174,41.595004983576]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Madagascar,MDG,AFR,Africa,"{""type"":""Point"",""coordinates"":[46.7059983537884,-19.3731678048137]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Malawi,MWI,AFR,Africa,"{""type"":""Point"",""coordinates"":[34.2899068843289,-13.2172254876961]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Malaysia,MYS,WPR,Western Pacific,"{""type"":""Point"",""coordinates"":[109.698865823759,3.79239360533173]}","{""type"":""Point"",""coordinates"":[116.983181883096,13.1541697534531]}"
-Maldives,MDV,SEAR,South-East Asia,"{""type"":""Point"",""coordinates"":[73.3304243265161,3.68199334396818]}","{""type"":""Point"",""coordinates"":[94.3414464235754,15.8732684424615]}"
-Mali,MLI,AFR,Africa,"{""type"":""Point"",""coordinates"":[-3.53908338639446,17.3441671385825]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Malta,MLT,EUR,Europe,"{""type"":""Point"",""coordinates"":[14.4037540316662,35.9210269872519]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Marshall Islands,MHL,WPR,Western Pacific,"{""type"":""Point"",""coordinates"":[170.099516460511,7.11447665022841]}","{""type"":""Point"",""coordinates"":[116.983181883096,13.1541697534531]}"
-Mauritania,MRT,AFR,Africa,"{""type"":""Point"",""coordinates"":[-10.3434065505099,20.2562144028389]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Mauritius,MUS,AFR,Africa,"{""type"":""Point"",""coordinates"":[57.849700165133,-20.1855438697332]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Mexico,MEX,AMR,America,"{""type"":""Point"",""coordinates"":[-102.530317106014,23.9491794307266]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-Moldova,MDA,EUR,Europe,"{""type"":""Point"",""coordinates"":[28.4613968678331,47.195101844498]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Monaco,MCO,EUR,Europe,"{""type"":""Point"",""coordinates"":[7.39897432482775,43.7398461878233]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Mongolia,MNG,WPR,Western Pacific,"{""type"":""Point"",""coordinates"":[103.056286560823,46.8258061352023]}","{""type"":""Point"",""coordinates"":[116.983181883096,13.1541697534531]}"
-Montenegro,MNE,EUR,Europe,"{""type"":""Point"",""coordinates"":[19.2385000960474,42.7858185941783]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Montserrat,MSR,,,"{""type"":""Point"",""coordinates"":[-62.1873987828352,16.7375235654904]}",
-Morocco,MAR,EMR,Eastern Mediterranean,"{""type"":""Point"",""coordinates"":[-8.39643325308653,29.8416929906092]}","{""type"":""Point"",""coordinates"":[39.3715507254052,25.6516486435833]}"
-Mozambique,MOZ,AFR,Africa,"{""type"":""Point"",""coordinates"":[35.5381061988124,-17.270009897703]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Myanmar,MMR,SEAR,South-East Asia,"{""type"":""Point"",""coordinates"":[96.4892896679944,21.1676702161602]}","{""type"":""Point"",""coordinates"":[94.3414464235754,15.8732684424615]}"
-Namibia,NAM,AFR,Africa,"{""type"":""Point"",""coordinates"":[17.2111238231734,-22.1292438774042]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Nauru,NRU,WPR,Western Pacific,"{""type"":""Point"",""coordinates"":[166.933131929456,-0.520782884715927]}","{""type"":""Point"",""coordinates"":[116.983181883096,13.1541697534531]}"
-Nepal,NPL,SEAR,South-East Asia,"{""type"":""Point"",""coordinates"":[83.9162535675825,28.2479219830629]}","{""type"":""Point"",""coordinates"":[94.3414464235754,15.8732684424615]}"
-Netherlands,NLD,EUR,Europe,"{""type"":""Point"",""coordinates"":[5.21681384234278,52.0697915158717]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-New Caledonia,NCL,,,"{""type"":""Point"",""coordinates"":[165.671381489108,-21.2930228753519]}",
-New Zealand,NZL,WPR,Western Pacific,"{""type"":""Point"",""coordinates"":[171.470050634023,-41.825189032388]}","{""type"":""Point"",""coordinates"":[116.983181883096,13.1541697534531]}"
-Nicaragua,NIC,AMR,America,"{""type"":""Point"",""coordinates"":[-85.0333388121038,12.845392032291]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-Niger,NER,AFR,Africa,"{""type"":""Point"",""coordinates"":[9.38603776439213,17.4184622787454]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Nigeria,NGA,AFR,Africa,"{""type"":""Point"",""coordinates"":[8.09123958254276,9.59531533261756]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Niue,NIU,WPR,Western Pacific,"{""type"":""Point"",""coordinates"":[-169.869346041864,-19.0489197555762]}","{""type"":""Point"",""coordinates"":[116.983181883096,13.1541697534531]}"
-Norfolk Island,NFK,,,"{""type"":""Point"",""coordinates"":[167.955169332451,-29.0349751029139]}",
-Northern Cyprus,CYN,,,"{""type"":""Point"",""coordinates"":[33.5977943080795,35.2764210864045]}",
-Northern Mariana Islands,MNP,,,"{""type"":""Point"",""coordinates"":[145.599955005881,16.2508597692304]}",
-North Korea,PRK,SEAR,South-East Asia,"{""type"":""Point"",""coordinates"":[127.181204974968,40.1677663723574]}","{""type"":""Point"",""coordinates"":[94.3414464235754,15.8732684424615]}"
-Norway,NOR,EUR,Europe,"{""type"":""Point"",""coordinates"":[15.4095990700855,68.7942726548148]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Oman,OMN,EMR,Eastern Mediterranean,"{""type"":""Point"",""coordinates"":[56.0926522255515,20.6018079030357]}","{""type"":""Point"",""coordinates"":[39.3715507254052,25.6516486435833]}"
-Pakistan,PAK,EMR,Eastern Mediterranean,"{""type"":""Point"",""coordinates"":[69.3413448164733,29.9484980201229]}","{""type"":""Point"",""coordinates"":[39.3715507254052,25.6516486435833]}"
-Palau,PLW,WPR,Western Pacific,"{""type"":""Point"",""coordinates"":[134.338022075536,7.17335427898996]}","{""type"":""Point"",""coordinates"":[116.983181883096,13.1541697534531]}"
-Palestine,PSX,,,"{""type"":""Point"",""coordinates"":[35.1978137071686,31.91608514429]}",
-Panama,PAN,AMR,America,"{""type"":""Point"",""coordinates"":[-80.1212840460419,8.51456228871774]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-Papua New Guinea,PNG,WPR,Western Pacific,"{""type"":""Point"",""coordinates"":[145.231530637091,-6.47012075449271]}","{""type"":""Point"",""coordinates"":[116.983181883096,13.1541697534531]}"
-Paraguay,PRY,AMR,America,"{""type"":""Point"",""coordinates"":[-58.3984158108263,-23.2275233673377]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-Peru,PER,AMR,America,"{""type"":""Point"",""coordinates"":[-74.3780646509706,-9.15438724072046]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-Philippines,PHL,WPR,Western Pacific,"{""type"":""Point"",""coordinates"":[122.874360415246,11.76347992407]}","{""type"":""Point"",""coordinates"":[116.983181883096,13.1541697534531]}"
-Pitcairn Islands,PCN,,,"{""type"":""Point"",""coordinates"":[-128.478751250377,-24.4128052987708]}",
-Poland,POL,EUR,Europe,"{""type"":""Point"",""coordinates"":[19.3943240413838,52.1247748386998]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Portugal,PRT,EUR,Europe,"{""type"":""Point"",""coordinates"":[-8.59083752182298,39.5871461466147]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Puerto Rico,PRI,,,"{""type"":""Point"",""coordinates"":[-66.4676002926035,18.2238164656481]}",
-Qatar,QAT,EMR,Eastern Mediterranean,"{""type"":""Point"",""coordinates"":[51.1870951093337,25.3129408878777]}","{""type"":""Point"",""coordinates"":[39.3715507254052,25.6516486435833]}"
-Republic of Congo,COG,AFR,Africa,"{""type"":""Point"",""coordinates"":[15.2183365585241,-0.838879401433715]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Republic of Serbia,SRB,EUR,Europe,"{""type"":""Point"",""coordinates"":[20.7904027791617,44.2213755677257]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Romania,ROU,EUR,Europe,"{""type"":""Point"",""coordinates"":[24.972941654963,45.85346442291]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Russia,RUS,EUR,Europe,"{""type"":""Point"",""coordinates"":[96.6938360980423,61.9845275647123]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Rwanda,RWA,AFR,Africa,"{""type"":""Point"",""coordinates"":[29.9190607047069,-1.99275052758312]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Saint Barthelemy,BLM,,,"{""type"":""Point"",""coordinates"":[-62.8326196246965,17.9055845223429]}",
-Saint Helena,SHN,,,"{""type"":""Point"",""coordinates"":[-10.138417833025,-24.9113502374247]}",
-Saint Kitts and Nevis,KNA,AMR,America,"{""type"":""Point"",""coordinates"":[-62.6985454461019,17.2710422528094]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-Saint Lucia,LCA,AMR,America,"{""type"":""Point"",""coordinates"":[-60.9703165310753,13.9026705471684]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-Saint Martin,MAF,,,"{""type"":""Point"",""coordinates"":[-63.0550714919228,18.077620298493]}",
-Saint Pierre and Miquelon,SPM,,,"{""type"":""Point"",""coordinates"":[-56.3078135424278,46.9304579498999]}",
-Saint Vincent and the Grenadines,VCT,AMR,America,"{""type"":""Point"",""coordinates"":[-61.2033532661782,13.2162159199067]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-Samoa,WSM,WPR,Western Pacific,"{""type"":""Point"",""coordinates"":[-172.161249298755,-13.7545956538498]}","{""type"":""Point"",""coordinates"":[116.983181883096,13.1541697534531]}"
-San Marino,SMR,EUR,Europe,"{""type"":""Point"",""coordinates"":[12.4422225588601,43.9364661949215]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Sao Tome and Principe,STP,AFR,Africa,"{""type"":""Point"",""coordinates"":[6.72644287440088,0.444260038055774]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Saudi Arabia,SAU,EMR,Eastern Mediterranean,"{""type"":""Point"",""coordinates"":[44.5368631978369,24.1223274130524]}","{""type"":""Point"",""coordinates"":[39.3715507254052,25.6516486435833]}"
-Senegal,SEN,AFR,Africa,"{""type"":""Point"",""coordinates"":[-14.471307602032,14.3677890193532]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Seychelles,SYC,AFR,Africa,"{""type"":""Point"",""coordinates"":[51.881314192879,-6.59097547550373]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Siachen Glacier,KAS,,,"{""type"":""Point"",""coordinates"":[77.1799527986063,35.3910819814609]}",
-Sierra Leone,SLE,AFR,Africa,"{""type"":""Point"",""coordinates"":[-11.7950155296506,8.5630858504529]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Singapore,SGP,WPR,Western Pacific,"{""type"":""Point"",""coordinates"":[103.813467658136,1.35892102049777]}","{""type"":""Point"",""coordinates"":[116.983181883096,13.1541697534531]}"
-Sint Maarten,SXM,,,"{""type"":""Point"",""coordinates"":[-63.0701310269265,18.0406293460658]}",
-Slovakia,SVK,EUR,Europe,"{""type"":""Point"",""coordinates"":[19.48038297124,48.7049352971006]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Slovenia,SVN,EUR,Europe,"{""type"":""Point"",""coordinates"":[14.8080898134385,46.1161112159895]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Solomon Islands,SLB,WPR,Western Pacific,"{""type"":""Point"",""coordinates"":[159.638094404126,-8.90958311818952]}","{""type"":""Point"",""coordinates"":[116.983181883096,13.1541697534531]}"
-Somalia,SOM,EMR,Eastern Mediterranean,"{""type"":""Point"",""coordinates"":[45.7061312198953,4.74882456391808]}","{""type"":""Point"",""coordinates"":[39.3715507254052,25.6516486435833]}"
-Somaliland,SOL,,,"{""type"":""Point"",""coordinates"":[46.254815996414,9.73101980807547]}",
-South Africa,ZAF,AFR,Africa,"{""type"":""Point"",""coordinates"":[25.0873665473593,-29.0010306000679]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-South Georgia and South Sandwich Islands,SGS,,,"{""type"":""Point"",""coordinates"":[-35.8985756024402,-54.6767207930734]}",
-South Korea,KOR,WPR,Western Pacific,"{""type"":""Point"",""coordinates"":[127.819092585196,36.3733532473279]}","{""type"":""Point"",""coordinates"":[116.983181883096,13.1541697534531]}"
-South Sudan,SDS,AFR,Africa,"{""type"":""Point"",""coordinates"":[30.3011218236687,7.28352807310888]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Spain,ESP,EUR,Europe,"{""type"":""Point"",""coordinates"":[-3.65263722449772,40.2272391881848]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Sri Lanka,LKA,SEAR,South-East Asia,"{""type"":""Point"",""coordinates"":[80.7031629581953,7.61591465946464]}","{""type"":""Point"",""coordinates"":[94.3414464235754,15.8732684424615]}"
-Sudan,SDN,EMR,Eastern Mediterranean,"{""type"":""Point"",""coordinates"":[29.9396227232092,15.9868898748961]}","{""type"":""Point"",""coordinates"":[39.3715507254052,25.6516486435833]}"
-Suriname,SUR,AMR,America,"{""type"":""Point"",""coordinates"":[-55.9110712950676,4.13124517981443]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-Swaziland,SWZ,AFR,Africa,"{""type"":""Point"",""coordinates"":[31.4800242934059,-26.5619241052309]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Sweden,SWE,EUR,Europe,"{""type"":""Point"",""coordinates"":[16.754466662217,62.7770998973643]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Switzerland,CHE,EUR,Europe,"{""type"":""Point"",""coordinates"":[8.21538184986232,46.7990250304279]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Syria,SYR,EMR,Eastern Mediterranean,"{""type"":""Point"",""coordinates"":[38.5045595449927,35.0230064148272]}","{""type"":""Point"",""coordinates"":[39.3715507254052,25.6516486435833]}"
-Taiwan,TWN,,,"{""type"":""Point"",""coordinates"":[120.949875452685,23.7529872099339]}",
-Tajikistan,TJK,EUR,Europe,"{""type"":""Point"",""coordinates"":[71.0158345154895,38.5298850014689]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Thailand,THA,SEAR,South-East Asia,"{""type"":""Point"",""coordinates"":[101.003333198084,15.1144002590659]}","{""type"":""Point"",""coordinates"":[94.3414464235754,15.8732684424615]}"
-The Bahamas,BHS,AMR,America,"{""type"":""Point"",""coordinates"":[-76.5512503693202,24.2228106829168]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-Togo,TGO,AFR,Africa,"{""type"":""Point"",""coordinates"":[0.96226972014936,8.52678748281284]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Tonga,TON,WPR,Western Pacific,"{""type"":""Point"",""coordinates"":[-174.841723741364,-19.9690056479791]}","{""type"":""Point"",""coordinates"":[116.983181883096,13.1541697534531]}"
-Trinidad and Tobago,TTO,AMR,America,"{""type"":""Point"",""coordinates"":[-61.2584499455628,10.468830195049]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-Tunisia,TUN,EMR,Eastern Mediterranean,"{""type"":""Point"",""coordinates"":[9.5546279269063,34.1194057727663]}","{""type"":""Point"",""coordinates"":[39.3715507254052,25.6516486435833]}"
-Turkey,TUR,EUR,Europe,"{""type"":""Point"",""coordinates"":[35.167239859383,39.0610805928763]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Turkmenistan,TKM,EUR,Europe,"{""type"":""Point"",""coordinates"":[59.3759640034859,39.1159319906785]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Turks and Caicos Islands,TCA,,,"{""type"":""Point"",""coordinates"":[-71.8733095370485,21.7800453642469]}",
-Uganda,UGA,AFR,Africa,"{""type"":""Point"",""coordinates"":[32.36704141681,1.27568553880559]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Ukraine,UKR,EUR,Europe,"{""type"":""Point"",""coordinates"":[31.3857478425306,48.9973689921627]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-United Arab Emirates,ARE,EMR,Eastern Mediterranean,"{""type"":""Point"",""coordinates"":[54.3002126548035,23.9065192364206]}","{""type"":""Point"",""coordinates"":[39.3715507254052,25.6516486435833]}"
-United Kingdom,GBR,EUR,Europe,"{""type"":""Point"",""coordinates"":[-2.88695131080169,54.1470482040108]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-United Republic of Tanzania,TZA,AFR,Africa,"{""type"":""Point"",""coordinates"":[34.8135875160795,-6.27509342811819]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-United States of America,USA,AMR,America,"{""type"":""Point"",""coordinates"":[-112.495732186554,45.6881180796569]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-United States Virgin Islands,VIR,,,"{""type"":""Point"",""coordinates"":[-64.7976673215196,17.9805975931462]}",
-Uruguay,URY,AMR,America,"{""type"":""Point"",""coordinates"":[-56.0171559188991,-32.798209455369]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-Uzbekistan,UZB,EUR,Europe,"{""type"":""Point"",""coordinates"":[63.139918345669,41.7560406700067]}","{""type"":""Point"",""coordinates"":[76.350137250669,57.9777387954001]}"
-Vanuatu,VUT,WPR,Western Pacific,"{""type"":""Point"",""coordinates"":[167.700844140659,-16.2012679188912]}","{""type"":""Point"",""coordinates"":[116.983181883096,13.1541697534531]}"
-Vatican,VAT,,,"{""type"":""Point"",""coordinates"":[12.4534373478692,41.9033075947968]}",
-Venezuela,VEN,AMR,America,"{""type"":""Point"",""coordinates"":[-66.1688392318983,7.12773003289506]}","{""type"":""Point"",""coordinates"":[-89.1756025501732,29.8766320044924]}"
-Vietnam,VNM,WPR,Western Pacific,"{""type"":""Point"",""coordinates"":[106.300935134271,16.642181476249]}","{""type"":""Point"",""coordinates"":[116.983181883096,13.1541697534531]}"
-Wallis and Futuna,WLF,,,"{""type"":""Point"",""coordinates"":[-177.230553931752,-13.8473302658775]}",
-Western Sahara,SAH,,,"{""type"":""Point"",""coordinates"":[-12.2149650481799,24.232574966763]}",
-Yemen,YEM,EMR,Eastern Mediterranean,"{""type"":""Point"",""coordinates"":[47.5906054666168,15.9054180307991]}","{""type"":""Point"",""coordinates"":[39.3715507254052,25.6516486435833]}"
-Zambia,ZMB,AFR,Africa,"{""type"":""Point"",""coordinates"":[27.7742099821541,-13.4601127227362]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
-Zimbabwe,ZWE,AFR,Africa,"{""type"":""Point"",""coordinates"":[29.8518833922768,-19.0025356619696]}","{""type"":""Point"",""coordinates"":[17.065238298153,2.37371028168529]}"
+id,country_name,region_name,country_iso,region_iso,country_centroid,region_centroid,created_at,updated_at
+490,Antarctica,Antartica,AQ,AN,"{""type"":""point"", ""coordinates"":[-82.67628,8.78906]}","{""type"":""Point"",""coordinates"":[19.9088475268188,-80.5079464102288]}",2016-07-26 23:06:23.593342,2016-07-26 23:11:54.73107
+511,Australia,Australia/New Zealand,AU,AZ,"{""type"":""point"", ""coordinates"":[-25,135]}","{""type"":""Point"",""coordinates"":[135.977532183695,-26.3793465342288]}",2016-07-26 23:06:24.808244,2016-07-26 23:11:54.744088
+513,Aruba,Carribbean,AW,CB,"{""type"":""point"", ""coordinates"":[12.5,-69.96667]}","{""type"":""Point"",""coordinates"":[-75.0918978909751,20.2298014225409]}",2016-07-26 23:06:24.836268,2016-07-26 23:11:54.747113
+512,Barbados,Carribbean,BB,CB,"{""type"":""point"", ""coordinates"":[13.16667,-59.53333]}","{""type"":""Point"",""coordinates"":[-75.0918978909751,20.2298014225409]}",2016-07-26 23:06:24.822292,2016-07-26 23:11:54.756821
+509,Bahrain,Western Asia,BH,WS,"{""type"":""point"", ""coordinates"":[26.03333,50.55]}","{""type"":""Point"",""coordinates"":[43.3878415812532,28.4515048892831]}",2016-07-26 23:06:24.724475,2016-07-26 23:11:54.772916
+489,Bahamas,Carribbean,BS,CB,"{""type"":""point"", ""coordinates"":[25.04082,-77.37122]}","{""type"":""Point"",""coordinates"":[-75.0918978909751,20.2298014225409]}",2016-07-26 23:06:23.477521,2016-07-26 23:11:54.794607
+518,Belarus,Central and Eastern Europe,BY,CE,"{""type"":""point"", ""coordinates"":[53,28]}","{""type"":""Point"",""coordinates"":[91.8672853165586,61.1241414601048]}",2016-07-26 23:06:24.971924,2016-07-26 23:11:54.807185
+478,Switzerland,Western Europe,CH,WE,"{""type"":""point"", ""coordinates"":[47.00016,8.01427]}","{""type"":""Point"",""coordinates"":[6.45768472125939,48.573968061361]}",2016-07-26 23:06:23.159299,2016-07-26 23:11:54.829292
+514,Cuba,Carribbean,CU,CB,"{""type"":""point"", ""coordinates"":[22,-79.5]}","{""type"":""Point"",""coordinates"":[-75.0918978909751,20.2298014225409]}",2016-07-26 23:06:24.8505,2016-07-26 23:11:54.856291
+515,Curacao,Carribbean,CW,CB,"{""type"":""point"", ""coordinates"":[12.16667,-68.96667]}","{""type"":""Point"",""coordinates"":[-75.0918978909751,20.2298014225409]}",2016-07-26 23:06:24.865036,2016-07-26 23:11:54.863204
+525,Czech Republic,Central and Eastern Europe,CZ,CE,"{""type"":""point"", ""coordinates"":[49.75,15]}","{""type"":""Point"",""coordinates"":[91.8672853165586,61.1241414601048]}",2016-07-26 23:06:25.34712,2016-07-26 23:11:54.872713
+517,Dominican Republic,Carribbean,DO,CB,"{""type"":""point"", ""coordinates"":[19,-70.66667]}","{""type"":""Point"",""coordinates"":[-75.0918978909751,20.2298014225409]}",2016-07-26 23:06:24.8936,2016-07-26 23:11:54.888276
+501,United Kingdom,Northern Europe,GB,NE,"{""type"":""point"", ""coordinates"":[54.75844,-2.69531]}","{""type"":""Point"",""coordinates"":[-24.4266546450261,70.6996532290073]}",2016-07-26 23:06:24.331789,2016-07-26 23:11:54.939491
+482,Georgia,Western Asia,GE,WS,"{""type"":""point"", ""coordinates"":[41.99998,43.4999]}","{""type"":""Point"",""coordinates"":[43.3878415812532,28.4515048892831]}",2016-07-26 23:06:23.294008,2016-07-26 23:11:54.954836
+510,Heard Island and McDonald Islands,Antartica,HM,AN,"{""type"":""point"", ""coordinates"":[-53.11711,73.50952]}","{""type"":""Point"",""coordinates"":[19.9088475268188,-80.5079464102288]}",2016-07-26 23:06:24.770485,2016-07-26 23:11:54.990326
+483,Iraq,Western Asia,IQ,WS,"{""type"":""point"", ""coordinates"":[33,44]}","{""type"":""Point"",""coordinates"":[43.3878415812532,28.4515048892831]}",2016-07-26 23:06:23.315974,2016-07-26 23:11:55.024583
+491,Cayman Islands,Carribbean,KY,CB,"{""type"":""point"", ""coordinates"":[19.5,-80.66667]}","{""type"":""Point"",""coordinates"":[-75.0918978909751,20.2298014225409]}",2016-07-26 23:06:23.610049,2016-07-26 23:11:55.080506
+519,Saint Lucia,Carribbean,LC,CB,"{""type"":""point"", ""coordinates"":[13.88333,-60.96667]}","{""type"":""Point"",""coordinates"":[-75.0918978909751,20.2298014225409]}",2016-07-26 23:06:24.989119,2016-07-26 23:11:55.094423
+497,Lithuania,Northern Europe,LT,NE,"{""type"":""point"", ""coordinates"":[55.41667,24]}","{""type"":""Point"",""coordinates"":[-24.4266546450261,70.6996532290073]}",2016-07-26 23:06:23.938577,2016-07-26 23:11:55.110129
+479,Monaco,Western Europe,MC,WE,"{""type"":""point"", ""coordinates"":[43.73141,7.41903]}","{""type"":""Point"",""coordinates"":[6.45768472125939,48.573968061361]}",2016-07-26 23:06:23.190502,2016-07-26 23:11:55.125449
+527,Moldova,Central and Eastern Europe,MD,CE,"{""type"":""point"", ""coordinates"":[47.25,28.58333]}","{""type"":""Point"",""coordinates"":[91.8672853165586,61.1241414601048]}",2016-07-26 23:06:25.50151,2016-07-26 23:11:55.128607
+516,Montserrat,Carribbean,MS,CB,"{""type"":""point"", ""coordinates"":[16.75,-62.2]}","{""type"":""Point"",""coordinates"":[-75.0918978909751,20.2298014225409]}",2016-07-26 23:06:24.878035,2016-07-26 23:11:55.160498
+488,New Zealand,Australia/New Zealand,NZ,AZ,"{""type"":""point"", ""coordinates"":[-42,174]}","{""type"":""Point"",""coordinates"":[135.977532183695,-26.3793465342288]}",2016-07-26 23:06:23.462509,2016-07-26 23:11:55.205649
+493,Nicaragua,Central America,NI,CM,"{""type"":""point"", ""coordinates"":[13,-85]}","{""type"":""Point"",""coordinates"":[-99.2505808667876,21.8133558473591]}",2016-07-26 23:06:23.649191,2016-07-26 23:11:55.208557
+502,Niue,Polynesia,NU,PO,"{""type"":""point"", ""coordinates"":[-19.03333,-169.86667]}","{""type"":""Point"",""coordinates"":[-165.562775258219,-15.5658471700352]}",2016-07-26 23:06:24.335463,2016-07-26 23:11:55.229932
+481,Oman,Western Asia,OM,WS,"{""type"":""point"", ""coordinates"":[21,57]}","{""type"":""Point"",""coordinates"":[43.3878415812532,28.4515048892831]}",2016-07-26 23:06:23.266863,2016-07-26 23:11:55.232909
+522,Poland,Central and Eastern Europe,PL,CE,"{""type"":""point"", ""coordinates"":[52,20]}","{""type"":""Point"",""coordinates"":[91.8672853165586,61.1241414601048]}",2016-07-26 23:06:25.157208,2016-07-26 23:11:55.253995
+523,Russian Federation,Central and Eastern Europe,RU,CE,"{""type"":""point"", ""coordinates"":[60,100]}","{""type"":""Point"",""coordinates"":[91.8672853165586,61.1241414601048]}",2016-07-26 23:06:25.249283,2016-07-26 23:11:55.279824
+480,Saudi Arabia,Western Asia,SA,WS,"{""type"":""point"", ""coordinates"":[25,45]}","{""type"":""Point"",""coordinates"":[43.3878415812532,28.4515048892831]}",2016-07-26 23:06:23.229289,2016-07-26 23:11:55.286216
+500,Sweden,Northern Europe,SE,NE,"{""type"":""point"", ""coordinates"":[62,15]}","{""type"":""Point"",""coordinates"":[-24.4266546450261,70.6996532290073]}",2016-07-26 23:06:24.235534,2016-07-26 23:11:55.303954
+504,San Marino,Southern Europe,SM,SE,"{""type"":""point"", ""coordinates"":[43.9367,12.4463]}","{""type"":""Point"",""coordinates"":[7.38956543946488,41.4578362811151]}",2016-07-26 23:06:24.444581,2016-07-26 23:11:55.327734
+520,Sint Maarten (Dutch Part),Carribbean,SX,CB,"{""type"":""point"", ""coordinates"":[18.04167,-63.06667]}","{""type"":""Point"",""coordinates"":[-75.0918978909751,20.2298014225409]}",2016-07-26 23:06:25.007302,2016-07-26 23:11:55.354436
+486,Syria,Western Asia,SY,WS,"{""type"":""point"", ""coordinates"":[35,38]}","{""type"":""Point"",""coordinates"":[43.3878415812532,28.4515048892831]}",2016-07-26 23:06:23.393874,2016-07-26 23:11:55.358447
+485,Turkey,Western Asia,TR,WS,"{""type"":""point"", ""coordinates"":[39,35]}","{""type"":""Point"",""coordinates"":[43.3878415812532,28.4515048892831]}",2016-07-26 23:06:23.367854,2016-07-26 23:11:55.397288
+499,United States,North America,US,NM,"{""type"":""point"", ""coordinates"":[39.76,-98.5]}","{""type"":""Point"",""coordinates"":[-103.939500476328,55.1397926304534]}",2016-07-26 23:06:24.127863,2016-07-26 23:11:55.420945
+506,Uruguay,South America,UY,SM,"{""type"":""point"", ""coordinates"":[-33,-56]}","{""type"":""Point"",""coordinates"":[-60.8171054886641,-15.2231547189536]}",2016-07-26 23:06:24.569779,2016-07-26 23:11:55.4238
+507,Venezuela,South America,VE,SM,"{""type"":""point"", ""coordinates"":[8,-66]}","{""type"":""Point"",""coordinates"":[-60.8171054886641,-15.2231547189536]}",2016-07-26 23:06:24.626101,2016-07-26 23:11:55.437776
+503,Vietnam,South-Eastern Asia,VN,SS,"{""type"":""point"", ""coordinates"":[16.16667,107.83333]}","{""type"":""Point"",""coordinates"":[109.910978851168,7.94110667790799]}",2016-07-26 23:06:24.400909,2016-07-26 23:11:55.449414
+487,Yemen,Western Asia,YE,WS,"{""type"":""point"", ""coordinates"":[15.5,47.5]}","{""type"":""Point"",""coordinates"":[43.3878415812532,28.4515048892831]}",2016-07-26 23:06:23.41687,2016-07-26 23:11:55.461371
+530,Belize,Central America,BZ,CM,"{""type"":""point"", ""coordinates"":[17.25,-88.75]}","{""type"":""Point"",""coordinates"":[-99.2505808667876,21.8133558473591]}",2016-07-26 23:06:25.667916,2016-07-26 23:11:54.810423
+549,Democratic Republic of the Congo,Middle Africa,CD,MA,"{""type"":""point"", ""coordinates"":[-2.5,23.5]}","{""type"":""Point"",""coordinates"":[19.464922564119,0.618107263658459]}",2016-07-26 23:06:26.248987,2016-07-26 23:11:54.819847
+551,Central African Republic,Middle Africa,CF,MA,"{""type"":""point"", ""coordinates"":[7,21]}","{""type"":""Point"",""coordinates"":[19.464922564119,0.618107263658459]}",2016-07-26 23:06:26.275648,2016-07-26 23:11:54.822869
+550,Congo,Middle Africa,CG,MA,"{""type"":""point"", ""coordinates"":[-1,15.5]}","{""type"":""Point"",""coordinates"":[19.464922564119,0.618107263658459]}",2016-07-26 23:06:26.259412,2016-07-26 23:11:54.826084
+552,Cameroon,Middle Africa,CM,MA,"{""type"":""point"", ""coordinates"":[6,12.5]}","{""type"":""Point"",""coordinates"":[19.464922564119,0.618107263658459]}",2016-07-26 23:06:26.287748,2016-07-26 23:11:54.842891
+563,Denmark,Northern Europe,DK,NE,"{""type"":""point"", ""coordinates"":[56,10]}","{""type"":""Point"",""coordinates"":[-24.4266546450261,70.6996532290073]}",2016-07-26 23:06:26.529187,2016-07-26 23:11:54.88165
+570,Algeria,North Africa,DZ,NA,"{""type"":""point"", ""coordinates"":[28,3]}","{""type"":""Point"",""coordinates"":[14.8790854842834,25.1323592342349]}",2016-07-26 23:06:26.724554,2016-07-26 23:11:54.891386
+567,Estonia,Northern Europe,EE,NE,"{""type"":""point"", ""coordinates"":[59,26]}","{""type"":""Point"",""coordinates"":[-24.4266546450261,70.6996532290073]}",2016-07-26 23:06:26.685155,2016-07-26 23:11:54.897772
+566,Egypt,North Africa,EG,NA,"{""type"":""point"", ""coordinates"":[27,30]}","{""type"":""Point"",""coordinates"":[14.8790854842834,25.1323592342349]}",2016-07-26 23:06:26.570154,2016-07-26 23:11:54.901041
+571,Finland,Northern Europe,FI,NE,"{""type"":""point"", ""coordinates"":[64,26]}","{""type"":""Point"",""coordinates"":[-24.4266546450261,70.6996532290073]}",2016-07-26 23:06:26.817119,2016-07-26 23:11:54.918035
+555,Fiji,Melanesia,FJ,ME,"{""type"":""point"", ""coordinates"":[-15.7332,-179.912]}","{""type"":""Point"",""coordinates"":[147.888477768951,-7.76197444087451]}",2016-07-26 23:06:26.342984,2016-07-26 23:11:54.921133
+556,Gabon,Middle Africa,GA,MA,"{""type"":""point"", ""coordinates"":[-1,11.75]}","{""type"":""Point"",""coordinates"":[19.464922564119,0.618107263658459]}",2016-07-26 23:06:26.353448,2016-07-26 23:11:54.936413
+572,Greenland,Northern Europe,GL,NE,"{""type"":""point"", ""coordinates"":[72,-40]}","{""type"":""Point"",""coordinates"":[-24.4266546450261,70.6996532290073]}",2016-07-26 23:06:26.932833,2016-07-26 23:11:54.961063
+558,Guam,Micronesia,GU,MI,"{""type"":""point"", ""coordinates"":[13.47861,144.81834]}","{""type"":""Point"",""coordinates"":[91.2136096744779,7.94639720805253]}",2016-07-26 23:06:26.381113,2016-07-26 23:11:54.980903
+531,Hungary,Central and Eastern Europe,HU,CE,"{""type"":""point"", ""coordinates"":[47,20]}","{""type"":""Point"",""coordinates"":[91.8672853165586,61.1241414601048]}",2016-07-26 23:06:25.749793,2016-07-26 23:11:55.002971
+573,Ireland,Northern Europe,IE,NE,"{""type"":""point"", ""coordinates"":[53,-8]}","{""type"":""Point"",""coordinates"":[-24.4266546450261,70.6996532290073]}",2016-07-26 23:06:27.031787,2016-07-26 23:11:55.009048
+544,Japan,Eastern Asia,JP,ES,"{""type"":""point"", ""coordinates"":[35.68536,139.75309]}","{""type"":""Point"",""coordinates"":[105.293943572632,38.1739069049899]}",2016-07-26 23:06:26.120026,2016-07-26 23:11:55.047698
+534,Kenya,Eastern Africa,KE,EA,"{""type"":""point"", ""coordinates"":[0.448968042,37.91715735]}","{""type"":""Point"",""coordinates"":[36.2399137063007,-4.70783204975634]}",2016-07-26 23:06:25.823746,2016-07-26 23:11:55.050965
+562,Kiribati,Micronesia,KI,MI,"{""type"":""point"", ""coordinates"":[1.421,172.984]}","{""type"":""Point"",""coordinates"":[91.2136096744779,7.94639720805253]}",2016-07-26 23:06:26.43484,2016-07-26 23:11:55.060933
+546,South Korea,Eastern Asia,KR,ES,"{""type"":""point"", ""coordinates"":[36.5,127.75]}","{""type"":""Point"",""coordinates"":[105.293943572632,38.1739069049899]}",2016-07-26 23:06:26.206332,2016-07-26 23:11:55.074327
+568,Libya,North Africa,LY,NA,"{""type"":""point"", ""coordinates"":[28,17]}","{""type"":""Point"",""coordinates"":[14.8790854842834,25.1323592342349]}",2016-07-26 23:06:26.698134,2016-07-26 23:11:55.119436
+564,Morocco,North Africa,MA,NA,"{""type"":""point"", ""coordinates"":[31.84655878,-6.276138678]}","{""type"":""Point"",""coordinates"":[14.8790854842834,25.1323592342349]}",2016-07-26 23:06:26.541986,2016-07-26 23:11:55.122504
+533,Madagascar,Eastern Africa,MG,EA,"{""type"":""point"", ""coordinates"":[-20,47]}","{""type"":""Point"",""coordinates"":[36.2399137063007,-4.70783204975634]}",2016-07-26 23:06:25.801075,2016-07-26 23:11:55.134809
+532,Malawi,Eastern Africa,MW,EA,"{""type"":""point"", ""coordinates"":[-13.5,34]}","{""type"":""Point"",""coordinates"":[36.2399137063007,-4.70783204975634]}",2016-07-26 23:06:25.776297,2016-07-26 23:11:55.176061
+537,Mozambique,Eastern Africa,MZ,EA,"{""type"":""point"", ""coordinates"":[-18.25,35]}","{""type"":""Point"",""coordinates"":[36.2399137063007,-4.70783204975634]}",2016-07-26 23:06:25.891698,2016-07-26 23:11:55.185364
+553,New Caledonia,Melanesia,NC,ME,"{""type"":""point"", ""coordinates"":[-21.5,165.5]}","{""type"":""Point"",""coordinates"":[147.888477768951,-7.76197444087451]}",2016-07-26 23:06:26.310095,2016-07-26 23:11:55.192275
+576,Norway,Northern Europe,NO,NE,"{""type"":""point"", ""coordinates"":[62,10]}","{""type"":""Point"",""coordinates"":[-24.4266546450261,70.6996532290073]}",2016-07-26 23:06:27.33975,2016-07-26 23:11:55.214667
+528,Romania,Central and Eastern Europe,RO,CE,"{""type"":""point"", ""coordinates"":[46,25]}","{""type"":""Point"",""coordinates"":[91.8672853165586,61.1241414601048]}",2016-07-26 23:06:25.578515,2016-07-26 23:11:55.223767
+559,Nauru,Micronesia,NR,MI,"{""type"":""point"", ""coordinates"":[-0.517,166.933]}","{""type"":""Point"",""coordinates"":[91.2136096744779,7.94639720805253]}",2016-07-26 23:06:26.38681,2016-07-26 23:11:55.22696
+557,Papua New Guinea,Melanesia,PG,ME,"{""type"":""point"", ""coordinates"":[-6,147]}","{""type"":""Point"",""coordinates"":[147.888477768951,-7.76197444087451]}",2016-07-26 23:06:26.375585,2016-07-26 23:11:55.242613
+565,Sudan,North Africa,SD,NA,"{""type"":""point"", ""coordinates"":[16,30]}","{""type"":""Point"",""coordinates"":[14.8790854842834,25.1323592342349]}",2016-07-26 23:06:26.554051,2016-07-26 23:11:55.301046
+578,Svalbard,Northern Europe,SJ,NE,"{""type"":""point"", ""coordinates"":[78.15706,15.86426]}","{""type"":""Point"",""coordinates"":[-24.4266546450261,70.6996532290073]}",2016-07-26 23:06:27.718181,2016-07-26 23:11:55.316884
+538,Somalia,Eastern Africa,SO,EA,"{""type"":""point"", ""coordinates"":[6,48]}","{""type"":""Point"",""coordinates"":[36.2399137063007,-4.70783204975634]}",2016-07-26 23:06:25.911127,2016-07-26 23:11:55.33527
+536,South Sudan,Eastern Africa,SS,EA,"{""type"":""point"", ""coordinates"":[7.5,30]}","{""type"":""Point"",""coordinates"":[36.2399137063007,-4.70783204975634]}",2016-07-26 23:06:25.870329,2016-07-26 23:11:55.341344
+554,Chad,Middle Africa,TD,MA,"{""type"":""point"", ""coordinates"":[15,19]}","{""type"":""Point"",""coordinates"":[19.464922564119,0.618107263658459]}",2016-07-26 23:06:26.321518,2016-07-26 23:11:55.36758
+541,Tanzania,Eastern Africa,TZ,EA,"{""type"":""point"", ""coordinates"":[-6,35]}","{""type"":""Point"",""coordinates"":[36.2399137063007,-4.70783204975634]}",2016-07-26 23:06:26.006101,2016-07-26 23:11:55.409489
+529,Ukraine,Central and Eastern Europe,UA,CE,"{""type"":""point"", ""coordinates"":[49,32]}","{""type"":""Point"",""coordinates"":[91.8672853165586,61.1241414601048]}",2016-07-26 23:06:25.647938,2016-07-26 23:11:55.412466
+547,Uganda,Eastern Africa,UG,EA,"{""type"":""point"", ""coordinates"":[1.25,32.5]}","{""type"":""Point"",""coordinates"":[36.2399137063007,-4.70783204975634]}",2016-07-26 23:06:26.224906,2016-07-26 23:11:55.415208
+560,Vanuatu,Melanesia,VU,ME,"{""type"":""point"", ""coordinates"":[-16,167]}","{""type"":""Point"",""coordinates"":[147.888477768951,-7.76197444087451]}",2016-07-26 23:06:26.407266,2016-07-26 23:11:55.452522
+543,Zimbabwe,Eastern Africa,ZW,EA,"{""type"":""point"", ""coordinates"":[-19,29.75]}","{""type"":""Point"",""coordinates"":[36.2399137063007,-4.70783204975634]}",2016-07-26 23:06:26.075607,2016-07-26 23:11:55.470794
+612,Argentina,South America,AR,SM,"{""type"":""point"", ""coordinates"":[-34,-64]}","{""type"":""Point"",""coordinates"":[-60.8171054886641,-15.2231547189536]}",2016-07-26 23:06:28.939385,2016-07-26 23:11:54.734353
+591,Bosnia and Herzegovina,Southern Europe,BA,SE,"{""type"":""point"", ""coordinates"":[44.25,17.83333]}","{""type"":""Point"",""coordinates"":[7.38956543946488,41.4578362811151]}",2016-07-26 23:06:28.059608,2016-07-26 23:11:54.75351
+584,Bangladesh,South-Central Asia,BD,SC,"{""type"":""point"", ""coordinates"":[24,90]}","{""type"":""Point"",""coordinates"":[68.9353807947497,35.3805743715067]}",2016-07-26 23:06:27.82158,2016-07-26 23:11:54.760129
+626,Burkina Faso,Western Africa,BF,WA,"{""type"":""point"", ""coordinates"":[12.5,-1.66667]}","{""type"":""Point"",""coordinates"":[-1.1829537456975,14.7408116740271]}",2016-07-26 23:06:29.608093,2016-07-26 23:11:54.766463
+608,Bolivia,South America,BO,SM,"{""type"":""point"", ""coordinates"":[-17,-65]}","{""type"":""Point"",""coordinates"":[-60.8171054886641,-15.2231547189536]}",2016-07-26 23:06:28.692429,2016-07-26 23:11:54.78844
+610,Brazil,South America,BR,SM,"{""type"":""point"", ""coordinates"":[-10,-55]}","{""type"":""Point"",""coordinates"":[-60.8171054886641,-15.2231547189536]}",2016-07-26 23:06:28.818648,2016-07-26 23:11:54.79157
+581,Botswana,Southern Africa,BW,SA,"{""type"":""point"", ""coordinates"":[-22,24]}","{""type"":""Point"",""coordinates"":[22.5247263560193,-25.4906108524515]}",2016-07-26 23:06:27.745215,2016-07-26 23:11:54.804101
+623,Cote d'Ivoire,Western Africa,CI,WA,"{""type"":""point"", ""coordinates"":[8,-5.5]}","{""type"":""Point"",""coordinates"":[-1.1829537456975,14.7408116740271]}",2016-07-26 23:06:29.546827,2016-07-26 23:11:54.832672
+611,Colombia,South America,CO,SM,"{""type"":""point"", ""coordinates"":[4,-73.25]}","{""type"":""Point"",""coordinates"":[-60.8171054886641,-15.2231547189536]}",2016-07-26 23:06:28.876363,2016-07-26 23:11:54.849755
+613,Ecuador,South America,EC,SM,"{""type"":""point"", ""coordinates"":[-1.25,-78.25]}","{""type"":""Point"",""coordinates"":[-60.8171054886641,-15.2231547189536]}",2016-07-26 23:06:29.004672,2016-07-26 23:11:54.894643
+606,Spain,Southern Europe,ES,SE,"{""type"":""point"", ""coordinates"":[40,-4]}","{""type"":""Point"",""coordinates"":[7.38956543946488,41.4578362811151]}",2016-07-26 23:06:28.595089,2016-07-26 23:11:54.91083
+627,Ghana,Western Africa,GH,WA,"{""type"":""point"", ""coordinates"":[8.1,-1.2]}","{""type"":""Point"",""coordinates"":[-1.1829537456975,14.7408116740271]}",2016-07-26 23:06:29.629495,2016-07-26 23:11:54.945762
+624,Guinea,Western Africa,GN,WA,"{""type"":""point"", ""coordinates"":[10.83333,-10.66667]}","{""type"":""Point"",""coordinates"":[-1.1829537456975,14.7408116740271]}",2016-07-26 23:06:29.565643,2016-07-26 23:11:54.965118
+605,Greece,Southern Europe,GR,SE,"{""type"":""point"", ""coordinates"":[39,22]}","{""type"":""Point"",""coordinates"":[7.38956543946488,41.4578362811151]}",2016-07-26 23:06:28.563569,2016-07-26 23:11:54.97139
+621,Guinea-Bissau,Western Africa,GW,WA,"{""type"":""point"", ""coordinates"":[12,-15]}","{""type"":""Point"",""coordinates"":[-1.1829537456975,14.7408116740271]}",2016-07-26 23:06:29.508749,2016-07-26 23:11:54.98398
+614,Guyana,South America,GY,SM,"{""type"":""point"", ""coordinates"":[5,-59]}","{""type"":""Point"",""coordinates"":[-60.8171054886641,-15.2231547189536]}",2016-07-26 23:06:29.063767,2016-07-26 23:11:54.987188
+620,Indonesia,South-Eastern Asia,ID,SS,"{""type"":""point"", ""coordinates"":[-5,120]}","{""type"":""Point"",""coordinates"":[109.910978851168,7.94110667790799]}",2016-07-26 23:06:29.48627,2016-07-26 23:11:55.006096
+589,India,South-Central Asia,IN,SC,"{""type"":""point"", ""coordinates"":[22,79]}","{""type"":""Point"",""coordinates"":[68.9353807947497,35.3805743715067]}",2016-07-26 23:06:27.988134,2016-07-26 23:11:55.018488
+583,Iran,South-Central Asia,IR,SC,"{""type"":""point"", ""coordinates"":[32,53]}","{""type"":""Point"",""coordinates"":[68.9353807947497,35.3805743715067]}",2016-07-26 23:06:27.780779,2016-07-26 23:11:55.027662
+603,Italy,Southern Europe,IT,SE,"{""type"":""point"", ""coordinates"":[42.83333,12.83333]}","{""type"":""Point"",""coordinates"":[7.38956543946488,41.4578362811151]}",2016-07-26 23:06:28.501036,2016-07-26 23:11:55.033878
+590,Kazakhstan,South-Central Asia,KZ,SC,"{""type"":""point"", ""coordinates"":[48,68]}","{""type"":""Point"",""coordinates"":[68.9353807947497,35.3805743715067]}",2016-07-26 23:06:28.028609,2016-07-26 23:11:55.083423
+596,Sri Lanka,South-Central Asia,LK,SC,"{""type"":""point"", ""coordinates"":[7.75,80.75]}","{""type"":""Point"",""coordinates"":[68.9353807947497,35.3805743715067]}",2016-07-26 23:06:28.252212,2016-07-26 23:11:55.100774
+625,Liberia,Western Africa,LR,WA,"{""type"":""point"", ""coordinates"":[6.5,-9.5]}","{""type"":""Point"",""coordinates"":[-1.1829537456975,14.7408116740271]}",2016-07-26 23:06:29.586214,2016-07-26 23:11:55.10386
+628,Mali,Western Africa,ML,WA,"{""type"":""point"", ""coordinates"":[18,-2]}","{""type"":""Point"",""coordinates"":[-1.1829537456975,14.7408116740271]}",2016-07-26 23:06:29.647102,2016-07-26 23:11:55.144503
+600,Malta,Southern Europe,MT,SE,"{""type"":""point"", ""coordinates"":[35.91667,14.43333]}","{""type"":""Point"",""coordinates"":[7.38956543946488,41.4578362811151]}",2016-07-26 23:06:28.396545,2016-07-26 23:11:55.16412
+580,Namibia,Southern Africa,NA,SA,"{""type"":""point"", ""coordinates"":[-22,17]}","{""type"":""Point"",""coordinates"":[22.5247263560193,-25.4906108524515]}",2016-07-26 23:06:27.733898,2016-07-26 23:11:55.188759
+630,Nigeria,Western Africa,NG,WA,"{""type"":""point"", ""coordinates"":[10,8]}","{""type"":""Point"",""coordinates"":[-1.1829537456975,14.7408116740271]}",2016-07-26 23:06:29.687988,2016-07-26 23:11:55.202766
+592,Nepal,South-Central Asia,NP,SC,"{""type"":""point"", ""coordinates"":[28,84]}","{""type"":""Point"",""coordinates"":[68.9353807947497,35.3805743715067]}",2016-07-26 23:06:28.106339,2016-07-26 23:11:55.217698
+619,Philippines,South-Eastern Asia,PH,SS,"{""type"":""point"", ""coordinates"":[13,122]}","{""type"":""Point"",""coordinates"":[109.910978851168,7.94110667790799]}",2016-07-26 23:06:29.40131,2016-07-26 23:11:55.246423
+601,Portugal,Southern Europe,PT,SE,"{""type"":""point"", ""coordinates"":[39.6945,-8.13057]}","{""type"":""Point"",""coordinates"":[7.38956543946488,41.4578362811151]}",2016-07-26 23:06:28.439091,2016-07-26 23:11:55.266269
+616,Paraguay,South America,PY,SM,"{""type"":""point"", ""coordinates"":[-23.33333,-58]}","{""type"":""Point"",""coordinates"":[-60.8171054886641,-15.2231547189536]}",2016-07-26 23:06:29.197832,2016-07-26 23:11:55.273252
+604,Serbia,Southern Europe,RS,SE,"{""type"":""point"", ""coordinates"":[44.81892,20.45998]}","{""type"":""Point"",""coordinates"":[7.38956543946488,41.4578362811151]}",2016-07-26 23:06:28.532031,2016-07-26 23:11:55.276636
+607,Slovenia,Southern Europe,SI,SE,"{""type"":""point"", ""coordinates"":[46.08333,15]}","{""type"":""Point"",""coordinates"":[7.38956543946488,41.4578362811151]}",2016-07-26 23:06:28.627237,2016-07-26 23:11:55.313777
+629,Senegal,Western Africa,SN,WA,"{""type"":""point"", ""coordinates"":[14.5,-14.25]}","{""type"":""Point"",""coordinates"":[-1.1829537456975,14.7408116740271]}",2016-07-26 23:06:29.670832,2016-07-26 23:11:55.33136
+617,Suriname,South America,SR,SM,"{""type"":""point"", ""coordinates"":[4,-56]}","{""type"":""Point"",""coordinates"":[-60.8171054886641,-15.2231547189536]}",2016-07-26 23:06:29.262563,2016-07-26 23:11:55.338261
+597,Tajikistan,South-Central Asia,TJ,SC,"{""type"":""point"", ""coordinates"":[39,71]}","{""type"":""Point"",""coordinates"":[68.9353807947497,35.3805743715067]}",2016-07-26 23:06:28.285708,2016-07-26 23:11:55.376492
+582,Tokelau,Polynesia,TK,PO,"{""type"":""point"", ""coordinates"":[-9.167,-171.83]}","{""type"":""Point"",""coordinates"":[-165.562775258219,-15.5658471700352]}",2016-07-26 23:06:27.748867,2016-07-26 23:11:55.379588
+599,Uzbekistan,South-Central Asia,UZ,SC,"{""type"":""point"", ""coordinates"":[41.66667,63.83333]}","{""type"":""Point"",""coordinates"":[68.9353807947497,35.3805743715067]}",2016-07-26 23:06:28.3561,2016-07-26 23:11:55.426629
+602,Holy See (Vatican City),Southern Europe,VA,SE,"{""type"":""point"", ""coordinates"":[41.90225,12.4533]}","{""type"":""Point"",""coordinates"":[7.38956543946488,41.4578362811151]}",2016-07-26 23:06:28.468083,2016-07-26 23:11:55.429786
+585,South Africa,Southern Africa,ZA,SA,"{""type"":""point"", ""coordinates"":[-29,24]}","{""type"":""Point"",""coordinates"":[22.5247263560193,-25.4906108524515]}",2016-07-26 23:06:27.832489,2016-07-26 23:11:55.464372
+642,Antigua and Barbuda,Carribbean,AG,CB,"{""type"":""point"", ""coordinates"":[17.05,-61.8]}","{""type"":""Point"",""coordinates"":[-75.0918978909751,20.2298014225409]}",2016-07-26 23:06:29.927333,2016-07-26 23:11:54.712506
+633,Austria,Western Europe,AT,WE,"{""type"":""point"", ""coordinates"":[47.33333,13.33333]}","{""type"":""Point"",""coordinates"":[6.45768472125939,48.573968061361]}",2016-07-26 23:06:29.734612,2016-07-26 23:11:54.740611
+636,Azerbaijan,Western Asia,AZ,WS,"{""type"":""point"", ""coordinates"":[40.5,47.5]}","{""type"":""Point"",""coordinates"":[43.3878415812532,28.4515048892831]}",2016-07-26 23:06:29.805869,2016-07-26 23:11:54.75034
+635,Belgium,Western Europe,BE,WE,"{""type"":""point"", ""coordinates"":[50.75,4.5]}","{""type"":""Point"",""coordinates"":[6.45768472125939,48.573968061361]}",2016-07-26 23:06:29.784934,2016-07-26 23:11:54.763339
+661,Burundi,Eastern Africa,BI,EA,"{""type"":""point"", ""coordinates"":[-3.5,30]}","{""type"":""Point"",""coordinates"":[36.2399137063007,-4.70783204975634]}",2016-07-26 23:06:30.428306,2016-07-26 23:11:54.775996
+640,Bouvet Island,Antartica,BV,AN,"{""type"":""point"", ""coordinates"":[-54.43333,3.4]}","{""type"":""Point"",""coordinates"":[19.9088475268188,-80.5079464102288]}",2016-07-26 23:06:29.901406,2016-07-26 23:11:54.80107
+676,Cook Islands,Polynesia,CK,PO,"{""type"":""point"", ""coordinates"":[-21.24842,-159.78516]}","{""type"":""Point"",""coordinates"":[-165.562775258219,-15.5658471700352]}",2016-07-26 23:06:30.910578,2016-07-26 23:11:54.836109
+638,Germany,Western Europe,DE,WE,"{""type"":""point"", ""coordinates"":[51.5,10.5]}","{""type"":""Point"",""coordinates"":[6.45768472125939,48.573968061361]}",2016-07-26 23:06:29.840176,2016-07-26 23:11:54.875777
+655,Djibouti,Eastern Africa,DJ,EA,"{""type"":""point"", ""coordinates"":[11.83333,42.5]}","{""type"":""Point"",""coordinates"":[36.2399137063007,-4.70783204975634]}",2016-07-26 23:06:30.296816,2016-07-26 23:11:54.878758
+672,Western Sahara,North Africa,EH,NA,"{""type"":""point"", ""coordinates"":[24.49215,-12.65625]}","{""type"":""Point"",""coordinates"":[14.8790854842834,25.1323592342349]}",2016-07-26 23:06:30.596387,2016-07-26 23:11:54.904165
+659,Eritrea,Eastern Africa,ER,EA,"{""type"":""point"", ""coordinates"":[15,39]}","{""type"":""Point"",""coordinates"":[36.2399137063007,-4.70783204975634]}",2016-07-26 23:06:30.374646,2016-07-26 23:11:54.907661
+671,Micronesia,Micronesia,FM,MI,"{""type"":""point"", ""coordinates"":[6.924,158.162]}","{""type"":""Point"",""coordinates"":[91.2136096744779,7.94639720805253]}",2016-07-26 23:06:30.578782,2016-07-26 23:11:54.927166
+649,Grenada,Carribbean,GD,CB,"{""type"":""point"", ""coordinates"":[12.11667,-61.66667]}","{""type"":""Point"",""coordinates"":[-75.0918978909751,20.2298014225409]}",2016-07-26 23:06:30.023973,2016-07-26 23:11:54.951874
+639,Gibraltar,Western Europe,GI,WE,"{""type"":""point"", ""coordinates"":[36.13333,-5.35]}","{""type"":""Point"",""coordinates"":[6.45768472125939,48.573968061361]}",2016-07-26 23:06:29.856785,2016-07-26 23:11:54.957938
+656,Equatorial Guinea,Middle Africa,GQ,MA,"{""type"":""point"", ""coordinates"":[1.7,10.5]}","{""type"":""Point"",""coordinates"":[19.464922564119,0.618107263658459]}",2016-07-26 23:06:30.306293,2016-07-26 23:11:54.968223
+663,Guatemala,Central America,GT,CM,"{""type"":""point"", ""coordinates"":[15.5,-90.25]}","{""type"":""Point"",""coordinates"":[-99.2505808667876,21.8133558473591]}",2016-07-26 23:06:30.454819,2016-07-26 23:11:54.977737
+647,Haiti,Carribbean,HT,CB,"{""type"":""point"", ""coordinates"":[19,-72.41667]}","{""type"":""Point"",""coordinates"":[-75.0918978909751,20.2298014225409]}",2016-07-26 23:06:29.997791,2016-07-26 23:11:54.999998
+674,Isle of Man,Northern Europe,IM,NE,"{""type"":""point"", ""coordinates"":[54.25,-4.5]}","{""type"":""Point"",""coordinates"":[-24.4266546450261,70.6996532290073]}",2016-07-26 23:06:30.799331,2016-07-26 23:11:55.015512
+673,Jersey,Northern Europe,JE,NE,"{""type"":""point"", ""coordinates"":[49.21667,-2.11667]}","{""type"":""Point"",""coordinates"":[-24.4266546450261,70.6996532290073]}",2016-07-26 23:06:30.702431,2016-07-26 23:11:55.037187
+658,Comoros,Eastern Africa,KM,EA,"{""type"":""point"", ""coordinates"":[-12.23333,44.44553]}","{""type"":""Point"",""coordinates"":[36.2399137063007,-4.70783204975634]}",2016-07-26 23:06:30.346224,2016-07-26 23:11:55.064518
+651,Saint Kitts and Nevis,Carribbean,KN,CB,"{""type"":""point"", ""coordinates"":[17.33333,-62.75]}","{""type"":""Point"",""coordinates"":[-75.0918978909751,20.2298014225409]}",2016-07-26 23:06:30.049574,2016-07-26 23:11:55.067939
+681,Lesotho,Southern Africa,LS,SA,"{""type"":""point"", ""coordinates"":[-29.5,28.25]}","{""type"":""Point"",""coordinates"":[22.5247263560193,-25.4906108524515]}",2016-07-26 23:06:30.9462,2016-07-26 23:11:55.107044
+670,Northern Mariana Islands,Micronesia,MP,MI,"{""type"":""point"", ""coordinates"":[15.214,145.756]}","{""type"":""Point"",""coordinates"":[91.2136096744779,7.94639720805253]}",2016-07-26 23:06:30.573354,2016-07-26 23:11:55.154113
+634,Mauritania,Western Africa,MR,WA,"{""type"":""point"", ""coordinates"":[20.25,-10.5]}","{""type"":""Point"",""coordinates"":[-1.1829537456975,14.7408116740271]}",2016-07-26 23:06:29.765181,2016-07-26 23:11:55.157408
+665,Mauritius,Eastern Africa,MU,EA,"{""type"":""point"", ""coordinates"":[-20.3,57.58333]}","{""type"":""Point"",""coordinates"":[36.2399137063007,-4.70783204975634]}",2016-07-26 23:06:30.499762,2016-07-26 23:11:55.169315
+631,Niger,Western Africa,NE,WA,"{""type"":""point"", ""coordinates"":[18,9]}","{""type"":""Point"",""coordinates"":[-1.1829537456975,14.7408116740271]}",2016-07-26 23:06:29.704655,2016-07-26 23:11:55.195771
+678,Pitcairn,Polynesia,PN,PO,"{""type"":""point"", ""coordinates"":[-25.06667,-130.1]}","{""type"":""Point"",""coordinates"":[-165.562775258219,-15.5658471700352]}",2016-07-26 23:06:30.920463,2016-07-26 23:11:55.2571
+645,Puerto Rico,Carribbean,PR,CB,"{""type"":""point"", ""coordinates"":[18.24829,-66.49989]}","{""type"":""Point"",""coordinates"":[-75.0918978909751,20.2298014225409]}",2016-07-26 23:06:29.967809,2016-07-26 23:11:55.260144
+653,Palau,Micronesia,PW,MI,"{""type"":""point"", ""coordinates"":[7.503,134.621]}","{""type"":""Point"",""coordinates"":[91.2136096744779,7.94639720805253]}",2016-07-26 23:06:30.077717,2016-07-26 23:11:55.269708
+664,Rwanda,Eastern Africa,RW,EA,"{""type"":""point"", ""coordinates"":[-2,30]}","{""type"":""Point"",""coordinates"":[36.2399137063007,-4.70783204975634]}",2016-07-26 23:06:30.475944,2016-07-26 23:11:55.283135
+680,Saint Helena,Southern Africa,SH,SA,"{""type"":""point"", ""coordinates"":[-15.95,-5.7]}","{""type"":""Point"",""coordinates"":[22.5247263560193,-25.4906108524515]}",2016-07-26 23:06:30.934578,2016-07-26 23:11:55.310473
+657,El Salvador,Central America,SV,CM,"{""type"":""point"", ""coordinates"":[13.83333,-88.91667]}","{""type"":""Point"",""coordinates"":[-99.2505808667876,21.8133558473591]}",2016-07-26 23:06:30.326299,2016-07-26 23:11:55.350339
+644,Turks and Caicos Islands,Carribbean,TC,CB,"{""type"":""point"", ""coordinates"":[21.73333,-71.58333]}","{""type"":""Point"",""coordinates"":[-75.0918978909751,20.2298014225409]}",2016-07-26 23:06:29.955073,2016-07-26 23:11:55.364819
+652,Trinidad and Tobago,Carribbean,TT,CB,"{""type"":""point"", ""coordinates"":[11,-61]}","{""type"":""Point"",""coordinates"":[-75.0918978909751,20.2298014225409]}",2016-07-26 23:06:30.07015,2016-07-26 23:11:55.400438
+669,Tuvalu,Polynesia,TV,PO,"{""type"":""point"", ""coordinates"":[-8.51719,179.14478]}","{""type"":""Point"",""coordinates"":[-165.562775258219,-15.5658471700352]}",2016-07-26 23:06:30.568176,2016-07-26 23:11:55.403397
+668,Taiwan,Eastern Asia,TW,ES,"{""type"":""point"", ""coordinates"":[24,121]}","{""type"":""Point"",""coordinates"":[105.293943572632,38.1739069049899]}",2016-07-26 23:06:30.564373,2016-07-26 23:11:55.406378
+650,Saint Vincent and the Grenadines,Carribbean,VC,CB,"{""type"":""point"", ""coordinates"":[13.08333,-61.2]}","{""type"":""Point"",""coordinates"":[-75.0918978909751,20.2298014225409]}",2016-07-26 23:06:30.036717,2016-07-26 23:11:55.432908
+646,"Virgin Islands, British",Carribbean,VG,CB,"{""type"":""point"", ""coordinates"":[18.5,-64.5]}","{""type"":""Point"",""coordinates"":[-75.0918978909751,20.2298014225409]}",2016-07-26 23:06:29.982213,2016-07-26 23:11:55.442598
+677,Samoa,Polynesia,WS,PO,"{""type"":""point"", ""coordinates"":[-13.8,-172.13333]}","{""type"":""Point"",""coordinates"":[-165.562775258219,-15.5658471700352]}",2016-07-26 23:06:30.914294,2016-07-26 23:11:55.455496
+632,Andorra,Western Europe,AD,WE,"{""type"":""point"", ""coordinates"":[42.55,1.58333]}","{""type"":""Point"",""coordinates"":[6.45768472125939,48.573968061361]}",2016-07-26 23:06:29.718323,2016-07-26 23:11:54.695672
+484,United Arab Emirates,Western Asia,AE,WS,"{""type"":""point"", ""coordinates"":[23.75,54.5]}","{""type"":""Point"",""coordinates"":[43.3878415812532,28.4515048892831]}",2016-07-26 23:06:23.337913,2016-07-26 23:11:54.703454
+587,Afghanistan,South-Central Asia,AF,SC,"{""type"":""point"", ""coordinates"":[33,66]}","{""type"":""Point"",""coordinates"":[68.9353807947497,35.3805743715067]}",2016-07-26 23:06:27.912067,2016-07-26 23:11:54.706867
+641,Anguilla,Carribbean,AI,CB,"{""type"":""point"", ""coordinates"":[18.21667,-63.05]}","{""type"":""Point"",""coordinates"":[-75.0918978909751,20.2298014225409]}",2016-07-26 23:06:29.914843,2016-07-26 23:11:54.716715
+594,Albania,Southern Europe,AL,SE,"{""type"":""point"", ""coordinates"":[41,20]}","{""type"":""Point"",""coordinates"":[7.38956543946488,41.4578362811151]}",2016-07-26 23:06:28.183616,2016-07-26 23:11:54.720704
+705,Armenia,Western Asia,AM,WS,"{""type"":""point"", ""coordinates"":[40.25,45]}","{""type"":""Point"",""coordinates"":[43.3878415812532,28.4515048892831]}",2016-07-26 23:06:31.946077,2016-07-26 23:11:54.723862
+548,Angola,Middle Africa,AO,MA,"{""type"":""point"", ""coordinates"":[-12.5,18.5]}","{""type"":""Point"",""coordinates"":[19.464922564119,0.618107263658459]}",2016-07-26 23:06:26.23641,2016-07-26 23:11:54.727125
+498,American Samoa,Polynesia,AS,PO,"{""type"":""point"", ""coordinates"":[-14.23377,-169.47767]}","{""type"":""Point"",""coordinates"":[-165.562775258219,-15.5658471700352]}",2016-07-26 23:06:23.944617,2016-07-26 23:11:54.737408
+521,Bulgaria,Central and Eastern Europe,BG,CE,"{""type"":""point"", ""coordinates"":[42.66667,25.25]}","{""type"":""Point"",""coordinates"":[91.8672853165586,61.1241414601048]}",2016-07-26 23:06:25.081843,2016-07-26 23:11:54.769815
+622,Benin,Western Africa,BJ,WA,"{""type"":""point"", ""coordinates"":[9.5,2.25]}","{""type"":""Point"",""coordinates"":[-1.1829537456975,14.7408116740271]}",2016-07-26 23:06:29.527525,2016-07-26 23:11:54.779096
+654,Bermuda,North America,BM,NM,"{""type"":""point"", ""coordinates"":[32.33022,-64.74003]}","{""type"":""Point"",""coordinates"":[-103.939500476328,55.1397926304534]}",2016-07-26 23:06:30.276741,2016-07-26 23:11:54.782154
+684,Brunei Darussalam,South-Eastern Asia,BN,SS,"{""type"":""point"", ""coordinates"":[4.5,114.66667]}","{""type"":""Point"",""coordinates"":[109.910978851168,7.94110667790799]}",2016-07-26 23:06:31.059955,2016-07-26 23:11:54.785442
+683,Bhutan,South-Central Asia,BT,SC,"{""type"":""point"", ""coordinates"":[27.5,90.5]}","{""type"":""Point"",""coordinates"":[68.9353807947497,35.3805743715067]}",2016-07-26 23:06:30.992453,2016-07-26 23:11:54.797891
+577,Canada,North America,CA,NM,"{""type"":""point"", ""coordinates"":[60.10867,-113.64258]}","{""type"":""Point"",""coordinates"":[-103.939500476328,55.1397926304534]}",2016-07-26 23:06:27.615136,2016-07-26 23:11:54.813645
+687,Cocos (Keeling) Islands,South-Eastern Asia,CC,SS,"{""type"":""point"", ""coordinates"":[-12.1642,96.87332]}","{""type"":""Point"",""coordinates"":[109.910978851168,7.94110667790799]}",2016-07-26 23:06:31.236747,2016-07-26 23:11:54.816675
+615,Chile,South America,CL,SM,"{""type"":""point"", ""coordinates"":[-30,-71]}","{""type"":""Point"",""coordinates"":[-60.8171054886641,-15.2231547189536]}",2016-07-26 23:06:29.130043,2016-07-26 23:11:54.839675
+539,China,Eastern Asia,CN,ES,"{""type"":""point"", ""coordinates"":[35,105]}","{""type"":""Point"",""coordinates"":[105.293943572632,38.1739069049899]}",2016-07-26 23:06:25.954309,2016-07-26 23:11:54.845988
+524,Costa Rica,Central America,CR,CM,"{""type"":""point"", ""coordinates"":[10,-84]}","{""type"":""Point"",""coordinates"":[-99.2505808667876,21.8133558473591]}",2016-07-26 23:06:25.272777,2016-07-26 23:11:54.853
+701,Cape Verde,Western Africa,CV,WA,"{""type"":""point"", ""coordinates"":[16,-24]}","{""type"":""Point"",""coordinates"":[-1.1829537456975,14.7408116740271]}",2016-07-26 23:06:31.861823,2016-07-26 23:11:54.859732
+698,Christmas Island,South-Eastern Asia,CX,SS,"{""type"":""point"", ""coordinates"":[-10.5,105.66667]}","{""type"":""Point"",""coordinates"":[109.910978851168,7.94110667790799]}",2016-07-26 23:06:31.757426,2016-07-26 23:11:54.866498
+685,Cyprus,Southern Europe,CY,SE,"{""type"":""point"", ""coordinates"":[35,33]}","{""type"":""Point"",""coordinates"":[7.38956543946488,41.4578362811151]}",2016-07-26 23:06:31.094243,2016-07-26 23:11:54.869605
+643,Dominica,Carribbean,DM,CB,"{""type"":""point"", ""coordinates"":[15.5,-61.33333]}","{""type"":""Point"",""coordinates"":[-75.0918978909751,20.2298014225409]}",2016-07-26 23:06:29.940677,2016-07-26 23:11:54.885054
+697,South Georgia and the South Sandwich Islands,South America,GS,SM,"{""type"":""point"", ""coordinates"":[-56,-33]}","{""type"":""Point"",""coordinates"":[-60.8171054886641,-15.2231547189536]}",2016-07-26 23:06:31.694772,2016-07-26 23:11:54.97439
+711,Israel,Western Asia,IL,WS,"{""type"":""point"", ""coordinates"":[31.5,34.75]}","{""type"":""Point"",""coordinates"":[43.3878415812532,28.4515048892831]}",2016-07-26 23:06:32.070619,2016-07-26 23:11:55.01238
+707,Jordan,Western Asia,JO,WS,"{""type"":""point"", ""coordinates"":[31,36]}","{""type"":""Point"",""coordinates"":[43.3878415812532,28.4515048892831]}",2016-07-26 23:06:31.984385,2016-07-26 23:11:55.044427
+708,Kuwait,Western Asia,KW,WS,"{""type"":""point"", ""coordinates"":[29.5,47.75]}","{""type"":""Point"",""coordinates"":[43.3878415812532,28.4515048892831]}",2016-07-26 23:06:32.005448,2016-07-26 23:11:55.077433
+688,Laos,South-Eastern Asia,LA,SS,"{""type"":""point"", ""coordinates"":[18,105]}","{""type"":""Point"",""coordinates"":[109.910978851168,7.94110667790799]}",2016-07-26 23:06:31.302171,2016-07-26 23:11:55.087193
+710,Lebanon,Western Asia,LB,WS,"{""type"":""point"", ""coordinates"":[33.83333,35.83333]}","{""type"":""Point"",""coordinates"":[43.3878415812532,28.4515048892831]}",2016-07-26 23:06:32.049145,2016-07-26 23:11:55.091094
+696,Luxembourg,Western Europe,LU,WE,"{""type"":""point"", ""coordinates"":[49.75,6.16667]}","{""type"":""Point"",""coordinates"":[6.45768472125939,48.573968061361]}",2016-07-26 23:06:31.628079,2016-07-26 23:11:55.113146
+691,Montenegro,Southern Europe,ME,SE,"{""type"":""point"", ""coordinates"":[42.75,19.25]}","{""type"":""Point"",""coordinates"":[7.38956543946488,41.4578362811151]}",2016-07-26 23:06:31.476862,2016-07-26 23:11:55.131794
+693,Macedonia,Southern Europe,MK,SE,"{""type"":""point"", ""coordinates"":[41.66667,21.75]}","{""type"":""Point"",""coordinates"":[7.38956543946488,41.4578362811151]}",2016-07-26 23:06:31.527125,2016-07-26 23:11:55.141261
+690,Myanmar,South-Eastern Asia,MM,SS,"{""type"":""point"", ""coordinates"":[21,96]}","{""type"":""Point"",""coordinates"":[109.910978851168,7.94110667790799]}",2016-07-26 23:06:31.44479,2016-07-26 23:11:55.147855
+709,Qatar,Western Asia,QA,WS,"{""type"":""point"", ""coordinates"":[25.5,51.25]}","{""type"":""Point"",""coordinates"":[43.3878415812532,28.4515048892831]}",2016-07-26 23:06:32.025302,2016-07-26 23:11:55.220859
+695,Peru,South America,PE,SM,"{""type"":""point"", ""coordinates"":[-10,-75.25]}","{""type"":""Point"",""coordinates"":[-60.8171054886641,-15.2231547189536]}",2016-07-26 23:06:31.612826,2016-07-26 23:11:55.239245
+700,West Bank and Gaza,Western Asia,PS,WS,"{""type"":""point"", ""coordinates"":[31.92157,35.20329]}","{""type"":""Point"",""coordinates"":[43.3878415812532,28.4515048892831]}",2016-07-26 23:06:31.844718,2016-07-26 23:11:55.263267
+704,Sierra Leone,Western Africa,SL,WA,"{""type"":""point"", ""coordinates"":[8.5,-11.5]}","{""type"":""Point"",""coordinates"":[-1.1829537456975,14.7408116740271]}",2016-07-26 23:06:31.922741,2016-07-26 23:11:55.324242
+682,Swaziland,Southern Africa,SZ,SA,"{""type"":""point"", ""coordinates"":[-26.5,31.5]}","{""type"":""Point"",""coordinates"":[22.5247263560193,-25.4906108524515]}",2016-07-26 23:06:30.955966,2016-07-26 23:11:55.361627
+703,Togo,Western Africa,TG,WA,"{""type"":""point"", ""coordinates"":[8.66667,1.08333]}","{""type"":""Point"",""coordinates"":[-1.1829537456975,14.7408116740271]}",2016-07-26 23:06:31.895024,2016-07-26 23:11:55.370663
+699,Timor-Leste,South-Eastern Asia,TL,SS,"{""type"":""point"", ""coordinates"":[-8.83333,125.75]}","{""type"":""Point"",""coordinates"":[109.910978851168,7.94110667790799]}",2016-07-26 23:06:31.826907,2016-07-26 23:11:55.382696
+694,Kosovo,Southern Europe,XK,SE,"{""type"":""point"", ""coordinates"":[42.58333,20.91667]}","{""type"":""Point"",""coordinates"":[7.38956543946488,41.4578362811151]}",2016-07-26 23:06:31.557229,2016-07-26 23:11:55.458477
+535,Ethiopia,Eastern Africa,ET,EA,"{""type"":""point"", ""coordinates"":[9,39.5]}","{""type"":""Point"",""coordinates"":[36.2399137063007,-4.70783204975634]}",2016-07-26 23:06:25.847646,2016-07-26 23:11:54.913977
+609,Falkland Islands (Malvinas),South America,FK,SM,"{""type"":""point"", ""coordinates"":[-51.75,-59.16667]}","{""type"":""Point"",""coordinates"":[-60.8171054886641,-15.2231547189536]}",2016-07-26 23:06:28.752485,2016-07-26 23:11:54.924139
+675,Faroe Islands,Northern Europe,FO,NE,"{""type"":""point"", ""coordinates"":[62,-7]}","{""type"":""Point"",""coordinates"":[-24.4266546450261,70.6996532290073]}",2016-07-26 23:06:30.904969,2016-07-26 23:11:54.930365
+477,France,Western Europe,FR,WE,"{""type"":""point"", ""coordinates"":[46,2]}","{""type"":""Point"",""coordinates"":[6.45768472125939,48.573968061361]}",2016-07-26 23:06:23.12524,2016-07-26 23:11:54.93329
+574,Guernsey,Northern Europe,GG,NE,"{""type"":""point"", ""coordinates"":[49.45474,-2.57629]}","{""type"":""Point"",""coordinates"":[-24.4266546450261,70.6996532290073]}",2016-07-26 23:06:27.144008,2016-07-26 23:11:54.942722
+702,Gambia,Western Africa,GM,WA,"{""type"":""point"", ""coordinates"":[13.5,-15.5]}","{""type"":""Point"",""coordinates"":[-1.1829537456975,14.7408116740271]}",2016-07-26 23:06:31.878298,2016-07-26 23:11:54.948818
+660,Honduras,Central America,HN,CM,"{""type"":""point"", ""coordinates"":[15,-86.5]}","{""type"":""Point"",""coordinates"":[-99.2505808667876,21.8133558473591]}",2016-07-26 23:06:30.400433,2016-07-26 23:11:54.993612
+595,Croatia,Southern Europe,HR,SE,"{""type"":""point"", ""coordinates"":[45.16667,15.5]}","{""type"":""Point"",""coordinates"":[7.38956543946488,41.4578362811151]}",2016-07-26 23:06:28.214309,2016-07-26 23:11:54.996694
+686,British Indian Ocean Territory,South-Eastern Asia,IO,SS,"{""type"":""point"", ""coordinates"":[-6,72]}","{""type"":""Point"",""coordinates"":[109.910978851168,7.94110667790799]}",2016-07-26 23:06:31.168827,2016-07-26 23:11:55.021647
+575,Iceland,Northern Europe,IS,NE,"{""type"":""point"", ""coordinates"":[65,-18]}","{""type"":""Point"",""coordinates"":[-24.4266546450261,70.6996532290073]}",2016-07-26 23:06:27.245137,2016-07-26 23:11:55.030715
+648,Jamaica,Carribbean,JM,CB,"{""type"":""point"", ""coordinates"":[18.16667,-77.25]}","{""type"":""Point"",""coordinates"":[-75.0918978909751,20.2298014225409]}",2016-07-26 23:06:30.011217,2016-07-26 23:11:55.040925
+588,Kyrgyzstan,South-Central Asia,KG,SC,"{""type"":""point"", ""coordinates"":[41.5,75]}","{""type"":""Point"",""coordinates"":[68.9353807947497,35.3805743715067]}",2016-07-26 23:06:27.948864,2016-07-26 23:11:55.054239
+505,Cambodia,South-Eastern Asia,KH,SS,"{""type"":""point"", ""coordinates"":[13,105]}","{""type"":""Point"",""coordinates"":[109.910978851168,7.94110667790799]}",2016-07-26 23:06:24.512892,2016-07-26 23:11:55.057335
+542,North Korea,Eastern Asia,KP,ES,"{""type"":""point"", ""coordinates"":[40.13434638,127.1627788]}","{""type"":""Point"",""coordinates"":[105.293943572632,38.1739069049899]}",2016-07-26 23:06:26.052662,2016-07-26 23:11:55.071058
+706,Liechtenstein,Western Europe,LI,WE,"{""type"":""point"", ""coordinates"":[47.16667,9.53333]}","{""type"":""Point"",""coordinates"":[6.45768472125939,48.573968061361]}",2016-07-26 23:06:31.964517,2016-07-26 23:11:55.097712
+496,Latvia,Northern Europe,LV,NE,"{""type"":""point"", ""coordinates"":[57,25]}","{""type"":""Point"",""coordinates"":[-24.4266546450261,70.6996532290073]}",2016-07-26 23:06:23.816523,2016-07-26 23:11:55.116327
+662,Marshall Islands,Micronesia,MH,MI,"{""type"":""point"", ""coordinates"":[7.113,171.236]}","{""type"":""Point"",""coordinates"":[91.2136096744779,7.94639720805253]}",2016-07-26 23:06:30.43359,2016-07-26 23:11:55.137985
+545,Mongolia,Eastern Asia,MN,ES,"{""type"":""point"", ""coordinates"":[46,105]}","{""type"":""Point"",""coordinates"":[105.293943572632,38.1739069049899]}",2016-07-26 23:06:26.164921,2016-07-26 23:11:55.151024
+586,Maldives,South-Central Asia,MV,SC,"{""type"":""point"", ""coordinates"":[3.682262044,73.33032797]}","{""type"":""Point"",""coordinates"":[68.9353807947497,35.3805743715067]}",2016-07-26 23:06:27.875199,2016-07-26 23:11:55.172963
+494,Mexico,Central America,MX,CM,"{""type"":""point"", ""coordinates"":[23,-102]}","{""type"":""Point"",""coordinates"":[-99.2505808667876,21.8133558473591]}",2016-07-26 23:06:23.674192,2016-07-26 23:11:55.179142
+689,Malaysia,South-Eastern Asia,MY,SS,"{""type"":""point"", ""coordinates"":[2.5,112.5]}","{""type"":""Point"",""coordinates"":[109.910978851168,7.94110667790799]}",2016-07-26 23:06:31.361887,2016-07-26 23:11:55.182261
+579,Norfolk Island,Polynesia,NF,PO,"{""type"":""point"", ""coordinates"":[-29.03333,167.95]}","{""type"":""Point"",""coordinates"":[-165.562775258219,-15.5658471700352]}",2016-07-26 23:06:27.722937,2016-07-26 23:11:55.199489
+637,Netherlands,Western Europe,NL,WE,"{""type"":""point"", ""coordinates"":[52.25,5.75]}","{""type"":""Point"",""coordinates"":[6.45768472125939,48.573968061361]}",2016-07-26 23:06:29.823035,2016-07-26 23:11:55.211467
+495,Panama,Central America,PA,CM,"{""type"":""point"", ""coordinates"":[9,-80]}","{""type"":""Point"",""coordinates"":[-99.2505808667876,21.8133558473591]}",2016-07-26 23:06:23.70608,2016-07-26 23:11:55.236055
+593,Pakistan,South-Central Asia,PK,SC,"{""type"":""point"", ""coordinates"":[30,70]}","{""type"":""Point"",""coordinates"":[68.9353807947497,35.3805743715067]}",2016-07-26 23:06:28.149796,2016-07-26 23:11:55.250644
+561,Solomon Islands,Melanesia,SB,ME,"{""type"":""point"", ""coordinates"":[-8,159]}","{""type"":""Point"",""coordinates"":[147.888477768951,-7.76197444087451]}",2016-07-26 23:06:26.428443,2016-07-26 23:11:55.289482
+666,Seychelles,Eastern Africa,SC,EA,"{""type"":""point"", ""coordinates"":[-4.58333,55.66667]}","{""type"":""Point"",""coordinates"":[36.2399137063007,-4.70783204975634]}",2016-07-26 23:06:30.521025,2016-07-26 23:11:55.298025
+618,Singapore,South-Eastern Asia,SG,SS,"{""type"":""point"", ""coordinates"":[1.36667,103.8]}","{""type"":""Point"",""coordinates"":[109.910978851168,7.94110667790799]}",2016-07-26 23:06:29.330807,2016-07-26 23:11:55.307363
+526,Slovakia,Central and Eastern Europe,SK,CE,"{""type"":""point"", ""coordinates"":[48.66667,19.5]}","{""type"":""Point"",""coordinates"":[91.8672853165586,61.1241414601048]}",2016-07-26 23:06:25.421294,2016-07-26 23:11:55.320952
+692,Sao Tome and Principe,Western Africa,ST,WA,"{""type"":""point"", ""coordinates"":[1,7]}","{""type"":""Point"",""coordinates"":[-1.1829537456975,14.7408116740271]}",2016-07-26 23:06:31.495282,2016-07-26 23:11:55.345193
+508,Thailand,South-Eastern Asia,TH,SS,"{""type"":""point"", ""coordinates"":[15.5,101]}","{""type"":""Point"",""coordinates"":[109.910978851168,7.94110667790799]}",2016-07-26 23:06:24.701595,2016-07-26 23:11:55.373602
+598,Turkmenistan,South-Central Asia,TM,SC,"{""type"":""point"", ""coordinates"":[39.75,59.66667]}","{""type"":""Point"",""coordinates"":[68.9353807947497,35.3805743715067]}",2016-07-26 23:06:28.323351,2016-07-26 23:11:55.387275
+569,Tunisia,North Africa,TN,NA,"{""type"":""point"", ""coordinates"":[34,9]}","{""type"":""Point"",""coordinates"":[14.8790854842834,25.1323592342349]}",2016-07-26 23:06:26.711062,2016-07-26 23:11:55.390616
+679,Tonga,Polynesia,TO,PO,"{""type"":""point"", ""coordinates"":[-20,-175]}","{""type"":""Point"",""coordinates"":[-165.562775258219,-15.5658471700352]}",2016-07-26 23:06:30.924704,2016-07-26 23:11:55.393678
+667,United States Minor Outlying Islands,Micronesia,UM,MI,"{""type"":""point"", ""coordinates"":[5.875,-162.057]}","{""type"":""Point"",""coordinates"":[91.2136096744779,7.94639720805253]}",2016-07-26 23:06:30.525697,2016-07-26 23:11:55.418133
+492,"Virgin Islands, U.S.",Carribbean,VI,CB,"{""type"":""point"", ""coordinates"":[18.34829,-64.98348]}","{""type"":""Point"",""coordinates"":[-75.0918978909751,20.2298014225409]}",2016-07-26 23:06:23.62596,2016-07-26 23:11:55.446168
+540,Zambia,Eastern Africa,ZM,EA,"{""type"":""point"", ""coordinates"":[-14.33333,28.5]}","{""type"":""Point"",""coordinates"":[36.2399137063007,-4.70783204975634]}",2016-07-26 23:06:25.974977,2016-07-26 23:11:55.467483
