@@ -52,8 +52,14 @@
       var params = this.router.getParams();
 
       var regionsCollection = new App.Collection.Regions();
-      var regionsView = new App.View.Regions({
-        regions: regionsCollection,
+      var regionsView = new App.View.List({
+        list: regionsCollection,
+        /* TwoLevels expecifies whether the list will be an array of objects inside
+         of an array of objects or just an array of objects */
+        twoLevels: true,
+        template: HandlebarsTemplates['countries-list'],
+        secondLevelName: 'countries',
+        itemCategory: 'country_name'
       });
 
       var layersCollection = new App.Collection.Layers();

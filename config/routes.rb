@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get '/',               to: 'home#index',         as: 'home'
   get '/map',            to: 'map#index',          as: 'map'
   get '/countries',      to: 'countries#index',    as: 'countries'
-  get '/countries/:iso', to: 'countries#show',     as: 'countries/iso'
+  get '/countries/:iso', to: 'countries#show',     as: 'country'
   get '/cancer-types',   to: 'cancer_types#index', as: 'cancers'
   get '/about',          to: 'about#index',        as: 'about'
 

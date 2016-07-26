@@ -4,19 +4,19 @@
     "id": "afr",
     "countries": [
       {
-        "name": "Algeria",
+        "country_name": "Algeria",
         "id": "alg",
-        "iso": "ALG"
+        "country_iso": "ALG"
       },
       {
-        "name": "Congo",
+        "country_name": "Congo",
         "id": "cong",
-        "iso": "CNG"
+        "country_iso": "CNG"
       },
       {
-        "name": "Kenya",
+        "country_name": "Kenya",
         "id": "ken",
-        "iso": "KEN"
+        "country_iso": "KEN"
       }
     ]
   },
@@ -25,19 +25,19 @@
     "id": "eur",
     "countries": [
       {
-        "name": "France",
+        "country_name": "France",
         "id": "fr",
-        "iso": "FR"
+        "country_iso": "FR"
       },
       {
-        "name": "Italy",
+        "country_name": "Italy",
         "id": "ita",
-        "iso": "ITA"
+        "country_iso": "ITA"
       },
       {
-        "name": "Spain",
+        "country_name": "Spain",
         "id": "spa",
-        "iso": "SPA"
+        "country_iso": "SPA"
       }
     ]
   },
@@ -46,19 +46,19 @@
     "id": "amer",
     "countries": [
       {
-        "name": "United States",
+        "country_name": "United States",
         "id": "us",
-        "iso": "US"
+        "country_iso": "US"
       },
       {
-        "name": "Brazil",
+        "country_name": "Brazil",
         "id": "brz",
-        "iso": "BRZ"
+        "country_iso": "BRZ"
       },
       {
-        "name": "Canada",
+        "country_name": "Canada",
         "id": "can",
-        "iso": "CAN"
+        "country_iso": "CAN"
       }
     ]
   }
