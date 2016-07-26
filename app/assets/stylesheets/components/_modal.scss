@@ -6,12 +6,12 @@
 // 	  	<svg><use xlink:href="#shape-close"></use></svg>
 // 	  </button>
 // 	  
-// 	  <div class="modal-wrapper {{#if footer}}-has-footer{{/if}}">
+// 	  <div class="modal-wrapper {{#if hasFooter}}-has-footer{{/if}}">
 // 	    <div class="modal-content">
 // 	    	{ content }
 // 	    </div>
 // 	    
-// 	    {{#if footer}}
+// 	    {{#if hasFooter}}
 // 	      <div class="modal-footer">
 // 	      	{ content }
 // 	      </div>

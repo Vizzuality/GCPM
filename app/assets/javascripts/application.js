@@ -18,6 +18,8 @@
 //= require underscore/underscore
 //= require backbone/backbone
 //= require d3
+//= require chosen
+//= require pickadate
 //= require_self
 
 //= require_tree ./templates

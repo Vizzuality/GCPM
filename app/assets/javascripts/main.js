@@ -29,7 +29,6 @@
     },
 
     mapPage: function() {
-      console.log('map');
       var params = this.router.getParams(),
           layersCollection = new App.Collection.Layers();
 
