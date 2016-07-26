@@ -7,6 +7,9 @@
  *      <li class="item"><%= link_to (t '{ Item name }'), {path} %></li>
  *    </ul>
  *
+ *  Optional items to show on mobile
+ *    - "-optional"
+ *
  *  Colors modifiers (for the outline and/or background and/or text):
  *    - "-color-0": transparent
  *    - "-color-1": blue   ($color-1) - DEFAULT, optional class
@@ -58,7 +61,11 @@
     a {
       display: block;
       color: $color-3;
-      padding: 12px 24px;
+      padding: 7px 8px;
+
+      @media #{$mq-mobile-large} {
+        padding: 12px 24px;
+      }
 
       &:hover, &.-active {
         box-shadow: inset 0 0 2px 0 lightgrey;
@@ -66,5 +73,9 @@
         background-color: $color-3;
       }
     }
+  }
+
+  .-optional {
+    display: none;
   }
 }

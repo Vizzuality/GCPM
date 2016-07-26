@@ -5,4 +5,12 @@
  */
 .c-map {
   height: 600px;
+
+  .leaflet-control-attribution {
+    display: none;
+
+    @media #{$mq-tablet} {
+      display: inherit;
+    }
+  }
 }
