@@ -6,20 +6,14 @@
 
   App.View.MapFilters = App.Helper.Modal.extend({
 
-    id: '#map-filters',
-
-    className: "c-modal",
-
-    template: HandlebarsTemplates['map-filters'],
+    el: '#map-filters',
 
     initialize: function() {
       // Initialize Parent
       this.constructor.__super__.initialize.apply(this);
       // Inits
       this.render();
-      this.listeners();
-
-      this.$body.append(this.el);
+      this.listeners();     
     },
 
     listeners: function() {
@@ -29,10 +23,18 @@
     },
 
     render: function() {
-      this.$el.html(this.template());
+      this.renderChosen();
       return this;
-
     },
+
+    renderChosen: function() {
+      this.$el.find('.chosen-select').chosen({
+        width: '100%',
+        allow_single_deselect: true,
+        inherit_select_classes: true,
+        no_results_text: "Oops, nothing found!"        
+      });
+    }
 
   });
 
