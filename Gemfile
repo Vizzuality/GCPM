@@ -53,6 +53,8 @@ group :development, :test do
   gem 'faker'
   gem 'spring-commands-rspec'
   gem 'rspec-rails', '~> 3.0'
+  gem 'factory_girl_rails'
+  gem 'database_cleaner'
 end
 
 group :development do
@@ -74,8 +76,7 @@ group :development do
 end
 
 group :test do
-  gem 'factory_girl_rails'
-  gem 'database_cleaner'
+
 end
 
 # group :production do
