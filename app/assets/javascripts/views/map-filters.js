@@ -13,12 +13,11 @@
     template: HandlebarsTemplates['map-filters'],
 
     initialize: function() {
+      // Initialize Parent
+      this.__super__.initialize.apply(this, arguments);
       // Inits
       this.render();
       this.listeners();
-      // All the methods that has _ is because they belong to the Parent View
-      this._cache();
-      this._listeners();
 
       this.$body.append(this.el);
     },

@@ -17,7 +17,9 @@
     },
 
     initialize: function() {
-      this.listeners();
+      // All the methods that has _ is because they belong to the Parent View
+      this._cache();
+      this._listeners();      
     },
 
     _listeners: function() {

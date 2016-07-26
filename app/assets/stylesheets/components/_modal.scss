@@ -1,8 +1,12 @@
+// This component is for all the modal of the app
+// - The component is hidden by default until the class -active is added
+// - `-has-footer` class is when you have a footer inside the modal that you want to have always present (A submit button or something similar), even if you scroll through the modal
+
 //<div class="c-modal">
 // 	<div class="modal-backdrop btn-modal-close"></div>
 //
 // 	<div class="modal-window">
-// 	  <button href="#" class="btn-modal-close">
+// 	  <button href="#" class="modal-close btn-modal-close">
 // 	  	<svg><use xlink:href="#shape-close"></use></svg>
 // 	  </button>
 // 	  
@@ -26,7 +30,8 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1101;
+  // Just to be sure that is over all the content
+  z-index: 10;
   width: 100%;
   height: 100%;
   opacity: 0;
@@ -103,12 +108,12 @@
 
   &:before {
     top: 0;
-    background: linear-gradient(top,rgba($color-3,1),rgba($color-3,0));
+    background: linear-gradient(to top,rgba($color-3,1),rgba($color-3,0));
   }
 
   &:after {
     bottom: 0;
-    background: linear-gradient(top,rgba($color-3,0),rgba($color-3,1));
+    background: linear-gradient(to top,rgba($color-3,0),rgba($color-3,1));
   }
 
   .modal-close {
@@ -119,7 +124,7 @@
     right: 0px;
     width: 40px;
     height: 40px;
-    z-index: 20;
+    z-index: 2;
 
     svg {
       position: absolute;
