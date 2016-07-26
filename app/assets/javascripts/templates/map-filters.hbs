@@ -2,18 +2,24 @@
 <div class="modal-backdrop btn-modal-close"></div>
 {{!-- WINDOW --}}
 <div class="modal-window">
+  {{!-- Modal close button --}}
   <button href="#" class="modal-close btn-modal-close">
     <svg><use xlink:href="#shape-close"></use></svg>
   </button>
   
-  <div class="modal-wrapper {{#if footer}}-has-footer{{/if}}">
+  {{!-- Modal wrapper button --}}
+  <div class="modal-wrapper {{#if hasFooter}}-has-footer{{/if}}">
     <div class="modal-content">
-
+      <div class='c-map-filters'>
+        <form action="">
+          <h2 class='modal-title'>Filters</h2>
+          <div class=""></div>
+        </form>
+      </div>
     </div>
-    
-    {{#if footer}}
+
+    {{#if hasFooter}}
       <div class="modal-footer">
-        
       </div>
     {{/if}}
   </div>

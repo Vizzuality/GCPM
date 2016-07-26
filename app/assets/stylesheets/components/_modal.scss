@@ -29,10 +29,13 @@
   z-index: 1101;
   width: 100%;
   height: 100%;
-  display: none;
+  opacity: 0;
+  visibility: hidden;
   
+  // Active styles
   &.-active {
-    display: block;
+    visibility: visible;
+    opacity: 1;
 
     .modal-backdrop {
       opacity: 1;
@@ -70,36 +73,16 @@
     height: 100%;
     opacity: 0;
     visibility: hidden;
-    transition: all 0s $easeInOutSine;
+    transition: all 0.2s $easeInOutSine;
 
     @media #{$mq-tablet}{
-      left: 50%; top: 50%;
-      width: 500px;
+      width: 700px;
+      top: 50%;
+      left: 50%; 
       height: auto;
       min-height: 100px;
       transform: translate(-50%,-60%);
-    }
-
-    .modal-close {
-      display: block;
-      position: absolute;
-      top: 0px;
-      right: 0px;
-      width: 40px;
-      height: 40px;
-      z-index: 20;
-
-      svg{
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        width: 20px;
-        height: 20px;
-        margin: auto;
-      }
-    }
+    }    
   }
 }
 
@@ -128,9 +111,25 @@
     background: linear-gradient(top,rgba($color-3,0),rgba($color-3,1));
   }
 
-  // MODAL CLOSE BTN
   .modal-close {
+  	@extend %reset-btn;
+    display: block;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 40px;
+    height: 40px;
+    z-index: 20;
+
     svg {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 20px;
+      height: 20px;
+      margin: auto;
       fill: $color-2;
     }
 
@@ -140,35 +139,37 @@
       }
     }
   }
+}
 
-  // MODAL WRAPPER
-  .modal-wrapper{
-    overflow-x: hidden;
-    overflow-y: auto;
-    height: 100%;
-    max-height: 100%;
+
+// MODAL WRAPPER
+.modal-wrapper {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100%;
+  max-height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding: 60px;
+  @media #{$mq-tablet}{
+    max-height: 450px;
+  }
+
+  &.-has-footer {
+    border-bottom: 66px solid transparent;
+  }
+
+  .modal-content {
+    height: auto;
     width: 100%;
-    top: 0;
-    left: 0;
-    padding: 20px;
-    @media #{$mq-tablet}{
-      max-height: 450px;
-    }
+    outline: none;
 
-    &.-has-footer {
-      border-bottom: 66px solid transparent;
-    }
-
-    .modal-content {
-      height: auto;
-      width: 100%;
-      outline: none;
-
-      font-size: 15px;
-      color: $color-2;
-    }
+    font-size: 15px;
+    color: $color-2;
   }
 }
+
 
 // MODAL HEADER
 .modal-header {
@@ -180,17 +181,6 @@
   z-index: 2;
   padding: 20px;
   @include clearfix();
-
-  // GRADIENTS
-  .gradient {
-    content: "";
-    position: absolute;
-    height: 15px;
-    width: 100%;
-    left: 0;
-    top: 100%;
-    background: linear-gradient(top,rgba($color-3,1),rgba($color-3,0));
-  }
 
   ul {
     margin: 15px 0;
@@ -236,55 +226,20 @@
   padding: 15px 0;
   @include clearfix();
   border-top: 1px solid $color-5;
-  
-  // GRADIENTS
-  .gradient {
-    content: "";
-    position: absolute;
-    height: 15px;
-    width: calc(100% - 10px);
-    left: 0;
-    bottom: 100%;
-    border-bottom: 1px solid $color-5;
-    background: linear-gradient(top,rgba($color-3,0),rgba($color-3,1));
-  }
-
 }
 
-// MODAL ARROWS
-.modal-arrows {
-  display: none;
-  @media #{$mq-tablet} {
-    display: block;
-  }  
-  
-  .btn-direction{
-    position: absolute;
-    top: 50%;
-    transform: translate(0,-50%);
-    
-    &.-left{
-      right: 100%;
-    }
-    
-    &.-right{
-      left: 100%;
-    }
-    
-    .icon{
-      padding: 10px;
-      width: 60px;
-      height: 60px;
-      svg{
-        stroke: $color-3;
-      }
-    }
-  }  
-}
 
 // MODAL CONTENT
 .modal-content {
   font-size: 13px;
+
+  .modal-title {
+  	margin: 0;
+  	color: $color-2;
+		font-size: $font-size-x-medium;
+		font-weight: $font-weight-bold;
+  }
+
 
   br {
     display: none;
@@ -299,19 +254,20 @@
     color: $color-2;
     font-size: 13px;
 
-    > li{
+    > li {
       list-style-type: disc;
       padding: 10px 0 0;
       margin-left: 20px;
       line-height: 1.25;
 
+      &:first-child {
+        padding: 0;
+      }
+
       > p {
         margin: 0;
       }
 
-      &:first-child{
-        padding: 0;
-      }
     }
   }
 
