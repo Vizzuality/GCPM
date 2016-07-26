@@ -108,7 +108,7 @@ ActiveRecord::Schema.define(version: 20160726232049) do
     t.datetime "updated_at",     null: false
   end
 
-  create_table "memberships", force: :cascade do |t|
+  create_table "members", force: :cascade do |t|
     t.integer  "project_id"
     t.integer  "organization_id"
     t.integer  "investigator_id"
