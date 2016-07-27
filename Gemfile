@@ -42,6 +42,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-hammerjs'
   gem 'rails-assets-jquery-hammerjs'
   gem 'rails-assets-leaflet'
+  gem 'rails-assets-chosen'
+  gem 'rails-assets-pickadate'
 end
 
 # Active record

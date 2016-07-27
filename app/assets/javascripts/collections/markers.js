@@ -4,7 +4,7 @@
 
   App.Collection = App.Collection || {};
   App.Collection.Markers = Backbone.Collection.extend({
-    url: '/assets/jsons/',
+    url: '/jsons/',
 
     initialize: function(options) {
       this.options = options ? options : {};

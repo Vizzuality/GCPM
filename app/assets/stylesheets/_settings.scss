@@ -31,6 +31,7 @@ $color-3:  #fff;
 $color-4:  #68299b;
 $color-5:  #fbfbfb;
 $color-6:  #f57823;
+$color-7: #000;
 
 /* Shadows */
 $shadow-1: 0 7px 10px rgba(0, 0, 0, 0.1);
@@ -49,3 +50,12 @@ $mq-tablet:       "screen and (min-width: #{$breakpoint-tablet})";
 $mq-laptop:       "screen and (min-width: #{$breakpoint-laptop})";
 
 $mq-body-width: "screen and (min-width: #{$body-max-width})";
+
+/* Eases */
+$easeInCubic: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+$easeOutCubic: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+$easeInOutCubic: cubic-bezier(0.645, 0.045, 0.355, 1.000);
+
+$easeInSine: cubic-bezier(0.470, 0.000, 0.745, 0.715);
+$easeOutSine: cubic-bezier(0.390, 0.575, 0.565, 1.000);
+$easeInOutSine: cubic-bezier(0.445, 0.050, 0.550, 0.950);

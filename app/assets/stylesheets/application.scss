@@ -12,6 +12,7 @@
  *
  *= require_self
  //= require leaflet
- */
+ //= require chosen 
+*/
 
-@import "settings", "fonts", "base", "layouts/*", "components/*";
+@import "settings", "fonts", "base", "mixins", "layouts/*", "components/*";
