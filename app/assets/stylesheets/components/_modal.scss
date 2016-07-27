@@ -19,7 +19,7 @@
  * 	Modifiers:
  * 		- "-active": class to show the modal (hidden by default)
  * 		- "-has-footer": tell the modal you want a fixed footer at its bottom
- *
+ *    - "-has-scroll": tell the modal you want to scroll the modal if it's neccessary
  */
 
 // Layout
@@ -112,7 +112,7 @@
 
     @media #{$mq-tablet} {
       padding: $wrapper-padding;
-      max-height: 450px;
+      
     }
 
     /* Gradients for the content */
@@ -150,14 +150,10 @@
     }
   }
 
-  &.-has-footer .modal-wrapper:after { content: none; }
-
   .modal-content {
     flex-grow: 1;
     width: 100%;
     padding: 20px 0; /* The gradient isn't applied on the first and last line */
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
     line-height: 1.6;
 
     .modal-title {
@@ -166,7 +162,7 @@
   		font-weight: $font-weight-bold;
     }
 
-    ul {
+    > ul {
       list-style-type: disc;
 
       > li {
@@ -208,6 +204,21 @@
       left: 0;
       top: -20px;
       background: linear-gradient(to top, rgba($color-3, 1), rgba($color-3, 0));
+    }
+  }
+
+  &.-has-footer .modal-wrapper:after { 
+    content: none; 
+  }
+
+  &.-has-scroll {
+    .modal-wrapper {
+      max-height: 450px;
+    }
+
+    .modal-content { 
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
   }
 }
