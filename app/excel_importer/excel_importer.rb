@@ -1,15 +1,16 @@
 require 'roo'
+require 'data_extractor'
 
 class ExcelImporter
 
   def initialize(file)
     @projects_excel_book = Roo::Spreadsheet.open(file, extension: :xlsx)
+    @errors = []
   end
 
   attr_reader :errors
 
   def import!
-    @errors = []
     @projects_excel_book.default_sheet = @projects_excel_book.sheets.first
     header = @projects_excel_book.first
 
@@ -36,7 +37,8 @@ class ExcelImporter
 
     parsed_excel.each do |row|
       begin
-        Project.import_from_excel(row)
+        project_data = DataExtractor.new(row)
+        project_data.extract
         Rails.logger.debug 'Project imported'
       rescue Exception => e
         Rails.logger.debug e
