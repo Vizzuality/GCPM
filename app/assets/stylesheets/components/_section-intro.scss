@@ -40,22 +40,47 @@
     flex-flow: column;
     justify-content: space-between;
     padding-top: 60px;
-    padding-bottom: 130px;
+    padding-bottom: 70px;
+    align-items: center;
 
-    @media #{$mq-tablet} {
+    @media screen and (min-width: 700px) {
       flex-flow: row;
+      padding-top: 60px;
+      padding-bottom: 130px;
     }
 
     .info {
       width: 100%;
+      margin-bottom: 30px;
+      padding-left: $wrapper-mobile-padding;
+      padding-right: $wrapper-mobile-padding;
+
+
+      @media #{$mq-mobile-large} {
+        padding-left: $wrapper-tablet-padding;
+        padding-right: $wrapper-tablet-padding;
+      }
+
+      @media screen and (min-width: 700px) {
+        width: calc(100% / 2);;
+      }
 
       @media #{$mq-tablet} {
-        width: 61.6%;
+        width: calc(100% * 2 / 3);
+        margin-bottom: 0;
+        padding-left: $wrapper-padding;
+        padding-right: $wrapper-padding;
       }
 
       .c-title {
         margin: 0;
         margin-bottom: 30px;
+      }
+    }
+
+    .c-buttons-group {
+      @media #{$mq-tablet} {
+        margin-top: 100px;
       }
     }
 
