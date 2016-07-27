@@ -19,7 +19,7 @@
 //= require backbone/backbone
 //= require d3
 //= require chosen
-//= require pickadate
+//= require pickadate/picker
 //= require_self
 
 //= require_tree ./templates
