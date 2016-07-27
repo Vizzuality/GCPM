@@ -19,4 +19,12 @@ Rails.application.routes.draw do
   get 'network/projects/edit/:project_id', to: 'network_projects#edit', as: 'edit_user_project'
   get 'network/projects/update/:project_id', to: 'network_projects#update', as: 'update_user_project'
   get 'network/projects/delete/:project_id', to: 'network_projects#delete', as: 'delete_user_project'
+  namespace :api, defaults: { format: 'json' } do
+    scope module: :v1 do
+      resources :regions, only: [:index, :show]
+      resources :cancer_types, only: [:index, :show], :path => '/cancer-types'
+      get 'lists/countries', to: 'lists#countries'
+      get 'lists/cancer-types', to: 'lists#cancer_types'
+    end
+  end
 end
