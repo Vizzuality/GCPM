@@ -36,9 +36,8 @@
       var mapView = new App.View.Map({
         layers: layersCollection,
       });
-      var mapMenuView = new App.View.MapMenu({
-        layers: layersCollection,
-      });
+      var mapMenuView = new App.View.MapMenu();
+      var mapFiltersView = new App.View.MapFilters();
 
       // Sync layers
       layersCollection.toggleLayers([

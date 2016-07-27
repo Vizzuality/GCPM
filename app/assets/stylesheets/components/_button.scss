@@ -23,6 +23,7 @@
  */
 
 %reset-btn {
+  padding: 0;
   -webkit-appearance: none;
   border: 1px solid transparent;
   background: none;
@@ -33,7 +34,6 @@
   text-decoration: none;
   font-family: inherit;
 }
-
 
 .c-button {
   display: inline-block;
