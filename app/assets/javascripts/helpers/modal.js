@@ -13,13 +13,14 @@
     })),
 
     events: {
-      'click .js-btn-modal-close' : 'hide'
+      'click .js-btn-modal-close' : 'hide',
+      'click': 'onClickBackdrop'
     },
 
     initialize: function() {
       // All the methods that has _ is because they belong to the Parent View
       this._cache();
-      this._listeners();      
+      this._listeners();
     },
 
     _listeners: function() {
@@ -38,6 +39,11 @@
       this.$close =          this.$el.find('.modal-close');
     },
 
+    onClickBackdrop: function(e) {
+      if(e.target === e.currentTarget) {
+        this.hide();
+      }
+    },
 
     /**
      * MODEL CHANGES

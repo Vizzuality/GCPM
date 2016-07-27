@@ -1,13 +1,11 @@
 <div id="map-filters" class="c-modal">
-  <!-- BACKDROP -->
-  <div class="modal-backdrop js-btn-modal-close"></div>
   <!-- WINDOW -->
   <div class="modal-window">
     <!-- Modal close button -->
     <button href="#" class="modal-close js-btn-modal-close">
       <svg><use xlink:href="#shape-close"></use></svg>
     </button>
-    
+
     <!-- Modal wrapper button -->
     <div class="modal-wrapper">
       <div class="modal-content">
@@ -23,17 +21,17 @@
                     <option value="">All countries</option>
                     <% @countries.each do |country| %>
                       <option value="<%= country.iso %>"><%= country.name %></option>
-                    <% end %>                    
+                    <% end %>
                   </select>
                 </div>
               </div>
               <div class="grid-item">
                 <div class="c-select">
                   <select class="chosen-select" multiple data-placeholder="All organizations types">
-                    <option value="">All organizations types</option>                  
+                    <option value="">All organizations types</option>
                     <% @organization_types.each do |organization_type| %>
                       <option value="<%= organization_type.id %>"><%= organization_type.name %></option>
-                    <% end %>                    
+                    <% end %>
                   </select>
                 </div>
               </div>
@@ -43,7 +41,7 @@
                     <option value="">All cancer types</option>
                     <% @cancer_types.each do |cancer_type| %>
                       <option value="<%= cancer_type.id %>"><%= cancer_type.name %></option>
-                    <% end %>                    
+                    <% end %>
                   </select>
                 </div>
               </div>
@@ -53,7 +51,7 @@
                     <option value="">All organizations</option>
                     <% @organizations.each do |organization| %>
                       <option value="<%= organization.id %>"><%= organization.name %></option>
-                    <% end %>                    
+                    <% end %>
                   </select>
                 </div>
               </div>
@@ -63,7 +61,7 @@
                     <option value="">All project types</option>
                     <% @project_types.each do |project_type| %>
                       <option value="<%= project_type.id %>"><%= project_type.name %></option>
-                    <% end %>                    
+                    <% end %>
                   </select>
                 </div>
               </div>
