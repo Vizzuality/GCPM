@@ -21,10 +21,9 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'sass-rails'
 gem 'autoprefixer-rails'
+gem 'pickadate-rails', '~> 3.5', '>= 3.5.6.0'
 gem 'bourbon'
 gem 'handlebars_assets'
-gem 'rails-assets-html2canvas'
-gem 'rails-assets-imagesloaded-packaged'
 
 # Email service integration
 gem 'sendgrid-ruby'
@@ -38,11 +37,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-backbone'
   gem 'rails-assets-d3'
   gem 'rails-assets-moment'
-  gem 'rails-assets-hammerjs'
-  gem 'rails-assets-jquery-hammerjs'
   gem 'rails-assets-leaflet'
   gem 'rails-assets-chosen'
-  gem 'rails-assets-pickadate'
 end
 
 # Active record
