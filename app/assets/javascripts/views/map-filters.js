@@ -24,6 +24,7 @@
 
     render: function() {
       this.renderChosen();
+      this.renderPickADate();
       return this;
     },
 
@@ -34,6 +35,10 @@
         inherit_select_classes: true,
         no_results_text: "Oops, nothing found!"        
       });
+    },
+
+    renderPickADate: function() {
+      // this.$el.find('.pickadate-input').pickadate();      
     }
 
   });
