@@ -52,16 +52,21 @@
       var params = this.router.getParams();
 
       var regionsCollection = new App.Collection.Regions();
-      var regionsView = new App.View.List({
-        list: regionsCollection,
-        /* TwoLevels expecifies whether the list will be an array of objects inside
-         of an array of objects or just an array of objects */
-        twoLevels: true,
-        template: HandlebarsTemplates['countries-list'],
-        secondLevelName: 'countries',
-        itemCategory: 'country_name'
+
+      var regionsView = new App.View.SearchList({
+        searchList: regionsCollection,
+        options: {
+          isTwoLevels: true,
+          template: HandlebarsTemplates['countries-list'],
+          innerSearchListName: 'countries',
+          itemSearchedCategory: 'country_name'
+        }
       });
 
+      regionsCollection.fetch();
+
+
+      // Map view
       var layersCollection = new App.Collection.Layers();
       var mapView = new App.View.Map({
         layers: layersCollection,

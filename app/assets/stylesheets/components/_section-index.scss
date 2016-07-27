@@ -3,7 +3,7 @@
  *
  *  <section class="c-section-index">
  *    <div class="wrapper">
- *      <input class="c-title -bigger search" id="search" placeholder="{ Content }" /><br/>
+ *      <input class="c-title -bigger search" id="js-search-list" placeholder="{ Content }" /><br/>
  *      <a href="#collection-list" class="c-button -filled -color-3">{ Content }</a>
  *
  *      <div id="collection-list">
@@ -38,7 +38,7 @@
     padding-bottom: 100px;
   }
 
-  #search {
+  .js-search-list {
     width: 100%;
     border: none;
     margin-bottom: 20px;
