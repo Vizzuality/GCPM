@@ -20,6 +20,7 @@
 //= require d3
 //= require chosen
 //= require pickadate/picker
+//= require pickadate/picker.date
 //= require_self
 
 //= require_tree ./templates
