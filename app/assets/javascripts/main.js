@@ -26,6 +26,9 @@
     start: function() {
       Backbone.history.stop();
       Backbone.history.start({ pushState: true });
+
+      /* We initialize the mobile header */
+      new App.View.MobileHeader();
     },
 
     mapPage: function() {
@@ -79,5 +82,3 @@
   });
 
 })(this.App);
-
-
