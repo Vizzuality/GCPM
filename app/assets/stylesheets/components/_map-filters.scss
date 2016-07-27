@@ -1,0 +1,15 @@
+.c-map-filters {
+  // Grid
+  .grid-filters {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    list-style: none;
+
+    .grid-item {
+      width: 47.5%;
+    }
+  }
+}

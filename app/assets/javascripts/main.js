@@ -26,6 +26,9 @@
     start: function() {
       Backbone.history.stop();
       Backbone.history.start({ pushState: true });
+
+      /* We initialize the mobile header */
+      new App.View.MobileHeader();
     },
 
     mapPage: function() {
@@ -36,9 +39,8 @@
       var mapView = new App.View.Map({
         layers: layersCollection,
       });
-      var mapMenuView = new App.View.MapMenu({
-        layers: layersCollection,
-      });
+      var mapMenuView = new App.View.MapMenu();
+      var mapFiltersView = new App.View.MapFilters();
 
       // Sync layers
       layersCollection.toggleLayers([
@@ -95,5 +97,3 @@
   });
 
 })(this.App);
-
-

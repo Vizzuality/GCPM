@@ -12,6 +12,9 @@
  *
  *= require_self
  //= require leaflet
- */
+ //= require chosen
+ //= require pickadate/classic
+ //= require pickadate/classic.date
+*/
 
-@import "settings", "fonts", "base", "layouts/*", "components/*";
+@import "settings", "fonts", "base", "mixins", "layouts/*", "components/*";

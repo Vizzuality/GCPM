@@ -14,6 +14,7 @@ gem 's3'
 gem 'activeadmin', git: 'http://github.com/activeadmin/activeadmin'
 gem 'active_admin_theme'
 gem 'turbolinks', '~> 5.0.0'
+gem 'active_model_serializers', '~> 0.10.0'
 
 # Assets pipeline
 gem 'uglifier', '>= 1.3.0'
@@ -21,10 +22,9 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'sass-rails'
 gem 'autoprefixer-rails'
+gem 'pickadate-rails', '~> 3.5', '>= 3.5.6.0'
 gem 'bourbon'
 gem 'handlebars_assets'
-gem 'rails-assets-html2canvas'
-gem 'rails-assets-imagesloaded-packaged'
 
 # Email service integration
 gem 'sendgrid-ruby'
@@ -38,18 +38,13 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-backbone'
   gem 'rails-assets-d3'
   gem 'rails-assets-moment'
-  gem 'rails-assets-hammerjs'
-  gem 'rails-assets-jquery-hammerjs'
   gem 'rails-assets-leaflet'
   gem 'rails-assets-fuse'
+  gem 'rails-assets-chosen'
 end
 
 # Active record
 gem 'pg', '~> 0.18'
-
-group :staging do
-  gem 'rails_12factor'
-end
 
 group :development, :test do
   gem 'teaspoon-mocha', git: 'http://github.com/modeset/teaspoon', branch: 'rails_5'
@@ -58,6 +53,9 @@ group :development, :test do
   gem 'faker'
   gem 'spring-commands-rspec'
   gem 'rspec-rails', '~> 3.0'
+  gem 'factory_girl_rails'
+  gem 'to_factory'
+  gem 'database_cleaner'
 end
 
 group :development do
@@ -71,6 +69,7 @@ group :development do
   gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
   # Deploy
   gem 'capistrano', '3.5'
+  gem 'capistrano-env-config'
   gem 'capistrano-rails'
   gem 'capistrano-bundler'
   gem 'capistrano-rvm'
@@ -78,8 +77,7 @@ group :development do
 end
 
 group :test do
-  gem 'factory_girl_rails'
-  gem 'database_cleaner'
+
 end
 
 # group :production do

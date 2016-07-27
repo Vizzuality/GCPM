@@ -1,0 +1,100 @@
+<div id="map-filters" class="c-modal">
+  <!-- WINDOW -->
+  <div class="modal-window">
+    <!-- Modal close button -->
+    <button href="#" class="modal-close js-btn-modal-close">
+      <svg><use xlink:href="#shape-close"></use></svg>
+    </button>
+
+    <!-- Modal wrapper button -->
+    <div class="modal-wrapper">
+      <div class="modal-content">
+        <form action="">
+        <input type="hidden" name="type" value="<%= request.query_parameters['type'] %>">
+
+          <h2 class='modal-title'>Filters</h2>
+          <div class='c-map-filters'>
+
+            <!-- COMMON FILTERS -->
+            <div class="grid-filters">
+              <div class="grid-item">
+                <div class="c-select">
+                  <select name="countries" class="chosen-select" multiple data-placeholder="All countries">
+                    <option value="">All countries</option>
+                    <% @countries.each do |country| %>
+                      <option value="<%= country['iso'] %>"><%= country['name'] %></option>
+                    <% end %>
+                  </select>
+                </div>
+              </div>
+              <div class="grid-item">
+                <div class="c-select">
+                  <select name="organization_types" class="chosen-select" multiple data-placeholder="All organizations types">
+                    <option value="">All organizations types</option>
+                    <% @organization_types.each do |organization_type| %>
+                      <option value="<%= organization_type['id'] %>"><%= organization_type['name'] %></option>
+                    <% end %>
+                  </select>
+                </div>
+              </div>
+              <div class="grid-item">
+                <div class="c-select">
+                  <select name="cancer_types" class="chosen-select" multiple data-placeholder="All cancer types">
+                    <option value="">All cancer types</option>
+                    <% @cancer_types.each do |cancer_type| %>
+                      <option value="<%= cancer_type['id'] %>"><%= cancer_type['name'] %></option>
+                    <% end %>
+                  </select>
+                </div>
+              </div>
+              <div class="grid-item">
+                <div class="c-select">
+                  <select name="organizations" class="chosen-select" multiple data-placeholder="All organizations">
+                    <option value="">All organizations</option>
+                    <% @organizations.each do |organization| %>
+                      <option value="<%= organization['id'] %>"><%= organization['name'] %></option>
+                    <% end %>
+                  </select>
+                </div>
+              </div>
+              <div class="grid-item">
+                <div class="c-select">
+                  <select name="project_types" class="chosen-select" multiple data-placeholder="All project types">
+                    <option value="">All project types</option>
+                    <% @project_types.each do |project_type| %>
+                      <option value="<%= project_type['id'] %>"><%= project_type['name'] %></option>
+                    <% end %>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- DATE FILTERS -->
+            <div class="grid-filters">
+              <div class="grid-item">
+                <div class="c-pickadate">
+                  <label for="pickadate-start-input">Start date</label>
+                  <input type="text" name="start" id="pickadate-start-input" class="pickadate-input">
+                  <div id="pickadate-start-container" class="pickadate-container" autofocus></div>
+                </div>
+              </div>
+              <div class="grid-item">
+                <div class="c-pickadate">
+                  <label for="pickadate-end-input">End date</label>
+                  <input type="text" name="end" id="pickadate-end-input" class="pickadate-input">
+                  <div id="pickadate-end-container" class="pickadate-container" autofocus></div>
+                </div>
+              </div>                          
+            </div>
+
+            <div class="grid-buttons">
+              <button type="button" class="c-button js-btn-modal-close">Cancel</button>
+              <button type="submit" class="c-button -filled">Apply</button>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

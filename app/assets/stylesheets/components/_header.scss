@@ -140,7 +140,7 @@
     visibility: hidden;
     opacity: 0;
     will-change: opacity;
-    transition: opacity .3s ease-out;
+    transition: opacity .3s ease-out, visibility 0s linear .3s;
     background: $color-3;
     z-index: 2;
 
@@ -151,6 +151,7 @@
     &.-opened {
       visibility: visible;
       opacity: 1;
+      transition: opacity .3s ease-out, visibility 0s linear 0s;
 
       /* The hamburger icon transform into a close one */
       & + .wrapper .hamburger-menu span {

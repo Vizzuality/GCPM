@@ -6,7 +6,7 @@
 
   App.View.MobileHeader = Backbone.View.extend({
 
-    el: document.body,
+    el: '.c-header',
 
     events: {
       'click .js-hamburger-menu': 'toggleDrawer'

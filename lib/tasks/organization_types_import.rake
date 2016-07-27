@@ -11,6 +11,6 @@ namespace :organization_types do
     types.each do |t|
       OrganizationType.create!(name: t)
     end
-    puts "Organiztion types created"
+    puts "Organization types created"
   end
 end
