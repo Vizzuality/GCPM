@@ -172,6 +172,7 @@
               };
 
               layerInstance = new App.Helper.MarkerLayer(this.map, options);
+
               layerInstance.create(function(layer) {
                 layer.setOpacity(layerData.opacity);
                 layer.setZIndex(1000-layerData.order);

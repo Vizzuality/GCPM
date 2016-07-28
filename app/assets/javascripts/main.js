@@ -81,7 +81,7 @@
       });
 
       layersCollection.toggleLayers([
-        params.type || 'project-markers'
+        params.type || 'org-project-markers'
       ]);
 
       this.initGlobalViews();
