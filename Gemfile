@@ -9,7 +9,6 @@ gem 'puma'
 gem 'jbuilder', '~> 2.0'
 gem 'devise', git: 'http://github.com/plataformatec/devise', branch: 'master'
 gem 'dotenv-rails', '2.1.0'
-gem 'gon'
 gem 's3'
 gem 'activeadmin', git: 'http://github.com/activeadmin/activeadmin'
 gem 'active_admin_theme'
@@ -24,7 +23,6 @@ gem 'jquery-rails'
 gem 'sass-rails'
 gem 'autoprefixer-rails'
 gem 'pickadate-rails', '~> 3.5', '>= 3.5.6.0'
-gem 'bourbon'
 gem 'handlebars_assets'
 
 # Email service integration
@@ -48,7 +46,6 @@ end
 gem 'pg', '~> 0.18'
 
 group :development, :test do
-  gem 'teaspoon-mocha', git: 'http://github.com/modeset/teaspoon', branch: 'rails_5'
   gem 'hirb'
   gem 'awesome_print'
   gem 'faker'
@@ -80,7 +77,3 @@ end
 group :test do
 
 end
-
-# group :production do
-#   gem 'rails_12factor' # Required for Heroku
-# end
