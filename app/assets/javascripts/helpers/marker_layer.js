@@ -57,12 +57,24 @@
           })
         });
 
-        // Return a leaflet marker
-        return L.marker(marker.center, {
+        var markerIcon = L.marker(marker.center, {
           icon: icon
         }).on('mouseover', this._onMouseover.bind(this))
           .on('mouseout', this._onMouseout.bind(this))
           .on('click', this._onMouseclick.bind(this));
+
+        /* Need to set markers investigators */
+        if (marker.investigators) {
+          var peopleList = '<div class="people">';
+          marker.investigators.map(function(investigator) {
+            peopleList += '<p class="person">'+ investigator +'</p>';
+          });
+          peopleList += '</div>';
+          markerIcon.bindPopup(peopleList);
+        }
+
+        // Return a leaflet marker
+        return markerIcon;
 
       }.bind(this));
 

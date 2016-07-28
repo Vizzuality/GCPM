@@ -1,6 +1,14 @@
 <section class="country">
   <div class="c-section-intro -color-4">
-    <div id="map" class="map c-map"></div>
+    <div id="map" class="map c-map">
+      <div class="c-map-intro-legend">
+        <ul class="legend-list">
+          <li class="item"><div class="icon -first"></div><%= t 'project_leads' %></li>
+          <li class="item"><div class="icon -second"></div><%= t 'collaborators' %></li>
+        </ul>
+        <div class="viel"></div>
+      </div>
+    </div>
     <div class="intro-info">
       <div class="info">
         <h1 class="c-title -big"><%= @country.country_name %></h1>

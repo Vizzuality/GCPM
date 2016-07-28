@@ -7,6 +7,8 @@
 
     "country_name": "North America",
 
+    "investigators": ["Hyung L Kim", "Lynne Wagner", "Hyung L Kim", "Lynne Wagner", "Hyung L Kim", "Lynne Wagner", "Hyung L Kim"],
+
     "value": 7,
 
     "type": "collaborator"
@@ -21,6 +23,8 @@
 
     "value": 5,
 
+    "investigators": ["Hyung L Kim", "Lynne Wagner", "Hyung L Kim", "Lynne Wagner", "Hyung L Kim"],
+
     "type": "lead"
   },
   {
@@ -32,6 +36,8 @@
     "country_name": "Europe",
 
     "value": 3,
+
+    "investigators": ["Hyung L Kim", "Lynne Wagner", "Hyung L Kim"],
 
     "type": "lead"
   },
@@ -45,6 +51,8 @@
 
     "value": 9,
 
+    "investigators": ["Hyung L Kim", "Lynne Wagner", "Hyung L Kim", "Lynne Wagner", "Hyung L Kim", "Hyung L Kim", "Lynne Wagner", "Hyung L Kim", "Lynne Wagner"],
+
     "type": "lead"
   },
   {
@@ -56,6 +64,8 @@
     "country_name": "Asia",
 
     "value": 1,
+
+    "investigators": ["Lynne Wagner"],
 
     "type": "lead"
   }
