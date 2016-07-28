@@ -41,6 +41,7 @@
       });
       var mapMenuView = new App.View.MapMenu();
       var mapFiltersView = new App.View.MapFilters();
+      var mapLayersView = new App.View.MapLayers();
 
       // Sync layers
       layersCollection.toggleLayers([
