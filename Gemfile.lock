@@ -263,7 +263,7 @@ GEM
       rails-assets-underscore (>= 1.8.3)
     rails-assets-chosen (1.6.1)
       rails-assets-jquery (>= 1.4.4)
-    rails-assets-d3 (4.1.1)
+    rails-assets-d3 (3.5.17)
     rails-assets-fuse (2.3.0)
     rails-assets-jquery (3.1.0)
     rails-assets-leaflet (0.7.7)
@@ -409,7 +409,7 @@ DEPENDENCIES
   rails (>= 5.0.0.beta4, < 5.1)
   rails-assets-backbone!
   rails-assets-chosen!
-  rails-assets-d3!
+  rails-assets-d3 (~> 3.5.17)!
   rails-assets-fuse!
   rails-assets-leaflet!
   rails-assets-moment!
