@@ -3,7 +3,7 @@
     <div id="map" class="map c-map"></div>
     <div class="intro-info wrapper">
       <div class="info">
-        <h1 class="c-title -big"><%= @country && @country.name %></h1>
+        <h1 class="c-title -big"><%= @country.country_name %></h1>
         <div class="c-numbers-grid">
           <div class="number-info">
             <label class="title">Projects</label>
@@ -32,16 +32,15 @@
         </div>
       </div>
       <ul class="c-section-menu wrapper -color-0">
-        <li class="item"><%= link_to (t 'data'), '/', { :class => "-active"} %></li>
-        <li class="item"><%= link_to (t 'projects'), '/' %></li>
+        <li class="item"><%= link_to (t 'projects'), '/', { :class => "-active"} %></li>
         <li class="item"><%= link_to (t 'people'), '/' %></li>
         <li class="item"><%= link_to (t 'events'), '/' %></li>
-        <li class="item"><%= link_to (t 'posts'), '/' %></li>
       </ul>
     </div>
   </div>
 
-  <div class="country-data">
+  <!-- Data tab not showing at the moment  -->
+  <!-- <div class="country-data">
     <div class="c-legend-map-container">
       <div class="c-map"></div>
 
@@ -56,5 +55,5 @@
         </ul>
       </div>
     </div>
-  </div>
+  </div> -->
 </section>
