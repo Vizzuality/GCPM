@@ -28,6 +28,32 @@ To set up the database, run:
     bundle exec rake db:create
     bundle exec rake db:migrate
 
+
+### Using Docker (recommended)
+
+Very useful for **development**, it ensures everybody have the same environment. Also you can test production environment.
+You can install Docker from [here](https://www.docker.com).
+
+Building docker container:
+
+```bash
+docker-compose build
+```
+
+Runing container:
+
+```bash
+docker-compose up
+```
+
+Maybe, first time you will need run these tasks:
+
+```bash
+docker-compose run web rake db:create
+docker-compose run web rake db:migrate
+```
+
+
 ## Running
 
 To run application:
