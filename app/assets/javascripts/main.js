@@ -14,21 +14,25 @@
 
     initialize: function() {
       this.router = new App.Router();
-      // this._cartodbHack();
       this.listeners();
     },
 
     listeners: function() {
+      this.listenTo(this.router, 'route', this.initCommonViews);
       this.listenTo(this.router, 'route:map', this.mapPage);
       this.listenTo(this.router, 'route:countries', this.countriesPage);
       this.listenTo(this.router, 'route:country', this.countryPage);
     },
 
     start: function() {
-      Backbone.history.stop();
-      Backbone.history.start({ pushState: true });
+      this.router.start();
+    },
 
-      /* We initialize the mobile header */
+    update: function() {
+      console.log('update instances please');
+    },
+
+    initCommonViews: function() {
       new App.View.MobileHeader();
     },
 
@@ -48,8 +52,6 @@
       layersCollection.toggleLayers([
         params.type || 'project-markers'
       ]);
-
-      this.initGlobalViews();
     },
 
     countriesPage: function() {
@@ -68,8 +70,6 @@
       });
 
       regionsCollection.fetch();
-
-      this.initGlobalViews();
     },
 
     countryPage: function() {
@@ -84,22 +84,7 @@
       layersCollection.toggleLayers([
         params.type || 'org-project-markers'
       ]);
-
-      this.initGlobalViews();
-    },
-
-    initGlobalViews: function() {
-    },
-
-    /**
-     * Cartodb Handlebars hack.
-     */
-    _cartodbHack: function() {
-      cdb.core.Template.compilers = _.extend(cdb.core.Template.compilers, {
-        handlebars: typeof(Handlebars) === 'undefined' ? null : Handlebars.compile
-      });
-    },
-
+    }
 
   });
 

@@ -111,6 +111,10 @@
      */
     getParams: function() {
       return this._unserializeParams();
+    },
+
+    start: function() {
+      Backbone.history.start({ pushState: true });
     }
 
   });
