@@ -101,7 +101,7 @@
       if (this.basemap) {
         this.map.removeLayer(this.basemap);
       } else {
-        console.info('Basemap doesn\`t exist.');
+        console.info('Basemap doesn\'t exist.');
       }
     },
 

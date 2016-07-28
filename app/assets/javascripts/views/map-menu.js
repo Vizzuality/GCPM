@@ -36,7 +36,7 @@
       e && e.preventDefault();
       var action = $(e.currentTarget).data('action');
       Backbone.Events.trigger('MapMenu/action');
-      Backbone.Events.trigger(action);
+      Backbone.Events.trigger(action, e);
     }
 
 
