@@ -3,7 +3,7 @@
  *  Preferred markup (for accessibility matter):
  *
  *    <div class="c-section-intro">
- *      <div class="intro-info wrapper">
+ *      <div class="intro-info">
  *        <div class="info">
  *          { Content }
  *        </div>
@@ -40,13 +40,13 @@
     flex-flow: column;
     justify-content: space-between;
     padding-top: 60px;
-    padding-bottom: 70px;
+    padding-bottom: 40px;
     align-items: center;
 
     @media screen and (min-width: 700px) {
       flex-flow: row;
       padding-top: 60px;
-      padding-bottom: 130px;
+      padding-bottom: 55px;
     }
 
     .info {
