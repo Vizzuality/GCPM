@@ -9,9 +9,8 @@
 #  updated_at      :datetime         not null
 #
 
-FactoryGirl.define do
-  factory :research_unit do
-    investigator_id 1
-    address_id 1
-  end
+require 'rails_helper'
+
+RSpec.describe ResearchUnit, :type => :model do
+  pending "add some examples to (or delete) #{__FILE__}"
 end

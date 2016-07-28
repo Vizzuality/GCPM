@@ -2,14 +2,13 @@
 #
 # Table name: memberships
 #
-#  id              :integer          not null, primary key
-#  project_id      :integer
-#  organization_id :integer
-#  investigator_id :integer
-#  membership_type :integer
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  address_id      :integer
+#  id               :integer          not null, primary key
+#  project_id       :integer
+#  research_unit_id :integer
+#  membership_type  :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  address_id       :integer
 #
 
 require 'rails_helper'

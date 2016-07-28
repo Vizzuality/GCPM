@@ -5,7 +5,7 @@
  *
  *    <div class="c-buttons-group">
  *      <a href="{ path }" class="c-button -inverse -filled btn-follow">{ Content }</a>
- *      <div>
+ *      <div class="row-buttons">
  *        <a href="{ path }" class="c-button -inverse">{ Content }</a>
  *        <a href="{ path }" class="c-button -inverse">{ Content }</a>
  *        <a href="{ path }" class="c-button -inverse">{ Content }</a>
@@ -18,13 +18,55 @@
     display: flex;
     flex-flow: column;
     align-items: flex-end;
+    width: 100%;
+    padding: 0 $wrapper-mobile-padding;
 
-    .c-button {
-      margin-bottom: 10px;
+    @media #{$mq-mobile-large} {
+      width: calc(100% / 2);
+      padding: 0 $wrapper-tablet-padding;
     }
 
-    .-inverse.-filled.btn-follow {
+    @media #{$mq-tablet} {
+      width: calc(100% / 3);
+      padding: 0 $wrapper-padding;
+    }
+
+    .row-buttons {
+      display: flex;
+      flex-flow: column;
       width: 100%;
-      color: #5665bf;
+
+      @media screen and (min-width: 980px) {
+        flex-flow: row;
+      }
+    }
+
+    .c-button {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px 30px;
+
+      @media #{$mq-tablet} {
+        padding: 10px 10px;
+      }
+
+      @media screen and (min-width: 980px) {
+        width: calc(100% / 3);
+        margin-left: 5px;
+
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+    }
+
+    .-inverse.-filled.btn-large {
+      width: 100%;
+      color: $color-4;
+
+      @media #{$mq-tablet} {
+        width: 100%;
+        max-width: none;
+      }
     }
   }

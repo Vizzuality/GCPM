@@ -18,8 +18,10 @@
 //= require underscore/underscore
 //= require backbone/backbone
 //= require d3
+//= require fuse
 //= require chosen
-//= require pickadate
+//= require pickadate/picker
+//= require pickadate/picker.date
 //= require_self
 
 //= require_tree ./templates

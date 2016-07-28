@@ -1,60 +1,8 @@
-<section class="country">
-  <div class="c-section-intro -color-4">
-    <div id="map" class="map c-map"></div>
-    <div class="intro-info wrapper">
-      <div class="info">
-        <h1 class="c-title -big">Egypt</h1>
-        <div class="c-numbers-grid">
-          <div class="number-info">
-            <label class="title">Projects</label>
-            <p class="number">18</p>
-          </div>
-          <div class="number-info">
-            <label class="title">Organizations</label>
-            <p class="number">12</p>
-          </div>
-          <div class="number-info">
-            <label class="title">Events</label>
-            <p class="number">12</p>
-          </div>
-          <div class="number-info">
-            <label class="title">Daly datasets</label>
-            <p class="number">5</p>
-          </div>
-        </div>
-      </div>
-      <div class="c-buttons-group">
-        <a href="/" class="c-button -inverse -filled btn-follow">Follow</a>
-        <div>
-          <a href="/" class="c-button -inverse">+ Project</a>
-          <a href="/" class="c-button -inverse">+ Post</a>
-          <a href="/" class="c-button -inverse">+ Event</a>
-        </div>
-      </div>
-      <ul class="c-section-menu wrapper -color-0">
-        <li class="item"><%= link_to (t 'data'), '/', { :class => "-active"} %></li>
-        <li class="item"><%= link_to (t 'projects'), '/' %></li>
-        <li class="item"><%= link_to (t 'people'), '/' %></li>
-        <li class="item"><%= link_to (t 'events'), '/' %></li>
-        <li class="item"><%= link_to (t 'posts'), '/' %></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="country-data">
-    <div class="c-legend-map-container">
-      <div class="c-map"></div>
-
-      <div class="c-map-legend">
-        <h3 class="c-title -normal">Radiothearpy coverage and untreated deaths in pain</h3>
-        <ul class="legend">
-          <li class="item"><div class="legend-icon -color-1"></div>To be defined</li>
-          <li class="item"><div class="legend-icon -color-2"></div>To be defined</li>
-          <li class="item"><div class="legend-icon -color-3"></div>To be defined</li>
-          <li class="item"><div class="legend-icon -color-4"></div>To be defined</li>
-          <li class="item"><div class="legend-icon -color-5"></div>To be defined</li>
-        </ul>
-      </div>
-    </div>
+<section class="c-section-index country-index">
+  <div class="search-container wrapper">
+    <input class="c-title -bigger js-search-list" id="search-input" placeholder="<%= t 'search_placeholder' %>" /><br/>
+    <a href="#search-list" class="c-button -filled -color-3"><%= t 'search' %></a>
+    <div id="search-list"></div>
   </div>
 </section>
+

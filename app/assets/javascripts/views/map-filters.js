@@ -8,6 +8,43 @@
 
     el: '#map-filters',
 
+    pickadateOptions: {
+      today: false,
+      clear: false,
+      close: false,
+      closeOnClear: false,
+      closeOnSelect: false,
+      selectYears: true,        
+      selectMonths: true,        
+      editable: false,
+      format: 'yyyy-mm-dd',
+      klass: {
+        picker: 'picker-custom',
+        holder: 'picker-holder-custom',
+      },
+      onStart: function() {
+        this.$root.find( 'button, select' ).attr( 'disabled', false );
+      },
+      onRender: function() {
+        this.$root.find( 'button, select' ).attr( 'disabled', false );
+      },
+      onOpen: function() {
+        this.$root.find( 'button, select' ).attr( 'disabled', false );
+      },
+      onClose: function() {
+        this.$root.find( 'button, select' ).attr( 'disabled', false );
+      },
+      onStop: function() {
+        this.$root.find( 'button, select' ).attr( 'disabled', false );
+      },
+      onSet: function(context) {
+        this.$root.find( 'button, select' ).attr( 'disabled', false );
+      }
+    },
+
+
+
+
     initialize: function() {
       // Initialize Parent
       this.constructor.__super__.initialize.apply(this);
@@ -38,7 +75,13 @@
     },
 
     renderPickADate: function() {
-      // this.$el.find('.pickadate-input').pickadate();      
+      var $start = this.$el.find('#pickadate-start-input').pickadate(_.extend({}, this.pickadateOptions, {
+        container: '#pickadate-start-container'
+      }));
+
+      var $end = this.$el.find('#pickadate-end-input').pickadate(_.extend({}, this.pickadateOptions, {
+        container: '#pickadate-end-container'
+      }));
     }
 
   });

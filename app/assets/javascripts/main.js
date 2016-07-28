@@ -53,8 +53,23 @@
     countryPage: function() {
       var params = this.router.getParams();
 
-      var layersCollection = new App.Collection.Layers();
+      var regionsCollection = new App.Collection.Regions();
 
+      var regionsView = new App.View.SearchList({
+        searchList: regionsCollection,
+        options: {
+          isTwoLevels: true,
+          template: HandlebarsTemplates['countries-list'],
+          innerSearchListName: 'countries',
+          itemSearchedCategory: 'country_name'
+        }
+      });
+
+      regionsCollection.fetch();
+
+
+      // Map view
+      var layersCollection = new App.Collection.Layers();
       var mapView = new App.View.Map({
         layers: layersCollection,
       });
