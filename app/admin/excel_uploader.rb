@@ -14,9 +14,10 @@ ActiveAdmin.register_page "Excel Upload" do
       importer = ExcelImporter.new(params[:qqfile].tempfile.path)
 
       if importer.import!
-
+        puts importer.errors.to_json
         render json: {
-          success: true
+          success: true,
+          errors: importer.errors.to_json
         }
 
       else

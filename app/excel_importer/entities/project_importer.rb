@@ -40,9 +40,6 @@ class ProjectImporter
     return if project_types.blank?
     pt = project_types.split('|').map{|e| e.strip.downcase}
     master_pt = ProjectType.all.pluck(:name).map{|e| e.downcase}
-    puts pt
-    puts master_pt
-    puts pt - master_pt
     wrong_types = pt - master_pt
     if wrong_types != []
       @errors << "Unknow project type(s) #{wrong_types}"

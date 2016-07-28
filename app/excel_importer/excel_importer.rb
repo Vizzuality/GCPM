@@ -39,6 +39,7 @@ class ExcelImporter
       begin
         project_data = DataExtractor.new(row)
         project_data.extract
+        @errors << project_data.errors if project_data.errors
         Rails.logger.debug 'Project imported'
       rescue Exception => e
         Rails.logger.debug e
