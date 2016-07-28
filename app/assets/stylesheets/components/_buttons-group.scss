@@ -17,7 +17,7 @@
 .c-buttons-group {
     display: flex;
     flex-flow: column;
-    align-items: flex-end;
+    align-items: space-between;
     width: 100%;
     padding: 0 $wrapper-mobile-padding;
 
@@ -60,13 +60,9 @@
       }
     }
 
-    .-inverse.-filled.btn-large {
+    .btn-large {
       width: 100%;
-      color: $color-4;
 
-      @media #{$mq-tablet} {
-        width: 100%;
-        max-width: none;
-      }
+      &.-inverse { color: $color-4; }
     }
   }
