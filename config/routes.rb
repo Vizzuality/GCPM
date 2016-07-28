@@ -21,6 +21,10 @@ Rails.application.routes.draw do
   get 'network/projects/edit/:project_id', to: 'network_projects#edit', as: 'edit_user_project'
   get 'network/projects/update/:project_id', to: 'network_projects#update', as: 'update_user_project'
   get 'network/projects/delete/:project_id', to: 'network_projects#delete', as: 'delete_user_project'
+
+  # Admin
+  #get 'admin/excel-uploader', to: 'admin/excel_uploader#new', as: :admin_excel_uploader
+
   namespace :api, defaults: { format: 'json' } do
     scope module: :v1 do
       resources :regions, only: [:index, :show]

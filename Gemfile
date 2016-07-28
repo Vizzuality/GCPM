@@ -15,6 +15,7 @@ gem 'activeadmin', git: 'http://github.com/activeadmin/activeadmin'
 gem 'active_admin_theme'
 gem 'turbolinks', '~> 5.0.0'
 gem 'active_model_serializers', '~> 0.10.0'
+gem 'roo'
 
 # Assets pipeline
 gem 'uglifier', '>= 1.3.0'

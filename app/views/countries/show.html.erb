@@ -3,7 +3,7 @@
     <div id="map" class="map c-map"></div>
     <div class="intro-info">
       <div class="info">
-        <h1 class="c-title -big"><%= @country && @country.country_name %></h1>
+        <h1 class="c-title -big"><%= @country.country_name %></h1>
         <div class="c-numbers-grid">
           <div class="number-info">
             <label class="title">Projects</label>
@@ -32,13 +32,14 @@
         </div>
       </div>
       <ul class="c-section-menu wrapper -color-0">
-        <li class="item"><%= link_to (t 'projects'), '/', { :class => "-active"} %></li>
-        <li class="item"><%= link_to (t 'people'), '/' %></li>
-        <li class="item"><%= link_to (t 'events'), '/' %></li>
+        <li><%= link_to (t 'projects'), country_path(request.query_parameters.merge({ type: 'org-project-markers' })), :class => !params['type'] ? '-active' : active_param?('type','org-project-markers') %></li>
+        <li><%= link_to (t 'people'), country_path(request.query_parameters.merge({ type: 'org-people-markers' })), :class => active_param?('type','org-people-markers') %></li>
+        <li><%= link_to (t 'events'), country_path(request.query_parameters.merge({ type: 'org-event-markers' })), :class => active_param?('type','org-event-markers') %></li>
       </ul>
     </div>
   </div>
 
+  <!-- Data tab not showing at the moment  -->
   <!-- <div class="country-data">
     <div class="c-legend-map-container">
       <div class="c-map"></div>

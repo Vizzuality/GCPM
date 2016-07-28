@@ -22,7 +22,7 @@ module Gcpm
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     config.assets.enabled = true
-    config.assets.paths << "#{Rails.root}/app/assets/fonts"  
-
+    config.assets.paths << "#{Rails.root}/app/assets/fonts"
+    config.autoload_paths += %W(#{Rails.root}/app/excel_importer)
   end
 end
