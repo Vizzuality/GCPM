@@ -11,6 +11,7 @@
  *
  *  The different modifiers are:
  *    - "-huge":    usually a special title
+ *    - "-bigger":  usually the title of the page
  *    - "-big":     usually the title of the page
  *    - "-medium":  usually the title of a section
  *    - "-normal":  usually the title of an article (DEFAULT style)
@@ -27,6 +28,12 @@
     font-size: $font-size-x-huge;
     letter-spacing: -2px;
     line-height: 63px;
+  }
+
+  &.-bigger {
+    font-size: $font-size-huge;
+    letter-spacing: -1px;
+    line-height: 60px;
   }
 
   &.-big {

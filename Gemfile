@@ -39,6 +39,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-d3'
   gem 'rails-assets-moment'
   gem 'rails-assets-leaflet'
+  gem 'rails-assets-fuse'
   gem 'rails-assets-chosen'
 end
 
