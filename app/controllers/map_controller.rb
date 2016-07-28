@@ -9,5 +9,9 @@ class MapController < ApplicationController
     @organization_types = OrganizationType.all
     @cancer_types = CancerType.all
     @project_types = ProjectType.all
+    respond_to do |format|
+        format.html
+        format.js
+    end
   end
 end
