@@ -12,8 +12,9 @@
 #
 
 class Investigator < ApplicationRecord
-  has_and_belongs_to_many :addresses
+  has_many :research_units
+  has_many :addresses, through: :research_units
   has_many :organizations, through: :addresses
+  has_many :memberships, through: :research_units
   has_many :projects, through: :memberships
-  has_many :organizations, through: :memberships
 end
