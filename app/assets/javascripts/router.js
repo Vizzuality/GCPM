@@ -8,6 +8,7 @@
       // map
       'map': 'map',
       'countries': 'countries',
+      'countries/:iso': 'country'
     },
 
     params: new (Backbone.Model.extend()),

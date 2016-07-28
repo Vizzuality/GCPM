@@ -20,7 +20,8 @@
 
     listeners: function() {
       this.listenTo(this.router, 'route:map', this.mapPage);
-      this.listenTo(this.router, 'route:countries', this.countryPage);
+      this.listenTo(this.router, 'route:countries', this.countriesPage);
+      this.listenTo(this.router, 'route:country', this.countryPage);
     },
 
     start: function() {
@@ -51,11 +52,11 @@
       this.initGlobalViews();
     },
 
-    countryPage: function() {
+    countriesPage: function() {
       var params = this.router.getParams();
 
+      /* Countries index search view */
       var regionsCollection = new App.Collection.Regions();
-
       var regionsView = new App.View.SearchList({
         searchList: regionsCollection,
         options: {
@@ -68,6 +69,11 @@
 
       regionsCollection.fetch();
 
+      this.initGlobalViews();
+    },
+
+    countryPage: function() {
+      var params = this.router.getParams();
 
       // Map view
       var layersCollection = new App.Collection.Layers();
@@ -76,7 +82,7 @@
       });
 
       layersCollection.toggleLayers([
-        params.type || 'project-markers'
+        params.type || 'org-project-markers'
       ]);
 
       this.initGlobalViews();

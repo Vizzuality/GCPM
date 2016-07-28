@@ -1,0 +1,62 @@
+[
+  {
+    "center": {
+      "lat": 37,
+      "lng": -95
+    },
+
+    "country_name": "North America",
+
+    "value": 70,
+
+    "type": "collaborator"
+  },
+  {
+    "center": {
+      "lat": -5,
+      "lng": -50
+    },
+
+    "country_name": "South America",
+
+    "value": 53,
+
+    "type": "lead"
+  },
+  {
+    "center": {
+      "lat": 10,
+      "lng": 20
+    },
+
+    "country_name": "Europe",
+
+    "value": 33,
+
+    "type": "lead"
+  },
+  {
+    "center": {
+      "lat": 50,
+      "lng": 10
+    },
+
+    "country_name": "Africa",
+
+    "value": 46,
+
+    "type": "lead"
+  },
+  {
+    "center": {
+      "lat": 40,
+      "lng": 80
+    },
+
+    "country_name": "Asia",
+
+    "value": 8,
+
+    "type": "lead"
+  }
+]
