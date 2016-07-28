@@ -17,7 +17,8 @@ class Organization < ApplicationRecord
   has_many :addresses
   accepts_nested_attributes_for :addresses, allow_destroy: true
   belongs_to :organization_type
-  has_many :memberships
-  has_many :investigators, through: :memberships
+  has_many :research_units, through: :addresses
+  has_many :investigators, through: :research_units, foreign_key: 'investigator_id'
+  has_many :memberships, through: :research_units
   has_many :projects, through: :memberships
 end
