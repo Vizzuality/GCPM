@@ -17,12 +17,14 @@
 default: &default
   adapter: postgresql
   encoding: unicode
+  username:  <%= ENV.fetch('GCPM_DATABASE_USER') { postgres } %>
+  password: <%= ENV.fetch('GCPM_DATABASE_PASSWORD') { postgres } %>
+  host: <%= ENV.fetch('GCPM_DATABASE_HOST') { localhost } %>
   pool: 5
 
 development:
   <<: *default
   database: gcpm_development
-  user: postgres
 
 test:
   <<: *default
@@ -30,14 +32,8 @@ test:
 
 staging:
   <<: *default
-  database: gcpm_staging
-  username: <%= ENV['GCPM_DATABASE_USER'] %>
-  password: <%= ENV['GCPM_DATABASE_PASSWORD'] %>
-  host: localhost
+  url: <%= ENV['GCPM_DATABASE_URL'] %>
 
 production:
   <<: *default
-  database: gcpm_production
-  username: <%= ENV['GCPM_DATABASE_USER'] %>
-  password: <%= ENV['GCPM_DATABASE_PASSWORD'] %>
-  host: localhost
+  url: <%= ENV['GCPM_DATABASE_URL'] %>
