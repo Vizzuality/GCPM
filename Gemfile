@@ -36,9 +36,10 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-normalize-css'
   gem 'rails-assets-underscore'
   gem 'rails-assets-backbone'
-  gem 'rails-assets-d3'
+  gem 'rails-assets-d3', '~> 3.5.17'
   gem 'rails-assets-moment'
   gem 'rails-assets-leaflet'
+  gem 'rails-assets-fuse'
   gem 'rails-assets-chosen'
 end
 
