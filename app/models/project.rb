@@ -21,6 +21,8 @@ class Project < ApplicationRecord
   has_many :secondary_investigators,-> {where(memberships: {membership_type: 1})}, through: :memberships
   has_many :secondary_organizations,-> {where(memberships: {membership_type: 1})}, through: :memberships
   has_many :funding_sources,-> {where(memberships: {membership_type: :funding})}, through: :memberships, source: :organization
+  has_and_belongs_to_many :project_types
+  has_and_belongs_to_many :cancer_types
   scope :active, -> {where('projects.end_date >= ? AND projects.start_date <= ?', Time.now, Time.now).or(where('projects.end_date IS NULL'))}
   scope :inactive, -> {where('projects.end_date < ?', Time.now).or('projects.start_date > ?', Time.now)}
   def project_lead
