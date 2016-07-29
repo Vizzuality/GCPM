@@ -1,15 +1,5 @@
 <div class="c-header">
 
-  <div class="desktop-secondary-menu">
-    <div class="wrapper">
-      <ul>
-        <li><a disabled><%= t 'submit_project' %></a></li>
-        <li><a disabled><%= t 'language' %></a></li>
-        <li><a disabled><%= t 'search' %></a></li>
-      </ul>
-    </div>
-  </div>
-
   <div class="wrapper">
     <div class="desktop-menu">
       <div class="logo">
@@ -22,8 +12,22 @@
         <li class="<%= active_page?(countries_path) ? '-active' : '' %>"><%= link_to (t 'countries'), countries_path %></a></li>
         <li class="<%= active_page?(cancers_path) ? '-active' : '' %>"><%= link_to (t 'cancer_types'), cancers_path %></a></li>
         <li class="<%= active_page?(about_path) ? '-active' : '' %>"><%= link_to (t 'about'), about_path %></a></li>
-        <li><a disabled><%= t 'login' %></a></li>
-        <li><a disabled><%= t 'sign_up' %></a></li>
+        <li><img src="" class="btn-search"></li>
+        <% if user_signed_in? %>
+          <li class="user-avatar">
+            <div class="c-user-profile-picture">
+              <div class="initials">LA</div>
+              <img src="{Path}" alt="{User name}'s profile picture'" />
+              <!-- Notifications to set (set element on mobile too) -->
+              <% if true %>
+                <div class="c-badge">7</div>
+              <% end %>
+            </div>
+          </li>
+        <% else %>
+          <li class="<%= active_page?(user_session_path) ? '-active' : '' %>"><%= link_to (t 'login'), user_session_path %></a></li>
+        <% end %>
+
       </ul>
     </div>
   </div>
@@ -34,8 +38,22 @@
       <li class="<%= active_page?(countries_path) ? '-active' : '' %>"><%= link_to (t 'countries'), countries_path %></a></li>
       <li class="<%= active_page?(cancers_path) ? '-active' : '' %>"><%= link_to (t 'cancer_types'), cancers_path %></a></li>
       <li class="<%= active_page?(about_path) ? '-active' : '' %>"><%= link_to (t 'about'), about_path %></a></li>
-      <li><a disabled><%= t 'login' %></a></li>
-      <li><a disabled><%= t 'sign_up' %></a></li>
+      <li class="<%= active_page?(new_user_session_path) ? '-active' : '' %>"><%= link_to (t 'login'), new_user_session_path %></a></li>
+      <li><img src="" class="btn-search"></li>
+      <% if user_signed_in? %>
+        <li class="user-avatar">
+          <div class="c-user-profile-picture">
+            <div class="initials">LA</div>
+            <img src="{Path}" alt="{User name}'s profile picture'" />
+            <!-- Notifications to set -->
+            <% if true %>
+              <div class="c-badge">7</div>
+            <% end %>
+          </div>
+        </li>
+      <% else %>
+        <li class="<%= active_page?(user_session_path) ? '-active' : '' %>"><%= link_to (t 'login'), user_session_path %></a></li>
+      <% end %>
     </ul>
   </div>
 
