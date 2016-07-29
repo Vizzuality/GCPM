@@ -17,9 +17,9 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username:  <%= ENV.fetch('GCPM_DATABASE_USER') { postgres } %>
-  password: <%= ENV.fetch('GCPM_DATABASE_PASSWORD') { postgres } %>
-  host: <%= ENV.fetch('GCPM_DATABASE_HOST') { localhost } %>
+  username:  <%= ENV.fetch('GCPM_DATABASE_USER') { 'postgres' } %>
+  password: <%= ENV.fetch('GCPM_DATABASE_PASSWORD') { 'postgres' } %>
+  host: <%= ENV.fetch('GCPM_DATABASE_HOST') { 'localhost' } %>
   pool: 5
 
 development:

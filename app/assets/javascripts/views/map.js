@@ -55,6 +55,7 @@
     createMap: function() {
       if (!this.map) {
         this.map = L.map(this.el.id, this.options.map);
+        this.$el.data('leaflet', this.map);
         this.setBasemap();
       } else {
         console.info('Map already exists.');

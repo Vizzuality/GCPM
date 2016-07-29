@@ -38,6 +38,7 @@
   'use strict';
 
   this.App = {
+    Events: _.extend(Backbone.Events),
     View: {},
     Model: {},
     Collection: {},

@@ -1,9 +1,15 @@
 <div class="c-section-intro">
-	<div id="map" class="map c-map"></div>
+	<div id="map" class="map c-map" data-turbolinks-permanent></div>
 	<ul class="c-section-menu">
-	  <li><%= link_to (t 'projects'), map_path(request.query_parameters.merge({ type: 'project-markers' })), :class => active_param?('type','project-markers') %></li>
-	  <li><%= link_to (t 'people'), map_path(request.query_parameters.merge({ type: 'people-markers' })), :class => active_param?('type','people-markers') %></li>
-	  <li><%= link_to (t 'events'), map_path(request.query_parameters.merge({ type: 'event-markers' })), :class => active_param?('type','event-markers') %></li>
+	   <% @filters.each do |filter| %>
+      <li>
+        <%= link_to (t filter),
+          map_path(request.query_parameters.merge({ type: filter })),
+          class: active_param?('type', filter),
+          remote: true,
+          data: {magic: true} %>
+      </li>
+    <% end %>
 	</ul>
 </div>
 
@@ -17,12 +23,10 @@
 <!-- c-map-filters -->
 <%= render partial: "map-filters" %>
 
-
 <!-- c-grid-proyects -->
-<div class="c-card-grid">
-  <div id="mapProjectContent">
-    <%= render(:partial => 'map-projects') %>
-    <%= link_to 'Load project', :controller => 'map', :action => 'index', :format => 'js', remote: true %>
-
-  </div>
+<div class="c-card-grid" id="content">
+  <%= render(:partial => @current_type) %>
 </div>
+
+<%= link_to 'Load project', controller: 'map', action: 'index',
+    format: 'js', remote: true %>
