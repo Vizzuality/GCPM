@@ -333,6 +333,9 @@ GEM
     sendgrid-ruby (4.0.2)
       ruby_http_client (~> 3.0.0)
     sexp_processor (4.7.0)
+    simple_form (3.2.1)
+      actionpack (> 4, < 5.1)
+      activemodel (> 4, < 5.1)
     spring (1.7.2)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
@@ -420,6 +423,7 @@ DEPENDENCIES
   s3
   sass-rails
   sendgrid-ruby
+  simple_form
   spring-commands-rspec
   to_factory
   turbolinks (~> 5.0.0)
