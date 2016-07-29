@@ -11,13 +11,9 @@ Rails.application.routes.draw do
   get '/about',          to: 'about#index',        as: 'about'
 
   # User profile projects
-  get    'network/:user_id/projects',             to: 'network_projects#index',  as: 'user_projects'
-  get    'network/:user_id/projects/:project_id', to: 'network_projects#show',   as: 'user_project'
-  get    'network/projects/new',                  to: 'network_projects#new',    as: 'new_user_project'
-  post   'network/projects/create',               to: 'network_projects#create', as: 'create_user_project'
-  get    'network/projects/edit/:project_id',     to: 'network_projects#edit',   as: 'edit_user_project'
-  put    'network/projects/update/:project_id',   to: 'network_projects#update', as: 'update_user_project'
-  delete 'network/projects/delete/:project_id',   to: 'network_projects#delete', as: 'delete_user_project'
+  resources :users, only: :show, path: :network do
+    resources :projects, controller: 'network_projects', except: :index
+  end
 
   # Admin
   #get 'admin/excel-uploader', to: 'admin/excel_uploader#new', as: :admin_excel_uploader
