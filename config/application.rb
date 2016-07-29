@@ -24,5 +24,15 @@ module Gcpm
     config.assets.enabled = true
     config.assets.paths << "#{Rails.root}/app/assets/fonts"
     config.autoload_paths += %W(#{Rails.root}/app/excel_importer)
+
+    config.generators do |g|
+      g.test_framework  :rspec
+      g.view_specs      false
+      g.helper_specs    false
+      g.factory_girl    false
+      g.stylesheets     false
+      g.javascripts     false
+      g.helper          false
+    end
   end
 end

@@ -1,6 +1,6 @@
 ActiveAdmin.register_page "Excel Upload" do
   controller do
-    skip_before_filter :verify_authenticity_token
+    skip_before_action :verify_authenticity_token
     after_action :reset_keys, only: :create
     def index
       render 'admin/excel_upload/new', :layout => 'active_admin'

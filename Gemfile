@@ -65,6 +65,7 @@ group :development do
   gem 'quiet_assets'
   gem 'listen'
   gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+  gem 'rubocop', require: false
   # Deploy
   gem 'capistrano', '3.5'
   gem 'capistrano-env-config'

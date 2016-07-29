@@ -2,13 +2,11 @@
 
 TODO: Write a project description
 
-
-
 ##  Requirements:
 
 * Ruby 2.3.0 [How to install](https://gorails.com/setup/osx/10.10-yosemite)
 * PostgreSQL 9+ [How to install](http://exponential.io/blog/2015/02/21/install-postgresql-on-mac-os-x-via-brew/)
-* Cron or similar tool is required for periodically sending notification emails 
+* Cron or similar tool is required for periodically sending notification emails
 
 ## Installation
 
@@ -59,14 +57,14 @@ docker-compose run web rake db:migrate
 To run application:
 
     bundle exec rails server
-    
-    
+
+
 To send periodic notification emails to users, run the following `rake` task using `cron` or a similar tool:
 
     rake notifications:send
-    
-    
-# Development 
+
+
+# Development
 
 
 ## CartoDB integration
