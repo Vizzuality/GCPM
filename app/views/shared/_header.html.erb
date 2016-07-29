@@ -3,7 +3,7 @@
   <div class="desktop-secondary-menu">
     <div class="wrapper">
       <ul>
-        <li><a disabled><%= t 'submit_project' %></a></li>
+        <li><%= link_to t('submit_project'), new_user_project_path(user_id: current_user.id) %></li>
         <li><a disabled><%= t 'language' %></a></li>
         <li><a disabled><%= t 'search' %></a></li>
       </ul>
