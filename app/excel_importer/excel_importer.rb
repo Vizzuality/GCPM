@@ -36,14 +36,20 @@ class ExcelImporter
     end
 
     parsed_excel.each do |row|
-      begin
-        project_data = DataExtractor.new(row)
-        project_data.extract
-        @errors << { errors: project_data.errors } if project_data.errors
-        Rails.logger.debug 'Project imported'
-      rescue => e
-        Rails.logger.debug e
-        Rails.logger.debug e.backtrace.join("\n")
+      unless row.blank?
+        row.each{ |k,v| v.strip! if v.is_a?(String) && !(v.equal? v) }
+        begin
+          project_data = DataExtractor.new(row)
+          project_data.extract_project
+          project_data.extract_project_lead
+          project_data.extract_collaborators
+          project_data.extract_funding_sources
+          @errors << { errors: project_data.errors } if project_data.errors
+          Rails.logger.debug 'Project imported'
+        rescue => e
+          Rails.logger.debug e
+          Rails.logger.debug e.backtrace.join("\n")
+        end
       end
     end
   end

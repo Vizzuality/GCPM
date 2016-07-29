@@ -10,7 +10,6 @@ class ProjectImporter
   attr_reader :errors, :data, :project, :project_id
 
   def import!
-    return if data.map{|k,v| v }.compact.blank?
     project = Project.find_or_initialize_by(id: project_id)
     project.title = data['project_title']
     project.project_website = data['project_website']

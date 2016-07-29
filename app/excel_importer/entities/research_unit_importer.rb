@@ -14,7 +14,7 @@ class ResearchUnitImporter
     entity_name = is_project_lead ? "investigator" : "collaborator"
 
     investigator = Investigator.find_or_initialize_by(name: data["#{entity_name}_name"])
-    investigator.email = data["#{entity_name}_email"]
+    investigator.email = data["#{entity_name}_email_address"]
     investigator.website = data["#{entity_name}_website"]
 
     organization = Organization.find_or_initialize_by(name: data["#{entity_name}_organization_name"])

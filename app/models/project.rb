@@ -17,18 +17,21 @@ class Project < ApplicationRecord
   enum status: [:under_revision, :published, :unpublished]
 
   has_many :memberships
-  has_many :research_units, through: :memberships
-  has_many :organizations,  through: :memberships
+  has_many :research_units,  through: :memberships
+  has_many :organizations,   through: :memberships
 
-  has_many :investigators, through: :research_units, source: :investigator
-  has_many :addresses,     through: :research_units, source: :address
+  has_many :investigators,   through: :research_units, source: :investigator
+  has_many :addresses,       through: :research_units, source: :address
+  has_many :funders
+  has_many :funding_sources, through: :funders,        source: :organization
 
   has_many :project_leads,           -> { where(memberships: { membership_type: 0 })        }, through: :research_units, source: :investigator
   has_many :secondary_investigators, -> { where(memberships: { membership_type: 1 })        }, through: :research_units, source: :investigator
-  has_many :funding_sources,         -> { where(memberships: { membership_type: :funding }) }, through: :memberships,    source: :organization
 
   has_and_belongs_to_many :project_types
   has_and_belongs_to_many :cancer_types
+
+  validates_presence_of :title, :summary
 
   scope :active,   -> { where('projects.end_date >= ? AND projects.start_date <= ?', Time.now, Time.now).or(where('projects.end_date IS NULL')) }
   scope :inactive, -> { where('projects.end_date < ?', Time.now).or('projects.start_date > ?', Time.now)                                        }
