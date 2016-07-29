@@ -22,8 +22,8 @@
         <li class="<%= active_page?(countries_path) ? '-active' : '' %>"><%= link_to (t 'countries'), countries_path %></a></li>
         <li class="<%= active_page?(cancers_path) ? '-active' : '' %>"><%= link_to (t 'cancer_types'), cancers_path %></a></li>
         <li class="<%= active_page?(about_path) ? '-active' : '' %>"><%= link_to (t 'about'), about_path %></a></li>
-        <li><a disabled><%= t 'login' %></a></li>
-        <li><a disabled><%= t 'sign_up' %></a></li>
+        <li><%= link_to t('login'), new_user_session_path %></li>
+        <li><%= link_to t('sign_up'), new_user_registration_path %></li>
       </ul>
     </div>
   </div>
@@ -34,8 +34,8 @@
       <li class="<%= active_page?(countries_path) ? '-active' : '' %>"><%= link_to (t 'countries'), countries_path %></a></li>
       <li class="<%= active_page?(cancers_path) ? '-active' : '' %>"><%= link_to (t 'cancer_types'), cancers_path %></a></li>
       <li class="<%= active_page?(about_path) ? '-active' : '' %>"><%= link_to (t 'about'), about_path %></a></li>
-      <li><a disabled><%= t 'login' %></a></li>
-      <li><a disabled><%= t 'sign_up' %></a></li>
+      <li><%= link_to t('login'), new_user_session_path %></li>
+      <li><%= link_to t('sign_up'), new_user_registration_path %></li>
     </ul>
   </div>
 
