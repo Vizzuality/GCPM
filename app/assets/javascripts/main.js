@@ -55,6 +55,7 @@
 
     initCommonViews: function() {
       new App.View.MobileHeader();
+      new App.View.UserDropdownMenu();
     },
 
     replaceContent: function(data) {

@@ -103,9 +103,9 @@ ActiveRecord::Schema.define(version: 20160726232049) do
   create_table "memberships", force: :cascade do |t|
     t.integer  "project_id"
     t.integer  "research_unit_id"
-    t.integer  "membership_type"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.integer  "membership_type",  default: 1
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.integer  "address_id"
     t.index ["address_id"], name: "index_memberships_on_address_id", using: :btree
     t.index ["membership_type"], name: "index_memberships_on_membership_type", using: :btree
