@@ -14,3 +14,6 @@ if ProjectType.all.size == 0
     ProjectType.create(name: p)
   end
 end
+OrganizationType.create(name: 'public') unless OrganizationType.find_by(name: 'public')
+OrganizationType.create(name: 'non-profit') unless OrganizationType.find_by(name: 'non-profit')
+OrganizationType.create(name: 'for-profit') unless OrganizationType.find_by(name: 'for-profit')

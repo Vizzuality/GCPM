@@ -15,4 +15,5 @@ class ResearchUnit < ApplicationRecord
   has_many :memberships
   has_many :projects, through: :memberships
   has_one :organization, through: :address
+  validates_presence_of :address_id, :investigator_id
 end

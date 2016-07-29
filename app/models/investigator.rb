@@ -17,4 +17,5 @@ class Investigator < ApplicationRecord
   has_many :organizations, through: :addresses
   has_many :memberships, through: :research_units
   has_many :projects, through: :memberships
+  validates_presence_of :name
 end

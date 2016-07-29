@@ -19,18 +19,14 @@ class ProjectImporter
     project.end_date = data['project_end_date']
     project_types = self.validate_project_types(data['project_types'])
     cancer_types = self.validate_cancer_types(data['project_cancer_types'])
-    # project.import_project_types_from_excel(row)
-    # project.import_diseases_from_excel(row)
-    # project.import_funding_source_from_excel(row)
-    # project.import_investigator_from_excel(row)
-    # project.import_organization_from_excel(row)
-    # project.import_location_from_excel(row)
     if project.valid? && @errors == []
       project.project_types = project_types
       project.cancer_types = cancer_types
       project.status = 1
       project.save!
+      return true
     else
+      @errors << { project: project.errors.full_messages }
       Rails.logger.info @errors
       return false
     end
