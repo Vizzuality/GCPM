@@ -5,7 +5,7 @@ module ApplicationHelper
 
   def active_param?(name,value)
     params = request.query_parameters
-    (params[name] == value) ? '-active' : ''
+    params[name] == value ? '-active' : ''
   end
 
 end
