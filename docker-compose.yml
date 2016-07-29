@@ -1,0 +1,13 @@
+version: '2'
+services:
+  db:
+    image: postgres
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - './:/usr/src/gcpm'
+    env_file: .env
+    depends_on:
+      - db

@@ -2,10 +2,18 @@
 
   'use strict';
 
-  document.addEventListener('turbolinks:load', function(e) {
-    /* Initialize router */
-    console.log(e);
-    new App.MainView().start();
-  });
+  function initApp() {
+    var app = new App.MainView();
+    if (Backbone.History.started) {
+      app.stop();
+    }
+    app.start();
+  }
+
+  if (Turbolinks && Turbolinks.supported) {
+    document.addEventListener('turbolinks:load', initApp);
+  } else {
+    document.addEventListener('DOMContentLoaded', initApp);
+  }
 
 })(this.App);

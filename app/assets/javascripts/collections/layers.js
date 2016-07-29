@@ -42,6 +42,42 @@
         active: false,
         published: true
       },
+      {
+        id: 4,
+        slug: 'org-project-markers',
+        name: 'Project markers',
+        type: 'marker',
+        description: 'Project markers',
+        color: 'red',
+        opacity: 1,
+        order: 1000,
+        active: false,
+        published: true
+      },
+      {
+        id: 5,
+        slug: 'org-people-markers',
+        name: 'People markers',
+        type: 'marker',
+        description: 'People markers',
+        color: 'red',
+        opacity: 1,
+        order: 1000,
+        active: false,
+        published: true
+      },
+      {
+        id: 6,
+        slug: 'org-event-markers',
+        name: 'Events markers',
+        type: 'marker',
+        description: 'Events markers',
+        color: 'red',
+        opacity: 1,
+        order: 1000,
+        active: false,
+        published: true
+      }
     ],
 
     initialize: function() {

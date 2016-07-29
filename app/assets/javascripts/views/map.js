@@ -55,6 +55,7 @@
     createMap: function() {
       if (!this.map) {
         this.map = L.map(this.el.id, this.options.map);
+        this.$el.data('leaflet', this.map);
         this.setBasemap();
       } else {
         console.info('Map already exists.');
@@ -101,7 +102,7 @@
       if (this.basemap) {
         this.map.removeLayer(this.basemap);
       } else {
-        console.info('Basemap doesn\`t exist.');
+        console.info('Basemap doesn\'t exist.');
       }
     },
 
@@ -172,6 +173,7 @@
               };
 
               layerInstance = new App.Helper.MarkerLayer(this.map, options);
+
               layerInstance.create(function(layer) {
                 layer.setOpacity(layerData.opacity);
                 layer.setZIndex(1000-layerData.order);

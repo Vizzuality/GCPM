@@ -4,7 +4,7 @@
 
   App.Collection = App.Collection || {};
   App.Collection.Regions = Backbone.Collection.extend({
-    url: '/assets/jsons/regions.json',
+    url: '/api/regions',
   });
 
 })(this.App);

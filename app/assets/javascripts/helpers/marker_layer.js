@@ -13,13 +13,13 @@
     colors: {
       'project-markers': ['#5aade4', '#f57823', '#68299b', '#CCC'],
       'people-markers': ['#FFF', '#8653AF'],
-      'event-markers': ['#FFF', '#F59356'],
+      'event-markers': ['#FFF', '#F59356']
     },
 
     strokeColors: {
       'project-markers': '#FFF',
       'people-markers': '#68299b',
-      'event-markers': '#f57823',
+      'event-markers': '#f57823'
     },
     // tooltipEl: $('#locationTooltipView'),
     // tooltipTpl: HandlebarsTemplates['locationsTooltipTpl'],
@@ -47,19 +47,34 @@
         // Create icon
         var icon = new L.divIcon({
           iconSize: [size,size],
-          className: 'c-marker -' + this.options.type,
+          // Need to set marker.type on each marker
+          className: marker.type ?
+            'c-marker -' + marker.type :
+            'c-marker -' + this.options.type,
           html: this.template({
-            value: marker.value,
+            value: marker.value > 1 ? marker.value : '',
             svg: this.getHtmlString(svg)
           })
         });
 
-        // Return a leaflet marker
-        return L.marker(marker.center, {
+        var markerIcon = L.marker(marker.center, {
           icon: icon
         }).on('mouseover', this._onMouseover.bind(this))
           .on('mouseout', this._onMouseout.bind(this))
           .on('click', this._onMouseclick.bind(this));
+
+        /* Need to set markers investigators */
+        if (marker.investigators) {
+          var peopleList = '<div class="people">';
+          marker.investigators.map(function(investigator) {
+            peopleList += '<p class="person">'+ investigator +'</p>';
+          });
+          peopleList += '</div>';
+          markerIcon.bindPopup(peopleList);
+        }
+
+        // Return a leaflet marker
+        return markerIcon;
 
       }.bind(this));
 
@@ -110,26 +125,29 @@
                   .attr('height', size)
 
       // Add each arc to the svg element
-      var angle = 0;
-      _.each(marker.segments, function(segment, i){
-        var degrees = Math.round(360*(segment.value/total));
-        // Create an arc
-        var arc = d3.svg.arc()
-          .innerRadius(size/2 - 10)
-          .outerRadius(size/2 - 4)
-          .startAngle(angle * (pi/180)) //converting from degs to radians
-          .endAngle((angle + degrees) * (pi/180)) //converting from degs to radians
+      if (!marker.type) {
+        var angle = 0;
+        _.each(marker.segments, function(segment, i){
+          var degrees = Math.round(360*(segment.value/total));
+          // Create an arc
+          var arc = d3.svg.arc()
+            .innerRadius(size/2 - 10)
+            .outerRadius(size/2 - 4)
+            .startAngle(angle * (pi/180)) //converting from degs to radians
+            .endAngle((angle + degrees) * (pi/180)) //converting from degs to radians
 
-        vis.append('path')
-          .attr('d', arc)
-          .attr('fill', this.colors[this.options.type][i])
-          .attr('stroke-width', 2)
-          .attr('stroke', this.strokeColors[this.options.type])
-          .attr('transform', 'translate('+size/2+','+size/2+')');
+          vis.append('path')
+            .attr('d', arc)
+            .attr('fill', this.colors[this.options.type][i])
+            .attr('stroke-width', 2)
+            .attr('stroke', this.strokeColors[this.options.type])
+            .attr('transform', 'translate('+size/2+','+size/2+')');
 
-        angle = angle + Math.round(360*segment.value/total);
+          angle = angle + Math.round(360*segment.value/total);
 
-      }.bind(this));
+        }.bind(this));
+      }
+
 
       return svg;
     },

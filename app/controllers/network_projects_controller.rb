@@ -3,13 +3,16 @@ class NetworkProjectsController < ApplicationController
     @user = User.find(params[:project_id])
     @projects = @user.projects
   end
+
   def show
     @user = User.find(params[:project_id])
     @project = @user.projects.find(params[:project_id])
   end
+
   def new
     @project = Project.new
   end
+
   def create
     @project = Project.new(project_params)
     @project.user = current_user
@@ -20,9 +23,11 @@ class NetworkProjectsController < ApplicationController
       render 'new'
     end
   end
+
   def edit
     @project = current_user.projects.find(params[:project_id])
   end
+
   def update
     if @project.update_attributes(project_params)
       redirect_to @project
@@ -30,6 +35,7 @@ class NetworkProjectsController < ApplicationController
       render 'edit'
     end
   end
+
   def delete
     if Project.delete(params[:project_id])
       flash[:success] = "Project succesfully deleted"
@@ -39,7 +45,9 @@ class NetworkProjectsController < ApplicationController
       redirect_to user_projects
     end
   end
+
   private
+
     def project_params
       params.require(:project).permit()
     end
