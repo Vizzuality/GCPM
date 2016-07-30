@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160729093255) do
+ActiveRecord::Schema.define(version: 20160729151912) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,13 +47,6 @@ ActiveRecord::Schema.define(version: 20160729093255) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.index ["organization_id"], name: "index_addresses_on_organization_id", using: :btree
-  end
-
-  create_table "addresses_investigators", id: false, force: :cascade do |t|
-    t.integer "address_id"
-    t.integer "investigator_id"
-    t.index ["address_id"], name: "index_addresses_investigators_on_address_id", using: :btree
-    t.index ["investigator_id"], name: "index_addresses_investigators_on_investigator_id", using: :btree
   end
 
   create_table "admin_users", force: :cascade do |t|
@@ -98,28 +91,32 @@ ActiveRecord::Schema.define(version: 20160729093255) do
     t.datetime "updated_at",       null: false
   end
 
+  create_table "funders", force: :cascade do |t|
+    t.integer  "organization_id"
+    t.integer  "project_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["organization_id"], name: "index_funders_on_organization_id", using: :btree
+    t.index ["project_id"], name: "index_funders_on_project_id", using: :btree
+  end
+
   create_table "investigators", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
-    t.string   "position_title"
     t.text     "website"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "memberships", force: :cascade do |t|
     t.integer  "project_id"
-    t.integer  "organization_id"
-    t.integer  "investigator_id"
-    t.integer  "membership_type"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.integer  "address_id"
-    t.index ["address_id"], name: "index_memberships_on_address_id", using: :btree
-    t.index ["investigator_id"], name: "index_memberships_on_investigator_id", using: :btree
+    t.integer  "research_unit_id"
+    t.integer  "membership_type",  default: 1
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.index ["membership_type"], name: "index_memberships_on_membership_type", using: :btree
-    t.index ["organization_id"], name: "index_memberships_on_organization_id", using: :btree
     t.index ["project_id"], name: "index_memberships_on_project_id", using: :btree
+    t.index ["research_unit_id"], name: "index_memberships_on_research_unit_id", using: :btree
   end
 
   create_table "organization_types", force: :cascade do |t|
@@ -170,6 +167,15 @@ ActiveRecord::Schema.define(version: 20160729093255) do
     t.datetime "updated_at",      null: false
   end
 
+  create_table "research_units", force: :cascade do |t|
+    t.integer  "address_id"
+    t.integer  "investigator_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["address_id"], name: "index_research_units_on_address_id", using: :btree
+    t.index ["investigator_id"], name: "index_research_units_on_investigator_id", using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -189,11 +195,6 @@ ActiveRecord::Schema.define(version: 20160729093255) do
     t.datetime "locked_at"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.string   "name"
-    t.string   "position"
-    t.string   "twitter_account"
-    t.string   "linkedin_account"
-    t.string   "pubmed"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree

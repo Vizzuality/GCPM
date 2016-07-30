@@ -3,7 +3,6 @@ class CreateInvestigators < ActiveRecord::Migration[5.0]
     create_table :investigators do |t|
       t.string :name
       t.string :email
-      t.string :position_title
       t.text :website
 
       t.timestamps
