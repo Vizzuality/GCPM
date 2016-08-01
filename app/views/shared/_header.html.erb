@@ -12,7 +12,7 @@
         <li class="<%= active_page?(cancers_path) ? '-active' : '' %>"><%= link_to (t 'cancer_types'), cancers_path %></a></li>
         <li class="<%= active_page?(about_path) ? '-active' : '' %>"><%= link_to (t 'about'), about_path %></a></li>
         <li><img src="" class="btn-search"></li>
-        <% if !user_signed_in? %>
+        <% if user_signed_in? %>
           <li class="user-avatar">
             <div class="c-user-profile-picture">
               <div class="initials">LA</div>
@@ -22,7 +22,7 @@
                 <div class="c-badge">7</div>
               <% end %>
 
-              <div class="c-user-dropdown-menu">
+              <div class="c-user-dropdown-menu js-user-dropdown-menu">
                 <ul class="user-profile menu-section">
                   <li class="item"><%= link_to (t 'your_profile'), '/', {:class => "item-link", :method => :get} %></li>
                   <li class="item"><%= link_to (t 'logout'), destroy_user_session_path, {:class => "item-link", :method => :delete} %></li>
@@ -59,7 +59,7 @@
               <div class="c-badge">7</div>
             <% end %>
 
-            <div class="c-user-dropdown-menu">
+            <div class="c-user-dropdown-menu js-user-dropdown-menu">
               <ul class="user-profile menu-section">
                 <li class="item"><%= link_to (t 'your_profile'), '/', {:class => "item-link", :method => :get} %></li>
                 <li class="item"><%= link_to (t 'logout'), destroy_user_session_path, {:class => "item-link", :method => :delete} %></li>
