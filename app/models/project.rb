@@ -24,6 +24,7 @@ class Project < ApplicationRecord
   has_many :organizations,   through: :memberships
   has_many :investigators,   through: :research_units, source: :investigator
   has_many :addresses,       through: :research_units, source: :address
+  has_many :countries,       through: :addresses
   has_many :funders
   has_many :funding_sources, through: :funders,        source: :organization
 
