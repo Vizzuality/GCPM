@@ -11,15 +11,15 @@
     template: HandlebarsTemplates['marker'],
 
     colors: {
-      'project-markers': ['#5aade4', '#f57823', '#68299b', '#CCC'],
-      'people-markers': ['#FFF', '#8653AF'],
-      'event-markers': ['#FFF', '#F59356']
+      'projects': ['#5aade4', '#f57823', '#68299b', '#CCC'],
+      'people': ['#FFF', '#8653AF'],
+      'event': ['#FFF', '#F59356']
     },
 
     strokeColors: {
-      'project-markers': '#FFF',
-      'people-markers': '#68299b',
-      'event-markers': '#f57823'
+      'projects': '#FFF',
+      'people': '#68299b',
+      'event': '#f57823'
     },
     // tooltipEl: $('#locationTooltipView'),
     // tooltipTpl: HandlebarsTemplates['locationsTooltipTpl'],
