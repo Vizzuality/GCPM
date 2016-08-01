@@ -17,7 +17,7 @@ class DataExtractor
     return if project_attributes.values.compact.blank?
     project = ProjectImporter.new(project_index, project_attributes)
     unless project.import!
-      @errors << { project: row['project_index'], errors: project.errors.compact }
+      @errors << { project: project_index.to_i, errors: project.errors.compact }
       return false
     end
   end
@@ -28,7 +28,7 @@ class DataExtractor
     return if main_research_unit_attributes.values.compact.blank?
     research_unit = ResearchUnitImporter.new(main_research_unit_attributes, true)
     unless research_unit.import!
-      @errors << { project: row['project_index'], errors: research_unit.errors.compact }
+      @errors << { project: project_index.to_i, errors: research_unit.errors.compact }
       return false
     end
     # Assigns research unit (investigator & organization by address)
@@ -43,7 +43,7 @@ class DataExtractor
     return if secondary_research_unit_attributes.values.compact.blank?
     secondary_research_unit = ResearchUnitImporter.new(secondary_research_unit_attributes, false)
     unless secondary_research_unit.import!
-      @errors << { project: row['project_index'], errors: secondary_research_unit.errors.compact }
+      @errors << { project: project_index.to_i, errors: secondary_research_unit.errors.compact }
       return false
     end
     # Assigns secondary research unit (investigator & organization by address)
@@ -58,7 +58,7 @@ class DataExtractor
     return if funding_source_attributes.values.compact.blank?
     funding_source = FundingSourceImporter.new(funding_source_attributes)
     unless funding_source.import!
-      @errors << { project: row['project_index'], errors: funding_source.errors.compact }
+      @errors << { project: project_index.to_i, errors: funding_source.errors.compact }
       return false
     end
     funder = Funder.find_or_initialize_by(organization_id: funding_source.funding_source_id, project_id: project_index)

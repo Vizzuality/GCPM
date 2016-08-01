@@ -37,7 +37,7 @@ class ProjectImporter
     master_pt = ProjectType.all.pluck(:name).map{|e| e.downcase}
     wrong_types = pt - master_pt
     if wrong_types != []
-      @errors << "Unknow project type(s) #{wrong_types}"
+      @errors << { project_types: "Unknow project type(s) #{wrong_types}" }
       return
     else
       project_types = ProjectType.where('lower(name) in (?)', pt)
@@ -51,7 +51,7 @@ class ProjectImporter
     master_ct = CancerType.all.pluck(:name).map{|e| e.downcase}
     wrong_types = ct - master_ct
     if wrong_types != []
-      @errors << "Unknow cancer type(s) #{wrong_types}"
+      @errors << { cancer_types: "Unknow cancer type(s) #{wrong_types}" }
       return
     else
       cancer_types = CancerType.where('lower(name) in (?)', ct)
