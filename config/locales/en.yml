@@ -23,6 +23,7 @@
 
 en:
   about: "About"
+  active: "Active"
   add_project: "Add project"
   articles: "Articles"
   breast: "Breast"
@@ -30,11 +31,13 @@ en:
   collaborators: "Collaborators"
   countries: "Countries"
   data: "Data"
+  edit: "Edit"
   event: "Event"
   events: "Events"
   featured_organization: "Featured organization"
   featured_project: "Featured project"
   follow_us: "Follow us"
+  following: "Following"
   language: "Language"
   login: "Login"
   logout: "Logout"
@@ -63,3 +66,4 @@ en:
   total_events: "Total events"
   you: "You"
   your_profile: "Your profile"
+  your_projects: "Your projects"

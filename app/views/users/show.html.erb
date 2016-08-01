@@ -16,7 +16,7 @@
         <div class="c-personal-info">
           <div class="c-user-profile-picture -huge">
             <div class="initials">LK</div>
-            <img src="" alt="<%= @user.name %>'s profile picture'" />
+            <!-- <img src="" alt="<%= @user.name %>'s profile picture'" /> -->
           </div>
           <div class="data-container">
             <h1 class="c-title -big"><%= @user.name ? @user.name : User %>
@@ -80,5 +80,8 @@
       </ul>
     </div>
   </div>
+
+  <%= render(:partial => @current_type) %>
+
 </section>
 
