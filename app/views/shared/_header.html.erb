@@ -3,7 +3,9 @@
   <div class="desktop-secondary-menu">
     <div class="wrapper">
       <ul>
-        <li><%= link_to t('submit_project'), new_user_project_path(user_id: current_user.id) %></li>
+        <% if user_signed_in? %>
+          <li><%= link_to t('submit_project'), new_user_project_path(user_id: current_user.id) %></li>
+        <% end %>
         <li><a disabled><%= t 'language' %></a></li>
         <li><a disabled><%= t 'search' %></a></li>
       </ul>
@@ -22,8 +24,12 @@
         <li class="<%= active_page?(countries_path) ? '-active' : '' %>"><%= link_to (t 'countries'), countries_path %></a></li>
         <li class="<%= active_page?(cancers_path) ? '-active' : '' %>"><%= link_to (t 'cancer_types'), cancers_path %></a></li>
         <li class="<%= active_page?(about_path) ? '-active' : '' %>"><%= link_to (t 'about'), about_path %></a></li>
-        <li><%= link_to t('login'), new_user_session_path %></li>
-        <li><%= link_to t('sign_up'), new_user_registration_path %></li>
+        <% if user_signed_in? %>
+          <li><%= link_to t('logout'), destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to t('login'), new_user_session_path %></li>
+          <li><%= link_to t('sign_up'), new_user_registration_path %></li>
+        <% end %>
       </ul>
     </div>
   </div>
@@ -34,8 +40,12 @@
       <li class="<%= active_page?(countries_path) ? '-active' : '' %>"><%= link_to (t 'countries'), countries_path %></a></li>
       <li class="<%= active_page?(cancers_path) ? '-active' : '' %>"><%= link_to (t 'cancer_types'), cancers_path %></a></li>
       <li class="<%= active_page?(about_path) ? '-active' : '' %>"><%= link_to (t 'about'), about_path %></a></li>
-      <li><%= link_to t('login'), new_user_session_path %></li>
-      <li><%= link_to t('sign_up'), new_user_registration_path %></li>
+      <% if user_signed_in? %>
+        <li><%= link_to t('logout'), destroy_user_session_path, method: :delete %></li>
+      <% else %>
+        <li><%= link_to t('login'), new_user_session_path %></li>
+        <li><%= link_to t('sign_up'), new_user_registration_path %></li>
+      <% end %>
     </ul>
   </div>
 

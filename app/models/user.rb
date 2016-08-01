@@ -21,6 +21,11 @@
 #  locked_at              :datetime
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  name                   :string
+#  position               :string
+#  twitter_account        :string
+#  linkedin_account       :string
+#  pubmed                 :string
 #
 
 class User < ApplicationRecord
@@ -29,4 +34,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :lockable
+
+  has_many :projects, inverse_of: :user
+
+  def active_projects
+    projects.published
+  end
+
+  def inactive_projects
+    projects.unpublished | projects.under_revision
+  end
 end
