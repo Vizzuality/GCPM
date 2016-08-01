@@ -1,31 +1,78 @@
 
 .project_add {
-  .c-section-intro {
-    height: 370px;
-    border-bottom: 1px solid rgba(0, 0, 0, .15);
-    padding: 0 50px;
-    .c-title {
-    	padding-top: 230px;
-    	display: block;
-    }
+		.c-section-intro {
+		height: 370px;
+		border-bottom: 1px solid rgba(0, 0, 0, .15);
+		padding: 0 50px;
+		.c-title {
+			padding-top: 230px;
+			display: block;
+		}
 
-  }
+	}
+	.c-section-container {
+	  	display: table;
+	  	border-bottom: 1px solid rgba(0, 0, 0, .15);
+	  	&.-staff {
+	  		width: 100%;
+			padding: 50px;
+	  	}
+  	}
 	.c-section-half {
 		width: 50%;
-		float: left;
-    	padding: 0 50px;
-    	min-height: 30vh;
+		padding: 0 50px 50px;
+		min-height: 30vh;
+		display: table-cell;
 		&.-left {
 			border-right: 1px solid rgba(0, 0, 0, .15);
 		}
 		.c-section-title {
-			  margin:  60px 0 30px 0;
-			  padding: 0;
-			  font-size: $font-size-x-small;
-			  text-transform: uppercase;
-			  color: rgba($color-2,1);
+			margin:  60px 0 30px 0;
+			padding: 0;
+			font-size: $font-size-x-small;
+			text-transform: uppercase;
+			color: rgba($color-2,1);
+			display: block;
+			font-weight: $font-weight-bold;
+			&.-one-line{
+				margin: 60px 0 15px 0;
+			}
+		}
+		.-input-line {
+			width: 100%;
+		    border: none;
+		    border-bottom: 1px solid rgba(15,48,70,0.3);
+		    height: 30px;
+		    font-size: 15px;
+		    transition: all 0.25s ease-in;
+		    &:focus {
+		    	outline: none;
+		    	border-bottom: 1px solid rgba(15,48,70,0.6);
+		    }
+		}
+	}
+	.c-staff {
+		display: table-row;
+		span {
+			font-size: $font-size-x-small;
+			text-transform: uppercase;
+			color: rgba($color-2,1);
+			display: block;
+			font-weight: $font-weight-bold;
+		}
+		span, 
+		.-item {
+			display: table-cell;
 		}
 	}
 }
-
-
+.separator {
+	display: block;
+	height: 1px;
+	width: 100%;
+	width: calc(100% + 100px);
+    background-color: rgba(0, 0, 0, 0.15);
+    right: 50px;
+    position: relative;
+    margin: 30px 0 0;
+}
