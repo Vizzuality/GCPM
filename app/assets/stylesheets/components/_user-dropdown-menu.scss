@@ -1,0 +1,74 @@
+
+ /**
+    <div class="c-user-dropdown-menu js-user-dropdown-menu">
+      <ul class="user-profile menu-section">
+        <li class="item"><a class="item-link">{ Content }</a></li>
+        <li class="item"><a class="item-link">{ Content }</a></li>
+      </ul>
+
+      <ul class="user-tools menu-section">
+        <li class="item"><a class="item-link">{ Content }</a></li>
+      </ul>
+    </div>
+ **/
+
+.c-user-dropdown-menu {
+  position: absolute;
+  display: none;
+  flex-flow: column;
+  z-index: 9;
+  width: 170px;
+  background-color: $color-3;
+  transform: translate(-55%, 6px);
+  border: 1px solid rgba(0, 0, 0, 0.10);
+
+  &:before {
+    content: ' ';
+    width: 32px;
+    height: 32px;
+    background-color: $color-3;
+    position: absolute;
+    top: -12px;
+    right: 31px;
+    border: 1px solid rgba(0, 0, 0, 0.10);
+    transform: rotate(45deg);
+    z-index: -1;
+  }
+
+  &.-open {
+    display: flex;
+  }
+
+  & .menu-section {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start !important;
+    padding: 20px 28px !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.10);
+    color: $color-2;
+    background-color: $color-3;
+
+    &:last-child {
+      border: 0;
+    }
+
+    &.-color-2 > .item > .item-link { color: $color-1; }
+
+    & .item {
+      margin: 0;
+      margin-bottom: 30px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      & .item-link {
+        font-family: $font-family-1;
+        line-height: $font-size-x-small;
+        font-size: $font-size-x-small;
+        font-weight: $font-weight-bold;
+        text-transform: uppercase;
+      }
+    }
+  }
+}

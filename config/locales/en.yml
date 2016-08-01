@@ -23,6 +23,7 @@
 
 en:
   about: "About"
+  add_project: "Add project"
   articles: "Articles"
   breast: "Breast"
   cancer_types: "Cancer types"
@@ -36,6 +37,7 @@ en:
   follow_us: "Follow us"
   language: "Language"
   login: "Login"
+  logout: "Logout"
   map: "Map"
   massages: "Massages"
   network: "Network"
@@ -59,3 +61,4 @@ en:
   submit_project: "Submit a project"
   trachea_bronchus_and_lung: "Trachea, bronchus and lung"
   total_events: "Total events"
+  your_profile: "Your profile"

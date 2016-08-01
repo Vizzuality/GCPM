@@ -1,8 +1,13 @@
 class UsersController < ApplicationController
+  before_action :set_user
 
   def show
-    @user = User.find(params[:id])
-    # @projects = .projects
+    @projects = user_signed_in? && @user == current_user ? @user.projects : @user.active_projects
   end
 
+  private
+
+    def set_user
+      @user = User.find(params[:id])
+    end
 end
