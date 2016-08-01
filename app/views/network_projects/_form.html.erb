@@ -1,7 +1,12 @@
 <div class="c-section-intro">
 	<%= form.input :title, label: 'Project title_', label_html: { class: 'c-title -bigger -bold' }, :required => false %>
 </div>
-<%= form.input :summary %>
-<%= form.input :project_website %>
-<%= form.input :start_date %>
-<%= form.input :end_date %>
+<div class="c-section-half -left">
+	<h3 class="c-section-title">Description</h3>
+	<%= form.input :summary %>
+	<%= form.input :project_website %>
+</div>
+<div class="c-section-half">
+	<%= form.input :start_date %>
+	<%= form.input :end_date %>
+</div>

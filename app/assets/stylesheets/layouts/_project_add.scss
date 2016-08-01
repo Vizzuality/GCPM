@@ -1,0 +1,31 @@
+
+.project_add {
+  .c-section-intro {
+    height: 370px;
+    border-bottom: 1px solid rgba(0, 0, 0, .15);
+    padding: 0 50px;
+    .c-title {
+    	padding-top: 230px;
+    	display: block;
+    }
+
+  }
+	.c-section-half {
+		width: 50%;
+		float: left;
+    	padding: 0 50px;
+    	min-height: 30vh;
+		&.-left {
+			border-right: 1px solid rgba(0, 0, 0, .15);
+		}
+		.c-section-title {
+			  margin:  60px 0 30px 0;
+			  padding: 0;
+			  font-size: $font-size-x-small;
+			  text-transform: uppercase;
+			  color: rgba($color-2,1);
+		}
+	}
+}
+
+
