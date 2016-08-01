@@ -1,6 +1,6 @@
 
  /**
-    <div class="c-user-dropdown-menu">
+    <div class="c-user-dropdown-menu js-user-dropdown-menu">
       <ul class="user-profile menu-section">
         <li class="item"><a class="item-link">{ Content }</a></li>
         <li class="item"><a class="item-link">{ Content }</a></li>
@@ -35,7 +35,7 @@
     z-index: -1;
   }
 
-  &.-active {
+  &.-open {
     display: flex;
   }
 
