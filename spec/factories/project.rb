@@ -4,7 +4,7 @@ FactoryGirl.define do
     project_website nil
     start_date nil
     status nil
-    summary nil
-    title "test project"
+    summary Faker::Lorem.paragraph(5, true, 4)
+    title 'Test first project'
   end
 end

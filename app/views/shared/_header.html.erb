@@ -12,7 +12,7 @@
         <li class="<%= active_page?(cancers_path) ? '-active' : '' %>"><%= link_to (t 'cancer_types'), cancers_path %></a></li>
         <li class="<%= active_page?(about_path) ? '-active' : '' %>"><%= link_to (t 'about'), about_path %></a></li>
         <li><img src="" class="btn-search"></li>
-        <% if user_signed_in? %>
+        <% if !user_signed_in? %>
           <li class="user-avatar">
             <div class="c-user-profile-picture">
               <div class="initials">LA</div>
@@ -22,15 +22,14 @@
                 <div class="c-badge">7</div>
               <% end %>
 
-              <div class="c-user-dropdown-menu js-user-dropdown-menu">
+              <div class="c-user-dropdown-menu">
                 <ul class="user-profile menu-section">
                   <li class="item"><%= link_to (t 'your_profile'), '/', {:class => "item-link", :method => :get} %></li>
                   <li class="item"><%= link_to (t 'logout'), destroy_user_session_path, {:class => "item-link", :method => :delete} %></li>
                 </ul>
 
                 <ul class="user-tools menu-section -color-2">
-                  <!-- Add-project-path needed to be added when login works (new_user_project_path) -->
-                  <li class="item"><%= link_to (t 'add_project'), "/", {:class => "item-link", :method => :get} %></li>
+                  <li class="item"><%= link_to (t 'add_project'), '/', {:class => "item-link", :method => :get} %></li>
                 </ul>
               </div>
             </div>
@@ -48,32 +47,33 @@
       <li class="<%= active_page?(countries_path) ? '-active' : '' %>"><%= link_to (t 'countries'), countries_path %></a></li>
       <li class="<%= active_page?(cancers_path) ? '-active' : '' %>"><%= link_to (t 'cancer_types'), cancers_path %></a></li>
       <li class="<%= active_page?(about_path) ? '-active' : '' %>"><%= link_to (t 'about'), about_path %></a></li>
+      <li class="<%= active_page?(new_user_session_path) ? '-active' : '' %>"><%= link_to (t 'login'), new_user_session_path %></a></li>
       <li><img src="" class="btn-search"></li>
-        <% if user_signed_in? %>
-          <li class="user-avatar">
-            <div class="c-user-profile-picture">
-              <div class="initials">LA</div>
-              <img src="{Path}" alt="{User name}'s profile picture'" />
-              <!-- Notifications to set (set element on mobile too) -->
-              <% if true %>
-                <div class="c-badge">7</div>
-              <% end %>
+      <% if user_signed_in? %>
+        <li class="user-avatar">
+          <div class="c-user-profile-picture">
+            <div class="initials">LA</div>
+            <img src="{Path}" alt="{User name}'s profile picture'" />
+            <!-- Notifications to set -->
+            <% if true %>
+              <div class="c-badge">7</div>
+            <% end %>
 
-              <div class="c-user-dropdown-menu js-user-dropdown-menu">
-                <ul class="user-profile menu-section">
-                  <li class="item"><%= link_to (t 'your_profile'), '/', {:class => "item-link", :method => :get} %></li>
-                  <li class="item"><%= link_to (t 'logout'), destroy_user_session_path, {:class => "item-link", :method => :delete} %></li>
-                </ul>
+            <div class="c-user-dropdown-menu">
+              <ul class="user-profile menu-section">
+                <li class="item"><%= link_to (t 'your_profile'), '/', {:class => "item-link", :method => :get} %></li>
+                <li class="item"><%= link_to (t 'logout'), destroy_user_session_path, {:class => "item-link", :method => :delete} %></li>
+              </ul>
 
-                <ul class="user-tools menu-section -color-2">
-                  <li class="item"><%= link_to (t 'add_project'), new_user_project_path, {:class => "item-link", :method => :get} %></li>
-                </ul>
-              </div>
+              <ul class="user-tools menu-section -color-2">
+                <li class="item"><%= link_to (t 'add_project'), new_user_project_path(user_id: current_user.id), {:class => "item-link", :method => :get} %></li>
+              </ul>
             </div>
-          </li>
-        <% else %>
-          <li class="<%= active_page?(user_session_path) ? '-active' : '' %>"><%= link_to (t 'login'), user_session_path %></a></li>
-        <% end %>
+          </div>
+        </li>
+      <% else %>
+        <li class="<%= active_page?(user_session_path) ? '-active' : '' %>"><%= link_to (t 'login'), user_session_path %></a></li>
+      <% end %>
     </ul>
   </div>
 
