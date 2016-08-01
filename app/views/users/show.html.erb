@@ -1,1 +1,10 @@
-<h1><%= current_user.name %></h1>
+<h1><%= @user.name %></h1>
+<% @projects.each do |project| %>
+  <div>
+    <%= link_to project.title, user_project_path(@user, project) %>
+    <% if user_signed_in? && @user == current_user %>
+      <%= link_to 'Edit', edit_user_project_path(@user, project) %>
+      <%= link_to 'Delete', user_project_path(@user, project), data: { confirm: 'Are You sure?' }, method: :delete %>
+    <% end %>
+  </div>
+<% end %>
