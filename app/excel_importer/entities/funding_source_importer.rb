@@ -15,7 +15,7 @@ class FundingSourceImporter
       @funding_source_id = funding_source.id
       return true
     else
-      @errors << { project: project.errors.full_messages }
+      @errors << { project: funding_source.errors.full_messages }
       Rails.logger.info @errors
       return false
     end

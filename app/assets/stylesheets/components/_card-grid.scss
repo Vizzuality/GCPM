@@ -118,6 +118,12 @@
     &.-color-1 > * { color: $color-2 }
     &.-color-2 > * { color: $color-3 }
 
+    .link {
+      color: $color-2;
+
+      &:hover { color: lightgrey; }
+    }
+
     > .c-tag-list { margin-top: 7px; }
 
     > .c-button {
