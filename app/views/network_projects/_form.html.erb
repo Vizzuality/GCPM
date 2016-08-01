@@ -7,6 +7,8 @@
 	<%= form.input :project_website %>
 </div>
 <div class="c-section-half">
-	<%= form.input :start_date %>
-	<%= form.input :end_date %>
+	<%= form.input :start_date, as: :string, input_html: {id: 'add-project-start_date'} %>
+	<div id="pickadate-start-container" class="pickadate-container" autofocus></div>
+	<%= form.input :end_date, as: :string, input_html: {id: 'add-project-end_date'} %>
+	<div id="pickadate-end-container" class="pickadate-container" autofocus></div>
 </div>
