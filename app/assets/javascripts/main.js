@@ -55,6 +55,7 @@
 
     initCommonViews: function() {
       new App.View.MobileHeader();
+      new App.View.UserDropdownMenu();
     },
 
     replaceContent: function(data) {
@@ -73,9 +74,9 @@
         layers: layersCollection
       });
 
-      // new App.View.MapMenu();
-      // new App.View.MapFilters();
-      // new App.View.MapLayers();
+      new App.View.MapMenu();
+      new App.View.MapFilters();
+      new App.View.MapLayers();
 
       // Sync layers
       layersCollection.toggleLayers([

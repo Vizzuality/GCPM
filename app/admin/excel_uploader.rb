@@ -17,7 +17,7 @@ ActiveAdmin.register_page "Excel Upload" do
 
         render json: {
           success: true,
-          errors: importer.errors.to_json
+          errors: importer.errors
         }
 
       else

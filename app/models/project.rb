@@ -34,6 +34,7 @@ class Project < ApplicationRecord
   has_and_belongs_to_many :cancer_types
 
   validates_presence_of :title, :summary
+  validates :title, uniqueness: true
 
   scope :active,   -> { where('end_date >= ? AND start_date <= ?', Time.now, Time.now).or(where('end_date IS NULL')) }
   scope :inactive, -> { where('end_date < ?', Time.now).or('start_date > ?', Time.now)                                        }

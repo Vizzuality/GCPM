@@ -1,5 +1,5 @@
 Then /^I should have zero projects$/ do
-  Project.all.size.should == 0
+  Project.all.size.should.zero?
 end
 
 Then /^I should have one project$/ do
