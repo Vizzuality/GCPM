@@ -14,7 +14,7 @@
         <li><img src="" class="btn-search"></li>
         <% if user_signed_in? %>
           <li class="user-avatar">
-            <div class="c-user-profile-picture">
+            <div class="c-user-profile-picture <%= @isProfile ? "-active" : "" %>">
               <div class="initials">LK</div>
               <!-- <img src="" alt="{User name}'s profile picture'" /> -->
               <!-- Notifications to set (set element on mobile too) -->
@@ -50,7 +50,7 @@
       <li><img src="" class="btn-search"></li>
       <% if user_signed_in? %>
         <li class="user-avatar">
-          <div class="c-user-profile-picture">
+          <div class="c-user-profile-picture <%= @isProfile ? "-active" : "" %>">
             <div class="initials">LA</div>
             <img src="" alt="{User name}'s profile picture'" />
             <!-- Notifications to set -->

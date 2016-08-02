@@ -29,6 +29,7 @@
     },
 
     listeners: function(){
+      this.model.off('change:hidden');
       this.model.on('change:hidden', this.changeHidden.bind(this));
     },
 

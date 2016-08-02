@@ -2,10 +2,10 @@ class UsersController < ApplicationController
   before_action :set_user
 
   def show
-    #@projects = user_signed_in? && @user == current_user ? @user.projects : @user.active_projects
     @projects = user_signed_in? && @user == current_user ? @user.projects : @user.published_projects
     @current_type = params[:type] || 'projects'
     @filters = ['projects']
+    @isProfile = true
   end
 
   private

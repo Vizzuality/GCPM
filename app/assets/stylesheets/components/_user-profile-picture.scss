@@ -23,6 +23,10 @@
   background-color: $color-1;
   border-radius: 100%;
 
+  &.-active {
+    border: 3px solid $color-4;
+  }
+
   > img {
     position: absolute;
     top:  0;
