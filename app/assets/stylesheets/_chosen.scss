@@ -23,6 +23,20 @@
 	.chosen-container-single .chosen-single span {
 		display: inline;
 	}
+	.chosen-container-active.chosen-with-drop {
+		z-index: 1;
+	    position: absolute;
+	    width: 350px !important;
+	    background: #fff;
+	    .chosen-single:before {
+	    	content: '×';
+	    	border: none;
+	    	color: #5aade4;
+	    	transform: none;
+	    	font-size: 30px;
+	    	top: -2px;
+	    }
+	}
 	.chosen-container-active.chosen-with-drop .chosen-single,
 	.chosen-container-single .chosen-drop {
 		background: none;

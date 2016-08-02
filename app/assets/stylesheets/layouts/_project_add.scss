@@ -26,6 +26,9 @@
 		&.-left {
 			border-right: 1px solid rgba(0, 0, 0, .15);
 		}
+		.chosen-container-active.chosen-with-drop {
+			position: relative;
+		}
 		.c-section-title {
 			margin:  60px 0 30px 0;
 			padding: 0;
@@ -68,12 +71,10 @@
 			   display: none;
 			}
 			label { 
-			  	position: relative;
 				height: 18px;
 				width: 18px;
 				border: solid 1px rgba(15, 48, 70, 0.5);
 			    display: inline-block;
-			    margin: -10px 0 10px 0;
 			    cursor: pointer;
 			    border-radius: 100%;
 			}
@@ -88,13 +89,17 @@
 			    border-radius: 100%;
 			    background: #0f3046;
 			    position: relative;
-			    top: -14px;
+			    top: -4px;
 			    right: 14px;
 		        pointer-events: none;
 			}
 		}
+		&.-headers .-item {
+			height: 20px;
+		}
 	}
 }
+
 .separator {
 	display: block;
 	height: 1px;
