@@ -28,8 +28,6 @@
       selectMonths: true,        
       editable: false,
       format: 'yyyy-mm-dd',
-      min: new Date(1905,1,1),
-      max: new Date(2040,1,1),
       klass: {
         picker: 'picker-custom',
         holder: 'picker-holder-custom',
@@ -47,9 +45,6 @@
         this.$root.find( 'button, select' ).attr( 'disabled', false );
       },
       onStop: function() {
-        this.$root.find( 'button, select' ).attr( 'disabled', false );
-      },
-      onSet: function(context) {
         this.$root.find( 'button, select' ).attr( 'disabled', false );
       }
     },
@@ -110,16 +105,17 @@
         chosen.search_contains = true;
         chosen.result_select = function(evt) {
           var resultHighlight = null;
-          if(autoClose === false) {
-              evt['metaKey'] = true;
-              evt['ctrlKey'] = true;
-              resultHighlight = chosen.result_highlight;
+          if (autoClose === false) {
+            evt['metaKey'] = true;
+            evt['ctrlKey'] = true;
+            resultHighlight = chosen.result_highlight;
           }
           var stext = chosen.get_search_text();
           var result = chosen_resultSelect_fn.call(chosen, evt);
-          if(autoClose === false && resultHighlight !== null)
-              resultHighlight.addClass('result-selected');
-
+          if (autoClose === false && resultHighlight !== null){
+            resultHighlight.addClass('result-selected');
+          }
+              
           // this.search_field.val(stext);               
           this.winnow_results();
           this.search_field_scale();
@@ -131,12 +127,30 @@
 
     renderPickADate: function() {
       var $start = this.$el.find('#pickadate-start-input').pickadate(_.extend({}, this.pickadateOptions, {
-        container: '#pickadate-start-container'
+        container: '#pickadate-start-container',
+        min: new Date(1905,1,1),
+        max: this.params.end_date || new Date(2040,1,1),
       }));
+      var $startPicker = $start.pickadate('picker');
 
       var $end = this.$el.find('#pickadate-end-input').pickadate(_.extend({}, this.pickadateOptions, {
-        container: '#pickadate-end-container'
+        container: '#pickadate-end-container',
+        min: this.params.start_date || new Date(1905,1,1),
+        max: new Date(2040,1,1),
       }));
+      var $endPicker = $end.pickadate('picker');
+
+      $startPicker.on('set', function(e) {
+        if ( e.select ) {
+          $endPicker.set('min', $startPicker.get('select'))
+        }
+      })
+      $endPicker.on('set', function(e) {
+        if ( e.select ) {
+          $startPicker.set('max', $endPicker.get('select'))
+        }
+      })
+
     },
 
     /**
