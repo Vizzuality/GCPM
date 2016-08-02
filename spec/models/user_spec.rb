@@ -48,8 +48,8 @@ RSpec.describe User, type: :model do
     end
 
     it 'Active inactive user projects' do
-      expect(@user.active_projects.size).to   eq(1)
-      expect(@user.inactive_projects.size).to eq(2)
+      expect(@user.published_projects.size).to   eq(1)
+      expect(@user.unpublished_projects.size).to eq(2)
     end
   end
 end

@@ -22,7 +22,7 @@ class ResearchUnitImporter
 
     address = Address.new
     address.city = data["#{entity_name}_organization_city"]
-    address.country = data["#{entity_name}_organization_country"]
+    address.country_name = data["#{entity_name}_organization_country"]
     address.country_code = data["#{entity_name}_organization_country_iso_code"]
     address.latitude = data["#{entity_name}_organization_latitude"]
     address.longitude = data["#{entity_name}_organization_longitude"]
