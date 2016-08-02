@@ -8,16 +8,28 @@
 
     el: '#map-filters',
 
+    events: function(){
+      return _.extend({}, App.Helper.Modal.prototype.events,{
+        'submit #map-filters-form': 'onSubmitFilters'
+      });
+    },
+
     pickadateOptions: {
       today: false,
       clear: false,
       close: false,
       closeOnClear: false,
       closeOnSelect: false,
-      selectYears: true,        
+      selectYears: function() { // birthday is a date
+        var ageDifMs = new Date(1904,1,1) - new Date(2040,1,1);
+        var ageDate = new Date(ageDifMs); // miliseconds from epoch
+        return Math.abs(ageDate.getUTCFullYear() - 1970);
+      }(),
       selectMonths: true,        
       editable: false,
       format: 'yyyy-mm-dd',
+      min: new Date(1905,1,1),
+      max: new Date(2040,1,1),
       klass: {
         picker: 'picker-custom',
         holder: 'picker-holder-custom',
@@ -46,16 +58,21 @@
 
 
     initialize: function(settings) {
-      this.params = settings.params;
 
       // Initialize Parent
       this.constructor.__super__.initialize.apply(this);
 
+      this.utils = App.Helper.Utils;
+      this.params = settings.params;
+
       // Inits
       this.render();
-      this.listeners();     
+      this.cache();
+      this.listeners();
+    },
 
-
+    cache: function() {
+      this.$form = this.$el.find('#map-filters-form');
     },
 
     listeners: function() {
@@ -122,6 +139,15 @@
       }));
     },
 
+    /**
+     * UI EVENTS
+     * - onSubmitFilters
+     */
+    onSubmitFilters: function(e) {
+      e && e.preventDefault();
+      var newFilters = this.utils.getParams(this.$form.serialize());
+      this.publishFilters(newFilters);
+    },
 
     /**
      * PUBLISH

@@ -21,6 +21,8 @@
     params: new (Backbone.Model.extend()),
 
     initialize: function(settings) {
+      this.utils = App.Helper.Utils;
+
       var opts = settings && settings.options ? settings.options : {};
       this.options = _.extend({}, this.defaults, opts);
     },
@@ -89,29 +91,8 @@
     _unserializeParams: function() {
       var params = {};
       var search = window.location.search;
-      if (search) {
-        search.substring(1).split('&').forEach(function(pair) {
-          pair = pair.split('=');
-          if (!!pair[1]) {
-            var key = decodeURIComponent(pair[0]),
-                val = decodeURIComponent(pair[1]),
-                val = val ? val.replace(/\++/g,' ').trim() : '';
-
-            if (key.length === 0) {
-              return;
-            }
-            if (params[key] === undefined) {
-              params[key] = (!isNaN(val)) ? Number(val) : val;
-            }
-            else {
-              if ("function" !== typeof params[key].push) {
-                params[key] = [params[key]];
-              }
-              
-              params[key].push((!isNaN(val)) ? Number(val) : val);
-            }
-          }
-        });        
+      if (!!search) {
+        params = this.utils.getParams(search.substring(1));
       }
       return params;
     },
