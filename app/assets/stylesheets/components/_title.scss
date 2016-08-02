@@ -54,4 +54,8 @@
 
   &.-inverse { color: $color-3; }
 
+  &.-bold {
+    font-weight: $font-weight-bold;
+  }
+
 }

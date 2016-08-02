@@ -1,5 +1,124 @@
-<%= form.input :title %>
-<%= form.input :summary %>
-<%= form.input :project_website %>
-<%= form.input :start_date %>
-<%= form.input :end_date %>
+<div class="c-section-intro">
+	<%= form.input :title, label: 'Project title_', label_html: { class: 'c-title -bigger -bold' }, :required => false %>
+</div>
+<div class="c-section-container">
+	<div class="c-section-half -left">
+		<h3 class="c-section-title">Description</h3>
+		<%= form.input :summary %>
+	</div>
+	<div class="c-section-half">
+		<div class="c-pickadate">
+			<%= form.input :start_date, as: :string, input_html: {id: 'add-project-start_date', class: 'pickadate-input'}, label_html: { class: 'c-section-title' } %>
+			<div id="pickadate-start-container" class="pickadate-container" autofocus></div>
+		</div>
+		<span class="separator"></span>
+		<div class="c-pickadate">
+			<%= form.input :end_date, as: :string, input_html: {id: 'add-project-end_date', class: 'pickadate-input'}, label_html: { class: 'c-section-title' } %>
+			<div id="pickadate-end-container" class="pickadate-container" autofocus></div>
+		</div>
+		<span class="separator"></span>
+		<%= form.input :project_website, as: :string, label: 'project website', label_html: { class: 'c-section-title -one-line'}, input_html: {placeholder: 'http://example.org/', class: '-input-line'}, :required => false %>
+		<span class="separator"></span>
+		<%= form.input :project_types, as: :select, label: 'project type', label_html: { class: 'c-section-title -one-line'}, input_html: {class: 'chosen-select'} %>
+		<span class="separator"></span>
+		<%= form.input :cancer_types, as: :select, label: 'cancer type', label_html: { class: 'c-section-title -one-line'}, input_html: {class: 'chosen-select'} %>
+		<span class="separator"></span>
+		<%= form.input :project_website, as: :string, label: 'funding source', label_html: { class: 'c-section-title -one-line'}, input_html: {placeholder: 'Name', class: '-input-line'}, :required => false %>
+	</div>
+</div>
+<div class="c-section-container -staff">
+	<div class="c-staff -headers">
+		<span class="-item">investigator</span>
+		<span class="-item">organization*</span>
+		<span class="-item">address</span>
+		<span class="-item">lead</span>
+	</div>
+	<div class="c-staff -row">
+		<div class="-item">
+			<select name="investigators" class="chosen-select" data-placeholder="Select or add investigator">
+                <option value="">Select or add investigator</option>
+              </select>
+		</div>
+		<div class="-item">
+			<select name="organizations" class="chosen-select" data-placeholder="Select or add investigation">
+                <option value="">Select or add investigation</option>
+              </select>
+		</div>
+		<div class="-item">
+			<select name="address" class="chosen-select" data-placeholder="Select or add investigation">
+                <option value="">Select or add address</option>
+              </select>
+		</div>
+		<div class="-item">
+			<label for="tick-lead-0"></label><input type="checkbox" id="tick-lead-0"><span class="circle"></span>
+		</div>
+	</div>
+	<div class="c-staff -row">
+		<div class="-item">
+			<select name="investigators" class="chosen-select" data-placeholder="Select or add investigator">
+                <option value="">Select or add investigator</option>
+              </select>
+		</div>
+		<div class="-item">
+			<select name="organizations" class="chosen-select" data-placeholder="Select or add investigation">
+                <option value="">Select or add investigation</option>
+              </select>
+		</div>
+		<div class="-item">
+			<select name="address" class="chosen-select" data-placeholder="Select or add investigation">
+                <option value="">Select or add address</option>
+              </select>
+		</div>
+		<div class="-item">
+			<label for="tick-lead-1"></label><input type="checkbox" id="tick-lead-1"><span class="circle"></span>
+		</div>
+	</div>
+	<div class="c-staff -row">
+		<div class="-item">
+			<select name="investigators" class="chosen-select" data-placeholder="Select or add investigator">
+                <option value="">Select or add investigator</option>
+              </select>
+		</div>
+		<div class="-item">
+			<select name="organizations" class="chosen-select" data-placeholder="Select or add investigation">
+                <option value="">Select or add investigation</option>
+              </select>
+		</div>
+		<div class="-item">
+			<select name="address" class="chosen-select" data-placeholder="Select or add investigation">
+                <option value="">Select or add address</option>
+              </select>
+		</div>
+		<div class="-item">
+			<label for="tick-lead-2"></label><input type="checkbox" id="tick-lead-2"><span class="circle"></span>
+		</div>
+	</div>
+	<div class="c-staff -row">
+		<div class="-item">
+			<select name="investigators" class="chosen-select" data-placeholder="Select or add investigator">
+                <option value="">Select or add investigator</option>
+              </select>
+		</div>
+		<div class="-item">
+			<select name="organizations" class="chosen-select" data-placeholder="Select or add investigation">
+                <option value="">Select or add investigation</option>
+              </select>
+		</div>
+		<div class="-item">
+			<select name="address" class="chosen-select" data-placeholder="Select or add investigation">
+                <option value="">Select or add address</option>
+              </select>
+		</div>
+		<div class="-item">
+			<label for="tick-lead-3"></label><input type="checkbox" id="tick-lead-3"><span class="circle"></span>
+		</div>
+	</div>
+</div>
+<div class="c-section-container -staff">
+	<div class="c-staff -row">
+		Submitted information will be verified by the GCPM team to ensure data quality, and may be standardized and/or formatted for consistency before it is published. Checking this box acknowledges that you agree to share this information for public display on the Global Cancer Project Map.
+	</div>
+	<div class="c-staff -row">
+		<input type="checkbox" required> I accept these terms<span class="circle"></span>
+	</div>
+</div>
