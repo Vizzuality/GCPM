@@ -22,7 +22,7 @@
                   <select name="countries" class="chosen-select" multiple data-placeholder="All countries">
                     <option value="">All countries</option>
                     <% @countries.each do |country| %>
-                      <option value="<%= country['iso'] %>"><%= country['name'] %></option>
+                      <option value="<%= country['country_iso_3'] %>"><%= country['country_name'] %></option>
                     <% end %>
                   </select>
                 </div>

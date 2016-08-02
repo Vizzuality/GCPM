@@ -87,17 +87,31 @@
      */
     _unserializeParams: function() {
       var params = {};
-      if (location.search.length) {
-        var paramsArr = decodeURIComponent(location.search.slice(1)).split('&'),
-          temp = [];
-        for (var p = paramsArr.length; p--;) {
-          temp = paramsArr[p].split('=');
-          if (temp[1] && !_.isNaN(Number(temp[1]))) {
-            params[temp[0]] = Number(temp[1]);
-          } else if (temp[1]) {
-            params[temp[0]] = temp[1];
+      var search = window.location.search;
+      if (search) {
+        search.substring(1).split('&').forEach(function(pair) {
+          pair = pair.split('=');
+          if (!!pair[1]) {
+            var key = decodeURIComponent(pair[0]),
+                val = decodeURIComponent(pair[1]),
+                val = val ? val.replace(/\++/g,' ').trim() : '';
+
+            if (key.length === 0) {
+              return;
+            }
+            if (params[key] === undefined) {
+              console.log(val, !isNaN(val));
+              params[key] = (!isNaN(val)) ? Number(val) : val;
+            }
+            else {
+              if ("function" !== typeof params[key].push) {
+                params[key] = [params[key]];
+              }
+              
+              params[key].push((!isNaN(val)) ? Number(val) : val);
+            }
           }
-        }
+        });        
       }
       return params;
     },

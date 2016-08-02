@@ -13,6 +13,19 @@
 	box-shadow: $shadow-1;
   background: $color-3;
 
+  &:hover {
+    background: darken($color-3, 2.5%);
+  }
+
+  .value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: $font-size-x-medium;
+    font-weight: $font-weight-bold;
+    color: $color-2;
+  }
 
   &.-project-markers {
     background: $color-3;
@@ -79,16 +92,5 @@
 	.arc {
 
 	}
-
-	.value {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%,-50%);
-		font-size: $font-size-big;
-		font-weight: $font-weight-bold;
-		color: $color-2;
-	}
-
 
 }

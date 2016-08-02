@@ -69,9 +69,12 @@
       var params = this.router.getParams(),
           layersCollection = new App.Collection.Layers();
 
+      console.log(params);
+
       // // Views
       new App.View.Map({
-        layers: layersCollection
+        layers: layersCollection,
+        params: params
       });
 
       new App.View.MapMenu();
