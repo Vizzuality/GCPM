@@ -37,9 +37,16 @@
     </div>
   <% end %>
 
-  <h3>Cancel my account</h3>
 
-  <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { :class => "c-button -filled", confirm: "Are you sure?" }, method: :delete %></p>
+  <div class="cancel-account">
+    <div>
+    <h3 class="c-title -small">Cancel my account</h3>
+    <div class="cancel">
+      <p>Unhappy?</p>
+      <%= button_to "Cancel my account", registration_path(resource_name), :class => "c-button", data: { confirm: "Are you sure?" }, method: :delete %>
+    </div>
+    </div>
+  </div>
 
-  <%= link_to "Back", :back, { :class => "c-button" } %>
+  <%= link_to "Back", :back, { :class => "c-button -filled" } %>
 </div>
