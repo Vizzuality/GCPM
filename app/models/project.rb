@@ -37,8 +37,24 @@ class Project < ApplicationRecord
   validates_presence_of :title, :summary
   validates :title, uniqueness: true
 
-  scope :active,   -> { where('projects.end_date >= ? AND projects.start_date <= ?', Time.now, Time.now).or(where('projects.end_date IS NULL')) }
-  scope :inactive, -> { where('projects.end_date < ?', Time.now).or('projects.start_date > ?', Time.now)                                        }
+  scope :publihsed, -> { where(status: :published) }
+  scope :active,    -> { where('projects.end_date >= ? AND projects.start_date <= ?', Time.now, Time.now).or(where('projects.end_date IS NULL')) }
+  scope :inactive,  -> { where('projects.end_date < ?', Time.now).or('projects.start_date > ?', Time.now)                                        }
+
+  def self.fetch_all(options)
+    projects = Project.published
+    projects = projects.by_project_types(options[:project_types])           if options[:project_types]
+    projects = projects.by_cancer_types(options[:cancer_types])             if options[:cancer_types]
+    projects = projects.by_countries(options[:countries])                   if options[:countries]
+    projects = projects.by_regions(options[:regions])                       if options[:regions]
+    projects = projects.by_organizations(options[:organizations])           if options[:organizations]
+    projects = projects.by_organization_types(options[:organization_types]) if options[:organization_types]
+    projects = projects.by_start_date(options[:start_date])                 if options[:start_date]
+    projects = projects.by_end_date(options[:end_date])                     if options[:end_date]
+    projects = projects.limit(options[:limit])                              if options[:limit]
+    projects = projects.offset(options[:offset])                            if options[:offset]
+    projects
+  end
 
   def project_lead
     investigators.where(memberships: { membership_type: 0 }).first

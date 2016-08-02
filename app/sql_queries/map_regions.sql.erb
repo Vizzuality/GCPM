@@ -22,7 +22,7 @@ from projects
       inner join cancer_types_projects on cancer_types_projects.project_id = projects.id
       inner join cancer_types on cancer_types_projects.cancer_type_id = cancer_types.id
     <% end %>
-    where 1 = 1
+    where projects.status = 1
     <% if @params[:countries] %>
       and countries.id in     <%= "#{'(' + @params[:countries].join(',') + ')'}" %>
     <% end %>
