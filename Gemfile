@@ -32,6 +32,8 @@ gem 'sendgrid-ruby'
 # Api engine
 gem 'cartomodel', git: 'http://github.com/Vizzuality/cartomodel'
 
+gem 'sql_query'
+
 source 'https://rails-assets.org' do
   gem 'rails-assets-normalize-css'
   gem 'rails-assets-underscore'
