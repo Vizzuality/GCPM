@@ -18,6 +18,12 @@
 			padding: 50px;
 	  	}
   	}
+	.-m-edited .chosen-single span {
+		color: rgba($color-2,1);
+	}
+	.chosen-container {
+		position: absolute;
+	}
 	.c-section-half {
 		width: 50%;
 		padding: 0 50px 50px;
@@ -27,6 +33,9 @@
 			border-right: 1px solid rgba(0, 0, 0, .15);
 		}
 		.chosen-container-active.chosen-with-drop {
+			position: relative;
+		}
+		.chosen-container {
 			position: relative;
 		}
 		.c-section-title {
