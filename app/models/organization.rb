@@ -15,10 +15,13 @@
 
 class Organization < ApplicationRecord
   has_many :addresses
+  has_many :funders
+  has_many :funded_projects, through: :funders, source: :project
   accepts_nested_attributes_for :addresses, allow_destroy: true
   belongs_to :organization_type
   has_many :research_units, through: :addresses
   has_many :investigators, through: :research_units, foreign_key: 'investigator_id'
   has_many :memberships, through: :research_units
   has_many :projects, through: :memberships
+  validates_presence_of :name
 end

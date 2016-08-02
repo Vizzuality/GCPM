@@ -11,6 +11,11 @@
 
   <body>
     <%= render "shared/header" %>
+    <% if alert %>
+      <%= alert %>
+    <% else %>
+      <%= notice %>
+    <% end %>
     <%= yield %>
     <%= render "shared/footer" %>
   </body>

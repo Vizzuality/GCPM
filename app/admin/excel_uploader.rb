@@ -3,7 +3,7 @@ ActiveAdmin.register_page "Excel Upload" do
     skip_before_action :verify_authenticity_token
     after_action :reset_keys, only: :create
     def index
-      render 'admin/excel_upload/new', :layout => 'active_admin'
+      render 'admin/excel_upload/new', layout: 'active_admin'
     end
     def reset_keys
       Rake::Task['db:keys'].reenable # in case you're going to invoke the same task second time.
@@ -16,7 +16,8 @@ ActiveAdmin.register_page "Excel Upload" do
       if importer.import!
 
         render json: {
-          success: true
+          success: true,
+          errors: importer.errors
         }
 
       else

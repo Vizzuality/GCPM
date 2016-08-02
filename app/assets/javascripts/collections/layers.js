@@ -8,7 +8,7 @@
     layers: [
       {
         id: 1,
-        slug: 'project-markers',
+        slug: 'projects',
         name: 'Project markers',
         type: 'marker',
         description: 'Project markers',
@@ -20,7 +20,7 @@
       },
       {
         id: 2,
-        slug: 'people-markers',
+        slug: 'people',
         name: 'People markers',
         type: 'marker',
         description: 'People markers',
@@ -32,7 +32,7 @@
       },
       {
         id: 3,
-        slug: 'event-markers',
+        slug: 'event',
         name: 'Events markers',
         type: 'marker',
         description: 'Events markers',

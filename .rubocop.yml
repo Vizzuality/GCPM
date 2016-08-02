@@ -1,5 +1,5 @@
 AllCops:
-  TargetRubyVersion: 2.1
+  TargetRubyVersion: 2.3
   # Cop names are not displayed in offense messages by default. Change behavior
   # by overriding DisplayCopNames, or by giving the -D/--display-cop-names
   # option.
@@ -151,10 +151,6 @@ Style/ConstantName:
 
 # Use def with parentheses when there are arguments.
 Style/DefWithParentheses:
-  Enabled: false
-
-# Checks for use of deprecated Hash methods.
-Style/DeprecatedHashMethods:
   Enabled: false
 
 # Document classes and non-namespace modules.
@@ -597,6 +593,10 @@ Style/StringLiterals:
 Style/StringLiteralsInInterpolation:
   Enabled: false
 
+# Cheks for Missing frozen string literal comments
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
 # Checks if configured preferred methods are used over non-preferred.
 Style/StringMethods:
   Enabled: false
@@ -1033,7 +1033,7 @@ Rails/FindEach:
 
 # Prefer has_many :through to has_and_belongs_to_many.
 Rails/HasAndBelongsToMany:
-  Enabled: true
+  Enabled: false
 
 # Checks for calls to puts, print, etc.
 Rails/Output:

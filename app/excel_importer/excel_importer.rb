@@ -18,7 +18,7 @@ class ExcelImporter
     previous_row = nil
 
     parsed_excel = @projects_excel_book.each_with_index.map do |row, i|
-      next if i == 0 # first row is the header
+      next if i.zero? # first row is the header
 
       project_id = row[0]
 
@@ -36,13 +36,20 @@ class ExcelImporter
     end
 
     parsed_excel.each do |row|
-      begin
-        project_data = DataExtractor.new(row)
-        project_data.extract
-        Rails.logger.debug 'Project imported'
-      rescue Exception => e
-        Rails.logger.debug e
-        Rails.logger.debug e.backtrace.join("\n")
+      unless row.blank?
+        row.each{ |k,v| v.strip! if v.is_a?(String) && !(v.equal? v) }
+        begin
+          project_data = DataExtractor.new(row)
+          project_data.extract_project
+          project_data.extract_project_lead
+          project_data.extract_collaborators
+          project_data.extract_funding_sources
+          @errors << project_data.errors.reject(&:blank?) if project_data.errors && !(project_data.errors.reject(&:blank?).blank?)
+          Rails.logger.debug 'Project imported'
+        rescue => e
+          Rails.logger.debug e
+          Rails.logger.debug e.backtrace.join("\n")
+        end
       end
     end
   end

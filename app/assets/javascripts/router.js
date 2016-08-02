@@ -5,10 +5,16 @@
   App.Router = Backbone.Router.extend({
 
     routes: {
+      /* Had to set root path this way to allow main
+       listeners to init common views in the home */
+      '': '',
       // map
       'map': 'map',
       'countries': 'countries',
-      'countries/:iso': 'country'
+      'countries/:iso': 'country',
+      'cancer-types': 'cancer-types',
+      'cancer-types/:iso': 'cancer-type',
+      'about': 'about'
     },
 
     params: new (Backbone.Model.extend()),

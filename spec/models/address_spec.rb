@@ -4,7 +4,7 @@
 #
 #  id               :integer          not null, primary key
 #  city             :string
-#  country          :string
+#  country_name     :string
 #  country_code     :string
 #  latitude         :float
 #  longitude        :float
@@ -19,10 +19,11 @@
 #  organization_id  :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  country_id       :integer
 #
 
 require 'rails_helper'
 
-RSpec.describe Address, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe Address, type: :model do
+  # pending "add some examples to (or delete) #{__FILE__}"
 end

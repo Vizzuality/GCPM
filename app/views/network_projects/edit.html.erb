@@ -1,4 +1,4 @@
-<% simple_form_for @project do |f| %>
+<%= simple_form_for [@user, @project] do |f| %>
   <%= render partial: f %>
-  <%= f.button :submit, 'update', class: '' %>
+  <%= f.button :submit, 'Update', class: '' %>
 <% end %>
