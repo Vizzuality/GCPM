@@ -17,7 +17,7 @@ module Api
       end
 
       def map_params
-        params.permit(:start_date, :end_date, countries:[], cancer_types:[], organization_types:[], organizations:[])
+        params.permit(:start_date, :end_date, project_types:[], countries:[], cancer_types:[], organization_types:[], organizations:[])
       end
     end
   end
