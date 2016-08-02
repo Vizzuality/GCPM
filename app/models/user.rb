@@ -37,11 +37,11 @@ class User < ApplicationRecord
 
   has_many :projects, inverse_of: :user
 
-  def active_projects
+  def published_projects
     projects.published
   end
 
-  def inactive_projects
+  def unpublished_projects
     projects.unpublished | projects.under_revision
   end
 end
