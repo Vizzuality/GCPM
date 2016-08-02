@@ -31,7 +31,7 @@ class Address < ApplicationRecord
 
   def assign_country
     if self.country.present?
-      self.country_name = self.country.name
+      self.country_name = self.country.country_name
       self.country_code = self.country.country_iso_3
     else
       begin
