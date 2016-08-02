@@ -24,6 +24,7 @@ class Project < ApplicationRecord
   has_many :organizations,   through: :memberships
   has_many :investigators,   through: :research_units, source: :investigator
   has_many :addresses,       through: :research_units, source: :address
+  has_many :countries,       through: :addresses
   has_many :funders
   has_many :funding_sources, through: :funders,        source: :organization
 
@@ -36,8 +37,8 @@ class Project < ApplicationRecord
   validates_presence_of :title, :summary
   validates :title, uniqueness: true
 
-  scope :active,   -> { where('end_date >= ? AND start_date <= ?', Time.now, Time.now).or(where('end_date IS NULL')) }
-  scope :inactive, -> { where('end_date < ?', Time.now).or('start_date > ?', Time.now)                                        }
+  scope :active,   -> { where('projects.end_date >= ? AND projects.start_date <= ?', Time.now, Time.now).or(where('projects.end_date IS NULL')) }
+  scope :inactive, -> { where('projects.end_date < ?', Time.now).or('projects.start_date > ?', Time.now)                                        }
 
   def project_lead
     investigators.where(memberships: { membership_type: 0 }).first

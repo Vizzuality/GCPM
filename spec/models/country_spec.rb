@@ -11,6 +11,7 @@
 #  region_centroid  :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  country_iso_3    :string
 #
 
 require 'rails_helper'

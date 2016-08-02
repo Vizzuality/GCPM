@@ -44,7 +44,7 @@ class ExcelImporter
           project_data.extract_project_lead
           project_data.extract_collaborators
           project_data.extract_funding_sources
-          @errors << { errors: project_data.errors } if project_data.errors
+          @errors << project_data.errors.reject(&:blank?) if project_data.errors && !(project_data.errors.reject(&:blank?).blank?)
           Rails.logger.debug 'Project imported'
         rescue => e
           Rails.logger.debug e
