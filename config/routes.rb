@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get '/about',          to: 'about#index',        as: 'about'
 
   # User profile projects
-  resources :users, only: :show, path: :network do
+  resources :users, path: 'network', only: :show do
     resources :projects, controller: 'network_projects', except: :index
   end
 

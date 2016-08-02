@@ -1,5 +1,16 @@
-<%= form.input :title %>
-<%= form.input :summary %>
-<%= form.input :project_website %>
-<%= form.input :start_date %>
-<%= form.input :end_date %>
+<div class="form-inputs">
+  <%= form.input :title %>
+  <%= form.input :summary %>
+  <%= form.input :project_website %>
+  <%= form.input :start_date %>
+  <%= form.input :end_date %>
+
+  <div>
+    <%= form.fields_for :investigators do |investigators_form| %>
+      <%= render 'investigator_relation_form', f: investigators_form %>
+    <% end %>
+    <p class="add-button">
+      <%= add_investigator_path 'Add investigator', form, :investigators, 'add_fields add_investigator add_investigators_fields' %>
+    </p>
+  </div>
+</div>

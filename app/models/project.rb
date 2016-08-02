@@ -34,6 +34,8 @@ class Project < ApplicationRecord
   has_and_belongs_to_many :project_types
   has_and_belongs_to_many :cancer_types
 
+  accepts_nested_attributes_for :memberships, allow_destroy: true
+
   validates_presence_of :title, :summary
   validates :title, uniqueness: true
 
