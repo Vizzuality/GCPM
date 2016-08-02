@@ -61,9 +61,9 @@
       <div class="c-buttons-group">
         <a href="/" class="c-button -inverse -filled btn-large"><%= t 'share_my_info' %></a>
         <div class="row-buttons">
-          <a href="/" class="c-button -inverse">+ <%= t 'projects' %></a>
-          <a href="/" class="c-button -inverse">+ <%= t 'posts' %></a>
-          <a href="/" class="c-button -inverse">+ <%= t 'events' %></a>
+          <%= link_to "+ " + (t 'projects'), new_user_project_path(current_user), { :class => "c-button -inverse" } %>
+          <%= link_to "+ " + (t 'posts'), "#", { :class => "c-button -inverse" } %>
+          <%= link_to "+ " + (t 'events'), "#", { :class => "c-button -inverse" } %>
         </div>
       </div>
 
@@ -71,7 +71,7 @@
         <% @filters.each do |filter| %>
           <li>
             <%= link_to (t filter),
-              map_path(request.query_parameters.merge({ type: filter })),
+              user_path(request.query_parameters.merge({ type: filter })),
               class: active_param?('type', filter),
               remote: true,
               data: {magic: true} %>
@@ -80,8 +80,10 @@
       </ul>
     </div>
   </div>
+  <div id="content">
+    <%= render(:partial => @current_type) %>
+  </div>
 
-  <%= render(:partial => @current_type) %>
 
 </section>
 

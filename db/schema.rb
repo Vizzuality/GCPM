@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160802121917) do
+ActiveRecord::Schema.define(version: 20160802174327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,28 @@ ActiveRecord::Schema.define(version: 20160802121917) do
     t.string   "country_iso_3"
   end
 
+  create_table "events", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.text     "website"
+    t.text     "excerpt"
+    t.text     "participants"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.boolean  "private"
+    t.boolean  "online"
+    t.text     "address"
+    t.text     "address2"
+    t.string   "city"
+    t.string   "country"
+    t.string   "state"
+    t.float    "latitute"
+    t.float    "longitude"
+    t.string   "postcode"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "funders", force: :cascade do |t|
     t.integer  "organization_id"
     t.integer  "project_id"
@@ -117,8 +139,6 @@ ActiveRecord::Schema.define(version: 20160802121917) do
     t.integer  "membership_type",  default: 1
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
-    t.integer  "address_id"
-    t.index ["address_id"], name: "index_memberships_on_address_id", using: :btree
     t.index ["membership_type"], name: "index_memberships_on_membership_type", using: :btree
     t.index ["project_id"], name: "index_memberships_on_project_id", using: :btree
     t.index ["research_unit_id"], name: "index_memberships_on_research_unit_id", using: :btree
