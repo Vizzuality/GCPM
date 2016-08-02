@@ -86,6 +86,8 @@
 			    display: inline-block;
 			    cursor: pointer;
 			    border-radius: 100%;
+			    position: relative;
+			    z-index: 1;
 			}
 			.circle {
 				display: none;
