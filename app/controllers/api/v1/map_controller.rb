@@ -12,7 +12,6 @@ module Api
         else
           query = SqlQuery.new(:map_regions)
         end
-
         json_list = query.execute
         render json: json_list
       end
