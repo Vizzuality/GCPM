@@ -38,6 +38,9 @@ from projects
     <% if @params[:cancer_types] %>
       and cancer_types.id in <%= "#{'(' + @params[:cancer_types].join(',') + ')'}" %>
     <% end %>
+    <% if @params[:regions] %>
+      and countries.region_iso in <%= @params[:regions].to_s.gsub('[', '(').gsub(']',')').gsub('"',"'") %>
+    <% end %>
     <% if @params[:start_date] %>
       and (projects.start_date > date(<%= quote @params[:start_date] %>))
     <% end %>
