@@ -101,7 +101,6 @@
               return;
             }
             if (params[key] === undefined) {
-              console.log(val, !isNaN(val));
               params[key] = (!isNaN(val)) ? Number(val) : val;
             }
             else {

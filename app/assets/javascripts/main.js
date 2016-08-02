@@ -67,7 +67,7 @@
     },
 
     mapPage: function() {
-      var params = this.router.getParams(),
+      var params = this.setParams(this.router.getParams()),
           layersCollection = new App.Collection.Layers();
 
       console.log(params);
@@ -132,6 +132,11 @@
       layersCollection.toggleLayers([
         params.type || 'org-project-markers'
       ]);
+    },
+
+    setParams: function(params) {
+      var params = params;
+      return params;
     }
 
   });

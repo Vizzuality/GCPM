@@ -5,11 +5,11 @@ class MapController < ApplicationController
     @params = request.query_parameters
 
     # Common vars
-    @countries = Country.all
-    @organizations = Organization.all
+    @countries = Country.all.order('country_name')
+    @organizations = Organization.all.order('name')
     @organization_types = OrganizationType.all
-    @cancer_types = CancerType.all
-    @project_types = ProjectType.all
+    @cancer_types = CancerType.all.order('name')
+    @project_types = ProjectType.all.order('name')
 
     # Projects
     #Limit of projects shown at the begenning and added when show more button clicked
