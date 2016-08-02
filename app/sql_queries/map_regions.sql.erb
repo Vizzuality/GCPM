@@ -1,7 +1,11 @@
-select count(distinct(projects.id)), countries.region_name, countries.region_centroid, countries.region_iso
+select count(distinct(projects.id)),
+countries.region_name as name,
+countries.region_centroid as centroid,
+countries.region_iso as iso,
+'region' as type
 from projects
  inner join memberships on memberships.project_id = projects.id
     inner join research_units on memberships.research_unit_id = research_units.id
     inner join addresses on research_units.address_id = addresses.id
     inner join countries on addresses.country_id = countries.id
-group by countries.region_name, countries.region_centroid, countries.region_iso
+group by name, centroid, iso

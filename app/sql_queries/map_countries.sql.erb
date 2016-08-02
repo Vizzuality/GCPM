@@ -1,7 +1,15 @@
-select count(distinct(projects.id)), countries.country_name, countries.country_centroid, countries.country_iso_3
+select count(distinct(projects.id)),
+countries.country_name as name,
+countries.country_centroid as centroid,
+countries.country_iso_3 as iso,
+'country' as type
 from projects
  inner join memberships on memberships.project_id = projects.id
     inner join research_units on memberships.research_unit_id = research_units.id
     inner join addresses on research_units.address_id = addresses.id
     inner join countries on addresses.country_id = countries.id
-group by countries.country_name, countries.country_centroid, countries.country_iso_3
+    where 1 = 1
+    <% if @params[:countries] %>
+      and countries.id in <%= "#{'(' + @params[:countries].join(',') + ')'}" %>
+    <% end %>
+group by name, centroid, iso

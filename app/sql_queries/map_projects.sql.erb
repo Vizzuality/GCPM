@@ -1,8 +1,14 @@
-select projects.id, projects.title, countries.country_name, countries.country_centroid, countries.country_iso_3,
+select
+projects.id as project,
+projects.title as project_title,
+countries.country_name as name,
+countries.country_centroid as centroid,
+countries.country_iso_3 as iso,
+'project' as type,
 case when (memberships.membership_type = 0) then true else false end as is_project_lead
 from projects
  inner join memberships on memberships.project_id = projects.id
     inner join research_units on memberships.research_unit_id = research_units.id
     inner join addresses on research_units.address_id = addresses.id
     inner join countries on addresses.country_id = countries.id
-group by projects.id, projects.title, countries.country_name, countries.country_centroid, countries.country_iso_3, is_project_lead
+group by project, project_title, name, centroid, iso, is_project_lead
