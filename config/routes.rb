@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     scope module: :v1 do
       resources :regions,      only: [:index, :show]
       resources :cancer_types, only: [:index, :show], path: '/cancer-types'
+      resources :map, only: [:index]
 
       get 'lists/countries',    to: 'lists#countries'
       get 'lists/cancer-types', to: 'lists#cancer_types'

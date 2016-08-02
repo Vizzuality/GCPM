@@ -1,14 +1,8 @@
-select projects.id as projects_id, projects.title as project_title,
-countries.country_name, countries.country_iso_3, countries.country_centroid,
-json_agg(distinct(cancer_types.name)) as cancer_types,
+select projects.id, projects.title, countries.country_name, countries.country_centroid, countries.country_iso_3,
 case when (memberships.membership_type = 0) then true else false end as is_project_lead
-from cancer_types
-inner join cancer_types_projects on cancer_types_projects.cancer_type_id = cancer_types.id
-inner join projects on cancer_types_projects.project_id = projects.id
-inner join memberships on memberships.project_id = projects.id
-inner join research_units on memberships.research_unit_id = research_units.id
-inner join addresses on research_units.address_id = addresses.id
-inner join countries on addresses.country_id = countries.id
-group by projects_id, project_title,
-countries.country_name, countries.country_iso_3,
-countries.country_centroid, memberships.membership_type
+from projects
+ inner join memberships on memberships.project_id = projects.id
+    inner join research_units on memberships.research_unit_id = research_units.id
+    inner join addresses on research_units.address_id = addresses.id
+    inner join countries on addresses.country_id = countries.id
+group by projects.id, projects.title, countries.country_name, countries.country_centroid, countries.country_iso_3, is_project_lead
