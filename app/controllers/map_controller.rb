@@ -25,4 +25,9 @@ class MapController < ApplicationController
     end
   end
 
+  private
+  def projects_params
+    params.permit(:limit, :offset, :start_date, :end_date, project_types:[], countries:[], cancer_types:[], organization_types:[], organizations:[], regions:[])
+  end
+
 end
