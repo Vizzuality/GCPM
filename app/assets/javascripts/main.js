@@ -79,7 +79,9 @@
       });
 
       new App.View.MapMenu();
-      new App.View.MapFilters();
+      new App.View.MapFilters({
+        params: params
+      });
       new App.View.MapLayers();
 
       // Sync layers
@@ -134,8 +136,23 @@
       ]);
     },
 
+    /**
+     * - setParams
+     * This function will parse the params of the url, if we need
+     * different group or something like that
+     * 
+     */
     setParams: function(params) {
       var params = params;
+
+      if (params['regions[]']) {
+        params.group = 'countries';
+      }
+
+      if (params['countries[]']) {
+        params.group = 'projects';
+      }
+
       return params;
     }
 

@@ -12,7 +12,8 @@
 
     parse: function(response) {
       return _.map(response, function(marker){
-        marker.centroid = JSON.parse(marker.centroid).coordinates.reverse();
+        var centroid = (marker.type == 'region') ? JSON.parse(marker.centroid).coordinates.reverse() :JSON.parse(marker.centroid).coordinates
+        marker.centroid = centroid;
         return marker;
       })
     }

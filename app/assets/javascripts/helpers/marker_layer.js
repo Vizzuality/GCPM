@@ -57,6 +57,7 @@
             icon: icon,
             riseOnHover: true,
             data: {
+              type: marker.type,
               location_name: marker.location_name,
               iso: marker.iso
             }
@@ -100,9 +101,12 @@
     getSize: function(value) {
       var constant = 20,
           multiplier = 10,
-          size = Math.round(constant + (Math.log(value) * multiplier));
+          size = 5;
 
-      return size;
+      if (value) {
+        size = Math.round(constant + (Math.log(value) * multiplier));
+      }
+      return size;        
     },
 
     getSVG: function(marker) {
@@ -158,6 +162,13 @@
       return "";
     },
 
+
+    /**
+     * UI EVENTS
+     * - _onMouseover
+     * - _onMouseout
+     * - _onMouseclick
+     */
     _onMouseover: function(e) {
       // var pos = this.map.latLngToContainerPoint(e.target._latlng);
       // var data = e.target.options.data;
@@ -180,33 +191,25 @@
     },
 
     _onMouseclick: function(e) {
-      console.log(e);
-      console.log(e.target.options.data);
-      // // set default radius to all markers
-      // this._resetSelected();
-      // // set default radius to current
-      // Backbone.Events.trigger('Location/update', e.target.options.data.cartodb_id);
+      var data = e.target.options.data;
+      
+      if (data.type == 'region') {
+        Backbone.Events.trigger('Filters/update', {
+          'regions[]': data.iso
+        });
+      }
+
+      if (data.type == 'country') {
+        Backbone.Events.trigger('Filters/update', {
+          'countries[]': data.iso
+        });
+      }
+
+      if (data.type == 'project') {
+        //TO-DO: Go to project
+        console.log('TO-DO: Go to project');
+      }      
     },
-
-    _setSelected: function(id) {
-      // if (!!this.markers && !!this.markers.length) {
-      //   var currentMarker = _.find(this.markers, function(marker) {
-      //     return (marker.options.data.cartodb_id == id);
-      //   });
-
-      //   currentMarker.bringToFront();
-      //   currentMarker.setRadius(25);
-      // }
-    },
-
-    _resetSelected: function() {
-      // if (!!this.markers && !!this.markers.length) {
-      //   // set default radius to all markers
-      //   _.each(this.markers, function(marker){
-      //     marker.setRadius(10);
-      //   }.bind(this));
-      // }
-    }
 
   });
 

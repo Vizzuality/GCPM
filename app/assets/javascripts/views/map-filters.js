@@ -45,17 +45,26 @@
 
 
 
-    initialize: function() {
+    initialize: function(settings) {
+      this.params = settings.params;
+
       // Initialize Parent
       this.constructor.__super__.initialize.apply(this);
+
       // Inits
       this.render();
       this.listeners();     
+
+
     },
 
     listeners: function() {
       Backbone.Events.on('Filters/toggle', function(){
         this.toggle();
+      }.bind(this));
+
+      Backbone.Events.on('Filters/update', function(newFilters){
+        this.publishFilters(newFilters);
       }.bind(this));
     },
 
@@ -112,6 +121,15 @@
         container: '#pickadate-end-container'
       }));
     },
+
+
+    /**
+     * PUBLISH
+     */
+    publishFilters: function(newFilters) {
+      var newParams = _.extend({}, this.params, newFilters);
+      window.location = '/map?' + $.param(newParams)
+    }
 
   });
 
