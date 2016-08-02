@@ -14,7 +14,8 @@
       'countries/:iso': 'country',
       'cancer-types': 'cancer-types',
       'cancer-types/:iso': 'cancer-type',
-      'about': 'about'
+      'about': 'about',
+      'network/:id': 'network'
     },
 
     params: new (Backbone.Model.extend()),
