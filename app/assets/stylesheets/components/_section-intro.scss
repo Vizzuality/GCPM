@@ -24,10 +24,10 @@
 .c-section-intro {
   position: relative;
 
-  &.-color-1 * { color: $color-1; }
-  &.-color-2 * { color: $color-6; }
-  &.-color-3 * { color: $color-4; }
-  &.-color-4 * { color: $color-3; }
+  &.-color-1 .intro-info { color: $color-1; }
+  &.-color-2 .intro-info { color: $color-6; }
+  &.-color-3 .intro-info { color: $color-4; }
+  &.-color-4 .intro-info { color: $color-3; }
 
   .intro-info {
     position: absolute;
