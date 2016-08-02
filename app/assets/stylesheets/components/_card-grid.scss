@@ -129,6 +129,10 @@
     > .c-button {
       display: inline-block;
       margin-top: 10px;
+
+      &.-network {
+        margin-top: 18px;
+      }
     }
 
     > .c-card-user-profile { margin-top: 25px; }

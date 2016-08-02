@@ -14,17 +14,16 @@
         <li><img src="" class="btn-search"></li>
         <% if user_signed_in? %>
           <li class="user-avatar">
-            <div class="c-user-profile-picture">
-              <div class="initials">LA</div>
-              <img src="" alt="{User name}'s profile picture'" />
+            <div class="c-user-profile-picture <%= @isProfile ? "-active" : "" %>">
+              <div class="initials">LK</div>
+              <!-- <img src="" alt="{User name}'s profile picture'" /> -->
               <!-- Notifications to set (set element on mobile too) -->
               <% if true %>
                 <div class="c-badge">7</div>
               <% end %>
-
               <div class="c-user-dropdown-menu js-user-dropdown-menu">
                 <ul class="user-profile menu-section">
-                  <li class="item"><%= link_to (t 'your_profile'), '/', {:class => "item-link", :method => :get} %></li>
+                  <li class="item"><%= link_to (t 'your_profile'), user_path(current_user), {:class => "item-link", :method => :get} %></li>
                   <li class="item"><%= link_to (t 'logout'), destroy_user_session_path, {:class => "item-link", :method => :delete} %></li>
                 </ul>
 
@@ -50,7 +49,7 @@
       <li><img src="" class="btn-search"></li>
       <% if user_signed_in? %>
         <li class="user-avatar">
-          <div class="c-user-profile-picture">
+          <div class="c-user-profile-picture <%= @isProfile ? "-active" : "" %>">
             <div class="initials">LA</div>
             <img src="" alt="{User name}'s profile picture'" />
             <!-- Notifications to set -->

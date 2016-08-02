@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160801171206) do
+ActiveRecord::Schema.define(version: 20160802121917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,6 +117,8 @@ ActiveRecord::Schema.define(version: 20160801171206) do
     t.integer  "membership_type",  default: 1
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+    t.integer  "address_id"
+    t.index ["address_id"], name: "index_memberships_on_address_id", using: :btree
     t.index ["membership_type"], name: "index_memberships_on_membership_type", using: :btree
     t.index ["project_id"], name: "index_memberships_on_project_id", using: :btree
     t.index ["research_unit_id"], name: "index_memberships_on_research_unit_id", using: :btree
@@ -124,13 +126,6 @@ ActiveRecord::Schema.define(version: 20160801171206) do
 
   create_table "organization_types", force: :cascade do |t|
     t.string "name"
-  end
-
-  create_table "organization_types_organizations", id: false, force: :cascade do |t|
-    t.integer "organization_id"
-    t.integer "organization_type_id"
-    t.index ["organization_id"], name: "index_organization_types_organizations_on_organization_id", using: :btree
-    t.index ["organization_type_id"], name: "index_organization_types_organizations_on_organization_type_id", using: :btree
   end
 
   create_table "organizations", force: :cascade do |t|

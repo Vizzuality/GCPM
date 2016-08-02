@@ -51,7 +51,7 @@ class ResearchUnitImporter
       organization.organization_type = organization_type
       organization.save!
       investigator.save!
-      def_address = Address.find_or_initialize_by(organization_id: organization.id, latitude: address.latitude, longitude: address.longitude, country: address.country, country_code: address.country_code, city: address.city, line_1: address.line_1)
+      def_address = Address.find_or_initialize_by(organization_id: organization.id, latitude: address.latitude, longitude: address.longitude, country_name: address.country_name, country_code: address.country_code, city: address.city, line_1: address.line_1)
       def_address.save!
       research_unit = ResearchUnit.find_or_initialize_by(address_id: def_address.id, investigator_id: investigator.id)
       research_unit.save!
