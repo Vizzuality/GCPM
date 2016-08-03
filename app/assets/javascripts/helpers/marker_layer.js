@@ -57,6 +57,7 @@
             icon: icon,
             riseOnHover: true,
             data: {
+              id: marker.id,
               type: marker.type,
               location_name: marker.location_name,
               iso: marker.iso
@@ -194,13 +195,15 @@
       var data = e.target.options.data;
       
       if (data.type == 'region') {
-        Backbone.Events.trigger('Filters/update', {
+        Backbone.Events.trigger('params:update', {
           'regions[]': data.iso
         });
       }
 
       if (data.type == 'country') {
-        Backbone.Events.trigger('Filters/update', {
+        Backbone.Events.trigger('params:update', {
+          // Should we set the regions to null?
+          // 'regions[]': null,
           'countries[]': data.iso
         });
       }

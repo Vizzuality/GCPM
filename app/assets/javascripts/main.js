@@ -31,6 +31,10 @@
 
       // Listening magic links
       App.Events.on('remote:load', this.replaceContent);
+      
+      // Update params
+      App.Events.on('params:update', this.publishParams.bind(this));
+
     },
 
     start: function() {
@@ -60,6 +64,8 @@
     },
 
     replaceContent: function(data) {
+      console.log('replace content');
+      console.log(data);
       var contentElement = document.getElementById('content');
       if (contentElement) {
         contentElement.innerHTML = data.content;
@@ -70,9 +76,7 @@
       var params = this.setParams(this.router.getParams()),
           layersCollection = new App.Collection.Layers();
 
-      console.log(params);
-
-      // // Views
+      // Views
       new App.View.Map({
         layers: layersCollection,
         params: params
@@ -138,9 +142,8 @@
 
     /**
      * - setParams
-     * This function will parse the params of the url, if we need
-     * different group or something like that
-     * 
+     * - publishParams
+     * This function will parse the params of the url
      */
     setParams: function(params) {
       var params = params;
@@ -154,6 +157,12 @@
       }
 
       return params;
+    },
+
+    publishParams: function(newParams) {
+      this.params = _.extend({}, this.params, newParams);
+      this.router.navigate('/map?' + $.param(this.params), { trigger: true });
+      Turbolinks.visit('/map?' + $.param(this.params));
     }
 
   });

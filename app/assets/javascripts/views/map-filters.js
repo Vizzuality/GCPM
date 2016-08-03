@@ -53,7 +53,6 @@
 
 
     initialize: function(settings) {
-
       // Initialize Parent
       this.constructor.__super__.initialize.apply(this);
 
@@ -73,10 +72,6 @@
     listeners: function() {
       Backbone.Events.on('Filters/toggle', function(){
         this.toggle();
-      }.bind(this));
-
-      Backbone.Events.on('Filters/update', function(newFilters){
-        this.publishFilters(newFilters);
       }.bind(this));
     },
 
@@ -160,16 +155,8 @@
     onSubmitFilters: function(e) {
       e && e.preventDefault();
       var newFilters = this.utils.getParams(this.$form.serialize());
-      this.publishFilters(newFilters);
+      App.Events.trigger('params:update', newFilters)
     },
-
-    /**
-     * PUBLISH
-     */
-    publishFilters: function(newFilters) {
-      var newParams = _.extend({}, this.params, newFilters);
-      window.location = '/map?' + $.param(newParams)
-    }
 
   });
 
