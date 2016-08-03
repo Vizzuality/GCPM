@@ -4,7 +4,7 @@
 
   App.Collection = App.Collection || {};
   App.Collection.Markers = Backbone.Collection.extend({
-    url: 'http://localhost:3000/api/map',
+    url: '/api/map',
 
     initialize: function(options) {
       this.options = options ? options : {};
