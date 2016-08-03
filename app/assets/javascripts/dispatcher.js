@@ -2,12 +2,13 @@
 
   'use strict';
 
+  var MainView = new App.MainView();
+
   function initApp() {
-    var app = new App.MainView();
     if (Backbone.History.started) {
-      app.stop();
+      MainView.stop();
     }
-    app.start();
+    MainView.start();
   }
 
   if (Turbolinks && Turbolinks.supported) {

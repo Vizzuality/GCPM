@@ -43,7 +43,7 @@
 
     listeners: function() {
       // this.layers.on('sync reset change', this.renderLayers.bind(this));
-      App.Events.on('remote:load', this.setMarkers);
+      // App.Events.on('remote:load', this.setMarkers);
     },
 
 
@@ -113,7 +113,6 @@
     setMarkers: function() {
 
       var markers = new App.Collection.Markers();
-      console.log(this.params);
 
       markers
         .fetch({
