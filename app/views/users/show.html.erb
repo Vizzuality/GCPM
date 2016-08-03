@@ -63,7 +63,7 @@
         <div class="row-buttons">
           <%= link_to "+ " + (t 'projects'), new_user_project_path(user_id: current_user.id), { :class => "c-button -inverse" } if user_signed_in? && @user == current_user %>
           <%= link_to "+ " + (t 'posts'), "#", { :class => "c-button -inverse" } %>
-          <%= link_to "+ " + (t 'events'), "#", { :class => "c-button -inverse" } %>
+          <%= link_to "+ " + (t 'events'), new_user_event_path(user_id: current_user.id), { :class => "c-button -inverse" } if user_signed_in? && @user == current_user %>
         </div>
       </div>
 

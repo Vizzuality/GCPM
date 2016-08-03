@@ -13,11 +13,10 @@ Rails.application.routes.draw do
 
   resources :projects, only: :show
 
-  resources :events, except: :destroy
-
-  # User profile projects
-  resources :users, path: 'network', only: :show do
+  # User profile
+  resources :users, only: :show, path: :network do
     resources :projects, controller: 'network_projects', except: :index
+    resources :events,   controller: 'network_events',   except: :destroy
   end
 
   get '/network/:id/projects', to: 'users#show'

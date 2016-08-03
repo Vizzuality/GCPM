@@ -36,6 +36,7 @@ class User < ApplicationRecord
          :confirmable, :lockable
 
   has_many :projects, inverse_of: :user
+  has_many :events, inverse_of: :user
 
   def published_projects
     projects.published.includes(:cancer_types)
@@ -44,4 +45,5 @@ class User < ApplicationRecord
   def unpublished_projects
     projects.unpublished.includes(:cancer_types) | projects.under_revision.includes(:cancer_types)
   end
+
 end

@@ -27,8 +27,8 @@
       this.listenTo(this.router, 'route:map', this.mapPage);
       this.listenTo(this.router, 'route:countries', this.countriesPage);
       this.listenTo(this.router, 'route:country', this.countryPage);
-      // TODO => move this out
-      new App.View.AddNewProject();
+
+      this.listenTo(this.router, 'route:network', this.userPage);
 
       // Listening magic links
       App.Events.on('remote:load', this.replaceContent);

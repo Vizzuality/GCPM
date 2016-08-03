@@ -7,6 +7,7 @@ class NetworkProjectsController < ApplicationController
   before_action :set_selection,    only: [:new, :create, :edit, :update]
 
   def show
+    @events = Event.all
   end
 
   def edit
