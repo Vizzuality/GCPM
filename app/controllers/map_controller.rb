@@ -19,7 +19,7 @@ class MapController < ApplicationController
 
     # Events
     #Limit of events shown at the beginning and added when show more button clicked
-    @events  = Event.order('created_at DESC').limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
+    # @events  = Event.order('created_at DESC').limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
 
     @current_type = params[:type] || 'projects'
     @filters = ['projects', 'people', 'events']
