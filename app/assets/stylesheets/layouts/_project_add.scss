@@ -108,6 +108,9 @@
 		&.-headers .-item {
 			height: 20px;
 		}
+		.f-accept-terms {
+			margin: 15px 0 0;
+		}
 	}
 }
 
@@ -134,5 +137,24 @@
 	.c-pickadate {
 		width: 50%;
     	float: left;
+	}
+}
+.-editable {
+	display: none;
+}
+.f-edited {
+	.-hide-edited {
+		visibility: hidden;
+	}
+	.-editable {
+		display: block;
+		border: none;
+	    border-bottom: 1px dashed red;
+	    width: 100%;
+	}
+	.c-title + input {
+		height: 60px;
+	    font-size: 50px;
+	    line-height: 60px;
 	}
 }

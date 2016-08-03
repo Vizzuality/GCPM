@@ -1,14 +1,14 @@
 <div class="c-section-intro">
-	<%= form.input :title, label: 'Project title_', label_html: { class: 'c-title -bigger -bold' }, :required => false %>
+	<%= form.input :title, label: 'Project title_', label_html: { class: 'c-title -bigger -bold -hide-edited' }, :required => false, input_html: {value: 'Project title_', class: '-editable'}  %>
 </div>
 <div class="c-section-container">
 	<div class="c-section-half -left">
 		<h3 class="c-section-title">Description</h3>
-		<%= form.input :summary %>
+		<%= form.input :summary, label: 'Summary', label_html: { class: '-hide-edited' }, :required => false, input_html: {value: 'Summary', class: '-editable', rows: '40'} %>
 	</div>
 	<div class="c-section-half">
 		<div class="c-pickadate">
-			<%= form.input :start_date, as: :string, input_html: {id: 'add-project-start_date', class: 'pickadate-input'}, label_html: { class: 'c-section-title' } %>
+			<%= form.input :start_date, as: :string, input_html: {id: 'add-project-start_date', class: 'pickadate-input'}, label_html: { class: 'c-section-title' }%>
 			<div id="pickadate-start-container" class="pickadate-container" autofocus></div>
 		</div>
 		<span class="separator"></span>
@@ -50,7 +50,7 @@
               </select>
 		</div>
 		<div class="-item -m-edited">
-			<label for="tick-lead-1"></label><input type="checkbox" id="tick-lead-1"><span class="circle"></span>
+			<label for="tick-lead-1"></label><input type="checkbox" id="tick-lead-1" class="lead-investigator"><span class="circle"></span>
 		</div>
 	</div>
 	<div class="c-staff -row">
@@ -70,15 +70,18 @@
               </select>
 		</div>
 		<div class="-item">
-			<label for="tick-lead-0"></label><input type="checkbox" id="tick-lead-0"><span class="circle"></span>
+			<label for="tick-lead-0"></label><input type="checkbox" id="tick-lead-0" class="lead-investigator"><span class="circle"></span>
 		</div>
 	</div>
 </div>
 <div class="c-section-container -staff">
 	<div class="c-staff -row">
+		<span class="c-section-title">terms</span>
+	</div>
+	<div class="c-staff -row">
 		Submitted information will be verified by the GCPM team to ensure data quality, and may be standardized and/or formatted for consistency before it is published. Checking this box acknowledges that you agree to share this information for public display on the Global Cancer Project Map.
 	</div>
 	<div class="c-staff -row">
-		<input type="checkbox" required> I accept these terms<span class="circle"></span>
+		<input type="checkbox" required class="f-accept-terms"> I accept these terms
 	</div>
 </div>
