@@ -4,9 +4,11 @@
 		height: 370px;
 		border-bottom: 1px solid rgba(0, 0, 0, .15);
 		padding: 0 50px;
+		position: relative;
 		.c-title {
-			padding-top: 230px;
 			display: block;
+		    position: absolute;
+		    bottom: 0;
 		}
 
 	}
@@ -81,6 +83,15 @@
 		.-item {
 			display: table-cell;
 			height: 40px;
+			.remove_fields {
+				color: #5aade4;
+		    	font-size: 30px;
+		    	vertical-align: sub;
+			}
+			> a {
+				color: #0f3046;
+				font-size: 15px;
+			}
 			input[type=checkbox] {
 			   display: none;
 			}

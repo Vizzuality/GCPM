@@ -1,15 +1,17 @@
 <div class="form-inputs c-staff -row">
   <div class="-item -m-edited">
     <% if f.object.research_unit_id.present? %>
+    <%= f.hidden_field :_destroy %>
+    <%= link_to '×', '#', id: "delete-#{f.object.id}", class: 'remove_fields' %>
       <%= link_to @project.select_investigators(f.object.research_unit_id), '#' %>
     <% else %>
       <%= f.input :research_unit_id, label: 'Investigator', collection: @project.select_investigators, as: :collection_select, input_html: { class: 'chosen-select' } %>
     <% end %>
-    <%= f.hidden_field :_destroy %>
-    <%= link_to 'X', '#', id: "delete-#{f.object.id}", class: 'remove_fields' %>
   </div>
   <div class="-item -m-edited">
     <% if f.object.research_unit_id.present? %>
+    <%= f.hidden_field :_destroy %>
+    <%= link_to '×', '#', id: "delete-#{f.object.id}", class: 'remove_fields' %>
       <%= link_to @project.select_organizations(f.object.research_unit_id), '#' %>
     <% else %>
       <select name="organizations" class="chosen-select" data-placeholder="Select or add investigation">
@@ -19,6 +21,8 @@
   </div>
   <div class="-item -m-edited">
     <% if f.object.research_unit_id.present? %>
+	    <%= f.hidden_field :_destroy %>
+	    <%= link_to '×', '#', id: "delete-#{f.object.id}", class: 'remove_fields' %>
       <%= link_to @project.select_addresses(f.object.research_unit_id), '#' %>
     <% else %>
       <select name="address" class="chosen-select" data-placeholder="Select or add investigation">
@@ -27,7 +31,6 @@
     <% end %>
   </div>
   <div class="-item -m-edited">
-    <%= f.input :membership_type, label: false, as: :string %>
-    <label for="tick-lead-1"></label><input type="checkbox" id="tick-lead-1" class="lead-investigator"><span class="circle"></span>
+    <label for="tick-lead-1"></label><input type="checkbox" id="tick-lead-1" class="lead-investigator" checked="{@project.membership_type}"><span class="circle"></span>
   </div>
 </div>
