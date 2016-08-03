@@ -71,6 +71,7 @@
 
     listeners: function() {
       App.Events.on('Filters/toggle', function(){
+        console.log('Filters');
         this.show();
       }.bind(this));
     },
@@ -156,7 +157,17 @@
      */
     onSubmitFilters: function(e) {
       e && e.preventDefault();
-      var newFilters = this.utils.getParams(this.$form.serialize());
+      // Yes, this is the only way I found to achieve it...
+      // I'm not proud of it
+      var serialization = Backbone.Syphon.serialize(this);
+      var newFilters = {};
+      _.each(serialization, function(val, key){
+        if (_.isArray(val)) {
+          newFilters[key+'[]'] = _.flatten(val);
+        } else {
+          newFilters[key] = val;  
+        }        
+      });
       App.Events.trigger('params:update', newFilters)
     },
 

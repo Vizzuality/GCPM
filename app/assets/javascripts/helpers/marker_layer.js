@@ -38,7 +38,9 @@
     create: function(callback) {
       var markers = this.options.markers;
       if (markers && markers.length) {
-        this.markers = _.map(markers, function(marker){
+        this.markers = _.compact(_.map(markers, function(marker){
+          if (! !!marker.centroid) { return null; }
+
           var size = this.getSize(marker.count),
               svg = this.getSVG(marker);
 
@@ -69,7 +71,7 @@
           // Return a leaflet marker
           return markerIcon;
 
-        }.bind(this));
+        }.bind(this)));
 
         // Group the markers and add them to the map
         var group = L.featureGroup(this.markers).addTo(this.map);

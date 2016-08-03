@@ -143,13 +143,15 @@
 
     publishParams: function(newParams) {
       this.params = _.extend({}, this.params, newParams);
-      this.router.navigate('/map?' + $.param(this.stripNull(this.params)));
-      Turbolinks.visit('/map?' + $.param(this.stripNull(this.params)));
+      this.params = this.stripNull(this.params);
+      this.router.navigate('/map?' + $.param(this.params));
+      Turbolinks.visit('/map?' + $.param(this.params));
     },
 
     stripNull: function(obj) {
       for (var i in obj) {
-        if (obj[i] === null) delete obj[i];
+        if (! !!obj[i]) delete obj[i];
+        if (_.isArray(obj[i]) && ! !!obj[i].length) delete obj[i];
       }
       return obj;
     }    
