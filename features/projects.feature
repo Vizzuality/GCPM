@@ -6,8 +6,10 @@ I want to manage an project
   Scenario: Visitor can view projects page and project page without login
     Given user
     And first project
+    And project by user
     When I go to the user projects page for "user-2@sample.com"
     Then I should see "First project by user"
+    And I should see "ToFactory: RubyParser exception parsing this attribute"
     And I should not see "Delete"
     And I should not see "Edit"
     When I follow "First project by user"

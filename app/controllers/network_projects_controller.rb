@@ -56,6 +56,7 @@ class NetworkProjectsController < ApplicationController
     end
 
     def set_selection
+      # Improvements move selection to autocomplete search
       @countries     = Country.all.map      { |c| [c.country_name, c.id] }
       @project_types = ProjectType.all.map  { |p| [p.name, p.id]         }
       @cancer_types  = CancerType.all.map   { |c| [c.name, c.id]         }

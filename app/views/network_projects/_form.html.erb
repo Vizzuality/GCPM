@@ -36,47 +36,33 @@
 		<span class="-item">lead</span>
 	</div>
 
-	<div class="c-staff -row">
-		<div class="-item -m-edited">
-			<select name="investigators" class="chosen-select" data-placeholder="Select or add investigator">
+  <%= form.fields_for :memberships do |memberships_form| %>
+    <%= render 'membership_relation_form', f: memberships_form %>
+  <% end %>
+  <p class="add-button">
+    <%= add_membership_path 'Add new', form, :memberships, 'add_fields add_investigator' %>
+  </p>
+
+  <div class="c-staff -row">
+    <div class="-item -m-edited">
+      <select name="investigators" class="chosen-select" data-placeholder="Select or add investigator">
                 <option value="">John Sample</option>
               </select>
-		</div>
-		<div class="-item -m-edited">
-			<select name="organizations" class="chosen-select" data-placeholder="Select or add investigation">
+    </div>
+    <div class="-item -m-edited">
+      <select name="organizations" class="chosen-select" data-placeholder="Select or add investigation">
                 <option value="">Random organization</option>
               </select>
-		</div>
-		<div class="-item -m-edited">
-			<select name="address" class="chosen-select" data-placeholder="Select or add investigation">
+    </div>
+    <div class="-item -m-edited">
+      <select name="address" class="chosen-select" data-placeholder="Select or add investigation">
                 <option value="">Somewhere</option>
               </select>
-		</div>
-		<div class="-item -m-edited">
-			<label for="tick-lead-1"></label><input type="checkbox" id="tick-lead-1" class="lead-investigator"><span class="circle"></span>
-		</div>
-	</div>
-
-	<div class="c-staff -row">
-		<div class="-item">
-			<select name="investigators" class="chosen-select" data-placeholder="Select or add investigator">
-                <option value="">Select or add investigator</option>
-              </select>
-		</div>
-		<div class="-item">
-			<select name="organizations" class="chosen-select" data-placeholder="Select or add investigation">
-                <option value="">Select or add investigation</option>
-              </select>
-		</div>
-		<div class="-item">
-			<select name="address" class="chosen-select" data-placeholder="Select or add investigation">
-                <option value="">Select or add address</option>
-              </select>
-		</div>
-		<div class="-item">
-			<label for="tick-lead-0"></label><input type="checkbox" id="tick-lead-0" class="lead-investigator"><span class="circle"></span>
-		</div>
-	</div>
+    </div>
+    <div class="-item -m-edited">
+      <label for="tick-lead-1"></label><input type="checkbox" id="tick-lead-1" class="lead-investigator"><span class="circle"></span>
+    </div>
+  </div>
 
   <h3>Investigators</h3>
 
