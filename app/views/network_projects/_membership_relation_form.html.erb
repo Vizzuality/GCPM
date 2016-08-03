@@ -1,11 +1,11 @@
-<div class="form-inputs c-staff -row">
+<div class="form-inputs c-staff -row c-pregenerated">
   <div class="-item -m-edited">
     <% if f.object.research_unit_id.present? %>
     <%= f.hidden_field :_destroy %>
     <%= link_to '×', '#', id: "delete-#{f.object.id}", class: 'remove_fields' %>
       <%= link_to @project.select_investigators(f.object.research_unit_id), '#' %>
     <% else %>
-      <%= f.input :research_unit_id, label: 'Investigator', collection: @project.select_investigators, as: :collection_select, input_html: { class: 'chosen-select' } %>
+      <%= f.input :research_unit_id, label: 'Investigator', collection: @project.select_investigators, as: :collection_select, input_html: { class: 'chosen-select' }, label_html: {style: "display: none"}%>
     <% end %>
   </div>
   <div class="-item -m-edited">

@@ -8,7 +8,7 @@
 		.c-title {
 			display: block;
 		    position: absolute;
-		    bottom: 0;
+		    bottom: 80px;
 		}
 
 	}
@@ -30,6 +30,14 @@
 	}
 	.chosen-container {
 		position: absolute;
+	}
+	.add-button {
+		display: table-footer-group;
+	}
+	.c-pregenerated .chosen-container {
+		position: relative;
+		display: inline-block;
+		left: -6px;
 	}
 	.c-section-half {
 		width: 50%;
@@ -91,6 +99,9 @@
 			> a {
 				color: #0f3046;
 				font-size: 15px;
+			}
+			.collection_select {
+				display: inline-block;
 			}
 			input[type=checkbox] {
 			   display: none;
@@ -155,23 +166,18 @@
     margin: 0 50px 50px;
 }
 
-@media all and (max-width: 1024px) {
-	.separator {
-		display: none;
-	}
-	.project_add .c-section-half {
-		display: block;
-		width: 100%;
-	}
-	.c-pickadate {
-		width: 50%;
-    	float: left;
-	}
-}
 .-editable {
 	display: none;
 }
 .f-edited {
+	.project_summary .-hide-edited {
+		display: block;
+		height: 0;
+	}
+	textarea {
+		height: 100%;
+		font-size: 14px;
+	}
 	.-hide-edited {
 		visibility: hidden;
 	}
@@ -185,5 +191,21 @@
 		height: 60px;
 	    font-size: 50px;
 	    line-height: 60px;
+	    position: absolute;
+    	bottom: 80px;
+	}
+}
+
+@media all and (max-width: 1024px) {
+	.separator {
+		display: none;
+	}
+	.project_add .c-section-half {
+		display: block;
+		width: 100%;
+	}
+	.c-pickadate {
+		width: 50%;
+    	float: left;
 	}
 }

@@ -40,31 +40,8 @@
     <%= render 'membership_relation_form', f: memberships_form %>
   <% end %>
   <p class="add-button">
-    <%= add_membership_path 'Add new', form, :memberships, 'add_fields add_investigator' %>
+    <%= add_membership_path 'Add new', form, :memberships, 'add_fields add_investigator triggerAllNew' %>
   </p>
-
-  <div class="c-staff -row">
-    <div class="-item -m-edited">
-      <select name="investigators" class="chosen-select" data-placeholder="Select or add investigator">
-                <option value="">John Sample</option>
-              </select>
-    </div>
-    <div class="-item -m-edited">
-      <select name="organizations" class="chosen-select" data-placeholder="Select or add investigation">
-                <option value="">Random organization</option>
-              </select>
-    </div>
-    <div class="-item -m-edited">
-      <select name="address" class="chosen-select" data-placeholder="Select or add investigation">
-                <option value="">Somewhere</option>
-              </select>
-    </div>
-    <div class="-item -m-edited">
-      <label for="tick-lead-1"></label><input type="checkbox" id="tick-lead-1" class="lead-investigator"><span class="circle"></span>
-    </div>
-  </div>
-
-  
 </div>
 
 <div class="c-section-container -staff">
