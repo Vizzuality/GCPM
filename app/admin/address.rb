@@ -1,4 +1,5 @@
 ActiveAdmin.register Address do
+  menu parent: "Entities"
 
   permit_params :city, :country, :primary, :latitude, :longitude, :line_1, :line_2, :line_3, :postcode, :state, :state_code, :organization_id
   filter :country

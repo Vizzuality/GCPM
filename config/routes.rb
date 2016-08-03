@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -9,6 +10,10 @@ Rails.application.routes.draw do
   get '/countries/:iso', to: 'countries#show',     as: 'country'
   get '/cancer-types',   to: 'cancer_types#index', as: 'cancers'
   get '/about',          to: 'about#index',        as: 'about'
+
+  resources :projects, only: :show
+
+  resources :events, except: :destroy
 
   # User profile projects
   resources :users, only: :show, path: :network do
@@ -22,6 +27,7 @@ Rails.application.routes.draw do
     scope module: :v1 do
       resources :regions,      only: [:index, :show]
       resources :cancer_types, only: [:index, :show], path: '/cancer-types'
+      resources :map, only: [:index]
 
       get 'lists/countries',    to: 'lists#countries'
       get 'lists/cancer-types', to: 'lists#cancer_types'

@@ -21,16 +21,14 @@
       'people': '#68299b',
       'event': '#f57823'
     },
-    // tooltipEl: $('#locationTooltipView'),
-    // tooltipTpl: HandlebarsTemplates['locationsTooltipTpl'],
 
     initialize: function(map, settings) {
       if (!map && map instanceof L.Map) {
         throw 'First params "map" is required and a valid instance of L.Map.';
       }
-      var opts = settings || {};
-      this.options = _.extend({}, this.defaults, opts);
+
       this.map = map;
+      this.options = _.extend({}, this.defaults, settings || {});
     },
 
     /**
@@ -39,49 +37,48 @@
      */
     create: function(callback) {
       var markers = this.options.markers;
+      if (markers && markers.length) {
+        this.markers = _.map(markers, function(marker){
+          var size = this.getSize(marker.count),
+              svg = this.getSVG(marker);
 
-      this.markers = _.map(markers, function(marker){
-        var size = this.getSize(marker.value),
-            svg = this.getSVG(marker);
-
-        // Create icon
-        var icon = new L.divIcon({
-          iconSize: [size,size],
-          // Need to set marker.type on each marker
-          className: marker.type ?
-            'c-marker -' + marker.type :
-            'c-marker -' + this.options.type,
-          html: this.template({
-            value: marker.value > 1 ? marker.value : '',
-            svg: this.getHtmlString(svg)
-          })
-        });
-
-        var markerIcon = L.marker(marker.center, {
-          icon: icon
-        }).on('mouseover', this._onMouseover.bind(this))
-          .on('mouseout', this._onMouseout.bind(this))
-          .on('click', this._onMouseclick.bind(this));
-
-        /* Need to set markers investigators */
-        if (marker.investigators) {
-          var peopleList = '<div class="people">';
-          marker.investigators.map(function(investigator) {
-            peopleList += '<p class="person">'+ investigator +'</p>';
+          // Create icon
+          var icon = new L.divIcon({
+            iconSize: [size,size],
+            // Need to set marker.type on each marker
+            className: 'c-marker -' + marker.type,
+            html: this.template({
+              value: (marker.count > 1) ? marker.count : '',
+              svg: (!!svg) ? this.getHtmlString(svg) : null
+            })
           });
-          peopleList += '</div>';
-          markerIcon.bindPopup(peopleList);
-        }
 
-        // Return a leaflet marker
-        return markerIcon;
+          var markerIcon = L.marker(marker.centroid, {
+            icon: icon,
+            riseOnHover: true,
+            data: {
+              type: marker.type,
+              location_name: marker.location_name,
+              iso: marker.iso
+            }
+          }).on('mouseover', this._onMouseover.bind(this))
+            .on('mouseout', this._onMouseout.bind(this))
+            .on('click', this._onMouseclick.bind(this));
 
-      }.bind(this));
+          // Return a leaflet marker
+          return markerIcon;
 
-      // Group the markers and add them to the map
-      var group = L.featureGroup(this.markers).addTo(this.map);
-      // Fit bounds to see all the markers
-      this.map.fitBounds(group.getBounds());
+        }.bind(this));
+
+        // Group the markers and add them to the map
+        var group = L.featureGroup(this.markers).addTo(this.map);
+        // Fit bounds to see all the markers
+        this.map.fitBounds(group.getBounds());
+      } else {
+        // TO-DO: notification => no markers with the selected parameters
+        alert('no markers with the selected parameters');
+        this.map.setView([0, 0], 3);
+      }
     },
 
     /**
@@ -102,30 +99,33 @@
     },
 
     getSize: function(value) {
-      var constant = 30,
-          multiplier = 15,
-          size = Math.round(constant + (Math.log(value) * multiplier));
+      var constant = 20,
+          multiplier = 10,
+          size = 5;
 
-      return size;
+      if (value) {
+        size = Math.round(constant + (Math.log(value) * multiplier));
+      }
+      return size;        
     },
 
     getSVG: function(marker) {
-      var marker = marker,
-          size = this.getSize(marker.value),
-          total = marker.value,
-          pi = Math.PI;
+      if (marker.segments) {
+        var marker = marker,
+            size = this.getSize(marker.value),
+            total = marker.value,
+            pi = Math.PI;
 
 
-      // Create an svg element
-      var svg = document.createElementNS(d3.ns.prefix.svg, 'svg');
+        // Create an svg element
+        var svg = document.createElementNS(d3.ns.prefix.svg, 'svg');
 
-      // Set the svg with the arc
-      var vis = d3.select(svg)
-                  .attr('width', size)
-                  .attr('height', size)
+        // Set the svg with the arc
+        var vis = d3.select(svg)
+                    .attr('width', size)
+                    .attr('height', size)
 
-      // Add each arc to the svg element
-      if (!marker.type) {
+        // Add each arc to the svg element
         var angle = 0;
         _.each(marker.segments, function(segment, i){
           var degrees = Math.round(360*(segment.value/total));
@@ -146,10 +146,11 @@
           angle = angle + Math.round(360*segment.value/total);
 
         }.bind(this));
+        return svg;        
       }
 
+      return null;
 
-      return svg;
     },
 
     getHtmlString: function(xmlNode) {
@@ -161,6 +162,13 @@
       return "";
     },
 
+
+    /**
+     * UI EVENTS
+     * - _onMouseover
+     * - _onMouseout
+     * - _onMouseclick
+     */
     _onMouseover: function(e) {
       // var pos = this.map.latLngToContainerPoint(e.target._latlng);
       // var data = e.target.options.data;
@@ -183,31 +191,25 @@
     },
 
     _onMouseclick: function(e) {
-      // // set default radius to all markers
-      // this._resetSelected();
-      // // set default radius to current
-      // Backbone.Events.trigger('Location/update', e.target.options.data.cartodb_id);
+      var data = e.target.options.data;
+      
+      if (data.type == 'region') {
+        Backbone.Events.trigger('Filters/update', {
+          'regions[]': data.iso
+        });
+      }
+
+      if (data.type == 'country') {
+        Backbone.Events.trigger('Filters/update', {
+          'countries[]': data.iso
+        });
+      }
+
+      if (data.type == 'project') {
+        //TO-DO: Go to project
+        console.log('TO-DO: Go to project');
+      }      
     },
-
-    _setSelected: function(id) {
-      // if (!!this.markers && !!this.markers.length) {
-      //   var currentMarker = _.find(this.markers, function(marker) {
-      //     return (marker.options.data.cartodb_id == id);
-      //   });
-
-      //   currentMarker.bringToFront();
-      //   currentMarker.setRadius(25);
-      // }
-    },
-
-    _resetSelected: function() {
-      // if (!!this.markers && !!this.markers.length) {
-      //   // set default radius to all markers
-      //   _.each(this.markers, function(marker){
-      //     marker.setRadius(10);
-      //   }.bind(this));
-      // }
-    }
 
   });
 
