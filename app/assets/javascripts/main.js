@@ -68,16 +68,21 @@
     },
 
     mapPage: function() {
-      var params = this.router.getParams(),
+      var params = this.setParams(this.router.getParams()),
           layersCollection = new App.Collection.Layers();
+
+      console.log(params);
 
       // // Views
       new App.View.Map({
-        layers: layersCollection
+        layers: layersCollection,
+        params: params
       });
 
       new App.View.MapMenu();
-      new App.View.MapFilters();
+      new App.View.MapFilters({
+        params: params
+      });
       new App.View.MapLayers();
 
       // Sync layers
@@ -116,6 +121,40 @@
       layersCollection.toggleLayers([
         params.type || 'org-project-markers'
       ]);
+    },
+
+    userPage: function() {
+      var params = this.router.getParams();
+
+      // Map view
+      var layersCollection = new App.Collection.Layers();
+      var mapView = new App.View.Map({
+        layers: layersCollection,
+      });
+
+      layersCollection.toggleLayers([
+        params.type || 'org-project-markers'
+      ]);
+    },
+
+    /**
+     * - setParams
+     * This function will parse the params of the url, if we need
+     * different group or something like that
+     *
+     */
+    setParams: function(params) {
+      var params = params;
+
+      if (params['regions[]']) {
+        params.group = 'countries';
+      }
+
+      if (params['countries[]']) {
+        params.group = 'projects';
+      }
+
+      return params;
     }
 
   });

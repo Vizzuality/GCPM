@@ -1,0 +1,18 @@
+  with main_table as (
+    select cancer_types.name as cancer_type, countries.id as country_id, projects.id as projects_id,
+    count(distinct(projects.id)) as projects_count
+    from cancer_types
+    inner join cancer_types_projects on cancer_types_projects.cancer_type_id = cancer_types.id
+    inner join projects on cancer_types_projects.project_id = projects.id
+    inner join memberships on memberships.project_id = projects.id
+    inner join research_units on memberships.research_unit_id = research_units.id
+    inner join addresses on research_units.address_id = addresses.id
+    inner join countries on addresses.country_id = countries.id
+    group by countries.id, cancer_type, projects_id
+  )
+  select json_object_agg(cancer_type, projects_count) as cancer_types,
+  count(distinct(projects_id)) as projects_count,
+  countries.region_name, countries.region_centroid
+  from main_table
+  inner join countries on countries.id = main_table.country_id
+  group by countries.region_name, countries.region_centroid

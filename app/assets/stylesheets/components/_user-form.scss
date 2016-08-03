@@ -1,0 +1,44 @@
+
+/**
+ *
+ *  <div class="c-user-form">
+ *    { Content }
+ *  </div>
+ *
+ */
+
+.c-user-form {
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+
+  .c-title {
+    margin: 0;
+    margin-bottom: 26px;
+  }
+
+  .cancel-account {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+
+    > div {
+      display: flex;
+      flex-flow: column;
+    }
+
+    .c-title {
+      text-align: right;
+    }
+
+    .cancel {
+      display: flex;
+      align-items: center;
+      margin-bottom: 35px;
+
+      & .c-button {
+        margin-left: 30px;
+      }
+    }
+  }
+}
