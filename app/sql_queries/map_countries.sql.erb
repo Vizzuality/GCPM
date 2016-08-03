@@ -1,4 +1,5 @@
 select count(distinct(projects.id)),
+countries.id as location_id,
 countries.country_name as location_name,
 countries.country_centroid as centroid,
 countries.country_iso_3 as iso,
@@ -47,4 +48,4 @@ from projects
     <% if @params[:end_date] %>
       and (projects.end_date < date(<%= quote @params[:end_date] %>))
     <% end %>
-group by location_name, centroid, iso
+group by location_id, location_name, centroid, iso
