@@ -15,7 +15,7 @@
         <% if user_signed_in? %>
           <li class="user-avatar">
             <div class="c-user-profile-picture <%= @isProfile ? "-active" : "" %>">
-              <div class="initials">LK</div>
+              <div class="initials"><%= current_user.name ? current_user.name[0] : 'U' %></div>
               <!-- <img src="" alt="{User name}'s profile picture'" /> -->
               <!-- Notifications to set (set element on mobile too) -->
               <% if true %>
@@ -42,38 +42,35 @@
 
   <div class="mobile-drawer js-mobile-drawer">
     <ul class="menu">
+      <% if user_signed_in? %>
+          <li class="user-avatar">
+            <div class="c-user-profile-picture -big <%= @isProfile ? "-active" : "" %>">
+              <div class="initials">LK</div>
+              <!-- <img src="" alt="{User name}'s profile picture'" /> -->
+              <!-- Notifications to set (set element on mobile too) -->
+              <% if true %>
+                <div class="c-badge">7</div>
+              <% end %>
+            </div>
+          </li>
+        <% else %>
+          <li class="<%= active_page?(user_session_path) ? '-active' : '' %>"><%= link_to (t 'login'), user_session_path %></a></li>
+        <% end %>
       <li class="<%= active_page?(map_path) ? '-active' : '' %>"><%= link_to (t 'map'), map_path %></a></li>
       <li class="<%= active_page?(countries_path) ? '-active' : '' %>"><%= link_to (t 'countries'), countries_path %></a></li>
       <li class="<%= active_page?(cancers_path) ? '-active' : '' %>"><%= link_to (t 'cancer_types'), cancers_path %></a></li>
       <li class="<%= active_page?(about_path) ? '-active' : '' %>"><%= link_to (t 'about'), about_path %></a></li>
-      <li class="<%= active_page?(new_user_session_path) ? '-active' : '' %>"><%= link_to (t 'login'), new_user_session_path %></a></li>
-      <li><img src="" class="btn-search"></li>
-      <% if user_signed_in? %>
-        <li class="user-avatar">
-          <div class="c-user-profile-picture <%= @isProfile ? "-active" : "" %>">
-            <div class="initials">LA</div>
-            <img src="" alt="{User name}'s profile picture'" />
-            <!-- Notifications to set -->
-            <% if true %>
-              <div class="c-badge">7</div>
-            <% end %>
-
-            <div class="c-user-dropdown-menu js-user-dropdown-menu">
-              <ul class="user-profile menu-section">
-                <li class="item"><%= link_to (t 'your_profile'), '/', {:class => "item-link", :method => :get} %></li>
-                <li class="item"><%= link_to (t 'logout'), destroy_user_session_path, {:class => "item-link", :method => :delete} %></li>
-              </ul>
-
-              <ul class="user-tools menu-section -color-2">
-                <li class="item"><%= link_to (t 'add_project'), new_user_project_path(user_id: current_user.id), {:class => "item-link", :method => :get} %></li>
-              </ul>
-            </div>
-          </div>
-        </li>
-      <% else %>
-        <li class="<%= active_page?(user_session_path) ? '-active' : '' %>"><%= link_to (t 'login'), user_session_path %></a></li>
-      <% end %>
     </ul>
+    <% if user_signed_in? %>
+      <ul class="menu user-profile">
+        <li class="item"><%= link_to (t 'your_profile'), user_path(current_user), {:class => "item-link", :method => :get} %></li>
+        <li class="item"><%= link_to (t 'logout'), destroy_user_session_path, {:class => "item-link", :method => :delete} %></li>
+      </ul>
+
+      <ul class="menu user-tools -color-1">
+        <li class="item"><%= link_to (t 'add_project'), '/', {:class => "item-link", :method => :get} %></li>
+      </ul>
+    <% end %>
   </div>
 
   <div class="wrapper">
