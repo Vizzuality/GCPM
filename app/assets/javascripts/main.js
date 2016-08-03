@@ -30,7 +30,8 @@
       this.listenTo(this.router, 'route:event', this.eventInfo);
       this.listenTo(this.router, 'route:project', this.projectDetail);
       this.listenTo(this.router, 'route:network', this.userPage);
-
+      // HACK TODO => move this out
+      new App.View.AddNewProject();
       // Listening magic links
       App.Events.on('remote:load', this.replaceContent);
 
@@ -98,7 +99,6 @@
       var regionsView = new App.View.SearchList({
         searchList: regionsCollection,
         options: {
-          isTwoLevels: true,
           template: HandlebarsTemplates['countries-list'],
           innerSearchListName: 'countries',
           itemSearchedCategory: 'country_name'
