@@ -71,7 +71,7 @@
 
     listeners: function() {
       App.Events.on('Filters/toggle', function(){
-        this.toggle();
+        this.show();
       }.bind(this));
     },
 

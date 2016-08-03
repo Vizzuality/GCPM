@@ -77,7 +77,7 @@
         this.map.fitBounds(group.getBounds());
       } else {
         // TO-DO: notification => no markers with the selected parameters
-        alert('no markers with the selected parameters');
+        console.log('no markers with the selected parameters');
         this.map.setView([0, 0], 3);
       }
     },
@@ -102,7 +102,7 @@
     getSize: function(value) {
       var constant = 20,
           multiplier = 10,
-          size = 5;
+          size = 10;
 
       if (value) {
         size = Math.round(constant + (Math.log(value) * multiplier));
