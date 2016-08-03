@@ -16,16 +16,16 @@
         <div class="c-cards-profiles">
           <div class="c-card-user-profile">
             <a class="profile-picture">
-              <div class="c-user-profile-picture -small"><%= @project.project_leads.first.name[0] %></div>
+              <div class="c-user-profile-picture -small"><%= @project.project_leads.first ? @project.project_leads.first.name[0] : '' %></div>
             </a>
             <div class="info">
-              <a class="name"><%= @project.project_leads.first.name %></a>
+              <a class="name"><%= @project.project_leads.first ? @project.project_leads.first.name : '' %></a>
             </div>
           </div>
 
           <div class="c-card-user-profile">
             <a class="profile-picture">
-              <div class="c-user-profile-picture -small"><%= @project.secondary_investigators.first.name[0] %></div>
+              <div class="c-user-profile-picture -small"><%= @project.secondary_investigators.first ? @project.secondary_investigators.first.name[0] : '' %></div>
             </a>
             <div class="info">
               <a class="organization"><%= @project.secondary_investigators.size() %> Collaborators</a>
@@ -38,7 +38,7 @@
             </a>
             <div class="info">
               <a class="name">Funding source</a>
-              <a class="organization"><%= @project.funding_sources.first.name %></a>
+              <a class="organization"><%= @project.funding_sources.first ? @project.funding_sources.first.name : '' %></a>
             </div>
           </div>
         </div>
