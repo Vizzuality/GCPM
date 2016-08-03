@@ -1,6 +1,21 @@
 module RoutesHelper
-  def add_investigator_path(name, f, association, class_name=nil)
-    form_name = 'investigator_relation_form'
+  def add_address_path(name, f, association, class_name=nil)
+    form_name = 'address_relation_form'
+    common_nested_path(form_name, name, f, association, class_name)
+  end
+
+  def add_membership_path(name, f, association, class_name=nil)
+    form_name = 'membership_relation_form'
+    common_nested_path(form_name, name, f, association, class_name)
+  end
+
+  def add_membership_orga_path(name, f, association, class_name=nil)
+    form_name = 'membership_orga_relation_form'
+    common_nested_path(form_name, name, f, association, class_name)
+  end
+
+  def add_membership_address_path(name, f, association, class_name=nil)
+    form_name = 'membership_address_relation_form'
     common_nested_path(form_name, name, f, association, class_name)
   end
 
@@ -11,6 +26,6 @@ module RoutesHelper
     fields = f.fields_for(association, new_object, child_index: id) do |actions_form|
       render(form_name, f: actions_form)
     end
-    link_to(name, '', class: class_name, data: { id: id, fields: fields.gsub("\n", '')})
+    link_to(name, '', class: class_name, data: { id: id, fields: fields.gsub("\n", '') })
   end
 end

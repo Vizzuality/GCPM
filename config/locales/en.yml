@@ -32,6 +32,7 @@ en:
   countries: "Countries"
   data: "Data"
   edit: "Edit"
+  delete: "Delete"
   event: "Event"
   events: "Events"
   featured_organization: "Featured organization"

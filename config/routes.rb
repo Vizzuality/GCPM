@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     resources :projects, controller: 'network_projects', except: :index
   end
 
+  get '/network/:id/projects', to: 'users#show'
+
   # Admin
   #get 'admin/excel-uploader', to: 'admin/excel_uploader#new', as: :admin_excel_uploader
 

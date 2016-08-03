@@ -28,7 +28,7 @@ I want to manage an project
     When I go to the new project page for "user@sample.com"
     And I fill in "project_title" with "Created project by user"
     And I fill in "project_summary" with "Lorem ipsum.."
-    And I press "Create"
+    And I press "Submit"
     Then I should be on the project page for "user@sample.com" "Created project by user"
     And I should have one project
 

@@ -4,6 +4,7 @@ class NetworkProjectsController < ApplicationController
   before_action :set_user,         only: :show
   before_action :set_current_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_project,      only: [:show, :edit, :update, :destroy]
+  before_action :set_selection,    only: [:new, :create, :edit, :update]
 
   def show
   end
@@ -52,6 +53,13 @@ class NetworkProjectsController < ApplicationController
 
     def set_project
       @project = @user.projects.find(params[:id])
+    end
+
+    def set_selection
+      @countries     = Country.all.map      { |c| [c.country_name, c.id] }
+      @project_types = ProjectType.all.map  { |p| [p.name, p.id]         }
+      @cancer_types  = CancerType.all.map   { |c| [c.name, c.id]         }
+      @funders       = Organization.all.map { |f| [f.name, f.id]         }
     end
 
     def project_params

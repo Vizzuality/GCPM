@@ -2,10 +2,10 @@
 
   'use strict';
 
-  App.View = App.View || {};
+  App.View = App.View || {};
   App.View.AddNewProject = Backbone.View.extend({
 
-  	el: '.project_add',
+      el: '.project_add',
 
     pickadateOptions: {
       today: false,
@@ -13,8 +13,8 @@
       close: false,
       closeOnClear: false,
       closeOnSelect: false,
-      selectYears: true,        
-      selectMonths: true,        
+      selectYears: true,
+      selectMonths: true,
       editable: false,
       format: 'yyyy-mm-dd',
 
@@ -42,12 +42,16 @@
       }
     },
 
+    events: {
+      'click .-editable': 'displaInputs'
+    },
+
     initialize: function() {
       // Initialize Parent
       this.constructor.__super__.initialize.apply(this);
       // Inits
       this.render();
-      this.listeners();     
+      this.listeners();
     },
 
     listeners: function() {
@@ -67,8 +71,12 @@
         width: '100%',
         allow_single_deselect: true,
         inherit_select_classes: true,
-        no_results_text: "Oops, nothing found!"        
+        no_results_text: "Oops, nothing found!"
       });
+    },
+
+    displaInputs: function() {
+      $('body').addClass('f-edited');
     },
 
     renderPickADate: function() {
@@ -79,6 +87,7 @@
       var $end = this.$el.find('#add-project-end_date').pickadate(_.extend({}, this.pickadateOptions, {
         container: '#pickadate-end-container'
       }));
+
     }
   });
 
