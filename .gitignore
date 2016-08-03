@@ -26,5 +26,6 @@
 /private
 !/private/.keep
 
+/db_backups/*
 # Ignore environment variables
 /.env

@@ -1,4 +1,5 @@
 ActiveAdmin.register Organization do
+  menu parent: "Entities"
 
   permit_params :name, :acronym, :grid_id, :email_address, :established, :organization_type_id, addresses_attributes: [:city, :country, :primary, :latitude, :longitude, :line_1, :line_2, :line_3, :postcode, :state, :state_code, :_destroy, :id]
 

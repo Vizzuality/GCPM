@@ -16,4 +16,7 @@
 
 class Country < ApplicationRecord
   has_many :addresses
+  def self.names
+    Country.all.order(:country_name).pluck(:country_name)
+  end
 end

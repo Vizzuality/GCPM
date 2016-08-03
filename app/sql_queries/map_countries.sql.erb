@@ -1,4 +1,5 @@
 select count(distinct(projects.id)),
+countries.id as location_id,
 countries.country_name as location_name,
 countries.country_centroid as centroid,
 countries.country_iso_3 as iso,
@@ -22,7 +23,7 @@ from projects
       inner join cancer_types_projects on cancer_types_projects.project_id = projects.id
       inner join cancer_types on cancer_types_projects.cancer_type_id = cancer_types.id
     <% end %>
-    where 1 = 1
+    where projects.status = 1
     <% if @params[:countries] %>
       and countries.id in     <%= "#{'(' + @params[:countries].join(',') + ')'}" %>
     <% end %>
@@ -38,10 +39,13 @@ from projects
     <% if @params[:cancer_types] %>
       and cancer_types.id in <%= "#{'(' + @params[:cancer_types].join(',') + ')'}" %>
     <% end %>
+    <% if @params[:regions] %>
+      and countries.region_iso in <%= @params[:regions].to_s.gsub('[', '(').gsub(']',')').gsub('"',"'") %>
+    <% end %>
     <% if @params[:start_date] %>
       and (projects.start_date > date(<%= quote @params[:start_date] %>))
     <% end %>
     <% if @params[:end_date] %>
       and (projects.end_date < date(<%= quote @params[:end_date] %>))
     <% end %>
-group by location_name, centroid, iso
+group by location_id, location_name, centroid, iso
