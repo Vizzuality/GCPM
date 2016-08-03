@@ -27,6 +27,7 @@
       this.listenTo(this.router, 'route:map', this.mapPage);
       this.listenTo(this.router, 'route:countries', this.countriesPage);
       this.listenTo(this.router, 'route:country', this.countryPage);
+      this.listenTo(this.router, 'route:event', this.eventInfo);
       this.listenTo(this.router, 'route:network', this.userPage);
 
       // Listening magic links
@@ -136,11 +137,25 @@
       ]);
     },
 
+    eventInfo: function() {
+      var params = this.router.getParams();
+
+      // Map view
+      var layersCollection = new App.Collection.Layers();
+      var mapView = new App.View.Map({
+        layers: layersCollection,
+      });
+
+      layersCollection.toggleLayers([
+        params.type || 'org-project-markers'
+      ]);
+    },
+
     /**
      * - setParams
      * This function will parse the params of the url, if we need
      * different group or something like that
-     * 
+     *
      */
     setParams: function(params) {
       var params = params;
