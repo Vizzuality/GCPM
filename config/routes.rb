@@ -4,12 +4,12 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  get '/',                    to: 'home#index',         as: 'home'
-  get '/map',                 to: 'map#index',          as: 'map'
-  get '/countries',           to: 'countries#index',    as: 'countries'
-  get '/countries/:iso',      to: 'countries#show',     as: 'country'
-  get '/cancer-types',        to: 'cancer_types#index', as: 'cancers'
-  get '/about',               to: 'about#index',        as: 'about'
+  get '/',                      to: 'home#index',         as: 'home'
+  get '/map',                   to: 'map#index',          as: 'map'
+  get '/countries',             to: 'countries#index',    as: 'countries'
+  get '/countries/:iso',        to: 'countries#show',     as: 'country'
+  get '/cancer-types',          to: 'cancer_types#index', as: 'cancers'
+  get '/about',                 to: 'about#index',        as: 'about'
   get '/downloads/user-manual', to: 'downloads#show',     as: 'download_user_manual'
 
   resources :projects, only: :show
