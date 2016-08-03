@@ -14,26 +14,25 @@
     getParams: function(paramString) {
       var params = {};
       paramString.split('&').forEach(function(pair) {
-        pair = pair.split('=');
-        if (!!pair[1]) {
-          var key = decodeURIComponent(pair[0]),
-              val = decodeURIComponent(pair[1]),
-              val = val ? val.replace(/\++/g,' ').trim() : '';
+        pair = pair.split('=');  
+        var key = decodeURIComponent(pair[0]),
+            val = decodeURIComponent(pair[1]),
+            val = val ? val.replace(/\++/g,' ').trim() : '';
 
-          if (key.length === 0) {
-            return;
-          }
-          if (params[key] === undefined) {
-            params[key] = (!isNaN(val)) ? Number(val) : val;
-          }
-          else {
-            if ("function" !== typeof params[key].push) {
-              params[key] = [params[key]];
-            }
-            
-            params[key].push((!isNaN(val)) ? Number(val) : val);
-          }
+        if (key.length === 0) {
+          return;
         }
+        if (params[key] === undefined) {
+          params[key] = (!!val && !isNaN(val)) ? Number(val) : val || null;
+        }
+        else {
+          if ("function" !== typeof params[key].push) {
+            params[key] = [params[key]];
+          }
+          
+          params[key].push((!isNaN(val)) ? Number(val) : val || null);
+        }
+      
       });
 
       return params;    

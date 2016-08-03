@@ -24,7 +24,7 @@
     },
 
     _listeners: function() {
-      this.model.on("change:hidden", this.changeHidden, this);
+      this.model.on('change:hidden', this.changeHidden, this);
     },
 
     _cache: function() {
