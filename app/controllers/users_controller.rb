@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     @current_type = params[:type] || 'projects'
     @filters = ['projects', 'events']
     @isProfile = true
-    @events =  Event.all
+    @events =  user_signed_in? && @user == current_user ? @user.events : @user.published_events
   end
 
   private
