@@ -78,6 +78,10 @@
       }
     }
 
+    .c-numbers-grid {
+      color: $color-3;
+    }
+
     .c-buttons-group {
       @media #{$mq-tablet} {
         margin-top: 100px;

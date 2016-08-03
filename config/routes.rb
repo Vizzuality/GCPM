@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get '/downloads/user-manual', to: 'downloads#show',     as: 'download_user_manual'
 
   resources :projects, only: :show
+  resources :events, except: :destroy
 
   # User profile
   resources :users, only: :show, path: :network do

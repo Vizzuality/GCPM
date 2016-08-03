@@ -59,6 +59,10 @@
     isMagicLink: function(e) {
       var href = e.currentTarget.getAttribute('href');
       this.router.navigate(href);
+
+      /* Toggle c-section-menu item to -active */
+      $(".c-section-menu li a").removeClass('-active');
+      $(e.target).addClass("-active");
     },
 
     initCommonViews: function() {

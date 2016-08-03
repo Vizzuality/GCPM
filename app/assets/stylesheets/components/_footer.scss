@@ -76,7 +76,7 @@
       align-items: center;
       flex-wrap: wrap;
 
-      .separator {
+      & .separator {
         height: 30px;
         border-right: 2px solid rgba(0, 0, 0, .2);
       }
