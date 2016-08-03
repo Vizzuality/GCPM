@@ -1,11 +1,11 @@
 <div class="c-section-intro">
-	<%= form.input :title, label: 'Project title_', label_html: { class: 'c-title -bigger -bold -hide-edited' }, :required => false, input_html: {value: 'Project title_', class: '-editable'}  %>
+	<%= form.input :title, label: "#{@project.title}", label_html: { class: 'c-title -bigger -bold -hide-edited' }, :required => false, input_html: { class: '-editable', value: "#{@project.title}"}  %>
 </div>
 <div class="c-section-container">
 	<div class="c-section-half -left">
 		<h3 class="c-section-title">Description</h3>
 
-		<%= form.input :summary, label: 'Summary', label_html: { class: '-hide-edited' }, :required => false, input_html: {value: 'Summary', class: '-editable', rows: '40'} %>
+		<%= form.input :summary, label: "#{@project.summary}", label_html: { class: '-hide-edited' }, :required => false, input_html: {value: "#{@project.summary}", class: '-editable', rows: '40'} %>
 	</div>
 	<div class="c-section-half">
 		<div class="c-pickadate">
@@ -64,56 +64,7 @@
     </div>
   </div>
 
-  <h3>Investigators</h3>
-
-  <div>
-    <%= form.fields_for :investigators do |investigators_form| %>
-      <%= render 'investigator_relation_form', f: investigators_form %>
-    <% end %>
-  </div>
-
-  <div>
-    <%= form.fields_for :memberships do |memberships_form| %>
-      <%= render 'membership_relation_form', f: memberships_form %>
-    <% end %>
-    <p class="add-button">
-      <%= add_membership_path 'Add new', form, :memberships, 'add_fields add_investigator' %>
-    </p>
-  </div>
-
-  <h3>Organizations</h3>
-
-  <div>
-    <%= form.fields_for :organizations do |organizations_form| %>
-      <%= render 'organization_relation_form', f: organizations_form %>
-    <% end %>
-  </div>
-
-  <div>
-    <%= form.fields_for :memberships do |memberships_form| %>
-      <%= render 'membership_orga_relation_form', f: memberships_form %>
-    <% end %>
-    <p class="add-button">
-      <%= add_membership_orga_path 'Add new', form, :memberships, 'add_fields add_organization' %>
-    </p>
-  </div>
-
-  <h3>Addresses</h3>
-
-  <div>
-    <%= form.fields_for :addresses do |addresses_form| %>
-      <%= render 'address_relation_form', f: addresses_form %>
-    <% end %>
-  </div>
-
-  <div>
-    <%= form.fields_for :memberships do |memberships_form| %>
-      <%= render 'membership_address_relation_form', f: memberships_form %>
-    <% end %>
-    <p class="add-button">
-      <%= add_membership_address_path 'Add new', form, :memberships, 'add_fields add_address' %>
-    </p>
-  </div>
+  
 </div>
 
 <div class="c-section-container -staff">
