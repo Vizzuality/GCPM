@@ -1,4 +1,7 @@
 ActiveAdmin.register Investigator do
+  menu parent: "Entities"
+
+  permit_params :name, :email, :website
 
   filter :name
   filter :position_title
@@ -8,9 +11,17 @@ ActiveAdmin.register Investigator do
     column :id
     column :name
     column :email
-    column :position_title
     column :website
     actions
+  end
+
+  form do |f|
+    f.semantic_errors
+    f.inputs do
+      f.input :name
+      f.input :email
+      f.input :website
+    end
   end
 
 end

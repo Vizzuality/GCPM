@@ -22,7 +22,7 @@ from projects
       inner join cancer_types_projects on cancer_types_projects.project_id = projects.id
       inner join cancer_types on cancer_types_projects.cancer_type_id = cancer_types.id
     <% end %>
-    where 1 = 1
+    where projects.status = 1
     <% if @params[:countries] %>
       and countries.id in     <%= "#{'(' + @params[:countries].join(',') + ')'}" %>
     <% end %>
@@ -37,6 +37,9 @@ from projects
     <% end %>
     <% if @params[:cancer_types] %>
       and cancer_types.id in <%= "#{'(' + @params[:cancer_types].join(',') + ')'}" %>
+    <% end %>
+    <% if @params[:regions] %>
+      and countries.region_iso in <%= @params[:regions].to_s.gsub('[', '(').gsub(']',')').gsub('"',"'") %>
     <% end %>
     <% if @params[:start_date] %>
       and (projects.start_date > date(<%= quote @params[:start_date] %>))

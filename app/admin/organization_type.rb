@@ -1,4 +1,5 @@
 ActiveAdmin.register OrganizationType do
+  menu parent: "Entities"
 
   index do
     selectable_column
