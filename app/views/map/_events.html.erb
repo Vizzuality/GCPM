@@ -1,1 +1,24 @@
-<h1>Events</h1>
+
+<!-- Events cards -->
+<% @events.each do |e| %>
+  <div class="card -mobile-large-1-2 -tablet-1-3">
+    <h4 class="c-card-title -border-2"><%= e.city %>, <%= e.country %></h4>
+    <%= link_to event_path(e.id), { :class => "link" } do %>
+      <h3 class="c-title"><%= e.title %></h3>
+    <% end %>
+    <p><%= truncate(e.description, :length => 300) %></p>
+  </div>
+<% end %>
+
+<% if @events.size() > 0 %>
+  <div class="c-pagination-button">
+    <%= link_to (t 'show_more'),
+            map_path(request.query_parameters.merge({ limit: (params['limit'] ? params['limit'].to_i + 1 : 2 )  })),
+            class: "circle-button",
+            remote: true,
+            data: {magic: true} %>
+  </div>
+<% else %>
+  <p class="wrapper">No events</p>
+<% end %>
+
