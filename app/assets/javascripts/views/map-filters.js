@@ -53,7 +53,6 @@
 
 
     initialize: function(settings) {
-
       // Initialize Parent
       this.constructor.__super__.initialize.apply(this);
 
@@ -71,12 +70,8 @@
     },
 
     listeners: function() {
-      Backbone.Events.on('Filters/toggle', function(){
-        this.toggle();
-      }.bind(this));
-
-      Backbone.Events.on('Filters/update', function(newFilters){
-        this.publishFilters(newFilters);
+      App.Events.on('Filters/toggle', function(){
+        this.show();
       }.bind(this));
     },
 
@@ -87,42 +82,44 @@
     },
 
     renderChosen: function() {
-      var chosenSelects = this.$el.find('.chosen-select').chosen({
-        width: '100%',
-        allow_single_deselect: true,
-        inherit_select_classes: true,
-        no_results_text: "Oops, nothing found!"        
-      });
+      if(! !!$(this.$el.find('.chosen-select')[0]).data('chosen')) {
+        var chosenSelects = this.$el.find('.chosen-select').chosen({
+          width: '100%',
+          allow_single_deselect: true,
+          inherit_select_classes: true,
+          no_results_text: "Oops, nothing found!"        
+        });
 
-      // Fix to keep the chosen always visible 
-      // https://github.com/harvesthq/chosen/issues/1546
-      // Really????? This is the huge shit I've seen in my life
-      // The issue has been opened since 2013...
-      _.each(chosenSelects, function(select) {
-        var chosen = $(select).data('chosen');
-        var autoClose = false;
-        var chosen_resultSelect_fn = chosen.result_select;
-        chosen.search_contains = true;
-        chosen.result_select = function(evt) {
-          var resultHighlight = null;
-          if (autoClose === false) {
-            evt['metaKey'] = true;
-            evt['ctrlKey'] = true;
-            resultHighlight = chosen.result_highlight;
-          }
-          var stext = chosen.get_search_text();
-          var result = chosen_resultSelect_fn.call(chosen, evt);
-          if (autoClose === false && resultHighlight !== null){
-            resultHighlight.addClass('result-selected');
-          }
-              
-          // this.search_field.val(stext);               
-          this.winnow_results();
-          this.search_field_scale();
+        // Fix to keep the chosen always visible 
+        // https://github.com/harvesthq/chosen/issues/1546
+        // Really????? This is the huge shit I've seen in my life
+        // The issue has been opened since 2013...
+        _.each(chosenSelects, function(select) {
+          var chosen = $(select).data('chosen');
+          var autoClose = false;
+          var chosen_resultSelect_fn = chosen.result_select;
+          chosen.search_contains = true;
+          chosen.result_select = function(evt) {
+            var resultHighlight = null;
+            if (autoClose === false) {
+              evt['metaKey'] = true;
+              evt['ctrlKey'] = true;
+              resultHighlight = chosen.result_highlight;
+            }
+            var stext = chosen.get_search_text();
+            var result = chosen_resultSelect_fn.call(chosen, evt);
+            if (autoClose === false && resultHighlight !== null){
+              resultHighlight.addClass('result-selected');
+            }
+                
+            // this.search_field.val(stext);               
+            this.winnow_results();
+            this.search_field_scale();
 
-          return result;
-        };
-      });
+            return result;
+          };
+        });
+      }
     },
 
     renderPickADate: function() {
@@ -160,16 +157,8 @@
     onSubmitFilters: function(e) {
       e && e.preventDefault();
       var newFilters = this.utils.getParams(this.$form.serialize());
-      this.publishFilters(newFilters);
+      App.Events.trigger('params:update', newFilters)
     },
-
-    /**
-     * PUBLISH
-     */
-    publishFilters: function(newFilters) {
-      var newParams = _.extend({}, this.params, newFilters);
-      window.location = '/map?' + $.param(newParams)
-    }
 
   });
 
