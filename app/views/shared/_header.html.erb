@@ -15,7 +15,7 @@
         <% if user_signed_in? %>
           <li class="user-avatar">
             <div class="c-user-profile-picture <%= @isProfile ? "-active" : "" %>">
-              <div class="initials">LK</div>
+              <div class="initials"><%= current_user.name ? current_user.name[0] : 'U' %></div>
               <!-- <img src="" alt="{User name}'s profile picture'" /> -->
               <!-- Notifications to set (set element on mobile too) -->
               <% if true %>
