@@ -1,10 +1,89 @@
-<h1><%= @user.name %></h1>
-<% @projects.each do |project| %>
-  <div>
-    <%= link_to project.title, user_project_path(@user, project) %>
-    <% if user_signed_in? && @user == current_user %>
-      <%= link_to 'Edit', edit_user_project_path(@user, project) %>
-      <%= link_to 'Delete', user_project_path(@user, project), data: { confirm: 'Are You sure?' }, method: :delete %>
-    <% end %>
+
+<section class="network">
+  <div class="c-section-intro -color-4">
+    <div id="map" class="map c-map">
+      <div class="c-map-intro-legend">
+        <ul class="legend-list">
+          <li class="item"><div class="icon -first"></div><%= t 'you' %></li>
+          <li class="item"><div class="icon -second"></div><%= t 'collaborators' %></li>
+        </ul>
+        <div class="viel"></div>
+      </div>
+    </div>
+
+    <div class="intro-info">
+      <div class="info">
+        <div class="c-personal-info">
+          <div class="c-user-profile-picture -huge">
+            <div class="initials">LK</div>
+            <!-- <img src="" alt="<%= @user.name %>'s profile picture'" /> -->
+          </div>
+          <div class="data-container">
+            <h1 class="c-title -big"><%= @user.name ? @user.name : User %>
+              <svg class="c-svg -medium icon icon-">
+                <use xlink:href="#icon-"></use>
+              </svg>
+            </h1>
+            <div class="professional-data">
+              <!-- <ul class="work-info">
+                <li>Cedars-Sinai Medical Center
+                  <svg class="c-svg icon icon-">
+                    <use xlink:href="#icon-"></use>
+                  </svg>
+                </li>
+                <li>Director
+                  <svg class="c-svg icon icon-">
+                    <use xlink:href="#icon-"></use>
+                  </svg>
+                </li>
+              </ul> -->
+              <ul class="follow">
+                <li><span>211</span> Following</li>
+                <li><span>233</span> Followers</li>
+              </ul>
+              <!-- <ul class="contact">
+                <li>@twitter_account 
+                  <svg class="c-svg icon icon-">
+                    <use xlink:href="#icon-"></use>
+                  </svg>
+                </li>
+                <li>LinkedIn 
+                  <svg class="c-svg icon icon-">
+                    <use xlink:href="#icon-"></use>
+                  </svg>
+                </li>
+              </ul> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="c-buttons-group">
+        <a href="/" class="c-button -inverse -filled btn-large"><%= t 'share_my_info' %></a>
+        <div class="row-buttons">
+          <%= link_to "+ " + (t 'projects'), new_user_project_path(user_id: current_user.id), { :class => "c-button -inverse" } if user_signed_in? && @user == current_user %>
+          <%= link_to "+ " + (t 'posts'), "#", { :class => "c-button -inverse" } %>
+          <%= link_to "+ " + (t 'events'), new_user_event_path(user_id: current_user.id), { :class => "c-button -inverse" } if user_signed_in? && @user == current_user %>
+        </div>
+      </div>
+
+      <ul class="c-section-menu wrapper -color-0">
+        <% @filters.each do |filter| %>
+          <li>
+            <%= link_to (t filter),
+              user_path(request.query_parameters.merge({ type: filter })),
+              class: active_param?('type', filter),
+              remote: true,
+              data: {magic: true} %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   </div>
-<% end %>
+  <div id="content">
+    <%= render(:partial => @current_type) %>
+  </div>
+
+
+</section>
+

@@ -1,0 +1,25 @@
+
+/**
+ *
+ *  <div id="error_explanation">
+ *    <h2>{ Content }</h2>
+ *    <ul></ul>
+ *  </div>
+ *
+ */
+
+#error_explanation {
+
+  & h2 {
+    color: crimson;
+  }
+
+  ul {
+    margin-bottom: 35px;
+
+    li {
+      margin-left: 20px;
+      margin-bottom: 8px;
+    }
+  }
+}

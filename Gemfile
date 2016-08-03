@@ -32,6 +32,8 @@ gem 'sendgrid-ruby'
 # Api engine
 gem 'cartomodel', git: 'http://github.com/Vizzuality/cartomodel'
 
+gem 'sql_query'
+
 source 'https://rails-assets.org' do
   gem 'rails-assets-normalize-css'
   gem 'rails-assets-underscore'
@@ -61,7 +63,7 @@ group :development do
   gem 'quiet_assets'
   gem 'listen'
   gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-  gem 'rubocop', require: false
+  gem 'rubocop',     require: false
   # Deploy
   gem 'capistrano', '3.5'
   gem 'capistrano-env-config'

@@ -25,6 +25,27 @@
 		color: rgba(15,48,70,.3);
     	font-weight: normal;
 	}
+	.chosen-container-multi.chosen-container-active.chosen-with-drop {
+		width: 100% !important;
+	}
+	.chosen-container-multi .chosen-choices {
+		background: transparent;
+		li.search-choice {
+			border: none;
+			background: transparent;
+			.search-choice-close:after {
+		    	content: '×';
+		    	border: none;
+		    	color: #5aade4;
+		    	transform: none;
+		    	top: -2px;
+			    position: relative;
+			    right: 0px;
+			    font-size: 30px;
+			    background: white;
+		    }
+		}
+	}
 	.chosen-container-active.chosen-with-drop {
 		z-index: 2;
 	    position: absolute;

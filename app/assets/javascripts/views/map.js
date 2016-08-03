@@ -33,12 +33,12 @@
 
       var opts = settings && settings.options ? settings.options : {};
       this.options = _.extend({}, this.defaults, opts);
-
-      this.layers = settings.layers;
+      this.params = settings.params;
+      // this.layers = settings.layers;
 
       this.createMap();
 
-      this.listeners();
+      // this.listeners();
     },
 
     listeners: function() {
@@ -57,6 +57,7 @@
         this.map = L.map(this.el.id, this.options.map);
         this.$el.data('leaflet', this.map);
         this.setBasemap();
+        this.setMarkers();
       } else {
         console.info('Map already exists.');
       }
@@ -106,6 +107,33 @@
       }
     },
 
+
+    setMarkers: function() {
+
+      var markers = new App.Collection.Markers();
+
+      markers
+        .fetch({
+          data: this.params
+        })
+        .done(function(){
+          var options = {
+            markers: markers.toJSON()
+          };
+
+          var layerInstance = new App.Helper.MarkerLayer(this.map, options);
+
+          layerInstance.create(function(layer) {
+            layer.setOpacity(1);
+            layer.setZIndex(1000);
+          }.bind(this));
+
+          this.setLayer(layerInstance, {
+            id: 'marker-layer'
+          });
+
+        }.bind(this));
+    },
 
 
     /************
@@ -159,29 +187,6 @@
             }.bind(this));
 
             this.setLayer(layerInstance, layerData);
-          break;
-
-          case 'marker':
-            var markers = new App.Collection.Markers({
-              type: layerData.slug
-            });
-
-            markers.fetch().done(function(){
-              var options = {
-                markers: markers.toJSON(),
-                type: layerData.slug
-              };
-
-              layerInstance = new App.Helper.MarkerLayer(this.map, options);
-
-              layerInstance.create(function(layer) {
-                layer.setOpacity(layerData.opacity);
-                layer.setZIndex(1000-layerData.order);
-              }.bind(this));
-
-              this.setLayer(layerInstance, layerData);
-
-            }.bind(this));
           break;
 
           default:

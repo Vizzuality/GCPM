@@ -1,0 +1,44 @@
+<h3 class="c-title -normal -grid wrapper"><%= t "your_projects" %></h3>
+<!-- c-grid-projects -->
+<div class="c-card-grid" id="content">
+  <!-- Provisional loop  -->
+  <% @projects.each do |project| %>
+    <div class="card -mobile-large-1-2 -tablet-1-3">
+      <h4 class="c-card-title -border-1"><%= t 'active' %></h4>
+      <%= link_to user_project_path(@user, project), class: "link" do  %>
+        <h3 class="c-title"><%= project.title %></h3>
+      <% end %>
+      <div class="c-tag-list -closer">
+        <% project.cancer_types.each do |t| %>
+        <p class="tag"><%= t.name %></p>
+        <% end %>
+      </div>
+      <% if user_signed_in? && @user == current_user %>
+        <%= link_to t('edit'), edit_user_project_path(@user, project), class: "c-button -color-3 -network" %>
+        <%= link_to t('delete'), user_project_path(@user, project), data: { confirm: 'Are You sure?' }, method: :delete, class: "c-button -color-3 -network" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<h3 class="c-title -normal -grid wrapper"><%= t "following" %></h3>
+<!-- c-grid-projects -->
+<div class="c-card-grid">
+  <!-- Provisional loop  -->
+  <% for i in 1..4 %>
+    <div class="card -mobile-large-1-2 -tablet-1-3">
+      <h4 class="c-card-title -border-1"><%= t 'active' %></h4>
+      <a>
+        <h3 class="c-title">Research Training in Cancer Prevention and Control in Morocco</h3>
+      </a>
+      <div class="c-tag-list -closer">
+        <% ['Breast', 'Bladder', 'Pancreas'].each do |t| %>
+        <p class="tag"><%= t %></p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+
+

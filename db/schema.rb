@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160729151912) do
+ActiveRecord::Schema.define(version: 20160803143833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20160729151912) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "city"
-    t.string   "country"
+    t.string   "country_name"
     t.string   "country_code"
     t.float    "latitude"
     t.float    "longitude"
@@ -46,6 +46,8 @@ ActiveRecord::Schema.define(version: 20160729151912) do
     t.integer  "organization_id"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
+    t.integer  "country_id"
+    t.index ["country_id"], name: "index_addresses_on_country_id", using: :btree
     t.index ["organization_id"], name: "index_addresses_on_organization_id", using: :btree
   end
 
@@ -64,6 +66,15 @@ ActiveRecord::Schema.define(version: 20160729151912) do
     t.datetime "updated_at",                          null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
+  end
+
+  create_table "agrupations", force: :cascade do |t|
+    t.integer  "layer_id"
+    t.integer  "layer_group_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["layer_group_id"], name: "index_agrupations_on_layer_group_id", using: :btree
+    t.index ["layer_id"], name: "index_agrupations_on_layer_id", using: :btree
   end
 
   create_table "cancer_types", force: :cascade do |t|
@@ -89,6 +100,38 @@ ActiveRecord::Schema.define(version: 20160729151912) do
     t.string   "region_centroid"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.string   "country_iso_3"
+  end
+
+  create_table "db_backups", force: :cascade do |t|
+    t.text     "notes"
+    t.string   "file_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.text     "website"
+    t.text     "excerpt"
+    t.text     "participants"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.boolean  "private"
+    t.boolean  "online"
+    t.text     "address"
+    t.text     "address2"
+    t.string   "city"
+    t.string   "country"
+    t.string   "state"
+    t.float    "latitute"
+    t.float    "longitude"
+    t.string   "postcode"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_events_on_user_id", using: :btree
   end
 
   create_table "funders", force: :cascade do |t|
@@ -108,6 +151,42 @@ ActiveRecord::Schema.define(version: 20160729151912) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "layer_groups", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "super_group_id"
+    t.string   "slug"
+    t.string   "layer_group_type"
+    t.string   "category"
+    t.boolean  "active"
+    t.integer  "order"
+    t.text     "info"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  create_table "layers", force: :cascade do |t|
+    t.integer  "layer_group_id"
+    t.string   "name",                           null: false
+    t.string   "slug",                           null: false
+    t.string   "layer_type"
+    t.integer  "zindex"
+    t.boolean  "active"
+    t.integer  "order"
+    t.string   "color"
+    t.text     "info"
+    t.string   "layer_provider"
+    t.text     "css"
+    t.text     "interactivity"
+    t.float    "opacity"
+    t.text     "query"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.boolean  "locate_layer",   default: false
+    t.string   "icon_class"
+    t.boolean  "published",      default: true
+    t.text     "legend"
+  end
+
   create_table "memberships", force: :cascade do |t|
     t.integer  "project_id"
     t.integer  "research_unit_id"
@@ -121,13 +200,6 @@ ActiveRecord::Schema.define(version: 20160729151912) do
 
   create_table "organization_types", force: :cascade do |t|
     t.string "name"
-  end
-
-  create_table "organization_types_organizations", id: false, force: :cascade do |t|
-    t.integer "organization_id"
-    t.integer "organization_type_id"
-    t.index ["organization_id"], name: "index_organization_types_organizations_on_organization_id", using: :btree
-    t.index ["organization_type_id"], name: "index_organization_types_organizations_on_organization_type_id", using: :btree
   end
 
   create_table "organizations", force: :cascade do |t|
