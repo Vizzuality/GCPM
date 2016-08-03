@@ -1,0 +1,17 @@
+
+
+.c-projects-fields {
+  .project-field {
+    .c-title {
+      margin-bottom: 6px;
+    }
+
+    .data {
+      margin: 0;
+
+      & li {
+        margin-bottom: 5px;
+      }
+    }
+  }
+}
