@@ -43,7 +43,8 @@
     },
 
     events: {
-      'click .-editable': 'displaInputs'
+      'click .-editable' : 'displaInputs',
+      'click .lead-investigator' : 'selectLead'
     },
 
     initialize: function() {
@@ -73,6 +74,15 @@
         inherit_select_classes: true,
         no_results_text: "Oops, nothing found!"
       });
+    },
+    
+    displaInputs: function() {
+      $('body').addClass('f-edited');
+    },
+
+    selectLead: function(ev) {
+      $('.lead-investigator').prop('checked',false);
+      $(ev.target).prop('checked',true);
     },
 
     displaInputs: function() {

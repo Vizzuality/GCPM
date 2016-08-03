@@ -191,8 +191,6 @@ ActiveRecord::Schema.define(version: 20160803014813) do
     t.integer  "membership_type",  default: 1
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
-    t.integer  "address_id"
-    t.index ["address_id"], name: "index_memberships_on_address_id", using: :btree
     t.index ["membership_type"], name: "index_memberships_on_membership_type", using: :btree
     t.index ["project_id"], name: "index_memberships_on_project_id", using: :btree
     t.index ["research_unit_id"], name: "index_memberships_on_research_unit_id", using: :btree
@@ -200,13 +198,6 @@ ActiveRecord::Schema.define(version: 20160803014813) do
 
   create_table "organization_types", force: :cascade do |t|
     t.string "name"
-  end
-
-  create_table "organization_types_organizations", id: false, force: :cascade do |t|
-    t.integer "organization_id"
-    t.integer "organization_type_id"
-    t.index ["organization_id"], name: "index_organization_types_organizations_on_organization_id", using: :btree
-    t.index ["organization_type_id"], name: "index_organization_types_organizations_on_organization_type_id", using: :btree
   end
 
   create_table "organizations", force: :cascade do |t|

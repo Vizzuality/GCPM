@@ -1,6 +1,6 @@
 <div class="project_add">
 	<%= simple_form_for [@user, @project], url: user_projects_url(@user) do |f| %>
 	  <%= render partial: f %>
-	  <%= f.button :submit, 'Submit', class: 'c-button -color-3 -network' %>
+	  <%= f.button :submit, 'Submit', class: 'f-submit c-button -color-3 -network' %>
 	<% end %>
 </div>
