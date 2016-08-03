@@ -1,10 +1,8 @@
 select
 projects.id as project,
 projects.title as project_title,
-addresses.latitude as project_latitude,
-addresses.longitude as project_longitude,
 countries.country_name as location_name,
-countries.country_centroid as centroid,
+'{"type":"point","coordinates":[' || addresses.latitude || ',' || addresses.longitude || ']}' as centroid,
 countries.country_iso_3 as iso,
 'project' as type,
 case when (memberships.membership_type = 0) then true else false end as is_project_lead
@@ -52,5 +50,4 @@ from projects
     <% if @params[:end_date] %>
       and (projects.end_date < date(<%= quote @params[:end_date] %>))
     <% end %>
-group by project, project_title, project_latitude,
-project_longitude, location_name, centroid, iso, is_project_lead
+group by project, project_title, location_name, centroid, iso, is_project_lead
