@@ -38,11 +38,12 @@
 
       this.createMap();
 
-      // this.listeners();
+      this.listeners();
     },
 
     listeners: function() {
-      this.layers.on('sync reset change', this.renderLayers.bind(this));
+      // this.layers.on('sync reset change', this.renderLayers.bind(this));
+      // App.Events.on('remote:load', this.setMarkers);
     },
 
 
@@ -54,8 +55,13 @@
      */
     createMap: function() {
       if (!this.map) {
+        if (!!this.$el.data('map')) {
+          this.removeMap();
+        }
+        
         this.map = L.map(this.el.id, this.options.map);
-        this.$el.data('leaflet', this.map);
+        this.$el.data('map', this.map);
+
         this.setBasemap();
         this.setMarkers();
       } else {
@@ -68,12 +74,8 @@
      * Destroys the map and clears all related event listeners
      */
     removeMap: function() {
-      if (this.map) {
-        this.map.remove();
-        this.map = null;
-      } else {
-        console.info('Map doesn\'t exist yet.');
-      }
+      this.$el.data('map').remove();
+      this.$el.data('map', null);
     },
 
 

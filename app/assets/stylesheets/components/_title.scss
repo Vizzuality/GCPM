@@ -52,6 +52,11 @@
     letter-spacing: -0.5px;
   }
 
+  &.-smaller {
+    font-size: $font-size-normal;
+    letter-spacing: -0.5px;
+  }
+
   &.-inverse { color: $color-3; }
 
   &.-bold {

@@ -34,9 +34,9 @@
 <% @projects.each do |p| %>
   <div class="card -mobile-large-1-2 -tablet-1-3">
     <h4 class="c-card-title -border-2"><%= p.project_leads.first.name %></h4>
-    <a href="<%= p.project_website %>" target="_blank" class="link">
+    <%= link_to project_path(p.id), { :class => "link" } do %>
       <h3 class="c-title"><%= p.title %></h3>
-    </a>
+    <% end %>
     <p><%= truncate(p.summary, :length => 300) %></p>
   </div>
 <% end %>

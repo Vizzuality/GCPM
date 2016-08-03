@@ -76,6 +76,11 @@
       align-items: center;
       flex-wrap: wrap;
 
+      .separator {
+        height: 30px;
+        border-right: 2px solid rgba(0, 0, 0, .2);
+      }
+
       > li {
         flex-basis: 50%;
         margin-bottom: 15px;
@@ -90,13 +95,18 @@
           margin-left: 40px;
         }
 
+
         &:first-of-type {
           @media #{$mq-tablet} {
             margin-left: 0;
           }
         }
 
-        > a { color: $color-2; }
+        > a {
+          color: $color-2;
+
+          &.-color-1 { color: $color-1; }
+        }
       }
     }
 
