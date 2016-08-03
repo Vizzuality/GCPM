@@ -14,7 +14,7 @@ class MapController < ApplicationController
     # Projects
     #Limit of projects shown at the begenning and added when show more button clicked
     @limit = 15
-    @projects  = Project.all.order('created_at DESC').limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
+    @projects  = Project.fetch_all(projects_params).order('created_at DESC').limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
 
     @current_type = params[:type] || 'projects'
     @filters = ['projects', 'people', 'events']
@@ -27,7 +27,7 @@ class MapController < ApplicationController
 
   private
   def projects_params
-    params.permit(:limit, :offset, :start_date, :end_date, project_types:[], countries:[], cancer_types:[], organization_types:[], organizations:[], regions:[])
+    params.permit(:start_date, :end_date, project_types:[], countries:[], cancer_types:[], organization_types:[], organizations:[], regions:[])
   end
 
 end

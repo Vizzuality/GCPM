@@ -37,9 +37,17 @@ class Project < ApplicationRecord
   validates_presence_of :title, :summary
   validates :title, uniqueness: true
 
-  scope :publihsed, -> { where(status: :published) }
-  scope :active,    -> { where('projects.end_date >= ? AND projects.start_date <= ?', Time.now, Time.now).or(where('projects.end_date IS NULL')) }
-  scope :inactive,  -> { where('projects.end_date < ?', Time.now).or('projects.start_date > ?', Time.now)                                        }
+  scope :publihsed,             ->                     { where(status: :published) }
+  scope :active,                ->                     { where('projects.end_date >= ? AND projects.start_date <= ?', Time.now, Time.now).or(where('projects.end_date IS NULL')) }
+  scope :inactive,              ->                     { where('projects.end_date < ?', Time.now).or('projects.start_date > ?', Time.now) }
+  scope :by_project_types,      -> project_types       { joins(:project_types).where(project_types: { id: project_types }) }
+  scope :by_cancer_types,       -> cancer_types        { joins(:cancer_types).where(cancer_types: { id: cancer_types }) }
+  scope :by_organizations,      -> organizations       { joins(:organizations).where(organizations: { id: organizations }) }
+  scope :by_organization_types, -> organization_types  { joins(organizations: :organization_type).where(organization_types: { id: organization_types }) }
+  scope :by_countries,          -> countries           { joins(:countries).where(countries: { id: countries }) }
+  scope :by_regions,            -> regions             { joins(:countries).where(countries: { region_iso: regions }) }
+  scope :by_start_date,         -> start_date          { where('projects.start_date > ?', start_date ) }
+  scope :by_end_date,           -> end_date            { where('projects.end_date < ?', end_date ) }
 
   def self.fetch_all(options)
     projects = Project.published
