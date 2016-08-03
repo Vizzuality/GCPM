@@ -10,10 +10,7 @@
     app.start();
   }
 
-  if (Turbolinks && Turbolinks.supported) {
-    document.addEventListener('turbolinks:load', initApp);
-  } else {
-    document.addEventListener('DOMContentLoaded', initApp);
-  }
+  document.addEventListener('DOMContentLoaded', initApp);
+  
 
 })(this.App);

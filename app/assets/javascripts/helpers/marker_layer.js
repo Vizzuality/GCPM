@@ -35,7 +35,7 @@
      * Create a CartoDB layer
      * @param  {Function} callback
      */
-    create: function(callback) {
+    create: function() {
       var markers = this.options.markers;
       if (markers && markers.length) {
         this.markers = _.compact(_.map(markers, function(marker){
@@ -74,9 +74,9 @@
         }.bind(this)));
 
         // Group the markers and add them to the map
-        var group = L.featureGroup(this.markers).addTo(this.map);
+        this.markersGroup = L.featureGroup(this.markers).addTo(this.map);
         // Fit bounds to see all the markers
-        this.map.fitBounds(group.getBounds());
+        this.map.fitBounds(this.markersGroup.getBounds());
       } else {
         // TO-DO: notification => no markers with the selected parameters
         console.log('no markers with the selected parameters');
@@ -88,14 +88,9 @@
      * Remove cartodb layer and sublayers
      */
     remove: function() {
-      if (this.markers) {
-        _.compact(_.map(this.markers, function(marker){
-          marker.off('mouseover')
-                .off('mouseout')
-                .off('click');
-          this.map.removeLayer(marker);
-        }.bind(this)));
-        this.markers = null;
+      if (this.markersGroup) {
+        this.map.removeLayer(this.markersGroup);
+        this.markersGroup = null;
       } else {
         console.info('There aren\'t markers.');
       }
@@ -197,13 +192,13 @@
       var data = e.target.options.data;
       
       if (data.type == 'region') {
-        Backbone.Events.trigger('params:update', {
+        Backbone.Events.trigger('filters:update', {
           'regions[]': data.iso
         });
       }
 
       if (data.type == 'country') {
-        Backbone.Events.trigger('params:update', {
+        Backbone.Events.trigger('filters:update', {
           // Should we set the regions to null?
           // 'regions[]': null,
           'countries[]': data.location_id

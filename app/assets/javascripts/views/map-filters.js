@@ -70,8 +70,12 @@
     },
 
     listeners: function() {
+      App.Events.on('params:update', function(params){
+        this.params = params;
+        this.updateSelects();
+      }.bind(this));
+
       App.Events.on('Filters/toggle', function(){
-        console.log('Filters');
         this.show();
       }.bind(this));
     },
@@ -168,8 +172,17 @@
           newFilters[key] = val;  
         }        
       });
-      App.Events.trigger('params:update', newFilters)
+      console.log(newFilters);
+      App.Events.trigger('filters:update', newFilters);
+      this.hide();
     },
+
+    updateSelects: function() {
+      _.each(this.params, function(v,k){
+        var value = (_.isArray(v)) ? _.map(v, function(v){ return String(v) }) : [String(v)];
+        this.$el.find('select[name="'+k+'"]').val(v).trigger('chosen:updated');
+      }.bind(this))
+    }
 
   });
 

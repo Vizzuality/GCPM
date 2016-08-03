@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require leaflet
 //= require handlebars
-//= require turbolinks
 //= require underscore/underscore
 //= require backbone/backbone
 //= require backbone-syphon

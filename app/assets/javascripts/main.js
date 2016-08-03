@@ -33,7 +33,7 @@
       App.Events.on('remote:load', this.replaceContent);
       
       // Update params
-      App.Events.on('params:update', this.publishParams.bind(this));
+      App.Events.on('filters:update', this.publishParams.bind(this));
 
     },
 
@@ -130,6 +130,11 @@
      * This function will parse the params of the url
      */
     setParams: function(params) {
+      for (var i in params) {
+        if (! !!params[i]) delete params[i];
+        if (_.isArray(params[i]) && ! !!params[i].length) delete params[i];
+      }
+
       if (params['regions[]']) {
         params.group = 'countries';
       }
@@ -141,20 +146,11 @@
       return params;
     },
 
-    publishParams: function(newParams) {
-      this.params = _.extend({}, this.params, newParams);
-      this.params = this.stripNull(this.params);
-      this.router.navigate('/map?' + $.param(this.params));
-      Turbolinks.visit('/map?' + $.param(this.params));
+    publishParams: function(newFilters) {
+      // TO-DO: review when you have only one country, we need to save it as an array
+      this.params = this.setParams(_.extend({}, this.params, newFilters));
+      App.Events.trigger('params:update', this.params);
     },
-
-    stripNull: function(obj) {
-      for (var i in obj) {
-        if (! !!obj[i]) delete obj[i];
-        if (_.isArray(obj[i]) && ! !!obj[i].length) delete obj[i];
-      }
-      return obj;
-    }    
 
   });
 
