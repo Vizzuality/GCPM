@@ -13,11 +13,13 @@ Rails.application.routes.draw do
 
   resources :projects, only: :show
 
-  # User profile projects
+  # User profile
   resources :users, only: :show, path: :network do
     resources :projects, controller: 'network_projects', except: :index
-    resources :events,   controller: 'events',           except: :destroy
+    resources :events,   controller: 'network_events',   except: :destroy
   end
+
+  get '/network/:id/projects', to: 'users#show'
 
   # Admin
   #get 'admin/excel-uploader', to: 'admin/excel_uploader#new', as: :admin_excel_uploader

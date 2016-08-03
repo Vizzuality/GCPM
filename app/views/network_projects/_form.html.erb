@@ -1,14 +1,15 @@
 <div class="c-section-intro">
-	<%= form.input :title, label: 'Project title_', label_html: { class: 'c-title -bigger -bold' }, :required => false %>
+	<%= form.input :title, label: 'Project title_', label_html: { class: 'c-title -bigger -bold -hide-edited' }, :required => false, input_html: {value: 'Project title_', class: '-editable'}  %>
 </div>
 <div class="c-section-container">
 	<div class="c-section-half -left">
 		<h3 class="c-section-title">Description</h3>
-		<%= form.input :summary %>
+
+		<%= form.input :summary, label: 'Summary', label_html: { class: '-hide-edited' }, :required => false, input_html: {value: 'Summary', class: '-editable', rows: '40'} %>
 	</div>
 	<div class="c-section-half">
 		<div class="c-pickadate">
-			<%= form.input :start_date, as: :string, input_html: {id: 'add-project-start_date', class: 'pickadate-input'}, label_html: { class: 'c-section-title' } %>
+			<%= form.input :start_date, as: :string, input_html: {id: 'add-project-start_date', class: 'pickadate-input'}, label_html: { class: 'c-section-title' }%>
 			<div id="pickadate-start-container" class="pickadate-container" autofocus></div>
 		</div>
 		<span class="separator"></span>
@@ -19,13 +20,14 @@
 		<span class="separator"></span>
 		<%= form.input :project_website, as: :string, label: 'project website', label_html: { class: 'c-section-title -one-line'}, input_html: {placeholder: 'http://example.org/', class: '-input-line'}, :required => false %>
 		<span class="separator"></span>
-		<%= form.input :project_types, as: :select, label: 'project type', label_html: { class: 'c-section-title -one-line'}, input_html: {class: 'chosen-select'} %>
+		<%= form.input :project_type_ids, as: :collection_select, collection: @project_types, label: 'project type', label_html: { class: 'c-section-title -one-line'}, input_html: {class: 'chosen-select', multiple: true} %>
 		<span class="separator"></span>
-		<%= form.input :cancer_types, as: :select, label: 'cancer type', label_html: { class: 'c-section-title -one-line'}, input_html: {class: 'chosen-select'} %>
+		<%= form.input :cancer_type_ids, as: :collection_select, collection: @cancer_types, label: 'cancer type', label_html: { class: 'c-section-title -one-line'}, input_html: {class: 'chosen-select', multiple: true} %>
 		<span class="separator"></span>
-		<%= form.input :project_website, as: :string, label: 'funding source', label_html: { class: 'c-section-title -one-line'}, input_html: {placeholder: 'Name', class: '-input-line'}, :required => false %>
+		<%= form.input :funding_source_ids, as: :collection_select, collection: @funders, label: 'funding source', label_html: { class: 'c-section-title -one-line'}, input_html: {class: 'chosen-select', multiple: true} %>
 	</div>
 </div>
+
 <div class="c-section-container -staff">
 	<div class="c-staff -headers">
 		<span class="-item">investigator</span>
@@ -33,52 +35,95 @@
 		<span class="-item">address</span>
 		<span class="-item">lead</span>
 	</div>
-	<div class="c-staff -row">
-		<div class="-item -m-edited">
-			<select name="investigators" class="chosen-select" data-placeholder="Select or add investigator">
+
+  <%= form.fields_for :memberships do |memberships_form| %>
+    <%= render 'membership_relation_form', f: memberships_form %>
+  <% end %>
+  <p class="add-button">
+    <%= add_membership_path 'Add new', form, :memberships, 'add_fields add_investigator' %>
+  </p>
+
+  <div class="c-staff -row">
+    <div class="-item -m-edited">
+      <select name="investigators" class="chosen-select" data-placeholder="Select or add investigator">
                 <option value="">John Sample</option>
               </select>
-		</div>
-		<div class="-item -m-edited">
-			<select name="organizations" class="chosen-select" data-placeholder="Select or add investigation">
+    </div>
+    <div class="-item -m-edited">
+      <select name="organizations" class="chosen-select" data-placeholder="Select or add investigation">
                 <option value="">Random organization</option>
               </select>
-		</div>
-		<div class="-item -m-edited">
-			<select name="address" class="chosen-select" data-placeholder="Select or add investigation">
+    </div>
+    <div class="-item -m-edited">
+      <select name="address" class="chosen-select" data-placeholder="Select or add investigation">
                 <option value="">Somewhere</option>
               </select>
-		</div>
-		<div class="-item -m-edited">
-			<label for="tick-lead-1"></label><input type="checkbox" id="tick-lead-1"><span class="circle"></span>
-		</div>
-	</div>
-	<div class="c-staff -row">
-		<div class="-item">
-			<select name="investigators" class="chosen-select" data-placeholder="Select or add investigator">
-                <option value="">Select or add investigator</option>
-              </select>
-		</div>
-		<div class="-item">
-			<select name="organizations" class="chosen-select" data-placeholder="Select or add investigation">
-                <option value="">Select or add investigation</option>
-              </select>
-		</div>
-		<div class="-item">
-			<select name="address" class="chosen-select" data-placeholder="Select or add investigation">
-                <option value="">Select or add address</option>
-              </select>
-		</div>
-		<div class="-item">
-			<label for="tick-lead-0"></label><input type="checkbox" id="tick-lead-0"><span class="circle"></span>
-		</div>
-	</div>
+    </div>
+    <div class="-item -m-edited">
+      <label for="tick-lead-1"></label><input type="checkbox" id="tick-lead-1" class="lead-investigator"><span class="circle"></span>
+    </div>
+  </div>
+
+  <h3>Investigators</h3>
+
+  <div>
+    <%= form.fields_for :investigators do |investigators_form| %>
+      <%= render 'investigator_relation_form', f: investigators_form %>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.fields_for :memberships do |memberships_form| %>
+      <%= render 'membership_relation_form', f: memberships_form %>
+    <% end %>
+    <p class="add-button">
+      <%= add_membership_path 'Add new', form, :memberships, 'add_fields add_investigator' %>
+    </p>
+  </div>
+
+  <h3>Organizations</h3>
+
+  <div>
+    <%= form.fields_for :organizations do |organizations_form| %>
+      <%= render 'organization_relation_form', f: organizations_form %>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.fields_for :memberships do |memberships_form| %>
+      <%= render 'membership_orga_relation_form', f: memberships_form %>
+    <% end %>
+    <p class="add-button">
+      <%= add_membership_orga_path 'Add new', form, :memberships, 'add_fields add_organization' %>
+    </p>
+  </div>
+
+  <h3>Addresses</h3>
+
+  <div>
+    <%= form.fields_for :addresses do |addresses_form| %>
+      <%= render 'address_relation_form', f: addresses_form %>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.fields_for :memberships do |memberships_form| %>
+      <%= render 'membership_address_relation_form', f: memberships_form %>
+    <% end %>
+    <p class="add-button">
+      <%= add_membership_address_path 'Add new', form, :memberships, 'add_fields add_address' %>
+    </p>
+  </div>
 </div>
+
 <div class="c-section-container -staff">
+	<div class="c-staff -row">
+		<span class="c-section-title">terms</span>
+	</div>
 	<div class="c-staff -row">
 		Submitted information will be verified by the GCPM team to ensure data quality, and may be standardized and/or formatted for consistency before it is published. Checking this box acknowledges that you agree to share this information for public display on the Global Cancer Project Map.
 	</div>
 	<div class="c-staff -row">
-		<input type="checkbox" required> I accept these terms<span class="circle"></span>
+		<input type="checkbox" required class="f-accept-terms"> I accept these terms
 	</div>
 </div>
