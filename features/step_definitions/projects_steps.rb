@@ -11,9 +11,9 @@ Then /^I should have two projects$/ do
 end
 
 Given /^project by user$/ do
-  FactoryGirl.create(:project, user_id: User.last.id, title: 'User project', status: :published)
+  FactoryGirl.create(:project, user_id: User.last.id, title: 'User project', status: :published, cancer_type_ids: [FactoryGirl.create(:cancer_type).id])
 end
 
 Given /^first project$/ do
-  FactoryGirl.create(:project, user_id: User.last.id, title: 'First project by user', status: :published)
+  FactoryGirl.create(:project, user_id: User.last.id, title: 'First project by user', status: :published, cancer_type_ids: [FactoryGirl.create(:cancer_type).id])
 end

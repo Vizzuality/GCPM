@@ -12,9 +12,12 @@
 
 class Investigator < ApplicationRecord
   has_many :research_units
-  has_many :addresses, through: :research_units
+  has_many :addresses,     through: :research_units
   has_many :organizations, through: :addresses
-  has_many :memberships, through: :research_units
-  has_many :projects, through: :memberships
+  has_many :memberships,   through: :research_units
+  has_many :projects,      through: :memberships
+
+  accepts_nested_attributes_for :addresses, allow_destroy: true
+
   validates_presence_of :name
 end

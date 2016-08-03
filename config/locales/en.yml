@@ -33,6 +33,7 @@ en:
   data: "Data"
   download: "Download"
   edit: "Edit"
+  delete: "Delete"
   ends: "Ends"
   event: "Event"
   events: "Events"

@@ -6,8 +6,10 @@ I want to manage an project
   Scenario: Visitor can view projects page and project page without login
     Given user
     And first project
+    And project by user
     When I go to the user projects page for "user-2@sample.com"
     Then I should see "First project by user"
+    And I should see "ToFactory: RubyParser exception parsing this attribute"
     And I should not see "Delete"
     And I should not see "Edit"
     When I follow "First project by user"
@@ -28,7 +30,7 @@ I want to manage an project
     When I go to the new project page for "user@sample.com"
     And I fill in "project_title" with "Created project by user"
     And I fill in "project_summary" with "Lorem ipsum.."
-    And I press "Create"
+    And I press "Submit"
     Then I should be on the project page for "user@sample.com" "Created project by user"
     And I should have one project
 
