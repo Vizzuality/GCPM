@@ -8,6 +8,7 @@
 #  membership_type  :integer          default("secondary")
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  address_id       :integer
 #
 
 require 'rails_helper'

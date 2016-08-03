@@ -158,6 +158,7 @@
      * - setParams
      * This function will parse the params of the url, if we need
      * different group or something like that
+     *
      */
     setParams: function(params) {
       if (params['regions[]']) {

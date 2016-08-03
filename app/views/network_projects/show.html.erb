@@ -1,5 +1,10 @@
 <%= @project.title %>
 <div>
-<%= @project.summary %>
+  <%= @project.summary %>
+</div>
+<div>
+  <% @project.investigators.each do |investigator| %>
+    <%= investigator.name %>
+  <% end %>
 </div>
 <%= link_to 'Edit', edit_user_project_path(@user, @project) %>

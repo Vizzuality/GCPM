@@ -15,7 +15,7 @@ I want to register, login and edit account
   Scenario: User logout
     Given I am authenticated user
     And I am on the home page
-    When I follow "Logout" within ".user-profile"
+    When I follow "Logout" within ".desktop-menu .user-profile"
     Then I should see "Signed out successfully."
     And I am on the home page
 

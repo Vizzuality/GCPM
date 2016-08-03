@@ -1,0 +1,100 @@
+<div class="c-section-intro">
+  <%= form.input :title, label: 'Event title_', label_html: { class: 'c-title -bigger -bold' }, :required => false %>
+</div>
+<div class="c-section-container">
+  <div class="c-section-half -left">
+    <h3 class="c-section-title">Description</h3>
+    <%= form.input :description %>
+  </div>
+</div>
+  <!-- <div class="c-section-half">
+    <div class="c-pickadate">
+      <%= form.input :start_date, as: :string, input_html: {id: 'add-project-start_date', class: 'pickadate-input'}, label_html: { class: 'c-section-title' } %>
+      <div id="pickadate-start-container" class="pickadate-container" autofocus></div>
+    </div>
+    <span class="separator"></span>
+    <div class="c-pickadate">
+      <%= form.input :end_date, as: :string, input_html: {id: 'add-project-end_date', class: 'pickadate-input'}, label_html: { class: 'c-section-title' } %>
+      <div id="pickadate-end-container" class="pickadate-container" autofocus></div>
+    </div>
+
+  </div>
+</div> -->
+<!-- <div class="c-section-container -staff">
+  <div class="c-staff -headers">
+    <span class="-item">investigator</span>
+    <span class="-item">organization*</span>
+    <span class="-item">address</span>
+    <span class="-item">lead</span>
+  </div>
+  <div class="c-staff -row">
+    <div class="-item -m-edited">
+      <select name="investigators" class="chosen-select" data-placeholder="Select or add investigator">
+                <option value="">John Sample</option>
+              </select>
+    </div>
+    <div class="-item -m-edited">
+      <select name="organizations" class="chosen-select" data-placeholder="Select or add investigation">
+                <option value="">Random organization</option>
+              </select>
+    </div>
+    <div class="-item -m-edited">
+      <select name="address" class="chosen-select" data-placeholder="Select or add investigation">
+                <option value="">Somewhere</option>
+              </select>
+    </div>
+    <div class="-item -m-edited">
+      <label for="tick-lead-1"></label><input type="checkbox" id="tick-lead-1"><span class="circle"></span>
+    </div>
+  </div>
+  <div class="c-staff -row">
+    <div class="-item">
+      <select name="investigators" class="chosen-select" data-placeholder="Select or add investigator">
+                <option value="">Select or add investigator</option>
+              </select>
+    </div>
+    <div class="-item">
+      <select name="organizations" class="chosen-select" data-placeholder="Select or add investigation">
+                <option value="">Select or add investigation</option>
+              </select>
+    </div>
+    <div class="-item">
+      <select name="address" class="chosen-select" data-placeholder="Select or add investigation">
+                <option value="">Select or add address</option>
+              </select>
+    </div>
+    <div class="-item">
+      <label for="tick-lead-0"></label><input type="checkbox" id="tick-lead-0"><span class="circle"></span>
+    </div>
+  </div>
+</div>
+<div class="c-section-container -staff">
+  <div class="c-staff -row">
+    Submitted information will be verified by the GCPM team to ensure data quality, and may be standardized and/or formatted for consistency before it is published. Checking this box acknowledges that you agree to share this information for public display on the Global Cancer Project Map.
+  </div>
+  <div class="c-staff -row">
+    <input type="checkbox" required> I accept these terms<span class="circle"></span>
+  </div>
+</div> -->
+
+<!-- <%= simple_form_for [@user, @event] do |e| %>
+  <%= e.input :title %>
+  <%= e.input :description %>
+  <%= e.input :website %>
+  <%= e.input :excerpt %>
+  <%= e.input :participants %>
+  <%= e.input :start_date %>
+  <%= e.input :end_date %>
+  <%= e.input :private %>
+  <%= e.input :online %>
+  <%= e.input :address %>
+  <%= e.input :address2 %>
+  <%= e.input :city %>
+  <%= e.input :country, as: :select, collection: Country.names %>
+  <%= e.input :state %>
+  <%= e.input :postcode %>
+  <%= e.input :latitute %>
+  <%= e.input :longitude %>
+  <%= e.button :submit %>
+<% end %>
+ -->
