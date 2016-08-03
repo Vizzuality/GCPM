@@ -5,7 +5,7 @@
   <% @projects.each do |project| %>
     <div class="card -mobile-large-1-2 -tablet-1-3">
       <h4 class="c-card-title -border-1"><%= t 'active' %></h4>
-      <%= link_to user_project_path(@user, project) do %>
+      <%= link_to user_project_path(@user, project), class: "link" do  %>
         <h3 class="c-title"><%= project.title %></h3>
       <% end %>
       <div class="c-tag-list -closer">
