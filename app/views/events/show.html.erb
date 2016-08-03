@@ -1,0 +1,43 @@
+<section class="event">
+  <div class="c-section-intro -color-4">
+    <div id="map" class="map c-map">
+      <div class="c-map-intro-legend">
+        <ul class="legend-list">
+          <li class="item"><div class="icon -first"></div><%= t 'project_leads' %></li>
+          <li class="item"><div class="icon -second"></div><%= t 'collaborators' %></li>
+        </ul>
+        <div class="viel"></div>
+      </div>
+    </div>
+    <div class="intro-info">
+      <div class="info">
+        <h1 class="c-title -big"><%= @event.title %></h1>
+
+        <div class="c-cards-profiles">
+          <div class="c-card-user-profile">
+            <a class="profile-picture">
+              <div class="c-user-profile-picture -small"><%= @event.participants ? @event.participants[0] : '' %></div>
+            </a>
+            <div class="info">
+              <a class="name"><%= @event.participants ? @event.participants.size() : 0 %> Participants</a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="c-buttons-group">
+        <a href="/" class="c-button -inverse -filled btn-large">Follow</a>
+        <div class="row-buttons">
+          <a href="/" class="c-button -inverse">Share</a>
+          <a href="/" class="c-button -inverse">Contact</a>
+          <a href="/" class="c-button -inverse">More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-card-grid" id="content">
+    <%= render(:partial => @current_type) %>
+  </div>
+
+</section>

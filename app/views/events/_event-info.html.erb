@@ -1,0 +1,31 @@
+<div class="card -mobile-large-1-1 -tablet-2-3">
+  <p><%= @event.description %></p>
+</div>
+
+<div class="card -mobile-large-1-1 -tablet-1-3">
+  <div class="c-period-bar">
+    <div class="period">
+      <ul>
+        <li><%= t 'starts' %></li>
+        <li class="date"><%= @event.start_date %></li>
+      </ul>
+      <ul>
+        <li><%= t 'ends' %></li>
+        <li class="date"><%= @event.end_date %></li>
+      </ul>
+    </div>
+    <div class="bar"><div class="filled"></div></div>
+  </div>
+
+  <div class="c-projects-fields">
+
+    <div class="project-field">
+      <h4 class="c-title -smaller"><%= t 'location' %></h4>
+      <p class="data">
+          <%= @event.address %>, <%= @event.country %>
+      </p>
+    </div>
+
+  </div>
+</div>
+
