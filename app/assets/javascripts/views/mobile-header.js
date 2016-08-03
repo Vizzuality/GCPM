@@ -1,31 +1,3 @@
-// (function(App) {
-
-//   'use strict';
-
-//   App.View = App.View || {};
-
-//   App.View.MobileHeader = Backbone.View.extend({
-
-//     el: '.c-header',
-
-//     events: {
-//       'click .js-hamburger-menu': 'toggleDrawer'
-//     },
-
-//     initialize: function() {
-//       this.drawer = document.querySelector('.js-mobile-drawer');
-//     },
-
-//     toggleDrawer: function(e) {
-//       e.preventDefault();
-//       this.drawer.classList.toggle('-opened');
-//     }
-
-//   });
-
-// })(this.App);
-
-
 
 (function(App) {
 
@@ -75,24 +47,6 @@
     // Changes
     changeHidden: function() {
       this.$mobileMenu.toggleClass('-opened', !this.model.get('hidden'));
-      !this.model.get('hidden') ? this.setBindings() : this.unsetBindings() ;
-    },
-
-     /**
-     * BINDINGS
-     * - setBindings
-     * - unsetBindings
-     */
-    setBindings: function() {
-      this.$document.on('click.mobile-menu', function(e) {
-        if(!this.el.contains(e.target) && this.el !== e.target) {
-          this.model.set('hidden', true);
-        }
-      }.bind(this));
-    },
-
-    unsetBindings: function() {
-      this.$document.off('click.mobile-menu');
     }
 
   });
