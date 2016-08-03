@@ -16,6 +16,7 @@
       'cancer-types/:iso': 'cancer-type',
       'about': 'about',
       'events/:id': 'event',
+      'projects/:id': 'project',
       'network/:id': 'network'
     },
 

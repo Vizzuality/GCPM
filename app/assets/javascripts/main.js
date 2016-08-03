@@ -28,6 +28,7 @@
       this.listenTo(this.router, 'route:countries', this.countriesPage);
       this.listenTo(this.router, 'route:country', this.countryPage);
       this.listenTo(this.router, 'route:event', this.eventInfo);
+      this.listenTo(this.router, 'route:project', this.projectDetail);
       this.listenTo(this.router, 'route:network', this.userPage);
 
       // Listening magic links
@@ -138,6 +139,20 @@
     },
 
     eventInfo: function() {
+      var params = this.router.getParams();
+
+      // Map view
+      var layersCollection = new App.Collection.Layers();
+      var mapView = new App.View.Map({
+        layers: layersCollection,
+      });
+
+      layersCollection.toggleLayers([
+        params.type || 'org-project-markers'
+      ]);
+    },
+
+    projectDetail: function() {
       var params = this.router.getParams();
 
       // Map view
