@@ -13,6 +13,36 @@
       <div class="info">
         <h1 class="c-title -big"><%= @project.title %></h1>
 
+        <div class="c-cards-profiles">
+          <div class="c-card-user-profile">
+            <a class="profile-picture">
+              <div class="c-user-profile-picture -small"><%= @project.project_leads.first.name[0] %></div>
+            </a>
+            <div class="info">
+              <a class="name"><%= @project.project_leads.first.name %></a>
+            </div>
+          </div>
+
+          <div class="c-card-user-profile">
+            <a class="profile-picture">
+              <div class="c-user-profile-picture -small"><%= @project.secondary_investigators.first.name[0] %></div>
+            </a>
+            <div class="info">
+              <a class="organization"><%= @project.secondary_investigators.size() %> Collaborators</a>
+            </div>
+          </div>
+
+          <div class="c-card-user-profile">
+            <a class="profile-picture">
+              <div class="c-user-profile-picture -small"></div>
+            </a>
+            <div class="info">
+              <a class="name">Funding source</a>
+              <a class="organization"><%= @project.funding_sources.first.name %></a>
+            </div>
+          </div>
+        </div>
+
       </div>
       <div class="c-buttons-group">
         <a href="/" class="c-button -inverse -filled btn-large">Follow</a>
@@ -29,3 +59,4 @@
   </div>
 
 </section>
+

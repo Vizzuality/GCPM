@@ -22,8 +22,8 @@
     <div class="project-field">
       <h4 class="c-title -smaller"><%= t 'cancer_types' %></h4>
       <p class="data">
-        <% @project.cancer_types.each do |x| %>
-          <%= x.name %>
+        <% @project.cancer_types.each do |ct| %>
+          <%= ct.name %>
         <% end %>
         .
       </p>
@@ -32,8 +32,8 @@
     <div class="project-field">
       <h4 class="c-title -smaller"><%= t 'project_types' %></h4>
       <p class="data">
-        <% @project.project_types.each do |x| %>
-          <%= x.name %>
+        <% @project.project_types.each do |pt| %>
+          <%= pt.name %>
         <% end %>
         .
       </p>
@@ -42,8 +42,8 @@
     <div class="project-field">
       <h4 class="c-title -smaller"><%= t 'location' %>(s)</h4>
       <ul class="data">
-        <% @project.addresses.each do |x| %>
-          <li><%= x.city %>, <%= x.country_name %></li>
+        <% @project.addresses.each do |l| %>
+          <li><%= l.city %>, <%= l.country_name %></li>
         <% end %>
       </ul>
     </div>
@@ -51,8 +51,8 @@
     <div class="project-field">
       <h4 class="c-title -smaller"><%= t 'organization' %>(s)</h4>
       <ul class="data">
-        <% @project.organizations.each do |x| %>
-          <li><%= x.name %></li>
+        <% @project.organizations.each do |o| %>
+          <li><%= o.name %></li>
         <% end %>
       </ul>
     </div>
@@ -60,12 +60,11 @@
     <div class="project-field">
       <h4 class="c-title -smaller"><%= t 'funding_source' %>(s)</h4>
       <ul class="data">
-        <% @project.funding_sources.each do |x| %>
-          <li><%= x.name %></li>
+        <% @project.funding_sources.each do |fs| %>
+          <li><%= fs.name %></li>
         <% end %>
       </ul>
     </div>
 
   </div>
 </div>
-
