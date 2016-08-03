@@ -13,11 +13,10 @@ Rails.application.routes.draw do
 
   resources :projects, only: :show
 
-  resources :events, except: :destroy
-
   # User profile projects
   resources :users, only: :show, path: :network do
     resources :projects, controller: 'network_projects', except: :index
+    resources :events,   controller: 'events',           except: :destroy
   end
 
   # Admin

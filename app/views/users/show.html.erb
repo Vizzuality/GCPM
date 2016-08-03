@@ -62,8 +62,8 @@
         <a href="/" class="c-button -inverse -filled btn-large"><%= t 'share_my_info' %></a>
         <div class="row-buttons">
           <%= link_to "+ " + (t 'projects'), new_user_project_path(current_user), { :class => "c-button -inverse" } %>
-          <%= link_to "+ " + (t 'posts'), "#", { :class => "c-button -inverse" } %>
-          <%= link_to "+ " + (t 'events'), "#", { :class => "c-button -inverse" } %>
+          <%= link_to "+ " + (t 'posts'), '#', { :class => "c-button -inverse" } %>
+          <%= link_to "+ " + (t 'events'), new_user_event_path(current_user), { :class => "c-button -inverse" } %>
         </div>
       </div>
 

@@ -4,8 +4,9 @@ class UsersController < ApplicationController
   def show
     @projects = user_signed_in? && @user == current_user ? @user.projects : @user.published_projects
     @current_type = params[:type] || 'projects'
-    @filters = ['projects']
+    @filters = ['projects', 'events']
     @isProfile = true
+    @events =  Event.all
   end
 
   private
