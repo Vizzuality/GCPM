@@ -42,6 +42,11 @@
       }
     },
 
+    events: {
+      'click .-editable' : 'displaInputs',
+      'click .lead-investigator' : 'selectLead'
+    },
+
     initialize: function() {
       // Initialize Parent
       this.constructor.__super__.initialize.apply(this);
@@ -70,6 +75,15 @@
         no_results_text: "Oops, nothing found!"        
       });
     },
+    
+    displaInputs: function() {
+      $('body').addClass('f-edited');
+    },
+
+    selectLead: function(ev) {
+      $('.lead-investigator').prop('checked',false);
+      $(ev.target).prop('checked',true);
+    },
 
     renderPickADate: function() {
       var $start = this.$el.find('#add-project-start_date').pickadate(_.extend({}, this.pickadateOptions, {
@@ -79,6 +93,7 @@
       var $end = this.$el.find('#add-project-end_date').pickadate(_.extend({}, this.pickadateOptions, {
         container: '#pickadate-end-container'
       }));
+
     }
   });
 
