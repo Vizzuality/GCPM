@@ -44,7 +44,8 @@
 
     events: {
       'click .-editable' : 'displaInputs',
-      'click .lead-investigator' : 'selectLead'
+      'click .lead-investigator' : 'selectLead',
+      'click .f-submit' : 'onSubmit'
     },
 
     initialize: function() {
@@ -64,6 +65,14 @@
     render: function() {
       this.renderChosen();
       this.renderPickADate();
+      window.setTimeout(function(){
+        $('.triggerAllNew').trigger('click').hide().parent().find('select.chosen-select').chosen({
+          width: '100%',
+          allow_single_deselect: true,
+          inherit_select_classes: true,
+          no_results_text: "Oops, nothing found!"
+        });
+      },500);
       return this;
     },
 
@@ -83,6 +92,12 @@
     selectLead: function(ev) {
       $('.lead-investigator').prop('checked',false);
       $(ev.target).prop('checked',true);
+    },
+
+    onSubmit: function() {
+      if (! !!$('#project_memberships_attributes_undefined_research_unit_id').val()) {
+        $('.c-pregenerated').remove();
+      }
     },
 
     displaInputs: function() {
