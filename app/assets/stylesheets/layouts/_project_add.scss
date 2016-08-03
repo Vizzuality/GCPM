@@ -121,3 +121,18 @@
     position: relative;
     margin: 30px 0 0;
 }
+
+
+@media all and (max-width: 1024px) {
+	.separator {
+		display: none;
+	}
+	.project_add .c-section-half {
+		display: block;
+		width: 100%;
+	}
+	.c-pickadate {
+		width: 50%;
+    	float: left;
+	}
+}
