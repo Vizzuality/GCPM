@@ -27,15 +27,12 @@
     color: $color-2;
   }
 
-  &.-project-markers {
-    background: $color-3;
-
-    .value {
-      color: $color-2;
-    }
+  &.-project {
+    box-shadow: none;
+    background: $color-2;
 
     &:hover {
-      background: darken($color-3, 2.5%);
+      background: darken($color-2, 2.5%);
     }
   }
 

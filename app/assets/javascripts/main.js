@@ -33,6 +33,10 @@
 
       // Listening magic links
       App.Events.on('remote:load', this.replaceContent);
+
+      // Update params
+      App.Events.on('params:update', this.publishParams.bind(this));
+
     },
 
     start: function() {
@@ -62,6 +66,8 @@
     },
 
     replaceContent: function(data) {
+      console.log('replace content');
+      console.log(data);
       var contentElement = document.getElementById('content');
       if (contentElement) {
         contentElement.innerHTML = data.content;
@@ -69,32 +75,24 @@
     },
 
     mapPage: function() {
-      var params = this.setParams(this.router.getParams()),
-          layersCollection = new App.Collection.Layers();
+      this.params = this.setParams(this.router.getParams());
+      var layersCollection = new App.Collection.Layers();
 
-      console.log(params);
-
-      // // Views
+      // Views
       new App.View.Map({
         layers: layersCollection,
-        params: params
+        params: this.params
       });
 
       new App.View.MapMenu();
       new App.View.MapFilters({
-        params: params
+        params: this.params
       });
       new App.View.MapLayers();
-
-      // Sync layers
-      layersCollection.toggleLayers([
-        params.type || 'projects'
-      ]);
     },
 
     countriesPage: function() {
-      var params = this.router.getParams();
-
+      this.params = this.setParams(this.router.getParams());
       /* Countries index search view */
       var regionsCollection = new App.Collection.Regions();
       var regionsView = new App.View.SearchList({
@@ -111,31 +109,21 @@
     },
 
     countryPage: function() {
-      var params = this.router.getParams();
-
+      this.params = this.setParams(this.router.getParams());
       // Map view
       var layersCollection = new App.Collection.Layers();
       var mapView = new App.View.Map({
         layers: layersCollection,
       });
-
-      layersCollection.toggleLayers([
-        params.type || 'org-project-markers'
-      ]);
     },
 
     userPage: function() {
-      var params = this.router.getParams();
-
+      this.params = this.setParams(this.router.getParams());
       // Map view
       var layersCollection = new App.Collection.Layers();
       var mapView = new App.View.Map({
         layers: layersCollection,
       });
-
-      layersCollection.toggleLayers([
-        params.type || 'org-project-markers'
-      ]);
     },
 
     eventInfo: function() {
@@ -170,11 +158,8 @@
      * - setParams
      * This function will parse the params of the url, if we need
      * different group or something like that
-     *
      */
     setParams: function(params) {
-      var params = params;
-
       if (params['regions[]']) {
         params.group = 'countries';
       }
@@ -184,6 +169,23 @@
       }
 
       return params;
+    },
+
+    /**
+     * - publishParams
+     * This function will parse the params of the url
+     */
+    publishParams: function(newParams) {
+      this.params = _.extend({}, this.params, newParams);
+      this.router.navigate('/map?' + $.param(this.stripNull(this.params)));
+      Turbolinks.visit('/map?' + $.param(this.stripNull(this.params)));
+    },
+
+    stripNull: function(obj) {
+      for (var i in obj) {
+        if (obj[i] === null) delete obj[i];
+      }
+      return obj;
     }
 
   });

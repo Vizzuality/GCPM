@@ -10,6 +10,13 @@
 
     .grid-item {
       width: 47.5%;
+      margin: 10px 0 0;
     }
+  }
+
+  .grid-buttons {
+    margin: 15px 0 0;
+    display: flex;
+    justify-content: center;
   }
 }
