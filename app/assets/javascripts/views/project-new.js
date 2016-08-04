@@ -63,7 +63,7 @@
       this.renderChosen();
       this.renderPickADate();
 
-      
+
       return this;
     },
 
@@ -101,7 +101,7 @@
         url: '/api/investigators/'+ev.target.value+'?token=bxx9bBCZFyB1TsYwBLNS',
         method: 'GET',
         success: function(data) {
-          var paintOrgOrAdd = function (elements) {          
+          var paintOrgOrAdd = function (elements) {
             var selectElements = document.createElement("SELECT");
             for (var i = 0; i < elements.length; i++) {
               var option = document.createElement("OPTION");
@@ -167,6 +167,7 @@
         this.fillPregeneratedInvestigators();
         return;
       };
+      
       var CONTAINER = document.getElementById('c-pregenerated-container');
       $.ajax({
         url: '/api/projects/'+PROJECT_ID+'/memberships?token='+AUTH_TOKEN,
@@ -215,7 +216,7 @@
         no_results_text: "Oops, nothing found!"
       });
     },
-    
+
     displaInputs: function() {
       $('body').addClass('f-edited');
     },
