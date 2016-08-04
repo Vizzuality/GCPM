@@ -4,7 +4,7 @@ countries.region_name as location_name,
 events.title as title,
 countries.region_centroid as centroid,
 countries.region_iso as iso,
-'event' as type
+'region' as type
 from events
 inner join countries on events.country = countries.country_name
 where 1=1
