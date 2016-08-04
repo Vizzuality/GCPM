@@ -186,6 +186,7 @@
       }
 
       if (params['countries[]']) {
+        //TO-DO: points instead of projects
         params.group = 'projects';
       }
 

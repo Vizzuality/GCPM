@@ -28,11 +28,12 @@
   }
 
   &.-project {
+    // TO-DO: add this color to settings?
     box-shadow: none;
-    background: $color-2;
+    background: #417394;
 
     &:hover {
-      background: darken($color-2, 2.5%);
+      background: darken(#417394, 2.5%);
     }
   }
 

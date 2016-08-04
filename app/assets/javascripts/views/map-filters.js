@@ -73,7 +73,12 @@
     listeners: function() {
       App.Events.on('params:update', function(params){
         this.params = params;
-        this.updateSelects();
+        this.updateFilters();
+      }.bind(this));
+
+      App.Events.on('filters:reset', function(params){
+        this.params = {};
+        this.resetFilters();
       }.bind(this));
 
       App.Events.on('Filters/toggle', function(){
@@ -83,7 +88,7 @@
       this.$btnResetFilters.on('click', function(e){
         e && e.preventDefault();
         App.Events.trigger('filters:reset');
-      }.bind(this))
+      }.bind(this));
     },
 
     render: function() {
@@ -134,28 +139,28 @@
     },
 
     renderPickADate: function() {
-      var $start = this.$el.find('#pickadate-start-input').pickadate(_.extend({}, this.pickadateOptions, {
+      var $startDate = this.$el.find('#pickadate-start-input').pickadate(_.extend({}, this.pickadateOptions, {
         container: '#pickadate-start-container',
         min: new Date(1905,1,1),
         max: this.params.end_date || new Date(2040,1,1),
       }));
-      var $startPicker = $start.pickadate('picker');
+      var $startDatePicker = $startDate.pickadate('picker');
 
-      var $end = this.$el.find('#pickadate-end-input').pickadate(_.extend({}, this.pickadateOptions, {
+      var $endDate = this.$el.find('#pickadate-end-input').pickadate(_.extend({}, this.pickadateOptions, {
         container: '#pickadate-end-container',
         min: this.params.start_date || new Date(1905,1,1),
         max: new Date(2040,1,1),
       }));
-      var $endPicker = $end.pickadate('picker');
+      var $endDatePicker = $endDate.pickadate('picker');
 
-      $startPicker.on('set', function(e) {
+      $startDatePicker.on('set', function(e) {
         if ( e.select ) {
-          $endPicker.set('min', $startPicker.get('select'))
+          $endDatePicker.set('min', $startDatePicker.get('select'))
         }
       })
-      $endPicker.on('set', function(e) {
+      $endDatePicker.on('set', function(e) {
         if ( e.select ) {
-          $startPicker.set('max', $endPicker.get('select'))
+          $startDatePicker.set('max', $endDatePicker.get('select'))
         }
       })
 
@@ -182,12 +187,18 @@
       this.hide();
     },
 
-    updateSelects: function() {
+    updateFilters: function() {
       _.each(this.params, function(v,k){
         var value = (_.isArray(v)) ? _.map(v, function(v){ return String(v) }) : [String(v)];
         this.$el.find('select[name="'+k+'"]').val(v).trigger('chosen:updated');
       }.bind(this))
-    }
+    },
+
+    resetFilters: function() {
+      this.$el.find('select').val(null).trigger('chosen:updated');      
+    },
+
+
 
   });
 

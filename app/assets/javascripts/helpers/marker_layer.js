@@ -56,7 +56,7 @@
               svg: (!!svg) ? this.getHtmlString(svg) : null
             })
           });
-          
+
           var markerIcon = L.marker(marker.centroid, {
             icon: icon,
             riseOnHover: true,
@@ -101,7 +101,7 @@
     getSize: function(value) {
       var constant = 20,
           multiplier = 10,
-          size = 10;
+          size = 16;
 
       if (value) {
         size = Math.round(constant + (Math.log(value) * multiplier));
