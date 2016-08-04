@@ -90,7 +90,7 @@
 			display: block;
 			font-weight: $font-weight-bold;
 		}
-		span, 
+		span,
 		.-item {
 			display: table-cell;
 			height: 40px;
@@ -109,7 +109,7 @@
 			input[type=checkbox] {
 			   display: none;
 			}
-			label { 
+			label {
 				height: 18px;
 				width: 18px;
 				border: solid 1px rgba(15, 48, 70, 0.5);
@@ -178,7 +178,9 @@
 		height: 0;
 	}
 	textarea {
+    resize: none;
 		height: 100%;
+
 		font-size: 14px;
 	}
 	.-hide-edited {
@@ -186,16 +188,23 @@
 	}
 	.-editable {
 		display: block;
-		border: none;
-	    border-bottom: 1px dashed red;
-	    width: 100%;
+	  width: 100%;
+
+    border: none;
 	}
 	.c-title + input {
-		height: 60px;
-	    font-size: 50px;
-	    line-height: 60px;
-	    position: absolute;
-    	bottom: 80px;
+    position: absolute;
+    bottom: 80px;
+
+    width: calc(100% - 100px); // 50px padding * 2
+    height: 60px;
+
+
+    font-family: $font-family-1;
+    font-size: $font-size-huge;
+    font-weight: $font-weight-bold;
+    color: $color-2;
+    line-height: 60px;
 	}
 }
 
