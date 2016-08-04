@@ -178,7 +178,6 @@
           newFilters[key] = val;  
         }        
       });
-      console.log(newFilters);
       App.Events.trigger('filters:update', newFilters);
       this.hide();
     },
