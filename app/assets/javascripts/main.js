@@ -30,8 +30,7 @@
       this.listenTo(this.router, 'route:event', this.eventInfo);
       this.listenTo(this.router, 'route:project', this.projectDetail);
       this.listenTo(this.router, 'route:network', this.userPage);
-      // HACK TODO => move this out
-      new App.View.AddNewProject();
+      this.listenTo(this.router, 'route:editproject', this.editProjectPage);
 
       new App.View.Notice();
       // Listening magic links
@@ -139,6 +138,10 @@
       var mapView = new App.View.Map({
         layers: layersCollection,
       });
+    },
+
+    editProjectPage: function() {
+      new App.View.AddNewProject();
     },
 
     eventInfo: function() {

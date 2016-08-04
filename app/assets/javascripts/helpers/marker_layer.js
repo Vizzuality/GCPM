@@ -56,7 +56,7 @@
               svg: (!!svg) ? this.getHtmlString(svg) : null
             })
           });
-
+          console.log(this.options.type)
           var markerIcon = L.marker(marker.centroid, {
             icon: icon,
             riseOnHover: true,
@@ -213,7 +213,7 @@
       }
 
       if (data.type == 'point') {
-        var path = '/'+path+'/';
+        var path = '/'+data.path+'/';
         // And events??
         window.location = path + data.location_id
       }      
