@@ -172,6 +172,10 @@
       $.ajax({
         url: '/api/projects/'+PROJECT_ID+'/memberships?token='+AUTH_TOKEN,
         success: function(data) {
+          if (data.length < 1) {
+            this.fillPregeneratedInvestigators();
+            return;
+          }
           for (var i = 0; i < data.length; i++) {
 
           var row = '<div class="-getrow" data-id="'+data[i].id+'">';
@@ -194,7 +198,7 @@
           CONTAINER.innerHTML = CONTAINER.innerHTML + row;
 
           }
-        },
+        }.bind(this),
         error:function (xhr, ajaxOptions, thrownError){
             if(xhr.status==404) {
                 this.fillPregeneratedInvestigators();
