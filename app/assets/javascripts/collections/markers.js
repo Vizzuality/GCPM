@@ -16,7 +16,6 @@
     },
 
     parse: function(response) {
-
       return _.map(response, function(marker){
         // Get the centroid of the location
         var centroid = JSON.parse(marker.centroid);

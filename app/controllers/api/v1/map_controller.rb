@@ -17,7 +17,7 @@ module Api
 
       def show_event
         @event = Event.find(params[:id])
-        render json: @event, serializer: MapEventSerializer
+        render json: [@event], each_serializer: MapEventSerializer
       end
 
       def map_params
