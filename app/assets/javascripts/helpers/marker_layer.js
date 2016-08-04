@@ -29,6 +29,8 @@
 
       this.map = map;
       this.options = _.extend({}, this.defaults, settings || {});
+      this.tooltipEl = $('#map-tooltip');
+      this.tooltipTpl = HandlebarsTemplates['map-tooltip'];
     },
 
     /**
@@ -55,14 +57,16 @@
             })
           });
 
+          console.log(marker);
+
           var markerIcon = L.marker(marker.centroid, {
             icon: icon,
             riseOnHover: true,
             data: {
-              location_id: marker.location_id,
               type: marker.type,
-              location_name: marker.location_name,
-              iso: marker.iso
+              location_id: marker.project || marker.location_id,
+              location_name: marker.project_title || marker.location_name,
+              location_iso: marker.iso
             }
           }).on('mouseover', this._onMouseover.bind(this))
             .on('mouseout', this._onMouseout.bind(this))
@@ -168,32 +172,36 @@
      * - _onMouseclick
      */
     _onMouseover: function(e) {
-      // var pos = this.map.latLngToContainerPoint(e.target._latlng);
-      // var data = e.target.options.data;
-      // e.target.bringToFront();
-      // this.tooltipEl
-      //   .css({
-      //     left: pos.x,
-      //     top: pos.y
-      //   })
-      //   .html(this.tooltipTpl(data))
-      //   .removeClass()
-      //   .addClass('m-location-tooltip -active -'+data.category);
+      var pos = this.map.latLngToContainerPoint(e.target._latlng);
+      var data = e.target.options.data;
+
+      this.tooltipEl
+        .css({
+          left: pos.x,
+          top: pos.y
+        })
+        .html(this.tooltipTpl(data))
+        .addClass('-active');
+
     },
 
     _onMouseout: function(e) {
-      // this.tooltipEl
-      //   .html('')
-      //   .removeClass()
-      //   .removeClass('-active');
+      this.tooltipEl
+        .html('')
+        .removeClass('-active');
     },
 
     _onMouseclick: function(e) {
+      // Remove the tooltip if it was openend
+      this.tooltipEl
+        .html('')
+        .removeClass('-active');
+
       var data = e.target.options.data;
       
       if (data.type == 'region') {
         Backbone.Events.trigger('filters:update', {
-          'regions[]': data.iso
+          'regions[]': data.location_iso
         });
       }
 
@@ -206,8 +214,7 @@
       }
 
       if (data.type == 'project') {
-        //TO-DO: Go to project
-        console.log('TO-DO: Go to project');
+        window.location = '/projects/'+ data.location_id
       }      
     },
 

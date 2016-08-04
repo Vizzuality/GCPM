@@ -1,6 +1,9 @@
 <div class="c-section-intro">
   <button id="btn-clear-filters" class="btn-reset-filters c-button -filled -inverse">Clear filters</button>
-	<div id="map" class="map c-map" data-turbolinks-permanent></div>
+	<div id="map" class="map c-map"></div>
+  
+  <div id="map-tooltip" class="c-map-tooltip"></div>
+
 	<ul class="c-section-menu">
 	   <% @filters.each do |filter| %>
       <% @class = !params['type'] && filter == "projects" ? "-active" : active_param?('type', filter) %>
