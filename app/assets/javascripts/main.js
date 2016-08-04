@@ -158,7 +158,8 @@
       var mapView = new App.View.Map({
         layers: layersCollection,
         options: {
-          basemap: 'customDetail'
+          basemap: 'customDetail',
+          apiUrl: '/api/map/events/'+EVENT_ID          
         }
       });
 
@@ -175,7 +176,8 @@
       var mapView = new App.View.Map({
         layers: layersCollection,
         options: {
-          basemap: 'customDetail'
+          basemap: 'customDetail',
+          apiUrl: '/api/map/projects/'+PROJECT_ID
         }
       });
 

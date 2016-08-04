@@ -126,7 +126,8 @@
         id: 'marker-layer'
       })
       var markers = new App.Collection.Markers({
-        type: this.params.get('type') || 'projects'
+        type: this.params.get('type') || 'projects',
+        apiUrl: this.options.apiUrl
       });
       markers
         .fetch({

@@ -9,6 +9,10 @@
 
     initialize: function(options) {
       this.options = options ? options : {};
+
+      if (this.options.apiUrl) {
+        this.url = this.options.apiUrl;
+      }
     },
 
     parse: function(response) {
