@@ -5,13 +5,16 @@
     <% @events.each do |e| %>
       <div class="card -mobile-small-1-1 -mobile-large-1-2 -tablet-1-3">
         <h4 class="c-card-title -border-1"><%= t 'active' %></h4>
-        <a>
+        <%= link_to event_path(e), class: "link" do  %>
           <h3 class="c-title"><%= e.title %></h3>
-        </a>
+        <% end %>
         <div class="c-tag-list -closer">
 
         </div>
-        <%= link_to (t 'edit'), edit_user_event_path(current_user, e['id'] ), {:class => "c-button -color-3 -network"} %>
+        <% if user_signed_in? && @user == current_user %>
+          <%= link_to t('edit'), edit_user_event_path(@user, e), class: "c-button -color-3 -network" %>
+          <!-- <%= link_to t('delete'), user_event_path(@user, e), data: { confirm: 'Are You sure?' }, method: :delete, class: "c-button -color-3 -network" %> -->
+        <% end %>
       </div>
     <% end %>
   </div>

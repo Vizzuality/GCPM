@@ -72,3 +72,10 @@ ul {
     column-gap: 40px;
   }
 }
+
+
+a, button {
+  &:focus {
+    outline: 0;
+  }
+}
