@@ -63,17 +63,28 @@
     },
 
     render: function() {
+      this.fillPregenerated();
       this.renderChosen();
       this.renderPickADate();
-      window.setTimeout(function(){
-        $('.triggerAllNew').trigger('click').hide().parent().find('select.chosen-select').chosen({
-          width: '100%',
-          allow_single_deselect: true,
-          inherit_select_classes: true,
-          no_results_text: "Oops, nothing found!"
-        });
-      },500);
+
+      
       return this;
+    },
+
+    fillPregenerated: function() {
+      var selectInvestigators = document.createElement("SELECT");
+      selectInvestigators.classList.add('chosen-select');
+      for (var i = 0; i<=4; i++){
+          var opt = document.createElement('option');
+          opt.value = i;
+          opt.innerHTML = i;
+          selectInvestigators.appendChild(opt);
+      }
+      var itemWrapper = document.createElement('div')
+      itemWrapper.classList.add('-item','-m-edited');
+      itemWrapper.appendChild(selectInvestigators);
+
+      document.getElementById('c-pregenerated-container').appendChild(itemWrapper);
     },
 
     renderChosen: function() {
