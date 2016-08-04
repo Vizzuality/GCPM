@@ -30,6 +30,7 @@
       this.listenTo(this.router, 'route:network', this.userPage);
 
       // Listening magic links
+      App.Events.on('params:update', this.getContent);
       App.Events.on('remote:load', this.replaceContent);
       
       // Update params
@@ -63,9 +64,13 @@
       new App.View.UserDropdownMenu();
     },
 
+    getContent: function() {
+      $.getScript(window.location.pathname + window.location.search, function(data, textStatus, jqxhr){
+        console.log(data, textStatus, jqxhr);
+      })
+    },
+
     replaceContent: function(data) {
-      console.log('replace content');
-      console.log(data);
       var contentElement = document.getElementById('content');
       if (contentElement) {
         contentElement.innerHTML = data.content;

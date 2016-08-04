@@ -1,5 +1,7 @@
 class MapController < ApplicationController
 
+  respond_to :html, :js
+
   def index
     @title = t 'map'
     @params = request.query_parameters
@@ -19,10 +21,7 @@ class MapController < ApplicationController
     @current_type = params[:type] || 'projects'
     @filters = ['projects', 'people', 'events']
 
-    respond_to do |format|
-      format.html
-      format.js
-    end
+    respond_with(@projects)
   end
 
   private
