@@ -38,6 +38,7 @@
 
       // Update params
       App.Events.on('filters:update', this.publishParams.bind(this));
+      App.Events.on('filters:reset', this.resetParams.bind(this));
 
     },
 
@@ -47,10 +48,6 @@
 
     stop: function() {
       Backbone.history.stop();
-    },
-
-    update: function() {
-      console.log('update please');
     },
 
     /**
@@ -73,7 +70,7 @@
 
     getContent: function() {
       $.getScript(window.location.pathname + window.location.search, function(data, textStatus, jqxhr){
-        console.log(data, textStatus, jqxhr);
+        // console.log(data, textStatus, jqxhr);
       })
     },
 
@@ -188,7 +185,14 @@
 
     publishParams: function(newFilters) {
       // TO-DO: review when you have only one country, we need to save it as an array
+      // TO-DO convert params to a backbone model. Like the other views like map or router
       this.params = this.setParams(_.extend({}, this.params, newFilters));
+      App.Events.trigger('params:update', this.params);
+    },
+
+    resetParams: function() {
+      // TO-DO: review when you have only one country, we need to save it as an array
+      this.params = {};
       App.Events.trigger('params:update', this.params);
     },
 

@@ -5,6 +5,7 @@
  */
 .c-map {
   height: 600px;
+  z-index: 1;
 
   .leaflet-control-attribution {
     display: none;

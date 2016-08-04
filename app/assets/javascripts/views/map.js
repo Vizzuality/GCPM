@@ -46,8 +46,8 @@
     listeners: function() {
       // this.layers.on('sync reset change', this.renderLayers.bind(this));
       App.Events.on('params:update', function(params){
-        this.params.unset({ silent: true });
-        this.params.set(params, { silent: true });
+        this.params.clear().set(params, { silent: true });
+        console.log(this.params.toJSON());
         this.setMarkers();
       }.bind(this));      
     },

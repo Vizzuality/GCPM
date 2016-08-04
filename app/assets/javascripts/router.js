@@ -33,7 +33,7 @@
 
     listeners: function() {
       App.Events.on('params:update', function(params){
-        this.params.set(params, { silent: true });
+        this.params.clear().set(params, { silent: true });
         this.updateUrl();
       }.bind(this));      
     },

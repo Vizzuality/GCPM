@@ -53,13 +53,6 @@
       this.constructor.__super__.initialize.apply(this);
       // Inits
       this.render();
-      this.listeners();
-    },
-
-    listeners: function() {
-      Backbone.Events.on('Filters/toggle', function(){
-        this.toggle();
-      }.bind(this));
     },
 
     render: function() {

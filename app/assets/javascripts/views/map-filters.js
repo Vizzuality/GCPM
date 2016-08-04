@@ -67,6 +67,7 @@
 
     cache: function() {
       this.$form = this.$el.find('#map-filters-form');
+      this.$btnResetFilters = $('.btn-reset-filters');
     },
 
     listeners: function() {
@@ -78,6 +79,11 @@
       App.Events.on('Filters/toggle', function(){
         this.show();
       }.bind(this));
+
+      this.$btnResetFilters.on('click', function(e){
+        e && e.preventDefault();
+        App.Events.trigger('filters:reset');
+      }.bind(this))
     },
 
     render: function() {

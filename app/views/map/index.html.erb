@@ -1,4 +1,5 @@
 <div class="c-section-intro">
+  <button id="btn-clear-filters" class="btn-reset-filters c-button -filled -inverse">Clear filters</button>
 	<div id="map" class="map c-map" data-turbolinks-permanent></div>
 	<ul class="c-section-menu">
 	   <% @filters.each do |filter| %>
@@ -16,9 +17,7 @@
 </div>
 
 
-<div id="map-layers-tooltip" class="c-tooltip -tip-left">
-	hola, soy tooltip y tú?
-</div>
+<div id="map-layers-tooltip" class="c-tooltip -tip-left"></div>
 
 <!-- c-map-menu -->
 <%= render partial: "map-menu" %>
