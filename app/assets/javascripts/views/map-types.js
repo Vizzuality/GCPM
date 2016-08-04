@@ -31,11 +31,6 @@
     },
 
     listeners: function() {
-      App.Events.on('params:update', function(params){
-        this.params = params;
-        this.updateSelects();
-      }.bind(this));
-
       this.model.on('change:type', this.changeType.bind(this));
     },
 
@@ -44,7 +39,15 @@
      */
     changeType: function() {
       var type = this.model.get('type');
-      console.log(type);
+      // Select buttons
+      this.$el.find('.js-btn-mapmenu-type').removeClass('-active');
+      this.$el.find('.js-btn-mapmenu-type[data-type='+type+']').addClass('-active');
+
+      // Publish the type
+      var newFilters = {
+        type: this.model.get('type')
+      };
+      App.Events.trigger('filters:update', newFilters);
 
     },
 
