@@ -27,12 +27,15 @@
       this.listenTo(this.router, 'route:map', this.mapPage);
       this.listenTo(this.router, 'route:countries', this.countriesPage);
       this.listenTo(this.router, 'route:country', this.countryPage);
+      this.listenTo(this.router, 'route:event', this.eventInfo);
+      this.listenTo(this.router, 'route:project', this.projectDetail);
       this.listenTo(this.router, 'route:network', this.userPage);
-
+      // HACK TODO => move this out
+      new App.View.AddNewProject();
       // Listening magic links
       App.Events.on('params:update', this.getContent);
       App.Events.on('remote:load', this.replaceContent);
-      
+
       // Update params
       App.Events.on('filters:update', this.publishParams.bind(this));
 
@@ -57,6 +60,10 @@
     isMagicLink: function(e) {
       var href = e.currentTarget.getAttribute('href');
       this.router.navigate(href);
+
+      /* Toggle c-section-menu item to -active */
+      $(".c-section-menu li a").removeClass('-active');
+      $(e.target).addClass("-active");
     },
 
     initCommonViews: function() {
@@ -101,7 +108,6 @@
       var regionsView = new App.View.SearchList({
         searchList: regionsCollection,
         options: {
-          isTwoLevels: true,
           template: HandlebarsTemplates['countries-list'],
           innerSearchListName: 'countries',
           itemSearchedCategory: 'country_name'
@@ -129,10 +135,39 @@
       });
     },
 
+    eventInfo: function() {
+      var params = this.router.getParams();
+
+      // Map view
+      var layersCollection = new App.Collection.Layers();
+      var mapView = new App.View.Map({
+        layers: layersCollection,
+      });
+
+      layersCollection.toggleLayers([
+        params.type || 'org-project-markers'
+      ]);
+    },
+
+    projectDetail: function() {
+      var params = this.router.getParams();
+
+      // Map view
+      var layersCollection = new App.Collection.Layers();
+      var mapView = new App.View.Map({
+        layers: layersCollection,
+      });
+
+      layersCollection.toggleLayers([
+        params.type || 'org-project-markers'
+      ]);
+    },
+
     /**
      * - setParams
-     * - publishParams
-     * This function will parse the params of the url
+     * This function will parse the params of the url, if we need
+     * different group or something like that
+     *
      */
     setParams: function(params) {
       for (var i in params) {

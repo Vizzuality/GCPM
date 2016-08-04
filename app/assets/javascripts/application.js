@@ -33,6 +33,8 @@
 //= require router
 //= require dispatcher
 
+//= require forms
+
 (function() {
 
   'use strict';

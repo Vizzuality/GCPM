@@ -34,6 +34,11 @@ class Project < ApplicationRecord
   has_and_belongs_to_many :project_types
   has_and_belongs_to_many :cancer_types
 
+  accepts_nested_attributes_for :memberships,   allow_destroy: true
+  accepts_nested_attributes_for :investigators, update_only:   true
+  accepts_nested_attributes_for :organizations, update_only:   true
+  accepts_nested_attributes_for :addresses,     update_only:   true
+
   validates_presence_of :title, :summary
   validates :title, uniqueness: true
 
@@ -61,7 +66,7 @@ class Project < ApplicationRecord
     projects = projects.by_end_date(options[:end_date])                     if options[:end_date]
     projects = projects.limit(options[:limit])                              if options[:limit]
     projects = projects.offset(options[:offset])                            if options[:offset]
-    projects
+    projects.uniq
   end
 
   def project_lead
@@ -88,5 +93,30 @@ class Project < ApplicationRecord
   def unpublish
     self.status = :unpublished
     save
+  end
+
+  def select_investigators(ru_id=nil)
+    if ru_id.present?
+      ResearchUnit.includes(:investigator).find(ru_id).investigator.name
+    else
+      ResearchUnit.includes(:investigator).all.map { |ru| [ru.investigator.name, ru.id] }
+    end
+  end
+
+  def select_organizations(ru_id=nil)
+    if ru_id.present?
+      ResearchUnit.includes(:organization).find(ru_id).organization.name
+    else
+      ResearchUnit.includes(:investigator, investigator: :organizations).all
+                  .map { |ru| ru.investigator.organizations.map { |o| [o.name, ru.id] }.flatten! }
+    end
+  end
+
+  def select_addresses(ru_id=nil)
+    if ru_id.present?
+      ResearchUnit.includes(:address).find(ru_id).address.country_name
+    else
+      ResearchUnit.includes(:address).all.map { |ru| [ru.address.country_name, ru.id] }
+    end
   end
 end

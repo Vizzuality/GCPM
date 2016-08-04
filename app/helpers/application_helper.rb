@@ -7,5 +7,4 @@ module ApplicationHelper
     params = request.query_parameters
     params[name] == value ? '-active' : ''
   end
-
 end

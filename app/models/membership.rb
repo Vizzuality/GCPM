@@ -8,6 +8,7 @@
 #  membership_type  :integer          default("secondary")
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  address_id       :integer
 #
 
 class Membership < ApplicationRecord
@@ -21,5 +22,4 @@ class Membership < ApplicationRecord
 
   validates_presence_of :project_id, :research_unit_id
   validates :project_id, uniqueness: { scope: :research_unit_id }
-
 end

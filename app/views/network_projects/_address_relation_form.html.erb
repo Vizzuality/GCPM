@@ -1,0 +1,10 @@
+<div class="form-inputs">
+  <%= f.input :city %>
+  <%= f.input :country_id, label: 'Country', collection: @countries, as: :collection_select, input_html: { class: '' } %>
+  <%= f.input :latitude %>
+  <%= f.input :longitude %>
+  <%= f.input :postcode %>
+  <%= f.hidden_field :_destroy %>
+  <%= link_to 'Remove address', '#', id: "delete-#{f.object.id}", class: 'remove_fields' %>
+</div>
+<hr></hr>
