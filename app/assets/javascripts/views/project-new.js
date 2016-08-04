@@ -46,7 +46,8 @@
       'click .-editable' : 'displaInputs',
       'click .lead-investigator' : 'selectLead',
       'click .f-submit' : 'onSubmit',
-      'change .changeInvestigator' : 'getOrganizations'
+      'click .remove_fields' : 'removeRelation',
+      'click .f-circle-parent' : 'changeLead'
     },
 
     initialize: function() {
@@ -65,24 +66,64 @@
       return this;
     },
 
-    fillPregenerated: function() {
-      var selectInvestigators = document.createElement("SELECT");
-      selectInvestigators.classList.add('chosen-select');
-      $.get('/api/projects/members/'+PROJECT_ID+'/token='+AUTH_TOKEN, function( data ) {
-        console.log(data);
-        data = JSON.parse(data);
-        for (var key in data){
-          for (var i = 0; i<=4; i++){
-              var opt = document.createElement('option');
-              opt.value = i;
-              opt.innerHTML = i;
-              selectInvestigators.appendChild(opt);
-          }
-          var itemWrapper = document.createElement('div')
-          itemWrapper.classList.add('-item','-m-edited', 'changeInvestigator');
-          itemWrapper.appendChild(selectInvestigators);
+    removeRelation: function(ev) {
+      var target = $(ev.target).parent().parent();
+      var id = target.data('id');
+      AUTH_TOKEN = 'X18fTWv64i4W7Dam5WeN';
+      $.ajax({
+        url: 'http://192.168.1.69:3000/api/projects/'+PROJECT_ID+'/memberships/'+id+'?token='+AUTH_TOKEN,
+        method: 'DELETE'
+      });
+      target.fadeOut();
+    },
 
-          document.getElementById('c-pregenerated-container').appendChild(itemWrapper);
+    changeLead: function(ev){
+      var target = $(ev.target).parent();
+      var id = target.data('id');
+      this.$el.find('.-getrow').find('.circle').remove();
+      target.find('.f-circle-parent').html('<span class="circle"></span>');
+      AUTH_TOKEN = 'X18fTWv64i4W7Dam5WeN';
+      $.ajax({
+        url: 'http://192.168.1.69:3000/api/projects/'+PROJECT_ID+'/memberships/'+id+'?token='+AUTH_TOKEN,
+        method: 'PUT',
+        data: {'membership': {'membership_type':'main'}}
+      });
+      target.siblings().each(function(i, el){
+        $.ajax({
+          url: 'http://192.168.1.69:3000/api/projects/'+PROJECT_ID+'/memberships/'+$(el).data('id')+'?token='+AUTH_TOKEN,
+          method: 'PUT',
+          data: {'membership': {'membership_type':'secondary'}}
+        });
+      });
+    },
+
+    fillPregenerated: function() {
+      AUTH_TOKEN = 'X18fTWv64i4W7Dam5WeN';
+      var CONTAINER = document.getElementById('c-pregenerated-container');
+      $.get('http://192.168.1.69:3000/api/projects/'+PROJECT_ID+'/memberships?token='+AUTH_TOKEN, function( data ) {
+        // '/api/projects/'+PROJECT_ID+'/memberships/ROW_ID?token='+AUTH_TOKEN
+        console.log(data);
+        for (var i = 0; i < data.length; i++) {
+
+          var row = '<div class="-getrow" data-id="'+data[i].id+'">';
+          row     +=  '<span class="-item -m-edited">';
+          row     +=    '<a href="#" class="remove_fields">×</a>';
+          row     +=    data[i].investigator.name;
+          row     +=  '</span>';
+          row     +=  '<span class="-item -m-edited">';
+          row     +=    data[i].organization.name;
+          row     +=  '</span>';
+          row     +=  '<span class="-item -m-edited">';
+          row     +=    data[i].address.line_1;
+          row     +=  '</span>';
+          row     +=  '<span class="-item -m-edited f-circle-parent">';
+          if (data[i].membership_type == 'main') {
+            row     +=    '<span class="circle"></span>';
+          }
+          row     +=  '</span>';
+          row     += '</div>';
+          CONTAINER.innerHTML = CONTAINER.innerHTML + row;
+
         }
       });
     },
