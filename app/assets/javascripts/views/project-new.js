@@ -48,7 +48,8 @@
       'click .f-submit' : 'onSubmit',
       'click .remove_fields' : 'removeRelation',
       'click .f-circle-parent' : 'changeLead',
-      'change .selectInvestigator' : 'loadOrgaAndAddr'
+      'change .selectInvestigator' : 'loadOrgaAndAddr',
+      'change .selectElements'  : 'updateResearchUnit'
     },
 
     initialize: function() {
@@ -109,7 +110,7 @@
               option.value = elements[i].id;
               selectElements.appendChild(option);
             }
-            selectElements.classList.add('chosen-select');
+            selectElements.classList.add('chosen-select', 'selectElements');
             var item = document.createElement('SPAN');
             item.classList.add('-item','-m-edited');
             item.appendChild(selectElements);
@@ -129,12 +130,30 @@
           addLead();
           this.fillPregeneratedInvestigators();
         }.bind(this)
+        this.updateResearchUnit(ev);
+      });
+    },
+
+
+    updateResearchUnit: function(ev) {
+      var target = $(ev.target).parent();
+      var data = {
+        'investigator_id' : target.find('.selectInvestigator').value(), 
+        'address_id' :  target.find('.selectElements').last().value()
+      }
+      $.ajax({
+        url: '/api/check_research_unit/?token='+AUTH_TOKEN,
+        method: 'GET',
+        data: data,
+        success: function(data) {
+          target.data('research_unit', data);
+        }
       });
     },
 
     fillPregeneratedInvestigators: function() {
       $.ajax({
-        url: '/api/investigators?token=bxx9bBCZFyB1TsYwBLNS',
+        url: '/api/investigators?token='+AUTH_TOKEN,
         method: 'GET',
         success: function(data) {
           var selectInvestigators = document.createElement("SELECT");
@@ -233,6 +252,21 @@
     onSubmit: function() {
       if (! !!$('#project_memberships_attributes_undefined_research_unit_id').val()) {
         $('.c-pregenerated').last().remove();
+      }
+      var elems = document.getElementsByTagName('.-getrow');
+      for (var i = 0; i < elems; i++){
+        var data = {
+          "membership" : {
+            "project_id" : PROJECT_ID,
+            "research_unit_id" : elems[i].data('research_unit'),
+            "membership_type" : !!$(elems[i]).find('.circle') ? 'main' : 'secondary'
+          }
+        };
+        $.ajax({
+          url: '/api/projects/'+PROJECT_ID+'/memberships/?token='+AUTH_TOKEN,
+          data: data,
+          method: 'POST'
+        });
       }
     },
 
