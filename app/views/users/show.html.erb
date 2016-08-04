@@ -15,7 +15,7 @@
       <div class="info">
         <div class="c-personal-info">
           <div class="c-user-profile-picture -huge">
-            <div class="initials">LK</div>
+            <div class="initials"><%=  @user.name ? @user.name[0] : 'U' %></div>
             <!-- <img src="" alt="<%= @user.name %>'s profile picture'" /> -->
           </div>
           <div class="data-container">
@@ -25,7 +25,7 @@
               </svg>
             </h1>
             <div class="professional-data">
-              <!-- <ul class="work-info">
+              <ul class="work-info">
                 <li>Cedars-Sinai Medical Center
                   <svg class="c-svg icon icon-">
                     <use xlink:href="#icon-"></use>
@@ -36,13 +36,13 @@
                     <use xlink:href="#icon-"></use>
                   </svg>
                 </li>
-              </ul> -->
+              </ul>
               <ul class="follow">
                 <li><span>211</span> Following</li>
                 <li><span>233</span> Followers</li>
               </ul>
-              <!-- <ul class="contact">
-                <li>@twitter_account 
+              <ul class="contact">
+                <li>@twitter
                   <svg class="c-svg icon icon-">
                     <use xlink:href="#icon-"></use>
                   </svg>
@@ -52,18 +52,18 @@
                     <use xlink:href="#icon-"></use>
                   </svg>
                 </li>
-              </ul> -->
+              </ul>
             </div>
           </div>
         </div>
       </div>
 
       <div class="c-buttons-group">
-        <a href="/" class="c-button -inverse -filled btn-large"><%= t 'share_my_info' %></a>
+        <a class="c-button -inverse -filled btn-large"><%= t 'share_my_info' %></a>
         <div class="row-buttons">
-          <%= link_to "+ " + (t 'projects'), new_user_project_path(user_id: current_user.id), { :class => "c-button -inverse" } if user_signed_in? && @user == current_user %>
-          <%= link_to "+ " + (t 'posts'), "#", { :class => "c-button -inverse" } %>
-          <%= link_to "+ " + (t 'events'), new_user_event_path(user_id: current_user.id), { :class => "c-button -inverse" } if user_signed_in? && @user == current_user %>
+          <%= link_to "Add " + (t 'projects'), new_user_project_path(user_id: current_user.id), { :class => "c-button -inverse" } if user_signed_in? && @user == current_user %>
+          <%= link_to "Add " + (t 'posts'), "#", { :class => "c-button -inverse" } %>
+          <%= link_to "Add " + (t 'events'), new_user_event_path(user_id: current_user.id), { :class => "c-button -inverse" } if user_signed_in? && @user == current_user %>
         </div>
       </div>
 

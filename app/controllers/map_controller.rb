@@ -22,7 +22,7 @@ class MapController < ApplicationController
     # @events  = Event.order('created_at DESC').limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
 
     @current_type = params[:type] || 'projects'
-    @filters = ['projects', 'people', 'events']
+    @filters = ['projects', 'events']
 
     respond_to do |format|
       format.html

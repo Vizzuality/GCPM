@@ -105,7 +105,8 @@
         options: {
           template: HandlebarsTemplates['countries-list'],
           innerSearchListName: 'countries',
-          itemSearchedCategory: 'country_name'
+          itemSearchedCategory: 'country_name',
+          isTwoLevels: true
         }
       });
 
