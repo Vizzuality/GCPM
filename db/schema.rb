@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160803143833) do
+ActiveRecord::Schema.define(version: 20160804113911) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(version: 20160803143833) do
     t.string   "city"
     t.string   "country"
     t.string   "state"
-    t.float    "latitute"
+    t.float    "latitude"
     t.float    "longitude"
     t.string   "postcode"
     t.datetime "created_at",   null: false
@@ -193,8 +193,6 @@ ActiveRecord::Schema.define(version: 20160803143833) do
     t.integer  "membership_type",  default: 1
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
-    t.integer  "address_id"
-    t.index ["address_id"], name: "index_memberships_on_address_id", using: :btree
     t.index ["membership_type"], name: "index_memberships_on_membership_type", using: :btree
     t.index ["project_id"], name: "index_memberships_on_project_id", using: :btree
     t.index ["research_unit_id"], name: "index_memberships_on_research_unit_id", using: :btree

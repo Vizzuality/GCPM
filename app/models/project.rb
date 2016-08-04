@@ -66,7 +66,7 @@ class Project < ApplicationRecord
     projects = projects.by_end_date(options[:end_date])                     if options[:end_date]
     projects = projects.limit(options[:limit])                              if options[:limit]
     projects = projects.offset(options[:offset])                            if options[:offset]
-    projects
+    projects.uniq
   end
 
   def project_lead

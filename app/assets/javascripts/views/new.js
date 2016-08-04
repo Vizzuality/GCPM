@@ -96,7 +96,7 @@
 
     onSubmit: function() {
       if (! !!$('#project_memberships_attributes_undefined_research_unit_id').val()) {
-        $('.c-pregenerated').remove();
+        $('.c-pregenerated').last().remove();
       }
     },
 
