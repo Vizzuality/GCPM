@@ -26,6 +26,8 @@
 #  twitter_account        :string
 #  linkedin_account       :string
 #  pubmed                 :string
+#  authentication_token   :string
+#  token_expires_at       :datetime
 #
 
 require 'rails_helper'

@@ -21,4 +21,12 @@ class Membership < ApplicationRecord
 
   validates_presence_of :project_id, :research_unit_id
   validates :project_id, uniqueness: { scope: :research_unit_id }
+
+  def address
+    if research_unit && research_unit.address.present?
+      self.research_unit.address
+    else
+      {}
+    end
+  end
 end
