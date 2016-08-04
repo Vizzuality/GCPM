@@ -6,6 +6,10 @@
 .c-map {
   height: 600px;
 
+  &.leaflet-container{
+    background-color: $color-4;
+  }
+
   .leaflet-control-attribution {
     display: none;
 
