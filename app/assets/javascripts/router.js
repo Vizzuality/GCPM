@@ -29,34 +29,15 @@
 
       var opts = settings && settings.options ? settings.options : {};
       this.options = _.extend({}, this.defaults, opts);
+
+      this.listeners()
     },
 
-    /**
-     * Set params and update model
-     * @param {String} name
-     * @param {String|Object|Array} value
-     * @param {Array[String]} keys
-     */
-    setParams: function(name, value, keys) {
-      if (typeof value === 'string' || typeof value === 'number') {
-        this.params.set(name, value);
-      } else if (typeof value === 'object' && !_.isArray(value)) {
-        if (keys && _.isArray(keys)) {
-          // var params = _.pick(value, 'id', 'opacity', 'order');
-          // this.params.set(name, JSON.stringify(params));
-        } else {
-          this.params.set(name, JSON.stringify(value));
-        }
-      } else if (typeof value === 'object' && _.isArray(value)) {
-        if (keys && _.isArray(keys)) {
-          var params = _.map(value, function(v) {
-            return _.pick(v, keys);
-          });
-          this.params.set(name, JSON.stringify(params));
-        } else {
-          this.params.set(name, JSON.stringify(value));
-        }
-      }
+    listeners: function() {
+      App.Events.on('params:update', function(params){
+        this.params.clear().set(params, { silent: true });
+        this.updateUrl();
+      }.bind(this));      
     },
 
     /**
@@ -65,27 +46,6 @@
     updateUrl: function() {
       var url = location.pathname.slice(1) + '?' + this._serializeParams();
       this.navigate(url, { trigger: false });
-    },
-
-    /**
-     * This method will update this.params object when URL change
-     * @param  {String} routeName
-     * @param  {Array} params
-     */
-    updateParams: function(params, routeName) {
-      if (this.options.decoded && params[0]) {
-        try {
-          params = this._decodeParams(params[0]);
-        } catch(err) {
-          console.error('Invalid params. ' + err);
-          params = null;
-          return this.navigate('map');
-        }
-        this.params.clear({ silent: true }).set({ config: params });
-      } else {
-        var p = this._unserializeParams();
-        this.params.clear({ silent: true }).set(this._unserializeParams());
-      }
     },
 
     /**

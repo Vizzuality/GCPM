@@ -4,15 +4,17 @@
  *
  */
 .c-map {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  min-height: 600px;
+  height: 100%;
+  z-index: 1;
+  background: $color-4;
 
+  &.-map, &.-map.leaflet-container {
+    background: $color-1;
+  }
 
-  &.leaflet-container{
-    background-color: $color-4;
+  &.-detail, &.-detail.leaflet-container {
+    background: $color-4;
   }
 
   .leaflet-control-attribution {

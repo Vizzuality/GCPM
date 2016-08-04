@@ -88,6 +88,10 @@
       text-transform: uppercase;
       cursor: pointer;
 
+      svg {
+        margin: 0 5px 0 0;
+      }
+
       &:last-child {
         margin-right: 0;
       }
