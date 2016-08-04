@@ -42,13 +42,13 @@
     </div>
   <% end %>
 
-    <div class="c-pagination-button">
-      <%= link_to (t 'show_more'),
-              map_path(request.query_parameters.merge({ limit: (params['limit'] ? params['limit'].to_i + 1 : 2 )  })),
-              class: "circle-button",
-              remote: true,
-              data: {magic: true} %>
-    </div>
+  <div class="c-pagination-button">
+    <%= link_to (t 'show_more'),
+            map_path(request.query_parameters.merge({ limit: (params['limit'] ? params['limit'].to_i + 1 : 2 )  })),
+            class: "circle-button",
+            remote: true,
+            data: {magic: true} %>
+  </div>
 <% else %>
   <div class="c-no-items -padding wrapper">
     <p>No projects</p>

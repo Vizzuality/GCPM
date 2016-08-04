@@ -1,5 +1,5 @@
 <h3 class="c-title -normal -grid wrapper"><%= t "your_events" %></h3>
-<% if @projects && @projects.size() != 0 %>
+<% if @events && @events.size() != 0 %>
   <!-- c-grid-events -->
   <div class="c-card-grid">
     <% @events.each do |e| %>
@@ -15,6 +15,14 @@
       </div>
     <% end %>
   </div>
+
+  <div class="c-pagination-button">
+    <%= link_to (t 'show_more'),
+            user_path(request.query_parameters.merge({ limit: (params['limit'] ? params['limit'].to_i + 1 : 2 )  })),
+            class: "circle-button",
+            remote: true,
+            data: {magic: true} %>
+  </div>
 <% else %>
   <div class="c-no-items wrapper">
     <p>No Events</p>
@@ -24,7 +32,7 @@
 
 <h3 class="c-title -normal -grid wrapper"><%= t "following" %></h3>
 <% if @eventsFollowing && @eventsFollowing.size() != 0 %>
-  <!-- c-grid-projects -->
+  <!-- c-grid-events -->
   <div class="c-card-grid">
     <!-- Provisional loop  -->
     <% for i in 1..4 %>
@@ -40,6 +48,14 @@
         </div>
       </div>
     <% end %>
+  </div>
+
+  <div class="c-pagination-button">
+    <%= link_to (t 'show_more'),
+            user_path(request.query_parameters.merge({ limitFollow: (params['limitFollow'] ? params['limitFollow'].to_i + 1 : 2 )  })),
+            class: "circle-button",
+            remote: true,
+            data: {magic: true} %>
   </div>
 <% else %>
   <div class="c-no-items wrapper">
