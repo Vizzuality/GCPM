@@ -2,16 +2,9 @@ module Api
   module V1
     class MapController < ApiController
       def index
-        case params[:group]
-        when 'regions'
-          query = SqlQuery.new(:map_regions, params: map_params)
-        when 'countries'
-          query = SqlQuery.new(:map_countries, params: map_params)
-        when 'projects'
-          query = SqlQuery.new(:map_projects, params: map_params)
-        else
-          query = SqlQuery.new(:map_regions, params: map_params)
-        end
+        type = params[:type] && params[:type] == 'events' ? 'events' : 'projects'
+        group = params[:group] && ['countries', 'regions', 'points'].include?(params[:group]) ? params[:group] : 'countries'
+        query = SqlQuery.new("#{type}_map_#{group}", params: map_params)
         json_list = query.execute
         render json: json_list
       end

@@ -17,7 +17,7 @@
 #  city         :string
 #  country      :string
 #  state        :string
-#  latitute     :float
+#  latitude     :float
 #  longitude    :float
 #  postcode     :string
 #  created_at   :datetime         not null
