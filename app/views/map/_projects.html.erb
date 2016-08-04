@@ -38,9 +38,16 @@
       <%= link_to project_path(p.id), { :class => "link" } do %>
         <h3 class="c-title"><%= p.title %></h3>
       <% end %>
-      <p><%= truncate(p.summary, :length => 300) %></p>
+      <!-- Project summary replaced by cancer tags -->
+      <!-- <p><%= truncate(p.summary, :length => 300) %></p> -->
+      <div class="c-tag-list -closer">
+        <% p.cancer_types.each do |t| %>
+        <p class="tag"><%= t.name %></p>
+        <% end %>
+      </div>
     </div>
   <% end %>
+
 
   <div class="c-pagination-button">
     <%= link_to (t 'show_more'),
