@@ -135,7 +135,7 @@
         .done(function(){
           var options = {
             markers: markers.toJSON(),
-            type: this.params.get('type')
+            type: this.params.get('type') || 'projects'
           };
 
           var layerInstance = new App.Helper.MarkerLayer(this.map, options);

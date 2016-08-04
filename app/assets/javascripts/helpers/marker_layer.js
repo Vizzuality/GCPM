@@ -57,12 +57,12 @@
             })
           });
 
-          console.log(marker);
           var markerIcon = L.marker(marker.centroid, {
             icon: icon,
             riseOnHover: true,
             data: {
               type: marker.type,
+              path: this.options.type,
               location_id: marker.project || marker.location_id,
               location_name: marker.project_title || marker.location_name,
               location_iso: marker.iso
@@ -213,8 +213,9 @@
       }
 
       if (data.type == 'point') {
+        var path = '/'+path+'/';
         // And events??
-        window.location = '/projects/'+ data.location_id
+        window.location = path + data.location_id
       }      
     },
 
