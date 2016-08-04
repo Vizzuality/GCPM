@@ -45,7 +45,8 @@
     events: {
       'click .-editable' : 'displaInputs',
       'click .lead-investigator' : 'selectLead',
-      'click .f-submit' : 'onSubmit'
+      'click .f-submit' : 'onSubmit',
+      'change .changeInvestigator' : 'getOrganizations'
     },
 
     initialize: function() {
@@ -63,17 +64,39 @@
     },
 
     render: function() {
+      this.fillPregenerated();
       this.renderChosen();
       this.renderPickADate();
-      window.setTimeout(function(){
-        $('.triggerAllNew').trigger('click').hide().parent().find('select.chosen-select').chosen({
-          width: '100%',
-          allow_single_deselect: true,
-          inherit_select_classes: true,
-          no_results_text: "Oops, nothing found!"
-        });
-      },500);
+
+      
       return this;
+    },
+
+    fillPregenerated: function() {
+      var selectInvestigators = document.createElement("SELECT");
+      selectInvestigators.classList.add('chosen-select');
+      $.get('/api/projects/members/'+PROJECT_ID+'/token='+AUTH_TOKEN, function( data ) {
+        console.log(data);
+        data = JSON.parse(data);
+        for (var key in data){
+          for (var i = 0; i<=4; i++){
+              var opt = document.createElement('option');
+              opt.value = i;
+              opt.innerHTML = i;
+              selectInvestigators.appendChild(opt);
+          }
+          var itemWrapper = document.createElement('div')
+          itemWrapper.classList.add('-item','-m-edited', 'changeInvestigator');
+          itemWrapper.appendChild(selectInvestigators);
+
+          document.getElementById('c-pregenerated-container').appendChild(itemWrapper);
+        }
+      });
+    },
+
+    getOrganizations: function(ev) {
+      var id = ev.target;
+
     },
 
     renderChosen: function() {

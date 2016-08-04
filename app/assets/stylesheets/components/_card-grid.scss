@@ -91,6 +91,7 @@
 
     /* Specific sizes relying on the screen size */
     $breakpoints: (
+      "mobile-small": $mq-mobile-small,
       "mobile-large": $mq-mobile-large,
       "tablet":       $mq-tablet,
       "laptop":       $mq-laptop

@@ -1,0 +1,22 @@
+.c-notice {
+  z-index: 1001;
+
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+
+  width: 100%;
+  padding: 20px 30px;
+
+  color: $color-3;
+  text-align: center;
+
+  background-color: $color-4;
+
+  transition: .25s transform ease-in-out;
+
+  &.-hidden {
+    transform: translate(-50%, -100%);
+  }
+}
