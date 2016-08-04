@@ -57,6 +57,7 @@
             })
           });
 
+          console.log(marker);
           var markerIcon = L.marker(marker.centroid, {
             icon: icon,
             riseOnHover: true,
@@ -211,7 +212,8 @@
         });
       }
 
-      if (data.type == 'project') {
+      if (data.type == 'point') {
+        // And events??
         window.location = '/projects/'+ data.location_id
       }      
     },
