@@ -1,4 +1,6 @@
-.project_add {
+.project_add, .c-select {
+	position: relative;
+
 	.chosen-container-single .chosen-single {
 		border: none;
 		background: transparent;
@@ -25,9 +27,7 @@
 		color: rgba(15,48,70,.3);
     	font-weight: normal;
 	}
-	.chosen-container-multi.chosen-container-active.chosen-with-drop {
-		width: 100% !important;
-	}
+
 	.chosen-container-multi .chosen-choices {
 		background: transparent;
 		li.search-choice {
@@ -49,7 +49,6 @@
 	.chosen-container-active.chosen-with-drop {
 		z-index: 2;
 	    position: absolute;
-	    width: 350px !important;
 	    background: #fff;
 	    .chosen-single:before {
 	    	content: '×';

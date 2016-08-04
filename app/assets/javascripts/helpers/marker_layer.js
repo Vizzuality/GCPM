@@ -79,7 +79,9 @@
         // Group the markers and add them to the map
         this.markersGroup = L.featureGroup(this.markers).addTo(this.map);
         // Fit bounds to see all the markers
-        this.map.fitBounds(this.markersGroup.getBounds());
+        this.map.fitBounds(this.markersGroup.getBounds(), {
+          maxZoom: 10
+        });
       } else {
         // TO-DO: notification => no markers with the selected parameters
         console.log('no markers with the selected parameters');
