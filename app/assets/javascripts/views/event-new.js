@@ -3,7 +3,7 @@
   'use strict';
 
   App.View = App.View || {};
-  App.View.AddNewProject = Backbone.View.extend({
+  App.View.AddNewEvent = Backbone.View.extend({
 
       el: '.project_add',
 
@@ -58,7 +58,7 @@
     },
 
     render: function() {
-      this.fillPregenerated();
+      // this.fillPregenerated();
       this.renderChosen();
       this.renderPickADate();
 
@@ -66,71 +66,39 @@
       return this;
     },
 
-    removeRelation: function(ev) {
-      var target = $(ev.target).parent().parent();
-      var id = target.data('id');
-      AUTH_TOKEN = 'X18fTWv64i4W7Dam5WeN';
-      $.ajax({
-        url: 'http://192.168.1.69:3000/api/projects/'+PROJECT_ID+'/memberships/'+id+'?token='+AUTH_TOKEN,
-        method: 'DELETE'
-      });
-      target.fadeOut();
-    },
+    // removeRelation: function(ev) {
+    //   var target = $(ev.target).parent().parent();
+    //   var id = target.data('id');
+    //   AUTH_TOKEN = 'X18fTWv64i4W7Dam5WeN';
+    //   $.ajax({
+    //     url: 'http://192.168.1.69:3000/api/projects/'+PROJECT_ID+'/memberships/'+id+'?token='+AUTH_TOKEN,
+    //     method: 'DELETE'
+    //   });
+    //   target.fadeOut();
+    // },
 
-    changeLead: function(ev){
-      var target = $(ev.target).parent();
-      var id = target.data('id');
-      this.$el.find('.-getrow').find('.circle').remove();
-      target.find('.f-circle-parent').html('<span class="circle"></span>');
-      AUTH_TOKEN = 'X18fTWv64i4W7Dam5WeN';
-      $.ajax({
-        url: 'http://192.168.1.69:3000/api/projects/'+PROJECT_ID+'/memberships/'+id+'?token='+AUTH_TOKEN,
-        method: 'PUT',
-        data: {'membership': {'membership_type':'main'}}
-      });
-      target.siblings().each(function(i, el){
-        $.ajax({
-          url: 'http://192.168.1.69:3000/api/projects/'+PROJECT_ID+'/memberships/'+$(el).data('id')+'?token='+AUTH_TOKEN,
-          method: 'PUT',
-          data: {'membership': {'membership_type':'secondary'}}
-        });
-      });
-    },
-
-    fillPregenerated: function() {
-      var AUTH_TOKEN = 'X18fTWv64i4W7Dam5WeN';
-      var CONTAINER = document.getElementById('c-pregenerated-container');
-      $.get('http://192.168.1.69:3000/api/projects/'+PROJECT_ID+'/memberships?token='+AUTH_TOKEN, function( data ) {
-        // '/api/projects/'+PROJECT_ID+'/memberships/ROW_ID?token='+AUTH_TOKEN
-        console.log(data);
-        for (var i = 0; i < data.length; i++) {
-
-          var row = '<div class="-getrow" data-id="'+data[i].id+'">';
-          row     +=  '<span class="-item -m-edited">';
-          row     +=    '<a href="#" class="remove_fields">×</a>';
-          row     +=    data[i].investigator.name;
-          row     +=  '</span>';
-          row     +=  '<span class="-item -m-edited">';
-          row     +=    data[i].organization.name;
-          row     +=  '</span>';
-          row     +=  '<span class="-item -m-edited">';
-          row     +=    data[i].address.line_1;
-          row     +=  '</span>';
-          row     +=  '<span class="-item -m-edited f-circle-parent">';
-          if (data[i].membership_type == 'main') {
-            row     +=    '<span class="circle"></span>';
-          }
-          row     +=  '</span>';
-          row     += '</div>';
-          CONTAINER.innerHTML = CONTAINER.innerHTML + row;
-
-        }
-      });
-    },
+    // changeLead: function(ev){
+    //   var target = $(ev.target).parent();
+    //   var id = target.data('id');
+    //   this.$el.find('.-getrow').find('.circle').remove();
+    //   target.find('.f-circle-parent').html('<span class="circle"></span>');
+    //   AUTH_TOKEN = 'X18fTWv64i4W7Dam5WeN';
+    //   $.ajax({
+    //     url: 'http://192.168.1.69:3000/api/projects/'+PROJECT_ID+'/memberships/'+id+'?token='+AUTH_TOKEN,
+    //     method: 'PUT',
+    //     data: {'membership': {'membership_type':'main'}}
+    //   });
+    //   target.siblings().each(function(i, el){
+    //     $.ajax({
+    //       url: 'http://192.168.1.69:3000/api/projects/'+PROJECT_ID+'/memberships/'+$(el).data('id')+'?token='+AUTH_TOKEN,
+    //       method: 'PUT',
+    //       data: {'membership': {'membership_type':'secondary'}}
+    //     });
+    //   });
+    // },
 
     getOrganizations: function(ev) {
       var id = ev.target;
-
     },
 
     renderChosen: function() {
@@ -155,10 +123,6 @@
       if (! !!$('#project_memberships_attributes_undefined_research_unit_id').val()) {
         $('.c-pregenerated').last().remove();
       }
-    },
-
-    displaInputs: function() {
-      $('body').addClass('f-edited');
     },
 
     renderPickADate: function() {
