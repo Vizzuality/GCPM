@@ -50,7 +50,7 @@
           var icon = new L.divIcon({
             iconSize: [size,size],
             // Need to set marker.type on each marker
-            className: 'c-marker -' + marker.type,
+            className: 'c-marker -' + marker.type + ' -'+this.options.type,
             html: this.template({
               value: (marker.count > 1) ? marker.count : '',
               svg: (!!svg) ? this.getHtmlString(svg) : null

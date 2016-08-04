@@ -125,15 +125,17 @@
       this.removeLayer({
         id: 'marker-layer'
       })
-
-      var markers = new App.Collection.Markers();
+      var markers = new App.Collection.Markers({
+        type: this.params.get('type') || 'projects'
+      });
       markers
         .fetch({
           data: this.params.toJSON()
         })
         .done(function(){
           var options = {
-            markers: markers.toJSON()
+            markers: markers.toJSON(),
+            type: this.params.get('type')
           };
 
           var layerInstance = new App.Helper.MarkerLayer(this.map, options);

@@ -4,6 +4,7 @@
 
   App.Collection = App.Collection || {};
   App.Collection.Markers = Backbone.Collection.extend({
+    
     url: '/api/map',
 
     initialize: function(options) {
@@ -11,6 +12,7 @@
     },
 
     parse: function(response) {
+
       return _.map(response, function(marker){
         // Get the centroid of the location
         var centroid = JSON.parse(marker.centroid);
@@ -21,7 +23,7 @@
         }
 
         return marker;
-      })
+      }.bind(this));
     }
 
   });

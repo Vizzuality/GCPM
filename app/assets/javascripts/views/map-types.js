@@ -27,6 +27,10 @@
       this.options = _.extend({}, this.defaults, opts);
       this.params = settings.params;
 
+      if (!!this.params.type) {
+        this.model.set('type', this.params.type);
+      }
+
       this.listeners();
     },
 
