@@ -133,7 +133,7 @@
         .fetch({
           data: this.params.toJSON()
         })
-        .done(function(){
+        .done(function(data){
           var options = {
             markers: markers.toJSON(),
             type: this.params.get('type') || 'projects'

@@ -33,17 +33,20 @@
     background: #417394;
 
     &:hover {
-      background: darken(#417394, 2.5%);
+      background: darken(#417394, 5%);
     }
   }
 
-  &.-events {
+  &.-events, &.-investigator {
     background: $color-6;
+
+    &:hover {
+      background: darken($color-6, 5%);
+    }
     
     .value {
       color: $color-3;
     }
-
   }
 
 	.arc {
