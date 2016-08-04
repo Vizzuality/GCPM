@@ -84,7 +84,7 @@
         no_results_text: "Oops, nothing found!"
       });
     },
-    
+
     displaInputs: function() {
       $('body').addClass('f-edited');
     },

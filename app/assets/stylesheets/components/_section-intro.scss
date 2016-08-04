@@ -23,6 +23,7 @@
 
 .c-section-intro {
   position: relative;
+  min-height: 500px;
 
   &.-color-1 .intro-info { color: $color-1; }
   &.-color-2 .intro-info { color: $color-6; }
