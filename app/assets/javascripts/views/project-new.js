@@ -47,7 +47,8 @@
       'click .lead-investigator' : 'selectLead',
       'click .f-submit' : 'onSubmit',
       'click .remove_fields' : 'removeRelation',
-      'click .f-circle-parent' : 'changeLead'
+      'click .f-circle-parent' : 'changeLead',
+      'change .selectInvestigator' : 'loadOrgaAndAddr'
     },
 
     initialize: function() {
@@ -104,7 +105,76 @@
       });
     },
 
+    loadOrgaAndAddr: function(ev) {
+      $.ajax({
+        url: 'http://192.168.1.69:3000/api/investigators/'+ev.target.value+'?token=X18fTWv64i4W7Dam5WeN',
+        method: 'GET',
+        success: function(data) {
+          var paintOrgOrAdd = function (elements) {          
+            var selectElements = document.createElement("SELECT");
+            for (var i = 0; i < elements.length; i++) {
+              var option = document.createElement("OPTION");
+              option.innerText = elements[i].name || elements[i].line_1;
+              option.value = elements[i].id;
+              selectElements.appendChild(option);
+            }
+            selectElements.classList.add('chosen-select');
+            var item = document.createElement('SPAN');
+            item.classList.add('-item','-m-edited');
+            item.appendChild(selectElements);
+            $('#c-pregenerated-container').find('.-getrow').append($(item));
+            $(selectElements).chosen({
+              width: '100%',
+              allow_single_deselect: true,
+              inherit_select_classes: true,
+              no_results_text: "Oops, nothing found!"
+            });
+          }
+          var addLead = function(){
+            $('#c-pregenerated-container').find('.-getrow').append('<span class="-item -m-edited f-circle-parent"></span>');
+          }
+          paintOrgOrAdd(data.organizations);
+          paintOrgOrAdd(data.addresses);
+          addLead();
+        }
+      });
+    },
+
+    fillPregeneratedInvestigators: function() {
+      $.ajax({
+        url: 'http://192.168.1.69:3000/api/investigators?token=X18fTWv64i4W7Dam5WeN',
+        method: 'GET',
+        success: function(data) {
+          var selectInvestigators = document.createElement("SELECT");
+          for (var i = 0; i < data.length; i++) {
+            var option = document.createElement("OPTION");
+            option.innerText = data[i].name;
+            option.value = data[i].id;
+            selectInvestigators.appendChild(option);
+          }
+          selectInvestigators.classList.add('chosen-select', 'selectInvestigator');
+          var getrow = document.createElement('div');
+          getrow.classList.add('-getrow');
+          var item = document.createElement('SPAN');
+          item.classList.add('-item', '-m-edited');
+          item.appendChild(selectInvestigators);
+          getrow.appendChild(item);
+          document.getElementById('c-pregenerated-container').appendChild(getrow);
+          $(selectInvestigators).chosen({
+            width: '100%',
+            allow_single_deselect: true,
+            inherit_select_classes: true,
+            no_results_text: "Oops, nothing found!"
+          });
+        }
+      });
+    },
+
     fillPregenerated: function() {
+      if (! PROJECT_ID) {
+        this.fillPregeneratedInvestigators();
+        return;
+      };
       AUTH_TOKEN = 'X18fTWv64i4W7Dam5WeN';
       var CONTAINER = document.getElementById('c-pregenerated-container');
       $.get('http://192.168.1.69:3000/api/projects/'+PROJECT_ID+'/memberships?token='+AUTH_TOKEN, function( data ) {
