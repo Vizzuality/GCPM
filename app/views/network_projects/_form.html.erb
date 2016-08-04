@@ -1,3 +1,4 @@
+<span class="user-manual"><%= link_to (t 'download'), download_user_manual_path, class: "-color-1 f-user-manual", download: 'User Manual', data: {turbolinks: false}, title: "User Manual" %></span>
 <div class="c-section-intro">
 	<%= form.input :title, label: "#{@project.title}", label_html: { class: 'c-title -bigger -bold -hide-edited' }, :required => false, input_html: { class: '-editable', value: "#{@project.title}"}  %>
 </div>
@@ -35,13 +36,8 @@
 		<span class="-item">address</span>
 		<span class="-item">lead</span>
 	</div>
-
-  <%= form.fields_for :memberships do |memberships_form| %>
-    <%= render 'membership_relation_form', f: memberships_form %>
-  <% end %>
-  <p class="add-button">
-    <%= add_membership_path 'Add new', form, :memberships, 'add_fields add_investigator triggerAllNew' %>
-  </p>
+	<div id="c-pregenerated-container">
+	</div>
 </div>
 
 <div class="c-section-container -staff">
