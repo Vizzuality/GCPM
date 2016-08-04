@@ -31,6 +31,7 @@
       this.listenTo(this.router, 'route:project', this.projectDetail);
       this.listenTo(this.router, 'route:network', this.userPage);
       this.listenTo(this.router, 'route:editproject', this.editProjectPage);
+      this.listenTo(this.router, 'route:editevent', this.editEventPage);
 
       // Listening magic links
       App.Events.on('params:update', this.getContent);
@@ -150,6 +151,10 @@
       new App.View.AddNewProject();
     },
 
+    editEventPage: function() {
+      new App.View.AddNewEvent();
+    },
+
     eventInfo: function() {
       var params = this.router.getParams();
 
@@ -159,7 +164,7 @@
         layers: layersCollection,
         options: {
           basemap: 'customDetail',
-          apiUrl: '/api/map/events/'+EVENT_ID          
+          apiUrl: '/api/map/events/'+EVENT_ID
         }
       });
 

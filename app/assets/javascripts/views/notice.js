@@ -16,7 +16,6 @@
     },
 
     _hideNotice: function() {
-      console.log('hide');
       this.$el.addClass('-hidden');
     }
 
