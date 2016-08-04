@@ -3,7 +3,7 @@ module Api
     class MapController < ApiController
       def index
         type = params[:type] && params[:type] == 'events' ? 'events' : 'projects'
-        group = params[:group] && ['countries', 'regions', 'points'].include?(params[:group]) ? params[:group] : 'countries'
+        group = params[:group] && ['countries', 'regions', 'points'].include?(params[:group]) ? params[:group] : 'regions'
         query = SqlQuery.new("#{type}_map_#{group}", params: map_params)
         json_list = query.execute
         render json: json_list
@@ -17,7 +17,7 @@ module Api
 
       def show_event
         @event = Event.find(params[:id])
-        render json: @event, serializer: MapEventSerializer
+        render json: [@event], each_serializer: MapEventSerializer
       end
 
       def map_params

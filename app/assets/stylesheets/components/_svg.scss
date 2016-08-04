@@ -11,11 +11,16 @@
  *    - "-small" - DEFAULT, optional class
  *    - "-smaller"
  *
+ *  Colors modifiers (for the text):
+ *    - "-color-1": blue      ($color-1)
+ *    - "-color-2": orange    ($color-6)
+ *    - "-color-3": purple    ($color-4)
  */
 
 .c-svg {
   width: 12px;
   height: 12px;
+  fill: $color-1;
 
   &.-big {
     width: 34px;
@@ -35,6 +40,22 @@
   &.-smaller {
     width: 5px;
     height: 5px;
+  }
+
+  // Colors
+  &.-color-1 { 
+    color: $color-1;
+    &:hover { color: lighten($color-1, 10%)}
+  }
+  
+  &.-color-2 { 
+    color: $color-6;
+    &:hover { color: lighten($color-6, 10%)}
+  }
+  
+  &.-color-3 { 
+    color: $color-4;
+    &:hover { color: lighten($color-4, 10%)}
   }
 }
 

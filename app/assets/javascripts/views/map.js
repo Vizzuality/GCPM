@@ -31,6 +31,8 @@
       defaults: {}
     })),
 
+    params: new (Backbone.Model.extend()),
+
     initialize: function(settings) {
       if (!this.el) {
         return;
@@ -38,7 +40,7 @@
 
       var opts = settings && settings.options ? settings.options : {};
       this.options = _.extend({}, this.defaults, opts);
-      this.params = settings.params;
+      this.params.set(settings.params, { silent: true });
       // this.layers = settings.layers;
 
       this.createMap();
@@ -48,7 +50,10 @@
 
     listeners: function() {
       // this.layers.on('sync reset change', this.renderLayers.bind(this));
-      // App.Events.on('remote:load', this.setMarkers);
+      App.Events.on('params:update', function(params){
+        this.params.clear().set(params, { silent: true });
+        this.setMarkers();
+      }.bind(this));      
     },
 
 
@@ -117,23 +122,26 @@
 
     setMarkers: function() {
 
-      var markers = new App.Collection.Markers();
-
+      this.removeLayer({
+        id: 'marker-layer'
+      })
+      var markers = new App.Collection.Markers({
+        type: this.params.get('type') || 'projects',
+        apiUrl: this.options.apiUrl
+      });
       markers
         .fetch({
-          data: this.params
+          data: this.params.toJSON()
         })
-        .done(function(){
+        .done(function(data){
           var options = {
-            markers: markers.toJSON()
+            markers: markers.toJSON(),
+            type: this.params.get('type') || 'projects'
           };
 
           var layerInstance = new App.Helper.MarkerLayer(this.map, options);
 
-          layerInstance.create(function(layer) {
-            layer.setOpacity(1);
-            layer.setZIndex(1000);
-          }.bind(this));
+          layerInstance.create();
 
           this.setLayer(layerInstance, {
             id: 'marker-layer'

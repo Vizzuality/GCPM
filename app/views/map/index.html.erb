@@ -1,24 +1,21 @@
 <div class="c-section-intro">
-	<div id="map" class="map c-map" data-turbolinks-permanent></div>
-	<ul class="c-section-menu">
+  <button id="btn-clear-filters" class="btn-reset-filters c-button -filled -inverse">Clear filters</button>
+	<div id="map" class="map c-map -map"></div>
+  
+  <div id="map-tooltip" class="c-map-tooltip"></div>
+
+	<ul id="map-types" class="c-section-menu">
 	   <% @filters.each do |filter| %>
       <% @class = !params['type'] && filter == "projects" ? "-active" : active_param?('type', filter) %>
       <li>
-        <%= link_to (t filter),
-          map_path(request.query_parameters.merge({ type: filter })),
-          class: @class,
-          id: "mn-" + filter,
-          remote: true,
-          data: { magic: true } %>
+        <a class="js-btn-mapmenu-type <%= @class %>" href="#" data-type="<%= filter %>"><%= t (filter) %></a>        
       </li>
     <% end %>
 	</ul>
 </div>
 
 
-<div id="map-layers-tooltip" class="c-tooltip -tip-left">
-	hola, soy tooltip y tú?
-</div>
+<div id="map-layers-tooltip" class="c-tooltip -tip-left"></div>
 
 <!-- c-map-menu -->
 <%= render partial: "map-menu" %>

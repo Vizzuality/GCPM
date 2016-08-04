@@ -1,16 +1,15 @@
-<div id="map-filters" class="c-modal" data-turbolinks-permanent>
+<div id="map-filters" class="c-modal">
   <!-- WINDOW -->
   <div class="modal-window">
     <!-- Modal close button -->
     <button href="#" class="modal-close js-btn-modal-close">
-      <svg><use xlink:href="#shape-close"></use></svg>
+      <svg><use xlink:href="#icon-close"></use></svg>
     </button>
 
     <!-- Modal wrapper button -->
     <div class="modal-wrapper">
       <div class="modal-content">
         <form id="map-filters-form" action="">
-        <input type="hidden" name="type" value="<%= request.query_parameters['type'] %>">
 
           <h2 class='modal-title'>Filters</h2>
           <div class='c-map-filters'>
@@ -19,7 +18,7 @@
             <div class="grid-filters">
               <div class="grid-item">
                 <div class="c-select">
-                  <%= select_tag 'countries[]', options_for_select(@countries.map {|c| [c.country_name, c.id]}, @params['countries']), 
+                  <%= select_tag 'countries[]', options_for_select(@countries.map {|c| [c.country_name, c.id]}, @params['countries']),
                       class: 'chosen-select chosen-multiselect',
                       "data-placeholder": "All countries",
                       multiple: true %>
@@ -27,7 +26,7 @@
               </div>
               <div class="grid-item">
                 <div class="c-select">
-                  <%= select_tag 'organization_types[]', options_for_select(@organization_types.map {|c| [c.name, c.id]}, @params['organization_types']), 
+                  <%= select_tag 'organization_types[]', options_for_select(@organization_types.map {|c| [c.name, c.id]}, @params['organization_types']),
                       class: 'chosen-select chosen-multiselect',
                       "data-placeholder": "All organization types",
                       multiple: true %>
@@ -35,7 +34,7 @@
               </div>
               <div class="grid-item">
                 <div class="c-select">
-                  <%= select_tag 'cancer_types[]', options_for_select(@cancer_types.map {|c| [c.name, c.id]}, @params['cancer_types']), 
+                  <%= select_tag 'cancer_types[]', options_for_select(@cancer_types.map {|c| [c.name, c.id]}, @params['cancer_types']),
                       class: 'chosen-select chosen-multiselect',
                       "data-placeholder": "All cancer types",
                       multiple: true %>
@@ -43,7 +42,7 @@
               </div>
               <div class="grid-item">
                 <div class="c-select">
-                  <%= select_tag 'organizations[]', options_for_select(@organizations.map {|c| [c.name, c.id]}, @params['organizations']), 
+                  <%= select_tag 'organizations[]', options_for_select(@organizations.map {|c| [c.name, c.id]}, @params['organizations']),
                       class: 'chosen-select chosen-multiselect',
                       "data-placeholder": "All organizations",
                       multiple: true %>
@@ -51,7 +50,7 @@
               </div>
               <div class="grid-item">
                 <div class="c-select">
-                  <%= select_tag 'project_types[]', options_for_select(@project_types.map {|c| [c.name, c.id]}, @params['project_types']), 
+                  <%= select_tag 'project_types[]', options_for_select(@project_types.map {|c| [c.name, c.id]}, @params['project_types']),
                       class: 'chosen-select chosen-multiselect',
                       "data-placeholder": "All project types",
                       multiple: true %>
@@ -74,7 +73,7 @@
                   <input type="text" name="end_date" id="pickadate-end-input" class="pickadate-input" value="<%= @params['end_date'] %>">
                   <div id="pickadate-end-container" class="pickadate-container" autofocus></div>
                 </div>
-              </div>                          
+              </div>
             </div>
 
             <div class="grid-buttons">

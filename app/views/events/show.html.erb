@@ -1,10 +1,10 @@
 <section class="country">
   <div class="c-section-intro -color-4">
-    <div id="map" class="map c-map">
+    <div id="map" class="map c-map -detail">
       <div class="c-map-intro-legend">
         <ul class="legend-list">
           <li class="item"><div class="icon -first"></div><%= t 'project_leads' %></li>
-          <li class="item"><div class="icon -second"></div><%= t 'collaborators' %></li>
+          <li class="item"><div class="icon -second"></div><%= t 'investigators' %></li>
         </ul>
         <div class="viel"></div>
       </div>
@@ -41,3 +41,7 @@
   </div>
 
 </section>
+
+<script type="text/javascript">
+  var EVENT_ID = <%= @event.id %>;
+</script>

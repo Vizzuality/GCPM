@@ -1,6 +1,6 @@
 class MapProjectSerializer < ActiveModel::Serializer
-  attributes :id, :type, :title, :centroid, :is_project_lead
-  def id
+  attributes :location_id, :type, :title, :centroid, :is_project_lead
+  def location_id
     @instance_options[:project].id
   end
   def type

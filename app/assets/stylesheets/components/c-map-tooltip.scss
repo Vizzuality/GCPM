@@ -1,0 +1,51 @@
+.c-map-tooltip {
+  position: absolute;
+  z-index: 2;
+  transform: translate(-50%,-100%);
+  margin: -10px 0 0;
+  overflow: visible;
+  max-width: 200px;
+  background: $color-3;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: $shadow-1;
+
+  &.-active {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%,-50%) rotate(45deg);
+    width: 8px;
+    height: 8px;
+    background: $color-3;
+  }
+
+  .tooltip-scroll {
+    overflow-y: auto;
+    max-height: 200px;
+  }
+
+  .tooltip-content {
+    padding: 20px;
+    
+    h4 {
+      font-size: $font-size-normal;
+      color: $color-2;
+      margin: 0;
+    }
+    
+    p {
+      font-size: $font-size-tiny;
+      text-transform: uppercase;
+      color: $color-2; 
+    }
+  }
+}

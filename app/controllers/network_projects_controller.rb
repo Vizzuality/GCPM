@@ -27,7 +27,7 @@ class NetworkProjectsController < ApplicationController
   def create
     @project = @user.projects.build(project_params)
     if @project.save
-      redirect_to user_project_path(@user, @project), notice: 'Project succesfully created.'
+      redirect_to user_path(@user, type: 'projects'), notice: 'Project succesfully created.'
     else
       render :new, notice: "Project can't be created."
     end

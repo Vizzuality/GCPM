@@ -4,7 +4,7 @@ projects.title as project_title,
 countries.country_name as location_name,
 '{"type":"point","coordinates":[' || addresses.latitude || ',' || addresses.longitude || ']}' as centroid,
 countries.country_iso_3 as iso,
-'project' as type,
+'point' as type,
 case when (memberships.membership_type = 0) then true else false end as is_project_lead
 from projects
  inner join memberships on memberships.project_id = projects.id
