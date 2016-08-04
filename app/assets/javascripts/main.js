@@ -19,11 +19,11 @@
     initialize: function() {
       this.$content = $('#content');
       this.router = new App.Router();
+      this.initCommonViews();
       this.listeners();
     },
 
     listeners: function() {
-      this.listenTo(this.router, 'route', this.initCommonViews);
       this.listenTo(this.router, 'route:map', this.mapPage);
       this.listenTo(this.router, 'route:countries', this.countriesPage);
       this.listenTo(this.router, 'route:country', this.countryPage);
