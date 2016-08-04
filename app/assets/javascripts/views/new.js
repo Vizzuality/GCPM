@@ -74,17 +74,21 @@
     fillPregenerated: function() {
       var selectInvestigators = document.createElement("SELECT");
       selectInvestigators.classList.add('chosen-select');
-      for (var i = 0; i<=4; i++){
-          var opt = document.createElement('option');
-          opt.value = i;
-          opt.innerHTML = i;
-          selectInvestigators.appendChild(opt);
-      }
-      var itemWrapper = document.createElement('div')
-      itemWrapper.classList.add('-item','-m-edited');
-      itemWrapper.appendChild(selectInvestigators);
+      $.get('/api/project/members', function( data ) {
+        console.log(data);
+        data = JSON.parse(data);
+        for (var i = 0; i<=4; i++){
+            var opt = document.createElement('option');
+            opt.value = i;
+            opt.innerHTML = i;
+            selectInvestigators.appendChild(opt);
+        }
+        var itemWrapper = document.createElement('div')
+        itemWrapper.classList.add('-item','-m-edited');
+        itemWrapper.appendChild(selectInvestigators);
 
-      document.getElementById('c-pregenerated-container').appendChild(itemWrapper);
+        document.getElementById('c-pregenerated-container').appendChild(itemWrapper);
+      });
     },
 
     renderChosen: function() {
