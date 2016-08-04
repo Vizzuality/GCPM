@@ -63,7 +63,7 @@
       this.renderChosen();
       this.renderPickADate();
 
-      
+
       return this;
     },
 
@@ -103,7 +103,7 @@
         url: 'http://192.168.1.69:3000/api/investigators/'+ev.target.value+'?token=X18fTWv64i4W7Dam5WeN',
         method: 'GET',
         success: function(data) {
-          var paintOrgOrAdd = function (elements) {          
+          var paintOrgOrAdd = function (elements) {
             var selectElements = document.createElement("SELECT");
             for (var i = 0; i < elements.length; i++) {
               var option = document.createElement("OPTION");
@@ -169,7 +169,9 @@
         this.fillPregeneratedInvestigators();
         return;
       };
+
       AUTH_TOKEN = 'X18fTWv64i4W7Dam5WeN';
+
       var CONTAINER = document.getElementById('c-pregenerated-container');
       $.get('http://192.168.1.69:3000/api/projects/'+PROJECT_ID+'/memberships?token='+AUTH_TOKEN, function( data ) {
         // '/api/projects/'+PROJECT_ID+'/memberships/ROW_ID?token='+AUTH_TOKEN
@@ -212,7 +214,7 @@
         no_results_text: "Oops, nothing found!"
       });
     },
-    
+
     displaInputs: function() {
       $('body').addClass('f-edited');
     },
