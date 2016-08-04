@@ -193,6 +193,8 @@ ActiveRecord::Schema.define(version: 20160804113911) do
     t.integer  "membership_type",  default: 1
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+    t.integer  "address_id"
+    t.index ["address_id"], name: "index_memberships_on_address_id", using: :btree
     t.index ["membership_type"], name: "index_memberships_on_membership_type", using: :btree
     t.index ["project_id"], name: "index_memberships_on_project_id", using: :btree
     t.index ["research_unit_id"], name: "index_memberships_on_research_unit_id", using: :btree
