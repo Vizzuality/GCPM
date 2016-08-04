@@ -56,7 +56,7 @@
               svg: (!!svg) ? this.getHtmlString(svg) : null
             })
           });
-          console.log(this.options.type)
+
           var markerIcon = L.marker(marker.centroid, {
             icon: icon,
             riseOnHover: true,
