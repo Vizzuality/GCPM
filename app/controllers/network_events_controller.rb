@@ -20,7 +20,7 @@ class NetworkEventsController < ApplicationController
 
   def update
     if @event.update(event_params)
-      redirect_to user_path(@user, type: 'events'), notice: 'Event succesfully updated.'
+      redirect_to event_path(@event), notice: 'Event succesfully updated.'
     else
       render :edit, notice: "Event can't be updated."
     end
@@ -29,7 +29,7 @@ class NetworkEventsController < ApplicationController
   def create
     @event = @user.events.build(event_params)
     if @event.save
-      redirect_to user_event_path(@user, @event), notice: 'Event succesfully created.'
+      redirect_to user_path(@user, type: 'events'), notice: 'Event succesfully created.'
     else
       render :new, notice: "Event can't be created."
     end
