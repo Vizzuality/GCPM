@@ -19,4 +19,8 @@ class ResearchUnit < ApplicationRecord
 
   validates_presence_of :address_id, :investigator_id
   validates :investigator_id, uniqueness: { scope: :address_id }
+
+  def self.check_id(investigator_id, address_id)
+    ResearchUnit.find_by(investigator_id: investigator_id, address_id: address_id)
+  end
 end

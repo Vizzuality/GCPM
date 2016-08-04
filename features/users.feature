@@ -10,11 +10,13 @@ I want to register, login and edit account
     And I fill in "Password" with "password"
     And I press "Log in"
     Then I should see "Signed in successfully."
+    And I should have an valid auth token for "test-user@sample.com"
     And I should be on the home page
 
   Scenario: User logout
     Given I am authenticated user
     And I am on the home page
+    And I should have an valid auth token for "user@sample.com"
     When I follow "Logout" within ".desktop-menu .user-profile"
     Then I should see "Signed out successfully."
     And I am on the home page

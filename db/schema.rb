@@ -274,6 +274,9 @@ ActiveRecord::Schema.define(version: 20160804113911) do
     t.string   "twitter_account"
     t.string   "linkedin_account"
     t.string   "pubmed"
+    t.string   "authentication_token"
+    t.datetime "token_expires_at"
+    t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree

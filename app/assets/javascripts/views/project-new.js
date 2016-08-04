@@ -49,7 +49,9 @@
       'click .remove_fields' : 'removeRelation',
       'click .f-circle-parent' : 'changeLead',
       'change .selectInvestigator' : 'loadOrgaAndAddr',
-      'change .selectElements'  : 'updateResearchUnit'
+      'change .selectElements'  : 'updateResearchUnit',
+      'click .pre-submit'   : 'onSubmit',
+      'click .saveRelation' : 'saveRelation'
     },
 
     initialize: function() {
@@ -85,13 +87,14 @@
       target.find('.f-circle-parent').html('<span class="circle"></span>');
       $.ajax({
         url: '/api/projects/'+PROJECT_ID+'/memberships/'+id+'?token='+AUTH_TOKEN,
-        method: 'PUT',
+        method: 'POST',
         data: {'membership': {'membership_type':'main'}}
       });
       target.siblings().each(function(i, el){
+        if (! !!$(el).data('id')) return;
         $.ajax({
           url: '/api/projects/'+PROJECT_ID+'/memberships/'+$(el).data('id')+'?token='+AUTH_TOKEN,
-          method: 'PUT',
+          method: 'POST',
           data: {'membership': {'membership_type':'secondary'}}
         });
       });
@@ -99,7 +102,7 @@
 
     loadOrgaAndAddr: function(ev) {
       $.ajax({
-        url: '/api/investigators/'+ev.target.value+'?token=bxx9bBCZFyB1TsYwBLNS',
+        url: '/api/investigators/'+ev.target.value+'?token='+AUTH_TOKEN,
         method: 'GET',
         success: function(data) {
           var paintOrgOrAdd = function (elements) {
@@ -130,23 +133,25 @@
           addLead();
           this.fillPregeneratedInvestigators();
         }.bind(this)
-        this.updateResearchUnit(ev);
       });
+      window.setTimeout(function(){
+        this.updateResearchUnit(ev);
+      }.bind(this),1500)
     },
 
 
     updateResearchUnit: function(ev) {
       var target = $(ev.target).parent();
       var data = {
-        'investigator_id' : target.find('.selectInvestigator').value(), 
-        'address_id' :  target.find('.selectElements').last().value()
+        'investigator_id' : target.find('select.selectInvestigator').val(),
+        'address_id' :  target.parent().find('select.selectElements').last().val()
       }
       $.ajax({
-        url: '/api/check_research_unit/?token='+AUTH_TOKEN,
+        url: '/api/check_research_unit?token='+AUTH_TOKEN,
         method: 'GET',
         data: data,
         success: function(data) {
-          target.data('research_unit', data);
+          target.closest('.-getrow').attr('data-research_unit', data.research_unit_id);
         }
       });
     },
@@ -186,17 +191,13 @@
         this.fillPregeneratedInvestigators();
         return;
       };
-      
+
       var CONTAINER = document.getElementById('c-pregenerated-container');
       $.ajax({
         url: '/api/projects/'+PROJECT_ID+'/memberships?token='+AUTH_TOKEN,
         success: function(data) {
-          if (data.length < 1) {
-            this.fillPregeneratedInvestigators();
-            return;
-          }
-          for (var i = 0; i < data.length; i++) {
 
+          for (var i = 0; i < data.length; i++) {
           var row = '<div class="-getrow" data-id="'+data[i].id+'">';
           row     +=  '<span class="-item -m-edited">';
           row     +=    '<a href="#" class="remove_fields">×</a>';
@@ -220,10 +221,11 @@
         }.bind(this),
         error:function (xhr, ajaxOptions, thrownError){
             if(xhr.status==404) {
-                this.fillPregeneratedInvestigators();
+                // this.fillPregeneratedInvestigators();
             }
         }.bind(this)
       });
+      this.fillPregeneratedInvestigators();
     },
 
     getOrganizations: function(ev) {
@@ -253,12 +255,16 @@
       if (! !!$('#project_memberships_attributes_undefined_research_unit_id').val()) {
         $('.c-pregenerated').last().remove();
       }
-      var elems = document.getElementsByTagName('.-getrow');
-      for (var i = 0; i < elems; i++){
+
+    },
+
+    saveRelation: function() {
+      var elems = document.getElementsByClassName('-getrow');
+      for (var i = 0; i < elems.length; i++){
         var data = {
           "membership" : {
             "project_id" : PROJECT_ID,
-            "research_unit_id" : elems[i].data('research_unit'),
+            "research_unit_id" : $(elems[i]).data('research_unit'),
             "membership_type" : !!$(elems[i]).find('.circle') ? 'main' : 'secondary'
           }
         };
