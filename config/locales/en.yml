@@ -24,6 +24,7 @@
 en:
   about: "About"
   active: "Active"
+  add_event: "Add event"
   add_project: "Add project"
   articles: "Articles"
   breast: "Breast"
@@ -74,5 +75,5 @@ en:
   trachea_bronchus_and_lung: "Trachea, bronchus and lung"
   total_events: "Total events"
   you: "You"
-  your_profile: "Your profile"
-  your_projects: "Your projects"
+  your_profile: "Your Profile"
+  your_projects: "Your Projects"
