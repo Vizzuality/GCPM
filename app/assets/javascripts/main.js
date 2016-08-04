@@ -32,7 +32,6 @@
       this.listenTo(this.router, 'route:network', this.userPage);
       this.listenTo(this.router, 'route:editproject', this.editProject);
 
-      new App.View.Notice();
       // Listening magic links
       App.Events.on('remote:load', this.replaceContent);
 
@@ -71,6 +70,7 @@
 
     initCommonViews: function() {
       new App.View.MobileHeader();
+      new App.View.Notice();
       new App.View.UserDropdownMenu();
     },
 
