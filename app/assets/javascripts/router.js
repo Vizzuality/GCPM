@@ -18,7 +18,8 @@
       'events/:id': 'event',
       'projects/:id': 'project',
       'network/:id': 'network',
-      'network/:id/projects/:val/edit': 'editproject'
+      'network/:id/projects/:val/edit': 'editproject',
+      'network/:id/projects/new': 'editproject'
     },
 
     params: new (Backbone.Model.extend()),

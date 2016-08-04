@@ -1,9 +1,23 @@
 select
 count(distinct(events.id)),
 countries.region_name as location_name,
+events.title as title,
 countries.region_centroid as centroid,
 countries.region_iso as iso,
 'region' as type
 from events
 inner join countries on events.country = countries.country_name
-group by location_name, centroid, iso
+where 1=1
+<% if @params[:countries] %>
+  and countries.id in         <%= "#{'(' + @params[:countries].join(',') + ')'}" %>
+<% end %>
+<% if @params[:regions] %>
+  and countries.region_iso in <%= @params[:regions].to_s.gsub('[', '(').gsub(']',')').gsub('"',"'") %>
+<% end %>
+<% if @params[:start_date] %>
+  and (events.start_date > date(<%= quote @params[:start_date] %>))
+<% end %>
+<% if @params[:end_date] %>
+  and (events.end_date < date(<%= quote @params[:end_date] %>))
+<% end %>
+group by location_name, title, centroid, iso
