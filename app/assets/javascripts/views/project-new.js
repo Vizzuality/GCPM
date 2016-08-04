@@ -45,7 +45,8 @@
     events: {
       'click .-editable' : 'displaInputs',
       'click .lead-investigator' : 'selectLead',
-      'click .f-submit' : 'onSubmit'
+      'click .f-submit' : 'onSubmit',
+      'change .changeInvestigator' : 'getOrganizations'
     },
 
     initialize: function() {
@@ -67,28 +68,35 @@
       this.renderChosen();
       this.renderPickADate();
 
-
+      
       return this;
     },
 
     fillPregenerated: function() {
       var selectInvestigators = document.createElement("SELECT");
       selectInvestigators.classList.add('chosen-select');
-      $.get('/api/project/members', function( data ) {
+      $.get('/api/projects/members/'+PROJECT_ID+'/token='+AUTH_TOKEN, function( data ) {
         console.log(data);
         data = JSON.parse(data);
-        for (var i = 0; i<=4; i++){
-            var opt = document.createElement('option');
-            opt.value = i;
-            opt.innerHTML = i;
-            selectInvestigators.appendChild(opt);
-        }
-        var itemWrapper = document.createElement('div')
-        itemWrapper.classList.add('-item','-m-edited');
-        itemWrapper.appendChild(selectInvestigators);
+        for (var key in data){
+          for (var i = 0; i<=4; i++){
+              var opt = document.createElement('option');
+              opt.value = i;
+              opt.innerHTML = i;
+              selectInvestigators.appendChild(opt);
+          }
+          var itemWrapper = document.createElement('div')
+          itemWrapper.classList.add('-item','-m-edited', 'changeInvestigator');
+          itemWrapper.appendChild(selectInvestigators);
 
-        document.getElementById('c-pregenerated-container').appendChild(itemWrapper);
+          document.getElementById('c-pregenerated-container').appendChild(itemWrapper);
+        }
       });
+    },
+
+    getOrganizations: function(ev) {
+      var id = ev.target;
+
     },
 
     renderChosen: function() {
@@ -99,7 +107,7 @@
         no_results_text: "Oops, nothing found!"
       });
     },
-
+    
     displaInputs: function() {
       $('body').addClass('f-edited');
     },
