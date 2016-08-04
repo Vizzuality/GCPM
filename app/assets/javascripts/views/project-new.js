@@ -115,7 +115,7 @@
             var item = document.createElement('SPAN');
             item.classList.add('-item','-m-edited');
             item.appendChild(selectElements);
-            $('#c-pregenerated-container').find('.-getrow').append($(item));
+            $('#c-pregenerated-container').find('.-getrow').last().append($(item));
             $(selectElements).chosen({
               width: '100%',
               allow_single_deselect: true,
@@ -124,7 +124,7 @@
             });
           }
           var addLead = function(){
-            $('#c-pregenerated-container').find('.-getrow').append('<span class="-item -m-edited f-circle-parent"></span>');
+            $('#c-pregenerated-container').find('.-getrow').last().append('<span class="-item -m-edited f-circle-parent"></span>');
           }
           paintOrgOrAdd(data.organizations);
           paintOrgOrAdd(data.addresses);
