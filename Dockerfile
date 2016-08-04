@@ -11,7 +11,9 @@ RUN apt-get update \
         postgresql-client \
     && rm -rf /var/lib/apt/lists/* \
     && curl -sL https://deb.nodesource.com/setup_6.x | bash - \
-    && apt-get install -y nodejs
+    && apt-get install -y nodejs libqt4-dev libqtwebkit-dev \
+      qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base \
+      gstreamer1.0-tools gstreamer1.0-x
 
 # Configure the main working directory. This is the base
 # directory used in any further RUN, COPY, and ENTRYPOINT

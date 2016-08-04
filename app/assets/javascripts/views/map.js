@@ -2,6 +2,16 @@
 
   'use strict';
 
+  var basemapsSpec = {
+    nokiaTerrain: {
+      url: 'https://4.maps.nlp.nokia.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/256/png8?lg=eng&token=A7tBPacePg9Mj_zghvKt9Q&app_id=KuYppsdXZznpffJsKT24',
+      options: {}
+    },
+    customDetail: {
+      url: 'https://cartocdn-ashbu.global.ssl.fastly.net/simbiotica/api/v1/map/simbiotica@87e21c6d@632ee45870a97b639be881c43cd903b8:1467196236654/1/{z}/{x}/{y}.png'
+    }
+  };
+
   App.View = App.View || {};
 
   App.View.Map = Backbone.View.extend({
@@ -14,12 +24,7 @@
         // center: [0, 0],
         scrollWheelZoom: false
       },
-      basemap: {
-        url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-        options: {
-          attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        }
-      }
+      basemap: 'nokiaTerrain'
     },
 
     model: new (Backbone.Model.extend({
@@ -58,7 +63,7 @@
         if (!!this.$el.data('map')) {
           this.removeMap();
         }
-        
+
         this.map = L.map(this.el.id, this.options.map);
         this.$el.data('map', this.map);
 
@@ -93,8 +98,8 @@
       if (this.basemap) {
         this.map.removeLayer(this.basemap);
       }
-
-      this.basemap = L.tileLayer(this.options.basemap.url, this.options.basemap.options).addTo(this.map);
+      var basemapConfig = basemapsSpec[this.options.basemap];
+      this.basemap = L.tileLayer(basemapConfig.url, basemapConfig.options).addTo(this.map);
     },
 
     /**

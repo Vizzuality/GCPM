@@ -1,0 +1,9 @@
+select
+count(distinct(events.id)),
+countries.region_name as location_name,
+countries.region_centroid as centroid,
+countries.region_iso as iso,
+'event' as type
+from events
+inner join countries on events.country = countries.country_name
+group by location_name, centroid, iso
