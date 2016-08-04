@@ -129,7 +129,8 @@
           paintOrgOrAdd(data.organizations);
           paintOrgOrAdd(data.addresses);
           addLead();
-        }
+          this.fillPregeneratedInvestigators();
+        }.bind(this)
       });
     },
 
