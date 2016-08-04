@@ -34,6 +34,7 @@
     position: absolute;
     bottom: 0;
     left: 0;
+    z-index: 2;
     width: 100%;
     min-height: 60px; // In case there is not content
     color: $color-2;

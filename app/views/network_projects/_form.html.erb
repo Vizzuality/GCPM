@@ -1,4 +1,13 @@
-<script> var PROJECT_ID = <%= @project.id %></script>
+<% 
+	@PROJECT_ID = false
+	if (@project.id) 
+		@PROJECT_ID = @project.id
+	end
+
+
+%>
+
+<script> var PROJECT_ID = <%= @PROJECT_ID %>;</script>
 <script> var AUTH_TOKEN = <%= 000 %></script>
 <span class="user-manual"><%= link_to (t 'download'), download_user_manual_path, class: "-color-1 f-user-manual", download: 'User Manual', data: {turbolinks: false}, title: "User Manual" %></span>
 <div class="c-section-intro">

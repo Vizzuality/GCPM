@@ -29,16 +29,20 @@
 
       this.map = map;
       this.options = _.extend({}, this.defaults, settings || {});
+      this.tooltipEl = $('#map-tooltip');
+      this.tooltipTpl = HandlebarsTemplates['map-tooltip'];
     },
 
     /**
      * Create a CartoDB layer
      * @param  {Function} callback
      */
-    create: function(callback) {
+    create: function() {
       var markers = this.options.markers;
       if (markers && markers.length) {
-        this.markers = _.map(markers, function(marker){
+        this.markers = _.compact(_.map(markers, function(marker){
+          if (! !!marker.centroid) { return null; }
+
           var size = this.getSize(marker.count),
               svg = this.getSVG(marker);
 
@@ -46,21 +50,22 @@
           var icon = new L.divIcon({
             iconSize: [size,size],
             // Need to set marker.type on each marker
-            className: 'c-marker -' + marker.type,
+            className: 'c-marker -' + marker.type + ' -'+this.options.type,
             html: this.template({
               value: (marker.count > 1) ? marker.count : '',
               svg: (!!svg) ? this.getHtmlString(svg) : null
             })
           });
-
+          console.log(this.options.type)
           var markerIcon = L.marker(marker.centroid, {
             icon: icon,
             riseOnHover: true,
             data: {
-              location_id: marker.location_id,
               type: marker.type,
-              location_name: marker.location_name,
-              iso: marker.iso
+              path: this.options.type,
+              location_id: marker.project || marker.location_id,
+              location_name: marker.project_title || marker.location_name,
+              location_iso: marker.iso
             }
           }).on('mouseover', this._onMouseover.bind(this))
             .on('mouseout', this._onMouseout.bind(this))
@@ -69,12 +74,12 @@
           // Return a leaflet marker
           return markerIcon;
 
-        }.bind(this));
+        }.bind(this)));
 
         // Group the markers and add them to the map
-        var group = L.featureGroup(this.markers).addTo(this.map);
+        this.markersGroup = L.featureGroup(this.markers).addTo(this.map);
         // Fit bounds to see all the markers
-        this.map.fitBounds(group.getBounds());
+        this.map.fitBounds(this.markersGroup.getBounds());
       } else {
         // TO-DO: notification => no markers with the selected parameters
         console.log('no markers with the selected parameters');
@@ -86,14 +91,9 @@
      * Remove cartodb layer and sublayers
      */
     remove: function() {
-      if (this.markers) {
-        _.compact(_.map(this.markers, function(marker){
-          marker.off('mouseover')
-                .off('mouseout')
-                .off('click');
-          this.map.removeLayer(marker);
-        }.bind(this)));
-        this.markers = null;
+      if (this.markersGroup) {
+        this.map.removeLayer(this.markersGroup);
+        this.markersGroup = null;
       } else {
         console.info('There aren\'t markers.');
       }
@@ -102,7 +102,7 @@
     getSize: function(value) {
       var constant = 20,
           multiplier = 10,
-          size = 10;
+          size = 16;
 
       if (value) {
         size = Math.round(constant + (Math.log(value) * multiplier));
@@ -171,46 +171,51 @@
      * - _onMouseclick
      */
     _onMouseover: function(e) {
-      // var pos = this.map.latLngToContainerPoint(e.target._latlng);
-      // var data = e.target.options.data;
-      // e.target.bringToFront();
-      // this.tooltipEl
-      //   .css({
-      //     left: pos.x,
-      //     top: pos.y
-      //   })
-      //   .html(this.tooltipTpl(data))
-      //   .removeClass()
-      //   .addClass('m-location-tooltip -active -'+data.category);
+      var pos = this.map.latLngToContainerPoint(e.target._latlng);
+      var data = e.target.options.data;
+
+      this.tooltipEl
+        .css({
+          left: pos.x,
+          top: pos.y
+        })
+        .html(this.tooltipTpl(data))
+        .addClass('-active');
+
     },
 
     _onMouseout: function(e) {
-      // this.tooltipEl
-      //   .html('')
-      //   .removeClass()
-      //   .removeClass('-active');
+      this.tooltipEl
+        .html('')
+        .removeClass('-active');
     },
 
     _onMouseclick: function(e) {
+      // Remove the tooltip if it was openend
+      this.tooltipEl
+        .html('')
+        .removeClass('-active');
+
       var data = e.target.options.data;
       
       if (data.type == 'region') {
-        Backbone.Events.trigger('params:update', {
-          'regions[]': data.iso
+        Backbone.Events.trigger('filters:update', {
+          'regions[]': data.location_iso
         });
       }
 
       if (data.type == 'country') {
-        Backbone.Events.trigger('params:update', {
+        Backbone.Events.trigger('filters:update', {
           // Should we set the regions to null?
           // 'regions[]': null,
           'countries[]': data.location_id
         });
       }
 
-      if (data.type == 'project') {
-        //TO-DO: Go to project
-        console.log('TO-DO: Go to project');
+      if (data.type == 'point') {
+        var path = '/'+data.path+'/';
+        // And events??
+        window.location = path + data.location_id
       }      
     },
 
