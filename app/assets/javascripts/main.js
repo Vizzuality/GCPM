@@ -32,6 +32,8 @@
       this.listenTo(this.router, 'route:network', this.userPage);
       // HACK TODO => move this out
       new App.View.AddNewProject();
+
+      new App.View.Notice();
       // Listening magic links
       App.Events.on('remote:load', this.replaceContent);
 

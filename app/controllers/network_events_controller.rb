@@ -20,7 +20,7 @@ class NetworkEventsController < ApplicationController
 
   def update
     if @event.update(event_params)
-      redirect_to user_event_path(@user, @event), notice: 'Event succesfully updated.'
+      redirect_to user_path(@user, type: 'events'), notice: 'Event succesfully updated.'
     else
       render :edit, notice: "Event can't be updated."
     end

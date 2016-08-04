@@ -7,7 +7,6 @@ class NetworkProjectsController < ApplicationController
   before_action :set_selection,    only: [:new, :create, :edit, :update]
 
   def show
-    @events = Event.all
   end
 
   def edit
@@ -19,7 +18,7 @@ class NetworkProjectsController < ApplicationController
 
   def update
     if @project.update(project_params)
-      redirect_to user_project_path(@user, @project), notice: 'Project succesfully updated.'
+      redirect_to user_path(@user, type: 'projects'), notice: 'Project succesfully updated.'
     else
       render :edit, notice: "Project can't be updated."
     end

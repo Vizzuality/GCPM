@@ -67,7 +67,7 @@
       this.renderChosen();
       this.renderPickADate();
 
-      
+
       return this;
     },
 
