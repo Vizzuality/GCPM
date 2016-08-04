@@ -1,7 +1,6 @@
 select
 count(distinct(events.id)),
 countries.region_name as location_name,
-events.title as title,
 countries.region_centroid as centroid,
 countries.region_iso as iso,
 'region' as type
@@ -20,4 +19,4 @@ where 1=1
 <% if @params[:end_date] %>
   and (events.end_date < date(<%= quote @params[:end_date] %>))
 <% end %>
-group by location_name, title, centroid, iso
+group by location_name, centroid, iso

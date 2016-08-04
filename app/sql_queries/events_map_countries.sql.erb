@@ -1,9 +1,9 @@
 select
 count(distinct(events.id)),
-events.title as title,
 countries.country_name as location_name,
 countries.country_centroid as centroid,
 countries.country_iso_3 as iso,
+countries.id as location_id,
 'country' as type
 from events
 inner join countries on events.country = countries.country_name
@@ -20,5 +20,5 @@ where 1=1
 <% if @params[:end_date] %>
   and (events.end_date < date(<%= quote @params[:end_date] %>))
 <% end %>
-group by title, location_name, centroid, iso
+group by location_id, location_name, centroid, iso
 
