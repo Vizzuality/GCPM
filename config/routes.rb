@@ -32,10 +32,12 @@ Rails.application.routes.draw do
       resources :cancer_types,  only: [:index, :show], path: '/cancer-types'
       resources :map,           only: [:index]
       resources :projects,      only: :update do
-        resources :memberships, only: [:index, :update, :destroy]
+        resources :memberships, only: [:index, :create, :destroy]
+        post '/memberships/:id', to: 'memberships#update'
       end
 
       resources :investigators, only: [:index, :show, :update, :create]
+      get 'check_research_unit', to: 'memberships#check_research_unit'
 
       get 'lists/countries',    to: 'lists#countries'
       get 'lists/cancer-types', to: 'lists#cancer_types'

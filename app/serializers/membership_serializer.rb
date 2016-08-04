@@ -7,4 +7,11 @@ class MembershipSerializer < ActiveModel::Serializer
   def address
     object.address
   end
+
+  def investigator
+    investigator        = {}
+    investigator[:id]   = object.investigator.id
+    investigator[:name] = object.investigator.name
+    investigator
+  end
 end
