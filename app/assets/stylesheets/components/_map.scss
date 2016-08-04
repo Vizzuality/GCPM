@@ -7,6 +7,10 @@
   height: 600px;
   z-index: 1;
 
+  &.leaflet-container{
+    background-color: $color-4;
+  }
+
   .leaflet-control-attribution {
     display: none;
 
