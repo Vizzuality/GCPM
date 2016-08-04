@@ -1,11 +1,11 @@
 <div class="c-section-intro">
-	<%= form.input :title, label: @project.title.presence || "Project title_", label_html: { class: 'c-title -bigger -bold -hide-edited' }, :required => false, input_html: { class: '-editable'}, value: @project.title.presence || "Project title_"  %>
+	<%= form.input :title, label: @project.title.presence || "Project title_", label_html: { class: 'c-title -bigger -bold -hide-edited' }, :required => false, input_html: { class: '-editable'}, placeholder: "Project title_", value: @project.title.presence || "Project title_"  %>
 </div>
 <div class="c-section-container">
 	<div class="c-section-half -left">
 		<h3 class="c-section-title">Description</h3>
 
-		<%= form.input :summary, label: "#{@project.summary}", label_html: { class: '-hide-edited' }, :required => false, input_html: {value: "#{@project.summary}", class: '-editable', rows: '40'} %>
+		<%= form.input :summary, label: "#{@project.summary}", label_html: { class: '-hide-edited' }, :required => false, input_html: {value: "#{@project.summary}", class: '-editable', rows: '40', placeholder: "Summary"} %>
 	</div>
 	<div class="c-section-half">
 		<div class="c-pickadate">

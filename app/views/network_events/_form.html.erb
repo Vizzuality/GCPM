@@ -1,10 +1,10 @@
 <div class="c-section-intro">
-  <%= form.input :title, label: @event.title.presence || "Event title_", label_html: { class: 'c-title -bigger -bold -hide-edited' }, :required => false, input_html: { class: '-editable'} %>
+  <%= form.input :title, label: @event.title.presence || "Event title_", label_html: { class: 'c-title -bigger -bold -hide-edited' }, :required => false, input_html: { class: '-editable', placeholder: "Event title_" } %>
 </div>
 <div class="c-section-container">
   <div class="c-section-half -left">
     <h3 class="c-section-title">Description</h3>
-    <%= form.input :description, label: "#{@event.description}", label_html: { class: '-hide-edited' }, :required => false, input_html: {value: "#{@event.description}", class: '-editable', rows: '40'} %>
+    <%= form.input :description, label: "#{@event.description}", label_html: { class: '-hide-edited' }, :required => false, input_html: {value: "#{@event.description}", class: '-editable', rows: '40', placeholder: "Description"} %>
   </div>
 </div>
 
