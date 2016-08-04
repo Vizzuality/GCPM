@@ -92,7 +92,15 @@
       AUTH_TOKEN = 'X18fTWv64i4W7Dam5WeN';
       $.ajax({
         url: 'http://192.168.1.69:3000/api/projects/'+PROJECT_ID+'/memberships/'+id+'?token='+AUTH_TOKEN,
-        method: 'PUT'
+        method: 'PUT',
+        data: {'membership': {'membership_type':'main'}}
+      });
+      target.siblings().each(function(i, el){
+        $.ajax({
+          url: 'http://192.168.1.69:3000/api/projects/'+PROJECT_ID+'/memberships/'+$(el).data('id')+'?token='+AUTH_TOKEN,
+          method: 'PUT',
+          data: {'membership': {'membership_type':'secondary'}}
+        });
       });
     },
 
@@ -120,7 +128,7 @@
             row     +=    '<span class="circle"></span>';
           }
           row     +=  '</span>';
-          row     +='</div>';
+          row     += '</div>';
           CONTAINER.innerHTML = CONTAINER.innerHTML + row;
 
         }
