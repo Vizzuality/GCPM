@@ -17,14 +17,15 @@ class MapController < ApplicationController
     # Projects
     #Limit of projects shown at the beginning and added when show more button clicked
     @projects  = Project.fetch_all(projects_params).order('created_at DESC').limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
-    @events  = Event.fetch_all().order('created_at DESC').limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
 
     # Events
     #Limit of events shown at the beginning and added when show more button clicked
     # @events  = Event.order('created_at DESC').limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
+    @events  = Event.fetch_all().order('created_at DESC').limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
+
 
     @current_type = params[:type] || 'projects'
-    @filters = ['projects', 'people', 'events']
+    @filters = ['projects', 'events']
 
     respond_with(@projects)
   end

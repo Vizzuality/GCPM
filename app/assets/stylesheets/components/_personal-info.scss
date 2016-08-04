@@ -19,7 +19,12 @@
 
 .c-personal-info {
   display: flex;
-  flex-flow: row;
+  flex-flow: column;
+  align-items: center;
+
+  @media #{$mq-tablet} {
+    flex-flow: row;
+  }
 
   .c-user-profile-picture {
     margin-right: 38px;
@@ -29,6 +34,11 @@
     display: flex;
     flex-flow: column;
     flex-grow: 1;
+    width: 100%;
+
+    @media #{$mq-tablet} {
+      width: initial;
+    }
 
     .c-title {
       margin-bottom: 20px !important;

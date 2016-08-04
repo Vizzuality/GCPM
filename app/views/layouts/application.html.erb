@@ -15,7 +15,11 @@
     <% if alert %>
       <%= alert %>
     <% else %>
-      <%= notice %>
+      <% if notice %>
+        <div class="c-notice">
+          <%= notice %>
+        </div>
+      <% end %>
     <% end %>
     <%= yield %>
     <%= render "shared/footer" %>
