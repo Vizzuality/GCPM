@@ -34,6 +34,8 @@ Rails.application.routes.draw do
 
       get 'lists/countries',    to: 'lists#countries'
       get 'lists/cancer-types', to: 'lists#cancer_types'
+      get 'map/projects/:id',   to: 'map#show_project'
+      get 'map/events/:id',     to: 'map#show_event'
     end
   end
 
