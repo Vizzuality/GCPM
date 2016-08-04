@@ -95,13 +95,13 @@
       new App.View.MapMenu();
 
       new App.View.MapTypes({
-        params: this.params        
+        params: this.params
       });
-      
+
       new App.View.MapFilters({
         params: this.params
       });
-      
+
       new App.View.MapLayers();
     },
 
