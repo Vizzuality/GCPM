@@ -12,6 +12,18 @@
 		}
 
 	}
+	.f-user-manual {
+		width: 100%;
+	    display: block;
+	    background: rgba(104,41,155,.1);
+	    height: 40px;
+	    line-height: 40px;
+	    padding: 0 0 0 50px;
+	    text-transform: uppercase;
+	    color: #0f3046;
+	    font-size: 12px;
+	    font-weight: $font-weight-bold;
+	}
 	.c-section-container {
 	  	display: table;
 	  	border-bottom: 1px solid rgba(0, 0, 0, .15);
