@@ -1,5 +1,5 @@
 <div class="c-section-intro">
-	<%= form.input :title, label: "#{@project.title}", label_html: { class: 'c-title -bigger -bold -hide-edited' }, :required => false, input_html: { class: '-editable', value: "#{@project.title}"}  %>
+	<%= form.input :title, label: @project.title.presence || "Project title_", label_html: { class: 'c-title -bigger -bold -hide-edited' }, :required => false, input_html: { class: '-editable'}, value: @project.title.presence || "Project title_"  %>
 </div>
 <div class="c-section-container">
 	<div class="c-section-half -left">
