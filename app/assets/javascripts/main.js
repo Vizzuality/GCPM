@@ -159,6 +159,9 @@
       var layersCollection = new App.Collection.Layers();
       var mapView = new App.View.Map({
         layers: layersCollection,
+        options: {
+          basemap: 'customDetail'
+        }
       });
 
       layersCollection.toggleLayers([

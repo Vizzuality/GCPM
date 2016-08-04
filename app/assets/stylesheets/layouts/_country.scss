@@ -4,7 +4,7 @@
     height: 900px;
 
     .intro-info {
-      background: linear-gradient(to bottom, transparent, $color-4);
+      background: linear-gradient(to bottom, rgba($color-4, 0) 0%, darken($color-4, 10%) 50%);
     }
 
     .c-section-menu {
