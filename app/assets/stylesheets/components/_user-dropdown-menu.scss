@@ -43,7 +43,8 @@
     display: flex;
     flex-flow: column;
     align-items: flex-start !important;
-    padding: 20px 28px !important;
+    // padding: 20px 28px !important;
+    padding: 15px 0 !important;
     border-bottom: 1px solid rgba(0, 0, 0, 0.10);
     color: $color-2;
     background-color: $color-3;
@@ -54,15 +55,17 @@
 
     &.-color-2 > .item > .item-link { color: $color-1; }
 
-    & .item {
+    > .item {
+      width: 100%;
+      padding: 0;
       margin: 0;
-      margin-bottom: 30px;
 
-      &:last-child {
-        margin-bottom: 0;
-      }
+      > .item-link {
+        display: inline-block;
 
-      & .item-link {
+        width: 100%;
+        padding: 15px 10px 15px 30px;
+
         font-family: $font-family-1;
         line-height: $font-size-x-small;
         font-size: $font-size-x-small;
