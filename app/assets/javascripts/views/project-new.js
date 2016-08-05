@@ -169,7 +169,21 @@
         method: 'GET',
         success: function(data) {
           var selectInvestigators = document.createElement("SELECT");
+          selectInvestigators.dataset.placeholder = 'Select or add investigator';
           for (var i = 0; i < data.length; i++) {
+            if (i == 0) {
+              // clean the first option
+              var option = document.createElement("OPTION");
+              option.classList.add('add-new-investigator');
+              selectInvestigators.appendChild(option); 
+              // add the `Add new` option first
+              var option_new = document.createElement("OPTION");
+              option_new.innerText = 'Add new';
+              option_new.value = '-1';
+              option_new.classList.add('add-new-investigator');
+              selectInvestigators.appendChild(option_new); 
+              continue;
+            }
             var option = document.createElement("OPTION");
             option.innerText = data[i].name;
             option.value = data[i].id;
@@ -187,7 +201,8 @@
             width: '100%',
             allow_single_deselect: true,
             inherit_select_classes: true,
-            no_results_text: "Oops, nothing found!"
+            no_results_text: "Oops, nothing found!",
+            placeholder_text_single: "Select or add investigator"
           });
         }
       });
