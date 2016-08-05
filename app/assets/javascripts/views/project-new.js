@@ -70,7 +70,7 @@
     },
 
     checkRelations: function() {
-      if (location.search.includes('relations')) {
+      if (location.search.includes('relations') || location.pathname.includes('/edit')) {
         var relations = document.getElementById('relations');
         relations.classList.remove('-hide-staff');
         relations.scrollIntoView();
