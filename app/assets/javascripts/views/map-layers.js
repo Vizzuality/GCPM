@@ -6,9 +6,11 @@
 
   App.View.MapLayers = App.Helper.Tooltip.extend({
 
-    el: '#map-layers-tooltip',
+    el: '#map-layers',
 
-    // map-layers
+    events: {
+      'click .btn-map-layer' : 'onClickLayer'
+    },
 
     initialize: function() {
       // Initialize Parent
@@ -17,22 +19,30 @@
       this.listeners();
     },
 
+
     listeners: function() {
-      // Doesn't work but we don't need it as we binded the close function to
-      // clicks on the document
-      // Backbone.Events.on('MapMenu/action', this.hide.bind(this));
       Backbone.Events.on('Layers/toggle', function(e) {
-        if(!this.initiator) {
-          this.initiator = e.target;
-          var buttonClientRect = e.currentTarget.getBoundingClientRect();
-          this.$el.css({
-            top:  (buttonClientRect.top + buttonClientRect.height) + 'px',
-            left: (buttonClientRect.left + buttonClientRect.width / 2) + 'px'
-          });
-        }
+
+        var $target = $(e.currentTarget);
+        var offsets = $target.offset();
+
+        this.$el.css({
+          top: offsets.top + $target.innerHeight() + 'px',
+          left: offsets.left + 'px'
+        });
 
         this.toggle();
       }.bind(this))
+    },
+
+
+    /**
+     * UI EVENTS
+     * - onClickLayer
+     */
+    onClickLayer: function(e) {
+      e & e.preventDefault();
+      console.log($(e.currentTarget).data('layer'));
     },
 
     // render: function() {
