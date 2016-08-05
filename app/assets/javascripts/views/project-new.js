@@ -58,6 +58,7 @@
       // Initialize Parent
       this.constructor.__super__.initialize.apply(this);
       // Inits
+      this.checkRelations();
       this.render();
     },
 
@@ -65,10 +66,16 @@
       this.fillPregenerated();
       this.renderChosen();
       this.renderPickADate();
-
-
       return this;
     },
+
+    checkRelations: function() {
+      if (location.search.includes('relations')) {
+        var relations = document.getElementById('relations');
+        relations.classList.remove('-hide-staff');
+        relations.scrollIntoView();
+      }
+    },  
 
     removeRelation: function(ev) {
       var target = $(ev.target).parent().parent();
