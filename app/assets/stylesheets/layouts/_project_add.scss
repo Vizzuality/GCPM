@@ -36,6 +36,9 @@
 	  		width: 100%;
 			padding: 50px;
 	  	}
+	  	&.-hide-staff {
+	  		display: none;
+	  	}
   	}
 	.-m-edited .chosen-single span {
 		color: rgba($color-2,1);
