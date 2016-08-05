@@ -104,6 +104,7 @@
       });
 
       new App.View.MapLayers();
+      new App.View.MapSortby();
     },
 
     countriesPage: function() {

@@ -4,12 +4,12 @@
 
   App.View = App.View || {};
 
-  App.View.MapLayers = App.Helper.Tooltip.extend({
+  App.View.MapSortby = App.Helper.Tooltip.extend({
 
-    el: '#map-layers',
+    el: '#map-sortby',
 
     events: {
-      'click .btn-map-layer' : 'onClickLayer'
+      'click .btn-map-sortby' : 'onClickSortby'
     },
 
     initialize: function() {
@@ -21,7 +21,7 @@
 
 
     listeners: function() {
-      App.Events.on('Layers/toggle', function(e) {
+      App.Events.on('Sortby/toggle', function(e) {
 
         var $currentTarget = $(e.currentTarget);
         var offsets = $currentTarget.offset();
@@ -40,11 +40,11 @@
 
     /**
      * UI EVENTS
-     * - onClickLayer
+     * - onClickSortby
      */
-    onClickLayer: function(e) {
+    onClickSortby: function(e) {
       e & e.preventDefault();
-      this.model.set('layer', $(e.currentTarget).data('layer'));
+      this.model.set('sortby', $(e.currentTarget).data('sortby'));
       console.log(this.model.toJSON());
     },
 
