@@ -64,8 +64,8 @@
             data: {
               type: marker.type,
               path: this.options.type,
-              location_id: marker.project || marker.location_id,
-              location_name: marker.project_title || marker.title || marker.location_name,
+              location_id: marker.project || marker.event || marker.location_id,
+              location_name: marker.title || marker.location_name,
               location_iso: marker.iso
             }
           }).on('mouseover', this._onMouseover.bind(this))

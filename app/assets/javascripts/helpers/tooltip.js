@@ -6,13 +6,16 @@
 
   App.Helper.Tooltip = Backbone.View.extend({
 
-    model: new (Backbone.Model.extend({
-      defaults: {
-        hidden: true
-      }
-    })),
-
     initialize: function() {
+      // The model must be initialized here in a parent view, if we don't do that all the child views will share the same model.
+      // Yes I know, a little bit crazy
+
+      this.model = new (Backbone.Model.extend({
+        defaults: {
+          hidden: true
+        }
+      })),
+
       // All the methods that has _ is because they belong to the Parent View
       this._cache();
       this._listeners();
@@ -66,16 +69,15 @@
      * - unsetBindings
      */
     setBindings: function() {
-      this.$document.on('click', _.bind(function(e) {
-        if(e.target !== this.initiator && this.el !== e.target &&
-          !$.contains(this.el, e.target)) {
+      this.$document.on('click.tooltip'+this.cid, function(e) {
+        if(!this.el.contains(e.target) && e.target !== this.model.get('currentTarget')) {
           this.hide();
         }
-      },this));
+      }.bind(this));
     },
 
     unsetBindings: function() {
-      this.$document.off('click');
+      this.$document.off('click.tooltip'+this.cid);
     }
 
   });

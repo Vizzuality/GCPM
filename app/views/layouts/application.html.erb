@@ -17,7 +17,13 @@
     <% else %>
       <% if notice %>
         <div class="c-notice">
-          <%= notice %>
+          <div class="container">
+            <%= notice %>
+            <div id="js-close" class="close-btn">
+              <span></span>
+              <span></span>
+            </div>
+          </div>
         </div>
       <% end %>
     <% end %>

@@ -63,6 +63,23 @@
             return options.inverse(this);
         }
       });
+    },
+
+    getTimelinePercentage: function(startDate, endDate) {
+      var current = new Date().getTime();
+      var start = new Date(startDate).getTime();
+      var end = new Date(endDate).getTime();
+      var percentage = 0;
+
+      if ( current > end ) {
+        percentage = 100;
+      } else if (current < start ) {
+        percentage = 0;
+      } else {
+        percentage = ((current - start) * 100 ) / ( end - start );
+      }
+
+      return percentage;
     }
   }
 
