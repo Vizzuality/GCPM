@@ -50,8 +50,12 @@
      */
     open: function(htmlContent) {
       this.currentContent = htmlContent || this.currentContent;
-      this.render();
-      this.el.classList.add('-open');
+      if (!this.currentContent) {
+        console.error('"content" attribute should exist.');
+      } else {
+        this.render();
+        this.el.classList.add('-open');
+      }
     },
 
     /**
@@ -66,12 +70,15 @@
      * Render html in element
      */
     render: function() {
-      if (!this.currentContent) {
-        console.error('"content" attribute should exist.');
-      } else if (typeof this.currentContent !== 'string') {
-        console.error('"content" attribute should be string.');
-      } else {
+      if (typeof this.currentContent === 'string') {
+        // Rendering string or html
         this.$el.html(this.template({ content: this.currentContent }));
+      } else if (this.currentContent instanceof Element) {
+        // Rendering DOM element
+        this.$el.html(this.template())
+          .find('.modal-wrapper').html(this.currentContent);
+      } else {
+        console.error('"content" attribute should be string or DOM element.');
       }
       return this;
     },

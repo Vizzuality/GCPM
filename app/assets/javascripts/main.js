@@ -40,7 +40,6 @@
       // Update params
       App.Events.on('filters:update', this.publishParams.bind(this));
       App.Events.on('filters:reset', this.resetParams.bind(this));
-
     },
 
     start: function() {
