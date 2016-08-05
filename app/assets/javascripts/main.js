@@ -28,7 +28,7 @@
       this.listenTo(this.router, 'route:countries', this.countriesPage);
       this.listenTo(this.router, 'route:country', this.countryPage);
       this.listenTo(this.router, 'route:event', this.eventInfo);
-      this.listenTo(this.router, 'route:project', this.projectDetail);
+      this.listenTo(this.router, 'route:project', this.projectDetailPage);
       this.listenTo(this.router, 'route:network', this.userPage);
       this.listenTo(this.router, 'route:editproject', this.editProjectPage);
 
@@ -159,7 +159,7 @@
         layers: layersCollection,
         options: {
           basemap: 'customDetail',
-          apiUrl: '/api/map/events/'+EVENT_ID          
+          apiUrl: '/api/map/events/'+EVENT_ID
         }
       });
 
@@ -168,7 +168,7 @@
       ]);
     },
 
-    projectDetail: function() {
+    projectDetailPage: function() {
       var params = this.router.getParams();
 
       // Map view
@@ -184,6 +184,7 @@
       layersCollection.toggleLayers([
         params.type || 'org-project-markers'
       ]);
+      new App.View.ProjectDetail();
     },
 
     /**
