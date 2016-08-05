@@ -19,6 +19,7 @@
     initialize: function() {
       this.$content = $('#content');
       this.router = new App.Router();
+      this.initCommonTools();
       this.initCommonViews();
       this.listeners();
     },
@@ -63,6 +64,10 @@
       $(e.target).addClass("-active");
     },
 
+    initCommonTools: function() {
+      App.Helper.Utils.handlebarsHelpers();
+    },
+
     initCommonViews: function() {
       new App.View.MobileHeader();
       new App.View.Notice();
@@ -93,7 +98,9 @@
         params: this.params
       });
 
-      new App.View.MapMenu();
+      new App.View.MapMenu({
+        params: this.params
+      });
 
       new App.View.MapTypes({
         params: this.params
