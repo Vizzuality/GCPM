@@ -9,10 +9,18 @@
 
     el: '.c-notice',
 
+    events: {
+      'click #js-close' : '_closeNotice'
+    },
+
     initialize: function() {
       if (this.el) {
         window.setTimeout(this._hideNotice.bind(this), 3000);
       }
+    },
+
+    _closeNotice: function() {
+      this.$el.remove();
     },
 
     _hideNotice: function() {
