@@ -28,9 +28,15 @@
 
         this.model.set('currentTarget', e.currentTarget);
 
+        // Position tooltip
         this.$el.css({
-          top: offsets.top + $currentTarget.innerHeight() + 'px',
-          left: offsets.left + 'px'
+          top: offsets.top + $currentTarget.innerHeight(),
+          left: offsets.left
+        });
+
+        // Position arrow
+        this.$el.find('.tooltip-arrow').css({
+          left: $currentTarget.innerWidth()/2
         });
 
         this.toggle();

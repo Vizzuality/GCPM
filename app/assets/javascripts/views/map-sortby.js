@@ -30,7 +30,12 @@
 
         this.$el.css({
           top: offsets.top + $currentTarget.innerHeight() + 'px',
-          left: offsets.left + 'px'
+          left: offsets.left + $currentTarget.innerWidth() + 'px'
+        });
+
+        // Position arrow
+        this.$el.find('.tooltip-arrow').css({
+          right: $currentTarget.innerWidth()/2
         });
 
         this.toggle();

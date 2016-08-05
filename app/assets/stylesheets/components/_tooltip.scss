@@ -32,10 +32,11 @@
     transition: transform .3s, opacity .2s, visibility 0s;
   }
 
-  &:before {
+  .tooltip-arrow {
     content: '';
+    display: inline-block;
     position: absolute;
-    top: 0px; /* 14 / sqrt(2) = 20 */
+    top: 0px;
     left: 50%;
     transform: translate(-50%, -50%) rotate(45deg);
     width:  14px;
@@ -48,9 +49,9 @@
   &.-tip-left {
     transform: translate(0px, -10px);
 
-    &:before {
-      left: 45px;
-      transform: translate(-50%, -50%) rotate(45deg);
+    .tooltip-arrow {
+      // 8px is (svg-width + svg-margin)/2
+      transform: translate(calc(-50% + 8px), -50%) rotate(45deg);
     }
 
     &.-opened {
@@ -59,16 +60,16 @@
   }
 
   &.-tip-right {
-    transform: translate(calc(30px - 100%), -10px);
+    transform: translate(-100%, -10px);
 
-    &:before {
+    .tooltip-arrow {
       left: auto;
-      right: 0;
-      transform: translate(-50%, -50%) rotate(45deg);
+      // 8px is (svg-width + svg-margin)/2
+      transform: translate(calc(50% + 8px), -50%) rotate(45deg);
     }
 
     &.-opened {
-      transform: translate(calc(30px - 100%), 0px);
+      transform: translate(-100%, 0px);
     }
   }
 
