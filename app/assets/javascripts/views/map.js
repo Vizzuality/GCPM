@@ -53,7 +53,7 @@
       App.Events.on('params:update', function(params){
         this.params.clear().set(params, { silent: true });
         this.setMarkers();
-      }.bind(this));      
+      }.bind(this));
     },
 
 
@@ -129,11 +129,12 @@
         type: this.params.get('type') || 'projects',
         apiUrl: this.options.apiUrl
       });
+
       markers
         .fetch({
           data: this.params.toJSON()
         })
-        .done(function(data){
+        .done(function(){
           var options = {
             markers: markers.toJSON(),
             type: this.params.get('type') || 'projects'

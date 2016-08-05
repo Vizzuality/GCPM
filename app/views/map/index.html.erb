@@ -1,14 +1,14 @@
 <div class="c-section-intro">
   <button id="btn-clear-filters" class="btn-reset-filters c-button -filled -inverse">Clear filters</button>
 	<div id="map" class="map c-map -map"></div>
-  
+
   <div id="map-tooltip" class="c-map-tooltip"></div>
 
 	<ul id="map-types" class="c-section-menu">
 	   <% @filters.each do |filter| %>
       <% @class = !params['type'] && filter == "projects" ? "-active" : active_param?('type', filter) %>
       <li>
-        <a class="js-btn-mapmenu-type <%= @class %>" href="#" data-type="<%= filter %>"><%= t (filter) %></a>        
+        <a class="js-btn-mapmenu-type <%= @class %>" href="#" data-type="<%= filter %>"><%= t (filter) %></a>
       </li>
     <% end %>
 	</ul>
@@ -18,7 +18,7 @@
 <div id="map-layers-tooltip" class="c-tooltip -tip-left"></div>
 
 <!-- c-map-menu -->
-<%= render partial: "map-menu" %>
+<div id="map-menu" class="c-map-menu wrapper" data-turbolinks-permanent></div>
 
 <!-- c-map-filters -->
 <%= render partial: "map-filters" %>

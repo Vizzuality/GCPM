@@ -43,19 +43,19 @@
   }
 
   // Colors
-  &.-color-1 { 
-    color: $color-1;
-    &:hover { color: lighten($color-1, 10%)}
+  &.-color-1 {
+    fill: $color-1;
+    &:hover { fill: lighten($color-1, 10%)}
   }
-  
-  &.-color-2 { 
-    color: $color-6;
-    &:hover { color: lighten($color-6, 10%)}
+
+  &.-color-2 {
+    fill: $color-6;
+    &:hover { fill: lighten($color-6, 10%)}
   }
-  
-  &.-color-3 { 
-    color: $color-4;
-    &:hover { color: lighten($color-4, 10%)}
+
+  &.-color-3 {
+    fill: $color-4;
+    &:hover { fill: lighten($color-4, 10%)}
   }
 }
 
