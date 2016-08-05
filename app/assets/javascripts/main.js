@@ -68,6 +68,7 @@
       new App.View.MobileHeader();
       new App.View.Notice();
       new App.View.UserDropdownMenu();
+      new App.View.Modal({ el: '#modalView' });
     },
 
     getContent: function() {
