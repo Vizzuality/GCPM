@@ -14,7 +14,7 @@
     getParams: function(paramString) {
       var params = {};
       paramString.split('&').forEach(function(pair) {
-        pair = pair.split('=');  
+        pair = pair.split('=');
         var key = decodeURIComponent(pair[0]),
             val = decodeURIComponent(pair[1]),
             val = val ? val.replace(/\++/g,' ').trim() : '';
@@ -29,13 +29,30 @@
           if ("function" !== typeof params[key].push) {
             params[key] = [params[key]];
           }
-          
+
           params[key].push((!isNaN(val)) ? Number(val) : val || null);
         }
-      
+
       });
 
-      return params;    
+      return params;
+    },
+
+    getTimelinePercentage: function(startDate, endDate) {
+      var current = new Date().getTime();
+      var start = new Date(startDate).getTime();
+      var end = new Date(endDate).getTime();
+      var percentage = 0;
+
+      if ( current > end ) {
+        percentage = 100;
+      } else if (current < start ) {
+        percentage = 0;
+      } else {
+        percentage = ((current - start) * 100 ) / ( end - start );
+      }
+
+      return percentage;
     }
   }
 

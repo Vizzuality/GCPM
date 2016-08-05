@@ -9,26 +9,33 @@
 
     el: '#content',
 
-    initialize: function() {
-      this.setTImelineBar();
+    cache: function() {
+      this.$startDate = $('.period .start-date');
+      this.$endDate = $('.period .end-date');
+      this.$bar = $('.c-period-bar .bar');
+      this.$filled = $('.bar .filled');
     },
 
-    setTImelineBar: function() {
-      var current = new Date().getTime();
-      var percentage = 0;
+    initialize: function() {
+      this.cache();
+      this.setTimelineBar();
+    },
 
+    setTimelineBar: function() {
       if (PROJECT_START_DATE !== '0' && PROJECT_END_DATE !== '0') {
-        var start = new Date(PROJECT_START_DATE).getTime();
-        var end = new Date(PROJECT_END_DATE).getTime();
-
-        var percentage = ((current - start) * 100 ) / ( end - start );
-
+        var percentage = App.Helper.Utils.getTimelinePercentage(PROJECT_START_DATE, PROJECT_END_DATE);
+        this.$filled.width(percentage + '%');
       } else {
-        /* In case one of the dates is not delivered */
-        percentage = 50;
-      }
+        this.$bar.addClass('-hidden');
 
-      $('.bar .filled').width(percentage + '%');
+        if (PROJECT_START_DATE === '0') {
+          this.$startDate.addClass('-hidden');
+          this.$endDate.css('text-align', 'left');
+        }
+        if (PROJECT_END_DATE === '0') {
+          this.$endDate.addClass('-hidden');
+        }
+      }
     }
 
   });
