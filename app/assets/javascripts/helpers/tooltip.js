@@ -66,16 +66,15 @@
      * - unsetBindings
      */
     setBindings: function() {
-      this.$document.on('click', _.bind(function(e) {
-        if(e.target !== this.initiator && this.el !== e.target &&
-          !$.contains(this.el, e.target)) {
+      this.$document.on('click.tooltip', function(e) {
+        if(!this.el.contains(e.target) && e.target !== this.model.get('currentTarget')) {
           this.hide();
         }
-      },this));
+      }.bind(this));
     },
 
     unsetBindings: function() {
-      this.$document.off('click');
+      this.$document.off('click.tooltip');
     }
 
   });

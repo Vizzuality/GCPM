@@ -23,11 +23,13 @@
     listeners: function() {
       Backbone.Events.on('Layers/toggle', function(e) {
 
-        var $target = $(e.currentTarget);
-        var offsets = $target.offset();
+        var $currentTarget = $(e.currentTarget);
+        var offsets = $currentTarget.offset();
+
+        this.model.set('currentTarget', e.currentTarget);
 
         this.$el.css({
-          top: offsets.top + $target.innerHeight() + 'px',
+          top: offsets.top + $currentTarget.innerHeight() + 'px',
           left: offsets.left + 'px'
         });
 
