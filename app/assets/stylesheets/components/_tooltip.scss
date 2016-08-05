@@ -1,12 +1,12 @@
 /**
  *
  *  <div class="c-tooltip">
- *  	{content to hold the tooltip}
- *  	{content}
+ *    {content to hold the tooltip}
+ *    {content}
  *  </div>
  *
  *  Modifiers:
- *  	- "-opened":     open the tooltip (hidden by default)
+ *    - "-opened":     open the tooltip (hidden by default)
  *    - "-tip-center": tip at the center - DEFAULT, optional class
  *    - "-tip-right":  tip at the right
  *    - "-tip-left":   tip at the left
@@ -19,8 +19,8 @@
   padding: 20px;
   transform: translate(-50%, 0px);
   background: $color-3;
-  box-shadow: 0 2px 7px 0 rgba(0, 0, 0, .1);
-  z-index: 1;
+  box-shadow: $shadow-2;
+  z-index: 2;
   visibility: hidden;
   opacity: 0;
   transition: transform .3s, opacity .2s, visibility 0s .3s;
@@ -35,40 +35,61 @@
   &:before {
     content: '';
     position: absolute;
-    top: calc(-20px + 8px); /* 28 / sqrt(2) = 20 */
+    top: 0px; /* 14 / sqrt(2) = 20 */
     left: 50%;
-    transform: translate(-50%, 0) rotate(45deg);
-    width:  28px;
-    height: 28px;
-    border-top:  14px solid $color-3;
-    border-left: 14px solid $color-3;
+    transform: translate(-50%, -50%) rotate(45deg);
+    width:  14px;
+    height: 14px;
+    background: $color-3;
+    box-shadow: -1px -1px 0px rgba(0,0,0,0.1);
     z-index: -1;
   }
 
   &.-tip-left {
-    transform: translate(-30px, 0px);
+    transform: translate(0px, -10px);
 
     &:before {
-      left: 15px;
-      transform: rotate(45deg);
+      left: 45px;
+      transform: translate(-50%, -50%) rotate(45deg);
     }
 
     &.-opened {
-      transform: translate(-30px, 20px);
+      transform: translate(0px, 0px);
     }
   }
 
   &.-tip-right {
-    transform: translate(calc(30px - 100%), 0px);
+    transform: translate(calc(30px - 100%), -10px);
 
     &:before {
       left: auto;
       right: 0;
-      transform: translate(-15px, 0) rotate(45deg);
+      transform: translate(-50%, -50%) rotate(45deg);
     }
 
     &.-opened {
-      transform: translate(calc(30px - 100%), 20px);
+      transform: translate(calc(30px - 100%), 0px);
+    }
+  }
+
+  ul {
+    li {
+      margin: 5px 0 0;
+      cursor: pointer;
+
+      &:first-child {
+        margin: 0;
+      }
+
+      &.-selected, &:hover {
+        color: $color-1;
+      }
+
+      p {
+        line-height: 1;
+        padding: 0;
+      }
+
     }
   }
 }
