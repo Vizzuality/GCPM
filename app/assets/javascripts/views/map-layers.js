@@ -45,25 +45,6 @@
       console.log($(e.currentTarget).data('layer'));
     },
 
-    // render: function() {
-    //   this.renderChosen();
-    //   this.renderPickADate();
-    //   return this;
-    // },
-    //
-    // renderChosen: function() {
-    //   this.$el.find('.chosen-select').chosen({
-    //     width: '100%',
-    //     allow_single_deselect: true,
-    //     inherit_select_classes: true,
-    //     no_results_text: "Oops, nothing found!"
-    //   });
-    // },
-    //
-    // renderPickADate: function() {
-    //   // this.$el.find('.pickadate-input').pickadate();
-    // }
-
   });
 
 })(this.App);
