@@ -2,7 +2,8 @@
 
   'use strict';
 
-  App.View = {};
+  App.View = App.View || {};
+
   App.View.Modal = Backbone.View.extend({
 
     events: {
