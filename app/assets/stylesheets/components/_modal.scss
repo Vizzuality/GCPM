@@ -89,10 +89,12 @@
 
     svg {
       fill: $color-2;
+      width: 20px;
+      height: 20px;
     }
 
-    &:hover svg { 
-      fill: lighten($color-2, 10%); 
+    &:hover svg {
+      fill: lighten($color-2, 10%);
     }
   }
 
