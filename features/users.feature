@@ -19,6 +19,7 @@ I want to register, login and edit account
     And I should have an valid auth token for "user@sample.com"
     When I follow "Logout" within ".desktop-menu .user-profile"
     Then I should see "Signed out successfully."
+    And I should have an invalid auth token for "user@sample.com"
     And I am on the home page
 
   Scenario: Password reset

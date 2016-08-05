@@ -52,7 +52,7 @@ class User < ApplicationRecord
 
   def check_authentication_token(destroy_true=nil)
     # ToDo: reset authentication_token after devise session destroy
-    if self.authentication_token.blank? #|| self.current_sign_in_at.present? && self.current_sign_in_at >= self.token_expires_at
+    if self.authentication_token.blank?
       self.authentication_token = generate_authentication_token
       set_token_expiration
     elsif destroy_true.present?
