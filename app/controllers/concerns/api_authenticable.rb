@@ -2,7 +2,7 @@ module ApiAuthenticable
   extend ActiveSupport::Concern
 
   included do
-    protect_from_forgery with: :null_session
+    protect_from_forgery with: :null_session, only: Proc.new { |c| c.request.format.json? }
     skip_before_action :verify_request
 
     def session_invalid?(object)

@@ -17,7 +17,6 @@ class ResearchUnit < ApplicationRecord
   has_many :projects,     through: :memberships
   has_one  :organization, through: :address
 
-  validates_presence_of :address_id, :investigator_id
   validates :investigator_id, uniqueness: { scope: :address_id }
 
   def self.check_id(investigator_id, address_id)
