@@ -27,7 +27,7 @@
       this.listenTo(this.router, 'route:map', this.mapPage);
       this.listenTo(this.router, 'route:countries', this.countriesPage);
       this.listenTo(this.router, 'route:country', this.countryPage);
-      this.listenTo(this.router, 'route:event', this.eventInfo);
+      this.listenTo(this.router, 'route:event', this.eventDetailPage);
       this.listenTo(this.router, 'route:project', this.projectDetailPage);
       this.listenTo(this.router, 'route:network', this.userPage);
       this.listenTo(this.router, 'route:editproject', this.editProjectPage);
@@ -155,7 +155,7 @@
       new App.View.AddNewEvent();
     },
 
-    eventInfo: function() {
+    eventDetailPage: function() {
       var params = this.router.getParams();
 
       // Map view
@@ -171,6 +171,8 @@
       layersCollection.toggleLayers([
         params.type || 'org-project-markers'
       ]);
+
+      new App.View.EventDetail();
     },
 
     projectDetailPage: function() {
@@ -189,6 +191,7 @@
       layersCollection.toggleLayers([
         params.type || 'org-project-markers'
       ]);
+
       new App.View.ProjectDetail();
     },
 
