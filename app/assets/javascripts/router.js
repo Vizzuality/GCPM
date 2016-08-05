@@ -19,7 +19,9 @@
       'projects/:id': 'project',
       'network/:id': 'network',
       'network/:id/projects/:val/edit': 'editproject',
-      'network/:id/projects/new': 'editproject'
+      'network/:id/projects/new': 'editproject',
+      'network/:id/events/new': 'editevent',
+      'network/:id/events/:val/edit': 'editevent'
     },
 
     params: new (Backbone.Model.extend()),
@@ -37,7 +39,7 @@
       App.Events.on('params:update', function(params){
         this.params.clear().set(params, { silent: true });
         this.updateUrl();
-      }.bind(this));      
+      }.bind(this));
     },
 
     /**

@@ -29,6 +29,8 @@ class Address < ApplicationRecord
   has_many :investigators, through: :research_units
   before_save :assign_country
 
+  accepts_nested_attributes_for :organization, allow_destroy: true
+
   def assign_country
     if self.country.present?
       self.country_name = self.country.country_name

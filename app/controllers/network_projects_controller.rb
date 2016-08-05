@@ -18,7 +18,7 @@ class NetworkProjectsController < ApplicationController
 
   def update
     if @project.update(project_params)
-      redirect_to user_path(@user, type: 'projects'), notice: 'Project succesfully updated.'
+      redirect_to project_path(@project), notice: 'Project succesfully updated.'
     else
       render :edit, notice: "Project can't be updated."
     end
@@ -29,7 +29,7 @@ class NetworkProjectsController < ApplicationController
     if @project.save
       redirect_to user_path(@user, type: 'projects'), notice: 'Project succesfully created.'
     else
-      render :new, notice: "Project can't be created."
+      redirect_to new_user_project_path(@user, @project), notice: "Project can't be created."
     end
   end
 

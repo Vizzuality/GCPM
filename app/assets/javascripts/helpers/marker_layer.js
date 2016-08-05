@@ -44,13 +44,14 @@
           if (! !!marker.centroid) { return null; }
 
           var size = this.getSize(marker.count),
-              svg = this.getSVG(marker);
+              svg = this.getSVG(marker),
+              investigator = (marker.is_project_lead === false) ? ' -investigator' : '';
 
           // Create icon
           var icon = new L.divIcon({
             iconSize: [size,size],
             // Need to set marker.type on each marker
-            className: 'c-marker -' + marker.type + ' -'+this.options.type,
+            className: 'c-marker -' + marker.type + ' -'+this.options.type + investigator,
             html: this.template({
               value: (marker.count > 1) ? marker.count : '',
               svg: (!!svg) ? this.getHtmlString(svg) : null
@@ -80,6 +81,8 @@
         this.markersGroup = L.featureGroup(this.markers).addTo(this.map);
         // Fit bounds to see all the markers
         this.map.fitBounds(this.markersGroup.getBounds(), {
+          paddingTopLeft: [30,30],
+          paddingBottomRight: [30,30],
           maxZoom: 10
         });
       } else {

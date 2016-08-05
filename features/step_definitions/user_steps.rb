@@ -19,3 +19,11 @@ end
 Given /^user$/ do
   FactoryGirl.create(:user, email: 'user-2@sample.com')
 end
+
+Then /^I should have an valid auth token for "([^\"]*)"$/ do |user|
+  User.find_by_email(user).authentication_token.should == User.find_by_email(user).authentication_token
+end
+
+Then /^I should have an invalid auth token for "([^\"]*)"$/ do |user|
+  User.find_by_email(user).authentication_token.should == nil
+end

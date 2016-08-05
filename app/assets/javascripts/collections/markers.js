@@ -16,7 +16,9 @@
     },
 
     parse: function(response) {
-      return _.map(response, function(marker){
+      return _.map(response, function(marker, i){
+        // Check if an id is passed
+        // marker.id = marker.id + i;
         // Get the centroid of the location
         var centroid = JSON.parse(marker.centroid);
         if (marker.type == 'region') {
@@ -27,8 +29,7 @@
 
         return marker;
       }.bind(this));
-    }
-
+    },
   });
 
 })(this.App);

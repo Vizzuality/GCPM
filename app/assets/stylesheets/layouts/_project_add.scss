@@ -112,6 +112,7 @@
 		.-item {
 			display: table-cell;
 			height: 40px;
+      position: relative;
 			.remove_fields {
 				color: #5aade4;
 		    	font-size: 30px;
@@ -180,7 +181,8 @@
     margin: 30px 0 0;
 }
 
-.f-submit {
+.f-submit,
+.saveRelation {
 	width: 130px;
 	height: 45px;
 	background-color: #68299b;
@@ -192,6 +194,7 @@
 	text-transform: uppercase;
     border: none;
     margin: 0 50px 50px;
+  display: block;
 }
 
 .-editable {
@@ -222,7 +225,7 @@
     bottom: 80px;
 
     width: calc(100% - 100px); // 50px padding * 2
-    height: 60px;
+    height: 80px;
 
 
     font-family: $font-family-1;

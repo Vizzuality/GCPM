@@ -47,7 +47,11 @@
       'click .lead-investigator' : 'selectLead',
       'click .f-submit' : 'onSubmit',
       'click .remove_fields' : 'removeRelation',
-      'click .f-circle-parent' : 'changeLead'
+      'click .f-circle-parent' : 'changeLead',
+      'change .selectInvestigator' : 'loadOrgaAndAddr',
+      'change .selectElements'  : 'updateResearchUnit',
+      'click .pre-submit'   : 'onSubmit',
+      'click .saveRelation' : 'saveRelation'
     },
 
     initialize: function() {
@@ -62,16 +66,15 @@
       this.renderChosen();
       this.renderPickADate();
 
-      
+
       return this;
     },
 
     removeRelation: function(ev) {
       var target = $(ev.target).parent().parent();
       var id = target.data('id');
-      AUTH_TOKEN = 'X18fTWv64i4W7Dam5WeN';
       $.ajax({
-        url: 'http://192.168.1.69:3000/api/projects/'+PROJECT_ID+'/memberships/'+id+'?token='+AUTH_TOKEN,
+        url: '/api/projects/'+PROJECT_ID+'/memberships/'+id+'?token='+AUTH_TOKEN,
         method: 'DELETE'
       });
       target.fadeOut();
@@ -82,29 +85,119 @@
       var id = target.data('id');
       this.$el.find('.-getrow').find('.circle').remove();
       target.find('.f-circle-parent').html('<span class="circle"></span>');
-      AUTH_TOKEN = 'X18fTWv64i4W7Dam5WeN';
       $.ajax({
-        url: 'http://192.168.1.69:3000/api/projects/'+PROJECT_ID+'/memberships/'+id+'?token='+AUTH_TOKEN,
-        method: 'PUT',
+        url: '/api/projects/'+PROJECT_ID+'/memberships/'+id+'?token='+AUTH_TOKEN,
+        method: 'POST',
         data: {'membership': {'membership_type':'main'}}
       });
       target.siblings().each(function(i, el){
+        if (! !!$(el).data('id')) return;
         $.ajax({
-          url: 'http://192.168.1.69:3000/api/projects/'+PROJECT_ID+'/memberships/'+$(el).data('id')+'?token='+AUTH_TOKEN,
-          method: 'PUT',
+          url: '/api/projects/'+PROJECT_ID+'/memberships/'+$(el).data('id')+'?token='+AUTH_TOKEN,
+          method: 'POST',
           data: {'membership': {'membership_type':'secondary'}}
         });
       });
     },
 
-    fillPregenerated: function() {
-      AUTH_TOKEN = 'X18fTWv64i4W7Dam5WeN';
-      var CONTAINER = document.getElementById('c-pregenerated-container');
-      $.get('http://192.168.1.69:3000/api/projects/'+PROJECT_ID+'/memberships?token='+AUTH_TOKEN, function( data ) {
-        // '/api/projects/'+PROJECT_ID+'/memberships/ROW_ID?token='+AUTH_TOKEN
-        console.log(data);
-        for (var i = 0; i < data.length; i++) {
+    loadOrgaAndAddr: function(ev) {
+      $.ajax({
+        url: '/api/investigators/'+ev.target.value+'?token='+AUTH_TOKEN,
+        method: 'GET',
+        success: function(data) {
+          var paintOrgOrAdd = function (elements) {
+            var selectElements = document.createElement("SELECT");
+            for (var i = 0; i < elements.length; i++) {
+              var option = document.createElement("OPTION");
+              option.innerText = elements[i].name || elements[i].line_1;
+              option.value = elements[i].id;
+              selectElements.appendChild(option);
+            }
+            selectElements.classList.add('chosen-select', 'selectElements');
+            var item = document.createElement('SPAN');
+            item.classList.add('-item','-m-edited');
+            item.appendChild(selectElements);
+            $('#c-pregenerated-container').find('.-getrow').last().append($(item));
+            $(selectElements).chosen({
+              width: '100%',
+              allow_single_deselect: true,
+              inherit_select_classes: true,
+              no_results_text: "Oops, nothing found!"
+            });
+          }
+          var addLead = function(){
+            $('#c-pregenerated-container').find('.-getrow').last().append('<span class="-item -m-edited f-circle-parent"></span>');
+          }
+          paintOrgOrAdd(data.organizations);
+          paintOrgOrAdd(data.addresses);
+          addLead();
+          this.fillPregeneratedInvestigators();
+        }.bind(this)
+      });
+      window.setTimeout(function(){
+        this.updateResearchUnit(ev);
+      }.bind(this),1500)
+    },
 
+
+    updateResearchUnit: function(ev) {
+      var target = $(ev.target).parent();
+      var data = {
+        'investigator_id' : target.find('select.selectInvestigator').val(),
+        'address_id' :  target.parent().find('select.selectElements').last().val()
+      }
+      $.ajax({
+        url: '/api/check_research_unit?token='+AUTH_TOKEN,
+        method: 'GET',
+        data: data,
+        success: function(data) {
+          target.closest('.-getrow').attr('data-research_unit', data.research_unit_id);
+        }
+      });
+    },
+
+    fillPregeneratedInvestigators: function() {
+      $.ajax({
+        url: '/api/investigators?token='+AUTH_TOKEN,
+        method: 'GET',
+        success: function(data) {
+          var selectInvestigators = document.createElement("SELECT");
+          for (var i = 0; i < data.length; i++) {
+            var option = document.createElement("OPTION");
+            option.innerText = data[i].name;
+            option.value = data[i].id;
+            selectInvestigators.appendChild(option);
+          }
+          selectInvestigators.classList.add('chosen-select', 'selectInvestigator');
+          var getrow = document.createElement('div');
+          getrow.classList.add('-getrow');
+          var item = document.createElement('SPAN');
+          item.classList.add('-item', '-m-edited');
+          item.appendChild(selectInvestigators);
+          getrow.appendChild(item);
+          document.getElementById('c-pregenerated-container').appendChild(getrow);
+          $(selectInvestigators).chosen({
+            width: '100%',
+            allow_single_deselect: true,
+            inherit_select_classes: true,
+            no_results_text: "Oops, nothing found!"
+          });
+        }
+      });
+    },
+
+    fillPregenerated: function() {
+      if (! PROJECT_ID) {
+        this.fillPregeneratedInvestigators();
+        return;
+      };
+
+      var CONTAINER = document.getElementById('c-pregenerated-container');
+      $.ajax({
+        url: '/api/projects/'+PROJECT_ID+'/memberships?token='+AUTH_TOKEN,
+        success: function(data) {
+
+          for (var i = 0; i < data.length; i++) {
           var row = '<div class="-getrow" data-id="'+data[i].id+'">';
           row     +=  '<span class="-item -m-edited">';
           row     +=    '<a href="#" class="remove_fields">×</a>';
@@ -124,8 +217,15 @@
           row     += '</div>';
           CONTAINER.innerHTML = CONTAINER.innerHTML + row;
 
-        }
+          }
+        }.bind(this),
+        error:function (xhr, ajaxOptions, thrownError){
+            if(xhr.status==404) {
+                // this.fillPregeneratedInvestigators();
+            }
+        }.bind(this)
       });
+      this.fillPregeneratedInvestigators();
     },
 
     getOrganizations: function(ev) {
@@ -141,7 +241,7 @@
         no_results_text: "Oops, nothing found!"
       });
     },
-    
+
     displaInputs: function() {
       $('body').addClass('f-edited');
     },
@@ -154,6 +254,25 @@
     onSubmit: function() {
       if (! !!$('#project_memberships_attributes_undefined_research_unit_id').val()) {
         $('.c-pregenerated').last().remove();
+      }
+
+    },
+
+    saveRelation: function() {
+      var elems = document.getElementsByClassName('-getrow');
+      for (var i = 0; i < elems.length; i++){
+        var data = {
+          "membership" : {
+            "project_id" : PROJECT_ID,
+            "research_unit_id" : $(elems[i]).data('research_unit'),
+            "membership_type" : !!$(elems[i]).find('.circle') ? 'main' : 'secondary'
+          }
+        };
+        $.ajax({
+          url: '/api/projects/'+PROJECT_ID+'/memberships/?token='+AUTH_TOKEN,
+          data: data,
+          method: 'POST'
+        });
       }
     },
 

@@ -13,7 +13,7 @@ I want to manage an project
     And I should not see "Delete"
     And I should not see "Edit"
     When I follow "First project by user"
-    Then I should be on the project page for "user-2@sample.com" "First project by user"
+    Then I should be on the project page for "First project by user"
 
   Scenario: User can edit owned project
     Given I am authenticated user
@@ -22,7 +22,7 @@ I want to manage an project
     And I fill in "project_title" with "New title"
     And I fill in "project_summary" with "Lorem ipsum.."
     And I press "Update"
-    Then I should be on the project page for "user@sample.com" "New title"
+    Then I should be on the project page for "New title"
     And I should see "New title"
 
   Scenario: User can create project
@@ -31,7 +31,7 @@ I want to manage an project
     And I fill in "project_title" with "Created project by user"
     And I fill in "project_summary" with "Lorem ipsum.."
     And I press "Submit"
-    Then I should be on the project page for "user@sample.com" "Created project by user"
+    Then I should be on the profile page for "user@sample.com"
     And I should have one project
 
   Scenario: User delete owned project

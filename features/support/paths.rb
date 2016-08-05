@@ -18,8 +18,12 @@ module NavigationHelpers
       '/users/sign_up'
     when /the profile edit page for "(.*)"$/
       edit_user_registration_path(User.find_by_email($1))
+    when /the profile page for "(.*)"$/
+      user_path(User.find_by_email($1))
     when /the user projects page for "(.*)"$/
       user_path(User.find_by_email($1))
+    when /the project page for "(.*)"$/
+      project_path(Project.find_by_title($1))
     when /the project page for "(.*)" "(.*)"$/
       user_project_path(User.find_by_email($1), Project.find_by_title($2))
     when /the edit project page for "(.*)" "(.*)"$/
