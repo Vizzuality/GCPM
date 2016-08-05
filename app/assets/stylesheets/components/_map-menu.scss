@@ -58,7 +58,7 @@
       left: 0;
       padding: 0 15px;
       box-shadow: $shadow-2;
-      
+
       @media #{$mq-tablet} {
         position: relative;
         bottom: auto;
@@ -82,9 +82,9 @@
       @extend %reset-btn;
       display: flex;
       align-items: center;
-      padding: 13px 10px; 
+      padding: 13px 10px;
       font-weight: $font-weight-bold;
-      font-size: 12px;      
+      font-size: 12px;
       text-transform: uppercase;
       cursor: pointer;
 
@@ -97,17 +97,17 @@
       }
 
       // Colors
-      &.-color-1 { 
+      &.-color-1 {
         color: $color-1;
         &:hover { color: lighten($color-1, 10%)}
       }
-      
-      &.-color-2 { 
+
+      &.-color-2 {
         color: $color-6;
         &:hover { color: lighten($color-6, 10%)}
       }
-      
-      &.-color-3 { 
+
+      &.-color-3 {
         color: $color-4;
         &:hover { color: lighten($color-4, 10%)}
       }
