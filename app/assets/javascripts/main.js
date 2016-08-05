@@ -40,7 +40,6 @@
       // Update params
       App.Events.on('filters:update', this.publishParams.bind(this));
       App.Events.on('filters:reset', this.resetParams.bind(this));
-
     },
 
     start: function() {
@@ -68,6 +67,7 @@
       new App.View.MobileHeader();
       new App.View.Notice();
       new App.View.UserDropdownMenu();
+      new App.View.Modal({ el: '#modalView' });
     },
 
     getContent: function() {
