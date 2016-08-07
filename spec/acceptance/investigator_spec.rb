@@ -3,19 +3,33 @@ require 'acceptance_helper'
 module Api::V1
   describe 'Investigators', type: :request do
     context 'For investigators list' do
-      let!(:investigators) { FactoryGirl.create(:investigator) }
-      let!(:user) {
-        user = FactoryGirl.create(:user, authentication_token: '7Nw1A13xrHrZDHj631MA')
-        user
-      }
-      let!(:country)      { FactoryGirl.create(:country) }
+      let!(:investigator) { FactoryGirl.create(:investigator)                                                 }
+      let!(:user)         { FactoryGirl.create(:user, authentication_token: '7Nw1A13xrHrZDHj631MA')           }
+      let!(:country)      { FactoryGirl.create(:country)                                                      }
       let!(:organization) { FactoryGirl.create(:organization, name: 'Test orga 3', address_ids: [address.id]) }
-      let!(:address)      { FactoryGirl.create(:address, country_id: country.id) }
+      let!(:address)      { FactoryGirl.create(:address, country_id: country.id)                              }
 
-      let(:params) {{"investigator": { "name": "Test investigator", "address_ids": ["#{address.id}"],
+      let(:params) {{"investigator": { "name": "Test investigator", "email": "testuser@sample.com", "website": "http://www.testwebsite.com", "address_ids": ["#{address.id}"],
                                        "addresses_attributes": [
-                                         {"country_id": "#{country.id}", "organization_attributes": {"name": "Test orga 1"} },
-                                         {"country_id": "#{country.id}", "organization_attributes": {"name": "Test orga 2"} }
+                                         {"country_id": "#{country.id}",
+                                          "city": "",
+                                          "latitude": "",
+                                          "longitude": "",
+                                          "line_1": "",
+                                          "line_2": "",
+                                          "line_3": "",
+                                          "postcode": "",
+                                          "primary": "",
+                                          "state": "",
+                                          "state_code": "",
+                                          "geonames_city_id": "",
+                                          "organization_attributes": {"name": "Test orga 1",
+                                                                      "acronym": "",
+                                                                      "grid_id": "",
+                                                                      "email_address": "",
+                                                                      "established": "",
+                                                                      "organization_type_id": ""}},
+                                         {"country_id": "#{country.id}", "organization_attributes": {"name": "Test orga 2"}}
                                        ]
                    }}}
 

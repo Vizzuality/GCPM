@@ -24,8 +24,6 @@ module NavigationHelpers
       user_path(User.find_by_email($1))
     when /the project page for "(.*)"$/
       project_path(Project.find_by_title($1))
-    when /the project page for "(.*)" "(.*)"$/
-      user_project_path(User.find_by_email($1), Project.find_by_title($2))
     when /the edit project page for "(.*)" "(.*)"$/
       edit_user_project_path(User.find_by_email($1), Project.find_by_title($2))
     when /the new project page for "(.*)"$/

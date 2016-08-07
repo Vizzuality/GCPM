@@ -25,8 +25,10 @@
 class Address < ApplicationRecord
   belongs_to :organization
   belongs_to :country
+
   has_many :research_units
   has_many :investigators, through: :research_units
+
   before_save :assign_country
 
   accepts_nested_attributes_for :organization, allow_destroy: true

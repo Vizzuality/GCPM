@@ -3,8 +3,8 @@ module Api::V1
     include ApiAuthenticable
 
     before_action :set_user_by_token
-    before_action :set_user_project,    except: :check_research_unit
-    before_action :set_user_membership, except: [:index, :create, :check_research_unit]
+    before_action :set_user_project,       except: :check_research_unit
+    before_action :set_project_membership, except: [:index, :create, :check_research_unit]
 
     def index
       memberships = @project.memberships.all.includes(:investigator, :organization)
@@ -67,7 +67,7 @@ module Api::V1
         @project = @user.projects.find(params[:project_id])
       end
 
-      def set_user_membership
+      def set_project_membership
         @membership = @project.memberships.find(params[:id])
       end
 
