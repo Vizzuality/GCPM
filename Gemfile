@@ -32,7 +32,6 @@ gem 'sendgrid-ruby'
 
 # Api engine
 gem 'cartomodel', git: 'http://github.com/Vizzuality/cartomodel'
-gem 'rack-cors', require: 'rack/cors'
 gem 'sql_query'
 
 source 'https://rails-assets.org' do
