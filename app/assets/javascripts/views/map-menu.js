@@ -16,6 +16,12 @@
 
     model: new (Backbone.Model.extend()),
 
+    colors: {
+      'projects': '-color-1',
+      'events': '-color-2',
+      'default': '-color-1'
+    },
+
     initialize: function(settings) {
       if (!this.el) {
         return;
@@ -24,7 +30,7 @@
       var opts = settings && settings.params ? settings.params : {};
       this.options = _.extend({}, this.defaults, opts);
 
-      this.model.set(this.typeDictionary(this.options.type));
+      this.model.set(this.setParams(this.options.type));
       this.listeners();
       this.render();
     },
@@ -32,37 +38,21 @@
     listeners: function() {
       App.Events.on('params:update', function(params){
         this.params = params;
-        var newParams = this.typeDictionary(params.type);
+        var newParams = this.setParams(params.type);
         this.model.set(newParams);
       }.bind(this));
       this.model.on('change', this.render.bind(this));
     },
 
     render: function() {
-      var html = this.template(this.model.toJSON());
-      this.$el.html(html);
+      this.$el.html(this.template(this.model.toJSON()));
     },
 
-    typeDictionary: function(type) {
-      var typeParams = {};
-      switch(type) {
-        case 'projects':
-          typeParams = {
-            type: 'projects',
-            color: '-color-1'
-          }; break;
-        case 'events':
-          typeParams = {
-            type: 'events',
-            color: '-color-2'
-          }; break;
-        default:
-          typeParams = {
-            type: 'projects',
-            color: '-color-1'
-          };
+    setParams: function(type) {
+      return {
+        type: type,
+        color: this.colors[type] || this.colors['default']
       }
-      return typeParams;
     },
 
     triggerAction: function(e) {
