@@ -15,7 +15,7 @@
   App.View.Investigator.Form = Backbone.View.extend({
 
     events: {
-      'submit': 'onSubmit'
+      'submit form': 'onSubmit'
     },
 
     template: HandlebarsTemplates['investigators/form'],
@@ -27,6 +27,13 @@
 
     onSubmit: function(e) {
       e.preventDefault();
+      this.createInvestigator($(e.currentTarget).serializeObject());
+    },
+
+    createInvestigator: function(investigatorSpec) {
+      var investigator = new App.Model.Investigator(investigatorSpec);
+      console.log(investigator);
+      investigator.save();
     }
 
   });
