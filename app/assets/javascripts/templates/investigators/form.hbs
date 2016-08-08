@@ -4,10 +4,20 @@
 
   {{!-- {{> network_projects/_form}} --}}
 
-  <label for="organisation_website">
+  <label for="website">
     Name of investigator:
-    <input type="text" name="investigator_name" placeholder="Name of investigator">
+    <input type="text" name="name" placeholder="Name of investigator">
   </label>
+
+  <label for="email">
+    Name of investigator:
+    <input type="text" name="email" placeholder="Email of investigator">
+  </label>
+
+
+  {{{organisationForm}}}
+
+  <button type="submit">Save</button>
 
 </form>
 
@@ -21,3 +31,27 @@
                                        ]
                    }}
  --}}
+
+{{!-- {"investigator": { "name": "Test investigator", "email": "testuser@sample.com", "website": "http://www.testwebsite.com", "address_ids": ["#{address.id}"],
+                                       "addresses_attributes": [
+                                         {"country_id": "#{country.id}",
+                                          "city": "",
+                                          "latitude": "",
+                                          "longitude": "",
+                                          "line_1": "",
+                                          "line_2": "",
+                                          "line_3": "",
+                                          "postcode": "",
+                                          "primary": "",
+                                          "state": "",
+                                          "state_code": "",
+                                          "geonames_city_id": "",
+                                          "organization_attributes": {"name": "Test orga 1",
+                                                                      "acronym": "",
+                                                                      "grid_id": "",
+                                                                      "email_address": "",
+                                                                      "established": "",
+                                                                      "organization_type_id": ""}},
+                                         {"country_id": "#{country.id}", "organization_attributes": {"name": "Test orga 2"}}
+                                       ]
+                   }} --}}
