@@ -31,6 +31,7 @@
    * @param {Object} attributes
    */
   App.Helper.Utils = {
+
     getParams: function(paramString) {
       var params = {};
       paramString.split('&').forEach(function(pair) {
@@ -101,6 +102,7 @@
 
       return percentage;
     }
+
   }
 
 })(this.App);
