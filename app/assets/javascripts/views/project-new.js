@@ -51,7 +51,8 @@
       'change .selectInvestigator' : 'loadOrgaAndAddr',
       'change .selectElements'  : 'updateResearchUnit',
       'click .pre-submit'   : 'onSubmit',
-      'click .saveRelation' : 'saveRelation'
+      'click .saveRelation' : 'saveRelation',
+      'click .add-new-investigator' : 'addInvestigatorForm'
     },
 
     initialize: function() {
@@ -311,6 +312,11 @@
         container: '#pickadate-end-container'
       }));
 
+    },
+    addInvestigatorForm: function() {
+      var investigatorForm = new App.View.Investigator.Form();
+      Backbone.Events.trigger('Modal:open', investigatorForm.render().el);
+      return;
     }
   });
 
