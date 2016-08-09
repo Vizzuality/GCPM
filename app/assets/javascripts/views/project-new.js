@@ -61,6 +61,14 @@
       // Inits
       this.checkRelations();
       this.render();
+      this.setListeners();
+    },
+
+    /**
+     * Settings global events
+     */
+    setListeners: function() {
+      App.Events.on('addNewOrganization', this.addNewOrganization, this);
     },
 
     render: function() {
@@ -175,7 +183,6 @@
             if (i == 0) {
               // clean the first option
               var option = document.createElement("OPTION");
-              option.classList.add('add-new-investigator');
               selectInvestigators.appendChild(option); 
               // add the `Add new` option first
               var option_new = document.createElement("OPTION");
@@ -313,6 +320,12 @@
       }));
 
     },
+
+    addNewOrganization: function() {
+      $('#modalPickOrganization').fadeOut(function(){
+        $('.modal-module.-mm-org').show();
+      })
+    },
     addInvestigatorForm: function() {
       var investigatorForm = new App.View.Investigator.Form();
       Backbone.Events.trigger('Modal:open', investigatorForm.render().el);
@@ -327,18 +340,17 @@
         method: 'GET',
         success: function(data) {
           var selectOrganization = document.createElement("SELECT");
-          selectOrganization.dataset.placeholder = 'Select or add investigator';
+          selectOrganization.dataset.placeholder = 'Select or add organization';
           for (var i = 0; i < data.length; i++) {
             if (i == 0) {
               // clean the first option
               var option = document.createElement("OPTION");
-              option.classList.add('add-new-investigator');
               selectOrganization.appendChild(option); 
               // add the `Add new` option first
               var option_new = document.createElement("OPTION");
               option_new.innerText = 'Add new';
               option_new.value = '-1';
-              option_new.classList.add('add-new-investigator');
+              option_new.classList.add('add-new-organization');
               selectOrganization.appendChild(option_new); 
               continue;
             }
@@ -360,7 +372,7 @@
             allow_single_deselect: true,
             inherit_select_classes: true,
             no_results_text: "Oops, nothing found!",
-            placeholder_text_single: "Select or add investigator"
+            placeholder_text_single: "Select or add organization"
           });
         }
       });

@@ -7,7 +7,6 @@
   App.Controller.Editproject = App.Controller.Page.extend({
 
     index: function(params) {
-      console.log(params);
       new App.View.AddNewProject();
     },
 

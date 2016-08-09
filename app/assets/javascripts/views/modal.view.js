@@ -8,7 +8,8 @@
 
     events: {
       'click .js-btn-modal-close': 'close',
-      'click .js-modal-backdrop': 'close'
+      'click .js-modal-backdrop': 'close',
+      'click .add-new-organization' : 'addNewOrganization'
     },
 
     defaults: {
@@ -89,6 +90,10 @@
     clear: function() {
       this.$el.html(null);
       return this;
+    },
+
+    addNewOrganization: function(ev) {
+      App.Events.trigger('addNewOrganization', ev);
     }
 
   });
