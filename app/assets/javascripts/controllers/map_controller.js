@@ -12,11 +12,12 @@
       var layersSpec = this.layersSpec = new App.Collection.LayersSpec();
       var map = this.map = new App.View.Map({
         el: '#map',
-        collection: this.layersSpec
+        collection: this.layersSpec,
+        params: params
       });
 
       layersSpec.on('change, reset', function() {
-        console.log('reset');
+        // console.log('reset');
         map.renderLayers();
       });
 

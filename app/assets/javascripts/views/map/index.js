@@ -73,9 +73,6 @@
         this.$el.data('map', this.map);
 
         this.setBasemap();
-        /* Seting senter on settings basemap renders */
-        // this.map.setView([0, 0], 3);
-        // this.setMarkers();
       } else {
         console.info('Map already exists.');
       }
@@ -132,16 +129,19 @@
 
       var LayersDic = {
         tile: App.View.MarkerLayer,
+        carto: App.View.MarkerLayer,
         marker: App.View.MarkerLayer
       };
 
       // Add all layers
       _.each(this.collection.models, function(layerModel) {
-        if (layersDic[layerModel.attributes.type]) {
-          var currentLayer = new LayersDic[layerModel.attributes.type]();
-          currentLayer.done(_.bind(function() {
+        if (LayersDic[layerModel.attributes.type]) {
+          var currentLayer = new LayersDic[layerModel.attributes.type]({params: this.params});
+
+          currentLayer.create().done(_.bind(function() {
             this.map.addLayer(currentLayer.layer);
             this._instancedlayers[layerModel.attributes.id] = currentLayer;
+            this._fitBounds(currentLayer.layer);
           }, this));
         }
       }, this);
@@ -151,116 +151,16 @@
       _.each(this._instancedlayers, function(layerInstanced) {
         this.map.removeLayer(layerInstanced.layer);
       }, this);
+    },
+
+    /* Fit bounds to see all the markers */
+    _fitBounds: function(layer) {
+      this.map.fitBounds(layer.getBounds(), {
+        paddingTopLeft: [30,30],
+        paddingBottomRight: [30,30],
+        maxZoom: 10
+      });
     }
-
-
-    // setMarkers: function() {
-
-    //   this.removeLayer({
-    //     id: 'marker-layer'
-    //   })
-    //   var markers = new App.Collection.Markers({
-    //     type: this.params.get('type') || 'projects',
-    //     apiUrl: this.options.apiUrl
-    //   });
-
-    //   markers
-    //     .fetch({
-    //       data: this.params.toJSON()
-    //     })
-    //     .done(function(){
-    //       var options = {
-    //         markers: markers.toJSON(),
-    //         type: this.params.get('type') || 'projects'
-    //       };
-
-    //       var layerInstance = new App.Helper.MarkerLayer(this.map, options);
-
-    //       layerInstance.create();
-
-    //       this.setLayer(layerInstance, {
-    //         id: 'marker-layer'
-    //       });
-
-    //     }.bind(this));
-    // },
-
-    /**
-     * - addLayer
-     * Add a layer instance to map
-     * @param {Object} layerData
-     */
-    // addLayer: function(layerData) {
-    //   if (typeof layerData !== 'object' ||
-    //     !layerData.id || !layerData.type) {
-    //     throw 'Invalid "layerData" format.';
-    //   }
-
-    //   if (!this.map) {
-    //     throw 'Create a map before add a layer.';
-    //   }
-
-    //   var layer = this.model.get(layerData.id);
-
-    //   if (!!layer) {
-    //     this.removeLayer(layerData);
-    //     layer = null;
-    //   }
-
-    //   var layerInstance;
-    //   if (!layer) {
-    //     switch(layerData.type) {
-    //       case 'cartodb':
-    //         var data = _.pick(layerData, ['sql', 'cartocss', 'interactivity', 'bounds']);
-    //         var options = { sublayers: [data] };
-    //         layerInstance = new App.Helper.CartoDBLayer(this.map, options);
-    //         layerInstance.create(function(layer) {
-    //           layer.setOpacity(layerData.opacity);
-    //           layer.setZIndex(1000-layerData.order);
-    //         }.bind(this));
-
-    //         this.setLayer(layerInstance, layerData);
-    //       break;
-
-    //       default:
-    //         layerInstance = null;
-    //         this.setLayer(layerInstance, layerData);
-    //     }
-    //   } else {
-    //     if (layer.layer) {
-    //       layer.layer.setOpacity(layerData.opacity);
-    //       layer.layer.setZIndex(1000-layerData.order);
-    //     }
-    //     console.info('Layer "' + layerData.id + '"" already exists.');
-    //   }
-    // },
-
-    /**
-     * - setLayer
-     * Store the layer in the model
-     * @param  {Object} layerData
-     */
-    // setLayer: function(layerInstance, layerData) {
-    //   if (layerInstance) {
-    //     this.model.set(layerData.id, layerInstance);
-    //   } else {
-    //     throw 'Layer type hasn\'t been defined or it doesn\'t exist.';
-    //   }
-    // },
-
-    /**
-     * - removeLayer
-     * Remove a specific layer on map
-     * @param  {Object} layerData
-     */
-    // removeLayer: function(layerData) {
-    //   var layerInstance = this.model.get(layerData.id);
-
-    //   if (layerInstance) {
-    //     this.model.set(layerData.id, null);
-    //     layerInstance.remove();
-    //   }
-    // },
 
   });
 

@@ -4,7 +4,7 @@
 
   App.Helper = App.Helper || {};
 
-  App.Helper.MarkerLayer = App.Helper.Class.extend({
+  App.View.MarkerLayer = App.Helper.Class.extend({
 
     defaults: {},
 
@@ -22,23 +22,50 @@
       'event': '#f57823'
     },
 
-    initialize: function(map, settings) {
-      if (!map && map instanceof L.Map) {
-        throw 'First params "map" is required and a valid instance of L.Map.';
-      }
+    initialize: function(settings) {
+      // if (!map && map instanceof L.Map) {
+      //   throw 'First params "map" is required and a valid instance of L.Map.';
+      // }
+      this.params = settings.params;
 
-      this.map = map;
+      // this.map = map;
       this.options = _.extend({}, this.defaults, settings || {});
       this.tooltipEl = $('#map-tooltip');
       this.tooltipTpl = HandlebarsTemplates['map-tooltip'];
+
+      this.create();
     },
 
     /**
-     * Create a CartoDB layer
+     * Add a CartoDB layer
      * @param  {Function} callback
      */
     create: function() {
-      var markers = this.options.markers;
+      var markers = new App.Collection.Markers({
+        type: this.params.get('type') || 'projects',
+        apiUrl: this.options.apiUrl
+      });
+
+      return markers
+        .fetch({
+          data: this.params.toJSON()
+        })
+        .done(function(){
+          this.opt = {
+            markers: markers.toJSON(),
+            type: this.params.get('type') || 'projects'
+          };
+
+          this.add();
+        }.bind(this));
+    },
+
+    /**
+     * Add a CartoDB layer
+     * @param  {Function} callback
+     */
+    add: function() {
+      var markers = this.opt.markers;
       if (markers && markers.length) {
         this.markers = _.compact(_.map(markers, function(marker){
           if (! !!marker.centroid) { return null; }
@@ -51,7 +78,7 @@
           var icon = new L.divIcon({
             iconSize: [size,size],
             // Need to set marker.type on each marker
-            className: 'c-marker -' + marker.type + ' -'+this.options.type + investigator,
+            className: 'c-marker -' + marker.type + ' -'+this.opt.type + investigator,
             html: this.template({
               value: (marker.count > 1) ? marker.count : '',
               svg: (!!svg) ? this.getHtmlString(svg) : null
@@ -63,7 +90,7 @@
             riseOnHover: true,
             data: {
               type: marker.type,
-              path: this.options.type,
+              path: this.opt.type,
               location_id: marker.project || marker.event || marker.location_id,
               location_name: marker.title || marker.location_name,
               location_iso: marker.iso
@@ -77,30 +104,11 @@
 
         }.bind(this)));
 
-        // Group the markers and add them to the map
-        this.markersGroup = L.featureGroup(this.markers).addTo(this.map);
-        // Fit bounds to see all the markers
-        this.map.fitBounds(this.markersGroup.getBounds(), {
-          paddingTopLeft: [30,30],
-          paddingBottomRight: [30,30],
-          maxZoom: 10
-        });
+        // Group the markers
+        this.layer = L.featureGroup(this.markers);
       } else {
         // TO-DO: notification => no markers with the selected parameters
         console.log('no markers with the selected parameters');
-        this.map.setView([0, 0], 3);
-      }
-    },
-
-    /**
-     * Remove cartodb layer and sublayers
-     */
-    remove: function() {
-      if (this.markersGroup) {
-        this.map.removeLayer(this.markersGroup);
-        this.markersGroup = null;
-      } else {
-        console.info('There aren\'t markers.');
       }
     },
 
@@ -112,7 +120,7 @@
       if (value) {
         size = Math.round(constant + (Math.log(value) * multiplier));
       }
-      return size;        
+      return size;
     },
 
     getSVG: function(marker) {
@@ -152,7 +160,7 @@
           angle = angle + Math.round(360*segment.value/total);
 
         }.bind(this));
-        return svg;        
+        return svg;
       }
 
       return null;
@@ -175,17 +183,18 @@
      * - _onMouseout
      * - _onMouseclick
      */
+     // TO-DO implement without having this.map
     _onMouseover: function(e) {
-      var pos = this.map.latLngToContainerPoint(e.target._latlng);
-      var data = e.target.options.data;
+      // var pos = this.map.latLngToContainerPoint(e.target._latlng);
+      // var data = e.target.options.data;
 
-      this.tooltipEl
-        .css({
-          left: pos.x,
-          top: pos.y
-        })
-        .html(this.tooltipTpl(data))
-        .addClass('-active');
+      // this.tooltipEl
+      //   .css({
+      //     left: pos.x,
+      //     top: pos.y
+      //   })
+      //   .html(this.tooltipTpl(data))
+      //   .addClass('-active');
 
     },
 
@@ -202,7 +211,7 @@
         .removeClass('-active');
 
       var data = e.target.options.data;
-      
+
       if (data.type == 'region') {
         Backbone.Events.trigger('filters:update', {
           'regions[]': data.location_iso
@@ -221,7 +230,7 @@
         var path = '/'+data.path+'/';
         // And events??
         window.location = path + data.location_id
-      }      
+      }
     },
 
   });
