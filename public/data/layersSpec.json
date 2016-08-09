@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "type": "tile",
+    "config": {},
+    "active": false,
+    "order": 0
+  },
+  {
+    "id": 2,
+    "type": "marker",
+    "config": {},
+    "active": false,
+    "order": 2
+  },
+  {
+    "id": 3,
+    "type": "carto",
+    "config": {},
+    "active": false,
+    "order": 1
+  }
+]
