@@ -53,7 +53,7 @@
                "acronym"              : this.attributes.acronym_org,
                   "email_address"     : this.attributes.email_org,
                   "established"       : this.attributes.established_org,
-                  "organization_type_id": this.attributes.name_org
+                  "organization_type_id": this.attributes.organization_type_id
                 }
           }]
         }
