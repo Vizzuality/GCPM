@@ -317,7 +317,53 @@
       var investigatorForm = new App.View.Investigator.Form();
       Backbone.Events.trigger('Modal:open', investigatorForm.render().el);
       $('.modal-container').addClass('-tall');
+      this.loadPickableOrganizations();
       return;
+    },
+
+    loadPickableOrganizations: function() {
+      $.ajax({
+        url: '/api/organizations?token='+AUTH_TOKEN,
+        method: 'GET',
+        success: function(data) {
+          var selectOrganization = document.createElement("SELECT");
+          selectOrganization.dataset.placeholder = 'Select or add investigator';
+          for (var i = 0; i < data.length; i++) {
+            if (i == 0) {
+              // clean the first option
+              var option = document.createElement("OPTION");
+              option.classList.add('add-new-investigator');
+              selectOrganization.appendChild(option); 
+              // add the `Add new` option first
+              var option_new = document.createElement("OPTION");
+              option_new.innerText = 'Add new';
+              option_new.value = '-1';
+              option_new.classList.add('add-new-investigator');
+              selectOrganization.appendChild(option_new); 
+              continue;
+            }
+            var option = document.createElement("OPTION");
+            option.innerText = data[i].name;
+            option.value = data[i].id;
+            selectOrganization.appendChild(option);
+          }
+          selectOrganization.classList.add('chosen-select', 'selectInvestigator');
+          var getrow = document.createElement('div');
+          getrow.classList.add('-getrow');
+          var item = document.createElement('SPAN');
+          item.classList.add('-item', '-m-edited');
+          item.appendChild(selectOrganization);
+          getrow.appendChild(item);
+          document.getElementById('c-pregenerated-container').appendChild(getrow);
+          $(selectOrganization).chosen({
+            width: '100%',
+            allow_single_deselect: true,
+            inherit_select_classes: true,
+            no_results_text: "Oops, nothing found!",
+            placeholder_text_single: "Select or add investigator"
+          });
+        }
+      });
     }
   });
 

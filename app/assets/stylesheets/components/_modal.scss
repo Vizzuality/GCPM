@@ -53,6 +53,9 @@
     height: 60vh;
     overflow: scroll;
     display: block;
+    .modal-module {
+      display: none;
+    }
     label {
       margin:  10px 0 30px 0;
       padding: 0;
