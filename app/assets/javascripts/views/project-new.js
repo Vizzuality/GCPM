@@ -347,14 +347,14 @@
             option.value = data[i].id;
             selectOrganization.appendChild(option);
           }
-          selectOrganization.classList.add('chosen-select', 'selectInvestigator');
+          selectOrganization.classList.add('chosen-select', 'selectOrganization');
           var getrow = document.createElement('div');
           getrow.classList.add('-getrow');
           var item = document.createElement('SPAN');
           item.classList.add('-item', '-m-edited');
           item.appendChild(selectOrganization);
           getrow.appendChild(item);
-          document.getElementById('c-pregenerated-container').appendChild(getrow);
+          document.getElementById('modalPickOrganization').appendChild(getrow);
           $(selectOrganization).chosen({
             width: '100%',
             allow_single_deselect: true,
