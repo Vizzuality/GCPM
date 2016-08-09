@@ -149,7 +149,7 @@
 
     clearLayers: function() {
       _.each(this._instancedlayers, function(layerInstanced) {
-        this.map(layerInstanced.layer);
+        this.map.removeLayer(layerInstanced.layer);
       }, this);
     }
 
