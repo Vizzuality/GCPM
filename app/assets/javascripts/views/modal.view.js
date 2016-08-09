@@ -93,7 +93,7 @@
     },
 
     addNewOrganization: function(ev) {
-      App.Events.trigger('addNewOrganization', ev);
+      App.Events.trigger('Editproject:addNewOrganization', ev);
     }
 
   });

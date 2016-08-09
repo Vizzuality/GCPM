@@ -68,7 +68,9 @@
      * Settings global events
      */
     setListeners: function() {
-      App.Events.on('addNewOrganization', this.addNewOrganization, this);
+      App.Events.on('Editproject:addNewOrganization', this.addNewOrganization, this);
+      App.Events.on('Editproject:updateLastInvestigators', this.updateLastInvestigators, this);
+
     },
 
     render: function() {
@@ -341,7 +343,7 @@
         method: 'GET',
         success: function(data) {
           var selectOrganization = document.createElement("SELECT");
-          selectOrganization.name = "country_org";
+          selectOrganization.name = "organization_id";
           selectOrganization.dataset.placeholder = 'Select or add organization';
           for (var i = 0; i < data.length; i++) {
             if (i == 0) {
@@ -379,6 +381,12 @@
         }
       });
     },
+
+    updateLastInvestigators: function() {
+      $('.-getrow').last().remove();
+      this.fillPregeneratedInvestigators();
+    },
+
     loadPickableCountry: function() {
       $.ajax({
         url: '/api/countries?token='+AUTH_TOKEN,

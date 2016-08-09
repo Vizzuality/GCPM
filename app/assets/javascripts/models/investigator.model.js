@@ -26,7 +26,7 @@
           "name"    : this.attributes.name,
           "email"   : this.attributes.email,
           "website"   : this.attributes.website,
-          "address_ids": [this.attributes.organization_id]
+          "address_ids": [this.attributes.organization_id[0]]
           }
       }
     } else {
@@ -66,7 +66,8 @@
 			contentType: "application/json",
 			dataType: 'json',
 			complete: function(data) {
-			   console.log(data);
+			   App.Events.trigger('Modal:close', this);
+         App.Events.trigger('Editproject:updateLastInvestigators', this);
 			}
 		});
 	}
