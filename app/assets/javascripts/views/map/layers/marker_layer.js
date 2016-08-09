@@ -211,7 +211,6 @@
         .removeClass('-active');
 
       var data = e.target.options.data;
-
       if (data.type == 'region') {
         Backbone.Events.trigger('filters:update', {
           'regions[]': data.location_iso

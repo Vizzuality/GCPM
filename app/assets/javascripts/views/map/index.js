@@ -41,7 +41,6 @@
       var opts = settings && settings.options ? settings.options : {};
       this.options = _.extend({}, this.defaults, opts);
       this.params.set(settings.params, { silent: true });
-      // this.layers = settings.layers;
 
       this.createMap();
 
@@ -51,8 +50,8 @@
     listeners: function() {
       // this.layers.on('sync reset change', this.renderLayers.bind(this));
       App.Events.on('params:update', function(params){
-        // this.params.clear().set(params, { silent: true });
-        // this.setMarkers();
+        this.params.clear().set(params, { silent: true });
+        this.renderLayers();
       }.bind(this));
     },
 
