@@ -61,6 +61,14 @@
       // Inits
       this.checkRelations();
       this.render();
+      this.setListeners();
+    },
+
+    /**
+     * Settings global events
+     */
+    setListeners: function() {
+      App.Events.on('addNewOrganization', this.addNewOrganization, this);
     },
 
     render: function() {
@@ -175,7 +183,6 @@
             if (i == 0) {
               // clean the first option
               var option = document.createElement("OPTION");
-              option.classList.add('add-new-investigator');
               selectInvestigators.appendChild(option); 
               // add the `Add new` option first
               var option_new = document.createElement("OPTION");
@@ -313,6 +320,12 @@
       }));
 
     },
+
+    addNewOrganization: function() {
+      $('#modalPickOrganization').fadeOut(function(){
+        $('.modal-module.-mm-org').show();
+      })
+    },
     addInvestigatorForm: function() {
       var investigatorForm = new App.View.Investigator.Form();
       Backbone.Events.trigger('Modal:open', investigatorForm.render().el);
@@ -332,7 +345,6 @@
             if (i == 0) {
               // clean the first option
               var option = document.createElement("OPTION");
-              option.classList.add('add-new-organization');
               selectOrganization.appendChild(option); 
               // add the `Add new` option first
               var option_new = document.createElement("OPTION");
