@@ -115,11 +115,14 @@
 		.-item {
 			display: table-cell;
 			height: 40px;
-      position: relative;
+      		position: relative;
 			.remove_fields {
 				color: #5aade4;
 		    	font-size: 30px;
 		    	vertical-align: sub;
+		    	margin: 0 7px 0 6px;
+			    position: relative;
+			    top: 2px;
 			}
 			> a {
 				color: #0f3046;
