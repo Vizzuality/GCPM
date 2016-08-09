@@ -316,6 +316,7 @@
     addInvestigatorForm: function() {
       var investigatorForm = new App.View.Investigator.Form();
       Backbone.Events.trigger('Modal:open', investigatorForm.render().el);
+      $('.modal-container').addClass('-tall')
       return;
     }
   });
