@@ -7,22 +7,28 @@
   App.Controller.Map = App.Controller.Page.extend({
 
     index: function(params) {
-      console.log(params);
-      this.map = new App.View.Map({ el: '#map' });
-      this.layersSpec = new App.Collection.LayersSpec();
-      this.layersSpec.fetch({ data: params }).done(this._addLayers.bind(this));
+      var layersActived = [2];
 
-      this._setMapComponents();
+      var layersSpec = this.layersSpec = new App.Collection.LayersSpec();
+      var map = this.map = new App.View.Map({
+        el: '#map',
+        collection: this.layersSpec
+      });
+
+      layersSpec.on('change, reset', function() {
+        console.log('reset');
+        map.renderLayers();
+      });
+
+      layersSpec.fetch().done(function() {
+        // This method trigger an event called 'reset'
+        layersSpec.filterByIds(layersActived);
+      });
+
+      this._initMapComponents();
     },
 
-    _addLayers: function() {
-      debugger;
-      var layersSpec = this.layersSpec.toJSON();
-      this.map.collection = layersSpec;
-      this.map.renderLayers(this.map.collection);
-    },
-
-    _setMapComponents: function() {
+    _initMapComponents: function() {
       new App.View.MapMenu({
         params: this.params
       });

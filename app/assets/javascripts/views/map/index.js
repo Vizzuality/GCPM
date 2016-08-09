@@ -36,6 +36,8 @@
         return;
       }
 
+      this._instancedlayers = {};
+
       var opts = settings && settings.options ? settings.options : {};
       this.options = _.extend({}, this.defaults, opts);
       this.params.set(settings.params, { silent: true });
@@ -107,35 +109,6 @@
       this.basemap = L.tileLayer(basemapConfig.url, basemapConfig.options).addTo(this.map);
     },
 
-    /************
-     * LAYERS
-     * - renderLayers
-     * Render or remove layers by Layers Collection
-     */
-    renderLayers: function(layersSpec) {
-      _.each(layersSpec, function(layerSpec) {
-        switch(layerSpec.type) {
-          case "tile":
-            break;
-          case "carto":
-            break;
-          case "marker":
-            new App.View.MarkerLayer({map: this.map});
-            break;
-        }
-      }, this);
-
-
-
-      // _.each(layersData, function(layerData) {
-      //   if (layerData.active) {
-      //     this.addLayer(layerData);
-      //   } else {
-      //     this.removeLayer(layerData);
-      //   }
-      // }, this);
-    },
-
     /**
      * - unsetBasemap
      * Remove basemap from mapView
@@ -147,6 +120,38 @@
         console.info('Basemap doesn\'t exist.');
       }
     },
+
+    /************
+     * LAYERS
+     * - renderLayers
+     * Render or remove layers by Layers Collection
+     */
+    renderLayers: function() {
+      // At beginning clear all layers
+      this.clearLayers();
+
+      var LayersDic = {
+        tile: App.View.MarkerLayer,
+        marker: App.View.MarkerLayer
+      };
+
+      // Add all layers
+      _.each(this.collection.models, function(layerModel) {
+        if (layersDic[layerModel.attributes.type]) {
+          var currentLayer = new LayersDic[layerModel.attributes.type]();
+          currentLayer.done(_.bind(function() {
+            this.map.addLayer(currentLayer.layer);
+            this._instancedlayers[layerModel.attributes.id] = currentLayer;
+          }, this));
+        }
+      }, this);
+    },
+
+    clearLayers: function() {
+      _.each(this._instancedlayers, function(layerInstanced) {
+        this.map(layerInstanced.layer);
+      }, this);
+    }
 
 
     // setMarkers: function() {
