@@ -20,13 +20,12 @@
     initialize: function() {
       this.$content = $('#content');
       this.router = new App.Router();
-      this.initCommonTools();
+      // this.initCommonTools();
       // this.initCommonViews();
       this.listeners();
     },
 
     listeners: function() {
-      // this.listenTo(this.router, 'route:map', this.mapPage);
       this.listenTo(this.router, 'route:countries', this.countriesPage);
       this.listenTo(this.router, 'route:country', this.countryPage);
       this.listenTo(this.router, 'route:event', this.eventDetailPage);
@@ -42,14 +41,6 @@
       // Update params
       App.Events.on('filters:update', this.publishParams.bind(this));
       App.Events.on('filters:reset', this.resetParams.bind(this));
-    },
-
-    start: function() {
-      Backbone.history.start({ pushState: true });
-    },
-
-    stop: function() {
-      Backbone.history.stop();
     },
 
     /**
