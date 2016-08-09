@@ -11,6 +11,6 @@
   }
 
   document.addEventListener('DOMContentLoaded', initApp);
-  
+
 
 })(this.App);

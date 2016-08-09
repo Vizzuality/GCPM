@@ -1,6 +1,7 @@
 (function(App) {
 
   'use strict';
+
   /**
    * Main Application View
    */
@@ -20,7 +21,7 @@
       this.$content = $('#content');
       this.router = new App.Router();
       this.initCommonTools();
-      this.initCommonViews();
+      // this.initCommonViews();
       this.listeners();
     },
 
@@ -68,12 +69,12 @@
       App.Helper.Utils.handlebarsHelpers();
     },
 
-    initCommonViews: function() {
-      new App.View.MobileHeader();
-      new App.View.Notice();
-      new App.View.UserDropdownMenu();
-      new App.View.Modal({ el: '#modalView' });
-    },
+    // initCommonViews: function() {
+    //   new App.View.MobileHeader();
+    //   new App.View.Notice();
+    //   new App.View.UserDropdownMenu();
+    //   new App.View.Modal({ el: '#modalView' });
+    // },
 
     getContent: function() {
       $.getScript(window.location.pathname + window.location.search, function(data, textStatus, jqxhr){
