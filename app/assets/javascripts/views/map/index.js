@@ -56,7 +56,6 @@
     },
 
 
-
     /************
      * MAP
      * - createMap
@@ -85,7 +84,6 @@
       this.$el.data('map').remove();
       this.$el.data('map', null);
     },
-
 
 
     /************
@@ -117,6 +115,7 @@
       }
     },
 
+
     /************
      * LAYERS
      * - renderLayers
@@ -138,7 +137,8 @@
           var currentLayer = new LayersDic[layerModel.attributes.type]({params: this.params});
 
           currentLayer.create().done(_.bind(function() {
-            this.map.addLayer(currentLayer.layer);
+            this.currentLayer = currentLayer.layer;
+            this.addLayer();
             this._instancedlayers[layerModel.attributes.id] = currentLayer;
             this._fitBounds(currentLayer.layer);
           }, this));
@@ -146,13 +146,35 @@
       }, this);
     },
 
+    /**
+     * - renderLayers
+     * Add layer to the map and its correspondant events
+     */
+    addLayer: function() {
+      this.currentLayer.addTo(this.map)
+        .on('mouseover', function(data) {
+          var pos = this.map.latLngToContainerPoint(data.latlng);
+          this.tooltip = new App.View.Tooltip({map: this.map, data: data, pos: pos});
+        }.bind(this))
+        .on('mouseout click', function(data) {
+          this.tooltip.remove();
+        }.bind(this));
+    },
+
+    /**
+     * - clearLayers
+     * Remove all layers from the map
+     */
     clearLayers: function() {
       _.each(this._instancedlayers, function(layerInstanced) {
         this.map.removeLayer(layerInstanced.layer);
       }, this);
     },
 
-    /* Fit bounds to see all the markers */
+    /**
+     * - _fitBounds
+     * Fit bounce to see all the markers
+     */
     _fitBounds: function(layer) {
       this.map.fitBounds(layer.getBounds(), {
         paddingTopLeft: [30,30],
