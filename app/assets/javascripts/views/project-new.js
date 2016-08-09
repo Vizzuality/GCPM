@@ -323,7 +323,7 @@
 
     addNewOrganization: function() {
       $('#modalPickOrganization').fadeOut(function(){
-        $('.modal-module.-mm-org').show();
+        $('.modal-module').show();
       })
     },
     addInvestigatorForm: function() {
@@ -340,6 +340,7 @@
         method: 'GET',
         success: function(data) {
           var selectOrganization = document.createElement("SELECT");
+          selectOrganization.name = "organization_id";
           selectOrganization.dataset.placeholder = 'Select or add organization';
           for (var i = 0; i < data.length; i++) {
             if (i == 0) {
