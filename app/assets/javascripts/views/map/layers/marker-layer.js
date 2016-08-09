@@ -95,9 +95,7 @@
               location_name: marker.title || marker.location_name,
               location_iso: marker.iso
             }
-          }).on('mouseover', this._onMouseover.bind(this))
-            .on('mouseout', this._onMouseout.bind(this))
-            .on('click', this._onMouseclick.bind(this));
+          }).on('click', this._onMouseclick.bind(this));
 
           // Return a leaflet marker
           return markerIcon;
@@ -179,37 +177,9 @@
 
     /**
      * UI EVENTS
-     * - _onMouseover
-     * - _onMouseout
      * - _onMouseclick
      */
-     // TO-DO implement without having this.map
-    _onMouseover: function(e) {
-      // var pos = this.map.latLngToContainerPoint(e.target._latlng);
-      // var data = e.target.options.data;
-
-      // this.tooltipEl
-      //   .css({
-      //     left: pos.x,
-      //     top: pos.y
-      //   })
-      //   .html(this.tooltipTpl(data))
-      //   .addClass('-active');
-
-    },
-
-    _onMouseout: function(e) {
-      this.tooltipEl
-        .html('')
-        .removeClass('-active');
-    },
-
     _onMouseclick: function(e) {
-      // Remove the tooltip if it was openend
-      this.tooltipEl
-        .html('')
-        .removeClass('-active');
-
       var data = e.target.options.data;
       if (data.type == 'region') {
         Backbone.Events.trigger('filters:update', {
