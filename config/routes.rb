@@ -37,6 +37,7 @@ Rails.application.routes.draw do
       end
 
       resources :investigators, only: [:index, :show, :update, :create]
+      resources :organizations, only: [:index, :show]
       get 'check_research_unit', to: 'memberships#check_research_unit'
 
       get 'lists/countries',    to: 'lists#countries'

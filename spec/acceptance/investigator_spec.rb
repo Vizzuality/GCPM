@@ -3,11 +3,11 @@ require 'acceptance_helper'
 module Api::V1
   describe 'Investigators', type: :request do
     context 'For investigators list' do
-      let!(:investigator) { FactoryGirl.create(:investigator)                                                 }
       let!(:user)         { FactoryGirl.create(:user, authentication_token: '7Nw1A13xrHrZDHj631MA')           }
       let!(:country)      { FactoryGirl.create(:country)                                                      }
       let!(:organization) { FactoryGirl.create(:organization, name: 'Test orga 3', address_ids: [address.id]) }
       let!(:address)      { FactoryGirl.create(:address, country_id: country.id)                              }
+      let!(:investigator) { FactoryGirl.create(:investigator, address_ids: [address.id])                      }
 
       let(:params) {{"investigator": { "name": "Test investigator", "email": "testuser@sample.com", "website": "http://www.testwebsite.com", "address_ids": ["#{address.id}"],
                                        "addresses_attributes": [
@@ -33,6 +33,8 @@ module Api::V1
                                        ]
                    }}}
 
+      let(:investigator_id) { investigator.id }
+
       it 'Allows to access investigators list' do
         get '/api/investigators?token=7Nw1A13xrHrZDHj631MA'
 
@@ -41,6 +43,14 @@ module Api::V1
         expect(json.length).to          eq(1)
         expect(investigator['name']).to be_present
         expect(investigator['id']).to   be_present
+      end
+
+      it 'Allows to access investigator by id' do
+        get "/api/investigators/#{investigator_id}?token=7Nw1A13xrHrZDHj631MA"
+
+        expect(status).to eq(200)
+        expect(json['organizations'].size).to eq(1)
+        expect(json['addresses'].size).to     eq(1)
       end
 
       context 'Allows to manage investigators' do

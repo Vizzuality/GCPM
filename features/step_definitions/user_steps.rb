@@ -25,5 +25,5 @@ Then /^I should have an valid auth token for "([^\"]*)"$/ do |user|
 end
 
 Then /^I should have an invalid auth token for "([^\"]*)"$/ do |user|
-  User.find_by_email(user).authentication_token.should == nil
+  User.find_by_email(user).authentication_token.should.nil?
 end
