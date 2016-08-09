@@ -26,6 +26,16 @@ module Api::V1
         expect(status).to eq(200)
         expect(json['addresses'].size).to eq(1)
       end
+
+      it 'Allows to access countries list' do
+        get '/api/countries?token=7Nw1A13xrHrZDHj631MA'
+
+        country = json[0]
+        expect(status).to          eq(200)
+        expect(json.length).to     eq(1)
+        expect(country['name']).to be_present
+        expect(country['id']).to   be_present
+      end
     end
   end
 end
