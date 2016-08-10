@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: memberships
+#
+#  id               :integer          not null, primary key
+#  project_id       :integer
+#  research_unit_id :integer
+#  membership_type  :integer          default("secondary")
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+
 class MembershipSerializer < ActiveModel::Serializer
   attributes :id, :membership_type
 

@@ -21,4 +21,7 @@ where 1=1
 <% if @params[:end_date] %>
   and (events.end_date < date(<%= quote @params[:end_date] %>))
 <% end %>
+<% if @params[:user] %>
+  and events.user_id = <%= quote @params[:user] %>
+<% end %>
 group by event, title, location_name, location_id, centroid, iso
