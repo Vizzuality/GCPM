@@ -41,6 +41,7 @@ class Project < ApplicationRecord
 
   validates_presence_of :title, :summary
   validates :title, uniqueness: true
+  validates_acceptance_of :terms
 
   scope :publihsed,             ->                     { where(status: :published) }
   scope :active,                ->                     { where('projects.end_date >= ? AND projects.start_date <= ?', Time.now, Time.now).or(where('projects.end_date IS NULL')) }

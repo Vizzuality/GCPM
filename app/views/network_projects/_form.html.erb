@@ -42,7 +42,7 @@
 <div class="c-section-container -staff -hide-staff" id="relations">
 	<div class="c-staff -headers">
 		<span class="-item">investigator</span>
-		<span class="-item">organization*</span>
+		<span class="-ermsermsitem">organization*</span>
 		<span class="-item">address</span>
 		<span class="-item">lead</span>
 	</div>
@@ -59,6 +59,7 @@
 		Submitted information will be verified by the GCPM team to ensure data quality, and may be standardized and/or formatted for consistency before it is published. Checking this box acknowledges that you agree to share this information for public display on the Global Cancer Project Map.
 	</div>
 	<div class="c-staff -row">
-		<input type="checkbox" required class="f-accept-terms"> I accept these terms
+		<%= form.input :terms, as: :boolean %>
+		
 	</div>
 </div>
