@@ -246,19 +246,17 @@
           if (data[i].membership_type == 'main') {
             row     +=    '<span class="circle"></span>';
           }
-          row     +=  '</span>';
-          row     += '</div>';
-          CONTAINER.innerHTML = CONTAINER.innerHTML + row;
-
+            row     +=  '</span>';
+            row     += '</div>';
+            CONTAINER.innerHTML = CONTAINER.innerHTML + row;
           }
+          this.fillPregeneratedInvestigators();
         }.bind(this),
         error:function (xhr, ajaxOptions, thrownError){
             if(xhr.status==404) {
-                // this.fillPregeneratedInvestigators();
             }
         }.bind(this)
       });
-      this.fillPregeneratedInvestigators();
     },
 
     getOrganizations: function(ev) {
