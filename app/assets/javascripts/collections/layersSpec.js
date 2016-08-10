@@ -14,13 +14,14 @@
      * @return {Collection}
      */
     filterByIds: function(ids) {
-      var result = _.filter(this.models, function(layerModel) {
+      var result = this.models.filter(function(layerModel) {
         var itExists = false;
-        for (var i = ids.length - 1; i >= 0; i--) {
+        for (var i = ids.length - 1; i >= 0 && itExists === false; i--) {
           itExists = ids[i] === layerModel.attributes.id;
         }
         return itExists;
       });
+
       this.reset(result);
       return this;
     }

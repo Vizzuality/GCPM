@@ -8,7 +8,7 @@
 
     index: function(params) {
       this.params = params;
-      var layersActived = [3];
+      var layersActived = [3, 2];
 
       var layersSpec = this.layersSpec = new App.Collection.LayersSpec();
       var map = this.map = new App.View.Map({
