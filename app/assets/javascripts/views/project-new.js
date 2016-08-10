@@ -283,12 +283,9 @@
     },
 
     onSubmit: function(e) {
-      if (e.preventDefault) {
-        e.preventDefault();
-      }
 
       if (! !!$('#project_memberships_attributes_undefined_research_unit_id').val()) {
-        $('.c-pregenerated').last().remove();
+        $('#c-pregenerated-container').find('.-getrow').last().remove();
       }
 
       $.when(this.updateRelation()).done(function() {
@@ -306,7 +303,7 @@
           "membership" : {
             "project_id" : PROJECT_ID,
             "research_unit_id": $elem.data('research_unit'),
-            "membership_type" : !!$elem.find('.circle') ? 'main' : 'secondary'
+            "membership_type" : !!$elem.find('.circle').length ? 'main' : 'secondary'
           }
         };
 
