@@ -11,7 +11,7 @@ module Api::V1
       let(:organization_id) { organization.id }
 
       it 'Allows to access organizations list' do
-        get '/api/organizations?token=7Nw1A13xrHrZDHj631MA'
+        get "/api/organizations?token=#{user.authentication_token}"
 
         organization = json[0]
         expect(status).to               eq(200)
@@ -21,14 +21,14 @@ module Api::V1
       end
 
       it 'Allows to access organization by id' do
-        get "/api/organizations/#{organization_id}?token=7Nw1A13xrHrZDHj631MA"
+        get "/api/organizations/#{organization_id}?token=#{user.authentication_token}"
 
         expect(status).to eq(200)
         expect(json['addresses'].size).to eq(1)
       end
 
       it 'Allows to access countries list' do
-        get '/api/countries?token=7Nw1A13xrHrZDHj631MA'
+        get "/api/countries?token=#{user.authentication_token}"
 
         country = json[0]
         expect(status).to          eq(200)
