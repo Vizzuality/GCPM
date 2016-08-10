@@ -51,7 +51,8 @@
       'change .selectInvestigator' : 'loadOrgaAndAddr',
       'change .selectElements'  : 'updateResearchUnit',
       'click .pre-submit'   : 'onSubmit',
-      'click .saveRelation' : 'saveRelation'
+      'click .saveRelation' : 'saveRelation',
+      'click .add-new-investigator' : 'addInvestigatorForm'
     },
 
     initialize: function() {
@@ -60,6 +61,16 @@
       // Inits
       this.checkRelations();
       this.render();
+      this.setListeners();
+    },
+
+    /**
+     * Settings global events
+     */
+    setListeners: function() {
+      App.Events.on('Editproject:addNewOrganization', this.addNewOrganization, this);
+      App.Events.on('Editproject:updateLastInvestigators', this.updateLastInvestigators, this);
+
     },
 
     render: function() {
@@ -70,7 +81,7 @@
     },
 
     checkRelations: function() {
-      if (location.search.includes('relations')) {
+      if (location.search.includes('relations') || location.pathname.includes('/edit')) {
         var relations = document.getElementById('relations');
         relations.classList.remove('-hide-staff');
         relations.scrollIntoView();
@@ -169,7 +180,20 @@
         method: 'GET',
         success: function(data) {
           var selectInvestigators = document.createElement("SELECT");
+          selectInvestigators.dataset.placeholder = 'Select or add investigator';
           for (var i = 0; i < data.length; i++) {
+            if (i == 0) {
+              // clean the first option
+              var option = document.createElement("OPTION");
+              selectInvestigators.appendChild(option); 
+              // add the `Add new` option first
+              var option_new = document.createElement("OPTION");
+              option_new.innerText = 'Add new';
+              option_new.value = '-1';
+              option_new.classList.add('add-new-investigator');
+              selectInvestigators.appendChild(option_new); 
+              continue;
+            }
             var option = document.createElement("OPTION");
             option.innerText = data[i].name;
             option.value = data[i].id;
@@ -187,7 +211,8 @@
             width: '100%',
             allow_single_deselect: true,
             inherit_select_classes: true,
-            no_results_text: "Oops, nothing found!"
+            no_results_text: "Oops, nothing found!",
+            placeholder_text_single: "Select or add investigator"
           });
         }
       });
@@ -296,6 +321,114 @@
         container: '#pickadate-end-container'
       }));
 
+    },
+
+    addNewOrganization: function() {
+      $('#modalPickOrganization').fadeOut(function(){
+        $('.modal-module').show();
+      })
+    },
+    addInvestigatorForm: function() {
+      var investigatorForm = new App.View.Investigator.Form();
+      Backbone.Events.trigger('Modal:open', investigatorForm.render().el);
+      $('.modal-container').addClass('-tall');
+      this.loadPickableOrganizations();
+      this.loadPickableCountry();
+      return;
+    },
+
+    loadPickableOrganizations: function() {
+      $.ajax({
+        url: '/api/organizations?token='+AUTH_TOKEN,
+        method: 'GET',
+        success: function(data) {
+          var selectOrganization = document.createElement("SELECT");
+          selectOrganization.name = "organization_id";
+          selectOrganization.dataset.placeholder = 'Select or add organization';
+          for (var i = 0; i < data.length; i++) {
+            if (i == 0) {
+              // clean the first option
+              var option = document.createElement("OPTION");
+              selectOrganization.appendChild(option); 
+              // add the `Add new` option first
+              var option_new = document.createElement("OPTION");
+              option_new.innerText = 'Add new';
+              option_new.value = '-1';
+              option_new.classList.add('add-new-organization');
+              selectOrganization.appendChild(option_new); 
+              continue;
+            }
+            var option = document.createElement("OPTION");
+            option.innerText = data[i].name;
+            option.value = data[i].id;
+            selectOrganization.appendChild(option);
+          }
+          selectOrganization.classList.add('chosen-select', 'selectOrganization');
+          var getrow = document.createElement('div');
+          getrow.classList.add('-getrow');
+          var item = document.createElement('SPAN');
+          item.classList.add('-item', '-m-edited');
+          item.appendChild(selectOrganization);
+          getrow.appendChild(item);
+          document.getElementById('modalPickOrganization').appendChild(getrow);
+          $(selectOrganization).chosen({
+            width: '100%',
+            allow_single_deselect: true,
+            inherit_select_classes: true,
+            no_results_text: "Oops, nothing found!",
+            placeholder_text_single: "Select or add organization"
+          });
+        }
+      });
+    },
+
+    updateLastInvestigators: function() {
+      $('.-getrow').last().remove();
+      this.fillPregeneratedInvestigators();
+    },
+
+    loadPickableCountry: function() {
+      $.ajax({
+        url: '/api/countries?token='+AUTH_TOKEN,
+        method: 'GET',
+        success: function(data) {
+          var selectOrganization = document.createElement("SELECT");
+          selectOrganization.name = "organization_id";
+          selectOrganization.dataset.placeholder = 'Select or add country';
+          for (var i = 0; i < data.length; i++) {
+            if (i == 0) {
+              // clean the first option
+              var option = document.createElement("OPTION");
+              selectOrganization.appendChild(option); 
+              // add the `Add new` option first
+              var option_new = document.createElement("OPTION");
+              option_new.innerText = 'Add new';
+              option_new.value = '-1';
+              selectOrganization.appendChild(option_new); 
+              continue;
+            }
+            var option = document.createElement("OPTION");
+            option.innerText = data[i].name;
+            option.value = data[i].id;
+            selectOrganization.appendChild(option);
+          }
+          selectOrganization.classList.add('chosen-select', 'selectOrganization');
+          var getrow = document.createElement('div');
+          getrow.classList.add('-getrow');
+          var item = document.createElement('SPAN');
+          item.classList.add('-item', '-m-edited');
+          item.appendChild(selectOrganization);
+          getrow.appendChild(item);
+          document.getElementById('modalPickCountry').appendChild(getrow);
+          $(selectOrganization).chosen({
+            width: '100%',
+            allow_single_deselect: true,
+            inherit_select_classes: true,
+            no_results_text: "Oops, nothing found!",
+            placeholder_text_single: "Select or add country"
+          });
+        }
+      });
     }
   });
 

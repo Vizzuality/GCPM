@@ -4,46 +4,46 @@
 
   App.Router = Backbone.Router.extend({
 
+    /**
+     * Inspired by Rails, we have a routes file that specifies these routes
+     * and any additional route parameters.
+     * @type {Object}
+     */
     routes: {
-      /* Had to set root path this way to allow main
-       listeners to init common views in the home */
-      '': '',
-      // map
-      'map': 'map',
-      'countries': 'countries',
-      'countries/:iso': 'country',
-      'cancer-types': 'cancer-types',
-      'cancer-types/:iso': 'cancer-type',
-      'about': 'about',
-      'events/:id': 'event',
-      'projects/:id': 'project',
-      'network/:id': 'network',
-      'network/:id/projects/:val/edit': 'editproject',
-      'network/:id/projects/new': 'editproject',
-      'network/:id/events/new': 'editevent',
-      'network/:id/events/:val/edit': 'editevent'
+      '': 'Home#index',
+      'map': 'Map#index',
+      'network/:id/projects/:val/edit': 'Editproject#index',
+      'network/:id/projects/new': 'Editproject#index',
+      'network/:id/projects/edit': 'Editproject#index'
     },
 
-    params: new (Backbone.Model.extend()),
-
-    initialize: function(settings) {
-      this.utils = App.Helper.Utils;
-
-      var opts = settings && settings.options ? settings.options : {};
-      this.options = _.extend({}, this.defaults, opts);
-
-      this.listeners()
-    },
-
-    listeners: function() {
-      App.Events.on('params:update', function(params){
-        this.params.clear().set(params, { silent: true });
-        this.updateUrl();
-      }.bind(this));
+    initialize: function() {
+      // We are going to save params in model
+      this.params = new (Backbone.Model.extend());
+      // Listening events
+      this.params.on('change', _.bind(this.updateUrl, this));
+      // Global event to update params from external actions
+      App.Events.on('Router:update', _.bind(this.updateParams, this));
     },
 
     /**
-     * Change url with params
+     * Get URL params
+     * @return {Object}
+     */
+    getParams: function(routeParams) {
+      return this._unserializeParams(routeParams);
+    },
+
+    /**
+     * Update model with new params
+     * @param  {Object} params
+     */
+    updateParams: function(params) {
+      this.params.clear().set(params, { silent: true });
+    },
+
+    /**
+     * Change URL with current params
      */
     updateUrl: function() {
       var url = location.pathname.slice(1) + '?' + this._serializeParams();
@@ -52,13 +52,15 @@
 
     /**
      * Transform URL string params to object
+     * @param  {String} routeParams
      * @return {Object}
+     * @example https://medialize.github.io/URI.js/docs.html
      */
-    _unserializeParams: function() {
+    _unserializeParams: function(routeParams) {
       var params = {};
-      var search = window.location.search;
-      if (!!search) {
-        params = this.utils.getParams(search.substring(1));
+      if (typeof routeParams === 'string' && routeParams.length) {
+        var uri = new URI('?' + routeParams);
+        params = uri.search(true);
       }
       return params;
     },
@@ -66,18 +68,12 @@
     /**
      * Transform object params to URL string
      * @return {String}
+     * @example https://medialize.github.io/URI.js/docs.html
      */
     _serializeParams: function() {
-      return this.params ? $.param(this.params.attributes) : null;
-    },
-
-    /**
-     * - getParams
-     * Return params
-     * @return {Object}
-     */
-    getParams: function() {
-      return this._unserializeParams();
+      var uri = new URI();
+      uri.search(this.params.attributes);
+      return uri.search();
     }
 
   });

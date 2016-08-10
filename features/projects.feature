@@ -31,7 +31,7 @@ I want to manage an project
     And I fill in "project_title" with "Created project by user"
     And I fill in "project_summary" with "Lorem ipsum.."
     And I press "Submit"
-    Then I should be on the profile page for "user@sample.com"
+    Then I should be on the edit project page for "user@sample.com" "Created project by user"
     And I should have one project
 
   Scenario: User delete owned project

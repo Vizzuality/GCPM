@@ -6,9 +6,11 @@
 
   App.View.MapLayers = App.Helper.Tooltip.extend({
 
-    el: '#map-layers-tooltip',
+    el: '#map-layers',
 
-    // map-layers
+    events: {
+      'click .btn-map-layer' : 'onClickLayer'
+    },
 
     initialize: function() {
       // Initialize Parent
@@ -17,42 +19,40 @@
       this.listeners();
     },
 
+
     listeners: function() {
-      // Doesn't work but we don't need it as we binded the close function to
-      // clicks on the document
-      // Backbone.Events.on('MapMenu/action', this.hide.bind(this));
-      Backbone.Events.on('Layers/toggle', function(e) {
-        if(!this.initiator) {
-          this.initiator = e.target;
-          var buttonClientRect = e.currentTarget.getBoundingClientRect();
-          this.$el.css({
-            top:  (buttonClientRect.top + buttonClientRect.height) + 'px',
-            left: (buttonClientRect.left + buttonClientRect.width / 2) + 'px'
-          });
-        }
+      App.Events.on('Layers/toggle', function(e) {
+
+        var $currentTarget = $(e.currentTarget);
+        var offsets = $currentTarget.offset();
+
+        this.model.set('currentTarget', e.currentTarget);
+
+        // Position tooltip
+        this.$el.css({
+          top: offsets.top + $currentTarget.innerHeight(),
+          left: offsets.left
+        });
+
+        // Position arrow
+        this.$el.find('.tooltip-arrow').css({
+          left: $currentTarget.innerWidth()/2
+        });
 
         this.toggle();
       }.bind(this))
     },
 
-    // render: function() {
-    //   this.renderChosen();
-    //   this.renderPickADate();
-    //   return this;
-    // },
-    //
-    // renderChosen: function() {
-    //   this.$el.find('.chosen-select').chosen({
-    //     width: '100%',
-    //     allow_single_deselect: true,
-    //     inherit_select_classes: true,
-    //     no_results_text: "Oops, nothing found!"
-    //   });
-    // },
-    //
-    // renderPickADate: function() {
-    //   // this.$el.find('.pickadate-input').pickadate();
-    // }
+
+    /**
+     * UI EVENTS
+     * - onClickLayer
+     */
+    onClickLayer: function(e) {
+      e & e.preventDefault();
+      this.model.set('layer', $(e.currentTarget).data('layer'));
+      console.log(this.model.toJSON());
+    },
 
   });
 

@@ -2,11 +2,11 @@
 /**
     <div class="c-period-bar">
       <div class="period">
-        <ul>
+        <ul class="start-date">
           <p><%= t 'starts' %></p>
           <p class="date"><%= @project.start_date %></p>
         </ul>
-        <ul>
+        <ul class="end-date">
           <p><%= t 'ends' %></p>
           <p class="date"><%= @project.end_date %></p>
         </ul>
@@ -31,6 +31,8 @@
       &:last-child {
         text-align: right;
       }
+
+      &.-hidden { display: none; }
     }
 
     .date {
@@ -43,6 +45,8 @@
     height: 10px;
     border-radius: 10px;
     background-color: lightgrey;
+
+    &.-hidden { display: none; }
 
     & .filled {
       height: 100%;

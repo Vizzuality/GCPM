@@ -25,12 +25,12 @@ module Gcpm
     config.assets.paths << "#{Rails.root}/app/assets/fonts"
     config.autoload_paths += %W(#{Rails.root}/app/excel_importer)
 
-    config.middleware.use Rack::Cors do
-      allow do
-        origins '*'
-        resource '/*', headers: :any, methods: [:put, :patch, :post, :delete]
-      end
-    end
+    # config.middleware.use Rack::Cors do
+    #   allow do
+    #     origins '*'
+    #     resource '/*', headers: :any, methods: [:put, :patch, :post, :delete]
+    #   end
+    # end
 
     config.generators do |g|
       g.test_framework  :rspec

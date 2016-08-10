@@ -1,6 +1,7 @@
 (function(App) {
 
   'use strict';
+
   /**
    * Main Application View
    */
@@ -19,17 +20,16 @@
     initialize: function() {
       this.$content = $('#content');
       this.router = new App.Router();
-      this.initCommonTools();
-      this.initCommonViews();
+      // this.initCommonTools();
+      // this.initCommonViews();
       this.listeners();
     },
 
     listeners: function() {
-      this.listenTo(this.router, 'route:map', this.mapPage);
       this.listenTo(this.router, 'route:countries', this.countriesPage);
       this.listenTo(this.router, 'route:country', this.countryPage);
-      this.listenTo(this.router, 'route:event', this.eventInfo);
-      this.listenTo(this.router, 'route:project', this.projectDetail);
+      this.listenTo(this.router, 'route:event', this.eventDetailPage);
+      this.listenTo(this.router, 'route:project', this.projectDetailPage);
       this.listenTo(this.router, 'route:network', this.userPage);
       this.listenTo(this.router, 'route:editproject', this.editProjectPage);
       this.listenTo(this.router, 'route:editevent', this.editEventPage);
@@ -41,15 +41,6 @@
       // Update params
       App.Events.on('filters:update', this.publishParams.bind(this));
       App.Events.on('filters:reset', this.resetParams.bind(this));
-
-    },
-
-    start: function() {
-      Backbone.history.start({ pushState: true });
-    },
-
-    stop: function() {
-      Backbone.history.stop();
     },
 
     /**
@@ -69,11 +60,12 @@
       App.Helper.Utils.handlebarsHelpers();
     },
 
-    initCommonViews: function() {
-      new App.View.MobileHeader();
-      new App.View.Notice();
-      new App.View.UserDropdownMenu();
-    },
+    // initCommonViews: function() {
+    //   new App.View.MobileHeader();
+    //   new App.View.Notice();
+    //   new App.View.UserDropdownMenu();
+    //   new App.View.Modal({ el: '#modalView' });
+    // },
 
     getContent: function() {
       $.getScript(window.location.pathname + window.location.search, function(data, textStatus, jqxhr){
@@ -111,6 +103,7 @@
       });
 
       new App.View.MapLayers();
+      new App.View.MapSortby();
     },
 
     countriesPage: function() {
@@ -162,7 +155,7 @@
       new App.View.AddNewEvent();
     },
 
-    eventInfo: function() {
+    eventDetailPage: function() {
       var params = this.router.getParams();
 
       // Map view
@@ -178,9 +171,11 @@
       layersCollection.toggleLayers([
         params.type || 'org-project-markers'
       ]);
+
+      new App.View.EventDetail();
     },
 
-    projectDetail: function() {
+    projectDetailPage: function() {
       var params = this.router.getParams();
 
       // Map view
@@ -196,6 +191,8 @@
       layersCollection.toggleLayers([
         params.type || 'org-project-markers'
       ]);
+
+      new App.View.ProjectDetail();
     },
 
     /**
