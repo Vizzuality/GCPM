@@ -10,48 +10,104 @@
   </label>
 
   <label for="email">
-    Name of investigator:
-    <input type="text" name="email" placeholder="Email of investigator">
+    Email of investigator:
+    <input type="email" name="email" placeholder="Email of investigator">
   </label>
 
+  <label for="email">
+    Website of investigator:
+    <input type="url" name="website" placeholder="http://example.org/">
+  </label>
 
-  {{{organisationForm}}}
+  <div id="modalPickOrganization"></div>
+  <div class="modal-module -mm-org">
+    <label for="name_org">
+      Name of organization:
+      <input type="text" name="name_org" placeholder="Name">
+    </label>
 
-  <button type="submit">Save</button>
+    <label for="acronym_org">
+      Acronym of organization:
+      <input type="text" name="acronym_org" placeholder="NM">
+    </label>
+
+    <label for="email_org">
+      Email of organization:
+      <input type="text" name="email_org" placeholder="test@test.com">
+    </label>
+
+    <label for="established_org">
+      Established:
+      <input type="text" name="established_org" placeholder="1956">
+    </label>
+
+    <div id="modalPickCountry"></div>
+
+    <label for="city_org">
+      City:
+      <input type="text" name="city_org" placeholder="Boston">
+    </label>
+  </div>
+
+  <div class="modal-module -mm-adr">
+    <label for="latitude_org" class="-half">
+      LAT:
+      <input type="text" name="latitude_org" placeholder="00º 00' 00&quot;">
+    </label>
+
+    <label for="longitude_org" class="-half">
+      LONG:
+      <input type="text" name="longitude_org" placeholder="00º 00' 00&quot;">
+    </label>
+
+    <label for="line1_org">
+      Line 1:
+      <input type="text" name="line1_org" placeholder="Beacon St.">
+    </label>
+
+    <label for="line_2_org" class="-half">
+      Line 2:
+      <input type="text" name="line_2_org" placeholder="-">
+    </label>
+
+    <label for="line_3_org" class="-half">
+      Line 3:
+      <input type="text" name="line_3_org" placeholder="-">
+    </label>
+
+    <label for="postcode_org">
+      Postcode:
+      <input type="text" name="postcode_org" placeholder="02108">
+    </label>
+
+    <label for="primary_org">
+      Primary:
+      <input type="text" name="primary_org" placeholder="No">
+    </label>
+
+    <label for="state_org">
+      State:
+      <input type="text" name="state_org" placeholder="Massachusetts">
+    </label>
+
+    <label for="statecode_org">
+      Statecode:
+      <input type="text" name="statecode_org" placeholder="MA">
+    </label>
+
+    <label for="geonames_city_id_org">
+      Geonames:
+      <input type="text" name="geonames_city_id_org" placeholder="Boston">
+    </label>
+
+    <label for="organization_type_id">
+      Organization type:
+      <input type="text" name="organization_type_id" placeholder="Boston">
+    </label>
+  </div>
+  <div class="-buttons">
+    <span class="-btn js-btn-modal-close">cancel</span>
+    <button type="submit" class="-btn -add">add</button>
+  </div>
 
 </form>
-
-
-{{!--
-
-  {"investigator": { "name": "Test investigator", "address_ids": ["#{address.id}"],
-                                       "addresses_attributes": [
-                                         {"country_id": "#{country.id}", "organization_attributes": {"name": "Test orga 1"} },
-                                         {"country_id": "#{country.id}", "organization_attributes": {"name": "Test orga 2"} }
-                                       ]
-                   }}
- --}}
-
-{{!-- {"investigator": { "name": "Test investigator", "email": "testuser@sample.com", "website": "http://www.testwebsite.com", "address_ids": ["#{address.id}"],
-                                       "addresses_attributes": [
-                                         {"country_id": "#{country.id}",
-                                          "city": "",
-                                          "latitude": "",
-                                          "longitude": "",
-                                          "line_1": "",
-                                          "line_2": "",
-                                          "line_3": "",
-                                          "postcode": "",
-                                          "primary": "",
-                                          "state": "",
-                                          "state_code": "",
-                                          "geonames_city_id": "",
-                                          "organization_attributes": {"name": "Test orga 1",
-                                                                      "acronym": "",
-                                                                      "grid_id": "",
-                                                                      "email_address": "",
-                                                                      "established": "",
-                                                                      "organization_type_id": ""}},
-                                         {"country_id": "#{country.id}", "organization_attributes": {"name": "Test orga 2"}}
-                                       ]
-                   }} --}}
