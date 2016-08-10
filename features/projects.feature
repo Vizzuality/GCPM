@@ -15,6 +15,7 @@ I want to manage an project
     When I follow "First project by user"
     Then I should be on the project page for "First project by user"
 
+  @javascript
   Scenario: User can edit owned project
     Given I am authenticated user
     And first project
@@ -25,6 +26,7 @@ I want to manage an project
     Then I should be on the project page for "New title"
     And I should see "New title"
 
+  @javascript
   Scenario: User can create project
     Given I am authenticated user
     When I go to the new project page for "user@sample.com"
