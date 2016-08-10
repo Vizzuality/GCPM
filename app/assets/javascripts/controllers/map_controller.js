@@ -8,7 +8,7 @@
 
     index: function(params) {
       this.params = params;
-      var layersActived = [2];
+      var layersActived = [3];
 
       var layersSpec = this.layersSpec = new App.Collection.LayersSpec();
       var map = this.map = new App.View.Map({
@@ -18,12 +18,11 @@
       });
 
       layersSpec.on('change, reset', function() {
-        // console.log('reset');
         map.renderLayers();
       });
 
       layersSpec.fetch().done(function() {
-        // This method trigger an event called 'reset'
+        // This method triggers an event called 'reset'
         layersSpec.filterByIds(layersActived);
       });
 
@@ -39,9 +38,9 @@
         params: this.params
       });
 
-      // new App.View.MapFilters({
-      //   params: this.params
-      // });
+      new App.View.MapFilters({
+        params: this.params
+      });
 
       // new App.View.MapLayers();
       // new App.View.MapSortby();

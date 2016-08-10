@@ -127,20 +127,30 @@
 
       var LayersDic = {
         tile: App.View.MarkerLayer,
-        carto: App.View.MarkerLayer,
+        carto: App.View.CartoLayer,
         marker: App.View.MarkerLayer
       };
 
       // Add all layers
       _.each(this.collection.models, function(layerModel) {
-        if (LayersDic[layerModel.attributes.type]) {
-          var currentLayer = new LayersDic[layerModel.attributes.type]({params: this.params});
+        var layerType = layerModel.attributes.type;
+        if (LayersDic[layerType]) {
+          var currentLayerObj = new LayersDic[layerType]({
+            params: this.params,
+            config: layerModel.attributes.config
+          });
 
-          currentLayer.create().done(_.bind(function() {
-            this.currentLayer = currentLayer.layer;
+          currentLayerObj.create().done(_.bind(function(layer) {
+            // Carto create function returns directly the layer
+            if (layerType === "carto") {
+              currentLayerObj.layer = layer;
+            }
+            this.currentLayer = currentLayerObj.layer;
             this.addLayer();
-            this._instancedlayers[layerModel.attributes.id] = currentLayer;
-            this._fitBounds(currentLayer.layer);
+            this._instancedlayers[layerModel.attributes.id] = currentLayerObj;
+            if(layerType === 'marker') {
+              this._fitBounds(this.currentLayer);
+            }
           }, this));
         }
       }, this);

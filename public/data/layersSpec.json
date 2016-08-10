@@ -16,7 +16,10 @@
   {
     "id": 3,
     "type": "carto",
-    "config": {},
+    "config": {
+      "cartocss": "#crm_countries_geoms{polygon-fill: #FF6600;polygon-opacity: 0.7;line-color: #FFF;line-width: 1;line-opacity: 1;}",
+      "sql": "SELECT * FROM crm_countries_geoms"
+    },
     "active": false,
     "order": 1
   }

@@ -1,0 +1,6 @@
+{
+  "cartodb": {
+    "user_name": "crm",
+    "countries_table": "countries"
+  }
+}
