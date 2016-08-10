@@ -7,6 +7,7 @@
 
 <script> var PROJECT_ID = <%= @PROJECT_ID %>;</script>
 <script> var AUTH_TOKEN = "<%= @user.authentication_token %>"</script>
+
 <span class="user-manual"><%= link_to (t 'download'), download_user_manual_path, class: "-color-1 f-user-manual", download: 'User Manual', data: {turbolinks: false}, title: "User Manual" %></span>
 <div class="c-section-intro">
 	<%= form.input :title, label: @project.title.presence || "Project title_", label_html: { class: 'c-title -bigger -bold -hide-edited' }, :required => false, input_html: { class: '-editable'}, placeholder: "Project title_", value: @project.title.presence || "Project title_"  %>
@@ -47,7 +48,7 @@
 	</div>
 	<div id="c-pregenerated-container" class="c-staff">
 	</div>
-  <span class="button saveRelation">save</span>
+  <!-- <span class="button saveRelation">save</span> -->
 </div>
 
 <div class="c-section-container -staff">
