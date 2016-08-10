@@ -13,8 +13,10 @@
       '': 'Home#index',
       'map': 'Map#index',
       'network/:id/projects/:val/edit': 'Editproject#index',
+      'network/:id/projects/:val': 'Editproject#index',
       'network/:id/projects/new': 'Editproject#index',
-      'network/:id/projects/edit': 'Editproject#index'
+      'network/:id/projects/edit': 'Editproject#index',
+      'network/:id/projects': 'Editproject#index'
     },
 
     initialize: function() {

@@ -36,7 +36,7 @@ module Api::V1
       let(:investigator_id) { investigator.id }
 
       it 'Allows to access investigators list' do
-        get '/api/investigators?token=7Nw1A13xrHrZDHj631MA'
+        get "/api/investigators?token=#{user.authentication_token}"
 
         investigator = json[0]
         expect(status).to               eq(200)
@@ -46,7 +46,7 @@ module Api::V1
       end
 
       it 'Allows to access investigator by id' do
-        get "/api/investigators/#{investigator_id}?token=7Nw1A13xrHrZDHj631MA"
+        get "/api/investigators/#{investigator_id}?token=#{user.authentication_token}"
 
         expect(status).to eq(200)
         expect(json['organizations'].size).to eq(1)
@@ -55,7 +55,7 @@ module Api::V1
 
       context 'Allows to manage investigators' do
         it 'Create investigator with non existing and existing origanizations' do
-          post '/api/investigators?token=7Nw1A13xrHrZDHj631MA', params: params
+          post "/api/investigators?token=#{user.authentication_token}", params: params
 
           expect(status).to eq(201)
           expect(json['id']).to                         be_present

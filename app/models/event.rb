@@ -29,8 +29,11 @@ class Event < ApplicationRecord
   belongs_to :user, inverse_of: :events
 
   validates_presence_of :title, :description
+  scope :by_user, -> user { where('events.user_id = ?', user ) }
 
-  def self.fetch_all()
+  def self.fetch_all(options)
     events = Event.all
+    events = events.by_user(options[:user]) if options[:user]
+    events = events.uniq
   end
 end

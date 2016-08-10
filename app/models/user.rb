@@ -52,12 +52,12 @@ class User < ApplicationRecord
 
   def check_authentication_token(destroy_true=nil)
     # ToDo: reset authentication_token after devise session destroy
-    if self.authentication_token.blank?
-      self.authentication_token = generate_authentication_token
-      set_token_expiration
-    elsif destroy_true.present?
+    if destroy_true.present?
       query = "UPDATE users SET authentication_token=null, token_expires_at=null WHERE id=#{self.id}"
       ActiveRecord::Base.connection.execute(query)
+    elsif
+      self.authentication_token = generate_authentication_token
+      set_token_expiration
     end
   end
 

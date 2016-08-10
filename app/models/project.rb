@@ -41,6 +41,7 @@ class Project < ApplicationRecord
 
   validates_presence_of :title, :summary
   validates :title, uniqueness: true
+  validates_acceptance_of :terms
 
   scope :publihsed,             ->                     { where(status: :published) }
   scope :active,                ->                     { where('projects.end_date >= ? AND projects.start_date <= ?', Time.now, Time.now).or(where('projects.end_date IS NULL')) }
@@ -53,6 +54,7 @@ class Project < ApplicationRecord
   scope :by_regions,            -> regions             { joins(:countries).where(countries: { region_iso: regions }) }
   scope :by_start_date,         -> start_date          { where('projects.start_date > ?', start_date ) }
   scope :by_end_date,           -> end_date            { where('projects.end_date < ?', end_date ) }
+  scope :by_user,               -> user                { where('projects.user_id = ?', user ) }
 
   def self.fetch_all(options)
     projects = Project.published
@@ -64,6 +66,7 @@ class Project < ApplicationRecord
     projects = projects.by_organization_types(options[:organization_types]) if options[:organization_types]
     projects = projects.by_start_date(options[:start_date])                 if options[:start_date]
     projects = projects.by_end_date(options[:end_date])                     if options[:end_date]
+    projects = projects.by_user(options[:user])                             if options[:user]
     projects = projects.limit(options[:limit])                              if options[:limit]
     projects = projects.offset(options[:offset])                            if options[:offset]
     projects.uniq

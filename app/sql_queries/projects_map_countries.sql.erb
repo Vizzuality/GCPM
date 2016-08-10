@@ -48,4 +48,7 @@ from projects
     <% if @params[:end_date] %>
       and (projects.end_date < date(<%= quote @params[:end_date] %>))
     <% end %>
+    <% if @params[:user] %>
+      and projects.user_id = <%= quote @params[:user] %>
+    <% end %>
 group by location_id, location_name, centroid, iso

@@ -21,7 +21,7 @@ class MapController < ApplicationController
     # Events
     #Limit of events shown at the beginning and added when show more button clicked
     # @events  = Event.order('created_at DESC').limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
-    @events  = Event.fetch_all().order('created_at DESC').limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
+    @events  = Event.fetch_all(projects_params).order('created_at DESC').limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
 
 
     @current_type = params[:type] || 'projects'
@@ -32,7 +32,7 @@ class MapController < ApplicationController
 
   private
   def projects_params
-    params.permit(:start_date, :end_date, project_types:[], countries:[], cancer_types:[], organization_types:[], organizations:[], regions:[])
+    params.permit(:user, :start_date, :end_date, project_types:[], countries:[], cancer_types:[], organization_types:[], organizations:[], regions:[])
   end
 
 end
