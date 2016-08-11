@@ -22,7 +22,7 @@
     },
 
     /* Transforms psql & cartocss into string by handlebars */
-    templateString(path, options) {
+    templateString: function(path, options) {
       return HandlebarsTemplates[path](options);
     }
 
