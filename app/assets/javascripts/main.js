@@ -80,32 +80,6 @@
       }
     },
 
-    // mapPage: function() {
-    //   this.params = this.setParams(this.router.getParams());
-    //   var layersCollection = new App.Collection.Layers();
-
-    //   // Views
-    //   new App.View.Map({
-    //     layers: layersCollection,
-    //     params: this.params
-    //   });
-
-    //   new App.View.MapMenu({
-    //     params: this.params
-    //   });
-
-    //   new App.View.MapTypes({
-    //     params: this.params
-    //   });
-
-    //   new App.View.MapFilters({
-    //     params: this.params
-    //   });
-
-    //   new App.View.MapLayers();
-    //   new App.View.MapSortby();
-    // },
-
     countriesPage: function() {
       this.params = this.setParams(this.router.getParams());
       /* Countries index search view */
