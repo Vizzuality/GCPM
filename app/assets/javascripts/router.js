@@ -11,7 +11,8 @@
      */
     routes: {
       '': 'Home#index',
-      'map': 'Map#index'
+      'map': 'Map#index',
+      'network/:id': 'User#index'
     },
 
     initialize: function() {

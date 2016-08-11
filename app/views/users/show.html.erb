@@ -11,6 +11,8 @@
       </div>
     </div>
 
+    <div id="map-tooltip" class="c-map-tooltip"></div>
+
     <div class="intro-info">
       <div class="info">
         <div class="c-personal-info">
@@ -67,17 +69,15 @@
         </div>
       </div>
 
-      <ul class="c-section-menu wrapper -color-0">
-        <% @filters.each do |filter| %>
+      <ul id="map-types" class="c-section-menu wrapper -color-0">
+         <% @filters.each do |filter| %>
+          <% @class = !params['type'] && filter == "projects" ? "-active" : active_param?('type', filter) %>
           <li>
-            <%= link_to (t filter),
-              user_path(request.query_parameters.merge({ type: filter })),
-              class: active_param?('type', filter),
-              remote: true,
-              data: {magic: true} %>
+            <a class="js-btn-mapmenu-type <%= @class %>" href="#" data-type="<%= filter %>"><%= t (filter) %></a>
           </li>
         <% end %>
       </ul>
+
     </div>
   </div>
   <div id="content">

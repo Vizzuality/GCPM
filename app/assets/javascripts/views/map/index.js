@@ -134,6 +134,7 @@
       // Add all layers
       _.each(this.collection.models, function(layerModel) {
         var layerType = layerModel.attributes.type;
+
         if (LayersDic[layerType]) {
           var currentLayerObj = new LayersDic[layerType]({
             params: this.params,

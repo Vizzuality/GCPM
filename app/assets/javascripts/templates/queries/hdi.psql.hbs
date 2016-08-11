@@ -1,0 +1,10 @@
+SELECT
+  b.admin AS country_name,
+  b.adm0_a3 AS country_iso,
+  -- a.y_1980, a.y_1985, a.y_1990, a.y_2000, a.y_2005, a.y_2006,
+  -- a.y_2007, a.y_2008, a.y_2009, a.y_2010, a.y_2011, a.y_2012, a.y_2013,
+  a.{{column_name}} AS value,
+  b.the_geom_webmercator
+FROM crm_hdi a, crm_countries_geoms b
+WHERE a.iso = b.adm0_a3
+ORDER BY b.admin
