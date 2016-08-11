@@ -12,6 +12,7 @@
     routes: {
       '': 'Home#index',
       'map': 'Map#index',
+      'network/:id': 'User#index',
       'network/:id/projects/:val/edit': 'Editproject#index',
       'network/:id/projects/:val': 'Editproject#index',
       'network/:id/projects/new': 'Editproject#index',
@@ -25,7 +26,7 @@
       // Listening events
       this.params.on('change', _.bind(this.updateUrl, this));
       // Global event to update params from external actions
-      App.Events.on('Router:update', _.bind(this.updateParams, this));
+      App.Events.on('params:update', _.bind(this.updateParams, this));
     },
 
     /**
@@ -42,13 +43,14 @@
      */
     updateParams: function(params) {
       this.params.clear().set(params, { silent: true });
+      this.updateUrl();
     },
 
     /**
      * Change URL with current params
      */
     updateUrl: function() {
-      var url = location.pathname.slice(1) + '?' + this._serializeParams();
+      var url = location.pathname.slice(1) + this._serializeParams();
       this.navigate(url, { trigger: false });
     },
 

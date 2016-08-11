@@ -19,6 +19,11 @@
     display: flex;
     justify-content: center;
   }
+
+  // Temporal instruction
+  & .chosen-container {
+    position: relative;
+  }
 }
 
 #btn-clear-filters {

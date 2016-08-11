@@ -25,7 +25,7 @@
         var ageDate = new Date(ageDifMs); // miliseconds from epoch
         return Math.abs(ageDate.getUTCFullYear() - 1970);
       }(),
-      selectMonths: true,        
+      selectMonths: true,
       editable: false,
       format: 'yyyy-mm-dd',
       klass: {
@@ -103,10 +103,10 @@
           width: '100%',
           allow_single_deselect: true,
           inherit_select_classes: true,
-          no_results_text: "Oops, nothing found!"        
+          no_results_text: "Oops, nothing found!"
         });
 
-        // Fix to keep the chosen always visible 
+        // Fix to keep the chosen always visible
         // https://github.com/harvesthq/chosen/issues/1546
         // Really????? This is the huge shit I've seen in my life
         // The issue has been opened since 2013...
@@ -127,8 +127,8 @@
             if (autoClose === false && resultHighlight !== null){
               resultHighlight.addClass('result-selected');
             }
-                
-            // this.search_field.val(stext);               
+
+            // this.search_field.val(stext);
             this.winnow_results();
             this.search_field_scale();
 
@@ -180,8 +180,8 @@
         if (_.isArray(val)) {
           newFilters[key+'[]'] = _.flatten(val);
         } else {
-          newFilters[key] = val;  
-        }        
+          newFilters[key] = val;
+        }
       });
       App.Events.trigger('filters:update', newFilters);
       this.hide();
@@ -195,7 +195,7 @@
     },
 
     resetFilters: function() {
-      this.$el.find('select').val(null).trigger('chosen:updated');      
+      this.$el.find('select').val(null).trigger('chosen:updated');
     },
 
 
