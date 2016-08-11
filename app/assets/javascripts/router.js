@@ -12,7 +12,12 @@
     routes: {
       '': 'Home#index',
       'map': 'Map#index',
-      'network/:id': 'User#index'
+      'network/:id': 'User#index',
+      'network/:id/projects/:val/edit': 'Editproject#index',
+      'network/:id/projects/:val': 'Editproject#index',
+      'network/:id/projects/new': 'Editproject#index',
+      'network/:id/projects/edit': 'Editproject#index',
+      'network/:id/projects': 'Editproject#index'
     },
 
     initialize: function() {
@@ -53,11 +58,13 @@
      * Transform URL string params to object
      * @param  {String} routeParams
      * @return {Object}
+     * @example https://medialize.github.io/URI.js/docs.html
      */
     _unserializeParams: function(routeParams) {
       var params = {};
       if (typeof routeParams === 'string' && routeParams.length) {
-        params = App.Helper.Utils.getParams(routeParams);
+        var uri = new URI('?' + routeParams);
+        params = uri.search(true);
       }
       return params;
     },
@@ -65,9 +72,12 @@
     /**
      * Transform object params to URL string
      * @return {String}
+     * @example https://medialize.github.io/URI.js/docs.html
      */
     _serializeParams: function() {
-      return $.param(this.params.attributes);
+      var uri = new URI();
+      uri.search(this.params.attributes);
+      return uri.search();
     }
 
   });

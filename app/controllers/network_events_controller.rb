@@ -31,7 +31,7 @@ class NetworkEventsController < ApplicationController
     if @event.save
       redirect_to user_path(@user, type: 'events'), notice: 'Event succesfully created.'
     else
-      render :new, notice: "Event can't be created."
+      render :new, notice: @project.errors.full_messages
     end
   end
 

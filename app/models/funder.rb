@@ -13,6 +13,5 @@ class Funder < ApplicationRecord
   belongs_to :project
   belongs_to :organization
 
-  validates_presence_of :organization_id, :project_id
   validates :organization_id, uniqueness: { scope: :project_id }
 end

@@ -29,7 +29,7 @@
      * Instance common and global view here
      * @return {[type]} [description]
      */
-    _instanceCommonViews() {
+    _instanceCommonViews: function() {
       new App.View.MobileHeader();
       new App.View.Notice();
       new App.View.UserDropdownMenu();

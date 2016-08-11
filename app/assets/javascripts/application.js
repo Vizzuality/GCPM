@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require leaflet
+//= require URIjs
 //= require handlebars
 //= require underscore/underscore
 //= require backbone/backbone

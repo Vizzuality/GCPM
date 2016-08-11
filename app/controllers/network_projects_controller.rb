@@ -29,7 +29,7 @@ class NetworkProjectsController < ApplicationController
     if @project.save
       redirect_to edit_user_project_path(@user, @project, anchor: 'relations', relations: true), notice: 'Project succesfully created.'
     else
-      redirect_to new_user_project_path(@user, @project), notice: "Project can't be created."
+      render :new, notice: @project.errors.full_messages
     end
   end
 
