@@ -23,13 +23,8 @@
     },
 
     initialize: function(settings) {
-      // if (!map && map instanceof L.Map) {
-      //   throw 'First params "map" is required and a valid instance of L.Map.';
-      // }
-      this.params = settings.params;
-
-      // this.map = map;
       this.options = _.extend({}, this.defaults, settings || {});
+      this.params = settings.params;
       this.tooltipEl = $('#map-tooltip');
       this.tooltipTpl = HandlebarsTemplates['map-tooltip'];
 
@@ -37,7 +32,7 @@
     },
 
     /**
-     * Add a CartoDB layer
+     * Create a CartoDB layer
      * @param  {Function} callback
      */
     create: function() {
@@ -51,7 +46,7 @@
           data: this.params.toJSON()
         })
         .done(function(){
-          this.opt = {
+          this.markersOptions = {
             markers: markers.toJSON(),
             type: this.params.get('type') || 'projects'
           };
@@ -65,7 +60,7 @@
      * @param  {Function} callback
      */
     add: function() {
-      var markers = this.opt.markers;
+      var markers = this.markersOptions.markers;
       if (markers && markers.length) {
         this.markers = _.compact(_.map(markers, function(marker){
           if (! !!marker.centroid) { return null; }
@@ -78,7 +73,7 @@
           var icon = new L.divIcon({
             iconSize: [size,size],
             // Need to set marker.type on each marker
-            className: 'c-marker -' + marker.type + ' -'+this.opt.type + investigator,
+            className: 'c-marker -' + marker.type + ' -'+this.markersOptions.type + investigator,
             html: this.template({
               value: (marker.count > 1) ? marker.count : '',
               svg: (!!svg) ? this.getHtmlString(svg) : null
@@ -90,7 +85,7 @@
             riseOnHover: true,
             data: {
               type: marker.type,
-              path: this.opt.type,
+              path: this.markersOptions.type,
               location_id: marker.project || marker.event || marker.location_id,
               location_name: marker.title || marker.location_name,
               location_iso: marker.iso
