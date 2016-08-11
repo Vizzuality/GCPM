@@ -8,7 +8,7 @@
 
     index: function(params) {
       this.params = params;
-      var layersActived = [2];
+      var layersActived = [2, 4];
 
       var layersSpec = this.layersSpec = new App.Collection.LayersSpec();
       var options = {

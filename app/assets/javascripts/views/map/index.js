@@ -109,7 +109,7 @@
      */
     unsetBasemap: function() {
       if (this.basemap) {
-        // this.map.removeLayer(this.basemap);
+        this.map.removeLayer(this.basemap);
       } else {
         console.info('Basemap doesn\'t exist.');
       }
@@ -122,8 +122,6 @@
      * Render or remove layers by Layers Collection
      */
     renderLayers: function() {
-      // At beginning clear all layers
-      this.clearLayers();
 
       var LayersDic = {
         tile: App.View.MarkerLayer,
@@ -142,15 +140,24 @@
           });
 
           currentLayerObj.create().done(_.bind(function(layer) {
-            // Carto create function returns directly the layer
+            // Carto 'create' function returns directly the layer
+            console.log(layerModel.attributes.id);
             if (layerType === "carto") {
               currentLayerObj.layer = layer;
             }
-            this.currentLayer = currentLayerObj.layer;
-            this.addLayer();
+
+            var currentLayer = currentLayerObj.layer;
+            /* Remove previous layer in case it has the same id to avoid both to
+            be at the same time */
+            if (this._instancedlayers[layerModel.attributes.id]) {
+              this.removeLayer(layerModel.attributes.id);
+            }
+            this.addLayer(currentLayer);
             this._instancedlayers[layerModel.attributes.id] = currentLayerObj;
+
+
             if(layerType === 'marker') {
-              this._fitBounds(this.currentLayer);
+              this._fitBounds(currentLayer);
             }
           }, this));
         }
@@ -161,8 +168,8 @@
      * - renderLayers
      * Add layer to the map and its correspondant events
      */
-    addLayer: function() {
-      this.currentLayer.addTo(this.map)
+    addLayer: function(layer) {
+      layer.addTo(this.map)
         .on('mouseover', function(data) {
           var pos = this.map.latLngToContainerPoint(data.latlng);
           this.tooltip = new App.View.Tooltip({map: this.map, data: data, pos: pos});
@@ -173,13 +180,22 @@
     },
 
     /**
+     * - removeLayer
+     * Remove one layer from the map
+     */
+    removeLayer: function(i) {
+      this.map.removeLayer(this._instancedlayers[i].layer);
+    },
+
+     /**
      * - clearLayers
      * Remove all layers from the map
      */
     clearLayers: function() {
-      _.each(this._instancedlayers, function(layerInstanced) {
+      _.each(this._instancedlayers, function(layerInstanced, key) {
         this.map.removeLayer(layerInstanced.layer);
       }, this);
+      this._instancedlayers = {};
     },
 
     /**

@@ -22,5 +22,15 @@
     },
     "active": false,
     "order": 1
+  },
+  {
+    "id": 4,
+    "type": "carto",
+    "config": {
+      "sql": "SELECT * FROM crm_global_regions_geoms",
+      "cartocss": "#crm_global_regions_geoms{ polygon-fill: #FFFFFF; polygon-opacity: 0; line-color: #49A5E4; line-width: 1; line-opacity: 1; }"
+    },
+    "active": false,
+    "order": 1
   }
 ]

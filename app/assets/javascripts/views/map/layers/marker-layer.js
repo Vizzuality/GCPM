@@ -27,8 +27,6 @@
       this.params = settings.params;
       this.tooltipEl = $('#map-tooltip');
       this.tooltipTpl = HandlebarsTemplates['map-tooltip'];
-
-      this.create();
     },
 
     /**

@@ -50,7 +50,7 @@
      * Change URL with current params
      */
     updateUrl: function() {
-      var url = location.pathname.slice(1) + (this._serializeParams() ? '?' + this._serializeParams() : '');
+      var url = location.pathname.slice(1) + this._serializeParams();
       this.navigate(url, { trigger: false });
     },
 
