@@ -8,19 +8,27 @@
 
     index: function(params) {
       // Map view
-      var layersCollection = new App.Collection.Layers();
-      var mapView = new App.View.Map({
+      var layersActived = [2, 4];
+
+      var layersSpec = this.layersSpec = new App.Collection.LayersSpec();
+      var map = new App.View.Map({
         el: '#map',
-        layers: layersCollection,
+        collection: this.layersSpec,
         options: {
           basemap: 'customDetail',
-          apiUrl: '/api/map/events/'+EVENT_ID
+          apiUrl: '/api/map/events/' + EVENT_ID
         }
       });
 
-      layersCollection.toggleLayers([
-        params.type || 'org-project-markers'
-      ]);
+      layersSpec.on('change, reset', function() {
+        map.renderLayers();
+      });
+
+      layersSpec.fetch().done(function() {
+        // This method triggers an event called 'reset'
+        layersSpec.filterByIds(layersActived);
+      });
+
 
       new App.View.EventDetail();
     },

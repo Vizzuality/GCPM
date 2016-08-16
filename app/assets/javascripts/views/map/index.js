@@ -136,7 +136,8 @@
         if (LayersDic[layerType]) {
           var currentLayerObj = new LayersDic[layerType]({
             params: this.params,
-            config: layerModel.attributes.config
+            config: layerModel.attributes.config,
+            apiUrl: this.options.apiUrl
           });
 
           currentLayerObj.create().done(_.bind(function(layer) {
