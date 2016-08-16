@@ -26,14 +26,6 @@
     },
 
     listeners: function() {
-      this.listenTo(this.router, 'route:countries', this.countriesPage);
-      this.listenTo(this.router, 'route:country', this.countryPage);
-      this.listenTo(this.router, 'route:event', this.eventDetailPage);
-      this.listenTo(this.router, 'route:project', this.projectDetailPage);
-      this.listenTo(this.router, 'route:network', this.userPage);
-      this.listenTo(this.router, 'route:editproject', this.editProjectPage);
-      this.listenTo(this.router, 'route:editevent', this.editEventPage);
-
       // Listening magic links
       App.Events.on('params:update', this.getContent);
       App.Events.on('remote:load', this.replaceContent);
@@ -78,95 +70,6 @@
       if (contentElement) {
         contentElement.innerHTML = data.content;
       }
-    },
-
-    countriesPage: function() {
-      this.params = this.setParams(this.router.getParams());
-      /* Countries index search view */
-      var regionsCollection = new App.Collection.Regions();
-      var regionsView = new App.View.SearchList({
-        searchList: regionsCollection,
-        options: {
-          template: HandlebarsTemplates['countries-list'],
-          innerSearchListName: 'countries',
-          itemSearchedCategory: 'country_name',
-          isTwoLevels: true
-        }
-      });
-
-      regionsCollection.fetch();
-    },
-
-    countryPage: function() {
-      this.params = this.setParams(this.router.getParams());
-      // Map view
-      var layersCollection = new App.Collection.Layers();
-      var mapView = new App.View.Map({
-        layers: layersCollection,
-        options: {
-          basemap: 'customDetail'
-        }
-      });
-    },
-
-    userPage: function() {
-      this.params = this.setParams(this.router.getParams());
-      // Map view
-      var layersCollection = new App.Collection.Layers();
-      var mapView = new App.View.Map({
-        layers: layersCollection,
-        options: {
-          basemap: 'customDetail'
-        }
-      });
-    },
-
-    editProjectPage: function() {
-      new App.View.AddNewProject();
-    },
-
-    editEventPage: function() {
-      new App.View.AddNewEvent();
-    },
-
-    eventDetailPage: function() {
-      var params = this.router.getParams();
-
-      // Map view
-      var layersCollection = new App.Collection.Layers();
-      var mapView = new App.View.Map({
-        layers: layersCollection,
-        options: {
-          basemap: 'customDetail',
-          apiUrl: '/api/map/events/'+EVENT_ID
-        }
-      });
-
-      layersCollection.toggleLayers([
-        params.type || 'org-project-markers'
-      ]);
-
-      new App.View.EventDetail();
-    },
-
-    projectDetailPage: function() {
-      var params = this.router.getParams();
-
-      // Map view
-      var layersCollection = new App.Collection.Layers();
-      var mapView = new App.View.Map({
-        layers: layersCollection,
-        options: {
-          basemap: 'customDetail',
-          apiUrl: '/api/map/projects/'+PROJECT_ID
-        }
-      });
-
-      layersCollection.toggleLayers([
-        params.type || 'org-project-markers'
-      ]);
-
-      new App.View.ProjectDetail();
     },
 
     /**
