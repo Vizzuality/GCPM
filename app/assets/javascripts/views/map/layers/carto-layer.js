@@ -14,10 +14,16 @@
     initialize: function(settings) {
       this.options = _.extend({}, this.defaults, settings || {});
       this.params = settings.params;
-      this.cartocss = settings.config.cartocss;
-      this.sql = settings.config.sql;
-
-      this.create();
+      this.layer = this.params.get('layer');
+      // TO-DO: set the variables depending on params config coming from layersSpec.json
+      // or admin layers tables
+      if (this.layer) {
+        this.carto = new App.Helper.CartoOptions({layer: this.layer});
+        this.cartoOpts = this.carto.getCartoOptions();
+        this.cartocss = settings.config.cartocss || this.cartoOpts.cartocss;
+        this.sql = settings.config.sql || this.cartoOpts.sql;
+        this.create();
+      }
     },
 
     /************

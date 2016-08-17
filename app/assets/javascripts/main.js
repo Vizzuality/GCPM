@@ -32,6 +32,7 @@
 
       // Update params
       App.Events.on('filters:update', this.publishParams.bind(this));
+      App.Events.on('filters:delete', this.deleteParam.bind(this));
       App.Events.on('filters:reset', this.resetParams.bind(this));
     },
 
@@ -99,6 +100,15 @@
       // TO-DO: review when you have only one country, we need to save it as an array
       // TO-DO convert params to a backbone model. Like the other views like map or router
       this.params = this.setParams(_.extend({}, this.params, newFilters));
+      App.Events.trigger('params:update', this.params);
+    },
+
+    deleteParam: function(param) {
+      var newParams = {};
+      this.params && Object.keys(this.params).map(function (key) {
+        if (key !== param) newParams[key] = this.params[key];
+      }.bind(this));
+      this.params = newParams;
       App.Events.trigger('params:update', this.params);
     },
 

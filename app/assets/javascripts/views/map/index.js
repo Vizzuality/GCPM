@@ -122,6 +122,7 @@
      * Render or remove layers by Layers Collection
      */
     renderLayers: function() {
+      this.clearLayers();
 
       var LayersDic = {
         tile: App.View.MarkerLayer,
@@ -165,7 +166,7 @@
     },
 
     /**
-     * - renderLayers
+     * - addLayer
      * Add layer to the map and its correspondant events
      */
     addLayer: function(layer) {
