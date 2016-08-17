@@ -13,11 +13,23 @@
       '': 'Home#index',
       'map': 'Map#index',
       'network/:id': 'User#index',
-      'network/:id/projects/:val/edit': 'Editproject#index',
-      'network/:id/projects/:val': 'Editproject#index',
-      'network/:id/projects/new': 'Editproject#index',
-      'network/:id/projects/edit': 'Editproject#index',
-      'network/:id/projects': 'Editproject#index'
+
+      'projects/:id': 'Projects#index',
+      'network/:id/projects/:val/edit': 'Projects#new',
+      'network/:id/projects/:val': 'Projects#new',
+      'network/:id/projects/new': 'Projects#new',
+      'network/:id/projects/edit': 'Projects#new',
+      'network/:id/projects': 'Projects#new',
+
+      'events/:id': 'Events#index',
+      'network/:id/events/:val/edit': 'Events#new',
+      'network/:id/events/:val': 'Events#new',
+      'network/:id/events/new': 'Events#new',
+      'network/:id/events/edit': 'Events#new',
+      'network/:id/events': 'Events#new',
+
+      'countries': 'Countries#index',
+      'countries/:iso': 'Countries#show'
     },
 
     initialize: function() {

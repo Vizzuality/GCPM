@@ -34,10 +34,16 @@
      * @param  {Function} callback
      */
     create: function() {
-      var markers = new App.Collection.Markers({
+      var markersOpts = {
         type: this.params.get('type') || 'projects',
         apiUrl: this.options.apiUrl
-      });
+      }
+
+      if (window.location.pathname.indexOf('network') !== -1) {
+        markersOpts['userId'] = USER_ID;
+      }
+
+      var markers = new App.Collection.Markers(markersOpts);
 
       return markers
         .fetch({
