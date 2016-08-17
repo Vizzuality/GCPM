@@ -22,10 +22,14 @@
       // Initialize Parent
       this.constructor.__super__.initialize.apply(this);
       this.params = settings.params;
+
       // Inits
       this.listeners();
-    },
 
+      if (this.params.sortby) {
+        this.model.set('sortby', this.params.sortby);
+      }
+    },
 
     listeners: function() {
       App.Events.on('Sortby/toggle', function(e) {
@@ -48,10 +52,13 @@
         this.toggle();
       }.bind(this));
 
-      this.model.on('change:sortby', this.sortGridby.bind(this));
+      this.model.on('change:sortby', this.changeSortBy.bind(this));
     },
 
-    sortGridby: function() {
+    changeSortBy: function() {
+      this.$el.find('li').removeClass('-selected');
+      this.$el.find('li[data-sortby="'+this.model.get('sortby')+'"]').addClass('-selected');
+
       App.Events.trigger('filters:update', {
         sortby: this.model.get('sortby')
       });
@@ -66,8 +73,6 @@
       e & e.preventDefault();
       var sortby = $(e.currentTarget).data('sortby');
       this.model.set({ sortby: sortby });
-      $('#map-sortby ul li').removeClass('-selected');
-      $(e.currentTarget).addClass('-selected');
     },
 
   });
