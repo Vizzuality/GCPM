@@ -8,13 +8,20 @@
 
     el: '#map-sortby',
 
+    model: new (Backbone.Model.extend({
+      defaults: {
+        sortby: 'created asc'
+      }
+    })),
+
     events: {
       'click .btn-map-sortby' : 'onClickSortby'
     },
 
-    initialize: function() {
+    initialize: function(settings) {
       // Initialize Parent
       this.constructor.__super__.initialize.apply(this);
+      this.params = settings.params;
       // Inits
       this.listeners();
     },
@@ -39,7 +46,15 @@
         });
 
         this.toggle();
-      }.bind(this))
+      }.bind(this));
+
+      this.model.on('change:sortby', this.sortGridby.bind(this));
+    },
+
+    sortGridby: function() {
+      App.Events.trigger('filters:update', {
+        sortby: this.model.get('sortby')
+      });
     },
 
 
@@ -49,8 +64,10 @@
      */
     onClickSortby: function(e) {
       e & e.preventDefault();
-      this.model.set('sortby', $(e.currentTarget).data('sortby'));
-      console.log(this.model.toJSON());
+      var sortby = $(e.currentTarget).data('sortby');
+      this.model.set({ sortby: sortby });
+      $('#map-sortby ul li').removeClass('-selected');
+      $(e.currentTarget).addClass('-selected');
     },
 
   });

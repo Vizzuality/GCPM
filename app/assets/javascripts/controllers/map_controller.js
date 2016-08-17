@@ -42,8 +42,10 @@
         params: this.params
       });
 
-      // new App.View.MapLayers();
-      // new App.View.MapSortby();
+      new App.View.MapLayers();
+      new App.View.MapSortby({
+        params: this.params
+      });
     }
 
   });

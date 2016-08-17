@@ -141,7 +141,6 @@
 
           currentLayerObj.create().done(_.bind(function(layer) {
             // Carto 'create' function returns directly the layer
-            console.log(layerModel.attributes.id);
             if (layerType === "carto") {
               currentLayerObj.layer = layer;
             }
