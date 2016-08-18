@@ -24,15 +24,15 @@
       this.listeners();
       var urlParams = {};
 
-      if (settings.params.cancer_type) {
-        urlParams['cancer_type'] = settings.params.cancer_type;
-      }
-      if (settings.params.layer) {
-        urlParams['layer'] = settings.params.layer;
-      }
+      ['cancer_type', 'date', 'layer'].map(function(key) {
+        if (settings.params[key]) {
+          urlParams[key] = settings.params[key];
+        }
+      }.bind(this));
 
       if (Object.keys(urlParams).length !== 0) {
         this.model.set(urlParams);
+        this.changeLayer();
       }
     },
 
@@ -62,17 +62,18 @@
     changeLayer: function() {
       var layerParams = {
         layer: this.model.get('layer'),
-        cancer_type: this.model.get('cancer_type')
+        cancer_type: this.model.get('cancer_type'),
+        date: this.model.get('date')
       };
 
       this.$el.find('li').removeClass('-selected');
-      this.$el.find('li[data-layer="'+ this.model.get('layer') +'"]').addClass('-selected');
-
+      var layer = this.$el.find('.layers-list > li[data-layer="'+ this.model.get('layer') +'"]');
       var cancerType = this.$el.find('li[data-cancer-type="'+ this.model.get('cancer_type') +'"]');
+      var date = this.$el.find('li[data-date="'+ this.model.get('date') +'"]');
 
-      if (cancerType.length !== 0) {
-        cancerType.addClass('-selected');
-      }
+      [layer, cancerType, date].map(function(type) {
+        type.addClass('-selected');
+      }.bind(this));
 
       App.Events.trigger('filters:update', layerParams);
     },
@@ -86,7 +87,8 @@
       e & e.preventDefault({});
       this.model.set({
         layer: $(e.currentTarget).data('layer') || null,
-        cancer_type: $(e.currentTarget).data('cancer-type') || null
+        cancer_type: $(e.currentTarget).data('cancer-type') || null,
+        date: $(e.currentTarget).data('date') || null
       }, { silent: true });
       this.changeLayer();
     },

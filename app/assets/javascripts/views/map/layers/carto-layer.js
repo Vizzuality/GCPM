@@ -21,7 +21,7 @@
         this.carto = new App.Helper.CartoOptions({
           layer: this.layer,
           options: {
-            column_name: this.params.get('cancer_type'),
+            column_name: this.params.get('cancer_type') || 'y_' + this.params.get('date'),
             // TO-DO: set ranges dinamically depending on each one
             range1: 23,
             range2: 50,
