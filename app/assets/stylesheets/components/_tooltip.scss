@@ -78,14 +78,9 @@
 
     .tooltip-arrow {
       left: auto;
-      // 8px is (svg-width + svg-margin)/2
       transform: translate(-50px, 100%) rotate(45deg);
       box-shadow: -1px 1px 0px rgba(0,0,0,0.1);
     }
-
-    // &.-opened {
-    //   transform: translate(246px, -38px);
-    // }
   }
 
   ul {
