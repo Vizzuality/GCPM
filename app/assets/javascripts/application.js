@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require leaflet
+//= require URIjs
 //= require handlebars
 //= require underscore/underscore
 //= require backbone/backbone
@@ -22,6 +23,7 @@
 //= require chosen
 //= require pickadate/picker
 //= require pickadate/picker.date
+
 //= require_self
 
 //= require_tree ./templates
@@ -29,6 +31,7 @@
 //= require_tree ./models/
 //= require_tree ./collections/
 //= require_tree ./views/
+//= require_tree ./controllers/
 
 //= require main
 //= require router
@@ -45,7 +48,8 @@
     View: {},
     Model: {},
     Collection: {},
-    Helper: {}
+    Helper: {},
+    Controller: {}
   };
 
 }).call(this);

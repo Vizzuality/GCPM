@@ -3,9 +3,10 @@
   'use strict';
 
   App.View = App.View || {};
+
   App.View.AddNewProject = Backbone.View.extend({
 
-      el: '.project_add',
+    el: '.project_add',
 
     pickadateOptions: {
       today: false,
@@ -50,8 +51,9 @@
       'click .f-circle-parent' : 'changeLead',
       'change .selectInvestigator' : 'loadOrgaAndAddr',
       'change .selectElements'  : 'updateResearchUnit',
-      'click .pre-submit'   : 'onSubmit',
-      'click .saveRelation' : 'saveRelation'
+      'click .pre-submit': 'onSubmit',
+      // 'click .saveRelation' : 'saveRelation',
+      'click .add-new-investigator' : 'addInvestigatorForm'
     },
 
     initialize: function() {
@@ -60,6 +62,16 @@
       // Inits
       this.checkRelations();
       this.render();
+      this.setListeners();
+    },
+
+    /**
+     * Settings global events
+     */
+    setListeners: function() {
+      App.Events.on('Editproject:addNewOrganization', this.addNewOrganization, this);
+      App.Events.on('Editproject:updateLastInvestigators', this.updateLastInvestigators, this);
+
     },
 
     render: function() {
@@ -75,7 +87,7 @@
         relations.classList.remove('-hide-staff');
         relations.scrollIntoView();
       }
-    },  
+    },
 
     removeRelation: function(ev) {
       var target = $(ev.target).parent().parent();
@@ -92,19 +104,19 @@
       var id = target.data('id');
       this.$el.find('.-getrow').find('.circle').remove();
       target.find('.f-circle-parent').html('<span class="circle"></span>');
-      $.ajax({
-        url: '/api/projects/'+PROJECT_ID+'/memberships/'+id+'?token='+AUTH_TOKEN,
-        method: 'POST',
-        data: {'membership': {'membership_type':'main'}}
-      });
-      target.siblings().each(function(i, el){
-        if (! !!$(el).data('id')) return;
-        $.ajax({
-          url: '/api/projects/'+PROJECT_ID+'/memberships/'+$(el).data('id')+'?token='+AUTH_TOKEN,
-          method: 'POST',
-          data: {'membership': {'membership_type':'secondary'}}
-        });
-      });
+      // $.ajax({
+      //   url: '/api/projects/'+PROJECT_ID+'/memberships/'+id+'?token='+AUTH_TOKEN,
+      //   method: 'POST',
+      //   data: {'membership': {'membership_type':'main'}}
+      // });
+      // target.siblings().each(function(i, el){
+      //   if (! !!$(el).data('id')) return;
+      //   $.ajax({
+      //     url: '/api/projects/'+PROJECT_ID+'/memberships/'+$(el).data('id')+'?token='+AUTH_TOKEN,
+      //     method: 'POST',
+      //     data: {'membership': {'membership_type':'secondary'}}
+      //   });
+      // });
     },
 
     loadOrgaAndAddr: function(ev) {
@@ -154,7 +166,7 @@
         'address_id' :  target.parent().find('select.selectElements').last().val()
       }
       $.ajax({
-        url: '/api/check_research_unit?token='+AUTH_TOKEN,
+        url: '/api/check_research_unit?token=' + AUTH_TOKEN,
         method: 'GET',
         data: data,
         success: function(data) {
@@ -165,7 +177,7 @@
 
     fillPregeneratedInvestigators: function() {
       $.ajax({
-        url: '/api/investigators?token='+AUTH_TOKEN,
+        url: '/api/investigators?token=' + AUTH_TOKEN,
         method: 'GET',
         success: function(data) {
           var selectInvestigators = document.createElement("SELECT");
@@ -174,14 +186,13 @@
             if (i == 0) {
               // clean the first option
               var option = document.createElement("OPTION");
-              option.classList.add('add-new-investigator');
-              selectInvestigators.appendChild(option); 
+              selectInvestigators.appendChild(option);
               // add the `Add new` option first
               var option_new = document.createElement("OPTION");
               option_new.innerText = 'Add new';
               option_new.value = '-1';
               option_new.classList.add('add-new-investigator');
-              selectInvestigators.appendChild(option_new); 
+              selectInvestigators.appendChild(option_new);
               continue;
             }
             var option = document.createElement("OPTION");
@@ -235,19 +246,17 @@
           if (data[i].membership_type == 'main') {
             row     +=    '<span class="circle"></span>';
           }
-          row     +=  '</span>';
-          row     += '</div>';
-          CONTAINER.innerHTML = CONTAINER.innerHTML + row;
-
+            row     +=  '</span>';
+            row     += '</div>';
+            CONTAINER.innerHTML = CONTAINER.innerHTML + row;
           }
+          this.fillPregeneratedInvestigators();
         }.bind(this),
         error:function (xhr, ajaxOptions, thrownError){
             if(xhr.status==404) {
-                // this.fillPregeneratedInvestigators();
             }
         }.bind(this)
       });
-      this.fillPregeneratedInvestigators();
     },
 
     getOrganizations: function(ev) {
@@ -273,30 +282,73 @@
       $(ev.target).prop('checked',true);
     },
 
-    onSubmit: function() {
+    onSubmit: function(e) {
+
       if (! !!$('#project_memberships_attributes_undefined_research_unit_id').val()) {
-        $('.c-pregenerated').last().remove();
+        $('#c-pregenerated-container').find('.-getrow').last().remove();
       }
 
+      $.when(this.updateRelation()).done(function() {
+        $(e.currentTarget).submit();
+      });
     },
 
-    saveRelation: function() {
+    updateRelation: function() {
+      var deferred = new $.Deferred();
       var elems = document.getElementsByClassName('-getrow');
-      for (var i = 0; i < elems.length; i++){
+
+      $.when.apply($, _.map(elems, function(elem) {
+        var $elem = $(elem);
         var data = {
           "membership" : {
             "project_id" : PROJECT_ID,
-            "research_unit_id" : $(elems[i]).data('research_unit'),
-            "membership_type" : !!$(elems[i]).find('.circle') ? 'main' : 'secondary'
+            "research_unit_id": $elem.data('research_unit'),
+            "membership_type" : !!$elem.find('.circle').length ? 'main' : 'secondary'
           }
         };
-        $.ajax({
-          url: '/api/projects/'+PROJECT_ID+'/memberships/?token='+AUTH_TOKEN,
-          data: data,
-          method: 'POST'
+
+        var url = '';
+
+        // EDIT
+        if ($elem.data('id') && $elem.data('id') !== '') {
+          url = '/api/projects/'+PROJECT_ID+'/memberships/'+$elem.data('id') +'?token='+ AUTH_TOKEN;
+        // CREATE
+        } else {
+          url = '/api/projects/'+PROJECT_ID+'/memberships?token='+AUTH_TOKEN;
+        }
+
+        return $.ajax({
+          url: url,
+          processData: false,
+          data: JSON.stringify(data),
+          method: 'POST',
+          contentType: 'application/json'
         });
-      }
+      })).done(function() {
+        deferred.resolve();
+      });
+
+      return deferred.promise();
     },
+
+    // saveRelation: function() {
+    //   var elems = document.getElementsByClassName('-getrow');
+
+    //   $.when.apply($, _.map(elems, function(elem) {
+    //     var data = {
+    //       "membership" : {
+    //         "project_id" : PROJECT_ID,
+    //         "research_unit_id" : $(elem).data('research_unit'),
+    //         "membership_type" : !!$(elem).find('.circle') ? 'main' : 'secondary'
+    //       }
+    //     };
+    //     return $.ajax({
+    //       url: '/api/projects/'+PROJECT_ID+'/memberships/?token='+AUTH_TOKEN,
+    //       data: data,
+    //       method: 'POST'
+    //     });
+    //   }));
+    // },
 
     displaInputs: function() {
       $('body').addClass('f-edited');
@@ -311,6 +363,114 @@
         container: '#pickadate-end-container'
       }));
 
+    },
+
+    addNewOrganization: function() {
+      $('#modalPickOrganization').fadeOut(function(){
+        $('.modal-module').show();
+      })
+    },
+    addInvestigatorForm: function() {
+      var investigatorForm = new App.View.Investigator.Form();
+      Backbone.Events.trigger('Modal:open', investigatorForm.render().el);
+      $('.modal-container').addClass('-tall');
+      this.loadPickableOrganizations();
+      this.loadPickableCountry();
+      return;
+    },
+
+    loadPickableOrganizations: function() {
+      $.ajax({
+        url: '/api/organizations?token='+AUTH_TOKEN,
+        method: 'GET',
+        success: function(data) {
+          var selectOrganization = document.createElement("SELECT");
+          selectOrganization.name = "organization_id";
+          selectOrganization.dataset.placeholder = 'Select or add organization';
+          for (var i = 0; i < data.length; i++) {
+            if (i == 0) {
+              // clean the first option
+              var option = document.createElement("OPTION");
+              selectOrganization.appendChild(option);
+              // add the `Add new` option first
+              var option_new = document.createElement("OPTION");
+              option_new.innerText = 'Add new';
+              option_new.value = '-1';
+              option_new.classList.add('add-new-organization');
+              selectOrganization.appendChild(option_new);
+              continue;
+            }
+            var option = document.createElement("OPTION");
+            option.innerText = data[i].name;
+            option.value = data[i].id;
+            selectOrganization.appendChild(option);
+          }
+          selectOrganization.classList.add('chosen-select', 'selectOrganization');
+          var getrow = document.createElement('div');
+          getrow.classList.add('-getrow');
+          var item = document.createElement('SPAN');
+          item.classList.add('-item', '-m-edited');
+          item.appendChild(selectOrganization);
+          getrow.appendChild(item);
+          document.getElementById('modalPickOrganization').appendChild(getrow);
+          $(selectOrganization).chosen({
+            width: '100%',
+            allow_single_deselect: true,
+            inherit_select_classes: true,
+            no_results_text: "Oops, nothing found!",
+            placeholder_text_single: "Select or add organization"
+          });
+        }
+      });
+    },
+
+    updateLastInvestigators: function() {
+      $('.-getrow').last().remove();
+      this.fillPregeneratedInvestigators();
+    },
+
+    loadPickableCountry: function() {
+      $.ajax({
+        url: '/api/countries?token='+AUTH_TOKEN,
+        method: 'GET',
+        success: function(data) {
+          var selectOrganization = document.createElement("SELECT");
+          selectOrganization.name = "organization_id";
+          selectOrganization.dataset.placeholder = 'Select or add country';
+          for (var i = 0; i < data.length; i++) {
+            if (i == 0) {
+              // clean the first option
+              var option = document.createElement("OPTION");
+              selectOrganization.appendChild(option);
+              // add the `Add new` option first
+              var option_new = document.createElement("OPTION");
+              option_new.innerText = 'Add new';
+              option_new.value = '-1';
+              selectOrganization.appendChild(option_new);
+              continue;
+            }
+            var option = document.createElement("OPTION");
+            option.innerText = data[i].name;
+            option.value = data[i].id;
+            selectOrganization.appendChild(option);
+          }
+          selectOrganization.classList.add('chosen-select', 'selectOrganization');
+          var getrow = document.createElement('div');
+          getrow.classList.add('-getrow');
+          var item = document.createElement('SPAN');
+          item.classList.add('-item', '-m-edited');
+          item.appendChild(selectOrganization);
+          getrow.appendChild(item);
+          document.getElementById('modalPickCountry').appendChild(getrow);
+          $(selectOrganization).chosen({
+            width: '100%',
+            allow_single_deselect: true,
+            inherit_select_classes: true,
+            no_results_text: "Oops, nothing found!",
+            placeholder_text_single: "Select or add country"
+          });
+        }
+      });
     }
   });
 

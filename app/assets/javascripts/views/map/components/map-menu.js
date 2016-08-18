@@ -50,8 +50,9 @@
 
     setParams: function(type) {
       return {
-        type: type,
-        color: this.colors[type] || this.colors['default']
+        type: type || 'projects',
+        color: this.colors[type] || this.colors['default'],
+        userId: USER_ID
       }
     },
 

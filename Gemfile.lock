@@ -289,6 +289,7 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 5.0.0.rc2)
       sprockets-rails (>= 2.0.0)
+    rails-assets-URIjs (1.18.1)
     rails-assets-backbone (1.3.3)
       rails-assets-underscore (>= 1.8.3)
     rails-assets-chosen (1.6.1)
@@ -462,6 +463,7 @@ DEPENDENCIES
   puma
   quiet_assets
   rails (>= 5.0.0.beta4, < 5.1)
+  rails-assets-URIjs!
   rails-assets-backbone!
   rails-assets-chosen!
   rails-assets-d3 (~> 3.5.17)!

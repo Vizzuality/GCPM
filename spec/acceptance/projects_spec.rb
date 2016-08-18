@@ -20,7 +20,7 @@ module Api::V1
                               } }
 
       it 'Allows to update project' do
-        put "/api/projects/#{project_id}?token=7Nw1A13xrHrZDHj631MA", params: params
+        put "/api/projects/#{project_id}?token=#{user.authentication_token}", params: params
 
         expect(status).to eq(200)
         expect(json['title']).to eq('Project updated')
@@ -36,7 +36,7 @@ module Api::V1
                                 } }
 
         it 'Allows to update projects memberships' do
-          post "/api/projects/#{project_id}/memberships/#{membership.id}?token=7Nw1A13xrHrZDHj631MA", params: {"membership": {
+          post "/api/projects/#{project_id}/memberships/#{membership.id}?token=#{user.authentication_token}", params: {"membership": {
                                                                                                                  "membership_type": "main"
                                                                                                                }}
 
@@ -46,7 +46,7 @@ module Api::V1
         end
 
         it 'Allows to create projects memberships' do
-          post "/api/projects/#{project_id}/memberships?token=7Nw1A13xrHrZDHj631MA", params: params_membership
+          post "/api/projects/#{project_id}/memberships?token=#{user.authentication_token}", params: params_membership
 
           expect(status).to eq(201)
           expect(json['message']).to  eq('Membership created!')
@@ -54,7 +54,7 @@ module Api::V1
         end
 
         it 'Allows to delete projects memberships' do
-          delete "/api/projects/#{project_id}/memberships/#{membership.id}?token=7Nw1A13xrHrZDHj631MA"
+          delete "/api/projects/#{project_id}/memberships/#{membership.id}?token=#{user.authentication_token}"
 
           expect(status).to eq(200)
           expect(json['message']).to  eq('Membership deleted')
@@ -62,14 +62,14 @@ module Api::V1
         end
 
         it 'Check research_unit' do
-          get "/api/check_research_unit?token=7Nw1A13xrHrZDHj631MA&investigator_id=#{investigator.id}&address_id=#{address.id}"
+          get "/api/check_research_unit?token=#{user.authentication_token}&investigator_id=#{investigator.id}&address_id=#{address.id}"
 
           expect(status).to eq(200)
           expect(json['research_unit_id']).to eq (r_u_id)
         end
 
         it 'Get project memberships' do
-          get "/api/projects/#{project_id}/memberships?token=7Nw1A13xrHrZDHj631MA"
+          get "/api/projects/#{project_id}/memberships?token=#{user.authentication_token}"
 
           expect(status).to eq(200)
           expect(json[0]['membership_type']).to      eq ('secondary')

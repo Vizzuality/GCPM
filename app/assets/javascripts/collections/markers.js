@@ -4,7 +4,7 @@
 
   App.Collection = App.Collection || {};
   App.Collection.Markers = Backbone.Collection.extend({
-    
+
     url: '/api/map',
 
     initialize: function(options) {
@@ -12,6 +12,10 @@
 
       if (this.options.apiUrl) {
         this.url = this.options.apiUrl;
+      }
+
+      if (this.options.userId) {
+        this.url += (this.url.indexOf('?') === -1 ? '?' : '&' ) + 'user=' + this.options.userId;
       }
     },
 

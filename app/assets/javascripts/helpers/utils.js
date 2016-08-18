@@ -22,6 +22,32 @@
     return o;
   };
 
+  // Extending Handlebars
+  Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
+    switch (operator) {
+      case '==':
+        return (v1 == v2) ? options.fn(this) : options.inverse(this);
+      case '===':
+        return (v1 === v2) ? options.fn(this) : options.inverse(this);
+      case '!==':
+        return (v1 !== v2) ? options.fn(this) : options.inverse(this);
+      case '<':
+        return (v1 < v2) ? options.fn(this) : options.inverse(this);
+      case '<=':
+        return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+      case '>':
+        return (v1 > v2) ? options.fn(this) : options.inverse(this);
+      case '>=':
+        return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+      case '&&':
+        return (v1 && v2) ? options.fn(this) : options.inverse(this);
+      case '||':
+        return (v1 || v2) ? options.fn(this) : options.inverse(this);
+      default:
+        return options.inverse(this);
+    }
+  });
+
   App.Helper = App.Helper || {};
 
   /**
@@ -31,6 +57,7 @@
    * @param {Object} attributes
    */
   App.Helper.Utils = {
+
     getParams: function(paramString) {
       var params = {};
       paramString.split('&').forEach(function(pair) {
@@ -58,33 +85,6 @@
       return params;
     },
 
-    handlebarsHelpers: function() {
-      Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
-        switch (operator) {
-          case '==':
-            return (v1 == v2) ? options.fn(this) : options.inverse(this);
-          case '===':
-            return (v1 === v2) ? options.fn(this) : options.inverse(this);
-          case '!==':
-            return (v1 !== v2) ? options.fn(this) : options.inverse(this);
-          case '<':
-            return (v1 < v2) ? options.fn(this) : options.inverse(this);
-          case '<=':
-            return (v1 <= v2) ? options.fn(this) : options.inverse(this);
-          case '>':
-            return (v1 > v2) ? options.fn(this) : options.inverse(this);
-          case '>=':
-            return (v1 >= v2) ? options.fn(this) : options.inverse(this);
-          case '&&':
-            return (v1 && v2) ? options.fn(this) : options.inverse(this);
-          case '||':
-            return (v1 || v2) ? options.fn(this) : options.inverse(this);
-          default:
-            return options.inverse(this);
-        }
-      });
-    },
-
     getTimelinePercentage: function(startDate, endDate) {
       var current = new Date().getTime();
       var start = new Date(startDate).getTime();
@@ -101,6 +101,7 @@
 
       return percentage;
     }
+
   }
 
 })(this.App);

@@ -1,5 +1,6 @@
 
-.project_add {
+.project_add,
+.c-modal {
 		.c-section-intro {
 		height: 370px;
 		border-bottom: 1px solid rgba(0, 0, 0, .15);
@@ -43,6 +44,8 @@
 	.-m-edited .chosen-single span {
 		color: rgba($color-2,1);
 	}
+
+  // TODO: fix position, doen't fit with every modal
 	.chosen-container {
 		position: absolute;
 	}
@@ -115,11 +118,14 @@
 		.-item {
 			display: table-cell;
 			height: 40px;
-      position: relative;
+      		position: relative;
 			.remove_fields {
 				color: #5aade4;
 		    	font-size: 30px;
 		    	vertical-align: sub;
+		    	margin: 0 7px 0 6px;
+			    position: relative;
+			    top: 2px;
 			}
 			> a {
 				color: #0f3046;

@@ -32,7 +32,6 @@
 
     createInvestigator: function(investigatorSpec) {
       var investigator = new App.Model.Investigator(investigatorSpec);
-      console.log(investigator);
       investigator.save();
     }
 

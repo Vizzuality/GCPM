@@ -36,7 +36,9 @@ Rails.application.routes.draw do
         post '/memberships/:id', to: 'memberships#update'
       end
 
-      resources :investigators, only: [:index, :show, :update, :create]
+      resources :investigators,  only: [:index, :show, :update, :create]
+      resources :organizations,  only: [:index, :show]
+      get 'countries',           to: 'organizations#index_countries'
       get 'check_research_unit', to: 'memberships#check_research_unit'
 
       get 'lists/countries',    to: 'lists#countries'
@@ -46,5 +48,5 @@ Rails.application.routes.draw do
     end
   end
 
-  root to: 'home#index'
+  root to: 'map#index'
 end

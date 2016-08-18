@@ -10,12 +10,12 @@ class UsersController < ApplicationController
       @user.published_projects.limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
     @projectsCount = Project.count
 
+    @events = @user.events.limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
+    @eventsCount = Event.count
+
     @current_type = params[:type] || 'projects'
     @filters = ['projects', 'events']
     @isProfile = true
-
-    @events = @user.events.limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
-    @eventsCount = Event.count
   end
 
   private
