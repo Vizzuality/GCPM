@@ -41,13 +41,6 @@
       new App.View.MapTypes({
         params: this.params
       });
-
-      // new App.View.MapFilters({
-      //   params: this.params
-      // });
-
-      // new App.View.MapLayers();
-      // new App.View.MapSortby();
     }
 
   });

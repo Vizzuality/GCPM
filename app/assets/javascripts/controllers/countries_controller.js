@@ -22,15 +22,29 @@
       regionsCollection.fetch();
     },
 
-    show: function() {
+    show: function(params) {
+      this.params = params;
+      var layersActived = [2];
+      var layersSpec = this.layersSpec = new App.Collection.LayersSpec();
+      var options = {
+        basemap: 'customDetail'
+      };
       // Map view
       var layersCollection = new App.Collection.Layers();
-      var mapView = new App.View.Map({
-        el: "#map",
-        layers: layersCollection,
-        options: {
-          basemap: 'customDetail'
-        }
+      var map = new App.View.Map({
+        el: '#map',
+        collection: this.layersSpec,
+        params: this.params,
+        options: options
+      });
+
+      layersSpec.on('change, reset', function() {
+        map.renderLayers();
+      });
+
+      layersSpec.fetch().done(function() {
+        // This method triggers an event called 'reset'
+        layersSpec.filterByIds(layersActived);
       });
     }
 

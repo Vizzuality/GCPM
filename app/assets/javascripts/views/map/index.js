@@ -122,7 +122,6 @@
      * Render or remove layers by Layers Collection
      */
     renderLayers: function() {
-
       var LayersDic = {
         tile: App.View.MarkerLayer,
         carto: App.View.CartoLayer,
