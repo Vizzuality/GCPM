@@ -6,9 +6,6 @@
     nokiaTerrain: {
       url: 'https://4.maps.nlp.nokia.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/256/png8?lg=eng&token=A7tBPacePg9Mj_zghvKt9Q&app_id=KuYppsdXZznpffJsKT24',
       options: {}
-    },
-    customDetail: {
-      url: 'https://cartocdn-ashbu.global.ssl.fastly.net/simbiotica/api/v1/map/simbiotica@87e21c6d@632ee45870a97b639be881c43cd903b8:1467196236654/1/{z}/{x}/{y}.png'
     }
   };
 
@@ -70,7 +67,7 @@
         this.map = L.map(this.el.id, this.options.map);
         this.$el.data('map', this.map);
 
-        this.setBasemap();
+        if (this.options.basemap) this.setBasemap();
       } else {
         console.info('Map already exists.');
       }
@@ -137,6 +134,7 @@
           var currentLayerObj = new LayersDic[layerType]({
             params: this.params,
             config: layerModel.attributes.config,
+            db: layerModel.attributes.db,
             apiUrl: this.options.apiUrl
           });
 

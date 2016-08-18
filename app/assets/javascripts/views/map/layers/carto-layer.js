@@ -16,6 +16,7 @@
       this.params = settings.params;
       this.cartocss = settings.config.cartocss;
       this.sql = settings.config.sql;
+      this.db = settings.db || 'crm';
 
       this.create();
     },
@@ -43,15 +44,15 @@
         type: 'POST',
         dataType: 'json',
         contentType: 'application/json',
-        url: 'https://crm.carto.com/api/v1/map',
+        url: 'https://' + this.db + '.carto.com/api/v1/map',
         data: JSON.stringify(mapconfig)
       });
 
       return promise.then(function(data) {
-        var tileUrl = 'https://crm.carto.com/api/v1/map/' + data.layergroupid + '/{z}/{x}/{y}.png';
+        var tileUrl = 'https://' + this.db + '.carto.com/api/v1/map/' + data.layergroupid + '/{z}/{x}/{y}.png';
         var layer = L.tileLayer(tileUrl);
         return layer;
-      });
+      }.bind(this));
     },
 
   });
