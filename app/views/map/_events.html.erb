@@ -2,7 +2,9 @@
   <!-- Events cards -->
   <% @events.each do |e| %>
     <div class="card -mobile-large-1-2 -tablet-1-3">
-      <h4 class="c-card-title -border-2"><%= e.city %>, <%= e.country %></h4>
+      <a href="/map?type=events&group=countries&countries[]=<%= Country.find_by( country_name: e.country ).id %>" class="c-card-title -border-2">
+        <%= e.city %>, <%= e.country %>
+      </a>
       <%= link_to event_path(e.id), { :class => "link" } do %>
         <h3 class="c-title"><%= e.title %></h3>
       <% end %>
@@ -22,4 +24,3 @@
     <p>No events</p>
   </div>
 <% end %>
-

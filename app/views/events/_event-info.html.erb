@@ -22,7 +22,9 @@
     <div class="project-field">
       <h4 class="c-title -smaller"><%= t 'location' %></h4>
       <p class="data">
-          <%= @event.address %>, <%= @event.country %>
+          <a href="/map?type=events&group=countries&countries[]=<%= Country.find_by( country_name: @event.country ).id %>">
+            <%= @event.address %>, <%= @event.country %>
+          </a>
       </p>
     </div>
 

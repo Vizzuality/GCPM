@@ -23,9 +23,8 @@
       <h4 class="c-title -smaller"><%= t 'cancer_types' %></h4>
       <p class="data">
         <% @project.cancer_types.each do |ct| %>
-          <%= ct.name %>
+          <a href="/map?cancer_types[]=<%= ct.id %>" class="list-link"><%= ct.name %>. </a>
         <% end %>
-        .
       </p>
     </div>
 
@@ -33,9 +32,8 @@
       <h4 class="c-title -smaller"><%= t 'project_types' %></h4>
       <p class="data">
         <% @project.project_types.each do |pt| %>
-          <%= pt.name %>
+          <a href="/map?project_types[]=<%= pt.id %>" class="list-link"><%= pt.name %>. </a>
         <% end %>
-        .
       </p>
     </div>
 
@@ -43,16 +41,19 @@
       <h4 class="c-title -smaller"><%= t 'location' %>(s)</h4>
       <ul class="data">
         <% @project.addresses.each do |l| %>
-          <li><%= l.city %>, <%= l.country_name %></li>
+          <li>
+            <a href="/map?countries[]=<%= l.country_id %>&group=points" class="list-link"><%= l.city %>, <%= l.country_name %>. </a>
+          </li>
         <% end %>
       </ul>
     </div>
+
 
     <div class="project-field">
       <h4 class="c-title -smaller"><%= t 'organization' %>(s)</h4>
       <ul class="data">
         <% @project.organizations.each do |o| %>
-          <li><%= o.name %></li>
+          <li><a href="/map?organizations[]=<%= o.id %>"><%= o.name %></a></li>
         <% end %>
       </ul>
     </div>

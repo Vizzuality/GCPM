@@ -39,10 +39,9 @@
         <h3 class="c-title"><%= p.title %></h3>
       <% end %>
       <!-- Project summary replaced by cancer tags -->
-      <!-- <p><%= truncate(p.summary, :length => 300) %></p> -->
       <div class="c-tag-list -closer">
         <% p.cancer_types.each do |t| %>
-        <p class="tag"><%= t.name %></p>
+        <a href="/map?cancer_types[]=<%= t.id %>" class="tag"><%= t.name %></a>
         <% end %>
       </div>
     </div>
