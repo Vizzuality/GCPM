@@ -48,6 +48,7 @@ class Project < ApplicationRecord
   scope :inactive,              ->                     { where('projects.end_date < ?', Time.now).or('projects.start_date > ?', Time.now) }
   scope :by_project_types,      -> project_types       { joins(:project_types).where(project_types: { id: project_types }) }
   scope :by_cancer_types,       -> cancer_types        { joins(:cancer_types).where(cancer_types: { id: cancer_types }) }
+  scope :by_investigators,      -> investigators       { joins(:investigators).where(investigators: { id: investigators }) }
   scope :by_organizations,      -> organizations       { joins(:organizations).where(organizations: { id: organizations }) }
   scope :by_organization_types, -> organization_types  { joins(organizations: :organization_type).where(organization_types: { id: organization_types }) }
   scope :by_countries,          -> countries           { joins(:countries).where(countries: { id: countries }) }
@@ -56,8 +57,9 @@ class Project < ApplicationRecord
   scope :by_end_date,           -> end_date            { where('projects.end_date < ?', end_date ) }
   scope :by_user,               -> user                { where('projects.user_id = ?', user ) }
 
-  def self.fetch_all(options)
+  def self.fetch_all(options={})
     projects = Project.published
+    projects = projects.by_investigators(options[:investigators])           if options[:investigators]
     projects = projects.by_project_types(options[:project_types])           if options[:project_types]
     projects = projects.by_cancer_types(options[:cancer_types])             if options[:cancer_types]
     projects = projects.by_countries(options[:countries])                   if options[:countries]
@@ -67,6 +69,10 @@ class Project < ApplicationRecord
     projects = projects.by_start_date(options[:start_date])                 if options[:start_date]
     projects = projects.by_end_date(options[:end_date])                     if options[:end_date]
     projects = projects.by_user(options[:user])                             if options[:user]
+    projects = projects.order('projects.created_at ASC')                    if options[:sortby] && options[:sortby] == 'created_asc'
+    projects = projects.order('projects.created_at DESC')                   if options[:sortby] && options[:sortby] == 'created_desc'
+    projects = projects.order('projects.title ASC')                         if options[:sortby] && options[:sortby] == 'title_asc'
+    projects = projects.order('projects.title DESC')                        if options[:sortby] && options[:sortby] == 'title_desc'
     projects = projects.limit(options[:limit])                              if options[:limit]
     projects = projects.offset(options[:offset])                            if options[:offset]
     projects.uniq
