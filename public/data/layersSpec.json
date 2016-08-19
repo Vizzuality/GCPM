@@ -14,21 +14,12 @@
     "order": 2
   },
   {
-    "id": 3,
+    "id": 6,
     "type": "carto",
+    "db": "simbiotica",
     "config": {
-      "sql": "SELECT b.admin AS country_name, a.iso AS country_iso, a.incidence AS value, b.the_geom_webmercator FROM crm_globocan_2012 a, crm_countries_geoms b WHERE a.iso = b.adm0_a3 ORDER BY b.admin",
-      "cartocss": "/** choropleth visualization */ #crm_globocan_2012 { polygon-fill: transparent; polygon-opacity: 0.8; line-color: #FFF; line-width: 1; line-opacity: 1; } #crm_globocan_2012 [ value > 242.9] { polygon-fill: #CD0000; } #crm_globocan_2012 [ value <= 242.9] { polygon-fill: #D84948; } #crm_globocan_2012 [ value <= 172.3] { polygon-fill: #E18683; } #crm_globocan_2012 [ value <= 137.5] { polygon-fill: #E8B7B3; } #crm_globocan_2012 [ value <= 101.3] { polygon-fill: #E9C0BC; }"
-    },
-    "active": false,
-    "order": 1
-  },
-  {
-    "id": 4,
-    "type": "carto",
-    "config": {
-      "sql": "SELECT * FROM crm_global_regions_geoms",
-      "cartocss": "#crm_global_regions_geoms{ polygon-fill: #FFFFFF; polygon-opacity: 0; line-color: #49A5E4; line-width: 1; line-opacity: 1; }"
+      "sql": "SELECT * FROM country_sync",
+      "cartocss": "#country_sync{ polygon-fill: #fff; polygon-opacity: 0.1; line-color: #fff; line-width: 0.7; line-opacity: 0.7; }"
     },
     "active": false,
     "order": 1
