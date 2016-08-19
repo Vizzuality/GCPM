@@ -8,15 +8,15 @@
 
     index: function(params) {
       // Map view
-      // Layer active 4 eventual until basemap fixed
-      var layersActived = [2, 4];
+      // Layer active 6 eventual until basemap fixed
+      var layersActived = [2, 6];
 
       var layersSpec = this.layersSpec = new App.Collection.LayersSpec();
       var map = new App.View.Map({
         el: '#map',
         collection: this.layersSpec,
         options: {
-          basemap: 'customDetail',
+          basemap: null,
           apiUrl: '/api/map/projects/' + PROJECT_ID
         }
       });
