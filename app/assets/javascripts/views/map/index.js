@@ -122,16 +122,20 @@
      * Render or remove layers by Layers Collection
      */
     renderLayers: function() {
-
       var LayersDic = {
         tile: App.View.MarkerLayer,
         carto: App.View.CartoLayer,
         marker: App.View.MarkerLayer
       };
 
+      var restLayers = Object.keys(this._instancedlayers);
+
       // Add all layers
       _.each(this.collection.models, function(layerModel) {
         var layerType = layerModel.attributes.type;
+        restLayers = restLayers.filter(function(id) {
+          return id != layerModel.id;
+        });
 
         if (LayersDic[layerType]) {
           var currentLayerObj = new LayersDic[layerType]({
@@ -162,10 +166,12 @@
           }, this));
         }
       }, this);
+
+      if (restLayers.length !== 0) this.removeRestLayers(restLayers);
     },
 
     /**
-     * - renderLayers
+     * - addLayer
      * Add layer to the map and its correspondant events
      */
     addLayer: function(layer) {
@@ -177,6 +183,16 @@
         .on('mouseout click', function(data) {
           this.tooltip.remove();
         }.bind(this));
+    },
+
+    /**
+     * - removeRestLayers
+     * Remove layers which are rendered and not wanted
+     */
+    removeRestLayers: function(restLayers) {
+      restLayers.map(function(id) {
+        this.removeLayer(id);
+      }.bind(this));
     },
 
     /**

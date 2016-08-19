@@ -14,10 +14,26 @@
     initialize: function(settings) {
       this.options = _.extend({}, this.defaults, settings || {});
       this.params = settings.params;
-      this.cartocss = settings.config.cartocss;
-      this.sql = settings.config.sql;
-
-      this.create();
+      this.layer = this.params.get('layer');
+      // TO-DO: set the variables depending on params config coming from layersSpec.json
+      // or admin layers tables
+      if (this.layer) {
+        this.carto = new App.Helper.CartoOptions({
+          layer: this.layer,
+          options: {
+            column_name: this.params.get('cancer_type') || 'y_' + this.params.get('date'),
+            // TO-DO: set ranges dinamically depending on each one
+            range1: 23,
+            range2: 50,
+            range3: 70,
+            range4: 90
+          }
+        });
+        this.cartoOpts = this.carto.getCartoOptions();
+        this.cartocss = settings.config.cartocss || this.cartoOpts.cartocss;
+        this.sql = settings.config.sql || this.cartoOpts.sql;
+        this.create();
+      }
     },
 
     /************

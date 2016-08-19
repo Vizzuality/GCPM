@@ -17,12 +17,12 @@ class MapController < ApplicationController
     # Projects
     #Limit of projects shown at the beginning and added when show more button clicked
     @projects  = Project.fetch_all(projects_params).order('created_at DESC').limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
+    @projectsCount = Project.count
 
     # Events
     #Limit of events shown at the beginning and added when show more button clicked
-    # @events  = Event.order('created_at DESC').limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
     @events  = Event.fetch_all(projects_params).order('created_at DESC').limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
-
+    @eventsCount = Event.count
 
     @current_type = params[:type] || 'projects'
     @filters = ['projects', 'events']
