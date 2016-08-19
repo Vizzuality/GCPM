@@ -56,6 +56,14 @@
                       multiple: true %>
                 </div>
               </div>
+              <div class="grid-item">
+                <div class="c-select">
+                  <%= select_tag 'investigators[]', options_for_select(@investigators.map {|c| [c.name, c.id]}, @params['investigators']),
+                      class: 'chosen-select chosen-multiselect',
+                      "data-placeholder": "All investigators",
+                      multiple: true %>
+                </div>
+              </div>
             </div>
 
             <!-- DATE FILTERS -->
