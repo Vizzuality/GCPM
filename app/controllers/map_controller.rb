@@ -12,6 +12,7 @@ class MapController < ApplicationController
     @organization_types = OrganizationType.all
     @cancer_types = CancerType.all.order('name')
     @project_types = ProjectType.all.order('name')
+    @investigators = Investigator.all.order('name')
 
     @limit = 15
     # Projects
