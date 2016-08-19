@@ -2,44 +2,23 @@
 <div class="content active" id="share-link">
   <p>Copy the link below to share it</p>
   <div class="link-box">
-    <input class="url" value="{{link}}" />
+    <input id="url" class="url" value="{{link}}" />
     <button class="c-button btn-copy">Copy</button>
   </div>
   <div class="copy-alert hide">
-    <p>Now press &#8984; + C or Ctrl + C to copy</p>
+    {{!-- <p>Now press &#8984; + C or Ctrl + C to copy</p> --}}
+    <p class="paste-massage"></p>
   </div>
 </div>
 
-<div class="social-links">
-  <div class="btn-social twitter">
-    <a class="share-social" data-event="Twitter" href="https://twitter.com/share?url={{link}}&text=I would like to share this GCPM map with you" target="_blank">
-      <svg class="icon">
-        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-twitter"></use>
-      </svg>
-    </a>
-  </div>
-
-  <div class="btn-social facebook">
-    <a class="share-social" data-event="Facebook" href="https://www.facebook.com/sharer.php?u={{link}}" target="_blank">
-      <svg class="icon">
-        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-facebook"></use>
-      </svg>
-    </a>
-  </div>
-
-  <div class="btn-social google">
-    <a class="share-social" data-event="Google+" href="https://plus.google.com/share?url={{link}}" target="_blank">
-      <svg class="icon">
-        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-google"></use>
-      </svg>
-    </a>
-  </div>
-
-  <div class="btn-social email">
-    <a class="share-social" data-event="E-mail" href="mailto:?subject=Link to GCPM map&body=I would like to share this GCPM map with you {{link}}" target="_top">
-      <svg class="icon">
-        <use xlink:href="#icon-email" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
-      </svg>
-    </a>
+<div class="l-footer">
+  <div class="container">
+    <ul class="medias">
+      <li class="-notext -twitter">
+        <a data-event="Twitter" href="https://twitter.com/share?url={{link}}&text=I would like to share this GCPM map with you" target="_blank" rel="noreferrer" title="Twitter">Twitter</a>
+      </li>
+      <li class="-notext -facebook"><a data-event="Facebook" href="https://www.facebook.com/sharer.php?u={{link}}" target="_blank" rel="noreferrer" title="Facebook">Facebook</a></li>
+    </ul>
   </div>
 </div>
+

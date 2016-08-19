@@ -38,9 +38,14 @@
         params: this.params
       });
 
+      new App.View.MapShare({
+        params: this.params
+      });
+
       new App.View.MapFilters({
         params: this.params
       });
+
 
       // new App.View.MapLayers();
       // new App.View.MapSortby();

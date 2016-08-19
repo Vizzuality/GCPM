@@ -16,9 +16,6 @@
       });
     },
 
-    cache: function() {
-      this.contentContainer = $('#map-share .modal-content');
-    },
 
     initialize: function(settings) {
       // Initialize Parent
@@ -26,29 +23,48 @@
 
       this.utils = App.Helper.Utils;
       this.params = settings.params;
+      this.link = window.location.href;
 
       // Inits
+      this.cache();
       this.render();
-      // this.cache();
       this.listeners();
     },
 
-    // cache: function() {
-    // },
+    cache: function() {
+      this.$contentContainer = $('#map-share .modal-content');
+    },
 
     listeners: function() {
+      // Can not be on cache because render has to be called before
+      this.$btnCopy = $('.btn-copy');
 
       App.Events.on('Share/toggle', function(){
         this.show();
+        this.link = window.location.href;
+        this.render();
       }.bind(this));
+      this.$btnCopy.on('click', this._copyToClipboard.bind(this));
     },
 
     render: function() {
-      var html = this.tempmlate({ link: window.location.href });
-      this.contentContainer.html(html);
+      var html = this.tempmlate({ link: this.link });
+      this.$contentContainer.html(html);
       return this;
     },
 
+    _copyToClipboard: function(e) {
+      var url = document.querySelector('#url');
+      url.select();
+
+      try {
+        var successful = document.execCommand('copy');
+        $(e.currentTarget).html('copied');
+        $('.paste-massage').html('Now press &#8984; + V or Ctrl + V to paste');
+      } catch(err) {
+        console.log('Not supported')
+      }
+    },
 
     /**
      * UI EVENTS
