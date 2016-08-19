@@ -14,6 +14,7 @@
     initialize: function(settings) {
       this.options = _.extend({}, this.defaults, settings || {});
       this.params = settings.params;
+      this.db = settings.db || 'crm';
       this.layer = this.params.get('layer');
       // TO-DO: set the variables depending on params config coming from layersSpec.json
       // or admin layers tables
@@ -59,15 +60,15 @@
         type: 'POST',
         dataType: 'json',
         contentType: 'application/json',
-        url: 'https://crm.carto.com/api/v1/map',
+        url: 'https://' + this.db + '.carto.com/api/v1/map',
         data: JSON.stringify(mapconfig)
       });
 
       return promise.then(function(data) {
-        var tileUrl = 'https://crm.carto.com/api/v1/map/' + data.layergroupid + '/{z}/{x}/{y}.png';
+        var tileUrl = 'https://' + this.db + '.carto.com/api/v1/map/' + data.layergroupid + '/{z}/{x}/{y}.png';
         var layer = L.tileLayer(tileUrl);
         return layer;
-      });
+      }.bind(this));
     },
 
   });
