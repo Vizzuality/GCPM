@@ -34,6 +34,11 @@
         this.cartocss = settings.config.cartocss || this.cartoOpts.cartocss;
         this.sql = settings.config.sql || this.cartoOpts.sql;
         this.create();
+      // Review
+      } else if (this.db === 'simbiotica') {
+        this.cartocss = settings.config.cartocss;
+        this.sql = settings.config.sql;
+        this.create();
       }
     },
 

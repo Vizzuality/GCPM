@@ -129,6 +129,7 @@
 
       // Add all layers
       _.each(this.collection.models, function(layerModel) {
+
         var layerType = layerModel.attributes.type;
         restLayers = restLayers.filter(function(id) {
           return id != layerModel.id;
@@ -154,6 +155,7 @@
             if (this._instancedlayers[layerModel.attributes.id]) {
               this.removeLayer(layerModel.attributes.id);
             }
+
             this.addLayer(currentLayer);
             this._instancedlayers[layerModel.attributes.id] = currentLayerObj;
 

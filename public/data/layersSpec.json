@@ -14,6 +14,13 @@
     "order": 2
   },
   {
+    "id": 5,
+    "type": "carto",
+    "config": {},
+    "active": false,
+    "order": 1
+  },
+  {
     "id": 6,
     "type": "carto",
     "db": "simbiotica",
@@ -21,13 +28,6 @@
       "sql": "SELECT * FROM country_sync",
       "cartocss": "#country_sync{ polygon-fill: #fff; polygon-opacity: 0.1; line-color: #fff; line-width: 0.7; line-opacity: 0.7; }"
     },
-    "active": false,
-    "order": 1
-  },
-  {
-    "id": 5,
-    "type": "carto",
-    "config": {},
     "active": false,
     "order": 1
   }
