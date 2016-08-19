@@ -32,16 +32,15 @@
         </div>
       </div>
       <div class="c-buttons-group">
-        <a href="/" class="c-button -inverse -filled btn-large">Follow</a>
+        <a href="#" class="c-button -inverse -filled btn-large">Follow</a>
         <div class="row-buttons">
-          <a href="/" class="c-button -inverse">+ Project</a>
-          <a href="/" class="c-button -inverse">+ Post</a>
-          <a href="/" class="c-button -inverse">+ Event</a>
+          <a href="#" class="c-button -inverse">+ Project</a>
+          <a href="#" class="c-button -inverse">+ Post</a>
+          <a href="#" class="c-button -inverse">+ Event</a>
         </div>
       </div>
       <ul class="c-section-menu wrapper -color-0">
         <li><%= link_to (t 'projects'), country_path(request.query_parameters.merge({ type: 'org-project-markers' })), :class => !params['type'] ? '-active' : active_param?('type','org-project-markers') %></li>
-        <li><%= link_to (t 'people'), country_path(request.query_parameters.merge({ type: 'org-people-markers' })), :class => active_param?('type','org-people-markers') %></li>
         <li><%= link_to (t 'events'), country_path(request.query_parameters.merge({ type: 'org-event-markers' })), :class => active_param?('type','org-event-markers') %></li>
       </ul>
     </div>

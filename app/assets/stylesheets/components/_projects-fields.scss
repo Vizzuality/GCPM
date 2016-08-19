@@ -19,6 +19,12 @@
       & li {
         margin-bottom: 5px;
       }
+
+      & a {
+        color: $color-2;
+
+        &:hover { color: $color-1; }
+      }
     }
   }
 }

@@ -11,7 +11,7 @@
         <% end %>
         <div class="c-tag-list -closer">
           <% project.cancer_types.each do |t| %>
-          <p class="tag"><%= t.name %></p>
+          <p class="tag"><a href="/map?cancer_types[]=<%= t.id %>"><%= t.name %></a></p>
           <% end %>
         </div>
         <% if user_signed_in? && @user == current_user %>

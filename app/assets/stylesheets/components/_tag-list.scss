@@ -20,6 +20,8 @@
     font-weight: bold;
     text-transform: uppercase;
     background: rgba($color-2, .1);
+
+    & * {color: $color-2;}
   }
 
   &.-closer {
