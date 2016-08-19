@@ -67,5 +67,23 @@
       </ul>
     </div>
 
+    <div class="project-field">
+      <h4 class="c-title -smaller"><%= t 'project_lead' %>(s)</h4>
+      <ul class="data">
+        <% @project.project_leads.each do |pl| %>
+          <li><a href="/map?investigators[]=<%= pl.id %>"><%= pl.name %></a></li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="project-field">
+      <h4 class="c-title -smaller"><%= t 'collaborator' %>(s)</h4>
+      <ul class="data">
+        <% @project.secondary_investigators.each do |si| %>
+          <li><a href="/map?investigators[]=<%= si.id %>"><%= si.name %></a></li>
+        <% end %>
+      </ul>
+    </div>
+
   </div>
 </div>
