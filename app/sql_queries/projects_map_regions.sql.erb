@@ -14,6 +14,9 @@ from projects
     <% if @params[:organization_types] %>
       inner join organization_types on organization_types.id = organizations.organization_type_id
     <% end %>
+    <% if @params[:investigators] %>
+      inner join investigators on research_units.investigator_id = investigators.id
+    <% end %>
     <% if @params[:project_types] %>
       inner join project_types_projects on project_types_projects.project_id = projects.id
       inner join project_types on project_types_projects.project_type_id = project_types.id
@@ -31,6 +34,9 @@ from projects
     <% end %>
     <% if @params[:organization_types] %>
       and organization_types.id in <%= "#{'(' + @params[:organization_types].join(',') + ')'}" %>
+    <% end %>
+    <% if @params[:investigators] %>
+      and investigators.id in <%= "#{'(' + @params[:investigators].join(',') + ')'}" %>
     <% end %>
     <% if @params[:project_types] %>
       and project_types.id in <%= "#{'(' + @params[:project_types].join(',') + ')'}" %>

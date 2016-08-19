@@ -23,5 +23,12 @@
     },
     "active": false,
     "order": 1
+  },
+  {
+    "id": 5,
+    "type": "carto",
+    "config": {},
+    "active": false,
+    "order": 1
   }
 ]

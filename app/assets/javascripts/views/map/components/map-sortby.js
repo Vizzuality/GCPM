@@ -10,7 +10,7 @@
 
     model: new (Backbone.Model.extend({
       defaults: {
-        sortby: 'created asc'
+        sortby: 'created_asc'
       }
     })),
 
