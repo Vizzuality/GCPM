@@ -24,10 +24,10 @@
 
     show: function(params) {
       this.params = params;
-      var layersActived = [2];
+      var layersActived = [2, 6];
       var layersSpec = this.layersSpec = new App.Collection.LayersSpec();
       var options = {
-        basemap: 'customDetail'
+        basemap: null
       };
       // Map view
       var layersCollection = new App.Collection.Layers();
