@@ -30,8 +30,8 @@ class Event < ApplicationRecord
 
   validates_presence_of :title, :description
   scope :by_user,      -> user      { where('events.user_id = ?', user ) }
-  scope :by_countries, -> countries { joins('inner join countries on events.country = countries.country_name').where('countries.country_name in (?)', countries) }
-  scope :by_regions,   -> regions  { joins('inner join countries on events.country = countries.country_name').where('countries.region_name in (?)', regions) }
+  scope :by_countries, -> countries { joins('inner join countries on events.country = countries.country_name').where(countries: {id: countries})  }
+  scope :by_regions,   -> regions  { joins('inner join countries on events.country = countries.country_name').where(countries: {region_iso: regions}) }
 
   def self.fetch_all(options={})
     events = Event.all
