@@ -16,62 +16,70 @@
       });
     },
 
-
     initialize: function(settings) {
       // Initialize Parent
       this.constructor.__super__.initialize.apply(this);
-
-      this.utils = App.Helper.Utils;
-      this.params = settings.params;
       this.link = window.location.href;
 
       // Inits
-      this.cache();
       this.render();
+      this.cache();
       this.listeners();
     },
 
     cache: function() {
-      this.$contentContainer = $('#map-share .modal-content');
+      this.$btnCopy = $('.btn-copy');
+      this.$pasteMassage = $('.paste-massage');
+      this.$url = $('#url');
     },
 
     listeners: function() {
-      // Can not be on cache because render has to be called before
-      this.$btnCopy = $('.btn-copy');
 
       App.Events.on('Share/toggle', function(){
         this.show();
         this.link = window.location.href;
-        this.render();
+        this._setInputUrl();
+        this._setCopyButton(false);
       }.bind(this));
       this.$btnCopy.on('click', this._copyToClipboard.bind(this));
     },
 
     render: function() {
+      // Can not be on cache because is needed before cache is called
+      this.$contentContainer = $('#map-share .modal-content');
       var html = this.tempmlate({ link: this.link });
+
       this.$contentContainer.html(html);
-      return this;
     },
 
-    _copyToClipboard: function(e) {
-      var url = document.querySelector('#url');
-      url.select();
+    _setInputUrl: function() {
+      this.link = window.location.href;
+      this.$url.val(this.link);
+    },
 
-      try {
-        var successful = document.execCommand('copy');
-        $(e.currentTarget).html('copied');
-        $('.paste-massage').html('Now press &#8984; + V or Ctrl + V to paste');
-      } catch(err) {
-        console.log('Not supported')
+    _copyToClipboard: function() {
+      this.$url.select();
+      this._setCopyButton(true);
+    },
+
+    _setCopyButton: function(isSelected) {
+      if (isSelected) {
+        try {
+          var successful = document.execCommand('copy');
+          this.$btnCopy.html('Copied')
+            .prop('disabled', true)
+            .removeClass('-filled');
+          this.$pasteMassage.html('Now press &#8984; + V or Ctrl + V to paste');
+        } catch(err) {
+          console.log('Not supported')
+        }
+      } else {
+        this.$btnCopy.html('Copy')
+          .prop('disabled', false)
+          .addClass('-filled');
+        this.$pasteMassage.html('');
       }
-    },
-
-    /**
-     * UI EVENTS
-     * - onSubmitFilters
-     */
-
-
+    }
 
   });
 

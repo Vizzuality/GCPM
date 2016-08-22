@@ -45,6 +45,10 @@
         &.-notext > a {
           display: block;
           text-indent: -10000px;
+
+          &:hover {
+            opacity: .6;
+          }
         }
 
         &.-linkedin > a {
