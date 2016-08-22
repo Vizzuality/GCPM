@@ -6,9 +6,6 @@
     nokiaTerrain: {
       url: 'https://4.maps.nlp.nokia.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/256/png8?lg=eng&token=A7tBPacePg9Mj_zghvKt9Q&app_id=KuYppsdXZznpffJsKT24',
       options: {}
-    },
-    customDetail: {
-      url: 'https://cartocdn-ashbu.global.ssl.fastly.net/simbiotica/api/v1/map/simbiotica@87e21c6d@632ee45870a97b639be881c43cd903b8:1467196236654/1/{z}/{x}/{y}.png'
     }
   };
 
@@ -70,7 +67,7 @@
         this.map = L.map(this.el.id, this.options.map);
         this.$el.data('map', this.map);
 
-        this.setBasemap();
+        if (this.options.basemap) this.setBasemap();
       } else {
         console.info('Map already exists.');
       }
@@ -122,27 +119,32 @@
      * Render or remove layers by Layers Collection
      */
     renderLayers: function() {
-
       var LayersDic = {
         tile: App.View.MarkerLayer,
         carto: App.View.CartoLayer,
         marker: App.View.MarkerLayer
       };
 
+      var restLayers = Object.keys(this._instancedlayers);
+
       // Add all layers
       _.each(this.collection.models, function(layerModel) {
+
         var layerType = layerModel.attributes.type;
+        restLayers = restLayers.filter(function(id) {
+          return id != layerModel.id;
+        });
 
         if (LayersDic[layerType]) {
           var currentLayerObj = new LayersDic[layerType]({
             params: this.params,
             config: layerModel.attributes.config,
+            db: layerModel.attributes.db,
             apiUrl: this.options.apiUrl
           });
 
           currentLayerObj.create().done(_.bind(function(layer) {
             // Carto 'create' function returns directly the layer
-            console.log(layerModel.attributes.id);
             if (layerType === "carto") {
               currentLayerObj.layer = layer;
             }
@@ -153,6 +155,7 @@
             if (this._instancedlayers[layerModel.attributes.id]) {
               this.removeLayer(layerModel.attributes.id);
             }
+
             this.addLayer(currentLayer);
             this._instancedlayers[layerModel.attributes.id] = currentLayerObj;
 
@@ -163,10 +166,12 @@
           }, this));
         }
       }, this);
+
+      if (restLayers.length !== 0) this.removeRestLayers(restLayers);
     },
 
     /**
-     * - renderLayers
+     * - addLayer
      * Add layer to the map and its correspondant events
      */
     addLayer: function(layer) {
@@ -178,6 +183,16 @@
         .on('mouseout click', function(data) {
           this.tooltip.remove();
         }.bind(this));
+    },
+
+    /**
+     * - removeRestLayers
+     * Remove layers which are rendered and not wanted
+     */
+    removeRestLayers: function(restLayers) {
+      restLayers.map(function(id) {
+        this.removeLayer(id);
+      }.bind(this));
     },
 
     /**

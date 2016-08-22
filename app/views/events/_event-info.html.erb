@@ -22,9 +22,25 @@
     <div class="project-field">
       <h4 class="c-title -smaller"><%= t 'location' %></h4>
       <p class="data">
-          <%= @event.address %>, <%= @event.country %>
+          <a href="/map?type=events&group=countries&countries[]=<%= Country.find_by( country_name: @event.country ).id %>">
+            <%= @event.address %>, <%= @event.country %>
+          </a>
       </p>
     </div>
+
+    <% if @event.participants %>
+      <div class="project-field">
+        <h4 class="c-title -smaller"><%= t 'participants' %></h4>
+        <ul class="data">
+          <!-- TO-DO: Event form returns participants as string instead of an array og objects -->
+          <% @event.participants && @event.participants.kind_of?(Array) && @event.participants.each do |p| %>
+            <li>
+              <a href="/map?investigators[]=<%= p.id %>"><%= p.name %></a>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
   </div>
 </div>

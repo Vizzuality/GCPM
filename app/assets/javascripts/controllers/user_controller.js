@@ -8,11 +8,12 @@
 
     index: function(params) {
       this.params = params;
-      var layersActived = [2, 4];
+      // Id 6 is the custom basemap rendered as a carto layer
+      var layersActived = [2, 6];
 
       var layersSpec = this.layersSpec = new App.Collection.LayersSpec();
       var options = {
-        basemap: 'customDetail'
+        basemap: null
       };
       var map = this.map = new App.View.Map({
         el: '#map',
@@ -41,13 +42,6 @@
       new App.View.MapTypes({
         params: this.params
       });
-
-      // new App.View.MapFilters({
-      //   params: this.params
-      // });
-
-      // new App.View.MapLayers();
-      // new App.View.MapSortby();
     }
 
   });

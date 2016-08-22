@@ -1,7 +1,7 @@
 ActiveAdmin.register Event do
   menu parent: "Entities", priority: 2
 
-  permit_params :title, :description, :website, :excerpt, :participants, :start_date, :end_date, :private, :online, :address, :address2, :city, :country, :state, :latitute, :longitude, :postcode
+  permit_params :title, :description, :website, :excerpt, :participants, :start_date, :end_date, :private, :online, :address, :address2, :city, :country, :state, :latitude, :longitude, :postcode
 
   index do
     selectable_column
@@ -30,7 +30,7 @@ ActiveAdmin.register Event do
       f.input :country, as: :select, collection: Country.names
       f.input :state
       f.input :postcode
-      f.input :latitute
+      f.input :latitude
       f.input :longitude
     end
     f.actions

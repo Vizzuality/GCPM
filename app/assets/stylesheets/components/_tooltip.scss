@@ -73,6 +73,16 @@
     }
   }
 
+  &.-tip-left-top {
+    transform: translate(246px, -38px);
+
+    .tooltip-arrow {
+      left: auto;
+      transform: translate(-50px, 100%) rotate(45deg);
+      box-shadow: -1px 1px 0px rgba(0,0,0,0.1);
+    }
+  }
+
   ul {
     li {
       margin: 5px 0 0;
@@ -86,11 +96,19 @@
         color: $color-1;
       }
 
+      &:hover > .c-tooltip {
+        visibility: visible;
+        opacity: 1;
+      }
+
       p {
         line-height: 1;
         padding: 0;
       }
 
+      & li {
+        color: $color-2;
+      }
     }
   }
 }

@@ -8,7 +8,6 @@
 
     index: function(params) {
       this.params = params;
-      var layersActived = [2];
 
       var layersSpec = this.layersSpec = new App.Collection.LayersSpec();
       var map = this.map = new App.View.Map({
@@ -21,12 +20,21 @@
         map.renderLayers();
       });
 
-      layersSpec.fetch().done(function() {
-        // This method triggers an event called 'reset'
-        layersSpec.filterByIds(layersActived);
-      });
+      this.setCollection();
 
       this._initMapComponents();
+
+      App.Events.on('params:update', this.setCollection.bind(this));
+    },
+
+    setCollection: function() {
+      var layersActived = [2];
+
+      if (this.params['layer']) layersActived.push(5);
+      this.layersSpec.fetch().done(function() {
+        // This method triggers an event called 'reset'
+        this.layersSpec.filterByIds(layersActived);
+      }.bind(this));
     },
 
     _initMapComponents: function() {
@@ -46,9 +54,13 @@
         params: this.params
       });
 
+      new App.View.MapLayers({
+        params: this.params
+      });
 
-      // new App.View.MapLayers();
-      // new App.View.MapSortby();
+      new App.View.MapSortby({
+        params: this.params
+      });
     }
 
   });

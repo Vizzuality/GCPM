@@ -19,13 +19,16 @@
     <% end %>
   </div>
 
-  <div class="c-pagination-button">
-    <%= link_to (t 'show_more'),
-            user_path(request.query_parameters.merge({ limit: (params['limit'] ? params['limit'].to_i + 1 : 2 )  })),
-            class: "circle-button",
-            remote: true,
-            data: {magic: true} %>
-  </div>
+  <% @realLimit = params['limit'] ? params['limit'].to_i : 1 %>
+  <% if (@realLimit * @limit) < @eventsCount %>
+    <div class="c-pagination-button">
+      <%= link_to (t 'show_more'),
+              user_path(request.query_parameters.merge({ limit: (params['limit'] ? params['limit'].to_i + 1 : 2 )  })),
+              class: "circle-button",
+              remote: true,
+              data: {magic: true} %>
+    </div>
+  <% end %>
 <% else %>
   <div class="c-no-items wrapper">
     <p>No Events</p>
@@ -53,13 +56,16 @@
     <% end %>
   </div>
 
-  <div class="c-pagination-button">
-    <%= link_to (t 'show_more'),
-            user_path(request.query_parameters.merge({ limitFollow: (params['limitFollow'] ? params['limitFollow'].to_i + 1 : 2 )  })),
-            class: "circle-button",
-            remote: true,
-            data: {magic: true} %>
-  </div>
+  <% @realLimitFollow = params['limitFollow'] ? params['limitFollow'].to_i : 1 %>
+  <% if (@realLimitFollow * @limitFollow) < @eventsCount %>
+    <div class="c-pagination-button">
+      <%= link_to (t 'show_more'),
+              user_path(request.query_parameters.merge({ limitFollow: (params['limitFollow'] ? params['limitFollow'].to_i + 1 : 2 )  })),
+              class: "circle-button",
+              remote: true,
+              data: {magic: true} %>
+    </div>
+  <% end %>
 <% else %>
   <div class="c-no-items wrapper">
     <p>No Events following</p>
