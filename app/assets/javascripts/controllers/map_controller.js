@@ -46,6 +46,10 @@
         params: this.params
       });
 
+      new App.View.MapShare({
+        params: this.params
+      });
+
       new App.View.MapFilters({
         params: this.params
       });
