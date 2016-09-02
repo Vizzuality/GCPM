@@ -9,15 +9,25 @@
    * The action is actually a method of the controller.
    * The previously active controller is automatically disposed.
    */
-  var Dispatcher = function() {
+  App.Dispatcher = function() {
     this.initialize.apply(this, arguments);
   };
 
-  _.extend(Dispatcher.prototype, {
+  _.extend(App.Dispatcher.prototype, {
 
     initialize: function() {
+      this.params = new (Backbone.Model.extend());
       this.router = new App.Router();
-      this.router.on('route', this.runController);
+
+      this.params.on('change', this._updateUrl, this);
+      this.router.once('route', this._runAction, this);
+
+      // Global event to update params from external actions
+      App.on('Router:update', _.bind(this._updateFromParams, this));
+    },
+
+    getState: function() {
+      return this.params.attributes;
     },
 
     /**
@@ -27,47 +37,55 @@
      * @param  {String} routeName
      * @param  {Array} routeParams
      */
-    runController: function(routeName, routeParams) {
+    _runAction: function(routeName, routeParams) {
       var routeSplited = routeName.split('#');
       var controllerName = routeSplited[0];
       var actionName = routeSplited[1];
-      var params = this.getParams(routeParams[0]);
-      if (App.Controller[controllerName] &&
-        App.Controller.hasOwnProperty(controllerName)) {
-        var currentController = new App.Controller[controllerName]();
-        // Checking if action exists
-        if (currentController[actionName] &&
-          typeof currentController[actionName] === 'function') {
-          // Setting new params in model
-          this.updateParams(params);
-          // Executing controller#action and passing url params
-          currentController[actionName](this.params.attributes);
+      var controller = this._getController(controllerName);
+
+      this._updateFromQuery(routeParams[0]);
+
+      if (controller) {
+        var action = this._getAction(controller, actionName);
+        if (action) {
+          action(this.getState());
         } else {
           console.error('specified action doesn\'t exist');
         }
       } else {
         console.error('specified controller doesn\'t exist');
       }
+    },
+
+    _updateFromQuery: function(queryParams) {
+      this.params.set(this.router.unserializeParams(queryParams));
+      App.trigger('Router:change', this.getState());
+    },
+
+    _updateFromParams: function(params) {
+      this.params.set(params, { silent: true });
+      this._updateUrl();
+    },
+
+    _updateUrl: function() {
+      this.router.updateUrl(this.getState());
+      App.trigger('Router:change', this.getState());
+    },
+
+    _getController: function(controllerName) {
+      if (App.Controller[controllerName] &&
+        App.Controller.hasOwnProperty(controllerName)) {
+        return new App.Controller[controllerName]();
+      }
+    },
+
+    _getAction: function(controller, actionName) {
+      if (controller[actionName] &&
+        typeof controller[actionName] === 'function') {
+        return controller[actionName];
+      }
     }
 
   });
-
-  /**
-   * App will be start when DOM is ready
-   */
-  function initApp() {
-    new App.MainView(); // Only temporal, this will be removed
-    new Dispatcher();
-
-    if (Backbone.History.started) {
-      Backbone.history.stop();
-    }
-
-    // Start listening changes in routes
-    Backbone.history.start({ pushState: true });
-  }
-
-  document.addEventListener('DOMContentLoaded', initApp);
-
 
 })(this.App);
