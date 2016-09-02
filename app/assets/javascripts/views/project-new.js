@@ -53,7 +53,8 @@
       'change .selectElements'  : 'updateResearchUnit',
       'click .pre-submit': 'onSubmit',
       // 'click .saveRelation' : 'saveRelation',
-      'click .add-new-investigator' : 'addInvestigatorForm'
+      'click .add-new-investigator' : 'addInvestigatorForm',
+      'click .add-new-fundingsource' : 'addFundingsourceForm'
     },
 
     initialize: function() {
@@ -78,6 +79,7 @@
       this.fillPregenerated();
       this.renderChosen();
       this.renderPickADate();
+      this.addNewFundingSource();
       return this;
     },
 
@@ -104,19 +106,18 @@
       var id = target.data('id');
       this.$el.find('.-getrow').find('.circle').remove();
       target.find('.f-circle-parent').html('<span class="circle"></span>');
-      // $.ajax({
-      //   url: '/api/projects/'+PROJECT_ID+'/memberships/'+id+'?token='+AUTH_TOKEN,
-      //   method: 'POST',
-      //   data: {'membership': {'membership_type':'main'}}
-      // });
-      // target.siblings().each(function(i, el){
-      //   if (! !!$(el).data('id')) return;
-      //   $.ajax({
-      //     url: '/api/projects/'+PROJECT_ID+'/memberships/'+$(el).data('id')+'?token='+AUTH_TOKEN,
-      //     method: 'POST',
-      //     data: {'membership': {'membership_type':'secondary'}}
-      //   });
-      // });
+    },
+
+    addNewFundingSource: function() {
+      var target = document.getElementById('funding-sources-select');
+      $(target).prepend('<option value="-1" class="add-new-fundingsource">Add new</option><option></option>');
+      $(target).chosen({
+            width: '100%',
+            allow_single_deselect: true,
+            inherit_select_classes: true,
+            no_results_text: "Oops, nothing found!",
+            placeholder_text_single: "Select or add investigator"
+          });
     },
 
     loadOrgaAndAddr: function(ev) {
@@ -377,6 +378,14 @@
       this.loadPickableOrganizations();
       this.loadPickableCountry();
       return;
+    },
+
+    addFundingsourceForm: function(ev) {
+      debugger;
+      ev.preventDefault();
+      ev.stopPropagation();
+      $('#funding_sources_select_chosen').find('.chosen-choices li:nth-last-child(2)').remove();
+      $(ev.target).append('<input>')
     },
 
     loadPickableOrganizations: function() {
