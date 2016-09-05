@@ -1,11 +1,13 @@
 #about-content{
 	.header-about {
 		height: 312px;
-		width: 100%;
 		display: block;
 		background-color: #68299b;
 		color: #fff;
 		padding: 50px;
+		width: calc(100% + 100px);
+		position: relative;
+    	left: -50px;
 		h1 {
 			font-size: 65px;
 			margin-top: 0;
@@ -15,11 +17,15 @@
 		line-height: 1.4;
 		color: #0f3046;
 		font-size: 25px;
+		margin: 50px 0;
+	}
+	ul {
+		display: inline-block;
 	}
 	li {
 		float: left;
 		width: calc(100%/3);
-		height: 250px;
+		height: 280px;
 		text-align: center;
 		padding: 0 6px;
 		line-height: 1.7;
@@ -47,6 +53,15 @@
 				background-image: asset-url(abouticon-05);
 			}
 		}
+	}
+	.split-about {
+		display: block;
+		width: calc(100% + 100px);
+		position: relative;
+    	left: -50px;
+    	height: 1px;
+		border: solid 1px rgba(0, 0, 0, 0.1);
+		margin: 0 0 50px;
 	}
 	p {
 		display: block;
