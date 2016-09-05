@@ -29,6 +29,15 @@ class Event < ApplicationRecord
   belongs_to :user, inverse_of: :events
 
   validates_presence_of :title, :description
+
+  validate :dates_timeline
+
+  def dates_timeline
+    if self.start_date.present? && self.end_date.present?
+      errors.add(:end_date, 'must be after start date') if self.start_date > self.end_date
+    end
+  end
+
   scope :by_user,      -> user      { where('events.user_id = ?', user ) }
   scope :by_countries, -> countries { joins('inner join countries on events.country = countries.country_name').where(countries: {id: countries})  }
   scope :by_regions,   -> regions  { joins('inner join countries on events.country = countries.country_name').where(countries: {region_iso: regions}) }
