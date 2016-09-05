@@ -9,7 +9,7 @@ class CountriesController < ApplicationController
     @limit = 15
     @projects      = Project.fetch_all(countries: @country.id).order('created_at DESC').limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
     @projectsCount = @projects.length
-    @events  = Event.fetch_all(countries: @country.id).order('created_at DESC').limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
+    @events = Event.fetch_all(countries: @country.id).order('created_at DESC').limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
     @eventsCount = @events.length
 
     # @organizations  = Organization.fetch_all(countries: @country.id).order('created_at DESC').limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
@@ -17,7 +17,7 @@ class CountriesController < ApplicationController
   end
 
   private
-    
+
     def set_country
       @country = Country.find_by(country_iso: params[:iso])
     end
