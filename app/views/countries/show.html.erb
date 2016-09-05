@@ -1,3 +1,10 @@
+<%
+  @COUNTRY_ID = false
+  if (@country.id)
+    @COUNTRY_ID = @country.id
+  end
+%>
+<script> var COUNTRY_ID = <%= @COUNTRY_ID %>;</script>
 <section class="country">
   <div class="c-section-intro -color-4">
     <div id="map" class="map c-map -detail">

@@ -27,7 +27,8 @@
       var layersActived = [2, 6];
       var layersSpec = this.layersSpec = new App.Collection.LayersSpec();
       var options = {
-        basemap: null
+        basemap: null,
+        apiUrl: '/api/map/?group=points&countries[]=' + COUNTRY_ID
       };
       // Map view
       var layersCollection = new App.Collection.Layers();
