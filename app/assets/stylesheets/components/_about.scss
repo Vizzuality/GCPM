@@ -32,19 +32,19 @@
 		    width: 100%;
 		    margin: 0 0 23px 0;
 			&.-share {
-				background-image: url(abouticon-01.svg);
+				background-image: asset-url(abouticon-01);
 			}
 			&.-search {
-				background-image: url(abouticon-02.svg);
+				background-image: asset-url(abouticon-02);
 			}
 			&.-connect {
-				background-image: url(abouticon-03.svg);
+				background-image: asset-url(abouticon-03);
 			}
 			&.-view {
-				background-image: url(abouticon-04.svg);
+				background-image: asset-url(abouticon-04);
 			}
 			&.-more {
-				background-image: url(abouticon-05.svg);
+				background-image: asset-url(abouticon-05);
 			}
 		}
 	}
