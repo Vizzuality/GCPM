@@ -43,6 +43,14 @@ class Project < ApplicationRecord
   validates :title, uniqueness: true
   validates_acceptance_of :terms
 
+  validate :dates_timeline
+
+  def dates_timeline
+    if self.start_date.present? && self.end_date.present?
+      errors.add(:end_date, 'must be after start date') if self.start_date > self.end_date
+    end
+  end
+
   scope :publihsed,             ->                     { where(status: :published) }
   scope :active,                ->                     { where('projects.end_date >= ? AND projects.start_date <= ?', Time.now, Time.now).or(where('projects.end_date IS NULL')) }
   scope :inactive,              ->                     { where('projects.end_date < ?', Time.now).or('projects.start_date > ?', Time.now) }

@@ -6,7 +6,7 @@ module ApiAuthenticable
     skip_before_action :verify_request
 
     def session_invalid?(object)
-      object.token_expired? && session[:user_id].blank?
+      # object.token_expired? && session[:user_id].blank?
     end
 
     def reset_auth_token(object)

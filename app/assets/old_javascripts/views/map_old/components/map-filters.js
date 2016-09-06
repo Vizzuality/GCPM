@@ -81,8 +81,8 @@
         this.resetFilters();
       }.bind(this));
 
-      App.Events.on('Filters/toggle', function(){
-        this.show();
+      App.Events.on('Filters/toggle', function(e, isFilterEvents){
+        this.show(isFilterEvents);
       }.bind(this));
 
       this.$btnResetFilters.on('click', function(e){

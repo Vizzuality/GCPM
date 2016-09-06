@@ -57,10 +57,11 @@
     },
 
     triggerAction: function(e) {
+      var isFilterEvents = document.querySelectorAll('[data-type="events"]')[0].classList.contains('-active') && e.target.dataset.action.includes('Filter');
       e && e.preventDefault();
       var action = $(e.currentTarget).data('action');
       Backbone.Events.trigger('MapMenu/action');
-      Backbone.Events.trigger(action, e);
+      Backbone.Events.trigger(action, e, isFilterEvents);
     }
 
 

@@ -122,4 +122,10 @@
     border-radius: 100%;
     border-color: rgba($color-2, .15);
   }
+
+  &:disabled {
+    cursor: inherit;
+
+    &:hover { box-shadow: 0; }
+  }
 }

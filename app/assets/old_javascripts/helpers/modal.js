@@ -6,18 +6,18 @@
 
   App.Helper.Modal = Backbone.View.extend({
 
-    model: new (Backbone.Model.extend({
-      defaults: {
-        hidden: true
-      }
-    })),
-
     events: {
       'click .js-btn-modal-close' : 'hide',
       'click': 'onClickBackdrop'
     },
 
     initialize: function() {
+      this.model = new (Backbone.Model.extend({
+        defaults: {
+          hidden: true
+        }
+      }));
+
       // All the methods that has _ is because they belong to the Parent View
       this._cache();
       this._listeners();
@@ -65,7 +65,8 @@
      * - show
      * - hide
      */
-    show: function() {
+    show: function(isFilterEvents) {
+      this.hideEventsFields(!!isFilterEvents);
       this.model.set('hidden', false);
     },
 
@@ -101,6 +102,10 @@
       this.$document.off('keyup.modal');
       this.$backdrop.off('click');
     },
+
+    hideEventsFields: function(hide) {
+      (hide) ? this.$content.find('.grid-filters .c-select:not(:first)').hide() : this.$content.find('.grid-filters .c-select:not(:first)').show();
+    }
 
   });
 

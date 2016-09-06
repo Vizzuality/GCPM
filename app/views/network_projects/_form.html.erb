@@ -35,7 +35,7 @@
 		<span class="separator"></span>
 		<%= form.input :cancer_type_ids, as: :collection_select, collection: @cancer_types, label: 'cancer type', label_html: { class: 'c-section-title -one-line'}, input_html: {class: 'chosen-select', multiple: true} %>
 		<span class="separator"></span>
-		<%= form.input :funding_source_ids, as: :collection_select, collection: @funders, label: 'funding source', label_html: { class: 'c-section-title -one-line'}, input_html: {class: 'chosen-select', multiple: true} %>
+		<%= form.input :funding_source_ids, as: :collection_select, collection: @funders, label: 'funding source', label_html: { class: 'c-section-title -one-line'}, input_html: {multiple: true, id: 'funding-sources-select'} %>
 	</div>
 </div>
 
