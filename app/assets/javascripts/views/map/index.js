@@ -182,6 +182,30 @@
           content += "<li>value</li>";
           content += "</ul>";
         break;
+        case 'hdi':
+          content = "<div><span class='legend-title'>Human Development Index</span></div>";
+          content += "<ul>";
+          content += "<li>value</li>";
+          content += "</ul>";
+        break;
+        case 'mortality':
+          content = "<div><span class='legend-title'>Mortality, ASR all years Globocan</span></div>";
+          content += "<ul>";
+          content += "<li>value</li>";
+          content += "</ul>";
+        break;
+        case 'proportion':
+          content = "<div><span class='legend-title'>Prevalence, 1-year adults only, Globocan</span></div>";
+          content += "<ul>";
+          content += "<li>value</li>";
+          content += "</ul>";
+        break;
+        case 'context':
+          content = "<div><span class='legend-title'>Disability-Adjusted Life Year</span></div>";
+          content += "<ul>";
+          content += "<li>value</li>";
+          content += "</ul>";
+        break;
       }
       $(legend).html(content);
       $('#map').append($(legend));
