@@ -49,7 +49,7 @@
       App.Events.on('params:update', function(params){
         this.params.clear().set(params, { silent: true });
         this.renderLayers();
-        this.renderLegend(params.layer);
+        this.renderLegend(params.layer, params.date || params.cancer_type);
       }.bind(this));
     },
 
@@ -170,20 +170,22 @@
 
       if (restLayers.length !== 0) this.removeRestLayers(restLayers);
     },
-    renderLegend: function(slug) {
+    renderLegend: function(slug, extra) {
       $('#map-legend').remove();
       var legend = document.createElement('div');
       legend.id = 'map-legend';
+      extra = extra.replace(/_/g,' ');
+      extra = "<span class='extra'>" + extra + "</span>";
       var content = '';
       switch(slug) {
-        case 'incidence':
-          content = "<div><span class='legend-title'>Incidence, ASR all years Globocan</span></div>";
+        case 'hdi':
+          content = "<div><span class='legend-title'>Human Development Index, " +extra+ "</span></div>";
           content += "<ul>";
           content += "<li>value</li>";
           content += "</ul>";
         break;
-        case 'hdi':
-          content = "<div><span class='legend-title'>Human Development Index</span></div>";
+        case 'incidence':
+          content = "<div><span class='legend-title'>Incidence, ASR all years Globocan</span></div>";
           content += "<ul>";
           content += "<li>value</li>";
           content += "</ul>";
@@ -201,7 +203,7 @@
           content += "</ul>";
         break;
         case 'context':
-          content = "<div><span class='legend-title'>Disability-Adjusted Life Year</span></div>";
+          content = "<div><span class='legend-title'>Disability-Adjusted Life Year, " +extra+ "</span></div>";
           content += "<ul>";
           content += "<li>value</li>";
           content += "</ul>";

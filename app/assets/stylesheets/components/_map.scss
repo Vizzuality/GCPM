@@ -77,5 +77,8 @@
     font-weight: bold;
     line-height: 1.4;
     color: #0f3046;
+    .extra {
+      text-transform: capitalize;
+    }
   }
 }
