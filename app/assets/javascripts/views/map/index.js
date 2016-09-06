@@ -174,7 +174,7 @@
       $('#map-legend').remove();
       var legend = document.createElement('div');
       legend.id = 'map-legend';
-      extra = extra.replace(/_/g,' ');
+      extra = extra.toString().replace(/_/g,' ');
       extra = "<span class='extra'>" + extra + "</span>";
       var content = '';
       switch(slug) {
