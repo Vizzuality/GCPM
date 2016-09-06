@@ -49,6 +49,7 @@
       App.Events.on('params:update', function(params){
         this.params.clear().set(params, { silent: true });
         this.renderLayers();
+        this.renderLegend(params.layer);
       }.bind(this));
     },
 
@@ -168,6 +169,22 @@
       }, this);
 
       if (restLayers.length !== 0) this.removeRestLayers(restLayers);
+    },
+    renderLegend: function(slug) {
+      $('#map-legend').remove();
+      var legend = document.createElement('div');
+      legend.id = 'map-legend';
+      var content = '';
+      switch(slug) {
+        case 'incidence':
+          content = "<div><span class='legend-title'>Incidence, ASR all years Globocan</span></div>";
+          content += "<ul>";
+          content += "<li>value</li>";
+          content += "</ul>";
+        break;
+      }
+      $(legend).html(content);
+      $('#map').append($(legend));
     },
 
     /**

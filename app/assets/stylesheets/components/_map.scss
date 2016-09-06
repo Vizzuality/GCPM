@@ -62,3 +62,20 @@
     }
   }
 }
+
+#map-legend {
+  position: absolute;
+  top: 60px;
+  background: #fff;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15), 0 1px 0 0 rgba(0, 0, 0, 0.05);
+  z-index: 2;
+  padding: 10px;
+  right: 10px;
+  .legend-title {
+    font-family: Montserrat;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.4;
+    color: #0f3046;
+  }
+}
