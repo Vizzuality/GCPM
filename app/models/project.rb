@@ -89,10 +89,22 @@ class Project < ApplicationRecord
     end
 
     def build_project(options)
-      funders = options['new_funders'] if options['new_funders'].present?
-      options = options['new_funders'].present? ? options.except(:new_funders) : options
+      options = build_project_attributes(options) if options['new_funders'].present?
+      Project.new(options)
+    end
 
-      if funders.present? && Project.new(options).valid?
+    def update_project(options, project)
+      options = build_project_attributes(options, project) if options['new_funders'].present?
+      project.update(options)
+    end
+
+    def build_project_attributes(options, project=nil)
+      funders            = options['new_funders']
+      options            = options.except(:new_funders)
+      project.attributes = options if project.present?
+      validate_project   = project.present? ? project.valid? : Project.new(options).valid?
+
+      if validate_project
         funding_sources = []
         funders.each do |funder_params|
           funding_sources << Organization.create(funder_params)
@@ -100,7 +112,7 @@ class Project < ApplicationRecord
         options['funding_source_ids']  = [] if options['funding_source_ids'].blank?
         options['funding_source_ids'] += funding_sources.map(&:id)
       end
-      Project.new(options)
+      options
     end
   end
 
