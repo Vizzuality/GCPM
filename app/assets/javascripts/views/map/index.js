@@ -49,6 +49,7 @@
       App.Events.on('params:update', function(params){
         this.params.clear().set(params, { silent: true });
         this.renderLayers();
+        this.renderLegend(params.layer, params.date || params.cancer_type);
       }.bind(this));
     },
 
@@ -168,6 +169,52 @@
       }, this);
 
       if (restLayers.length !== 0) this.removeRestLayers(restLayers);
+    },
+    renderLegend: function(slug, extra) {
+      $('#map-legend').remove();
+      var legend = document.createElement('div');
+      legend.id = 'map-legend';
+      if (!!extra) {
+        extra = extra.toString().replace(/_/g,' ');
+      } else {
+        extra = '';
+      }
+      extra = "<span class='extra'>" + extra + "</span>";
+      var content = '';
+      switch(slug) {
+        case 'hdi':
+          content = "<div><span class='legend-title'>Human Development Index, " +extra+ "</span></div>";
+          content += "<ul>";
+          content += "<li>value</li>";
+          content += "</ul>";
+        break;
+        case 'incidence':
+          content = "<div><span class='legend-title'>Incidence, ASR all years Globocan</span></div>";
+          content += "<ul>";
+          content += "<li>value</li>";
+          content += "</ul>";
+        break;
+        case 'mortality':
+          content = "<div><span class='legend-title'>Mortality, ASR all years Globocan</span></div>";
+          content += "<ul>";
+          content += "<li>value</li>";
+          content += "</ul>";
+        break;
+        case 'proportion':
+          content = "<div><span class='legend-title'>Prevalence, 1-year adults only, Globocan</span></div>";
+          content += "<ul>";
+          content += "<li>value</li>";
+          content += "</ul>";
+        break;
+        case 'context':
+          content = "<div><span class='legend-title'>Disability-Adjusted Life Year, " +extra+ "</span></div>";
+          content += "<ul>";
+          content += "<li>value</li>";
+          content += "</ul>";
+        break;
+      }
+      $(legend).html(content);
+      $('#map').append($(legend));
     },
 
     /**
