@@ -174,7 +174,11 @@
       $('#map-legend').remove();
       var legend = document.createElement('div');
       legend.id = 'map-legend';
-      extra = extra.toString().replace(/_/g,' ');
+      if (!!extra) {
+        extra = extra.toString().replace(/_/g,' ');
+      } else {
+        extra = '';
+      }
       extra = "<span class='extra'>" + extra + "</span>";
       var content = '';
       switch(slug) {
