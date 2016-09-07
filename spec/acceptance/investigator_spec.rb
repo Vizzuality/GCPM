@@ -64,6 +64,7 @@ module Api::V1
           expect(json['addresses'][0]['country_id']).to eq(country.id)
           expect(json['addresses'].size).to             eq(3)
           expect(json['organizations'][1]['name']).to   eq('Test orga 1')
+          expect(json['organizations'][2]['name']).to   eq('Test orga 2')
         end
       end
     end

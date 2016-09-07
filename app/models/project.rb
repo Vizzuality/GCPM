@@ -34,10 +34,11 @@ class Project < ApplicationRecord
   has_and_belongs_to_many :project_types
   has_and_belongs_to_many :cancer_types
 
-  accepts_nested_attributes_for :memberships,   allow_destroy: true
-  accepts_nested_attributes_for :investigators, update_only:   true
-  accepts_nested_attributes_for :organizations, update_only:   true
-  accepts_nested_attributes_for :addresses,     update_only:   true
+  accepts_nested_attributes_for :memberships,     allow_destroy: true
+  accepts_nested_attributes_for :investigators,   update_only:   true
+  accepts_nested_attributes_for :organizations,   update_only:   true
+  accepts_nested_attributes_for :addresses,       update_only:   true
+  accepts_nested_attributes_for :funding_sources, allow_destroy: true
 
   validates_presence_of :title, :summary
   validates :title, uniqueness: true
@@ -65,25 +66,42 @@ class Project < ApplicationRecord
   scope :by_end_date,           -> end_date            { where('projects.end_date < ?', end_date ) }
   scope :by_user,               -> user                { where('projects.user_id = ?', user ) }
 
-  def self.fetch_all(options={})
-    projects = Project.published
-    projects = projects.by_investigators(options[:investigators])           if options[:investigators]
-    projects = projects.by_project_types(options[:project_types])           if options[:project_types]
-    projects = projects.by_cancer_types(options[:cancer_types])             if options[:cancer_types]
-    projects = projects.by_countries(options[:countries])                   if options[:countries]
-    projects = projects.by_regions(options[:regions])                       if options[:regions]
-    projects = projects.by_organizations(options[:organizations])           if options[:organizations]
-    projects = projects.by_organization_types(options[:organization_types]) if options[:organization_types]
-    projects = projects.by_start_date(options[:start_date])                 if options[:start_date]
-    projects = projects.by_end_date(options[:end_date])                     if options[:end_date]
-    projects = projects.by_user(options[:user])                             if options[:user]
-    projects = projects.order('projects.created_at ASC')                    if options[:sortby] && options[:sortby] == 'created_asc'
-    projects = projects.order('projects.created_at DESC')                   if options[:sortby] && options[:sortby] == 'created_desc'
-    projects = projects.order('projects.title ASC')                         if options[:sortby] && options[:sortby] == 'title_asc'
-    projects = projects.order('projects.title DESC')                        if options[:sortby] && options[:sortby] == 'title_desc'
-    projects = projects.limit(options[:limit])                              if options[:limit]
-    projects = projects.offset(options[:offset])                            if options[:offset]
-    projects.uniq
+  class << self
+    def fetch_all(options={})
+      projects = Project.published
+      projects = projects.by_investigators(options[:investigators])           if options[:investigators]
+      projects = projects.by_project_types(options[:project_types])           if options[:project_types]
+      projects = projects.by_cancer_types(options[:cancer_types])             if options[:cancer_types]
+      projects = projects.by_countries(options[:countries])                   if options[:countries]
+      projects = projects.by_regions(options[:regions])                       if options[:regions]
+      projects = projects.by_organizations(options[:organizations])           if options[:organizations]
+      projects = projects.by_organization_types(options[:organization_types]) if options[:organization_types]
+      projects = projects.by_start_date(options[:start_date])                 if options[:start_date]
+      projects = projects.by_end_date(options[:end_date])                     if options[:end_date]
+      projects = projects.by_user(options[:user])                             if options[:user]
+      projects = projects.order('projects.created_at ASC')                    if options[:sortby] && options[:sortby] == 'created_asc'
+      projects = projects.order('projects.created_at DESC')                   if options[:sortby] && options[:sortby] == 'created_desc'
+      projects = projects.order('projects.title ASC')                         if options[:sortby] && options[:sortby] == 'title_asc'
+      projects = projects.order('projects.title DESC')                        if options[:sortby] && options[:sortby] == 'title_desc'
+      projects = projects.limit(options[:limit])                              if options[:limit]
+      projects = projects.offset(options[:offset])                            if options[:offset]
+      projects.uniq
+    end
+
+    def build_project(options)
+      funders = options['new_funders'] if options['new_funders'].present?
+      options = options['new_funders'].present? ? options.except(:new_funders) : options
+
+      if funders.present? && Project.new(options).valid?
+        funding_sources = []
+        funders.each do |funder_params|
+          funding_sources << Organization.create(funder_params)
+        end
+        options['funding_source_ids']  = [] if options['funding_source_ids'].blank?
+        options['funding_source_ids'] += funding_sources.map(&:id)
+      end
+      Project.new(options)
+    end
   end
 
   def project_lead
