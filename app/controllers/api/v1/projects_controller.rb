@@ -6,10 +6,10 @@ module Api::V1
     before_action :set_user_project,  only: :update
 
     def update
-      if @project.update(project_params)
+      if Project.update_project(project_params, @project)
         render json: @project, status: 200, serializer: ProjectSerializer
       else
-        render json: { success: false, message: 'Error updating project' }, status: 422
+        render json: { success: false, message: @project.errors.full_messages }, status: 422
       end
     end
 
