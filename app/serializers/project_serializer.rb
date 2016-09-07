@@ -19,4 +19,7 @@ class ProjectSerializer < ActiveModel::Serializer
 
   has_many :investigators
   has_many :organizations
+  has_many :funding_sources
+  has_many :cancer_types
+  has_many :project_types
 end

@@ -2,14 +2,23 @@ module Api::V1
   class ProjectsController < ApiController
     include ApiAuthenticable
 
-    before_action :set_user_by_token, only: :update
+    before_action :set_user_by_token, only: [:update, :create]
     before_action :set_user_project,  only: :update
 
     def update
       if @project.update(project_params)
         render json: @project, status: 200, serializer: ProjectSerializer
       else
-        render json: { success: false, message: 'Error updateditg project' }, status: 422
+        render json: { success: false, message: 'Error updating project' }, status: 422
+      end
+    end
+
+    def create
+      @project = Project.build_project(project_params.merge(user: @user))
+      if @project.save
+        render json: @project, status: 201, serializer: ProjectSerializer
+      else
+        render json: { success: false, message: @project.errors.full_messages }, status: 422
       end
     end
 

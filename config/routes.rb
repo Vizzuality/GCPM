@@ -31,7 +31,7 @@ Rails.application.routes.draw do
       resources :regions,       only: [:index, :show]
       resources :cancer_types,  only: [:index, :show], path: '/cancer-types'
       resources :map,           only: [:index]
-      resources :projects,      only: :update do
+      resources :projects,      only: [:update, :create] do
         resources :memberships, only: [:index, :create, :destroy]
         post '/memberships/:id', to: 'memberships#update'
       end
