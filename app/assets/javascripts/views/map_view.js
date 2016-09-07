@@ -23,7 +23,6 @@
     },
 
     initialize: function(settings) {
-      console.log('new map');
       this.options = _.extend({}, this.defaults, settings.options || {});
       this.createMap();
     },
@@ -34,9 +33,6 @@
     createMap: function() {
       this.map = L.map(this.el.id, this.options);
       this.setBasemap();
-      this.map.on('moveend', function() {
-        this.trigger('Map:change', this.getState());
-      }.bind(this));
     },
 
     /**

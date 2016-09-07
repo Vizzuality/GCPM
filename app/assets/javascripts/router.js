@@ -14,14 +14,51 @@
       'map': 'Map#index'
     },
 
+    start: function() {
+      if (!Backbone.History.started) {
+        Backbone.history.start({ pushState: true });
+      }
+    },
+
+    initialize: function() {
+      this.params = new (Backbone.Model.extend());
+
+      this.updateParams();
+      this.start();
+
+      App.on('Router:update', this.updateUrl, this);
+
+      this.params.on('change', function() {
+        App.trigger('Router:change', this.getParams());
+      }, this);
+    },
+
+    updateParams: function() {
+      var uri = new URI();
+      this.params
+        .clear({ silent: true })
+        .set(uri.search(true));
+    },
+
+    getCurrent: function() {
+      return this.routes[Backbone.history.getFragment().split('?')[0]];
+    },
+
+    getParams: function() {
+      return this.params.attributes;
+    },
+
     /**
      * Change URL with current params
      * @param  {Object} params
+     * @param  {Object} options
      */
-    updateUrl: function(params) {
+    updateUrl: function(params, options) {
+      var settings = Object.assign({ trigger: false }, options || {});
       var uri = new URI();
-      uri.query(this.serializeParams(params));
-      this.navigate(uri.path().slice(1) + uri.search(), { trigger: false });
+      this.params.set(params || {});
+      uri.query(this.serializeParams(this.params.attributes));
+      this.navigate(uri.path().slice(1) + uri.search(), settings);
     },
 
     /**

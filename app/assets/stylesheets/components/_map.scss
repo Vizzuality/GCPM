@@ -25,6 +25,38 @@
     }
   }
 
+  .prunecluster,
+  .bubble-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+    font-weight: bold;
+    font-size: 38px;
+
+    background-color: white;
+
+    border-radius: 100%;
+    box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.1);
+    transition: all .3s ease;
+
+    &:hover {
+      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+      z-index: 1000 !important;
+    }
+
+    &.-blue {
+      background-color: #007bcd;
+    }
+  }
+
+  .prunecluster {
+    border: 3px solid #007bcd;
+    color: #007bcd;
+    font-size: 21px;
+  }
+
   /* !important needed to force the change from the library */
   .leaflet-popup {
     bottom: 2px !important;

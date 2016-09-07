@@ -30,7 +30,7 @@
 //= require_tree ./views
 //= require_tree ./controllers
 //= require_tree ./facades
-// require_tree ./helpers
+//= require_tree ./lib
 
 this.App = {
   facade: {},
@@ -49,10 +49,15 @@ _.extend(App, Backbone.Events);
  *
  */
 function initApp() {
-  new App.Dispatcher();
-  if (!Backbone.History.started) {
-    Backbone.history.start({ pushState: true });
-  }
+  var router = new App.Router();
+  var dispatcher = new App.Dispatcher();
+
+  dispatcher.runAction(router.getCurrent(), router.getParams());
+
+  router.on('route', function() {
+    router.updateParams();
+    router.updateUrl(router.getParams());
+  });
 }
 
 document.addEventListener('DOMContentLoaded', initApp)

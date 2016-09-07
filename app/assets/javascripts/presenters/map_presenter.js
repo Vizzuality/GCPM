@@ -2,54 +2,72 @@
 
   'use strict';
 
+  var StateModel = Backbone.Model.extend();
+
   App.Presenter.Map = function() {
     this.initialize.apply(this, arguments);
   };
 
-  _.extend(App.Presenter.Map.prototype,  {
+  _.extend(App.Presenter.Map.prototype, {
 
     initialize: function(params) {
-      this.currentParams = params;
-      this.layersSpec = new App.Collection.LayersSpec();
       this.fc = App.facade.layer;
+
+      this.state = new StateModel(params);
+      this.layersSpec = new App.Collection.LayersSpec();
       this.map = new App.View.Map({
         el: '#map',
-        options: this.getMapOptions(params)
+        options: this.getMapOptions()
       });
 
-      // Listeners
-      this.map.on('Map:change', function(state) {
-        App.trigger('Router:update', Object.assign(params, state));
-      });
-
-      // Triggers
-      App.trigger('Router:update', Object.assign(params, this.map.getState()));
-
-      // Draw first layer
+      // Drawing firs layer at beginning
       this.drawLayer();
+
+      // Setting listeners
+      this.setEvents();
+    },
+
+    setEvents: function() {
+      App.on('Router:change', this.setState, this);
+      this.state.on('change', this.drawLayer, this);
+      this.fc.on('region:change', function(properties) {
+        App.trigger('Router:update', { region: properties.iso });
+      }, this);
+    },
+
+    setState: function(params) {
+      var state = params;
+      if (!params.region) {
+        delete state.region;
+      }
+      if (!params.country) {
+        delete state.country;
+      }
+      this.state.clear({ silent: true });
+      this.state.set(state);
     },
 
     /**
      * Render layer
+     * @param {params} Object
      */
     drawLayer: function() {
       if (this.currentLayer) {
         this.map.removeLayer(this.currentLayer);
       }
-      this.fc.getLayer(this.currentParams).done(function(layer) {
-        var bounds = layer.getBounds();
-        this.currentLayer = this.map.addLayer(layer);
-        this.map.map.fitBounds(bounds);
+      this.fc.getLayer(this.state.attributes).done(function(layer) {
+        this.currentLayer = layer;
+        this.map.addLayer(this.currentLayer);
+        layer.FitBounds(); // Cluster prune method to fitbounds
       }.bind(this));
     },
 
     /**
      * Get default map options from params
-     * @param  {Object} params
      * @return {Object}
      */
-    getMapOptions: function(params) {
-      var mapSettings = _.pick(params, 'zoom', 'lat', 'lng');
+    getMapOptions: function() {
+      var mapSettings = _.pick(this.state.attributes, 'zoom', 'lat', 'lng');
       if (Object.keys(mapSettings).length > 0) {
         return {
           center: [mapSettings.lat, mapSettings.lng],

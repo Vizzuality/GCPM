@@ -8,10 +8,16 @@
 
     index: function(params) {
       var initialState = {};
+
       if (!params.data) {
         initialState.data = 'projects';
       }
-      new App.Presenter.Map(Object.assign(params, initialState));
+
+      initialState = Object.assign(params, initialState);
+
+      App.trigger('Router:update', initialState);
+
+      new App.Presenter.Map(initialState);
     }
 
   });
