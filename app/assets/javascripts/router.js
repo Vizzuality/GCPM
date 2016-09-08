@@ -38,6 +38,7 @@
 
     setSubscriptions: function() {
       App.on('Map:change', this.setParams, this);
+      App.on('TabNav:change', this.setParams, this);
     },
 
     startHistory: function() {

@@ -46,24 +46,24 @@
 
     setSubscriptions: function() {
       App.on('Router:change', this.setState, this);
+      App.on('TabNav:change', function(state) {
+        this.setState(state, true);
+      }, this);
     },
 
     getState: function() {
       return this.state.attributes;
     },
 
-    setState: function(params) {
-      var state = params;
-      if (!params.data) {
-        state.data = 'projects';
+    setState: function(params, merge) {
+      var newState = merge ?
+        Object.assign({}, this.getState(), params) : params;
+
+      if (!newState.data) {
+        newState.data = 'projects';
       }
-      if (!params.region) {
-        delete state.region;
-      }
-      if (!params.country) {
-        delete state.country;
-      }
-      this.state.clear({ silent: true }).set(state);
+
+      this.state.clear({ silent: true }).set(newState);
     },
 
     /**
