@@ -52,10 +52,6 @@ function initApp() {
   var dispatcher = new App.Dispatcher();
 
   dispatcher.runAction(router.getCurrent(), router.getParams());
-
-  router.on('route', function() {
-    router.updateParams();
-  });
 }
 
 document.addEventListener('DOMContentLoaded', initApp)

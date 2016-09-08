@@ -25,6 +25,10 @@
      * @param  {Object} routeParams
      */
     runAction: function(routeName, routeParams) {
+      if (!routeName) {
+        return;
+      }
+
       var routeSplited = routeName.split('#');
       var controllerName = routeSplited[0];
       var actionName = routeSplited[1];

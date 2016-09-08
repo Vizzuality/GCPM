@@ -10,55 +10,84 @@
      * @type {Object}
      */
     routes: {
-      '': 'Home#index',
-      'map': 'Map#index'
+      'map': 'Map#index',
+      'network/:id/projects/new': 'Project#new'
     },
 
     initialize: function() {
       this.params = new (Backbone.Model.extend());
 
-      this.updateParams();
-      this.start();
+      this.startHistory();
 
-      App.on('Router:update', this.updateUrl, this);
-
-      this.params.on('change', function() {
-        App.trigger('Router:change', this.getParams());
+      // Setting listeners
+      this.params.on('change', this.updateUrl, this);
+      this.on('route', function() {
+        this.setParams();
       }, this);
+
+      this.setSubscriptions();
+
+      // Setting firs state
+      this.setParams();
     },
 
-    start: function() {
+    setSubscriptions: function() {
+      App.on('Map:change', this.setParams, this);
+    },
+
+    startHistory: function() {
       if (!Backbone.History.started) {
         Backbone.history.start({ pushState: true });
       }
     },
 
-    updateParams: function() {
+    /**
+     * Setting new params and update it
+     * @param {Object} params
+     */
+    setParams: function(params) {
       var uri = new URI();
-      this.params
-        .clear({ silent: true })
-        .set(uri.search(true));
+      var newParams = params ?
+        Object.assign(uri.search(true), params) : uri.search(true);
+      this.params.clear({ silent: true }).set(newParams);
     },
 
-    getCurrent: function() {
-      return this.routes[Backbone.history.getFragment().split('?')[0]];
-    },
-
+    /**
+     * Namespace to get current params
+     */
     getParams: function() {
       return this.params.attributes;
     },
 
     /**
-     * Change URL with current params
-     * @param  {Object} params
-     * @param  {Object} options
+     * Get current fragment url
+     * @return {[type]} [description]
      */
-    updateUrl: function(params, options) {
-      var settings = Object.assign({ trigger: false }, options || {});
+    getCurrent: function() {
+      if (Backbone.history.started) {
+        var Router = this;
+        var fragment = Backbone.history.getFragment().split('?')[0];
+        var routes = _.pairs(Router.routes);
+        var matched = _.find(routes, function(handler) {
+          var route = handler[0];
+          // Convert the route to RegExp using the
+          // Backbone Router's internal convert
+          // function (if it already isn't a RegExp)
+          route = _.isRegExp(route) ? route :  Router._routeToRegExp(route);
+          // Test the regexp against the current fragment
+          return route.test(fragment);
+        });
+        return this.routes[matched[0]];
+      }
+    },
+
+    /**
+     * Change URL with current params
+     */
+    updateUrl: function() {
       var uri = new URI();
-      this.params.set(params || {});
-      uri.query(this._serializeParams(this.params.attributes));
-      this.navigate(uri.path().slice(1) + uri.search(), settings);
+      uri.query(this._serializeParams(this.getParams()));
+      this.navigate(uri.path().slice(1) + uri.search(), { trigger: false });
     },
 
     /**
@@ -67,10 +96,11 @@
      * @return {Object}
      * @example https://medialize.github.io/URI.js/docs.html
      */
-    unserializeParams: function(paramsQuery) {
+    _unserializeParams: function(paramsQuery) {
       var params = {};
       if (typeof paramsQuery === 'string' && paramsQuery.length) {
-        var uri = new URI('?' + paramsQuery);
+        var uri = new URI();
+        uri.query(paramsQuery);
         params = uri.search(true);
       }
       return params;

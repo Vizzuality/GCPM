@@ -13,26 +13,30 @@
     initialize: function(params) {
       this.fc = App.facade.layer;
 
-      this.state = new StateModel(params);
+      this.state = new StateModel();
       this.layersSpec = new App.Collection.LayersSpec();
       this.map = new App.View.Map({
         el: '#map'
         // options: this.getMapOptions()
       });
 
-      // Drawing firs layer at beginning
-      this.drawLayer();
-
       // Setting listeners
       this.setEvents();
+
+      // Setting firs state
+      this.setState(params);
     },
 
     setEvents: function() {
       App.on('Router:change', this.setState, this);
       this.state.on('change', this.drawLayer, this);
-      this.fc.on('region:change', function(properties) {
-        App.trigger('Router:update', { region: properties.iso });
-      }, this);
+      // this.fc.on('region:change', function(properties) {
+      //   App.trigger('Router:update', { region: properties.iso });
+      // }, this);
+    },
+
+    getState: function() {
+      return this.state.attributes;
     },
 
     setState: function(params) {
@@ -57,11 +61,12 @@
       if (this.currentLayer) {
         this.map.removeLayer(this.currentLayer);
       }
-      this.fc.getLayer(this.state.attributes).done(function(layer) {
+      this.fc.getLayer(this.getState()).done(function(layer) {
         this.currentLayer = layer;
         this.map.addLayer(this.currentLayer);
         layer.FitBounds(); // Cluster prune method to fitbounds
       }.bind(this));
+      App.trigger('Map:change', this.getState());
     },
 
     /**
