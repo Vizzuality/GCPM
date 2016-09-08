@@ -110,4 +110,21 @@
 
   });
 
+  /**
+   * App will be start when DOM is ready
+   */
+  function initApp() {
+    new App.MainView(); // Only temporal, this will be removed
+    new App.Dispatcher();
+
+    if (Backbone.History.started) {
+      Backbone.history.stop();
+    }
+
+    // Start listening changes in routes
+    Backbone.history.start({ pushState: true });
+  }
+
+  document.addEventListener('DOMContentLoaded', initApp);
+
 })(this.App);

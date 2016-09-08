@@ -9,49 +9,49 @@
 //
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
-
-//= require jquery2
+//
+//= require jquery
 //= require jquery_ujs
-//= require underscore
-//= require backbone
-//= require handlebars
 //= require leaflet
 //= require URIjs
+//= require handlebars
+//= require underscore/underscore
+//= require backbone/backbone
+//= require backbone-syphon
+//= require d3
+//= require fuse
+//= require chosen
+//= require pickadate/picker
+//= require pickadate/picker.date
 
 //= require_self
+
+//= require_tree ./templates
+//= require_tree ./helpers/
+//= require_tree ./models/
+//= require_tree ./collections/
+//= require_tree ./views/
+//= require_tree ./controllers/
 
 //= require dispatcher
 //= require router
 
-//= require_tree ./models
-//= require_tree ./collections
-//= require_tree ./presenters
-//= require_tree ./views
-//= require_tree ./controllers
-//= require_tree ./facades
-//= require_tree ./lib
+//= require main
 
-this.App = {
-  facade: {},
-  helper: {},
-  Model: {},
-  Collection: {},
-  Controller: {},
-  Presenter: {},
-  View: {}
-};
+//= require forms
 
-_.extend(App, Backbone.Events);
+(function() {
 
-/**
- * Dispatcher will be instanced here
- *
- */
-function initApp() {
-  var router = new App.Router();
-  var dispatcher = new App.Dispatcher();
+  'use strict';
 
-  dispatcher.runAction(router.getCurrent(), router.getParams());
-}
+  this.App = {
+    Events: _.extend(Backbone.Events),
+    Dispatcher: null,
+    View: {},
+    Model: {},
+    Collection: {},
+    Helper: {},
+    Controller: {}
+  };
 
-document.addEventListener('DOMContentLoaded', initApp)
+}).call(this);
