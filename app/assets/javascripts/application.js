@@ -17,6 +17,10 @@
 //= require handlebars
 //= require leaflet
 //= require URIjs
+//= require fuse
+//= require chosen
+//= require pickadate/picker
+//= require pickadate/picker.date
 
 //= require_self
 
@@ -26,6 +30,7 @@
 //= require_tree ./models
 //= require_tree ./collections
 //= require_tree ./presenters
+//= require_tree ./templates
 //= require_tree ./views
 //= require_tree ./controllers
 //= require_tree ./facades
