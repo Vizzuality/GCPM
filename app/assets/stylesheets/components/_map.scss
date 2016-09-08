@@ -38,23 +38,38 @@
     background-color: white;
 
     border-radius: 100%;
-    box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.3);
     transition: all .3s ease;
 
     &:hover {
-      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+      box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.5);
       z-index: 1000 !important;
     }
 
     &.-blue {
       background-color: #007bcd;
     }
-  }
 
-  .prunecluster {
-    border: 3px solid #007bcd;
-    color: #007bcd;
-    font-size: 21px;
+    &.-orange {
+      background-color: #f57823;
+    }
+
+    &.prunecluster {
+      border: 3px solid #007bcd;
+      background-color: white;
+      color: #007bcd;
+      font-size: 21px;
+
+      &.-blue {
+        color: #007bcd;
+        border-color: #007bcd;
+      }
+
+      &.-orange {
+        color: #f57823;
+        border-color: #f57823;
+      }
+    }
   }
 
   /* !important needed to force the change from the library */

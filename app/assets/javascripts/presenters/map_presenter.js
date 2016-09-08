@@ -16,7 +16,11 @@
       this.state = new StateModel();
       this.layersSpec = new App.Collection.LayersSpec();
       this.map = new App.View.Map({
-        el: '#map'
+        el: '#map',
+        options: {
+          minZoom: 2,
+          maxZoom: 8
+        }
         // options: this.getMapOptions()
       });
 
@@ -33,9 +37,9 @@
         App.trigger('Map:change', this.getState());
       }, this);
 
-      this.fc.on('region:change', function(properties) {
-        if (properties.type === 'region') {
-          this.setState({ region: properties.iso });
+      this.fc.on('region:change', function(state) {
+        if (state.type === 'region') {
+          this.setState({ region: state.iso, data: state.data });
         }
       }, this);
     },
