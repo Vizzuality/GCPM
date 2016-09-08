@@ -22,7 +22,6 @@
 
 //= require dispatcher
 //= require router
-//= require layout
 
 //= require_tree ./models
 //= require_tree ./collections
@@ -56,7 +55,6 @@ function initApp() {
 
   router.on('route', function() {
     router.updateParams();
-    router.updateUrl(router.getParams());
   });
 }
 

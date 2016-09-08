@@ -14,12 +14,6 @@
       'map': 'Map#index'
     },
 
-    start: function() {
-      if (!Backbone.History.started) {
-        Backbone.history.start({ pushState: true });
-      }
-    },
-
     initialize: function() {
       this.params = new (Backbone.Model.extend());
 
@@ -31,6 +25,12 @@
       this.params.on('change', function() {
         App.trigger('Router:change', this.getParams());
       }, this);
+    },
+
+    start: function() {
+      if (!Backbone.History.started) {
+        Backbone.history.start({ pushState: true });
+      }
     },
 
     updateParams: function() {
@@ -57,7 +57,7 @@
       var settings = Object.assign({ trigger: false }, options || {});
       var uri = new URI();
       this.params.set(params || {});
-      uri.query(this.serializeParams(this.params.attributes));
+      uri.query(this._serializeParams(this.params.attributes));
       this.navigate(uri.path().slice(1) + uri.search(), settings);
     },
 
@@ -82,7 +82,7 @@
      * @return {String}
      * @example https://medialize.github.io/URI.js/docs.html
      */
-    serializeParams: function(params) {
+    _serializeParams: function(params) {
       var uri = new URI();
       uri.search(params);
       return uri.search();

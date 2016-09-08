@@ -20,7 +20,7 @@
         fetchParams['regions[]'] = params.region;
         fetchParams.group = 'countries';
       }
-      fetchParams.type = params['data'];
+      fetchParams.type = params.data;
 
       locations
         .fetch({ data: fetchParams || {} })
@@ -42,7 +42,7 @@
 
   };
 
-  function createBubble(feature) {
+  function createBubbleMarker(feature) {
     var location = feature.geometry.coordinates;
     var bubleSize = blubbleSizes.small;
     if (feature.properties.count >= 100 &&
@@ -79,7 +79,7 @@
       });
     };
     _.each(geoJson.features, function(feature) {
-      pruneCluster.RegisterMarker(createBubble(feature));
+      pruneCluster.RegisterMarker(createBubbleMarker(feature));
     });
     return pruneCluster;
   }

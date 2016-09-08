@@ -16,8 +16,8 @@
       this.state = new StateModel(params);
       this.layersSpec = new App.Collection.LayersSpec();
       this.map = new App.View.Map({
-        el: '#map',
-        options: this.getMapOptions()
+        el: '#map'
+        // options: this.getMapOptions()
       });
 
       // Drawing firs layer at beginning
@@ -37,14 +37,16 @@
 
     setState: function(params) {
       var state = params;
+      if (!params.data) {
+        state.data = 'projects';
+      }
       if (!params.region) {
         delete state.region;
       }
       if (!params.country) {
         delete state.country;
       }
-      this.state.clear({ silent: true });
-      this.state.set(state);
+      this.state.clear({ silent: true }).set(state);
     },
 
     /**
@@ -66,16 +68,16 @@
      * Get default map options from params
      * @return {Object}
      */
-    getMapOptions: function() {
-      var mapSettings = _.pick(this.state.attributes, 'zoom', 'lat', 'lng');
-      if (Object.keys(mapSettings).length > 0) {
-        return {
-          center: [mapSettings.lat, mapSettings.lng],
-          zoom: mapSettings.zoom
-        };
-      }
-      return {};
-    }
+    // getMapOptions: function() {
+    //   var mapSettings = _.pick(this.state.attributes, 'zoom', 'lat', 'lng');
+    //   if (Object.keys(mapSettings).length > 0) {
+    //     return {
+    //       center: [mapSettings.lat, mapSettings.lng],
+    //       zoom: mapSettings.zoom
+    //     };
+    //   }
+    //   return {};
+    // }
 
   });
 
