@@ -57,8 +57,10 @@
       // this.projectTypeSelect = new App.Presenter.ProjectTypes({});
     },
 
-
     setSubscriptions: function() {
+      this.state.on('change', function(){console.log(this.state);}.bind(this));
+      App.on('Input:change', this.setInputValue, this);
+      App.on('Textarea:change', this.setTextareaValue, this);
       App.on('Pickdate:change', this.setDates, this);
     },
 
@@ -67,9 +69,29 @@
       var endDate = pickdate.$endDatePicker.get('select') || startDate;
 
       this.state.set({startDate, endDate});
+    },
+
+    setInputValue: function(input) {
+      var value = input.$el.find('input')[0].value;
+
+      if (value !== '') {
+        var obj = {};
+        obj[input.options.name] = value;
+
+        this.state.set(obj);
+      }
+    },
+
+    setTextareaValue: function(textarea) {
+      var value = textarea.$el.find('textarea')[0].value;
+
+      if (value !== '') {
+        var obj = {};
+        obj[textarea.options.name] = value;
+
+        this.state.set(obj);
+      }
     }
-
-
 
   });
 
