@@ -20,7 +20,7 @@
         // options: this.getMapOptions()
       });
 
-      // Setting listeners
+      this.setSubscriptions();
       this.setEvents();
 
       // Setting firs state
@@ -28,11 +28,20 @@
     },
 
     setEvents: function() {
+      this.state.on('change', function() {
+        this.drawLayer();
+        App.trigger('Map:change', this.getState());
+      }, this);
+
+      this.fc.on('region:change', function(properties) {
+        if (properties.type === 'region') {
+          this.setState({ region: properties.iso });
+        }
+      }, this);
+    },
+
+    setSubscriptions: function() {
       App.on('Router:change', this.setState, this);
-      this.state.on('change', this.drawLayer, this);
-      // this.fc.on('region:change', function(properties) {
-      //   App.trigger('Router:update', { region: properties.iso });
-      // }, this);
     },
 
     getState: function() {
@@ -66,7 +75,6 @@
         this.map.addLayer(this.currentLayer);
         layer.FitBounds(); // Cluster prune method to fitbounds
       }.bind(this));
-      App.trigger('Map:change', this.getState());
     },
 
     /**

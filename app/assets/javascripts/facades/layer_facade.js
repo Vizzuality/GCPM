@@ -66,7 +66,7 @@
     var pruneCluster = new PruneClusterForLeaflet();
     pruneCluster.PrepareLeafletMarker = function(leafletMarker, data) {
       leafletMarker.setIcon(data.icon);
-      leafletMarker.on('click', function() {
+      leafletMarker.off('click').on('click', function() {
         var eventName = null;
         if (!params.region && !params.country) {
           eventName = 'region';

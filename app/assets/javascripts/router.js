@@ -17,18 +17,23 @@
     initialize: function() {
       this.params = new (Backbone.Model.extend());
 
+      // Start!
       this.startHistory();
 
       // Setting listeners
-      this.params.on('change', this.updateUrl, this);
-      this.on('route', function() {
-        this.setParams();
-      }, this);
-
       this.setSubscriptions();
+      this.setEvents();
 
       // Setting firs state
       this.setParams();
+    },
+
+    setEvents: function() {
+      this.params.on('change', this.updateUrl, this);
+      this.on('route', function() {
+        this.setParams();
+        App.trigger('Router:change', this.getParams());
+      }, this);
     },
 
     setSubscriptions: function() {
@@ -64,21 +69,19 @@
      * @return {[type]} [description]
      */
     getCurrent: function() {
-      if (Backbone.history.started) {
-        var Router = this;
-        var fragment = Backbone.history.getFragment().split('?')[0];
-        var routes = _.pairs(Router.routes);
-        var matched = _.find(routes, function(handler) {
-          var route = handler[0];
-          // Convert the route to RegExp using the
-          // Backbone Router's internal convert
-          // function (if it already isn't a RegExp)
-          route = _.isRegExp(route) ? route :  Router._routeToRegExp(route);
-          // Test the regexp against the current fragment
-          return route.test(fragment);
-        });
-        return this.routes[matched[0]];
-      }
+      var Router = this;
+      var fragment = Backbone.history.getFragment().split('?')[0];
+      var routes = _.pairs(Router.routes);
+      var matched = _.find(routes, function(handler) {
+        var route = handler[0];
+        // Convert the route to RegExp using the
+        // Backbone Router's internal convert
+        // function (if it already isn't a RegExp)
+        route = _.isRegExp(route) ? route :  Router._routeToRegExp(route);
+        // Test the regexp against the current fragment
+        return route.test(fragment);
+      });
+      return this.routes[matched[0]];
     },
 
     /**
