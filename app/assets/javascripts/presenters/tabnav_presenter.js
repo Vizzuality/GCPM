@@ -14,7 +14,6 @@
       this.state = new StateModel();
       this.tabnav = new App.View.TabNav({ el: '#map-types' });
 
-      this.setState({ data: params.data });
       this.setEvents();
       this.setSubscriptions();
 

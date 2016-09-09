@@ -6,9 +6,9 @@
 
 	<ul id="map-types" class="c-section-menu">
 	   <% @filters.each do |filter| %>
-      <% @class = !params['type'] && filter == "projects" ? "-active" : active_param?('type', filter) %>
+      <%# @class = !params['type'] && filter == "projects" ? "-active" : active_param?('type', filter) %>
       <li>
-        <a class="js-btn-mapmenu-type <%= @class %>" href="#" data-type="<%= filter %>"><%= t (filter) %></a>
+        <a class="js-btn-mapmenu-type" href="#" data-type="<%= filter %>"><%= t (filter) %></a>
       </li>
     <% end %>
 	</ul>
