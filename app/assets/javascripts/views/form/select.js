@@ -2,12 +2,12 @@
 
   'use strict';
 
-  App.View.Textarea = Backbone.View.extend({
+  App.View.Select = Backbone.View.extend({
 
     defaults: {
     },
 
-    template: HandlebarsTemplates['textarea'],
+    template: HandlebarsTemplates['select'],
 
     initialize: function(settings) {
       this.el = settings.el;
@@ -21,8 +21,15 @@
       this.$el.html(this.template(this.options));
     },
 
+    renderOptions: function(options) {
+      options.map(function(option) {
+        this.$el.find('select')
+          .append($('<option value="' + option.value + '">' + option.name +'</option>'));
+      }.bind(this));
+    },
+
     setEvents: function() {
-      this.$el.find('textarea').on('blur', this.triggerChange.bind(this));
+      this.$el.find('select').on('blur', this.triggerChange.bind(this));
     },
 
     triggerChange: function(e) {

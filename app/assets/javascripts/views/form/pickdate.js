@@ -84,7 +84,7 @@
       if (e.select) {
         var start = this.$startDatePicker.get('select');
         var end = this.$endDatePicker.get('select');
-        App.trigger('Pickdate:change', this);
+        this.trigger('change', this);
       }
     }
 

@@ -12,13 +12,22 @@
 
     initialize: function(params) {
       this.state = new StateModel();
-      this.websiteInput = new App.View.Input(params);
+      this.websiteInput = new App.View.Input({
+        el: '#project-website',
+        options: {
+          name: 'website',
+          type: 'text',
+          label: 'Project website',
+          inputClass: 'c-section-title -one-line',
+          placeholder: 'http://example.org'
+        }
+      });
 
       this.setSubscriptions();
     },
 
-     setSubscriptions: function() {
-      App.on('Input:change', this.setUrl, this);
+    setSubscriptions: function() {
+      this.websiteInput.on('change', this.setUrl, this);
     },
 
     setUrl: function(input) {

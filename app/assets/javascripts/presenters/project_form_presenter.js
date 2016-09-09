@@ -19,7 +19,7 @@
     },
 
     initializeFormComponents: function() {
-      this.titleInput = new App.Presenter.TitleInput({
+      this.titleInput = new App.View.Input({
         el: '#title',
         options: {
           name: 'title',
@@ -43,25 +43,17 @@
 
       this.pickdate = new App.View.Pickdate({el: '.pickdate'});
 
-      this.websiteInput = new App.Presenter.WebsiteInput({
-        el: '#project-website',
-        options: {
-          name: 'projectWebsite',
-          type: 'text',
-          label: 'Project website',
-          inputClass: 'c-section-title -one-line',
-          placeholder: 'http://example.org'
-        }
-      });
-
-      // this.projectTypeSelect = new App.Presenter.ProjectTypes({});
+      this.websiteInput = new App.Presenter.WebsiteInput();
+      this.cancerTypesSelect = new App.Presenter.CancerTypes();
     },
 
     setSubscriptions: function() {
-      App.on('Input:change', this.setInputValue, this);
-      App.on('Textarea:change', this.setTextareaValue, this);
-      App.on('Pickdate:change', this.setDates, this);
-      App.on('Website:change', this.setPresenterValue, this);
+      this.titleInput.on('change', this.setInputValue, this);
+      this.descTextarea.on('change', this.setTextareaValue, this);
+      this.pickdate.on('change', this.setDates, this);
+
+      App.on('WebsiteInput:change', this.setPresenterValue, this);
+      App.on('cancerTypesSelect:change', this.setPresenterValue, this);
     },
 
     setDates: function(pickdate) {

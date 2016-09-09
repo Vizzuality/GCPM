@@ -25,7 +25,7 @@
     },
 
     triggerChange: function(e) {
-      App.trigger('Input:change', this);
+      this.trigger('change', this);
     }
 
   });
