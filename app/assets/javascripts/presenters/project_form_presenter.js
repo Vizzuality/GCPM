@@ -44,6 +44,7 @@
       this.pickdate = new App.View.Pickdate({el: '.pickdate'});
 
       this.websiteInput = new App.Presenter.WebsiteInput();
+      this.projectTypesSelect = new App.Presenter.ProjectTypes();
       this.cancerTypesSelect = new App.Presenter.CancerTypes();
     },
 
@@ -53,6 +54,7 @@
       this.pickdate.on('change', this.setDates, this);
 
       App.on('WebsiteInput:change', this.setPresenterValue, this);
+      App.on('projectTypesSelect:change', this.setPresenterValue, this);
       App.on('cancerTypesSelect:change', this.setPresenterValue, this);
     },
 
