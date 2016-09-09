@@ -57,8 +57,12 @@
     },
 
     setDates: function(pickdate) {
-      var startDate = pickdate.$startDatePicker.get('select');
-      var endDate = pickdate.$endDatePicker.get('select') || startDate;
+      var startDate = pickdate.$startDatePicker.get('select') &&
+        pickdate.$startDatePicker.get('select').obj;
+
+      var endDate = pickdate.$endDatePicker.get('select') ?
+        pickdate.$endDatePicker.get('select').obj :
+        startDate;
 
       this.state.set({startDate, endDate});
     },
