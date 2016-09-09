@@ -30,6 +30,7 @@
           obj[input.options.name] = value;
 
           this.state.set(obj);
+          App.trigger('Website:change', this);
         }
       }
     },

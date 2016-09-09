@@ -61,6 +61,7 @@
       App.on('Input:change', this.setInputValue, this);
       App.on('Textarea:change', this.setTextareaValue, this);
       App.on('Pickdate:change', this.setDates, this);
+      App.on('Website:change', this.setPresenterValue, this);
     },
 
     setDates: function(pickdate) {
@@ -90,6 +91,12 @@
 
         this.state.set(obj);
       }
+    },
+
+    setPresenterValue: function(presenter) {
+      var obj = presenter.state.attributes;
+
+      this.state.set(obj);
     }
 
   });
