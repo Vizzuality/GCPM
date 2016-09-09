@@ -46,6 +46,7 @@
       this.websiteInput = new App.Presenter.WebsiteInput();
       this.projectTypesSelect = new App.Presenter.ProjectTypes();
       this.cancerTypesSelect = new App.Presenter.CancerTypes();
+      this.fundingSourcesSelect = new App.Presenter.FundingSources();
     },
 
     setSubscriptions: function() {
@@ -56,6 +57,7 @@
       App.on('WebsiteInput:change', this.setPresenterValue, this);
       App.on('projectTypesSelect:change', this.setPresenterValue, this);
       App.on('cancerTypesSelect:change', this.setPresenterValue, this);
+      App.on('fundingSourcesSelect:change', this.setPresenterValue, this);
     },
 
     setDates: function(pickdate) {

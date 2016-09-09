@@ -4,24 +4,24 @@
 
   var StateModel = Backbone.Model.extend();
 
-  App.Presenter.ProjectTypes = function() {
+  App.Presenter.FundingSources = function() {
     this.initialize.apply(this, arguments);
   };
 
-  _.extend(App.Presenter.ProjectTypes.prototype, {
+  _.extend(App.Presenter.FundingSources.prototype, {
 
     initialize: function(params) {
       this.state = new StateModel();
-      this.projectTypes = new App.Collection.ProjectTypes();
-      this.projectTypesSelect = new App.View.Select({
-        el: '#project-types',
+      this.fundingSources = new App.Collection.FundingSources();
+      this.fundingSourcesSelect = new App.View.Select({
+        el: '#funding-sources',
         options: {
           multiple: true,
-          name: 'project-types',
+          name: 'funding-sources',
           type: 'text',
-          label: 'Project types',
+          label: 'Funding sources',
           inputClass: 'c-section-title -one-line',
-          placeholder: 'Project types'
+          placeholder: 'Funding sources'
         }
       });
 
@@ -30,18 +30,18 @@
     },
 
     render: function() {
-      this.projectTypes
+      this.fundingSources
         .fetch()
         .done(function() {
-          var options = this.projectTypes.toJSON().map(function(type) {
+          var options = this.fundingSources.toJSON().map(function(type) {
             return { name: type.name, value: type.id };
           });
-          this.projectTypesSelect.renderOptions(options);
+          this.fundingSourcesSelect.renderOptions(options);
         }.bind(this));
     },
 
     setSubscriptions: function() {
-      this.projectTypesSelect.on('change', this.setSelectValues, this);
+      this.fundingSourcesSelect.on('change', this.setSelectValues, this);
     },
 
     setSelectMultipleValues: function(select) {
@@ -57,7 +57,7 @@
         obj[select.options.name] = values;
 
         this.state.set(obj);
-        App.trigger('ProjectTypesSelect:change', this);
+        App.trigger('fundingSourcesSelect:change', this);
       }
     }
 

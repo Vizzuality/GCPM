@@ -16,6 +16,7 @@
       this.cancerTypesSelect = new App.View.Select({
         el: '#cancer-types',
         options: {
+          multiple: true,
           name: 'cancer-types',
           type: 'text',
           label: 'Cancer types',
@@ -40,15 +41,20 @@
     },
 
     setSubscriptions: function() {
-      this.cancerTypesSelect.on('change', this.setSelectValues, this);
+      this.cancerTypesSelect.on('change', this.setSelectMultipleValues, this);
     },
 
-    setSelectValues: function(select) {
-      var value = select.$el.find('select')[0].value;
+    setSelectMultipleValues: function(select) {
+      var values = [];
+      var options = select.$el.find('select :selected');
 
-      if (value) {
+      options.map(function(index, option) {
+        values.push(Number(option.value));
+      }.bind(this));
+
+      if (values) {
         var obj = {};
-        obj[select.options.name] = Number(value);
+        obj[select.options.name] = values;
 
         this.state.set(obj);
         App.trigger('cancerTypesSelect:change', this);
