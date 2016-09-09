@@ -209,6 +209,14 @@ module Api::V1
           expect(json.length).to eq (1)
           expect(json.length).to eq (1)
         end
+
+        it 'Get funding-sources list' do
+          get "/api/funding-sources"
+
+          expect(status).to eq(200)
+          expect(json.length).to eq (1)
+          expect(json.length).to eq (1)
+        end
       end
     end
   end
