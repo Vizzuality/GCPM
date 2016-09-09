@@ -51,7 +51,12 @@ function initApp() {
   var router = new App.Router();
   var dispatcher = new App.Dispatcher();
 
-  dispatcher.runAction(router.getCurrent(), router.getParams());
+  router.once('route', function() {
+    dispatcher.runAction(router.getCurrent(), router.getParams());
+  });
+
+  // Start!
+  router.startHistory();
 }
 
 document.addEventListener('DOMContentLoaded', initApp)
