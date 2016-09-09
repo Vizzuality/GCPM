@@ -43,7 +43,7 @@
 
       this.pickdate = new App.View.Pickdate({el: '.pickdate'});
 
-      this.websiteInput = new App.View.Input({
+      this.websiteInput = new App.Presenter.WebsiteInput({
         el: '#project-website',
         options: {
           name: 'projectWebsite',
@@ -58,7 +58,6 @@
     },
 
     setSubscriptions: function() {
-      this.state.on('change', function(){console.log(this.state);}.bind(this));
       App.on('Input:change', this.setInputValue, this);
       App.on('Textarea:change', this.setTextareaValue, this);
       App.on('Pickdate:change', this.setDates, this);
