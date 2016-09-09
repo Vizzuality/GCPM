@@ -10,4 +10,6 @@
 
 class ProjectType < ApplicationRecord
   has_and_belongs_to_many :projects
+
+  scope :select_id_name, -> { select(:id, :name) }
 end
