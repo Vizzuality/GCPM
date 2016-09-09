@@ -33,7 +33,7 @@
       this.descTextarea = new App.View.Textarea({
         el: '#description',
         options: {
-          name: 'descrition',
+          name: 'summary',
           type: 'textarea',
           label: 'Description',
           lableClass: 'c-section-title',
@@ -47,6 +47,8 @@
       this.projectTypesSelect = new App.Presenter.ProjectTypes();
       this.cancerTypesSelect = new App.Presenter.CancerTypes();
       this.fundingSourcesSelect = new App.Presenter.FundingSources();
+
+      this.modal = new App.Presenter.Modal();
     },
 
     setSubscriptions: function() {
@@ -68,7 +70,7 @@
         pickdate.$endDatePicker.get('select').obj :
         startDate;
 
-      this.state.set({startDate, endDate});
+      this.state.set({start_date: startDate, end_date: endDate});
     },
 
     setInputValue: function(input) {
@@ -98,6 +100,12 @@
 
       this.state.set(obj);
     }
+
+    // openModal: function(formType) {
+    //   var view = this.formsViews[formType];
+    //   this.modal.setView(view);
+    //   this.modal.open();
+    // }
 
   });
 

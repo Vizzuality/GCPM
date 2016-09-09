@@ -12,5 +12,8 @@
     class="{{#if inputClass}}{{inputClass}} {{/if}}"
     placeholder="{{#if placeholder}}{{placeholder}} {{/if}}"
     value="{{#if value}}{{value}}{{/if}}">
+    {{#if addNew}}
+      <option id="add-new-{{name}}" class="add-new">Add new</option>
+    {{/if}}
   </select>
 </div>

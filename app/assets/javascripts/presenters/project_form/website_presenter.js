@@ -15,7 +15,7 @@
       this.websiteInput = new App.View.Input({
         el: '#project-website',
         options: {
-          name: 'website',
+          name: 'project_website',
           type: 'text',
           label: 'Project website',
           inputClass: 'c-section-title -one-line',
@@ -39,7 +39,7 @@
           obj[input.options.name] = value;
 
           this.state.set(obj);
-          App.trigger('Website:change', this);
+          App.trigger('WebsiteInput:change', this);
         }
       }
     },

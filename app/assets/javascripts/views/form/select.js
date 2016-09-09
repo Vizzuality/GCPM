@@ -30,10 +30,15 @@
 
     setEvents: function() {
       this.$el.find('select').on('blur', this.triggerChange.bind(this));
+      this.$el.find('.add-new').on('click', this.triggerAddNewClick.bind(this));
     },
 
     triggerChange: function(e) {
       this.trigger('change', this);
+    },
+
+    triggerAddNewClick: function() {
+      this.trigger('add-new-funding-click', this);
     }
 
   });

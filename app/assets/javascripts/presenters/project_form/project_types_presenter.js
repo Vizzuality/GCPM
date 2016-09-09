@@ -17,7 +17,7 @@
         el: '#project-types',
         options: {
           multiple: true,
-          name: 'project-types',
+          name: 'project_type_ids',
           type: 'text',
           label: 'Project types',
           inputClass: 'c-section-title -one-line',

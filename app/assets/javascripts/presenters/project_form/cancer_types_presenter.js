@@ -17,7 +17,7 @@
         el: '#cancer-types',
         options: {
           multiple: true,
-          name: 'cancer-types',
+          name: 'cancer_type_ids',
           type: 'text',
           label: 'Cancer types',
           inputClass: 'c-section-title -one-line',

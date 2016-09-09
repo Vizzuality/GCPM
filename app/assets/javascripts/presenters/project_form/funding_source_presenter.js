@@ -17,7 +17,8 @@
         el: '#funding-sources',
         options: {
           multiple: true,
-          name: 'funding-sources',
+          name: 'funding_source_ids',
+          addNew: true,
           type: 'text',
           label: 'Funding sources',
           inputClass: 'c-section-title -one-line',
@@ -42,6 +43,7 @@
 
     setSubscriptions: function() {
       this.fundingSourcesSelect.on('change', this.setSelectValues, this);
+      // this.fundingSourcesSelect.on('add-new-funding-click', this.renderModal, this);
     },
 
     setSelectMultipleValues: function(select) {
