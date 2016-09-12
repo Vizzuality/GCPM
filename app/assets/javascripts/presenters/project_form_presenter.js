@@ -48,12 +48,17 @@
       this.projectTypesSelect = new App.Presenter.ProjectTypes();
       this.cancerTypesSelect = new App.Presenter.CancerTypes();
       this.fundingSourcesSelect = new App.Presenter.FundingSources();
+
+      this.investigatorsSelect = new App.Presenter.Investigators();
+
       this.submitButton = new App.View.SubmitButton({ el: '.project_add'});
+
 
       this.modal = new App.Presenter.Modal();
     },
 
     setSubscriptions: function() {
+      this.state.on('change', function(){console.log(this.state.attributes)}.bind(this))
       this.titleInput.on('change', this.setInputValue, this);
       this.descTextarea.on('change', this.setTextareaValue, this);
       this.pickdate.on('change', this.setDates, this);
@@ -63,6 +68,7 @@
       App.on('ProjectTypesSelect:change', this.setPresenterValue, this);
       App.on('CancerTypesSelect:change', this.setPresenterValue, this);
       App.on('FundingSourcesSelect:change', this.setPresenterValue, this);
+      App.on('InvestigatorsSelect:change', this.setPresenterValue, this);
     },
 
     setComponentsKeys: function() {
@@ -99,7 +105,6 @@
 
     setTextareaValue: function(textarea) {
       var value = textarea.$el.find('textarea')[0].value;
-
       var obj = {};
       obj[textarea.options.name] = value;
 
@@ -108,7 +113,6 @@
 
     setPresenterValue: function(presenter) {
       var obj = presenter.state.attributes;
-
       this.state.set(obj);
     },
 
