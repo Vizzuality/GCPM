@@ -119,7 +119,6 @@
     handleSubmit: function() {
       var keys = Object.keys(this.components);
       var fieldsLeft = keys.filter(function(key) {
-
         if (this.state.attributes[key] && this.state.attributes[key].length !== 0) {
           var required = this.components[key].$el.find('.c-required');
           required && required.addClass('-hidden');

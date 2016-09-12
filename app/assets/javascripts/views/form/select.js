@@ -21,8 +21,12 @@
       this.$el.html(this.template(this.options));
     },
 
-    renderOptions: function(options) {
+    renderOptions: function(options, addNew) {
       this.$el.find('select').empty();
+      addNew && this.$el.find('select')
+          .append($('<option value="-2" disabled selected>' + this.options.placeholder +
+            '</option><option value="-1" class="add-new">Add new</option>'));
+
       options.map(function(option) {
         this.$el.find('select')
           .append($('<option value="' + option.value + '">' + option.name +'</option>'));

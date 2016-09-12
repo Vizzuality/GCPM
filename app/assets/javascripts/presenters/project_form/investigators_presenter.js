@@ -46,7 +46,7 @@
           type: 'text',
           label: 'Organizations',
           inputClass: 'c-section-title -one-line',
-          placeholder: 'Organizations'
+          placeholder: 'Select or add a new one'
         }
       });
 
@@ -83,7 +83,7 @@
           var options = this.investigators.toJSON().map(function(type) {
             return { name: type.name, value: type.id };
           });
-          this.investigatorsSelect.renderOptions(options, true);
+          this.investigatorsSelect.renderOptions(options);
 
           if (options.length !== 0) {
             this.renderOrganizations(options[0].value);
@@ -110,6 +110,9 @@
     },
 
     renderAddresses: function(organizationId) {
+      var required = this.organizationsSelect.$el.find('.c-required');
+      required && required.addClass('-hidden');
+
       $.ajax({
         url: '/api/organizations/' + organizationId,
         method: 'GET',
@@ -120,7 +123,7 @@
               value: address.id
             };
           }.bind(this));
-          this.addressesSelect.renderOptions(addresses, true);
+          this.addressesSelect.renderOptions(addresses);
         }.bind(this)
       });
     },
@@ -166,7 +169,7 @@
       this.$investAdded.find('tr[value='+ value +']').remove();
     },
 
-    handleAddMore: function() {
+    addInvestigatorRow: function() {
       var investigators = this.state.get('investigators') || {};
       var investigator = this.investigatorsSelect.$el.find('select');
       var organization = this.organizationsSelect.$el.find('select');
@@ -181,6 +184,7 @@
       };
 
       this.state.set({investigators: investigators});
+      App.trigger('InvestigatorsSelect:change', this);
 
       this.$investAdded.append(
         '<tr value="' + this.investigatorsId + '"><td value="' +
@@ -193,8 +197,16 @@
       );
 
       this.setDeleteSubscription();
-      App.trigger('InvestigatorsSelect:change', this);
       this.investigatorsId ++;
+    },
+
+    handleAddMore: function() {
+      var organizations = this.organizationsSelect.$el;
+
+      if (Number(organizations.find('select :selected')[0].value) < 0) {
+        var required = organizations.find('.c-required');
+        required && required.removeClass('-hidden');
+      } else this.addInvestigatorRow();
     }
 
     // setSelectMultipleValues: function(select) {
