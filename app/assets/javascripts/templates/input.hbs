@@ -1,0 +1,14 @@
+
+<div class={{class}}>
+  {{#if label}}
+    <h3 for="" class="{{#if lableClass}} {{lableClass}} {{/if}}">
+      {{label}}
+    </h3>
+  {{/if}}
+  <input
+    name="{{#if name}} {{name}} {{/if}}"
+    type="{{#if type}} {{type}} {{/if}}"
+    class="{{#if inputClass}} {{inputClass}} {{/if}}"
+    placeholder="{{#if placeholder}} {{placeholder}} {{/if}}"
+    value="{{#if value}} {{value}} {{/if}}"/>
+</div>

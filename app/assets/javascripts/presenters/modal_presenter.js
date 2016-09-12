@@ -2,8 +2,6 @@
 
   'use strict';
 
-  var StateModel = Backbone.Model.extend();
-
   App.Presenter.Modal = function() {
     this.initialize.apply(this, arguments);
   };
@@ -11,7 +9,20 @@
   _.extend(App.Presenter.Modal.prototype, {
 
     initialize: function() {
-      console.log('init Modal');
+      this.modal = new App.View.Modal();
+
+      this.setSubscriptions();
+    },
+
+    setSubscriptions: function() {
+    },
+
+    open: function(content) {
+      this.modal.open(content);
+    },
+
+    close: function() {
+      this.modal.close();
     }
 
   });
