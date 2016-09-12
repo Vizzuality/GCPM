@@ -14,6 +14,7 @@
       this.state = new StateModel();
 
       this.initializeFormComponents();
+      this.setComponentsKeys();
 
       this.setSubscriptions();
     },
@@ -47,6 +48,7 @@
       this.projectTypesSelect = new App.Presenter.ProjectTypes();
       this.cancerTypesSelect = new App.Presenter.CancerTypes();
       this.fundingSourcesSelect = new App.Presenter.FundingSources();
+      this.submitButton = new App.View.SubmitButton({ el: '.project_add'});
 
       this.modal = new App.Presenter.Modal();
     },
@@ -55,11 +57,25 @@
       this.titleInput.on('change', this.setInputValue, this);
       this.descTextarea.on('change', this.setTextareaValue, this);
       this.pickdate.on('change', this.setDates, this);
+      this.submitButton.on('click', this.handleSubmit, this);
 
       App.on('WebsiteInput:change', this.setPresenterValue, this);
-      App.on('projectTypesSelect:change', this.setPresenterValue, this);
-      App.on('cancerTypesSelect:change', this.setPresenterValue, this);
-      App.on('fundingSourcesSelect:change', this.setPresenterValue, this);
+      App.on('ProjectTypesSelect:change', this.setPresenterValue, this);
+      App.on('CancerTypesSelect:change', this.setPresenterValue, this);
+      App.on('FundingSourcesSelect:change', this.setPresenterValue, this);
+    },
+
+    setComponentsKeys: function() {
+      this.components = {
+        'title': this.titleInput,
+        'summary': this.descTextarea,
+        'start_date': this.pickdate,
+        'end_date': this.pickdate,
+        'project_website': this.websiteInput.websiteInput,
+        'project_type_ids': this.projectTypesSelect.projectTypesSelect,
+        'cancer_type_ids': this.cancerTypesSelect.cancerTypesSelect,
+        'funding_source_ids': this.fundingSourcesSelect.fundingSourcesSelect
+      };
     },
 
     setDates: function(pickdate) {
@@ -75,30 +91,49 @@
 
     setInputValue: function(input) {
       var value = input.$el.find('input')[0].value;
+      var obj = {};
+      obj[input.options.name] = value;
 
-      if (value !== '') {
-        var obj = {};
-        obj[input.options.name] = value;
-
-        this.state.set(obj);
-      }
+      this.state.set(obj);
     },
 
     setTextareaValue: function(textarea) {
       var value = textarea.$el.find('textarea')[0].value;
 
-      if (value !== '') {
-        var obj = {};
-        obj[textarea.options.name] = value;
+      var obj = {};
+      obj[textarea.options.name] = value;
 
-        this.state.set(obj);
-      }
+      this.state.set(obj);
     },
 
     setPresenterValue: function(presenter) {
       var obj = presenter.state.attributes;
 
       this.state.set(obj);
+    },
+
+    handleSubmit: function() {
+      var keys = Object.keys(this.components);
+      var fieldsLeft = keys.filter(function(key) {
+
+        if (this.state.attributes[key] && this.state.attributes[key].length !== 0) {
+          var required = this.components[key].$el.find('.c-required');
+          required && required.addClass('-hidden');
+        }
+
+        return !this.state.attributes[key] || this.state.attributes[key].length === 0;
+      }.bind(this));
+
+      if (fieldsLeft.length !== 0) {
+        fieldsLeft.map(function(field) {
+          var required = this.components[field].$el.find('.c-required');
+          required && required.removeClass('-hidden');
+        }.bind(this));
+
+      } else {
+        // this.state.save();
+        console.log('All fields filled!');
+      }
     }
 
     // openModal: function(formType) {

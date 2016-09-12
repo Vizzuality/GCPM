@@ -42,7 +42,7 @@
     },
 
     setSubscriptions: function() {
-      this.fundingSourcesSelect.on('change', this.setSelectValues, this);
+      this.fundingSourcesSelect.on('change', this.setSelectMultipleValues, this);
       // this.fundingSourcesSelect.on('add-new-funding-click', this.renderModal, this);
     },
 
@@ -59,7 +59,7 @@
         obj[select.options.name] = values;
 
         this.state.set(obj);
-        App.trigger('fundingSourcesSelect:change', this);
+        App.trigger('FundingSourcesSelect:change', this);
       }
     }
 
