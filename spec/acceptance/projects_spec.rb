@@ -12,8 +12,8 @@ module Api::V1
       let(:r_u_id)        { investigator.research_units.first.id                                                 }
       let!(:membership)   { Membership.create(project_id: project.id, research_unit_id: r_u_id)                  }
       let(:funder)        { FactoryGirl.create(:organization, name: 'Project funder', address_ids: [address.id]) }
-      let(:cancer_type)   { FactoryGirl.create(:cancer_type)                                                     }
-      let(:project_type)  { FactoryGirl.create(:project_type)                                                    }
+      let!(:cancer_type)   { FactoryGirl.create(:cancer_type)                                                    }
+      let!(:project_type)  { FactoryGirl.create(:project_type)                                                   }
 
       let(:project_id) { project.id }
       let(:params)     { { "project": { "title": "Project updated" } } }
@@ -182,6 +182,40 @@ module Api::V1
           expect(json[0]['investigator']['name']).to eq ('Investigator')
           expect(json[0]['organization']['name']).to eq ('Test orga 1')
           expect(json[0]['address']['line_1']).to    eq ('Paris, France')
+        end
+
+        it 'Get project-types list' do
+          get "/api/projects/#{project_id}/memberships?token=#{user.authentication_token}"
+
+          expect(status).to eq(200)
+          expect(json[0]['membership_type']).to      eq ('secondary')
+          expect(json[0]['investigator']['name']).to eq ('Investigator')
+          expect(json[0]['organization']['name']).to eq ('Test orga 1')
+          expect(json[0]['address']['line_1']).to    eq ('Paris, France')
+        end
+
+        it 'Get project-types list' do
+          get "/api/project-types"
+
+          expect(status).to eq(200)
+          expect(json.length).to eq (1)
+          expect(json.length).to eq (1)
+        end
+
+        it 'Get project-types list' do
+          get "/api/cancer-types"
+
+          expect(status).to eq(200)
+          expect(json.length).to eq (1)
+          expect(json.length).to eq (1)
+        end
+
+        it 'Get funding-sources list' do
+          get "/api/funding-sources"
+
+          expect(status).to eq(200)
+          expect(json.length).to eq (1)
+          expect(json.length).to eq (1)
         end
       end
     end

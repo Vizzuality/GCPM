@@ -30,7 +30,9 @@ Rails.application.routes.draw do
     scope module: :v1 do
       resources :regions,       only: [:index, :show]
       resources :cancer_types,  only: [:index, :show], path: '/cancer-types'
+      resources :project_types, only: [:index],        path: 'project-types'
       resources :map,           only: [:index]
+
       resources :projects,      only: [:update, :create] do
         resources :memberships, only: [:index, :create, :destroy]
         post '/memberships/:id', to: 'memberships#update'
@@ -38,13 +40,14 @@ Rails.application.routes.draw do
 
       resources :investigators,  only: [:index, :show, :update, :create]
       resources :organizations,  only: [:index, :show]
+
+      get 'funding-sources',     to: 'organizations#index'
       get 'countries',           to: 'organizations#index_countries'
       get 'check_research_unit', to: 'memberships#check_research_unit'
-
-      get 'lists/countries',    to: 'lists#countries'
-      get 'lists/cancer-types', to: 'lists#cancer_types'
-      get 'map/projects/:id',   to: 'map#show_project'
-      get 'map/events/:id',     to: 'map#show_event'
+      get 'lists/countries',     to: 'lists#countries'
+      get 'lists/cancer-types',  to: 'lists#cancer_types'
+      get 'map/projects/:id',    to: 'map#show_project'
+      get 'map/events/:id',      to: 'map#show_event'
     end
   end
 
