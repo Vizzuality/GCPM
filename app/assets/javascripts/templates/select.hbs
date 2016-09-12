@@ -1,0 +1,19 @@
+
+<div class={{class}}>
+  {{#if label}}
+    <h3 for="" class="{{#if lableClass}} {{lableClass}} {{/if}}">
+      {{label}}
+    </h3>
+  {{/if}}
+  <select
+    multiple={{#if multiple}}true{{else}}false{{/if}}
+    name="{{#if name}}{{name}}{{/if}}"
+    type="{{#if type}} {{type}} {{/if}}"
+    class="{{#if inputClass}}{{inputClass}} {{/if}}"
+    placeholder="{{#if placeholder}}{{placeholder}} {{/if}}"
+    value="{{#if value}}{{value}}{{/if}}">
+    {{#if addNew}}
+      <option id="add-new-{{name}}" class="add-new">Add new</option>
+    {{/if}}
+  </select>
+</div>

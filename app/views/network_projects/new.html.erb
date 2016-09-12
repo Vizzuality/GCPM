@@ -1,6 +1,32 @@
-<div class="project_add">
-	<%= simple_form_for [@user, @project], url: user_projects_url(@user) do |f| %>
-	  <%= render partial: f %>
-	  <span class="pre-submit"><%= f.button :submit, 'Submit', class: 'f-submit -network' %></span>
-	<% end %>
+
+<div class="project_add c-section">
+  <div id="title"></div>
+  <span class="separator"></span>
+
+  <div class="c-section">
+    <div id="description"></div>
+
+    <div class="pickdate">
+      <div class="c-pickadate">
+        <h3 class="c-title">Start date</h3>
+        <div class="start-date"></div>
+        <div id="pickadate-start-container" class="pickadate-container" autofocus></div>
+      </div>
+
+      <div class="c-pickadate">
+        <h3 class="c-title">End date</h3>
+        <div class="end-date"></div>
+        <div id="pickadate-end-container" class="pickadate-container" autofocus></div>
+      </div>
+    </div>
+
+    <div class="project-info">
+      <h3 class="c-title">Project information</h3>
+      <div id="project-website" class="form-field"></div>
+
+      <div id="project-types" class="form-field"></div>
+      <div id="cancer-types" class="form-field"></div>
+      <div id="funding-sources" class="form-field"></div>
+    </div>
+  </div>
 </div>
