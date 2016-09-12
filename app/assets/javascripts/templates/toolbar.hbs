@@ -1,0 +1,59 @@
+<ul class="list">
+  <li>
+    <button class="item btn-mapmenu-action {{color}}" data-action="layer">
+      <svg class="c-svg {{color}}">
+        <use xlink:href="#icon-layers"></use>
+      </svg>
+      Layers
+    </button>
+  </li>
+
+  {{#if userId}}
+    <li>
+      <a href="/network/{{userId}}/{{data}}/new" class="item {{color}}">
+        <svg class="c-svg {{color}}">
+          <use xlink:href="#icon-add"></use>
+        </svg>
+        Add {{dataSingular}}
+      </a>
+    </li>
+  {{/if}}
+
+  <li>
+    <button class="item btn-mapmenu-action {{color}}" data-action="share">
+      <svg class="c-svg {{color}}">
+        <use xlink:href="#icon-save"></use>
+      </svg>
+      Share map
+    </button>
+  </li>
+</ul>
+
+<ul class="list -mobile-fixed">
+  {{!-- <li>
+    <a href="#" class="item btn-mapmenu-action {{color}} " data-action="download">
+      <svg class="c-svg {{color}}">
+        <use xlink:href="#icon-download"></use>
+      </svg>
+      Download
+    </a>
+  </li> --}}
+
+  <li>
+    <button class="item btn-mapmenu-action {{color}}" data-action="sortby">
+      <svg class="c-svg {{color}}">
+        <use xlink:href="#icon-sort"></use>
+      </svg>
+      Sort by
+    </button>
+  </li>
+
+  <li>
+    <button class="item btn-mapmenu-action {{color}}" data-action="filter">
+      <svg class="c-svg {{color}}">
+        <use xlink:href="#icon-filter"></use>
+      </svg>
+      Filter
+    </button>
+  </li>
+</ul>

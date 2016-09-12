@@ -10,11 +10,6 @@
 
     initialize: function() {
       this.modal = new App.View.Modal();
-
-      this.setSubscriptions();
-    },
-
-    setSubscriptions: function() {
     },
 
     open: function(content) {

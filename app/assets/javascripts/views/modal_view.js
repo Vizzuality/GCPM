@@ -14,18 +14,19 @@
     initialize: function(settings) {
       this.options = _.extend({}, settings);
       this.$el.addClass('c-modal');
-      this.render();
     },
 
     render: function() {
       this.$el.html(this.template());
       this.$content = this.$el.find('.modal-content');
+      this.delegateEvents();
     },
 
     open: function(content) {
       if (!content) {
         return;
       }
+      this.render();
       this.$el.appendTo('body');
       if (typeof content === 'string') {
         this.$content.html(content);

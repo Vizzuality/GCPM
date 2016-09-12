@@ -9,7 +9,7 @@
     index: function(params) {
       new App.Presenter.Map(params);
       new App.Presenter.TabNav(params);
-      new App.Presenter.Modal();
+      new App.Presenter.Toolbar(params);
     }
 
   });

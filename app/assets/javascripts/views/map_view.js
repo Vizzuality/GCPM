@@ -23,7 +23,8 @@
     },
 
     initialize: function(settings) {
-      this.options = _.extend({}, this.defaults, settings.options || {});
+      var opts = settings && settings.options;
+      this.options = _.extend({}, this.defaults, opts || {});
       this.createMap();
     },
 
