@@ -16,10 +16,14 @@
       var deferred = new $.Deferred();
       var fetchParams = _.pick(params, 'region');
 
-      if (params.region) {
+      if (params.country) {
+        fetchParams['countries[]'] = params.country;
+        fetchParams.group = 'points';
+      } else if (params.region) {
         fetchParams['regions[]'] = params.region;
         fetchParams.group = 'countries';
       }
+
       fetchParams.type = params.data;
 
       locations
@@ -27,9 +31,33 @@
         .done(function() {
           var layer;
           var geoJson = locations.toGeoJSON();
+          var optionsCircle = {
+            radius: 12,
+            fillColor: "#b85fff",
+            color: "#9440d7",
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 1
+          };
+
+          var optionsMarker = {
+            radius: 12,
+            fillColor: "#007bcd",
+            color: "#005e9c",
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 1
+          };
+
           if (params.country) {
             layer = L.geoJson(geoJson, {
-              pointToLayer: createMarker
+              pointToLayer: function (feature, latlng) {
+                if (feature.properties.is_project_lead) {
+                  return L.marker(latlng, {icon: createMarker()});
+                } else {
+                  return L.circleMarker(latlng, optionsCircle);
+                }
+              }
             });
           } else {
             layer = createBubbleLayer(geoJson, params);
@@ -41,6 +69,14 @@
     }
 
   };
+
+  function createMarker() {
+    // Create icon
+    return new L.divIcon({
+      iconSize: [12, 12],
+      className: 'c-marker -point'
+    });
+  }
 
   function createBubbleLayer(geoJson, params) {
     var pruneCluster = new PruneClusterForLeaflet();
