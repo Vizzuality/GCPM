@@ -12,12 +12,7 @@
         features: _.map(this.models, function(m) {
           var location = JSON.parse(m.attributes.centroid);
           // TODO: don't make this here
-          if (m.attributes.type === 'point') {
-            if (location && location.coordinates ) {
-              location = Object.assign({}, location, {type: 'Point'});
-            }
-          }
-          if (m.attributes.type === 'region') {
+          if (m.attributes.type === 'region' || m.attributes.type === 'point') {
             location.coordinates = location.coordinates.reverse();
           }
           return {

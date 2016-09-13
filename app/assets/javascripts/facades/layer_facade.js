@@ -40,23 +40,10 @@
             fillOpacity: 1
           };
 
-          var optionsMarker = {
-            radius: 12,
-            fillColor: "#007bcd",
-            color: "#005e9c",
-            weight: 1,
-            opacity: 1,
-            fillOpacity: 1
-          };
-
           if (params.country) {
             layer = L.geoJson(geoJson, {
               pointToLayer: function (feature, latlng) {
-                if (feature.properties.is_project_lead) {
-                  return L.marker(latlng, {icon: createMarker()});
-                } else {
-                  return L.circleMarker(latlng, optionsCircle);
-                }
+                return createMarker(feature, latlng, optionsCircle);
               }
             });
           } else {
@@ -70,11 +57,20 @@
 
   };
 
-  function createMarker() {
-    // Create icon
+  function createMarker(feature, latlng, optionsCircle) {
+    if (feature.properties.is_project_lead) {
+      var options = Object.assign({}, optionsCircle, {icon: createIconMarker()});
+      return L.marker(latlng, options);
+    } else {
+      return L.circleMarker(latlng, optionsCircle);
+    }
+  }
+
+  function createIconMarker() {
     return new L.divIcon({
       iconSize: [12, 12],
-      className: 'c-marker -point'
+      className: 'c-marker -icon',
+      html: '<svg class="icon icon-Oval"><use xlink:href="#icon-Oval"></use></svg>'
     });
   }
 
