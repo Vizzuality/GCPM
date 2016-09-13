@@ -10,55 +10,80 @@
 
   _.extend(App.Presenter.ProjectTypes.prototype, {
 
-    initialize: function(params) {
+    defaults: {
+      multiple: true,
+      name: 'project_type_ids',
+      label: 'Project types',
+      placeholder: 'Project types',
+      addNew: true
+    },
+
+    initialize: function(params, viewSettings) {
       this.state = new StateModel();
       this.projectTypes = new App.Collection.ProjectTypes();
-      this.projectTypesSelect = new App.View.Select({
+
+      // Creating view
+      this.select = new App.View.Select({
         el: '#project-types',
-        options: {
-          multiple: true,
-          name: 'project_type_ids',
-          type: 'text',
-          label: 'Project types',
-          inputClass: 'c-section-title -one-line',
-          placeholder: 'Project types'
-        }
+        options: _.extend({}, this.defaults, viewSettings || {})
       });
 
-      this.render();
-      this.setSubscriptions();
+      this.setEvents();
     },
 
-    render: function() {
-      this.projectTypes
-        .fetch()
-        .done(function() {
-          var options = this.projectTypes.toJSON().map(function(type) {
-            return { name: type.name, value: type.id };
-          });
-          this.projectTypesSelect.setOptions(options);
-        }.bind(this));
+    /**
+     * Setting internal events
+     */
+    setEvents: function() {
+      this.state.on('change', function() {
+        App.trigger('ProjectTypes:change', this.state.attributes);
+      }, this);
+      this.select.on('change', this.setState, this);
     },
 
-    setSubscriptions: function() {
-      this.projectTypesSelect.on('change', this.setSelectMultipleValues, this);
-    },
-
-    setSelectMultipleValues: function(select) {
-      var values = [];
-      var options = select.$el.find('select :selected');
-
-      options.map(function(index, option) {
-        values.push(Number(option.value));
+    /**
+     * Fetch cancer types from API
+     * @return {Promise}
+     */
+    fetchOptions: function() {
+      return this.projectTypes.fetch().done(function() {
+        var options = this.projectTypes.map(function(type) {
+          return {
+            name: type.attributes.name,
+            value: type.attributes.id
+          };
+        });
+        this.select.setOptions(options);
       }.bind(this));
+    },
 
-      if (values) {
-        var obj = {};
-        obj[select.options.name] = values;
+    /**
+     * Method to set a new state
+     * @param {Object} state
+     */
+    setState: function(state) {
+      var result = {};
+      _.each(state, function(s) {
+        return result[s.value] = s.name;
+      });
+      this.state.set(result);
+    },
 
-        this.state.set(obj);
-        App.trigger('ProjectTypesSelect:change', this);
-      }
+    /**
+     * Rebinding element, events and render again
+     * @param {DOM|String} el
+     */
+    setElement: function(el) {
+      this.select.setElement(el);
+      this.select.render();
+    },
+
+    /**
+     * Exposing DOM element
+     * @return {DOM}
+     */
+    getElement: function() {
+      return this.select.$el;
     }
 
   });

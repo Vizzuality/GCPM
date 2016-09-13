@@ -31,9 +31,11 @@
     },
 
     setSubscriptions: function() {
-      App.on('Map:change', this.setParams, this);
-      App.on('TabNav:change', this.setParams, this);
-      App.on('Toolbar:change', this.setParams, this);
+      var eventsNames = [
+        'Map:change', 'TabNav:change',
+        'Toolbar:change','FilterForm:change'
+      ].join(' ');
+      App.on(eventsNames, this.setParams, this);
     },
 
     startHistory: function() {
@@ -92,7 +94,7 @@
      */
     updateUrl: function() {
       var uri = new URI();
-      var params = _.omit(this.getParams(), 'vars', 'dataSingular');
+      var params = _.omit(this.getParams(), 'vars', 'dataSingular', 'userId');
       uri.query(this._serializeParams(params));
       this.navigate(uri.path().slice(1) + uri.search(), { trigger: false });
     },

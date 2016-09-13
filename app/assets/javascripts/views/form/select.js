@@ -46,11 +46,13 @@
 
     triggerChange: function(e) {
       var selectedOptions = e.currentTarget.selectedOptions;
-      var currentOptions = _.map(selectedOptions, function(option) {
+      var currentOptions = _.filter(_.map(selectedOptions, function(option) {
         return {
           name: option.innerHTML,
           value: option.getAttribute('value')
         };
+      }), function(option) {
+        return !!option.value;
       });
       this.trigger('change', currentOptions);
     }
