@@ -146,9 +146,6 @@
       this.$container.find('.delete').on('click', this.handleDeleteInvestigator);
     },
 
-    setDeleteSubscription: function() {
-      this.$container.find('.delete').on('click', this.handleDeleteInvestigator.bind(this));
-    },
 
     handleDeleteInvestigator: function(ev) {
       var investigators = {};
@@ -161,43 +158,10 @@
         }
       }.bind(this));
 
-      // Remove from state
       this.state.set({investigators: investigators});
       App.trigger('InvestigatorsSelect:change', this);
 
-      // Remove from table
       this.$investAdded.find('tr[value='+ value +']').remove();
-    },
-
-    addInvestigatorRow: function() {
-      var investigators = this.state.get('investigators') || {};
-      var investigator = this.investigatorsSelect.$el.find('select');
-      var organization = this.organizationsSelect.$el.find('select');
-      var address = this.addressesSelect.$el.find('select');
-      var lead = this.leadInput.$el.find('input')[0];
-
-      investigators[this.investigatorsId] = {
-        investigator_id: investigator[0].value,
-        organization_id: organization[0].value,
-        address_id: address[0].value,
-        lead: lead.checked
-      };
-
-      this.state.set({investigators: investigators});
-      App.trigger('InvestigatorsSelect:change', this);
-
-      this.$investAdded.append(
-        '<tr value="' + this.investigatorsId + '"><td value="' +
-          investigator.find(':selected').val() + '">' +
-            investigator.find(':selected').text() + '</td><td value="' +
-          organization.find(':selected').val() + '">' +
-            organization.find(':selected').text() + '</td><td>' +
-          (lead.checked ? 'Lead' : "") + '</td><td value="' +
-            this.investigatorsId + '" class="delete">Delete</td></tr>'
-      );
-
-      this.setDeleteSubscription();
-      this.investigatorsId ++;
     },
 
     handleAddMore: function() {
@@ -207,24 +171,52 @@
         var required = organizations.find('.c-required');
         required && required.removeClass('-hidden');
       } else this.addInvestigatorRow();
+    },
+
+    addInvestigatorRow: function() {
+      var investigators = this.state.get('investigators') || {};
+      var investigator = this.investigatorsSelect.$el.find('select');
+      var organization = this.organizationsSelect.$el.find('select');
+      var address = this.addressesSelect.$el.find('select');
+      var lead = this.leadInput.$el.find('input')[0];
+
+      lead && this.setInvestigatorsLead(investigators);
+
+      investigators[this.investigatorsId] = {
+        investigator_id: investigator[0].value,
+        organization_id: organization[0].value,
+        address_id: address[0].value,
+        lead: lead.checked
+      };
+
+      this.$investAdded.append(
+        '<tr value="' + this.investigatorsId + '"><td value="' +
+          investigator.find(':selected').val() + '">' +
+            investigator.find(':selected').text() + '</td><td value="' +
+          organization.find(':selected').val() + '">' +
+            organization.find(':selected').text() + '</td><td value="' +
+              (lead.checked ? 'lead' : "") + '">' +
+          (lead.checked ? 'Lead' : "") + '</td><td value="' +
+            this.investigatorsId + '" class="delete">Delete</td></tr>'
+      );
+
+      this.state.set({investigators: investigators});
+      App.trigger('InvestigatorsSelect:change', this);
+      this.setDeleteSubscription();
+      this.investigatorsId ++;
+    },
+
+    setDeleteSubscription: function() {
+      this.$container.find('.delete').on('click', this.handleDeleteInvestigator.bind(this));
+    },
+
+    setInvestigatorsLead: function(investigators) {
+      Object.keys(investigators).map(function(id) {
+        investigators[id] = Object.assign({}, investigators[id], {lead: false});
+      }.bind(this));
+
+      this.$investAdded.find('td[value=lead]').text('');
     }
-
-    // setSelectMultipleValues: function(select) {
-    //   var values = [];
-    //   var options = select.$el.find('select :selected');
-
-    //   options.map(function(index, option) {
-    //     values.push(Number(option.value));
-    //   }.bind(this));
-
-    //   if (values) {
-    //     var obj = {};
-    //     obj[select.options.name] = values;
-
-    //     this.state.set(obj);
-    //     App.trigger('InvestigatorsSelect:change', this);
-    //   }
-    // }
 
   });
 

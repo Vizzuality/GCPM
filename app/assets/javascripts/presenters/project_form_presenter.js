@@ -58,7 +58,6 @@
     },
 
     setSubscriptions: function() {
-      this.state.on('change', function(){console.log(this.state.attributes)}.bind(this))
       this.titleInput.on('change', this.setInputValue, this);
       this.descTextarea.on('change', this.setTextareaValue, this);
       this.pickdate.on('change', this.setDates, this);
