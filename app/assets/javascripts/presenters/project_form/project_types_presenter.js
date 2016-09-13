@@ -41,7 +41,7 @@
     },
 
     setSubscriptions: function() {
-      this.projectTypesSelect.on('change', this.setSelectValues, this);
+      this.projectTypesSelect.on('change', this.setSelectMultipleValues, this);
     },
 
     setSelectMultipleValues: function(select) {

@@ -21,7 +21,12 @@
       this.$el.html(this.template(this.options));
     },
 
-    renderOptions: function(options) {
+    renderOptions: function(options, addNew) {
+      this.$el.find('select').empty();
+      addNew && this.$el.find('select')
+          .append($('<option value="-2" disabled selected>' + this.options.placeholder +
+            '</option><option value="-1" class="add-new">Add new</option>'));
+
       options.map(function(option) {
         this.$el.find('select')
           .append($('<option value="' + option.value + '">' + option.name +'</option>'));
@@ -29,17 +34,17 @@
     },
 
     setEvents: function() {
-      this.$el.find('select').on('blur', this.triggerChange.bind(this));
-      this.$el.find('.add-new').on('click', this.triggerAddNewClick.bind(this));
+      this.$el.find('select').on('change', this.triggerChange.bind(this));
+      // this.$el.find('.add-new').on('click', this.triggerAddNewClick.bind(this));
     },
 
     triggerChange: function(e) {
       this.trigger('change', this);
     },
 
-    triggerAddNewClick: function() {
-      this.trigger('add-new-funding-click', this);
-    }
+    // triggerAddNewClick: function() {
+    //   this.trigger('add-new-funding-click', this);
+    // }
 
   });
 

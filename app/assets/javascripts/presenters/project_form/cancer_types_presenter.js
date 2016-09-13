@@ -57,7 +57,7 @@
         obj[select.options.name] = values;
 
         this.state.set(obj);
-        App.trigger('cancerTypesSelect:change', this);
+        App.trigger('CancerTypesSelect:change', this);
       }
     }
 

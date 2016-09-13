@@ -6,7 +6,9 @@
     </h3>
   {{/if}}
   <select
-    multiple={{#if multiple}}true{{else}}false{{/if}}
+    {{#if multiple}}
+    multiple
+    {{/if}}
     name="{{#if name}}{{name}}{{/if}}"
     type="{{#if type}} {{type}} {{/if}}"
     class="{{#if inputClass}}{{inputClass}} {{/if}}"
@@ -16,4 +18,5 @@
       <option id="add-new-{{name}}" class="add-new">Add new</option>
     {{/if}}
   </select>
+  <p class="c-required -hidden">* Field required</p>
 </div>
