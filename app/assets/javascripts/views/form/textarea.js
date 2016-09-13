@@ -5,28 +5,36 @@
   App.View.Textarea = Backbone.View.extend({
 
     defaults: {
+      label: null,
+      placeholder: null,
+      name: null,
+      required: false,
+      class: 'c-textarea'
     },
 
-    template: HandlebarsTemplates['textarea'],
+    events: {
+      'blur textarea': 'triggerChange'
+    },
+
+    template: HandlebarsTemplates['form/textarea'],
 
     initialize: function(settings) {
-      this.el = settings.el;
-      this.options = _.extend({}, this.defaults, settings.options || {});
+      var opts = (settings && settings.options) || {};
+      opts.class = [this.defaults.class, opts.class || ''].join(' ');
+      this.options = _.extend({}, this.defaults, opts);
 
       this.render();
-      this.setEvents();
     },
 
     render: function() {
       this.$el.html(this.template(this.options));
     },
 
-    setEvents: function() {
-      this.$el.find('textarea').on('blur', this.triggerChange.bind(this));
-    },
-
     triggerChange: function(e) {
-      this.trigger('change', this);
+      this.trigger('change', {
+        name: e.currentTarget.name,
+        value: e.currentTarget.value
+      });
     }
 
   });

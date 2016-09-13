@@ -13,10 +13,10 @@
     render: function() {
       this.$el.html(this.template());
 
-      _.each(this.inputs, function(view, key) {
+      _.each(this.inputs, function(presenter, key) {
         var $input = this.$el.find('#input-' + key);
         if ($input && $input.length) {
-          view.setElement(this.$el.find('#input-' + key)).render();
+          presenter.setElement($input).render();
         }
       }, this);
 

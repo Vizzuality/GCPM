@@ -5,27 +5,38 @@
   App.View.Input = Backbone.View.extend({
 
     defaults: {
+      label: null,
+      placeholder: null,
+      name: null,
+      type: 'text',
+      required: false,
+      class: 'c-input'
     },
 
-    template: HandlebarsTemplates['input'],
+    events: {
+      'blur input': 'triggerChange'
+    },
+
+    template: HandlebarsTemplates['form/input'],
 
     initialize: function(settings) {
-      this.el = settings.el;
-      this.options = _.extend({}, this.defaults, settings.options || {});
+      var opts = (settings && settings.options) || {};
+      opts.class = [this.defaults.class, opts.class || ''].join(' ');
+      this.options = _.extend({}, this.defaults, opts);
+
+      this.$el.addClass(this.options.class);
       this.render();
-      this.setEvents();
     },
 
     render: function() {
       this.$el.html(this.template(this.options));
     },
 
-    setEvents: function() {
-      this.$el.find('input').on('blur', this.triggerChange.bind(this));
-    },
-
     triggerChange: function(e) {
-      this.trigger('change', this);
+      this.trigger('change', {
+        name: e.currentTarget.name,
+        value: e.currentTarget.value
+      });
     }
 
   });

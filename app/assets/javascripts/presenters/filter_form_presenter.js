@@ -16,7 +16,7 @@
       var cancerTypes = new App.Presenter.CancerTypes()
       this.inputs = {
         // projectTypes: projectTypes.projectTypesSelect,
-        cancerTypes: cancerTypes.cancerTypesSelect,
+        cancerTypes: cancerTypes,
         // fundingSources: new App.Presenter.FundingSources()
       };
       this.modal = new App.View.Modal();

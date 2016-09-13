@@ -37,7 +37,7 @@
           var options = this.fundingSources.toJSON().map(function(type) {
             return { name: type.name, value: type.id };
           });
-          this.fundingSourcesSelect.renderOptions(options);
+          this.fundingSourcesSelect.setOptions(options);
         }.bind(this));
     },
 

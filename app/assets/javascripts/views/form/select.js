@@ -5,46 +5,55 @@
   App.View.Select = Backbone.View.extend({
 
     defaults: {
+      label: null,
+      name: null,
+      multiple: false,
+      required: false,
+      class: 'c-select',
+      blank: '-- Select an option --', // use false to disable this
+      addNew: false,
+      options: []
     },
 
-    template: HandlebarsTemplates['select'],
+    events: {
+      'change select': 'triggerChange'
+    },
+
+    template: HandlebarsTemplates['form/select'],
 
     initialize: function(settings) {
-      this.el = settings.el;
-      this.options = _.extend({}, this.defaults, settings.options || {});
+      var opts = (settings && settings.options) || {};
+      opts.class = [this.defaults.class, opts.class || ''].join(' ');
+      this.options = _.extend({}, this.defaults, opts);
 
       this.render();
-      this.setEvents();
     },
 
     render: function() {
       this.$el.html(this.template(this.options));
     },
 
-    renderOptions: function(options, addNew) {
-      this.$el.find('select').empty();
-      addNew && this.$el.find('select')
-          .append($('<option value="-2" disabled selected>' + this.options.placeholder +
-            '</option><option value="-1" class="add-new">Add new</option>'));
-
-      options.map(function(option) {
-        this.$el.find('select')
-          .append($('<option value="' + option.value + '">' + option.name +'</option>'));
-      }.bind(this));
-    },
-
-    setEvents: function() {
-      this.$el.find('select').on('change', this.triggerChange.bind(this));
-      // this.$el.find('.add-new').on('click', this.triggerAddNewClick.bind(this));
+    /**
+     * Render new options and render again
+     * @param {Array} options
+     * @example
+     * [{ name: 'Title', value: 1 }]
+     */
+    setOptions: function(options) {
+      this.options.options = options;
+      this.render();
     },
 
     triggerChange: function(e) {
-      this.trigger('change', this);
-    },
-
-    // triggerAddNewClick: function() {
-    //   this.trigger('add-new-funding-click', this);
-    // }
+      var selectedOptions = e.currentTarget.selectedOptions;
+      var currentOptions = _.map(selectedOptions, function(option) {
+        return {
+          name: option.innerHTML,
+          value: option.getAttribute('value')
+        };
+      });
+      this.trigger('change', currentOptions);
+    }
 
   });
 

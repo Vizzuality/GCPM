@@ -83,7 +83,7 @@
           var options = this.investigators.toJSON().map(function(type) {
             return { name: type.name, value: type.id };
           });
-          this.investigatorsSelect.renderOptions(options);
+          this.investigatorsSelect.setOptions(options);
 
           if (options.length !== 0) {
             this.renderOrganizations(options[0].value);
@@ -102,7 +102,7 @@
               value: organization.id
             };
           }.bind(this));
-          this.organizationsSelect.renderOptions(organizations, true);
+          this.organizationsSelect.setOptions(organizations, true);
           data.organizations.length !== 0 &&
             this.renderAddresses(organizations[0].value);
         }.bind(this)
@@ -123,7 +123,7 @@
               value: address.id
             };
           }.bind(this));
-          this.addressesSelect.renderOptions(addresses);
+          this.addressesSelect.setOptions(addresses);
         }.bind(this)
       });
     },
@@ -132,7 +132,7 @@
     setSubscriptions: function() {
       this.investigatorsSelect.on('change', function(investigatorsSelect){
         var investId = investigatorsSelect.$el.find(':selected')[0].value;
-        this.renderOrganizations(investId);
+        this.setOptions(investId);
       }.bind(this));
 
       this.organizationsSelect.on('change', function(organizationsSelect){

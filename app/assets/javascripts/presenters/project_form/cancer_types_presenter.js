@@ -36,7 +36,7 @@
           var options = this.cancerTypes.toJSON().map(function(type) {
             return { name: type.name, value: type.id };
           });
-          this.cancerTypesSelect.renderOptions(options);
+          this.cancerTypesSelect.setOptions(options);
         }.bind(this));
     },
 
@@ -59,6 +59,11 @@
         this.state.set(obj);
         App.trigger('CancerTypesSelect:change', this);
       }
+    },
+
+    setElement: function(element) {
+      this.cancerTypesSelect.setElement(element);
+      return this;
     }
 
   });

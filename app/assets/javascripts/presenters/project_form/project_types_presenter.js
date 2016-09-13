@@ -36,7 +36,7 @@
           var options = this.projectTypes.toJSON().map(function(type) {
             return { name: type.name, value: type.id };
           });
-          this.projectTypesSelect.renderOptions(options);
+          this.projectTypesSelect.setOptions(options);
         }.bind(this));
     },
 
