@@ -12,26 +12,80 @@
 
     initialize: function(params) {
       this.state = new StateModel();
-      var projectTypes = new App.Presenter.ProjectTypes();
-      var cancerTypes = new App.Presenter.CancerTypes()
-      this.inputs = {
-        // projectTypes: projectTypes.projectTypesSelect,
-        cancerTypes: cancerTypes.cancerTypesSelect,
-        // fundingSources: new App.Presenter.FundingSources()
-      };
+
+      var cancerTypes = new App.Presenter.CancerTypes(null, { addNew: false });
+      var projectTypes = new App.Presenter.ProjectTypes(null, { addNew: false });
+
+      this.inputs = [projectTypes, cancerTypes];
       this.modal = new App.View.Modal();
       this.filterForm = new App.View.FilterForm({ inputs: this.inputs });
 
+      this.setEvents();
       this.setSubscriptions();
     },
 
-    setSubscriptions: function() {
-      App.on('Toolbar:action', this.openForm, this);
+    /**
+     * Setting internal events
+     */
+    setEvents: function() {
+      this.filterForm.on('cancel', this.closeForm, this);
+      this.filterForm.on('submit', function(newState) {
+        this.setState(newState);
+        this.closeForm();
+      }, this);
+      this.state.on('change', function() {
+        App.trigger('FilterForm:change', this.state.attributes);
+      }, this)
     },
 
-    openForm: function(actionName) {
-      if (actionName === 'filter') {
-        this.modal.open(this.filterForm);
+    /**
+     * Subscribing to global events
+     */
+    setSubscriptions: function() {
+      App.on('Toolbar:action', function(actionName) {
+        if (actionName === 'filter') {
+          this.openForm();
+        }
+      }, this);
+    },
+
+    /**
+     * Setting form state
+     * @param {Object} newState
+     */
+    setState: function(newState) {
+      this.state.set(newState);
+    },
+
+    /**
+     * Open modal and render form inside
+     */
+    openForm: function() {
+      this.modal.open(this.filterForm);
+      this.renderForm();
+    },
+
+    /**
+     * Close form and modal
+     */
+    closeForm: function() {
+      this.modal.close();
+    },
+
+    /**
+     * Fetch all presenters and render all inputs
+     */
+    renderForm: function() {
+      if (!this.loaded) {
+        var promises = _.map(this.inputs, function(input) {
+          return input.fetchOptions();
+        });
+        $.when.apply($, promises).done(function() {
+          this.filterForm.render();
+          this.loaded = true;
+        }.bind(this));
+      } else {
+        this.filterForm.render();
       }
     }
 

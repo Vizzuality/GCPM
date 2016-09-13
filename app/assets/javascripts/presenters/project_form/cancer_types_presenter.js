@@ -10,55 +10,80 @@
 
   _.extend(App.Presenter.CancerTypes.prototype, {
 
-    initialize: function(params) {
+    defaults: {
+      multiple: true,
+      name: 'cancer_type_ids',
+      label: 'Cancer types',
+      placeholder: 'Cancer types',
+      addNew: true
+    },
+
+    initialize: function(params, viewSettings) {
       this.state = new StateModel();
       this.cancerTypes = new App.Collection.CancerTypes();
-      this.cancerTypesSelect = new App.View.Select({
+
+      // Creating view
+      this.select = new App.View.Select({
         el: '#cancer-types',
-        options: {
-          multiple: true,
-          name: 'cancer_type_ids',
-          type: 'text',
-          label: 'Cancer types',
-          inputClass: 'c-section-title -one-line',
-          placeholder: 'Cancer types'
-        }
+        options: _.extend({}, this.defaults, viewSettings || {})
       });
 
-      this.render();
-      this.setSubscriptions();
+      this.setEvents();
     },
 
-    render: function() {
-      this.cancerTypes
-        .fetch()
-        .done(function() {
-          var options = this.cancerTypes.toJSON().map(function(type) {
-            return { name: type.name, value: type.id };
-          });
-          this.cancerTypesSelect.renderOptions(options);
-        }.bind(this));
+    /**
+     * Setting internal events
+     */
+    setEvents: function() {
+      this.state.on('change', function() {
+        App.trigger('CancerTypes:change', this.state.attributes);
+      }, this);
+      this.select.on('change', this.setState, this);
     },
 
-    setSubscriptions: function() {
-      this.cancerTypesSelect.on('change', this.setSelectMultipleValues, this);
-    },
-
-    setSelectMultipleValues: function(select) {
-      var values = [];
-      var options = select.$el.find('select :selected');
-
-      options.map(function(index, option) {
-        values.push(Number(option.value));
+    /**
+     * Fetch cancer types from API
+     * @return {Promise}
+     */
+    fetchOptions: function() {
+      return this.cancerTypes.fetch().done(function() {
+        var options = this.cancerTypes.map(function(type) {
+          return {
+            name: type.attributes.name,
+            value: type.attributes.id
+          };
+        });
+        this.select.setOptions(options);
       }.bind(this));
+    },
 
-      if (values) {
-        var obj = {};
-        obj[select.options.name] = values;
+    /**
+     * Method to set a new state
+     * @param {Object} state
+     */
+    setState: function(state) {
+      var result = {};
+      _.each(state, function(s) {
+        return result[s.value] = s.name;
+      });
+      this.state.set(result);
+    },
 
-        this.state.set(obj);
-        App.trigger('cancerTypesSelect:change', this);
-      }
+    /**
+     * Rebinding element, events and render again
+     * @param {DOM|String} el
+     */
+    setElement: function(el) {
+      this.select.setElement(el);
+      this.select.render();
+    },
+
+    /**
+     * Exposing DOM element
+     * @return {DOM}
+     */
+    getElement: function() {
+      return this.select.$el;
     }
 
   });

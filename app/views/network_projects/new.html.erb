@@ -1,3 +1,4 @@
+<script> var AUTH_TOKEN = "<%= @user.authentication_token %>"</script>
 
 <div class="project_add c-section">
   <div id="title"></div>
@@ -18,6 +19,7 @@
         <div class="end-date"></div>
         <div id="pickadate-end-container" class="pickadate-container" autofocus></div>
       </div>
+      <p class="c-required -hidden">* Both dates are required</p>
     </div>
 
     <div class="project-info">
@@ -27,6 +29,18 @@
       <div id="project-types" class="form-field"></div>
       <div id="cancer-types" class="form-field"></div>
       <div id="funding-sources" class="form-field"></div>
+    </div>
+
+    <div class="investigators-organizations">
+      <div>
+        <h3 class="c-title">Invetigators & organizations</h3>
+        <div id="investigators" class="form-field"></div>
+        <div id="organizations" class="form-field"></div>
+        <div id="addresses" class="form-field"></div>
+        <div id="lead"></div>
+      </div>
+
+      <table class="investigators-added"></table>
     </div>
   </div>
 </div>

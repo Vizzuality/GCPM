@@ -37,12 +37,12 @@
           var options = this.fundingSources.toJSON().map(function(type) {
             return { name: type.name, value: type.id };
           });
-          this.fundingSourcesSelect.renderOptions(options);
+          this.fundingSourcesSelect.setOptions(options);
         }.bind(this));
     },
 
     setSubscriptions: function() {
-      this.fundingSourcesSelect.on('change', this.setSelectValues, this);
+      this.fundingSourcesSelect.on('change', this.setSelectMultipleValues, this);
       // this.fundingSourcesSelect.on('add-new-funding-click', this.renderModal, this);
     },
 
@@ -59,7 +59,7 @@
         obj[select.options.name] = values;
 
         this.state.set(obj);
-        App.trigger('fundingSourcesSelect:change', this);
+        App.trigger('FundingSourcesSelect:change', this);
       }
     }
 

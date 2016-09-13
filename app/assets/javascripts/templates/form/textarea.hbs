@@ -1,0 +1,16 @@
+{{#if label}}
+  <h3 for="" class="{{#if lableClass}} {{lableClass}} {{/if}}">
+    {{label}}
+  </h3>
+{{/if}}
+<textarea
+  {{#if name}}name="{{name}}"{{/if}}
+  {{#if inputClass}}class="{{inputClass}}"{{/if}}
+  {{#if placeholder}}placeholder="{{placeholder}}"{{/if}}
+  {{#if required}}required="true"{{/if}}
+>
+  {{#if value}}{{value}}{{/if}}
+</textarea>
+{{#if required}}
+  <p class="c-required">* Field required</p>
+{{/if}}
