@@ -2,15 +2,16 @@ source 'https://rubygems.org'
 
 ruby '2.3.1'
 
-gem 'rails', '>= 5.0.0.beta4', '< 5.1'
+gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 
 # Rails plugins
-gem 'puma'
+gem 'puma', '~> 3.0'
 gem 'jbuilder', '~> 2.0'
-gem 'devise', git: 'http://github.com/plataformatec/devise', branch: 'master'
+gem 'devise'
 gem 'dotenv-rails', '2.1.0'
 gem 's3'
-gem 'activeadmin', git: 'http://github.com/activeadmin/activeadmin'
+gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
+gem 'inherited_resources', git: 'https://github.com/activeadmin/inherited_resources'
 gem 'active_admin_theme'
 gem 'turbolinks', '~> 5.0.0'
 gem 'active_model_serializers', '~> 0.10.0'
@@ -19,11 +20,10 @@ gem 'simple_form'
 
 # Assets pipeline
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
-gem 'sass-rails'
+gem 'sass-rails', '~> 5.0'
 gem 'autoprefixer-rails'
-gem 'backbone-syphon-rails'
 gem 'pickadate-rails', '~> 3.5', '>= 3.5.6.0'
 gem 'handlebars_assets'
 
@@ -31,7 +31,7 @@ gem 'handlebars_assets'
 gem 'sendgrid-ruby'
 
 # Api engine
-gem 'cartomodel', git: 'http://github.com/Vizzuality/cartomodel'
+gem 'cartomodel', git: 'https://github.com/Vizzuality/cartomodel'
 # gem 'rack-cors', require: 'rack/cors'
 gem 'sql_query'
 
@@ -57,15 +57,16 @@ group :development, :test do
 end
 
 group :development do
-  #gem 'spring'
+  gem 'listen', '~> 3.0.5'
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '~> 3.0'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'annotate'
-  gem 'quiet_assets'
-  gem 'listen'
   gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-  gem 'rubocop',     require: false
+  gem 'rubocop', require: false
+  gem 'jshint'
   # Deploy
   gem 'capistrano', '3.5'
   gem 'capistrano-env-config'

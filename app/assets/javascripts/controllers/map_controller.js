@@ -10,6 +10,7 @@
       new App.Presenter.Map(params);
       new App.Presenter.TabNav(params);
       new App.Presenter.Toolbar(params);
+      new App.Presenter.FilterForm(params);
     }
 
   });
