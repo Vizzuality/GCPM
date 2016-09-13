@@ -2,7 +2,7 @@ select
 projects.id as project,
 projects.title as title,
 countries.country_name as location_name,
-'{"type":"point","coordinates":[' || addresses.latitude || ',' || addresses.longitude || ']}' as centroid,
+'{"type":"Point","coordinates":[' || addresses.latitude || ',' || addresses.longitude || ']}' as centroid,
 countries.country_iso_3 as iso,
 'point' as type,
 case when (memberships.membership_type = 0) then true else false end as is_project_lead
