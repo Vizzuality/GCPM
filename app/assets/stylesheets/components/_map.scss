@@ -82,11 +82,7 @@
     border: 1px solid #9440d7;
     background: #b85fff;
     border-radius: 100%;
-    // fill: #b85fff;
-    // fill-opacity: 1;
-    // stroke: #9440d7;
-    // stroke-width: 1px;
-    // shape-rendering: auto;
+    box-shadow: 0 3px 5px 0 rgba(3, 11, 43, 0.2);
   }
 
   .oval-icon {
@@ -96,6 +92,7 @@
       height: 36px;
       stroke: #005e9c;
       stroke-width: 1px;
+      filter: drop-shadow(0 3px 5px rgba(3, 11, 43, 0.2));
     }
   }
 
