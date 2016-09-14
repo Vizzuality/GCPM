@@ -19,6 +19,7 @@
       center: [0, 0],
       scrollWheelZoom: false,
       basemap: 'default',
+      attributionControl: false,
       zoom: 3
     },
 

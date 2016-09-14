@@ -18,8 +18,7 @@
       this.map = new App.View.Map({
         el: '#map',
         options: {
-          minZoom: 2,
-          maxZoom: 8
+          minZoom: 2
         }
         // options: this.getMapOptions()
       });
@@ -87,11 +86,9 @@
       this.fc.getLayer(this.getState()).done(function(layer) {
         this.currentLayer = layer;
         this.map.addLayer(this.currentLayer);
-        if (layer.FitBounds && typeof layer.FitBounds === 'function') {
-          layer.FitBounds(); // Cluster prune method to fitbounds
-        } else if (layer.getBounds && typeof layer.getBounds === 'function') {
-          this.map.map.fitBounds(layer.getBounds()); // Classic method
-        }
+        this.map.map.fitBounds(layer.getBounds(), {
+          padding: [50, 50]
+        });
       }.bind(this));
     },
 

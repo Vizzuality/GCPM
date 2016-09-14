@@ -12,7 +12,7 @@
 
     initialize: function(params) {
       this.state = new StateModel();
-      this.tabnav = new App.View.TabNav({ el: '#map-types' });
+      this.tabnav = new App.View.TabNav({ el: '#dataTabNav' });
 
       this.setEvents();
       this.setSubscriptions();

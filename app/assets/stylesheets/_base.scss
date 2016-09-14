@@ -49,21 +49,9 @@ ul {
   padding: 0;
 }
 
-.wrapper {
-  padding: 0 $wrapper-mobile-padding;
-
-  @media #{$mq-mobile-large} {
-    padding: 0 $wrapper-tablet-padding;
-  }
-
-  @media #{$mq-tablet} {
-    padding: 0 $wrapper-padding;
-  }
-}
-
-.turbolinks-progress-bar {
-  background: $color-1;
-}
+// .turbolinks-progress-bar {
+//   background: $color-1;
+// }
 
 /* Helpers */
 ._two-columns {
