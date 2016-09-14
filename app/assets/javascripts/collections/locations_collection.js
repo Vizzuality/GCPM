@@ -7,9 +7,12 @@
     url: '/api/map',
 
     toGeoJSON: function() {
+      var locations = _.filter(this.models, function(m) {
+        return !!m.attributes.centroid;
+      });
       return {
         type: 'FeatureCollection',
-        features: _.map(this.models, function(m) {
+        features: _.map(locations, function(m) {
           var location = JSON.parse(m.attributes.centroid);
           // TODO: don't make this here
           if (m.attributes.type === 'region' || m.attributes.type === 'point') {

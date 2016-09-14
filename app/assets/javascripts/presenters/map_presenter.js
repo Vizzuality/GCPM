@@ -87,9 +87,11 @@
       this.fc.getLayer(this.getState()).done(function(layer) {
         this.currentLayer = layer;
         this.map.addLayer(this.currentLayer);
-        //+++++++
-        !this.state.get('country') &&
+        if (layer.FitBounds && typeof layer.FitBounds === 'function') {
           layer.FitBounds(); // Cluster prune method to fitbounds
+        } else if (layer.getBounds && typeof layer.getBounds === 'function') {
+          this.map.map.fitBounds(layer.getBounds()); // Classic method
+        }
       }.bind(this));
     },
 

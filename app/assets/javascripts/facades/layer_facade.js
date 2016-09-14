@@ -31,21 +31,8 @@
         .done(function() {
           var layer;
           var geoJson = locations.toGeoJSON();
-          var optionsCircle = {
-            radius: 12,
-            fillColor: "#b85fff",
-            color: "#9440d7",
-            weight: 1,
-            opacity: 1,
-            fillOpacity: 1
-          };
-
           if (params.country) {
-            layer = L.geoJson(geoJson, {
-              pointToLayer: function (feature, latlng) {
-                return createMarker(feature, latlng, optionsCircle);
-              }
-            });
+            layer = createMarkerLayer(geoJson, params);
           } else {
             layer = createBubbleLayer(geoJson, params);
           }
@@ -57,23 +44,60 @@
 
   };
 
-  function createMarker(feature, latlng, optionsCircle) {
-    if (feature.properties.is_project_lead) {
-      var options = Object.assign({}, optionsCircle, {icon: createIconMarker()});
-      return L.marker(latlng, options);
-    } else {
-      return L.circleMarker(latlng, optionsCircle);
-    }
-  }
+  /**
+   * Creating marker layer for country detail
+   * showing project leaders and researchers
+   * @param  {Object} geoJson
+   * @return {Object}
+   */
+  function createMarkerLayer(geoJson) {
+    var pruneCluster = new PruneClusterForLeaflet();
 
-  function createIconMarker() {
-    return new L.divIcon({
-      iconSize: [12, 12],
-      className: 'c-marker -icon',
+    var circleIcon = new L.divIcon({
+      iconSize: [26, 26],
+      className: 'circle-icon',
+      html: ''
+    });
+
+    var ovalIcon = new L.divIcon({
+      iconSize: [26, 36],
+      className: 'oval-icon',
       html: '<svg class="icon icon-Oval"><use xlink:href="#icon-Oval"></use></svg>'
     });
+
+    pruneCluster.BuildLeafletIcon = function(feature) {
+      var location = feature.geometry.coordinates;
+      var marker = new PruneCluster.Marker(location[1], location[0]); // lat, lng
+      if (feature.properties.is_project_lead) {
+        marker.data.icon = ovalIcon;
+      } else {
+        marker.data.icon = circleIcon;
+      }
+      marker.data.feature = feature;
+      return marker;
+    };
+
+    pruneCluster.originalIcon = pruneCluster.BuildLeafletClusterIcon;
+
+    pruneCluster.BuildLeafletClusterIcon = function(cluster) {
+      var icon = pruneCluster.originalIcon(cluster);
+      icon.options.iconSize = new L.Point(60, 60, null);
+      return icon;
+    };
+
+    _.each(geoJson.features, function(feature) {
+      pruneCluster.RegisterMarker(pruneCluster.BuildLeafletIcon(feature));
+    });
+
+    return pruneCluster;
   }
 
+  /**
+   * Creating buble marker layer for region and countries layer
+   * @param  {Object} geoJson
+   * @param  {Object} params
+   * @return {Object}
+   */
   function createBubbleLayer(geoJson, params) {
     var pruneCluster = new PruneClusterForLeaflet();
 
@@ -121,6 +145,7 @@
       var icon = pruneCluster.originalIcon(cluster);
       var className = (params.data === 'events' ? '-orange' : '-blue');
       icon.options.className += ' ' + className;
+      icon.options.iconSize = new L.Point(60, 60, null);
       return icon;
     };
 
