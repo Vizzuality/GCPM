@@ -37,7 +37,9 @@
 
     background-color: white;
 
+    border: 1px solid #006eb8;
     border-radius: 100%;
+
     box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.3);
     transition: all .3s ease;
 
@@ -48,17 +50,21 @@
 
     &.-blue {
       background-color: #007bcd;
+      border-color: #006eb8;
     }
 
     &.-orange {
       background-color: #f57823;
+      border-color: #e86b16;
     }
 
     &.prunecluster {
-      border: 3px solid #007bcd;
-      background-color: white;
       color: #007bcd;
       font-size: 21px;
+
+      background-color: white;
+
+      border: 3px solid #007bcd;
 
       &.-blue {
         color: #007bcd;
@@ -69,6 +75,27 @@
         color: #f57823;
         border-color: #f57823;
       }
+    }
+  }
+
+  .circle-icon {
+    border: 1px solid #9440d7;
+    background: #b85fff;
+    border-radius: 100%;
+    // fill: #b85fff;
+    // fill-opacity: 1;
+    // stroke: #9440d7;
+    // stroke-width: 1px;
+    // shape-rendering: auto;
+  }
+
+  .oval-icon {
+    .icon {
+      fill: #007bcd;
+      width: 26px;
+      height: 36px;
+      stroke: #005e9c;
+      stroke-width: 1px;
     }
   }
 

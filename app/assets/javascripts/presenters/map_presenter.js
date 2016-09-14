@@ -42,6 +42,16 @@
           this.setState({ region: state.iso, data: state.data });
         }
       }, this);
+
+      this.fc.on('country:change', function(state) {
+        if (state.type === 'country') {
+          this.setState({
+            region: state.region,
+            data: state.data,
+            country: state.location_id
+          });
+        }
+      }, this);
     },
 
     setSubscriptions: function() {
@@ -77,7 +87,11 @@
       this.fc.getLayer(this.getState()).done(function(layer) {
         this.currentLayer = layer;
         this.map.addLayer(this.currentLayer);
-        layer.FitBounds(); // Cluster prune method to fitbounds
+        if (layer.FitBounds && typeof layer.FitBounds === 'function') {
+          layer.FitBounds(); // Cluster prune method to fitbounds
+        } else if (layer.getBounds && typeof layer.getBounds === 'function') {
+          this.map.map.fitBounds(layer.getBounds()); // Classic method
+        }
       }.bind(this));
     },
 
