@@ -19,7 +19,7 @@
     <option>{{blank}}</option>
   {{/if}}
   {{#each options}}
-    <option value="{{value}}">{{name}}</option>
+    <option value="{{value}}" {{#if selected}}selected{{/if}}>{{name}}</option>
   {{/each}}
 </select>
 {{#if required}}
