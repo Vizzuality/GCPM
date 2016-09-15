@@ -20,95 +20,42 @@
     },
 
     initializeFormComponents: function() {
-      this.titleInput = new App.View.Input({
-        el: '#title',
-        options: {
-          name: 'title',
-          class: '',
-          inputClass: 'c-title -bigger -bold',
-          type: 'text',
-          placeholder: 'Project Title_'
-        }
-      });
-
-      this.descTextarea = new App.View.Textarea({
-        el: '#description',
-        options: {
-          name: 'summary',
-          type: 'textarea',
-          label: 'Description',
-          lableClass: 'c-section-title',
-          placeholder: 'Lorem'
-        }
-      });
-
-      this.pickdate = new App.View.Pickdate({el: '.pickdate'});
-
-      this.websiteInput = new App.Presenter.WebsiteInput();
-      this.projectTypesSelect = new App.Presenter.ProjectTypes();
-      this.cancerTypesSelect = new App.Presenter.CancerTypes();
+      this.titleInput           = new App.Presenter.Input();
+      this.descTextarea         = new App.Presenter.Textarea();
+      this.pickdate             = new App.Presenter.Pickdate();
+      this.websiteInput         = new App.Presenter.WebsiteInput();
+      this.projectTypesSelect   = new App.Presenter.ProjectTypes();
+      this.cancerTypesSelect    = new App.Presenter.CancerTypes();
       this.fundingSourcesSelect = new App.Presenter.FundingSources();
-
-      this.investigatorsSelect = new App.Presenter.Investigators();
-
-      this.submitButton = new App.View.SubmitButton({ el: '.project_add'});
-
-
-      this.modal = new App.Presenter.Modal();
+      this.investigatorsSelect  = new App.Presenter.Investigators();
+      this.submitButton         = new App.Presenter.SubmitButton().submitButton;
+      this.modal                = new App.Presenter.Modal();
     },
 
     setSubscriptions: function() {
-      this.state.on('change', function(){console.log(this.state.attributes)}.bind(this))
-      this.titleInput.on('change', this.setInputValue, this);
-      this.descTextarea.on('change', this.setTextareaValue, this);
-      this.pickdate.on('change', this.setDates, this);
-      this.submitButton.on('click', this.handleSubmit, this);
+      this.titleInput.Input.on(       'change', this.titleInput.setInputValue, this);
+      this.descTextarea.Textarea.on(  'change', this.descTextarea.setTextareaValue, this);
+      this.pickdate.pickdate.on(      'change', this.pickdate.setDates, this);
+      this.submitButton.on(           'click',  this.handleSubmit, this);
 
-      App.on('WebsiteInput:change', this.setPresenterValue, this);
-      App.on('ProjectTypesSelect:change', this.setPresenterValue, this);
-      App.on('CancerTypesSelect:change', this.setPresenterValue, this);
+      App.on('WebsiteInput:change',         this.setPresenterValue, this);
+      App.on('ProjectTypesSelect:change',   this.setPresenterValue, this);
+      App.on('CancerTypesSelect:change',    this.setPresenterValue, this);
       App.on('FundingSourcesSelect:change', this.setPresenterValue, this);
-      App.on('InvestigatorsSelect:change', this.setPresenterValue, this);
+      App.on('InvestigatorsSelect:change',  this.setPresenterValue, this);
     },
 
     setComponentsKeys: function() {
       this.components = {
-        'title': this.titleInput,
-        'summary': this.descTextarea,
-        'start_date': this.pickdate,
-        'end_date': this.pickdate,
+        'title': this.titleInput.Input,
+        'summary': this.descTextarea.Textarea,
+        'start_date': this.pickdate.pickdate,
+        'end_date': this.pickdate.pickdate,
         'project_website': this.websiteInput.websiteInput,
         'project_type_ids': this.projectTypesSelect.projectTypesSelect,
         'cancer_type_ids': this.cancerTypesSelect.cancerTypesSelect,
         'funding_source_ids': this.fundingSourcesSelect.fundingSourcesSelect
       };
-    },
-
-    setDates: function(pickdate) {
-      var startDate = pickdate.$startDatePicker.get('select') &&
-        pickdate.$startDatePicker.get('select').obj;
-
-      var endDate = pickdate.$endDatePicker.get('select') ?
-        pickdate.$endDatePicker.get('select').obj :
-        startDate;
-
-      this.state.set({start_date: startDate, end_date: endDate});
-    },
-
-    setInputValue: function(input) {
-      var value = input.$el.find('input')[0].value;
-      var obj = {};
-      obj[input.options.name] = value;
-
-      this.state.set(obj);
-    },
-
-    setTextareaValue: function(textarea) {
-      var value = textarea.$el.find('textarea')[0].value;
-      var obj = {};
-      obj[textarea.options.name] = value;
-
-      this.state.set(obj);
     },
 
     setPresenterValue: function(presenter) {
