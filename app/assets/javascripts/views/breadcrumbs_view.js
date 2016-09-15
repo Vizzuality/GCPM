@@ -11,11 +11,16 @@
     template: HandlebarsTemplates['breadcrumbs'],
 
     initialize: function(settings) {
-      this.navTree = (settings && settings.navTree) || {};
+      this.data = (settings && settings.data) || [];
+    },
+
+    updateData: function(data) {
+      this.data = data || [];
+      this.render();
     },
 
     render: function() {
-      this.$el.html(this.template());
+      this.$el.html(this.template({ data: this.data }));
       return this;
     },
 
@@ -24,8 +29,8 @@
         e.preventDefault();
       }
       this.trigger('change', {
-        level: e.currentTarget.getAttribute('data-name'),
-        iso: e.currentTarget.getAttribute('data-value')
+        name: e.currentTarget.innerHTML,
+        value: e.currentTarget.getAttribute('data-value')
       });
     }
 

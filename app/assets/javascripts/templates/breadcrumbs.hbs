@@ -1,9 +1,10 @@
 <ul>
-  <li><a href="#" class="js-breadcrumb" data-name="global">Global</a></li>
-  {{#if region}}
-    <li><a href="#" class="js-breadcrumb" data-name="region" data-value="{{region}}">{{region}}</a></li>
-  {{/if}}
-  {{#if country}}
-    <li><a href="#" class="js-breadcrumb" data-name="country" data-value="{{country}}">{{country}}</a></li>
-  {{/if}}
+  {{#each data}}
+    <li>
+      <a href="{{link}}"
+        class="js-breadcrumb"
+        {{#if value}}data-value="{{value}}"{{/if}}
+      >{{name}}</a>
+    </li>
+  {{/each}}
 </ul>

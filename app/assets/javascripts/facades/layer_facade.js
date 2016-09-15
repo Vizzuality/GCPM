@@ -90,8 +90,8 @@
       if (!bounds) {
         return bounds;
       }
-      var southWest = L.latLng(bounds.maxLat, bounds.maxLng);
-      var northEast = L.latLng(bounds.minLat, bounds.minLng);
+      var southWest = L.latLng(bounds.minLat, bounds.maxLng);
+      var northEast = L.latLng(bounds.maxLat, bounds.minLng);
       return L.latLngBounds(southWest, northEast);;
     };
 
@@ -166,7 +166,7 @@
       }
       var southWest = L.latLng(bounds.minLat, bounds.maxLng);
       var northEast = L.latLng(bounds.maxLat, bounds.minLng);
-      return L.latLngBounds(southWest, northEast);;
+      return L.latLngBounds(southWest, northEast);
     };
 
     _.each(geoJson.features, function(feature) {
