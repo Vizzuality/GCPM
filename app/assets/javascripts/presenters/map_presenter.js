@@ -19,7 +19,7 @@
         el: '#map',
         options: {
           minZoom: 2,
-          maxZoom: 8
+          maxZoom: 14
         }
         // options: this.getMapOptions()
       });
@@ -85,12 +85,13 @@
         this.map.removeLayer(this.currentLayer);
       }
       this.fc.getLayer(this.getState()).done(function(layer) {
+        var bounds = layer.getBounds();
         this.currentLayer = layer;
         this.map.addLayer(this.currentLayer);
-        if (layer.FitBounds && typeof layer.FitBounds === 'function') {
-          layer.FitBounds(); // Cluster prune method to fitbounds
-        } else if (layer.getBounds && typeof layer.getBounds === 'function') {
-          this.map.map.fitBounds(layer.getBounds()); // Classic method
+        if (bounds) {
+          this.map.map.fitBounds(bounds, {
+            padding: [50, 50]
+          });
         }
       }.bind(this));
     },

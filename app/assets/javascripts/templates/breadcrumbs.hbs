@@ -1,0 +1,10 @@
+<ul>
+  {{#each data}}
+    <li>
+      <a href="{{link}}"
+        class="js-breadcrumb"
+        {{#if value}}data-value="{{value}}"{{/if}}
+      >{{name}}</a>
+    </li>
+  {{/each}}
+</ul>

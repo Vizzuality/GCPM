@@ -6,17 +6,21 @@
 
     url: '/api/map',
 
-    toGeoJSON: function() {
-      var locations = _.filter(this.models, function(m) {
-        return !!m.attributes.centroid;
+    model: App.Model.Location,
+
+    parse: function(data) {
+      return _.filter(data, function(d) {
+        return !!d.centroid && d.iso !== 'AN';
       });
+    },
+
+    toGeoJSON: function() {
       return {
         type: 'FeatureCollection',
-        features: _.map(locations, function(m) {
-          var location = JSON.parse(m.attributes.centroid);
+        features: _.map(this.models, function(m) {
           return {
             type: 'Feature',
-            geometry: location,
+            geometry: JSON.parse(m.attributes.centroid),
             properties: m.attributes
           };
         })

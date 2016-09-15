@@ -1,33 +1,44 @@
 <div class="c-section-intro">
-  <button id="btn-clear-filters" class="btn-reset-filters c-button -filled -inverse">Clear filters</button>
-	<div id="map" class="map c-map -map"></div>
+  <div class="c-map-breadcrumbs">
+    <div class="row">
+      <div class="column small-12">
+        <div id="breadcrumbs"></div>
+      </div>
+    </div>
+  </div>
 
-  <div id="map-tooltip" class="c-map-tooltip"></div>
+  <!-- <button id="btn-clear-filters" class="btn-reset-filters c-button -filled -inverse">Clear filters</button> -->
+  <div id="map" class="c-map"></div>
 
-	<ul id="map-types" class="c-section-menu">
-	   <% @filters.each do |filter| %>
-      <%# @class = !params['type'] && filter == "projects" ? "-active" : active_param?('type', filter) %>
-      <li>
-        <a class="js-btn-mapmenu-type" href="#" data-type="<%= filter %>"><%= t (filter) %></a>
-      </li>
-    <% end %>
-	</ul>
+  <!-- <div id="map-tooltip" class="c-map-tooltip"></div> -->
+
+  <div id="dataTabNav" class="c-tabnav">
+    <div class="row">
+      <div class="column small-12">
+        <ul class="tabnav-list">
+           <% @filters.each do |filter| %>
+            <%# @class = !params['type'] and filter == "projects" ? "-active" : active_param?('type', filter) %>
+            <li class="tabnav-item">
+              <a class="js-btn-mapmenu-type" href="#" data-type="<%= filter %>"><%= t (filter) %></a>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
 
 
 <div id="map-layers-tooltip" class="c-tooltip -tip-left"></div>
 
-<!-- c-map-menu -->
-<div id="map-menu" class="c-map-menu wrapper"></div>
-
-<!-- c-map-filters -->
-<%= render partial: "map-filters" %>
+<!-- toolbar -->
+<div id="toolbar" class="c-toolbar"></div>
 
 <!-- c-map-share -->
-<%= render partial: "map-share" %>
+<%# render partial: "map-share" %>
 
 <!-- c-map-tooltips -->
-<%= render partial: "map-tooltips" %>
+<%# render partial: "map-tooltips" %>
 
 <!-- c-grid-proyects -->
 <div class="c-card-grid" id="content">

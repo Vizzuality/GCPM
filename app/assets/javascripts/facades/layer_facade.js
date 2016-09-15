@@ -85,6 +85,16 @@
       return icon;
     };
 
+    pruneCluster.getBounds = function() {
+      var bounds = pruneCluster.Cluster.ComputeGlobalBounds();
+      if (!bounds) {
+        return bounds;
+      }
+      var southWest = L.latLng(bounds.minLat, bounds.maxLng);
+      var northEast = L.latLng(bounds.maxLat, bounds.minLng);
+      return L.latLngBounds(southWest, northEast);;
+    };
+
     _.each(geoJson.features, function(feature) {
       pruneCluster.RegisterMarker(pruneCluster.BuildLeafletIcon(feature));
     });
@@ -147,6 +157,16 @@
       icon.options.className += ' ' + className;
       icon.options.iconSize = new L.Point(60, 60, null);
       return icon;
+    };
+
+    pruneCluster.getBounds = function() {
+      var bounds = pruneCluster.Cluster.ComputeGlobalBounds();
+      if (!bounds) {
+        return bounds;
+      }
+      var southWest = L.latLng(bounds.minLat, bounds.maxLng);
+      var northEast = L.latLng(bounds.maxLat, bounds.minLng);
+      return L.latLngBounds(southWest, northEast);
     };
 
     _.each(geoJson.features, function(feature) {

@@ -1,5 +1,7 @@
-.c-header {
+.l-header {
   position: relative;
+  padding-top: 12px;
+  padding-bottom: 12px;
 
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15), 0 1px 0 0 rgba(0, 0, 0, 0.05);
 
@@ -8,16 +10,50 @@
   .desktop-menu {
     display: none;
 
+    @media screen and (min-width: $breakpoint-tablet) {
+      display: block;
+    }
+  }
+
+  .mobile-menu, .mobile-drawer {
+    @media screen and (min-width: $breakpoint-tablet) {
+      display: none;
+    }
+  }
+
+  .logo {
+    margin: 0;
+    height: 48px;
+    max-width: 259px;
+
+    background: asset-url('logo@2x.png') no-repeat left top;
+    background-size: 100%;
+
+    a {
+      display: block;
+      text-indent: -10000px;
+    }
+
+    h1 {
+      margin: 0;
+    }
+  }
+}
+
+.c-header {
+  .desktop-menu {
+    display: none;
+
     @media screen and (min-width: 870px) {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      display: block;
+      // justify-content: space-between;
+      // align-items: center;
       padding-top: 12px;
       padding-bottom: 12px;
 
       .logo {
         margin: 0;
-        flex-basis: 250px;
+        flex-basis: 259px;
         flex-shrink: 0;
 
         h1 {
@@ -216,5 +252,4 @@
       }
     }
   }
-
 }
