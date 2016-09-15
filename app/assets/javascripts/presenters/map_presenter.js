@@ -18,7 +18,8 @@
       this.map = new App.View.Map({
         el: '#map',
         options: {
-          minZoom: 2
+          minZoom: 2,
+          maxZoom: 14
         }
         // options: this.getMapOptions()
       });
@@ -84,11 +85,14 @@
         this.map.removeLayer(this.currentLayer);
       }
       this.fc.getLayer(this.getState()).done(function(layer) {
+        var bounds = layer.getBounds();
         this.currentLayer = layer;
         this.map.addLayer(this.currentLayer);
-        this.map.map.fitBounds(layer.getBounds(), {
-          padding: [50, 50]
-        });
+        if (bounds) {
+          this.map.map.fitBounds(bounds, {
+            padding: [50, 50]
+          });
+        }
       }.bind(this));
     },
 
