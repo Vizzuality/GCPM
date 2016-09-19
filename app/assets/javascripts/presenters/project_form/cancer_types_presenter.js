@@ -18,8 +18,9 @@
       blank: null,
       addNew: true,
       select2Options: {
+        // It adds a lot of issues
         // How to resolve the scroll issue https://github.com/select2/select2/issues/1672#issuecomment-240411031
-        closeOnSelect: false,
+        // closeOnSelect: false,
         placeholder: 'All cancer types',
       }
     },
