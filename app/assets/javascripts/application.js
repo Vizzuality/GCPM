@@ -18,7 +18,7 @@
 //= require leaflet
 //= require URIjs
 //= require fuse
-//= require chosen
+//= require select2
 //= require pickadate/picker
 //= require pickadate/picker.date
 

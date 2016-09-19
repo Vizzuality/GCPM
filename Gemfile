@@ -25,6 +25,7 @@ gem 'jquery-rails'
 gem 'sass-rails', '~> 5.0'
 gem 'autoprefixer-rails'
 gem 'pickadate-rails', '~> 3.5', '>= 3.5.6.0'
+gem "select2-rails"
 gem 'handlebars_assets'
 
 # Email service integration
@@ -43,7 +44,6 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-moment'
   gem 'rails-assets-leaflet'
   gem 'rails-assets-fuse'
-  gem 'rails-assets-chosen'
   gem 'rails-assets-URIjs'
 end
 

@@ -12,7 +12,10 @@
       class: 'c-select',
       blank: '-- Select an option --', // use false to disable this
       addNew: false,
-      options: []
+      options: [],
+      select2Options: {
+        theme: 'default'
+      }
     },
 
     events: {
@@ -31,6 +34,8 @@
 
     render: function() {
       this.$el.html(this.template(this.options));
+      console.log(this.options.select2Options);
+      this.$el.find('select').select2(this.options.select2Options);
     },
 
     /**

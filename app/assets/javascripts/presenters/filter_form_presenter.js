@@ -13,12 +13,20 @@
     initialize: function(params) {
       this.state = new StateModel();
 
-      var cancerTypes = new App.Presenter.CancerTypes(null, { addNew: false });
-      var projectTypes = new App.Presenter.ProjectTypes(null, { addNew: false });
+      var cancerTypes  = new App.Presenter.CancerTypes(null, {
+        label: null,
+        addNew: false
+      });
+      var projectTypes = new App.Presenter.ProjectTypes(null, {
+        label: null,
+        addNew: false
+      });
 
       this.inputs = [projectTypes, cancerTypes];
       this.modal = new App.View.Modal();
-      this.filterForm = new App.View.FilterForm({ inputs: this.inputs });
+      this.filterForm = new App.View.FilterForm({
+        inputs: this.inputs
+      });
 
       this.setEvents();
       this.setSubscriptions();

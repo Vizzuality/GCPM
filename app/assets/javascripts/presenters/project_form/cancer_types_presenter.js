@@ -15,7 +15,11 @@
       name: 'cancer_type_ids',
       label: 'Cancer types',
       placeholder: 'Cancer types',
-      addNew: true
+      addNew: true,
+      select2Options: {
+        closeOnSelect: false,
+        placeholder: 'All cancer types'
+      }
     },
 
     initialize: function(params, viewSettings) {
@@ -38,6 +42,7 @@
       this.state.on('change', function() {
         App.trigger('CancerTypes:change', this.state.attributes);
       }, this);
+
       this.select.on('change', this.setState, this);
     },
 
