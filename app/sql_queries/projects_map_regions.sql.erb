@@ -27,7 +27,7 @@ from projects
     <% end %>
     where projects.status = 1
     <% if @params[:countries] %>
-      and countries.country_iso in      <%= @params[:countries].to_s.gsub('[', '(').gsub(']',')').gsub('"',"'") %>
+      and countries.country_iso_3 in      <%= @params[:countries].to_s.gsub('[', '(').gsub(']',')').gsub('"',"'") %>
     <% end %>
     <% if @params[:organizations] %>
       and organizations.id in <%= "#{'(' + @params[:organizations].join(',') + ')'}" %>
