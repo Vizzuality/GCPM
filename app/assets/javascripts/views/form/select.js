@@ -14,7 +14,7 @@
       addNew: false,
       options: [],
       select2Options: {
-        theme: 'default'
+        theme: "default"
       }
     },
 
@@ -28,14 +28,14 @@
       var opts = (settings && settings.options) || {};
       opts.class = [this.defaults.class, opts.class || ''].join(' ');
       this.options = _.extend({}, this.defaults, opts);
+      this.options.select2Options = _.extend({}, this.defaults.select2Options, opts.select2Options);
 
       this.render();
     },
 
     render: function() {
       this.$el.html(this.template(this.options));
-      console.log(this.options.select2Options);
-      this.$el.find('select').select2(this.options.select2Options);
+      this.select = this.$el.find('select').select2(this.options.select2Options);
     },
 
     /**
