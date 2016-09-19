@@ -14,14 +14,15 @@
       multiple: true,
       name: 'cancer_type_ids',
       label: 'Cancer types',
-      placeholder: 'Cancer types',
+      placeholder: 'All cancer types',
       blank: null,
       addNew: true,
       select2Options: {
-        // It adds a lot of issues
-        // How to resolve the scroll issue https://github.com/select2/select2/issues/1672#issuecomment-240411031
-        // closeOnSelect: false,
-        placeholder: 'All cancer types',
+        // closeOnSelect: false
+        // It solves the closing of the dropdown menu
+        // It adds a lot of UX issues
+        // - Scroll: On select, scroll will go to first highlighted choice => How to resolve the scroll issue https://github.com/select2/select2/issues/1672#issuecomment-240411031
+        // - Click: On each click dropdown will appear and dissapear
       }
     },
 

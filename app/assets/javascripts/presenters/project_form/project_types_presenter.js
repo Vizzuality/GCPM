@@ -14,8 +14,17 @@
       multiple: true,
       name: 'project_type_ids',
       label: 'Project types',
-      placeholder: 'Project types',
-      addNew: true
+      placeholder: 'All project types',
+      blank: null,
+      addNew: false,
+      select2Options: {
+        // closeOnSelect: false
+        // It solves the closing of the dropdown menu
+        // It adds a lot of UX issues
+        // - Scroll: On select, scroll will go to first highlighted choice => How to resolve the scroll issue https://github.com/select2/select2/issues/1672#issuecomment-240411031
+        // - Click: On each click dropdown will appear and dissapear
+      }
+
     },
 
     initialize: function(params, viewSettings) {
