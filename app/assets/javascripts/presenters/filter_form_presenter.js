@@ -17,6 +17,10 @@
         label: null,
         addNew: false
       });
+      var organizations  = new App.Presenter.Organizations(null, {
+        label: null,
+        addNew: false
+      });
       var cancerTypes  = new App.Presenter.CancerTypes(null, {
         label: null,
         addNew: false
@@ -26,7 +30,7 @@
         addNew: false
       });
 
-      this.inputs = [countries, cancerTypes, projectTypes];
+      this.inputs = [countries, organizations, cancerTypes, projectTypes];
       this.modal = new App.View.Modal();
       this.filterForm = new App.View.FilterForm({
         inputs: this.inputs
