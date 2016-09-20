@@ -4,16 +4,15 @@
 
   var StateModel = Backbone.Model.extend();
 
-  App.Presenter.PickadateStartNew = function() {
+  App.Presenter.PickadateStart = function() {
     this.initialize.apply(this, arguments);
   };
 
-  _.extend(App.Presenter.PickadateStartNew.prototype, {
+  _.extend(App.Presenter.PickadateStart.prototype, {
 
     defaults: {
       name: 'start_date',
       label: 'Start date',
-      container: '#pickadate-start-container',
       min: new Date(1905,1,1),
       max: new Date(2040,1,1)
     },
@@ -35,10 +34,14 @@
      */
     setEvents: function() {
       this.state.on('change', function() {
-        App.trigger('PickadateStartNew:change', this.state.attributes);
+        App.trigger('PickadateStart:change', this.state.attributes);
       }, this);
 
-      // this.pickadate.on('change', this.setState, this);
+      App.on('PickadateEnd', function(state) {
+        console.log(state);
+      }.bind(this));
+
+      this.pickadate.on('change', this.setState, this);
     },
 
     /**
@@ -55,9 +58,7 @@
      */
     setState: function(state) {
       var result = {};
-      _.each(state, function(s) {
-        return result[s.value] = s.name;
-      });
+      result[state.name] = state.pick;
       this.state.set(result);
     },
 
@@ -80,36 +81,3 @@
   });
 
 })(this.App);
-
-
-// (function(App) {
-//
-//   'use strict';
-//
-//   var StateModel = Backbone.Model.extend();
-//
-//   App.Presenter.Pickdate = function() {
-//     this.initialize.apply(this, arguments);
-//   };
-//
-//   _.extend(App.Presenter.Pickdate.prototype, {
-//
-//   	initialize: function(params) {
-//       this.state = new StateModel();
-//       this.pickdate = new App.View.Pickdate({el: '.pickdate'});
-//     },
-//
-//     // setDates: function(pickdate) {
-//     //   var startDate = pickdate.$startDatePicker.get('pickadate') &&
-//     //     pickdate.$startDatePicker.get('pickadate').obj;
-//     //
-//     //   var endDate = pickdate.$endDatePicker.get('pickadate') ?
-//     //     pickdate.$endDatePicker.get('pickadate').obj :
-//     //     startDate;
-//     //
-//     //   this.state.set({start_date: startDate, end_date: endDate});
-//     // }
-//
-//   });
-//
-// })(this.App);

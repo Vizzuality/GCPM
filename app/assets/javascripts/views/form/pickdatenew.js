@@ -52,23 +52,18 @@
     render: function() {
       this.$el.html(this.template(this.options));
 
-      // this.setEvents();
-      // this.setPickdate();
+      this.setPickdate();
+      this.setEvents();
     },
 
     setPickdate: function() {
-      this.$picker = this.$el.find('.start-date').pickadate(_.extend({}, this.pickadateOptions, {
-        container: '#pickadate-start-container',
-        min: new Date(1905,1,1),
-        max: new Date(2040,1,1)
+      this.$picker = this.$el.find('.pickadate-input').pickadate(_.extend({}, this.pickadateOptions, {
+        container: '#'+this.options.name+'-container',
+        min: this.options.min,
+        max: this.options.max
       }));
-      this.$datePicker = this.$picker.pickadate('picker');
 
-      // this.$datePicker.on('set', function(e) {
-      //   if (e.select) {
-      //     this.$endDatePicker.set('min', this.$datePicker.get('select'));
-      //   }
-      // }.bind(this));
+      this.$datePicker = this.$picker.pickadate('picker');
     },
 
     setEvents: function() {
@@ -76,12 +71,13 @@
     },
 
     triggerChange: function(e) {
-      console.log(e);
-      // if (e.select) {
-      //   var start = this.$datePicker.get('select');
-      //   var end = this.$endDatePicker.get('select');
-      //   this.trigger('change', this);
-      // }
+      console.log(e.select);
+      if (e.select) {
+        this.trigger('change', {
+          name: this.options.name,
+          date: e.select
+        });
+      }
     }
 
   });

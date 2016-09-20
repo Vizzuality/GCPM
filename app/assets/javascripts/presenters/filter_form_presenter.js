@@ -30,9 +30,10 @@
         addNew: false
       });
 
-      var pickadate = new App.Presenter.PickadateStartNew();
+      var pickadateStart = new App.Presenter.PickadateStart();
+      var pickadateEnd = new App.Presenter.PickadateEnd();
 
-      this.children = [countries, organizations, cancerTypes, projectTypes, pickadate];
+      this.children = [countries, organizations, cancerTypes, projectTypes, pickadateStart, pickadateEnd];
 
       this.modal = new App.View.Modal();
       this.filterForm = new App.View.FilterForm({
