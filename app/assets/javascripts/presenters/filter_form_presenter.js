@@ -11,6 +11,7 @@
   _.extend(App.Presenter.FilterForm.prototype, {
 
     initialize: function(params) {
+      console.log(params);
       this.state = new StateModel();
 
       var countries  = new App.Presenter.Countries(null, {

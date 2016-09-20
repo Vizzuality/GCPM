@@ -154,7 +154,7 @@
   .modal-content {
     flex-grow: 1;
     width: 100%;
-    padding: 20px 0; /* The gradient isn't applied on the first and last line */
+    padding: 20px; /* The gradient isn't applied on the first and last line */
     line-height: 1.6;
 
     .modal-title {
