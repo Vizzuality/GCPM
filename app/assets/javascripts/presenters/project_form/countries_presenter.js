@@ -4,35 +4,45 @@
 
   var StateModel = Backbone.Model.extend();
 
-  App.Presenter.CancerTypes = function() {
+  App.Presenter.Countries = function() {
     this.initialize.apply(this, arguments);
   };
 
-  _.extend(App.Presenter.CancerTypes.prototype, {
+  _.extend(App.Presenter.Countries.prototype, {
 
     defaults: {
-      multiple: true,
-      name: 'cancer_type_ids',
-      label: 'Cancer types',
-      placeholder: 'All cancer types',
-      blank: null,
+      multiple: false,
+      name: 'countries',
+      label: 'Countries',
+      placeholder: 'All countries',
+      blank: true,
       addNew: true,
       select2Options: {
+        allowClear: true,
         // closeOnSelect: false
         // It solves the closing of the dropdown menu
         // It adds a lot of UX issues
         // - Scroll: On select, scroll will go to first highlighted choice => How to resolve the scroll issue https://github.com/select2/select2/issues/1672#issuecomment-240411031
         // - Click: On each click dropdown will appear and dissapear
+
+        templateSelection: function (data, container) {
+          // Return the placeholder
+          if (!data.id) {
+            return data.text;
+          }
+          // Return the selected option
+          return $('<span class="select2-selection__choice">' + data.text + '<span class="select2-selection__clear">×</span></span>');
+        }
       }
     },
 
     initialize: function(params, viewSettings) {
       this.state = new StateModel();
-      this.cancerTypes = new App.Collection.CancerTypes();
+      this.countries = new App.Collection.Countries();
 
       // Creating view
       this.select = new App.View.Select({
-        el: '#cancer-types',
+        el: '#countries',
         options: _.extend({}, this.defaults, viewSettings || {})
       });
 
@@ -44,7 +54,7 @@
      */
     setEvents: function() {
       this.state.on('change', function() {
-        App.trigger('CancerTypes:change', this.state.attributes);
+        App.trigger('Countries:change', this.state.attributes);
       }, this);
 
       this.select.on('change', this.setState, this);
@@ -55,8 +65,8 @@
      * @return {Promise}
      */
     fetchOptions: function() {
-      return this.cancerTypes.fetch().done(function() {
-        var options = this.cancerTypes.map(function(type) {
+      return this.countries.fetch().done(function() {
+        var options = this.countries.map(function(type) {
           return {
             name: type.attributes.name,
             value: type.attributes.id
