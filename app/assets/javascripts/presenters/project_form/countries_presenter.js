@@ -1,0 +1,100 @@
+(function(App) {
+
+  'use strict';
+
+  var StateModel = Backbone.Model.extend();
+
+  App.Presenter.Countries = function() {
+    this.initialize.apply(this, arguments);
+  };
+
+  _.extend(App.Presenter.Countries.prototype, {
+
+    defaults: {
+      multiple: true,
+      name: 'countries',
+      label: 'Countries',
+      placeholder: 'All countries',
+      blank: null,
+      addNew: true,
+      select2Options: {
+        // closeOnSelect: false
+        // It solves the closing of the dropdown menu
+        // It adds a lot of UX issues
+        // - Scroll: On select, scroll will go to first highlighted choice => How to resolve the scroll issue https://github.com/select2/select2/issues/1672#issuecomment-240411031
+        // - Click: On each click dropdown will appear and dissapear
+      }
+    },
+
+    initialize: function(params, viewSettings) {
+      this.state = new StateModel();
+      this.countries = new App.Collection.Countries();
+
+      // Creating view
+      this.select = new App.View.Select({
+        el: '#countries',
+        options: _.extend({}, this.defaults, viewSettings || {})
+      });
+
+      this.setEvents();
+    },
+
+    /**
+     * Setting internal events
+     */
+    setEvents: function() {
+      this.state.on('change', function() {
+        App.trigger('Countries:change', this.state.attributes);
+      }, this);
+
+      this.select.on('change', this.setState, this);
+    },
+
+    /**
+     * Fetch cancer types from API
+     * @return {Promise}
+     */
+    fetchOptions: function() {
+      return this.countries.fetch().done(function() {
+        var options = this.countries.map(function(type) {
+          return {
+            name: type.attributes.name,
+            value: type.attributes.id
+          };
+        });
+        this.select.setOptions(options);
+      }.bind(this));
+    },
+
+    /**
+     * Method to set a new state
+     * @param {Object} state
+     */
+    setState: function(state) {
+      var result = {};
+      _.each(state, function(s) {
+        return result[s.value] = s.name;
+      });
+      this.state.set(result);
+    },
+
+    /**
+     * Rebinding element, events and render again
+     * @param {DOM|String} el
+     */
+    setElement: function(el) {
+      this.select.setElement(el);
+      this.select.render();
+    },
+
+    /**
+     * Exposing DOM element
+     * @return {DOM}
+     */
+    getElement: function() {
+      return this.select.$el;
+    }
+
+  });
+
+})(this.App);

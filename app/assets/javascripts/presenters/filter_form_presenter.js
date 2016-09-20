@@ -13,6 +13,10 @@
     initialize: function(params) {
       this.state = new StateModel();
 
+      var countries  = new App.Presenter.Countries(null, {
+        label: null,
+        addNew: false
+      });
       var cancerTypes  = new App.Presenter.CancerTypes(null, {
         label: null,
         addNew: false
@@ -22,7 +26,7 @@
         addNew: false
       });
 
-      this.inputs = [projectTypes, cancerTypes];
+      this.inputs = [countries, cancerTypes, projectTypes];
       this.modal = new App.View.Modal();
       this.filterForm = new App.View.FilterForm({
         inputs: this.inputs
