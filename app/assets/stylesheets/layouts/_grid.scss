@@ -2,8 +2,8 @@ $wrapper-padding:          50px;
 $wrapper-tablet-padding:   30px;
 $wrapper-mobile-padding:   15px;
 
-.wrapper,
-.wrap {
+// .wrapper,
+// .wrap {
   // padding: 0 $wrapper-mobile-padding;
 
   // @media #{$mq-mobile-large} {
@@ -13,7 +13,7 @@ $wrapper-mobile-padding:   15px;
   // @media #{$mq-tablet} {
   //   padding: 0 $wrapper-padding;
   // }
-}
+// }
 
 .row {
   max-width: ($body-max-width - 100);

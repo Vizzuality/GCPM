@@ -4,7 +4,7 @@
 
   App.Model.Location = Backbone.Model.extend({
 
-    idAttribute: 'iso'
+    // idAttribute: 'iso'
 
   });
 

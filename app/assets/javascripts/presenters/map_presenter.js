@@ -48,7 +48,7 @@
           this.setState({
             region: state.region,
             data: state.data,
-            country: state.location_id
+            country: state.iso
           });
         }
       }, this);
