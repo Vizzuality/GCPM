@@ -7,25 +7,25 @@ class MapController < ApplicationController
     @params = request.query_parameters
 
     # Common vars
-    @countries = Country.all.order('country_name')
-    @organizations = Organization.all.order('name')
+    @countries = Country.order('country_name')
+    @organizations = Organization.order('name')
     @organization_types = OrganizationType.all
-    @cancer_types = CancerType.all.order('name')
-    @project_types = ProjectType.all.order('name')
-    @investigators = Investigator.all.order('name')
+    @cancer_types = CancerType.order('name')
+    @project_types = ProjectType.order('name')
+    @investigators = Investigator.order('name')
 
     @limit = 15
     # Projects
     #Limit of projects shown at the beginning and added when show more button clicked
-    @projects  = Project.fetch_all(projects_params).order('created_at DESC').limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
+    @projects  = Project.fetch_all(projects_params).order('created_at DESC').limit(@limit).offset(params[:limit] ? params[:limit].to_i : @limit)
     @projectsCount = Project.count
 
     # Events
     #Limit of events shown at the beginning and added when show more button clicked
-    @events  = Event.fetch_all(projects_params).order('created_at DESC').limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
+    @events  = Event.fetch_all(projects_params).order('created_at DESC').limit(@limit).offset(params[:limit] ? params[:limit].to_i : @limit)
     @eventsCount = Event.count
 
-    @current_type = params[:type] || 'projects'
+    @current_type = params[:data] || 'projects'
     @filters = ['projects', 'events']
 
     respond_with(@projects)
