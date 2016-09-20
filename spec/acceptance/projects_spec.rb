@@ -14,6 +14,7 @@ module Api::V1
       let(:funder)        { FactoryGirl.create(:organization, name: 'Project funder', address_ids: [address.id]) }
       let!(:cancer_type)   { FactoryGirl.create(:cancer_type)                                                    }
       let!(:project_type)  { FactoryGirl.create(:project_type)                                                   }
+      let!(:organization_type) { FactoryGirl.create(:organization_type)                                          }
 
       let(:project_id) { project.id }
       let(:params)     { { "project": { "title": "Project updated" } } }
@@ -212,6 +213,14 @@ module Api::V1
 
         it 'Get funding-sources list' do
           get "/api/funding-sources"
+
+          expect(status).to eq(200)
+          expect(json.length).to eq (1)
+          expect(json.length).to eq (1)
+        end
+
+        it 'Get organization-types list' do
+          get "/api/organization-types"
 
           expect(status).to eq(200)
           expect(json.length).to eq (1)

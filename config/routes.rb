@@ -28,10 +28,11 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: 'json' } do
     scope module: :v1 do
-      resources :regions,       only: [:index, :show]
-      resources :cancer_types,  only: [:index, :show], path: '/cancer-types'
-      resources :project_types, only: [:index],        path: 'project-types'
-      resources :map,           only: [:index]
+      resources :regions,            only: [:index, :show]
+      resources :cancer_types,       only: [:index, :show], path: '/cancer-types'
+      resources :project_types,      only: [:index],        path: 'project-types'
+      resources :organization_types, only: [:index],        path: 'organization-types'
+      resources :map,                only: [:index]
 
       resources :projects,      only: [:update, :create] do
         resources :memberships, only: [:index, :create, :destroy]

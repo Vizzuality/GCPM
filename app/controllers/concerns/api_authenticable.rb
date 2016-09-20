@@ -7,7 +7,7 @@ module ApiAuthenticable
     before_action :set_user_by_token
 
     def session_invalid?(object)
-      # object.token_expired? && session[:user_id].blank?
+      object.token_expired? && current_user.blank?
     end
 
     def reset_auth_token(object)
