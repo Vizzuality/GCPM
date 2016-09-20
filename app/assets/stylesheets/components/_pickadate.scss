@@ -1,7 +1,11 @@
 .c-pickadate {
 
   label {
+    display: block;
     text-align: center;
+    text-transform: uppercase;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-x-small;
   }
 
 	.pickadate-input {

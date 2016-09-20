@@ -29,11 +29,15 @@
         label: null,
         addNew: false
       });
+      var organizationsTypes = new App.Presenter.OrganizationTypes(null, {
+        label: null,
+        addNew: false
+      });
 
       var pickadateStart = new App.Presenter.PickadateStart();
       var pickadateEnd = new App.Presenter.PickadateEnd();
 
-      this.children = [countries, organizations, cancerTypes, projectTypes, pickadateStart, pickadateEnd];
+      this.children = [countries, organizations, cancerTypes, projectTypes, organizationsTypes, pickadateStart, pickadateEnd];
 
       this.modal = new App.View.Modal();
       this.filterForm = new App.View.FilterForm({

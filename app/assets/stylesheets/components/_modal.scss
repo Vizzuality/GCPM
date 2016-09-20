@@ -48,67 +48,6 @@
     }
   }
 
-  form {
-    position: relative;
-    height: 60vh;
-    overflow: scroll;
-    display: block;
-    .modal-module {
-      display: none;
-    }
-    .-getrow {
-      display: inline-block;
-      margin: 0px 0 40px;
-    }
-    label {
-      margin:  10px 0 30px 0;
-      padding: 0;
-      font-size: $font-size-x-small;
-      text-transform: uppercase;
-      color: rgba($color-2,1);
-      display: block;
-      font-weight: $font-weight-bold;
-      &.-half {
-        width: 49.5%;
-        display: inline-block;
-      }
-      input {
-        width: 100%;
-        border: none;
-        border-bottom: 1px solid rgba(15,48,70,0.3);
-        height: 30px;
-        font-size: 15px;
-        transition: all 0.25s ease-in;
-        &:focus {
-          outline: none;
-          border-bottom: 1px solid rgba(15,48,70,0.6);
-        }
-      }
-    }
-    .-buttons {
-      text-align: center;
-      margin: 70px 0 20px;
-    }
-    .-btn {
-      width: 114px;
-      height: 45px;
-      line-height: 45px;
-      text-align: center;
-      color: #5aade4;
-      border: solid 1px #5aade4;
-      margin: 0 10px;
-      display: inline-block;
-      font-weight: $font-weight-bold;
-      text-transform: uppercase;
-      font-size: $font-size-x-small;
-      cursor: pointer;
-      &.-add {
-        color: #fff;
-        background-color: #5aade4; 
-      }
-    }
-  }
-
   .modal-window, .modal-container {
     position: absolute;
     top: $wrapper-mobile-padding;
