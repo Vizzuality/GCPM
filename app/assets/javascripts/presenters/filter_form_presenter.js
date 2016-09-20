@@ -30,10 +30,13 @@
         addNew: false
       });
 
-      this.inputs = [countries, organizations, cancerTypes, projectTypes];
+      var pickadate = new App.Presenter.PickadateStartNew();
+
+      this.children = [countries, organizations, cancerTypes, projectTypes, pickadate];
+
       this.modal = new App.View.Modal();
       this.filterForm = new App.View.FilterForm({
-        inputs: this.inputs
+        children: this.children
       });
 
       this.setEvents();
@@ -89,19 +92,30 @@
     },
 
     /**
-     * Fetch all presenters and render all inputs
+     * Fetch all presenters and render all children
      */
     renderForm: function() {
       if (!this.loaded) {
-        var promises = _.map(this.inputs, function(input) {
-          return input.fetchOptions();
-        });
+        var promises = _.compact(_.map(this.children, function(child) {
+          if (!!child.fetchData) {
+            return child.fetchData();
+          }
+          return null;
+        }));
+
         $.when.apply($, promises).done(function() {
           this.filterForm.render();
+          _.each(this.children, function(child){
+            child.render();
+          });
           this.loaded = true;
         }.bind(this));
+
       } else {
         this.filterForm.render();
+        _.each(this.children, function(child){
+          child.render();
+        });
       }
     }
 

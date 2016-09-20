@@ -12,24 +12,18 @@
     },
 
     initialize: function(settings) {
-      this.inputs = (settings && settings.inputs) || {};
+      this.children = (settings && settings.children) || {};
     },
 
     render: function() {
       this.$el.html(this.template());
 
       // Rebinding elements and events
-      _.each(this.inputs, function(presenter) {
+      _.each(this.children, function(presenter) {
         presenter.setElement(presenter.getElement().selector);
       }, this);
 
-      this.renderChosen();
-
       return this;
-    },
-
-    renderChosen: function() {
-
     },
 
     triggerCancel: function() {

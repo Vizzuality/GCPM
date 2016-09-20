@@ -64,7 +64,7 @@
      * Fetch cancer types from API
      * @return {Promise}
      */
-    fetchOptions: function() {
+    fetchData: function() {
       return this.countries.fetch().done(function() {
         var options = this.countries.map(function(type) {
           return {
@@ -74,6 +74,10 @@
         });
         this.select.setOptions(options);
       }.bind(this));
+    },
+
+    render: function() {
+      this.select.render();
     },
 
     /**

@@ -2,10 +2,12 @@
 
   'use strict';
 
-  App.View.Pickdate = Backbone.View.extend({
+  App.View.PickadateNew = Backbone.View.extend({
 
     defaults: {
     },
+
+    template: HandlebarsTemplates['form/pickadate'],
 
     pickadateOptions: {
       today: false,
@@ -48,43 +50,38 @@
     },
 
     render: function() {
-      this.setEvents();
-      this.setPickdate();
+      this.$el.html(this.template(this.options));
+
+      // this.setEvents();
+      // this.setPickdate();
     },
 
     setPickdate: function() {
-      this.$start = this.$el.find('.start-date').pickadate(_.extend({}, this.pickadateOptions, {
+      this.$picker = this.$el.find('.start-date').pickadate(_.extend({}, this.pickadateOptions, {
         container: '#pickadate-start-container',
         min: new Date(1905,1,1),
         max: new Date(2040,1,1)
       }));
-      this.$startDatePicker = this.$start.pickadate('picker');
+      this.$datePicker = this.$picker.pickadate('picker');
 
-      this.$end = this.$el.find('.end-date').pickadate(_.extend({}, this.pickadateOptions, {
-        container: '#pickadate-end-container',
-        min: new Date(1905,1,1),
-        max: new Date(2040,1,1)
-      }));
-      this.$endDatePicker = this.$end.pickadate('picker');
-
-      this.$startDatePicker.on('set', function(e) {
-        if (e.select) {
-          this.$endDatePicker.set('min', this.$startDatePicker.get('select'));
-        }
-      }.bind(this));
+      // this.$datePicker.on('set', function(e) {
+      //   if (e.select) {
+      //     this.$endDatePicker.set('min', this.$datePicker.get('select'));
+      //   }
+      // }.bind(this));
     },
 
     setEvents: function() {
-      this.$startDatePicker.on('set', this.triggerChange.bind(this));
-      this.$endDatePicker.on('set', this.triggerChange.bind(this));
+      this.$datePicker.on('set', this.triggerChange.bind(this));
     },
 
     triggerChange: function(e) {
-      if (e.select) {
-        var start = this.$startDatePicker.get('select');
-        var end = this.$endDatePicker.get('select');
-        this.trigger('change', this);
-      }
+      console.log(e);
+      // if (e.select) {
+      //   var start = this.$datePicker.get('select');
+      //   var end = this.$endDatePicker.get('select');
+      //   this.trigger('change', this);
+      // }
     }
 
   });

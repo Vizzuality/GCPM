@@ -29,13 +29,12 @@
       opts.class = [this.defaults.class, opts.class || ''].join(' ');
       this.options = _.extend({}, this.defaults, opts);
       this.options.select2Options = _.extend({}, this.defaults.select2Options, opts.select2Options);
-
-      this.render();
     },
 
     render: function() {
       this.$el.html(this.template(this.options));
       this.select = this.$el.find('select').select2(this.options.select2Options);
+      return this;
     },
 
     /**
@@ -46,7 +45,6 @@
      */
     setOptions: function(options) {
       this.options.options = options;
-      this.render();
     },
 
     triggerChange: function(e) {
