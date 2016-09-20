@@ -37,8 +37,8 @@
         App.trigger('PickadateStart:change', this.state.attributes);
       }, this);
 
-      App.on('PickadateEnd', function(state) {
-        console.log(state);
+      App.on('PickadateEnd:change', function(date) {
+        this.pickadate.$datePicker.set('max', new Date(date.end_date));
       }.bind(this));
 
       this.pickadate.on('change', this.setState, this);
@@ -58,7 +58,7 @@
      */
     setState: function(state) {
       var result = {};
-      result[state.name] = state.pick;
+      result[state.name] = state.date;
       this.state.set(result);
     },
 

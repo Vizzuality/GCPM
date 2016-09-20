@@ -34,9 +34,12 @@
      */
     setEvents: function() {
       this.state.on('change', function() {
-        console.log(this.state.attributes);
         App.trigger('PickadateEnd:change', this.state.attributes);
       }, this);
+
+      App.on('PickadateStart:change', function(date) {
+        this.pickadate.$datePicker.set('min', new Date(date.start_date));
+      }.bind(this));
 
       this.pickadate.on('change', this.setState, this);
     },
@@ -55,7 +58,7 @@
      */
     setState: function(state) {
       var result = {};
-      result[state.name] = state.pick;
+      result[state.name] = state.date;
       this.state.set(result);
     },
 

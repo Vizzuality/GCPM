@@ -71,7 +71,6 @@
     },
 
     triggerChange: function(e) {
-      console.log(e.select);
       if (e.select) {
         this.trigger('change', {
           name: this.options.name,

@@ -93,14 +93,6 @@
     padding: 10px;
     cursor: pointer;
     z-index: 13; /* Otherwise, it won't be reachable */
-
-    svg {
-      fill: $color-2;
-    }
-
-    &:hover svg {
-      fill: lighten($color-2, 10%);
-    }
   }
 
   // MODAL WRAPPER
