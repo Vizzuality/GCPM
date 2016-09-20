@@ -2,6 +2,7 @@
   <label
     {{#if name}}for="{{name}}"{{/if}}
     {{#if labelClass}}class="{{labelClass}}"{{/if}}
+  >
     {{label}}
   </label>
 {{/if}}
@@ -11,12 +12,13 @@
   {{#if inputClass}}class="{{inputClass}}"{{/if}}
   {{#if value}}value="{{value}}"{{/if}}
   {{#if required}}required="true"{{/if}}
+  {{#if placeholder}}data-placeholder="{{placeholder}}"{{/if}}
 >
   {{#if addNew}}
     <option id="add-new-{{name}}" class="add-new">Add new</option>
   {{/if}}
   {{#if blank}}
-    <option>{{blank}}</option>
+    <option></option>
   {{/if}}
   {{#each options}}
     <option value="{{value}}" {{#if selected}}selected{{/if}}>{{name}}</option>

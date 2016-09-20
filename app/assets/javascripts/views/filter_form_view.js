@@ -23,7 +23,13 @@
         presenter.setElement(presenter.getElement().selector);
       }, this);
 
+      this.renderChosen();
+
       return this;
+    },
+
+    renderChosen: function() {
+
     },
 
     triggerCancel: function() {
