@@ -72,6 +72,11 @@
           this.openForm();
         }
       }, this);
+
+      App.on('Modal:loading', function(state) {
+        var loading = state.loading;
+        this.modal.toggleLoader(loading);
+      }, this);
     },
 
     /**
@@ -102,6 +107,10 @@
      */
     renderForm: function() {
       if (!this.loaded) {
+        App.trigger('Modal:loading', {
+          loading: true
+        });
+        // this.filterForm.showSpinner();
         var promises = _.compact(_.map(this.children, function(child) {
           if (!!child.fetchData) {
             return child.fetchData();
@@ -110,6 +119,9 @@
         }));
 
         $.when.apply($, promises).done(function() {
+          App.trigger('Modal:loading', {
+            loading: false
+          });
           this.filterForm.render();
           _.each(this.children, function(child){
             child.render();
@@ -121,6 +133,9 @@
         this.filterForm.render();
         _.each(this.children, function(child){
           child.render();
+        });
+        App.trigger('Modal:loading', {
+          loading: false
         });
       }
     }

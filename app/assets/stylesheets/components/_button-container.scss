@@ -1,0 +1,35 @@
+
+/**
+ *
+ *  Preferred markup (for accessibility matter):
+ *
+ *    <div class="c-button-container">
+ *      <button></button>
+ *      <button></button>
+ *      <button></button>
+ *    </div>
+ *
+ **/
+
+.c-button-container {
+  display: flex;
+
+  > * {
+    margin-right: 10px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  // Justify
+  &.-j-start   { justify-content: flex-start; }
+  &.-j-center  { justify-content: center; }
+  &.-j-end     { justify-content: flex-end; }
+  &.-j-between { justify-content: space-between; }
+  &.-j-around  { justify-content: space-around; }
+
+  // Align
+  &.-a-start   { align-items: flex-start; }
+  &.-a-center  { align-items: center; }
+  &.-a-end     { align-items: flex-end; }
+}

@@ -45,7 +45,12 @@
       setTimeout(function() {
         this.$el.remove();
       }.bind(this), 300);
-    }
+    },
+
+    toggleLoader: function(loading) {
+      this.$el.find('#modal-loader').toggleClass('-start', loading);
+    },
+
 
   });
 
