@@ -57,13 +57,21 @@
     },
 
     setPickdate: function() {
-      this.$picker = this.$el.find('.pickadate-input').pickadate(_.extend({}, this.pickadateOptions, {
-        container: '#'+this.options.name+'-container',
-        min: this.options.min,
-        max: this.options.max
-      }));
+      this.$picker = this.$el.find('.pickadate-input')
+        .val(this.options.value)
+        .pickadate(_.extend({}, this.pickadateOptions, {
+          container: '#'+this.options.name+'-container',
+          min: this.options.min,
+          max: this.options.max
+        }));
 
       this.$datePicker = this.$picker.pickadate('picker');
+    },
+
+    setValue: function() {
+      if (this.options.value) {
+        this.$datePicker.set('select', this.options.value, { format: 'yyyy-mm-dd' })
+      }
     },
 
     setEvents: function() {

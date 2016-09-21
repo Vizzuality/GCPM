@@ -14,29 +14,33 @@
       console.log(params);
       this.state = new StateModel();
 
-      var countries  = new App.Presenter.Countries(null, {
+      var countries = new App.Presenter.Countries({ value: params.countries }, {
         label: null,
         addNew: false
       });
-      var organizations  = new App.Presenter.Organizations(null, {
+      var organizations = new App.Presenter.Organizations({ value: params.organizations }, {
         label: null,
         addNew: false
       });
-      var cancerTypes  = new App.Presenter.CancerTypes(null, {
+      var cancerTypes = new App.Presenter.CancerTypes({ value: params.cancer_types }, {
         label: null,
         addNew: false
       });
-      var projectTypes = new App.Presenter.ProjectTypes(null, {
+      var projectTypes = new App.Presenter.ProjectTypes({ value: params.project_types }, {
         label: null,
         addNew: false
       });
-      var organizationsTypes = new App.Presenter.OrganizationTypes(null, {
+      var organizationsTypes = new App.Presenter.OrganizationTypes({ value: params.organization_types }, {
         label: null,
         addNew: false
       });
 
-      var pickadateStart = new App.Presenter.PickadateStart();
-      var pickadateEnd = new App.Presenter.PickadateEnd();
+      var pickadateStart = new App.Presenter.PickadateStart({ value: params.start_date }, {
+        max: params.end_date
+      });
+      var pickadateEnd = new App.Presenter.PickadateEnd({ value: params.end_date }, {
+        min: params.start_date
+      });
 
       this.children = [countries, organizations, cancerTypes, projectTypes, organizationsTypes, pickadateStart, pickadateEnd];
 
@@ -107,10 +111,8 @@
      */
     renderForm: function() {
       if (!this.loaded) {
-        App.trigger('Modal:loading', {
-          loading: true
-        });
-        // this.filterForm.showSpinner();
+        App.trigger('Modal:loading', { loading: true });
+
         var promises = _.compact(_.map(this.children, function(child) {
           if (!!child.fetchData) {
             return child.fetchData();
@@ -119,13 +121,13 @@
         }));
 
         $.when.apply($, promises).done(function() {
-          App.trigger('Modal:loading', {
-            loading: false
-          });
+          App.trigger('Modal:loading', { loading: false });
+
           this.filterForm.render();
           _.each(this.children, function(child){
             child.render();
           });
+
           this.loaded = true;
         }.bind(this));
 

@@ -23,7 +23,7 @@
       // Creating view
       this.pickadate = new App.View.PickadateNew({
         el: '#pickadate-end',
-        options: _.extend({}, this.defaults, viewSettings || {})
+        options: _.extend({}, this.defaults, params || {}, viewSettings || {})
       });
 
       this.setEvents();

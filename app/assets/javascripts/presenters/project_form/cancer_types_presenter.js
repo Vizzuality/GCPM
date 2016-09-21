@@ -12,7 +12,7 @@
 
     defaults: {
       multiple: true,
-      name: 'cancer_type_ids',
+      name: 'cancer_types',
       label: 'Cancer types',
       placeholder: 'All cancer types',
       blank: null,
@@ -33,7 +33,7 @@
       // Creating view
       this.select = new App.View.Select({
         el: '#cancer-types',
-        options: _.extend({}, this.defaults, viewSettings || {})
+        options: _.extend({}, this.defaults, params || {}, viewSettings || {})
       });
 
       this.setEvents();

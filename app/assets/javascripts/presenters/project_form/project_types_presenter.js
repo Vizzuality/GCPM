@@ -12,7 +12,7 @@
 
     defaults: {
       multiple: true,
-      name: 'project_type_ids',
+      name: 'project_types',
       label: 'Project types',
       placeholder: 'All project types',
       blank: null,
@@ -34,7 +34,7 @@
       // Creating view
       this.select = new App.View.Select({
         el: '#project-types',
-        options: _.extend({}, this.defaults, viewSettings || {})
+        options: _.extend({}, this.defaults, params || {}, viewSettings || {})
       });
 
       this.setEvents();

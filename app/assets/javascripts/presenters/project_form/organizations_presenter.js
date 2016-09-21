@@ -33,7 +33,7 @@
       // Creating view
       this.select = new App.View.Select({
         el: '#organizations',
-        options: _.extend({}, this.defaults, viewSettings || {})
+        options: _.extend({}, this.defaults, params || {}, viewSettings || {})
       });
 
       this.setEvents();
@@ -65,7 +65,7 @@
         this.select.setOptions(options);
       }.bind(this));
     },
-    
+
     render: function() {
       this.select.render();
     },

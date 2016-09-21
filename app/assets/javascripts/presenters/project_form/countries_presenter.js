@@ -43,7 +43,7 @@
       // Creating view
       this.select = new App.View.Select({
         el: '#countries',
-        options: _.extend({}, this.defaults, viewSettings || {})
+        options: _.extend({}, this.defaults, params || {}, viewSettings || {})
       });
 
       this.setEvents();

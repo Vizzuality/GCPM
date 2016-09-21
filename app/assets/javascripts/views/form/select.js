@@ -34,6 +34,7 @@
     render: function() {
       this.$el.html(this.template(this.options));
       this.select = this.$el.find('select').select2(this.options.select2Options);
+      this.setValue();
       return this;
     },
 
@@ -43,6 +44,15 @@
      * @example
      * [{ name: 'Title', value: 1 }]
      */
+    setValue: function() {
+
+      if (this.options.value) {
+          console.log(this.select.selector);
+          console.log(this.options.value);
+      }
+      $(this.select.selector).val(this.options.value).trigger("change");
+    },
+
     setOptions: function(options) {
       this.options.options = options;
     },
