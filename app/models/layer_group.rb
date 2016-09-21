@@ -25,4 +25,9 @@ class LayerGroup < ApplicationRecord
   def avoid_recursivity
     errors.add(:super_group, "This group can't be super group of itself.") if self.super_group_id.present? && self.super_group_id == self.id
   end
+  def self.fetch_all(options={})
+    layer_groups = LayerGroup.all
+    layer_groups = layer_groups.order('name ASC')
+    layer_groups
+  end
 end

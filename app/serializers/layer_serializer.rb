@@ -25,16 +25,17 @@
 #  legend         :text
 #
 
-class Layer < ApplicationRecord
-  has_many :agrupations,  dependent: :destroy
-  has_many :layer_groups, through: :agrupations,  dependent: :destroy
-
-  accepts_nested_attributes_for :agrupations, allow_destroy: true
-
-  def self.fetch_all(options={})
-    layers = Layer.all
-    layers = layers.order('name ASC')
-    layers
+class LayerSerializer < ActiveModel::Serializer
+  cache key: "layer"
+  attributes :name, :slug, :layer_type, :zindex, :active, :order, :color, :info, :interactivity, :css, :query, :layer_provider, :published, :legend
+  has_one :layer_group, serializer: LayerGroupSerializer
+  def type
+    'layers'
   end
-
+  def sources
+    object.sources
+  end
+  def layer_group
+    object.layer_groups.where(site_scope_id: options[:site_scope]).first
+  end
 end

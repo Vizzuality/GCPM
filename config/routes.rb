@@ -49,6 +49,8 @@ Rails.application.routes.draw do
       get 'lists/cancer-types',  to: 'lists#cancer_types'
       get 'map/projects/:id',    to: 'map#show_project'
       get 'map/events/:id',      to: 'map#show_event'
+      get  'layer-groups',       to: 'layer_groups#index',          as: 'layer_groups'
+      get  '/layers',            to: 'layers#index',                as: 'layers'
     end
   end
 
