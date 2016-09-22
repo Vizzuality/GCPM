@@ -34,6 +34,10 @@
           <li class="item"><%= link_to (t 'add_project'), new_user_project_path(current_user), {:class => "item-link", :method => :get} %></li>
           <li class="item"><%= link_to (t 'add_event'), new_user_event_path(current_user), {:class => "item-link", :method => :get} %></li>
         </ul>
+        <ul class="user-stats menu-section">
+          <li class="item"><span class="sum prj"></span></li>
+          <li class="item"><span class="sum evn"></span></li>
+        </ul>
       </div>
     </li>
   <% else %>
