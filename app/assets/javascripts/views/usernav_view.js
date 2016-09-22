@@ -7,7 +7,7 @@
     template: HandlebarsTemplates['usernav'],
 
     events: {
-      'click .userMenu': 'toggleMenu'
+      'click .js-userMenu': 'toggleMenu'
     },
 
     initialize: function(params) {
