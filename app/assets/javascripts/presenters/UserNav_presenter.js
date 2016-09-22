@@ -11,6 +11,8 @@
   _.extend(App.Presenter.UserNav.prototype, {
 
     initialize: function(params) {
+      sessionStorage.setItem('user_data', user_data);
+      
       this.state = new StateModel();
       this.tabnav = new App.View.UserNav({ el: '#UserNav' });
     }
