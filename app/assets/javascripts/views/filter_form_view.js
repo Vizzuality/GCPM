@@ -19,6 +19,8 @@
       this.$el.html(this.template());
 
       // Rebinding elements and events
+      this.delegateEvents();
+      
       _.each(this.children, function(presenter) {
         presenter.setElement(presenter.getElement().selector);
       }, this);
