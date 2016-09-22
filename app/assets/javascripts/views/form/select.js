@@ -45,11 +45,6 @@
      * [{ name: 'Title', value: 1 }]
      */
     setValue: function() {
-
-      if (this.options.value) {
-          console.log(this.select.selector);
-          console.log(this.options.value);
-      }
       $(this.select.selector).val(this.options.value).trigger("change");
     },
 

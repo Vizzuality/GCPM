@@ -11,28 +11,30 @@
   _.extend(App.Presenter.Countries.prototype, {
 
     defaults: {
-      multiple: false,
+      multiple: true,
       name: 'countries',
       label: 'Countries',
       placeholder: 'All countries',
       blank: true,
       addNew: true,
       select2Options: {
-        allowClear: true,
+        maximumSelectionLength: 1,
         // closeOnSelect: false
         // It solves the closing of the dropdown menu
         // It adds a lot of UX issues
         // - Scroll: On select, scroll will go to first highlighted choice => How to resolve the scroll issue https://github.com/select2/select2/issues/1672#issuecomment-240411031
         // - Click: On each click dropdown will appear and dissapear
 
-        templateSelection: function (data, container) {
-          // Return the placeholder
-          if (!data.id) {
-            return data.text;
-          }
-          // Return the selected option
-          return $('<span class="select2-selection__choice">' + data.text + '<span class="select2-selection__clear">×</span></span>');
-        }
+        // Use this if you want a single select
+        // allowClear: true,
+        // templateSelection: function (data, container) {
+        //   // Return the placeholder
+        //   if (!data.id) {
+        //     return data.text;
+        //   }
+        //   // Return the selected option
+        //   return $('<span class="select2-selection__choice">' + data.text + '<span class="select2-selection__clear">×</span></span>');
+        // }
       }
     },
 

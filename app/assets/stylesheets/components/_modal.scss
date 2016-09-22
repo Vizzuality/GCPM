@@ -71,7 +71,7 @@
       left: 50%;
       height: auto;
       min-height: 100px;
-      transform: translate(-50%, -60%);
+      transform: translate(-50%, -50%);
     }
 
     &.-tall {
@@ -156,6 +156,9 @@
     width: 100%;
     padding: 20px; /* The gradient isn't applied on the first and last line */
     line-height: 1.6;
+    overflow: auto;
+    height: 100%;
+    max-height: calc(100vh - 50px);
 
     .modal-title {
     	margin: 0;

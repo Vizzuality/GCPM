@@ -26,7 +26,7 @@
       return this;
     },
 
-    triggerCancel: function() {
+    triggerCancel: function(e) {
       this.trigger('cancel');
     },
 
