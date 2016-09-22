@@ -27,9 +27,8 @@ class MapController < ApplicationController
 
     @current_type = params[:type] || 'projects'
     @filters = ['projects', 'events']
-
-    respond_with(@projects)
     @user_data = JSON.generate(build_user_data)
+    respond_with(@projects)
 
   end
 
