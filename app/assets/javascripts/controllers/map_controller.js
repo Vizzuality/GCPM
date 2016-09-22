@@ -13,7 +13,6 @@
       new App.Presenter.FilterForm(params);
       new App.Presenter.Breadcrumbs(params);
       new App.Presenter.UserNav(params);
-      sessionStorage.setItem('user_data', user_data);
       user_data = null;
     }
 
