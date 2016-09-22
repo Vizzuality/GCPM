@@ -37,14 +37,15 @@
       }
     },
 
-    initialize: function(params, viewSettings) {
+    initialize: function(viewSettings) {
       this.state = new StateModel();
       this.countries = new App.Collection.Countries();
 
       // Creating view
       this.select = new App.View.Select({
         el: '#countries',
-        options: _.extend({}, this.defaults, params || {}, viewSettings || {})
+        options: _.extend({}, this.defaults, viewSettings || {}),
+        state: this.state
       });
 
       this.setEvents();
@@ -85,12 +86,8 @@
      * Method to set a new state
      * @param {Object} state
      */
-    setState: function(state) {
-      var result = {};
-      _.each(state, function(s) {
-        return result[s.value] = s.name;
-      });
-      this.state.set(result);
+    setState: function(state, options) {
+      this.state.set(state, options);
     },
 
     /**

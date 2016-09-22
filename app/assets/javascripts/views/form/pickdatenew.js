@@ -47,6 +47,7 @@
     initialize: function(settings) {
       this.el = settings.el;
       this.options = _.extend({}, this.defaults, settings.options || {});
+      this.state = settings.state;
     },
 
     render: function() {
@@ -58,7 +59,7 @@
 
     setPickdate: function() {
       this.$picker = this.$el.find('.pickadate-input')
-        .val(this.options.value)
+        .val(this.state.get('value'))
         .pickadate(_.extend({}, this.pickadateOptions, {
           container: '#'+this.options.name+'-container',
           min: this.options.min,
@@ -68,12 +69,6 @@
       this.$datePicker = this.$picker.pickadate('picker');
     },
 
-    setValue: function() {
-      if (this.options.value) {
-        this.$datePicker.set('select', this.options.value, { format: 'yyyy-mm-dd' })
-      }
-    },
-
     setEvents: function() {
       this.$datePicker.on('set', this.triggerChange.bind(this));
     },
@@ -81,8 +76,7 @@
     triggerChange: function(e) {
       if (e.select) {
         this.trigger('change', {
-          name: this.options.name,
-          date: e.select
+          value: e.select
         });
       }
     }

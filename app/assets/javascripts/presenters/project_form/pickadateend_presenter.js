@@ -17,13 +17,14 @@
       max: new Date(2040,1,1)
     },
 
-    initialize: function(params, viewSettings) {
+    initialize: function(viewSettings) {
       this.state = new StateModel();
 
       // Creating view
       this.pickadate = new App.View.PickadateNew({
         el: '#pickadate-end',
-        options: _.extend({}, this.defaults, params || {}, viewSettings || {})
+        options: _.extend({}, this.defaults, viewSettings || {}),
+        state: this.state
       });
 
       this.setEvents();
@@ -37,8 +38,8 @@
         App.trigger('PickadateEnd:change', this.state.attributes);
       }, this);
 
-      App.on('PickadateStart:change', function(date) {
-        this.pickadate.$datePicker.set('min', new Date(date.start_date));
+      App.on('PickadateStart:change', function(state) {
+        this.pickadate.$datePicker.set('min', new Date(state.value));
       }.bind(this));
 
       this.pickadate.on('change', this.setState, this);
@@ -56,10 +57,8 @@
      * Method to set a new state
      * @param {Object} state
      */
-    setState: function(state) {
-      var result = {};
-      result[state.name] = state.date;
-      this.state.set(result);
+    setState: function(state, options) {
+      this.state.set(state, options);
     },
 
     /**

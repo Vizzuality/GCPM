@@ -11,34 +11,33 @@
   _.extend(App.Presenter.FilterForm.prototype, {
 
     initialize: function(params) {
-      console.log(params);
-      this.state = new StateModel();
+      this.state = new StateModel(params);
 
-      var countries = new App.Presenter.Countries({ value: params.countries }, {
+      var countries = new App.Presenter.Countries({
         label: null,
         addNew: false
       });
-      var organizations = new App.Presenter.Organizations({ value: params.organizations }, {
+      var organizations = new App.Presenter.Organizations({
         label: null,
         addNew: false
       });
-      var cancerTypes = new App.Presenter.CancerTypes({ value: params.cancer_types }, {
+      var cancerTypes = new App.Presenter.CancerTypes({
         label: null,
         addNew: false
       });
-      var projectTypes = new App.Presenter.ProjectTypes({ value: params.project_types }, {
+      var projectTypes = new App.Presenter.ProjectTypes({
         label: null,
         addNew: false
       });
-      var organizationsTypes = new App.Presenter.OrganizationTypes({ value: params.organization_types }, {
+      var organizationsTypes = new App.Presenter.OrganizationTypes({
         label: null,
         addNew: false
       });
 
-      var pickadateStart = new App.Presenter.PickadateStart({ value: params.start_date }, {
+      var pickadateStart = new App.Presenter.PickadateStart({
         max: params.end_date
       });
-      var pickadateEnd = new App.Presenter.PickadateEnd({ value: params.end_date }, {
+      var pickadateEnd = new App.Presenter.PickadateEnd({
         min: params.start_date
       });
 
@@ -122,25 +121,29 @@
         }));
 
         $.when.apply($, promises).done(function() {
-          App.trigger('Modal:loading', { loading: false });
-
-          this.filterForm.render();
-          _.each(this.children, function(child){
-            child.render();
-          });
-
           this.loaded = true;
+          this.renderElements();
+          App.trigger('Modal:loading', { loading: false });
         }.bind(this));
 
       } else {
-        this.filterForm.render();
-        _.each(this.children, function(child){
-          child.render();
-        });
-        App.trigger('Modal:loading', {
-          loading: false
-        });
+        this.renderElements();
+        App.trigger('Modal:loading', { loading: false });
       }
+    },
+
+    renderElements: function() {
+      this.filterForm.render();
+      _.each(this.children, function(child){
+
+        // Get && set the value from the state thanks to the name
+        child.setState({
+          value: this.state.get(child.defaults.name)
+        }, { silent: true });
+
+        // Render the child
+        child.render();
+      }.bind(this));
     }
 
   });

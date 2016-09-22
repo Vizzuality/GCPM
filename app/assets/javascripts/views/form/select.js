@@ -27,6 +27,7 @@
     initialize: function(settings) {
       var opts = (settings && settings.options) || {};
       opts.class = [this.defaults.class, opts.class || ''].join(' ');
+      this.state = settings.state;
       this.options = _.extend({}, this.defaults, opts);
       this.options.select2Options = _.extend({}, this.defaults.select2Options, opts.select2Options);
     },
@@ -45,7 +46,7 @@
      * [{ name: 'Title', value: 1 }]
      */
     setValue: function() {
-      $(this.select.selector).val(this.options.value).trigger("change");
+      $(this.select.selector).val(this.state.get('value')).trigger("change");
     },
 
     setOptions: function(options) {
@@ -54,15 +55,8 @@
 
     triggerChange: function(e) {
       var selectedOptions = e.currentTarget.selectedOptions;
-      var currentOptions = _.filter(_.map(selectedOptions, function(option) {
-        return {
-          name: option.innerHTML,
-          value: option.getAttribute('value')
-        };
-      }), function(option) {
-        return !!option.value;
-      });
-      this.trigger('change', currentOptions);
+      var currentOptions = _.pluck(selectedOptions, 'value');
+      this.trigger('change', { value: currentOptions });
     }
 
   });
