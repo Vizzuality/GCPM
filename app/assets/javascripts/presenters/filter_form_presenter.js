@@ -62,6 +62,7 @@
         this.setState(newState);
         this.closeForm();
       }, this);
+
       this.state.on('change', function() {
         App.trigger('FilterForm:change', this.state.attributes);
       }, this)
