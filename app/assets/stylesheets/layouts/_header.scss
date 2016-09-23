@@ -6,19 +6,32 @@
 
   z-index: 3;
 
-  .desktop-menu {
+  .c-main-nav {
     display: none;
 
-    @media screen and (min-width: $breakpoint-tablet) {
-      display: block;
+    @media #{$mq-medium} {
+      display: flex;
     }
   }
 
-  .mobile-menu, .mobile-drawer {
-    @media screen and (min-width: $breakpoint-tablet) {
+  .icon-menu {
+    width: 20px;
+    height: 20px;
+    margin-top: 4px;
+    cursor: pointer;
+
+    @media #{$mq-medium} {
       display: none;
     }
+
+    &:hover { fill: $color-1; }
   }
+
+  // .mobile-menu, .mobile-drawer {
+  //   @media screen and (min-width: $breakpoint-tablet) {
+  //     display: none;
+  //   }
+  // }
 
   .logo {
     margin: 0;
@@ -41,12 +54,9 @@
 
 .c-header {
   .desktop-menu {
-    display: none;
+    display: block;
 
     @media screen and (min-width: 870px) {
-      display: block;
-      // justify-content: space-between;
-      // align-items: center;
       padding-top: 12px;
       padding-bottom: 12px;
 
