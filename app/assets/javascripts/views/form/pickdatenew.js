@@ -19,7 +19,6 @@
       selectMonths: true,
       editable: false,
       format: 'yyyy-mm-dd',
-
       klass: {
         picker: 'picker-custom',
         holder: 'picker-holder-custom',
@@ -62,8 +61,8 @@
         .val(this.state.get('value'))
         .pickadate(_.extend({}, this.pickadateOptions, {
           container: '#'+this.options.name+'-container',
-          min: this.options.min,
-          max: this.options.max
+          min: this.state.get('min') || undefined,
+          max: this.state.get('max') || undefined
         }));
 
       this.$datePicker = this.$picker.pickadate('picker');

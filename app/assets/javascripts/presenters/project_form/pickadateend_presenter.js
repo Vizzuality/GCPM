@@ -39,7 +39,7 @@
       }, this);
 
       App.on('PickadateStart:change', function(state) {
-        this.pickadate.$datePicker.set('min', new Date(state.value));
+        this.pickadate.$datePicker && this.pickadate.$datePicker.set('min', new Date(state.value));
       }.bind(this));
 
       this.pickadate.on('change', this.setState, this);
@@ -59,6 +59,14 @@
      */
     setState: function(state, options) {
       this.state.set(state, options);
+      this.setMin();
+    },
+
+    setMin: function() {
+      this.state.set({
+        // If it doesn't exist set it to 'undefined'. Otherwise it will break the filters
+        min: this.state.get('start_date') || undefined
+      }, { silent: true });
     },
 
     /**

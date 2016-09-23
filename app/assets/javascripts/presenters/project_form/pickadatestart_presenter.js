@@ -39,7 +39,7 @@
       }, this);
 
       App.on('PickadateEnd:change', function(state) {
-        this.pickadate.$datePicker.set('max', new Date(state.value));
+        this.pickadate.$datePicker && this.pickadate.$datePicker.set('max', new Date(state.value));
       }.bind(this));
 
       this.pickadate.on('change', this.setState, this);
@@ -59,6 +59,14 @@
      */
     setState: function(state, options) {
       this.state.set(state, options);
+      this.setMax();
+    },
+
+    setMax: function() {
+      this.state.set({
+        // If it doesn't exist set it to 'undefined'. Otherwise it will break the filters
+        max: this.state.get('end_date') || undefined
+      }, { silent: true });
     },
 
     /**

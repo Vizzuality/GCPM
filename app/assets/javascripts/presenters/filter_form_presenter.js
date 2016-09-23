@@ -34,12 +34,8 @@
         addNew: false
       });
 
-      var pickadateStart = new App.Presenter.PickadateStart({
-        max: params.end_date
-      });
-      var pickadateEnd = new App.Presenter.PickadateEnd({
-        min: params.start_date
-      });
+      var pickadateStart = new App.Presenter.PickadateStart();
+      var pickadateEnd = new App.Presenter.PickadateEnd();
 
       this.children = [countries, organizations, cancerTypes, projectTypes, organizationsTypes, pickadateStart, pickadateEnd];
 
@@ -122,24 +118,27 @@
 
         $.when.apply($, promises).done(function() {
           this.loaded = true;
-          this.renderElements();
+          this.renderFormElements();
           App.trigger('Modal:loading', { loading: false });
         }.bind(this));
 
       } else {
-        this.renderElements();
+        this.renderFormElements();
         App.trigger('Modal:loading', { loading: false });
       }
     },
 
-    renderElements: function() {
+    renderFormElements: function() {
       this.filterForm.render();
       _.each(this.children, function(child){
-
         // Get && set the value from the state thanks to the name
-        child.setState({
-          value: this.state.get(child.defaults.name)
-        }, { silent: true });
+        // I need to pass the rest of the params because there are some presenters that need other params
+        // Then, inside of each presenter, they will handle its state
+        var state = _.extend({}, this.state.toJSON(), {
+          value: this.state.get(child.defaults.name),
+        })
+
+        child.setState(state, { silent: true });
 
         // Render the child
         child.render();
