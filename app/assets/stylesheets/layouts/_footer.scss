@@ -1,9 +1,11 @@
-.l-footer {
-  padding: 20px 0;
+.l-footer.wrapper {
+  padding-top: 20px;
+  padding-bottom: 20px;
   border-top: 1px solid rgba(0, 0, 0, .15);
 
   @media #{$mq-tablet} {
-    padding: 60px 0;
+    padding-top: 60px;
+    padding-bottom: 60px;
   }
 
   > ul {

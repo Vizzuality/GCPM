@@ -2,18 +2,18 @@ $wrapper-padding:          50px;
 $wrapper-tablet-padding:   30px;
 $wrapper-mobile-padding:   15px;
 
-// .wrapper,
-// .wrap {
-  // padding: 0 $wrapper-mobile-padding;
+.wrapper,
+.wrap {
+  padding: 0 $wrapper-mobile-padding;
 
-  // @media #{$mq-mobile-large} {
-  //   padding: 0 $wrapper-tablet-padding;
-  // }
+  @media #{$mq-mobile-large} {
+    padding: 0 $wrapper-tablet-padding;
+  }
 
-  // @media #{$mq-tablet} {
-  //   padding: 0 $wrapper-padding;
-  // }
-// }
+  @media #{$mq-tablet} {
+    padding: 0 $wrapper-padding;
+  }
+}
 
 .row {
   max-width: ($body-max-width - 100);
