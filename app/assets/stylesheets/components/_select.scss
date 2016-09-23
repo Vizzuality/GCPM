@@ -80,7 +80,7 @@
 
   // SINGLE
 	.select2-selection--single {
-    height: 32px;
+    height: auto;
     border-width: 1px 1px 2px 1px;
     border-style: solid;
     border-color: transparent transparent rgba(black, .1) transparent;
@@ -106,20 +106,22 @@
       text-transform: uppercase;
       padding: 0;
       font-weight: $font-weight-bold;
+			line-height: 32px;
+			height: 32px;
 
       .select2-selection__choice {
-        margin-top: 2px;
         display: inline-block;
-        padding: 2px 5px 1px;
-        overflow: hidden;
+				overflow: hidden;
+				max-width: 200px;
+				margin: 5px 0 0;
+				padding: 2px 5px 1px;
+				border: 1px solid $color-1;
+				border-radius: 0;
         color: $color-2;
         text-overflow: ellipsis;
         line-height: normal;
         line-height: 19px;
-        border-radius: 0;
-        border: 1px solid $color-1;
         background-color: $color-3;
-        max-width: 200px;
 
         .select2-selection__clear {
           display: block;

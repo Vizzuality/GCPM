@@ -2,10 +2,12 @@
 
   'use strict';
 
-  App.View.Pickdate = Backbone.View.extend({
+  App.View.PickadateNew = Backbone.View.extend({
 
     defaults: {
     },
+
+    template: HandlebarsTemplates['form/pickadate'],
 
     pickadateOptions: {
       today: false,
@@ -17,7 +19,6 @@
       selectMonths: true,
       editable: false,
       format: 'yyyy-mm-dd',
-
       klass: {
         picker: 'picker-custom',
         holder: 'picker-holder-custom',
@@ -45,45 +46,37 @@
     initialize: function(settings) {
       this.el = settings.el;
       this.options = _.extend({}, this.defaults, settings.options || {});
+      this.state = settings.state;
     },
 
     render: function() {
-      this.setEvents();
+      this.$el.html(this.template(this.options));
+
       this.setPickdate();
+      this.setEvents();
     },
 
     setPickdate: function() {
-      this.$start = this.$el.find('.start-date').pickadate(_.extend({}, this.pickadateOptions, {
-        container: '#pickadate-start-container',
-        min: new Date(1905,1,1),
-        max: new Date(2040,1,1)
-      }));
-      this.$startDatePicker = this.$start.pickadate('picker');
+      this.$picker = this.$el.find('.pickadate-input')
+        .val(this.state.get('value'))
+        .pickadate(_.extend({}, this.pickadateOptions, {
+          container: '#'+this.options.name+'-container',
+          min: this.state.get('min') || undefined,
+          max: this.state.get('max') || undefined
+        }));
 
-      this.$end = this.$el.find('.end-date').pickadate(_.extend({}, this.pickadateOptions, {
-        container: '#pickadate-end-container',
-        min: new Date(1905,1,1),
-        max: new Date(2040,1,1)
-      }));
-      this.$endDatePicker = this.$end.pickadate('picker');
-
-      this.$startDatePicker.on('set', function(e) {
-        if (e.select) {
-          this.$endDatePicker.set('min', this.$startDatePicker.get('select'));
-        }
-      }.bind(this));
+      this.$datePicker = this.$picker.pickadate('picker');
     },
 
     setEvents: function() {
-      this.$startDatePicker.on('set', this.triggerChange.bind(this));
-      this.$endDatePicker.on('set', this.triggerChange.bind(this));
+      this.$datePicker.on('set', this.triggerChange.bind(this));
     },
 
     triggerChange: function(e) {
       if (e.select) {
-        var start = this.$startDatePicker.get('select');
-        var end = this.$endDatePicker.get('select');
-        this.trigger('change', this);
+        this.trigger('change', {
+          value: e.select
+        });
       }
     }
 

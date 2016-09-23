@@ -124,6 +124,10 @@
      */
     _serializeParams: function(params) {
       var uri = new URI();
+      var params = _.pick(params, function(value, key, object){ 
+        return value != null
+      });
+
       uri.search(params);
       return uri.search();
     }
