@@ -12,6 +12,8 @@
       new App.Presenter.Toolbar(params);
       new App.Presenter.FilterForm(params);
       new App.Presenter.Breadcrumbs(params);
+      new App.Presenter.UserNav(params);
+      user_data = null;
     }
 
   });

@@ -12,16 +12,17 @@
   <!-- <li><img src="" class="btn-search"></li> -->
 
   <% if user_signed_in? %>
-    <li class="user-item">
-      <div class="c-user-profile-picture <%= @isProfile ? "-active" : "" %>">
-        <div class="initials"><%= current_user.name ? current_user.name[0] : 'U' %></div>
+    <script>
+      var user_data = <%= "#{@user_data.to_json}".html_safe %>;
+    </script>
+    <li class="user-item" id="UserNav">
+      <div class="c-user-profile-picture <%= @isProfile ? "-active" : "" %> js-userMenu">
+        <div class="initials"></div>
         <!-- <img src="" alt="{User name}'s profile picture'" /> -->
         <!-- Notifications to set (set element on mobile too) -->
-        <% if true %>
-          <div class="c-badge">7</div>
-        <% end %>
+        <div class="c-badge"></div>
       </div>
-      <!-- <div class="c-user-dropdown-menu js-user-dropdown-menu">
+      <div class="c-user-dropdown-menu js-user-dropdown-menu userMenuDropDown">
         <ul class="user-profile menu-section">
           <li class="item"><%= link_to (t 'your_profile'), user_path(current_user), {:class => "item-link", :method => :get} %></li>
           <li class="item"><%= link_to (t 'logout'), destroy_user_session_path, {:class => "item-link", :method => :delete} %></li>
@@ -31,7 +32,9 @@
           <li class="item"><%= link_to (t 'add_project'), new_user_project_path(current_user), {:class => "item-link", :method => :get} %></li>
           <li class="item"><%= link_to (t 'add_event'), new_user_event_path(current_user), {:class => "item-link", :method => :get} %></li>
         </ul>
-      </div> -->
+        <ul class="user-stats menu-section proj-even">
+        </ul>
+      </div>
     </li>
   <% else %>
     <li class="<%= active_page?(user_session_path) ? '-active' : '' %>"><%= link_to (t 'login'), user_session_path %></a></li>
