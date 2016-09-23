@@ -16,7 +16,7 @@
       var user_data = <%= "#{@user_data.to_json}".html_safe %>;
     </script>
     <li class="user-item" id="UserNav">
-      <div class="c-user-profile-picture <%= @isProfile ? "-active" : "" %> userMenu">
+      <div class="c-user-profile-picture <%= @isProfile ? "-active" : "" %> js-userMenu">
         <div class="initials"></div>
         <!-- <img src="" alt="{User name}'s profile picture'" /> -->
         <!-- Notifications to set (set element on mobile too) -->
