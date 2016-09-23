@@ -16,6 +16,7 @@ gem 'active_admin_theme'
 gem 'turbolinks', '~> 5.0.0'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'roo'
+gem 'seed_dump'
 gem 'simple_form'
 
 # Assets pipeline
