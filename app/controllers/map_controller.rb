@@ -27,7 +27,7 @@ class MapController < ApplicationController
 
     @current_type = params[:type] || 'projects'
     @filters = ['projects', 'events']
-    @user_data = JSON.generate(build_user_data)
+    @user_data = current_user.present? ? JSON.generate(build_user_data) : nil
     respond_with(@projects)
 
   end
@@ -37,7 +37,7 @@ class MapController < ApplicationController
     params.permit(:sortby, :user, :start_date, :end_date, project_types:[], countries:[], cancer_types:[], organization_types:[], organizations:[], regions:[], investigators:[])
   end
 
-  def build_user_data 
+  def build_user_data
     {
       :user_project => Project.where("user_id = #{current_user.id}").count,
       :user_event   => Event.where("user_id = #{current_user.id}").count,
