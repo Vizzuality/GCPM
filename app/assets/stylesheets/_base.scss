@@ -61,10 +61,12 @@ ul {
   }
 }
 
-
 a, button {
   &:focus {
     outline: 0;
   }
 }
 
+.flex {
+  display: flex;
+}
