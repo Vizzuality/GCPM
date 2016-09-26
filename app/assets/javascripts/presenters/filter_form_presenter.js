@@ -11,29 +11,37 @@
   _.extend(App.Presenter.FilterForm.prototype, {
 
     initialize: function(params) {
-      this.state = new StateModel();
+      this.state = new StateModel(params);
 
-      var countries  = new App.Presenter.Countries(null, {
+      var countries = new App.Presenter.Countries({
         label: null,
         addNew: false
       });
-      var organizations  = new App.Presenter.Organizations(null, {
+      var organizations = new App.Presenter.Organizations({
         label: null,
         addNew: false
       });
-      var cancerTypes  = new App.Presenter.CancerTypes(null, {
+      var cancerTypes = new App.Presenter.CancerTypes({
         label: null,
         addNew: false
       });
-      var projectTypes = new App.Presenter.ProjectTypes(null, {
+      var projectTypes = new App.Presenter.ProjectTypes({
+        label: null,
+        addNew: false
+      });
+      var organizationsTypes = new App.Presenter.OrganizationTypes({
         label: null,
         addNew: false
       });
 
-      this.inputs = [countries, organizations, cancerTypes, projectTypes];
+      var pickadateStart = new App.Presenter.PickadateStart();
+      var pickadateEnd = new App.Presenter.PickadateEnd();
+
+      this.children = [countries, organizations, cancerTypes, projectTypes, organizationsTypes, pickadateStart, pickadateEnd];
+
       this.modal = new App.View.Modal();
       this.filterForm = new App.View.FilterForm({
-        inputs: this.inputs
+        children: this.children
       });
 
       this.setEvents();
@@ -49,6 +57,7 @@
         this.setState(newState);
         this.closeForm();
       }, this);
+
       this.state.on('change', function() {
         App.trigger('FilterForm:change', this.state.attributes);
       }, this)
@@ -62,6 +71,11 @@
         if (actionName === 'filter') {
           this.openForm();
         }
+      }, this);
+
+      App.on('Modal:loading', function(state) {
+        var loading = state.loading;
+        this.modal.toggleLoader(loading);
       }, this);
     },
 
@@ -89,20 +103,46 @@
     },
 
     /**
-     * Fetch all presenters and render all inputs
+     * Fetch all presenters and render all children
      */
     renderForm: function() {
       if (!this.loaded) {
-        var promises = _.map(this.inputs, function(input) {
-          return input.fetchOptions();
-        });
+        App.trigger('Modal:loading', { loading: true });
+
+        var promises = _.compact(_.map(this.children, function(child) {
+          if (!!child.fetchData) {
+            return child.fetchData();
+          }
+          return null;
+        }));
+
         $.when.apply($, promises).done(function() {
-          this.filterForm.render();
           this.loaded = true;
+          this.renderFormElements();
+          App.trigger('Modal:loading', { loading: false });
         }.bind(this));
+
       } else {
-        this.filterForm.render();
+        this.renderFormElements();
+        App.trigger('Modal:loading', { loading: false });
       }
+    },
+
+    renderFormElements: function() {
+      this.filterForm.render();
+      _.each(this.children, function(child){
+        // Get && set the value from the state thanks to the name
+        // I need to pass the rest of the params because there are some presenters that need other params
+        // Then, inside of each presenter, they will handle its state
+        var state = _.extend({}, this.state.toJSON(), {
+          value: this.state.get(child.defaults.name),
+        })
+
+        child.setState(state, { silent: true });
+
+        // Render the child
+        child.render();
+      }.bind(this));
     }
 
   });

@@ -197,6 +197,11 @@
             }
           }
 
+          &.-active a {
+            opacity: .5;
+            pointer-events: none;
+          }
+
           & a {
             font-weight: $font-weight-bold;
             font-size: $font-size-normal;

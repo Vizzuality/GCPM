@@ -27,15 +27,16 @@
     initialize: function(settings) {
       var opts = (settings && settings.options) || {};
       opts.class = [this.defaults.class, opts.class || ''].join(' ');
+      this.state = settings.state;
       this.options = _.extend({}, this.defaults, opts);
       this.options.select2Options = _.extend({}, this.defaults.select2Options, opts.select2Options);
-
-      this.render();
     },
 
     render: function() {
       this.$el.html(this.template(this.options));
       this.select = this.$el.find('select').select2(this.options.select2Options);
+      this.setValue();
+      return this;
     },
 
     /**
@@ -44,22 +45,18 @@
      * @example
      * [{ name: 'Title', value: 1 }]
      */
+    setValue: function() {
+      $(this.select.selector).val(this.state.get('value')).trigger("change");
+    },
+
     setOptions: function(options) {
       this.options.options = options;
-      this.render();
     },
 
     triggerChange: function(e) {
       var selectedOptions = e.currentTarget.selectedOptions;
-      var currentOptions = _.filter(_.map(selectedOptions, function(option) {
-        return {
-          name: option.innerHTML,
-          value: option.getAttribute('value')
-        };
-      }), function(option) {
-        return !!option.value;
-      });
-      this.trigger('change', currentOptions);
+      var currentOptions = _.pluck(selectedOptions, 'value');
+      this.trigger('change', { value: currentOptions });
     }
 
   });

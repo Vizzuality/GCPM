@@ -18,13 +18,14 @@
       blank: true,
       addNew: true,
       select2Options: {
-        allowClear: true,
         // closeOnSelect: false
         // It solves the closing of the dropdown menu
         // It adds a lot of UX issues
         // - Scroll: On select, scroll will go to first highlighted choice => How to resolve the scroll issue https://github.com/select2/select2/issues/1672#issuecomment-240411031
         // - Click: On each click dropdown will appear and dissapear
 
+        // Use this if you want a single select
+        allowClear: true,
         templateSelection: function (data, container) {
           // Return the placeholder
           if (!data.id) {
@@ -36,14 +37,15 @@
       }
     },
 
-    initialize: function(params, viewSettings) {
+    initialize: function(viewSettings) {
       this.state = new StateModel();
       this.countries = new App.Collection.Countries();
 
       // Creating view
       this.select = new App.View.Select({
         el: '#countries',
-        options: _.extend({}, this.defaults, viewSettings || {})
+        options: _.extend({}, this.defaults, viewSettings || {}),
+        state: this.state
       });
 
       this.setEvents();
@@ -64,7 +66,7 @@
      * Fetch cancer types from API
      * @return {Promise}
      */
-    fetchOptions: function() {
+    fetchData: function() {
       return this.countries.fetch().done(function() {
         var options = this.countries.map(function(type) {
           return {
@@ -76,16 +78,16 @@
       }.bind(this));
     },
 
+    render: function() {
+      this.select.render();
+    },
+
     /**
      * Method to set a new state
      * @param {Object} state
      */
-    setState: function(state) {
-      var result = {};
-      _.each(state, function(s) {
-        return result[s.value] = s.name;
-      });
-      this.state.set(result);
+    setState: function(state, options) {
+      this.state.set(state, options);
     },
 
     /**

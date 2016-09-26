@@ -12,7 +12,7 @@
 
     defaults: {
       multiple: true,
-      name: 'project_type_ids',
+      name: 'project_types',
       label: 'Project types',
       placeholder: 'All project types',
       blank: null,
@@ -27,14 +27,15 @@
 
     },
 
-    initialize: function(params, viewSettings) {
+    initialize: function(viewSettings) {
       this.state = new StateModel();
       this.projectTypes = new App.Collection.ProjectTypes();
 
       // Creating view
       this.select = new App.View.Select({
         el: '#project-types',
-        options: _.extend({}, this.defaults, viewSettings || {})
+        options: _.extend({}, this.defaults, viewSettings || {}),
+        state: this.state
       });
 
       this.setEvents();
@@ -54,7 +55,7 @@
      * Fetch cancer types from API
      * @return {Promise}
      */
-    fetchOptions: function() {
+    fetchData: function() {
       return this.projectTypes.fetch().done(function() {
         var options = this.projectTypes.map(function(type) {
           return {
@@ -66,16 +67,16 @@
       }.bind(this));
     },
 
+    render: function() {
+      this.select.render();
+    },
+
     /**
      * Method to set a new state
      * @param {Object} state
      */
-    setState: function(state) {
-      var result = {};
-      _.each(state, function(s) {
-        return result[s.value] = s.name;
-      });
-      this.state.set(result);
+    setState: function(state, options) {
+      this.state.set(state, options);
     },
 
     /**

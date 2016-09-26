@@ -1,7 +1,7 @@
-<form action="#">
+<form class="c-grid" action="#">
   <div class="row">
     <div class="column small-12">
-      <h2>Filters</h2>
+      <h2 class="c-title">Filters</h2>
     </div>
   </div>
   <div class="row">
@@ -9,7 +9,7 @@
       <div id="countries" class="c-select"></div>
     </div>
     <div class="column small-12 medium-6">
-      {{{organisationsTypes}}}
+      <div id="organization-types" class="c-select"></div>
     </div>
   </div>
   <div class="row">
@@ -25,13 +25,25 @@
       <div id="project-types" class="c-select"></div>
     </div>
     <div class="column small-12 medium-6">
-      {{{foundingSources}}}
+      <div id="funding-sources" class="c-select"></div>
     </div>
   </div>
+
+  <div class="row">
+    <div class="column small-12 medium-6">
+      <div id="pickadate-start" class="c-pickadate"></div>
+    </div>
+    <div class="column small-12 medium-6">
+      <div id="pickadate-end" class="c-pickadate"></div>
+    </div>
+  </div>
+
   <div class="row">
     <div class="column small-12">
-      <button type="button" class="js-filter-form-cancel">Cancel</button>
-      <button type="submit" class="js-filter-form-submit">Apply</button>
+      <div class="c-button-container -j-center -a-center">
+        <button type="button" class="c-button -filled -inverse js-filter-form-cancel">Cancel</button>
+        <button type="submit" class="c-button -filled js-filter-form-submit">Apply</button>
+      </div>
     </div>
   </div>
 </form>
