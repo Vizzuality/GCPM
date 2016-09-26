@@ -41,23 +41,39 @@
   <% end %>
 </ul>
 
-<% if false %>
+
+<!-- Mobile menu -->
 <div class="mobile-drawer js-mobile-drawer">
+
+  <div class="row mobile-menu">
+    <div class="column small-10 logo">
+      <%= link_to(home_path) do %>
+        <h1>Global cancer project map</h1>
+      <% end %>
+    </div>
+    <div class="column small-2 js-hamburger-menu flex align-right">
+      <svg class="icon icon-close">
+        <use xlink:href="#icon-close"></use>
+      </svg>
+    </div>
+  </div>
+
   <ul class="menu">
     <% if user_signed_in? %>
-        <li class="user-avatar">
-          <div class="c-user-profile-picture -big <%= @isProfile ? "-active" : "" %>">
-            <div class="initials">LK</div>
-            <!-- <img src="" alt="{User name}'s profile picture'" /> -->
-            <!-- Notifications to set (set element on mobile too) -->
-            <% if true %>
-              <div class="c-badge">7</div>
-            <% end %>
-          </div>
-        </li>
-      <% else %>
-        <li class="<%= active_page?(user_session_path) ? '-active' : '' %>"><%= link_to (t 'login'), user_session_path %></a></li>
-      <% end %>
+      <li class="user-avatar">
+        <div class="c-user-profile-picture -big <%= @isProfile ? "-active" : "" %>">
+          <div class="initials">LK</div>
+          <!-- <img src="" alt="{User name}'s profile picture'" /> -->
+          <!-- Notifications to set (set element on mobile too) -->
+          <% if true %>
+            <div class="c-badge">0</div>
+          <% end %>
+        </div>
+      </li>
+    <% else %>
+      <br/>
+      <li class="<%= active_page?(user_session_path) ? '-active' : '' %>"><%= link_to (t 'login'), user_session_path %></a></li>
+    <% end %>
     <li class="<%= active_page?(map_path) ? '-active' : '' %>"><%= link_to (t 'map'), map_path %></a></li>
     <li class="<%= active_page?(countries_path) ? '-active' : '' %>"><%= link_to (t 'countries'), countries_path %></a></li>
     <!-- <li class="<%#= active_page?(cancers_path) ? '-active' : '' %>"><%#= link_to (t 'cancer_types'), cancers_path %></a></li> -->
@@ -76,18 +92,3 @@
   <% end %>
 </div>
 
-<div class="wrapper">
-  <div class="mobile-menu">
-    <div class="logo">
-      <%= link_to(home_path) do %>
-        <h1>Global cancer project map</h1>
-      <% end %>
-    </div>
-    <div class="hamburger-menu js-hamburger-menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </div>
-</div>
-<% end %>
