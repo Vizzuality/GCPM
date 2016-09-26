@@ -11,7 +11,8 @@
      */
     routes: {
       'map(?*query)': 'Map#index',
-      'network/:id/projects/new': 'Project#new'
+      'network/:id/projects/new': 'Project#new',
+      'countries': 'Countries#index'
     },
 
     initialize: function() {
@@ -124,7 +125,7 @@
      */
     _serializeParams: function(params) {
       var uri = new URI();
-      var params = _.pick(params, function(value, key, object){ 
+      var params = _.pick(params, function(value, key, object){
         return value != null
       });
 
