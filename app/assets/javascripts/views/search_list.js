@@ -19,9 +19,14 @@
     },
 
     updateData: function(list) {
-      this.list = list && list instanceof Array ?
-        { '': list } :
-        list || {};
+      if (list && list instanceof Array) {
+        this.list = list.length !== 0 ?
+          { '': list } :
+          null;
+      } else {
+        this.list = list ? list : null;
+      }
+
       this.render();
     }
 
