@@ -1,0 +1,130 @@
+.c-map-upperbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-height: 36px;
+  width: 100%;
+  background-color: rgba($color-1, 0.7);
+  z-index: 1;
+
+  ul {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+
+    > li {
+      display: flex;
+      align-items: center;
+      min-height: 36px;
+    }
+  }
+
+  .-map-breadcrumbs > ul {
+
+    > li {
+      display: flex;
+      align-items: center;
+      min-height: 36px;
+
+      > a {
+        padding: .5rem 1rem;
+
+        font-size: 11px;
+        font-weight: bold;
+        line-height: 1;
+        color: $color-3;
+        text-transform: uppercase;
+
+        border: solid 1px $color-3;
+
+      }
+
+      &:after {
+        content: '/';
+        margin: 0 0.5rem;
+        color: $color-3;
+        font-size: 10px;
+        font-weight: bold;
+      }
+      &:last-child {
+        &:after {
+          content: '';
+        }
+
+        > a {
+          color: $color-2;
+          border-color: $color-2;
+        }
+      }
+      &:first-child {
+        > a {
+          color: $color-3;
+          border-color: $color-3;
+        }
+      }
+    }
+  }
+
+  .-map-legends {
+    display: flex;
+    justify-content: flex-end;
+    > ul {
+      font-size: 12px;
+      font-weight: bold;
+      line-height: 1;
+      color: $color-3;
+      text-transform: uppercase;
+      > li {
+        display: flex;
+        align-items: center;
+        min-height: 36px;
+        margin-right: 3em;
+
+        > span {
+
+          &.circle-icon {
+            width: 15px;
+            height: 15px;
+            border-radius: 100%;
+            margin-right: 5px;
+
+            &.-blue {
+              border: 1px solid #006eb8;
+              background-color: #007bcd;
+            }
+
+            &.-purple {
+              border: 1px solid $color-4;
+              background-color: #b85fff;
+            }
+
+            &.-orange {
+              border: 1px solid #e86b16;
+              background-color: $color-6;
+            }
+          }
+        }
+
+        > svg {
+
+          &.marker-icon {
+            height: 20px;
+            width: 20px;
+            margin-right: 5px;
+            &.-orange {
+              fill: $color-6;
+              stroke: #e86b16;
+            }
+            &.-blue {
+              fill: #007bcd;
+              stroke: #006eb8;
+            }
+          }
+        }
+      }
+    }
+  }
+}
