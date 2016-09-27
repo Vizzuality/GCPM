@@ -1,6 +1,7 @@
 (function(App) {
   'use strict'
-  App.Events.trigger('remote:load', {
-    content: "<%= j render(:partial => @current_type) %>"
-  });
+
+  var nextProjects = "<%= escape_javascript(render partial: 'map/' + @current_type ) %>";
+  document.getElementById('content').innerHTML += nextProjects;
+
 })(this.App);

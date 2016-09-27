@@ -11,8 +11,9 @@
       {{#each cancerTypes as |cancerType|}}
         <div class="column small-6 medium-4 list-grid">
           <div class="item">
-            <a class="item-link"
-              href="/cancer-types/{{cancerType.id}}">{{cancerType.name}}</a>
+            <a
+              class="item-link"
+              href="/cancer-types/{{cancerType.id}}?data=projects&sortby=title_asc&global=all&cancer_types={{cancerType.id}}">{{cancerType.name}}</a>
           </div>
         </div>
       {{/each}}
