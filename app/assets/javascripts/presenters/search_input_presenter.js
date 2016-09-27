@@ -10,8 +10,22 @@
 
   _.extend(App.Presenter.SearchInput.prototype, {
 
-    initialize: function() {
+    defaults: {
+      fuseOptions: {
+        caseSensitive: false,
+        includeScore: false,
+        shouldSort: true,
+        threshold: 0.1,
+        location: 0,
+        distance: 100,
+        maxPatternLength: 0,
+        keys: ['name']
+      }
+    },
+
+    initialize: function(params) {
       this.state = new StateModel();
+      this.fullList = params.fullList;
 
       this.searchInput = new App.View.Input({
         el: '#search-input',
@@ -30,18 +44,30 @@
     setSubscriptions: function() {
       this.searchInput.on('keyup', this.handleKeyup.bind(this));
 
-      // this.state.on('change', this.triggerChange.bind(this));
+      this.state.on('change', function() {
+        var filteredCountries = this.state.get('filteredCountries');
+        if (filteredCountries) {
+          App.trigger('SearchInput:change', filteredCountries, this);
+        }
+      }.bind(this));
     },
 
     handleKeyup: function(ev) {
-      // this.state.set({ 'searchValue':  ev.value });
-      App.trigger('SearchInput:change', ev.value);
+      this.searchValue = ev.value;
+      this.getFilteredList();
     },
 
-    triggerChange: function() {
-      // App.trigger('SearchInput:change', this.state.get('searchValue'));
-    }
+    getFilteredList: function() {
+      var result = [];
+      if (this.searchValue !== '') {
+        _.each(this.fullList, function(regionCountries, region) {
+          var fuse = new Fuse(regionCountries, this.defaults.fuseOptions);
+          result = result.concat(fuse.search(this.searchValue));
+        }.bind(this));
 
+        this.state.set({ filteredCountries: result });
+      } else { this.state.set({ filteredCountries: this.fullList }); }
+    }
 
   });
 
