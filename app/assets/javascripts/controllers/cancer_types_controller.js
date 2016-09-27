@@ -2,12 +2,12 @@
 
   'use strict';
 
-  App.Controller.Countries = function() {};
+  App.Controller.CancerTypes = function() {};
 
-  _.extend(App.Controller.Countries.prototype, {
+  _.extend(App.Controller.CancerTypes.prototype, {
 
     index: function(params) {
-      new App.Presenter.CountriesList(params);
+      new App.Presenter.CancerTypesList(params);
       new App.Presenter.UserNav(params);
     },
 

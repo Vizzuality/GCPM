@@ -10,9 +10,12 @@
      * @type {Object}
      */
     routes: {
-      'map(?*query)': 'Map#index',
+      'map(?*query)':             'Map#index',
       'network/:id/projects/new': 'Project#new',
-      'countries': 'Countries#index'
+      'countries':                'Countries#index',
+      'countries/:iso':           'Countries#show',
+      'cancer-types':             'CancerTypes#index',
+      'cancer-types/:id':         'CancerTypes#show'
     },
 
     initialize: function() {

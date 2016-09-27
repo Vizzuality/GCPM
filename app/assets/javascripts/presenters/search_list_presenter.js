@@ -9,10 +9,12 @@
   _.extend(App.Presenter.SearchList.prototype, {
 
     initialize: function(params) {
-
       this.searchList = new App.View.SearchList({
         el: '#search-list',
-        list: params.list
+        list: params.list instanceof Array ?
+          { '': params.list } :
+          params.list,
+        type: params.type
       });
 
       this.setSubscriptions();

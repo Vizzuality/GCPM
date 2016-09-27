@@ -4,17 +4,17 @@
 
   App.View.SearchList = Backbone.View.extend({
 
-    template: HandlebarsTemplates['search_list'],
-
     initialize: function(settings) {
       this.el = settings && settings.el;
       this.list = (settings && settings.list) || {};
+      this.type = (settings && settings.type) || 'countries';
+      this.template = HandlebarsTemplates[this.type + '_list'];
 
       this.render();
     },
 
     render: function() {
-      this.$el.html(this.template({ regions: this.list }));
+      this.$el.html(this.template({ groups: this.list }));
       return this;
     },
 

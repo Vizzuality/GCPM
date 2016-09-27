@@ -4,11 +4,11 @@
 
   var StateModel = Backbone.Model.extend();
 
-  App.Presenter.CountriesList = function() {
+  App.Presenter.CancerTypesList = function() {
     this.initialize.apply(this, arguments);
   };
 
-  _.extend(App.Presenter.CountriesList.prototype, {
+  _.extend(App.Presenter.CancerTypesList.prototype, {
 
     initialize: function(params) {
       this.state = new StateModel();
@@ -18,23 +18,21 @@
     },
 
     renderComponents: function() {
-      this.countriesList = new App.Collection.Countries();
-      this.countriesList.fetch()
+      this.cancerTypesList = new App.Collection.CancerTypes();
+      this.cancerTypesList.fetch()
         .done(function() {
-          this.countries = _.groupBy(
-            _.sortBy(this.countriesList.toJSON(), 'region_name'),
-            'region_name');
-          this.state.set({ 'countries': this.countries });
+          this.cancerTypes = _.sortBy(this.cancerTypesList.toJSON(), 'name');
+          this.state.set({ 'cancerTypes': this.cancerTypes });
 
           this.searchInput = new App.Presenter.SearchInput({
-            fullList: this.countries,
+            fullList: this.cancerTypes,
             options: {
-              placeholder: 'Type the country name_'
+              placeholder: 'Type the cancer type name_'
             }
           });
           this.searchList = new App.Presenter.SearchList({
-            list: this.countries,
-            type: 'countries'
+            list: this.cancerTypes,
+            type: 'cancer_types'
           });
         }.bind(this));
     },
@@ -42,12 +40,12 @@
     setSubscriptions: function() {
       App.on('SearchInput:change', this.handleSearchValue.bind(this));
       this.state.on('change', function() {
-        App.trigger('SearchList:change', this.state.get('filteredCountries'));
+        App.trigger('SearchList:change', this.state.get('filteredCancerTypes'));
       }.bind(this));
     },
 
-    handleSearchValue: function(filteredCountries) {
-      this.state.set({ filteredCountries: filteredCountries });
+    handleSearchValue: function(filteredCancerTypes) {
+      this.state.set({ filteredCancerTypes: filteredCancerTypes });
     }
 
   });

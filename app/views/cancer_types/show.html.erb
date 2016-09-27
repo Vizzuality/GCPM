@@ -1,0 +1,108 @@
+<%
+  @CANCER_TYPE_ID = false
+  if (@cancer_type.id)
+    @CANCER_TYPE_ID = @cancer_type.id
+  end
+%>
+<script> var CANCER_TYPE_ID = <%= @CANCER_TYPE_ID %>;</script>
+<section class="country">
+  <div class="c-section-intro -color-4">
+    <div id="map" class="map c-map -detail">
+      <div class="c-map-intro-legend">
+        <ul class="legend-list">
+          <li class="item"><div class="icon -first"></div><%= t 'project_leads' %></li>
+          <li class="item"><div class="icon -second"></div><%= t 'collaborators' %></li>
+        </ul>
+        <div class="viel"></div>
+      </div>
+    </div>
+    <div class="intro-info">
+      <div class="info">
+        <h1 class="c-title -big"><%= @cancer_type.name %></h1>
+        <div class="c-numbers-grid">
+          <div class="number-info">
+            <label class="title">Projects</label>
+            <p class="number"><%= @projectsCount %></p>
+          </div>
+          <div class="number-info">
+            <label class="title">Organizations</label>
+            <p class="number"> - </p>
+          </div>
+          <div class="number-info">
+            <label class="title">Events</label>
+            <p class="number"><%= @eventsCount %></p>
+          </div>
+          <div class="number-info">
+            <label class="title">Daly datasets</label>
+            <p class="number">0</p>
+          </div>
+        </div>
+      </div>
+      <div class="c-buttons-group">
+        <a href="#" class="c-button -inverse -filled btn-large">Follow</a>
+        <div class="row-buttons">
+          <a href="#" class="c-button -inverse">+ Project</a>
+          <a href="#" class="c-button -inverse">+ Post</a>
+          <a href="#" class="c-button -inverse">+ Event</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Data tab not showing at the moment  -->
+  <!-- <div class="country-data">
+    <div class="c-legend-map-container">
+      <div class="c-map"></div>
+
+      <div class="c-map-legend">
+        <h3 class="c-title -normal">Radiothearpy coverage and untreated deaths in pain</h3>
+        <ul class="legend">
+          <li class="item"><div class="legend-icon -color-1"></div>To be defined</li>
+          <li class="item"><div class="legend-icon -color-2"></div>To be defined</li>
+          <li class="item"><div class="legend-icon -color-3"></div>To be defined</li>
+          <li class="item"><div class="legend-icon -color-4"></div>To be defined</li>
+          <li class="item"><div class="legend-icon -color-5"></div>To be defined</li>
+        </ul>
+      </div>
+    </div>
+  </div> -->
+
+  <% if @projects && @projects.size() > 0 %>
+  <div class="c-card-grid" id="content">
+  <!-- Project cards -->
+  <% @projects.each do |p| %>
+    <div class="card -mobile-large-1-2 -tablet-1-3">
+      <h4 class="c-card-title -border-2">
+        <a href="/map?investigators[]=<%= p.project_leads.first.try(:id) %>" class="tag">
+          <%= p.project_leads.first.try(:name) %>
+        </a>
+      </h4>
+      <%= link_to project_path(p.id), { :class => "link" } do %>
+        <h3 class="c-title"><%= p.title %></h3>
+      <% end %>
+      <!-- Project summary replaced by cancer tags -->
+      <div class="c-tag-list -closer">
+        <% p.cancer_types.each do |t| %>
+        <a href="/map?cancer_types[]=<%= t.id %>" class="tag"><%= t.name %></a>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <% @realLimit = params['limit'] ? params['limit'].to_i : 1 %>
+  <% if (@realLimit * @limit) < @projectsCount %>
+    <div class="c-pagination-button">
+      <%= link_to (t 'show_more'),
+              map_path(request.query_parameters.merge({ limit: (params['limit'] ? params['limit'].to_i + 1 : 2 )  })),
+              class: "circle-button",
+              remote: true,
+              data: {magic: true} %>
+    </div>
+  </div>
+  <% end %>
+<% else %>
+  <div class="c-no-items -padding wrapper">
+    <p>No projects</p>
+  </div>
+<% end %>
+</section>
