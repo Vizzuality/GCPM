@@ -16,6 +16,7 @@
         <div class="viel"></div>
       </div>
     </div>
+
     <div class="intro-info">
       <div class="info">
         <h1 class="c-title -big"><%= @cancer_type.name %></h1>
@@ -44,6 +45,22 @@
           <a href="#" class="c-button -inverse">+ Project</a>
           <a href="#" class="c-button -inverse">+ Post</a>
           <a href="#" class="c-button -inverse">+ Event</a>
+        </div>
+      </div>
+    </div>
+    <div class="section-tabnav">
+      <div id="dataTabNav" class="c-tabnav">
+        <div class="row collapse">
+          <div class="column small-12">
+            <ul class="tabnav-list">
+               <% @filters.each do |filter| %>
+                <%# @class = !params['type'] and filter == "projects" ? "-active" : active_param?('type', filter) %>
+                <li class="tabnav-item">
+                  <a class="js-btn-mapmenu-type" href="#" data-type="<%= filter %>"><%= t (filter) %></a>
+                </li>
+              <% end %>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

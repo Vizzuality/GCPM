@@ -6,6 +6,7 @@ class CancerTypesController < ApplicationController
   end
 
   def show
+    @filters = ['projects', 'events']
     @limit = 15
     @projects      = Project.fetch_all(cancer_types: @cancer_type.id).order('created_at DESC').limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
     @projectsCount = Project.fetch_all(cancer_types: @cancer_type.id).length

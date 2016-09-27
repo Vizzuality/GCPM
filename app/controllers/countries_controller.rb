@@ -6,6 +6,7 @@ class CountriesController < ApplicationController
   end
 
   def show
+    @filters = ['projects', 'events']
     @limit = 15
     @projects      = Project.fetch_all(countries: @country.id).order('created_at DESC').limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
     @projectsCount = Project.fetch_all(countries: @country.id).length
@@ -19,6 +20,6 @@ class CountriesController < ApplicationController
   private
 
     def set_country
-      @country = Country.find_by(country_iso: params[:iso])
+      @country = Country.find_by(country_iso_3: params[:iso])
     end
 end

@@ -9,7 +9,7 @@
       {{#each countries as |country|}}
         <div class="column small-6 medium-4 list-grid">
           <div class="item">
-            <a class="item-link" href="/countries/{{country.country_iso}}">{{country.name}}</a>
+            <a class="item-link" href="/countries/{{country.country_iso_3}}?data=projects&sortby=title_asc&global=all&region={{country.region_iso}}&country={{country.country_iso_3}}">{{country.name}}</a>
           </div>
         </div>
       {{/each}}

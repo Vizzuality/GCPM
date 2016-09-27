@@ -1,5 +1,5 @@
 class OrganizationArraySerializer < ActiveModel::Serializer
-  attributes :id, :name, :country_iso, :region_name, :region_iso
+  attributes :id, :name, :country_iso_3, :region_name, :region_iso
 
   def name
     object.try(:name) || object.try(:country_name)
@@ -13,7 +13,7 @@ class OrganizationArraySerializer < ActiveModel::Serializer
     object.try(:region_iso)
   end
 
-  def country_iso
-    object.try(:country_iso)
+  def country_iso_3
+    object.try(:country_iso_3)
   end
 end
