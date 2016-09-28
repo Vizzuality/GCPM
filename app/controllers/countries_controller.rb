@@ -6,7 +6,7 @@ class CountriesController < ApplicationController
   end
 
   def show
-    @filters = ['projects', 'events']
+    @filters = %w(projects events)
     @limit = 15
     @projects      = Project.fetch_all(countries: @country.id).order('created_at DESC').limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
     @projectsCount = Project.fetch_all(countries: @country.id).length
