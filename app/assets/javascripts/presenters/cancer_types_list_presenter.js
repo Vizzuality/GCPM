@@ -27,7 +27,7 @@
           this.searchInput = new App.Presenter.SearchInput({
             fullList: this.cancerTypes,
             options: {
-              placeholder: 'Type the cancer type name_'
+              placeholder: 'Type the cancer type_'
             }
           });
           this.searchList = new App.Presenter.SearchList({
