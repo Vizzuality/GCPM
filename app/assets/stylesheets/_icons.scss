@@ -1,0 +1,22 @@
+
+.icon-menu {
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  cursor: pointer;
+
+  @media #{$mq-medium} {
+    display: none;
+  }
+
+  &:hover { fill: $color-1; }
+}
+
+.icon-close {
+  width: 15px;
+  height: 15px;
+  margin-top: 4px;
+  cursor: pointer;
+
+  &:hover { fill: $color-1; }
+}
