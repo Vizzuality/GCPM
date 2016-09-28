@@ -17,4 +17,4 @@
     "HandlebarsTemplates": true
   },
   "extends": "eslint:recommended"
-};
+}
