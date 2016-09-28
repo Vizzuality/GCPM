@@ -1,22 +1,24 @@
-
-.icon-menu {
-  width: 20px;
-  height: 20px;
-  margin-top: 4px;
+.c-icon {
   cursor: pointer;
 
-  @media #{$mq-medium} {
-    display: none;
+  &.-smaller {
+    width: 10px;
+    height: 10px;
   }
 
-  &:hover { fill: $color-1; }
-}
+  &.-small {
+    width: 15px;
+    height: 15px;
+  }
 
-.icon-close {
-  width: 15px;
-  height: 15px;
-  margin-top: 4px;
-  cursor: pointer;
+  &.-medium {
+    width: 20px;
+    height: 20px;
+  }
 
-  &:hover { fill: $color-1; }
+  &:hover {
+    &.-hov-1 { fill: $color-1; }
+    &.-hov-opc { opacity: .5; }
+  }
+
 }
