@@ -10,13 +10,13 @@ ActiveAdmin.register LayerGroup do
       end
     end
     f.inputs 'Layer Group Details' do
-    f.input :name
-    f.input :slug
-    f.input :active
-    f.input :order
-    f.input :info
-    f.input :layer_group_type, as: :select, collection: %w{group category subcategory subgroup}
-    f.input :super_group
+      f.input :name
+      f.input :slug
+      f.input :active
+      f.input :order
+      f.input :info
+      f.input :layer_group_type, as: :select, collection: %w{group category subcategory subgroup}
+      f.input :super_group
     end
     f.actions
   end

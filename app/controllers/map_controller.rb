@@ -33,15 +33,21 @@ class MapController < ApplicationController
   end
 
   private
-  def projects_params
-    params.permit(:sortby, :user, :start_date, :end_date, project_types:[], countries:[], cancer_types:[], organization_types:[], organizations:[], regions:[], investigators:[])
-  end
 
-  def build_user_data
-    {
-      :user_project => Project.where("user_id = #{current_user.id}").count,
-      :user_event   => Event.where("user_id = #{current_user.id}").count,
-      :user_initial => current_user.name ? current_user.name[0].upcase : current_user.email ? current_user.email[0].upcase : 'U'
-    }
-  end
+    def projects_params
+      params.permit(:sortby, :user, :start_date, :end_date, project_types:[], countries:[], cancer_types:[], organization_types:[], organizations:[], regions:[], investigators:[])
+    end
+
+    def build_user_data
+      if current_user.name && current_user.email
+        user_initial = current_user.email[0].upcase
+      else
+        user_initial = 'U'
+      end
+      {
+        user_project: Project.where("user_id = #{current_user.id}").count,
+        user_event: Event.where("user_id = #{current_user.id}").count,
+        user_initial: user_initial
+      }
+    end
 end

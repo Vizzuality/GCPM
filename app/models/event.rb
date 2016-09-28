@@ -39,8 +39,8 @@ class Event < ApplicationRecord
   end
 
   scope :by_user,      -> user      { where('events.user_id = ?', user ) }
-  scope :by_countries, -> countries { joins('inner join countries on events.country = countries.country_name').where(countries: {id: countries})  }
-  scope :by_regions,   -> regions  { joins('inner join countries on events.country = countries.country_name').where(countries: {region_iso: regions}) }
+  scope :by_countries, -> countries { joins('inner join countries on events.country = countries.country_name').where(countries: { id: countries })  }
+  scope :by_regions,   -> regions  { joins('inner join countries on events.country = countries.country_name').where(countries: { region_iso: regions }) }
   scope :by_start_date, -> start_date          { where('events.start_date > ?', start_date ) }
   scope :by_end_date,   -> end_date            { where('events.end_date < ?', end_date ) }
 
