@@ -24,8 +24,8 @@
     },
 
     initialize: function(settings) {
-      var opts = settings && settings.options;
-      this.options = _.extend({}, this.defaults, opts || {});
+      var opts = (settings && settings.options) || {};
+      this.options = _.extend({}, this.defaults, opts);
       this.createMap();
     },
 

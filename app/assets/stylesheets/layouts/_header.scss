@@ -1,22 +1,15 @@
 .l-header {
   position: relative;
-  padding: 12px 60px;
-
+  padding-top: 12px;
+  padding-bottom: 12px;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15), 0 1px 0 0 rgba(0, 0, 0, 0.05);
-
   z-index: 3;
 
-  .desktop-menu {
+  .c-main-nav {
     display: none;
 
-    @media screen and (min-width: $breakpoint-tablet) {
-      display: block;
-    }
-  }
-
-  .mobile-menu, .mobile-drawer {
-    @media screen and (min-width: $breakpoint-tablet) {
-      display: none;
+    @media #{$mq-medium} {
+      display: flex;
     }
   }
 
@@ -25,7 +18,7 @@
     height: 48px;
     max-width: 259px;
 
-    background: asset-url('logo@2x.png') no-repeat left top;
+    background: asset-url('logo@2x.png') no-repeat left center;
     background-size: 100%;
 
     a {
@@ -37,18 +30,34 @@
       margin: 0;
     }
   }
-}
 
-.c-header {
+  .icon-menu {
+    width: 20px;
+    height: 20px;
+    margin-top: 4px;
+    cursor: pointer;
+
+    @media #{$mq-medium} {
+      display: none;
+    }
+
+    &:hover { fill: $color-1; }
+  }
+
+  .icon-close {
+    width: 15px;
+    height: 15px;
+    margin-top: 4px;
+    cursor: pointer;
+
+    &:hover { fill: $color-1; }
+  }
+
+
   .desktop-menu {
-    display: none;
+    display: block;
 
     @media screen and (min-width: 870px) {
-      display: block;
-      // justify-content: space-between;
-      // align-items: center;
-      padding-top: 12px;
-      padding-bottom: 12px;
 
       .logo {
         margin: 0;
@@ -59,7 +68,7 @@
           height: 46px;
           margin: 0;
           text-indent: -10000px;
-          background: asset-url('logo@2x.png') no-repeat left top;
+          background: asset-url('logo@2x.png') no-repeat left center;
           background-size: 100%;
         }
       }
@@ -82,7 +91,7 @@
 
           > a {
             color: $color-2;
-            line-height: 70px;
+            line-height: 35px;
           }
 
           &.-active {
@@ -129,39 +138,6 @@
 
     @media screen and (min-width: 870px) {
       display: none;
-    }
-
-    .logo {
-      margin: 0;
-      flex-basis: 180px;
-      flex-shrink: 0;
-
-      h1 {
-        height: 35px;
-        margin: 0;
-        text-indent: calc(-100vw - 1000px);
-        background: asset-url('logo@2x.png') no-repeat left top;
-        background-size: 100%;
-      }
-    }
-
-    .hamburger-menu {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      height: 17px;
-      flex-basis: 20px;
-      flex-shrink: 0;
-      cursor: pointer;
-      z-index: 1003;
-      -webkit-tap-highlight-color: transparent;
-
-      > span {
-        display: block;
-        height: 2px;
-        background-color: $color-1;
-        transition: opacity .3s ease-out, transform .3s ease-in-out;
-      }
     }
   }
 
@@ -215,7 +191,14 @@
               position: absolute;
               top: 5px;
               right: 6px;
+              left: auto;
+              width: 30px;
             }
+          }
+
+          &.-active a {
+            opacity: .5;
+            pointer-events: none;
           }
 
           & a {
@@ -229,25 +212,6 @@
             }
           }
         }
-      }
-
-      /* The hamburger icon transform into a close one */
-      & + .wrapper .hamburger-menu span {
-
-        &:first-of-type {
-          transform: translateY(7.5px) rotate(-45deg);
-          transform-origin: center;
-        }
-
-        &:nth-of-type(2) {
-          opacity: 0;
-        }
-
-        &:last-of-type {
-          transform: translateY(-7.5px) rotate(45deg);
-          transform-origin: center;
-        }
-
       }
     }
   }

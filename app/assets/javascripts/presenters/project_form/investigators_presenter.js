@@ -10,10 +10,10 @@
 
   _.extend(App.Presenter.Investigators.prototype, {
 
-    initialize: function(params) {
+    initialize: function() {
       this.state = new StateModel();
       this.investigators = new App.Collection.Investigators();
-      this.investigators.url = '/api/investigators?token=' + AUTH_TOKEN;
+      this.investigators.url = '/api/investigators?token=' + window.AUTH_TOKEN;
       this.investigatorsId = 0;
 
       this.cache();
@@ -93,7 +93,7 @@
 
     renderOrganizations: function(investigatorId) {
       $.ajax({
-        url: '/api/investigators/' + investigatorId + '?token=' + AUTH_TOKEN,
+        url: '/api/investigators/' + investigatorId + '?token=' + window.AUTH_TOKEN,
         method: 'GET',
         success: function(data) {
           var organizations = data.organizations.map(function(organization) {

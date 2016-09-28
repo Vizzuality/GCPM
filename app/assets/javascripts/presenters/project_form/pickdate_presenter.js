@@ -10,7 +10,7 @@
 
   _.extend(App.Presenter.Pickdate.prototype, {
 
-  	initialize: function(params) {
+    initialize: function() {
       this.state = new StateModel();
       this.pickdate = new App.View.Pickdate({el: '.pickdate'});
     },

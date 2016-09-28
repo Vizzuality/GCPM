@@ -22,8 +22,8 @@
     template: HandlebarsTemplates['form/input'],
 
     initialize: function(settings) {
-      var opts = (settings && settings.options) || {};
-      opts.class = [this.defaults.class, opts.class || ''].join(' ');
+      var opts = (settings && settings.options)||{};
+      opts.class = [this.defaults.class, opts.class||''].join(' ');
       this.options = _.extend({}, this.defaults, opts);
 
       this.$el.addClass(this.options.class);

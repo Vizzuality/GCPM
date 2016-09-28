@@ -22,7 +22,7 @@
       this.$el.find('.proj-even').append(this.template({user_data: this.user_data || {}}));
     },
 
-    toggleMenu: function(e) {
+    toggleMenu: function() {
       this.$el.find('.userMenuDropDown').toggle();
     }
 

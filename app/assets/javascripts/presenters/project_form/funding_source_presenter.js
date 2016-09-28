@@ -10,7 +10,7 @@
 
   _.extend(App.Presenter.FundingSources.prototype, {
 
-    initialize: function(params) {
+    initialize: function() {
       this.state = new StateModel();
       this.fundingSources = new App.Collection.FundingSources();
       this.fundingSourcesSelect = new App.View.Select({

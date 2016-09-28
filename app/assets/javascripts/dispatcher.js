@@ -15,7 +15,9 @@
 
   _.extend(App.Dispatcher.prototype, {
 
-    initialize: function() {},
+    initialize: function() {
+      this.commonActions();
+    },
 
     /**
      * Facilitates mapping URLs to controller actions
@@ -58,6 +60,10 @@
         typeof controller[actionName] === 'function') {
         return controller[actionName];
       }
+    },
+
+    commonActions: function() {
+      new App.View.MobileHeader();
     }
 
   });

@@ -10,7 +10,7 @@
 
   _.extend(App.Presenter.WebsiteInput.prototype, {
 
-    initialize: function(params) {
+    initialize: function() {
       this.state = new StateModel();
       this.websiteInput = new App.View.Input({
         el: '#project-website',
