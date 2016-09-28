@@ -48,8 +48,8 @@
 
     renderToolbar: function() {
       var data = this.state.attributes;
-      if (USER_ID) {
-        data.userId = USER_ID;
+      if (window.USER_ID) {
+        data.userId = window.USER_ID;
       }
       this.toolbar.render(data);
       App.trigger('Toolbar:change', this.state.attributes);

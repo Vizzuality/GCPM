@@ -6,7 +6,7 @@
 
     initialize: function(settings) {
       this.el = settings.el;
-      this.options = _.extend({}, this.defaults, settings.options || {});
+      this.options = _.extend({}, this.defaults, settings.options);
       this.render();
       this.setEvents();
     },
@@ -19,7 +19,7 @@
       this.$el.find('.submit').on('click', this.triggerClick.bind(this));
     },
 
-    triggerClick: function(e) {
+    triggerClick: function() {
       this.trigger('click', this);
     }
 

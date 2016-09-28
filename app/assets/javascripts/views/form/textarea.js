@@ -19,7 +19,7 @@
     template: HandlebarsTemplates['form/textarea'],
 
     initialize: function(settings) {
-      var opts = (settings && settings.options) || {};
+      var opts = settings && settings.options;
       opts.class = [this.defaults.class, opts.class || ''].join(' ');
       this.options = _.extend({}, this.defaults, opts);
 

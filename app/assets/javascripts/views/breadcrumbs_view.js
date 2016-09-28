@@ -11,11 +11,11 @@
     template: HandlebarsTemplates['breadcrumbs'],
 
     initialize: function(settings) {
-      this.data = (settings && settings.data) || [];
+      this.data = (settings && settings.data)||[];
     },
 
     updateData: function(data) {
-      this.data = data || [];
+      this.data = data||[];
       this.render();
     },
 

@@ -73,7 +73,6 @@
         fragment = Backbone.history.getFragment(),
         routes = _.pairs(Router.routes),
         route = null,
-        params = null,
         matched;
 
       matched = _.find(routes, function(handler) {
@@ -84,7 +83,7 @@
       if(matched) {
         // NEW: Extracts the params using the internal
         // function _extractParameters
-        params = Router._extractParameters(route, fragment);
+        // params = Router._extractParameters(route, fragment);
         route = matched[1];
       }
 
@@ -125,7 +124,8 @@
      */
     _serializeParams: function(params) {
       var uri = new URI();
-      var params = _.pick(params, function(value, key, object){ 
+
+      params = _.pick(params, function(value) {
         return value != null
       });
 
