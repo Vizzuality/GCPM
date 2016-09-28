@@ -13,6 +13,8 @@ class CancerTypesController < ApplicationController
     @events = Event.fetch_all(cancer_types: @cancer_type.id).order('created_at DESC').limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
     @eventsCount = Event.fetch_all(cancer_types: @cancer_type.id).length
 
+    @current_type = params[:data] || 'projects'
+
     # @organizations  = Organization.fetch_all(cancer_types: @cancer_type.id).order('created_at DESC').limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
     # @organizationsCount = @organizations.length
   end

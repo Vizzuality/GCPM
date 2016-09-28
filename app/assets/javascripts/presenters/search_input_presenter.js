@@ -34,13 +34,14 @@
         options: {
           name: 'title',
           class: 'js-search-list',
-          inputClass: 'c-title -bigger -bold',
+          inputClass: 'c-title -bigger -bold -no-brd',
           type: 'text',
           placeholder: params.options.placeholder
         }
       });
 
       this.setSubscriptions();
+      this.focusInput();
     },
 
     setSubscriptions: function() {
@@ -52,6 +53,10 @@
           App.trigger('SearchInput:change', filteredList, this);
         }
       }.bind(this));
+    },
+
+    focusInput: function() {
+      this.searchInput.$el.find('input').focus();
     },
 
     handleKeyup: function(ev) {

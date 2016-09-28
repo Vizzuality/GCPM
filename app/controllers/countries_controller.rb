@@ -13,6 +13,8 @@ class CountriesController < ApplicationController
     @events = Event.fetch_all(countries: @country.id).order('created_at DESC').limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
     @eventsCount = Event.fetch_all(countries: @country.id).length
 
+    @current_type = params[:data] || 'projects'
+
     # @organizations  = Organization.fetch_all(countries: @country.id).order('created_at DESC').limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
     # @organizationsCount = @organizations.length
   end
