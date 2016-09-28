@@ -11,8 +11,12 @@
      * @type {Object}
      */
     routes: {
-      'map(?*query)': 'Map#index',
-      'network/:id/projects/new': 'Project#new'
+      'map(?*query)':             'Map#index',
+      'network/:id/projects/new': 'Project#new',
+      'countries':                'Countries#index',
+      'countries/:iso':           'Countries#show',
+      'cancer-types':             'CancerTypes#index',
+      'cancer-types/:id':         'CancerTypes#show'
     },
 
     initialize: function() {
@@ -124,7 +128,6 @@
      */
     _serializeParams: function(params) {
       var uri = new URI();
-
       params = _.pick(params, function(value) {
         return value != null
       });

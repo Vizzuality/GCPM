@@ -1,4 +1,4 @@
-module.exports = {
+{
   "rules": {
     "no-console": ["error", {
       "allow": ["warn", "error", "info"]
@@ -17,4 +17,4 @@ module.exports = {
     "HandlebarsTemplates": true
   },
   "extends": "eslint:recommended"
-};
+}

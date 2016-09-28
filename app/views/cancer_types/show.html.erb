@@ -1,10 +1,10 @@
 <%
-  @COUNTRY_ID = false
-  if (@country.id)
-    @COUNTRY_ID = @country.id
+  @CANCER_TYPE_ID = false
+  if (@cancer_type.id)
+    @CANCER_TYPE_ID = @cancer_type.id
   end
 %>
-<script> var COUNTRY_ID = <%= @COUNTRY_ID %>;</script>
+<script> var CANCER_TYPE_ID = <%= @CANCER_TYPE_ID %>;</script>
 <section class="country">
   <div class="c-section-intro -color-4">
     <div id="map" class="map c-map -detail">
@@ -16,9 +16,10 @@
         <div class="viel"></div>
       </div>
     </div>
+
     <div class="intro-info">
       <div class="info">
-        <h1 class="c-title -big"><%= @country.country_name %></h1>
+        <h1 class="c-title -big"><%= @cancer_type.name %></h1>
         <div class="c-numbers-grid">
           <div class="number-info">
             <label class="title">Projects</label>
@@ -100,6 +101,4 @@
       </div>
     <% end %>
   </div>
-
-
 </section>

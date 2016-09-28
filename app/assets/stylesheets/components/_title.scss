@@ -67,4 +67,9 @@
     margin-top: 55px;
     margin-bottom: 55px;
   }
+
+  &.-no-brd {
+    border: 0;
+    outline: none;
+  }
 }

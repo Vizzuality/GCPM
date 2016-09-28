@@ -14,7 +14,9 @@
     },
 
     events: {
-      'blur input': 'triggerChange'
+      'blur input': 'triggerChange',
+      'keyup input': 'triggerKeyup',
+      'click input': 'triggerClick'
     },
 
     template: HandlebarsTemplates['form/input'],
@@ -38,6 +40,18 @@
         name: e.currentTarget.name,
         value: e.currentTarget.value
       });
+    },
+
+    triggerKeyup: function(e) {
+      this.trigger('keyup', {
+        name: e.currentTarget.name,
+        value: e.currentTarget.value
+      });
+    },
+
+    triggerClick: function(e) {
+      if (!e.currentTarget.value) return;
+      e.target.setSelectionRange(0, e.target.value.length);
     }
 
   });

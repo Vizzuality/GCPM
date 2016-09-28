@@ -5,6 +5,9 @@
   <li class="<%= active_page?(countries_path) ? '-active' : '' %>">
     <%= link_to (t 'countries'), countries_path %></a>
   </li>
+  <li class="<%= active_page?(cancers_path) ? '-active' : '' %>">
+    <%= link_to (t 'cancer_types'), cancers_path %></a>
+  </li>
   <li class="<%= active_page?(about_path) ? '-active' : '' %>">
     <%= link_to (t 'about'), about_path %></a>
   </li>
@@ -40,7 +43,6 @@
     <li class="<%= active_page?(user_session_path) ? '-active' : '' %>"><%= link_to (t 'login'), user_session_path %></a></li>
   <% end %>
 </ul>
-
 
 <!-- Mobile menu -->
 <div class="mobile-drawer js-mobile-drawer">
