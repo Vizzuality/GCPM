@@ -51,16 +51,6 @@
     </div>
   <% end %>
 
-  <% @realLimit = params['limit'] ? params['limit'].to_i : 1 %>
-  <% if (@realLimit * @limit) < @projectsCount %>
-    <div class="c-pagination-button">
-      <%= link_to (t 'show_more'),
-              map_path(request.query_parameters.merge({ limit: (params['limit'] ? params['limit'].to_i + 1 : 2 )  })),
-              class: "circle-button",
-              remote: true,
-              data: {magic: true} %>
-    </div>
-  <% end %>
 <% else %>
   <div class="c-no-items -padding wrapper">
     <p>No projects</p>

@@ -1,3 +1,4 @@
+/* global PruneCluster, PruneClusterForLeaflet */
 (function(App) {
 
   'use strict';
@@ -27,7 +28,7 @@
       fetchParams.type = params.data;
 
       locations
-        .fetch({ data: fetchParams || {} })
+        .fetch({ data: fetchParams })
         .done(function() {
           var layer;
           var geoJson = locations.toGeoJSON();
@@ -92,7 +93,7 @@
       }
       var southWest = L.latLng(bounds.minLat, bounds.maxLng);
       var northEast = L.latLng(bounds.maxLat, bounds.minLng);
-      return L.latLngBounds(southWest, northEast);;
+      return L.latLngBounds(southWest, northEast);
     };
 
     _.each(geoJson.features, function(feature) {

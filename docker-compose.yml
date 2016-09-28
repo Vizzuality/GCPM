@@ -1,0 +1,22 @@
+version: '2'
+services:
+  db:
+    image: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - .:/var/lib/postgresql
+  web:
+    build: .
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
+    env_file: .env
+    environment:
+      - GCPM_DATABASE_HOST=db
+    container_name: gcpm
+    depends_on:
+      - db
+    links:
+      - db
