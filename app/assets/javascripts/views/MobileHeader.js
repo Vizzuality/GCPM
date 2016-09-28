@@ -38,7 +38,7 @@
     },
 
     // UI Events
-    setHidden: function(e) {
+    setHidden: function() {
       var hidden = this.model.get('hidden');
       this.model.set('hidden', !hidden);
     },
