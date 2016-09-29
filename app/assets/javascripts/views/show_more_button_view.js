@@ -10,7 +10,7 @@
 
     template: HandlebarsTemplates['show_more_button'],
 
-    initialize: function(settings) {
+    initialize: function() {
       this.render();
       this.page = 1;
     },
