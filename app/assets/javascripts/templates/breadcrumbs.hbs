@@ -5,9 +5,10 @@
         <span class="arrow-tail"></span>
       <a href="{{link}}"
         class="js-breadcrumb"
-        {{#if value}}data-value="{{value}}"{{/if}}
+         name={{name}}
+        {{#if value}}data-value="{{name}}"{{/if}}
       > <span class="globe-icon"><svg><use xlink:href="#icon-globe"</svg></span>
-        {{name}}</a>
+        {{value}}</a>
         <span class="rhombus"></span>
 
     </li>
