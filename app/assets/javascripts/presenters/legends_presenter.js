@@ -53,7 +53,11 @@
             ];
           break;
         case 'events':
-          data = [{ orangeCircle: true, description: 'Events Per Region' }];
+          data = [
+            { orangeCircle: true, description: 'Events Per Region', number: '1,387' },
+            { orangeSquare: true, description: 'Public Events', number: '1,829' },
+            { whiteSquare: true, description: 'Private Events', number: '16,322' }
+            ];
           break;
         case 'people':
           break;
