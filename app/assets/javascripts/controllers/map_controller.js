@@ -13,6 +13,7 @@
       new App.Presenter.FilterForm(params);
       new App.Presenter.Breadcrumbs(params);
       new App.Presenter.UserNav(params);
+      new App.Presenter.ShowMoreButton(params);
     }
 
   });
