@@ -1,0 +1,86 @@
+.c-legends-bar {
+  margin: 0;
+  height: 211px;
+  background-color: rgba($color-1, 0.1);
+  display: flex;
+  align-items: center;
+  .-legends-row {
+    display: flex;
+    align-content: space-between;
+    font-family: $font-family-1;
+    font-weight: $font-weight-bold;
+    color: $color-2;
+
+    .legend {
+      font-size: $font-size-x-small;
+      line-height: 1;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: center;
+
+      > span {
+
+        &.circle-icon {
+          width: 15px;
+          height: 15px;
+          border-radius: 100%;
+          margin-right: 5px;
+
+          &.-blue {
+            border: 1px solid #006eb8;
+            background-color: #007bcd;
+          }
+
+          &.-purple {
+            border: 1px solid $color-4;
+            background-color: #b85fff;
+          }
+
+          &.-orange {
+            border: 1px solid #e86b16;
+            background-color: $color-6;
+          }
+        }
+
+        &.square-icon {
+          width: 15px;
+          height: 15px;
+          margin-right: 5px;
+
+          &.-blue {
+            border: 1px solid rgba($color-2, 0.2);
+            background-color: $color-1;
+          }
+
+          &.-white {
+            border: 1px solid rgba($color-7, 0.2);
+            background-color: $color-3;
+          }
+        }
+      }
+
+      > svg {
+
+        &.marker-icon {
+          height: 20px;
+          width: 20px;
+          margin-right: 5px;
+          &.-orange {
+            fill: $color-6;
+            stroke: #e86b16;
+          }
+          &.-blue {
+            fill: #007bcd;
+            stroke: #006eb8;
+          }
+        }
+      }
+    }
+
+    .number {
+      font-size: $font-size-x-big;
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

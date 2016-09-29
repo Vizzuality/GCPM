@@ -1,11 +1,13 @@
-<ul>
 {{#each data}}
-<li>
-  {{#if blueCircle}}<span class="circle-icon -blue"></span>{{/if}}
-  {{#if purpleCircle}}<span class="circle-icon -purple"></span>{{/if}}
-  {{#if orangeCircle}}<span class="circle-icon -orange"></span>{{/if}}
-  {{#if blueMarker}}<svg class="marker-icon -blue"><use xlink:href="#icon-marker"></use></svg>{{/if}}
-  {{#if orangeMarker}}<svg class="marker-icon -orange"><use xlink:href="#icon-marker"></use></svg>{{/if}}
-  {{description}} </li>
+    <div class="column small-4">
+      <span class="legend">
+        {{#if blueCircle}}<span class="circle-icon -blue"></span>{{/if}}
+        {{#if blueSquare}}<span class="square-icon -blue"></span>{{/if}}
+        {{#if whiteSquare}}<span class="square-icon -white"></span>{{/if}}
+        {{#if blueMarker}} <svg class="marker-icon -blue"><use xlink:href="#icon-marker"></use></svg>{{/if}}
+        {{#if orangeMarker}} <svg class="marker-icon -orange"><use xlink:href="#icon-marker"></use></svg>{{/if}}
+        {{description}}
+      </span>
+        <div class="number">{{number}}</div>
+    </div>
 {{/each}}
-</ul>
