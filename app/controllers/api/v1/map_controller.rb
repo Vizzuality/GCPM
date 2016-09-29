@@ -2,7 +2,7 @@ module Api
   module V1
     class MapController < ApiController
       def index
-        type = params[:type] && params[:type] == 'events' ? 'events' : 'projects'
+        type = params[:type] && (params[:type] == 'events' || params[:type] == 'people') ? params[:type] : 'projects'
         group = params[:group] && ['countries', 'regions', 'points'].include?(params[:group]) ? params[:group] : 'regions'
         query = SqlQuery.new("#{type}_map_#{group}", params: map_params)
         json_list = query.execute
