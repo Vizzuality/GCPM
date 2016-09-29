@@ -5,7 +5,7 @@ class MapController < ApplicationController
   def index
     params = request.query_parameters
     page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
-    limit = 10 + (page * 10)
+    limit = 12 + (page * 9)
 
     @title = t 'map'
     @filters = %w(projects events)
@@ -17,7 +17,7 @@ class MapController < ApplicationController
     else
       @items = Project.fetch_all(projects_params).order('created_at DESC').limit(limit)
     end
-    logger.debug @items
+
     respond_with(@items)
   end
 

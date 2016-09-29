@@ -55,7 +55,7 @@
 
     setSubscriptions: function() {
       App.on('Router:change', this.setState, this);
-      App.on('TabNav:change', function(state) {
+      App.on('TabNav:change Breadcrumbs:change', function(state) {
         this.setState(state, true);
       }, this);
     },
