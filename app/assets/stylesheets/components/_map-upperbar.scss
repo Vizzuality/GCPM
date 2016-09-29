@@ -31,13 +31,28 @@
       background-color: $color-1;
 
       > a {
-        padding: 0.7rem 2rem;
+        padding: 0.7rem 1rem;
         height: 36px;
         font-size: 11px;
         font-weight: bold;
         color: $color-3;
         text-transform: uppercase;
+        display: flex;
+        align-content: flex-end;
 
+        > .globe-icon {
+          display: none;
+          padding-right: 1rem;
+          border-right: 0.5px solid $color-3;
+          margin-right: 1rem;
+
+          > svg {
+            width: 15px;
+            height: 15px;
+            fill: $color-3;
+          }
+
+        }
       }
 
       > .arrow-tail {
@@ -61,7 +76,6 @@
         &.-last {
           display: inherit;
         }
-      ;
       }
 
       &:first-child {
@@ -72,13 +86,23 @@
 
       &:last-child {
         background-color: transparent;
+
         > a {
           color: $color-2;
           background-color: $color-3;
+
+          > .globe-icon {
+            background-color: $color-3;
+            border-right: 0.5px solid rgba($color-2, 0.6);
+            > svg {
+              fill: $color-2;
+            }
+          }
         }
 
-        >.rhombus {
-          display: none;
+        > .rhombus {
+          display: inherit;
+          background-color: $color-3;
 
           &.-last {
             display: none;
@@ -86,89 +110,90 @@
         }
 
         > .arrow-tail {
-            display: inherit;
-            border-top: 18px solid $color-3;
-            border-bottom: 18px solid $color-3;
-            border-left: 15px solid $color-1;
-        }
-
-        >.rhombus {
           display: inherit;
-          background-color: $color-3;
+          border-top: 18px solid $color-3;
+          border-bottom: 18px solid $color-3;
+          border-left: 15px solid $color-1;
         }
       }
 
-      &:nth-child(2) {
-        >.arrow-tail {
+      &:nth-child(1) {
+        > .arrow-tail {
           display: none;
         }
 
-        >.rhombus {
+        > .rhombus {
           &.-last {
             display: none;
           }
         }
-      }
-    }
-  }
+        > a {
+          > .globe-icon {
+            display: inherit;
 
-  .-map-legends {
-    display: flex;
-    justify-content: flex-end;
-    > ul {
-      font-size: 12px;
-      font-weight: bold;
-      line-height: 1;
-      color: $color-3;
-      text-transform: uppercase;
-      > li {
-        display: flex;
-        align-items: center;
-        min-height: 36px;
-        margin-right: 3em;
-
-        > span {
-
-          &.circle-icon {
-            width: 15px;
-            height: 15px;
-            border-radius: 100%;
-            margin-right: 5px;
-
-            &.-blue {
-              border: 1px solid #006eb8;
-              background-color: #007bcd;
-            }
-
-            &.-purple {
-              border: 1px solid $color-4;
-              background-color: #b85fff;
-            }
-
-            &.-orange {
-              border: 1px solid #e86b16;
-              background-color: $color-6;
-            }
-          }
-        }
-
-        > svg {
-
-          &.marker-icon {
-            height: 20px;
-            width: 20px;
-            margin-right: 5px;
-            &.-orange {
-              fill: $color-6;
-              stroke: #e86b16;
-            }
-            &.-blue {
-              fill: #007bcd;
-              stroke: #006eb8;
-            }
           }
         }
       }
     }
   }
-}
+
+    .-map-legends {
+      display: flex;
+      justify-content: flex-end;
+      > ul {
+        font-size: 12px;
+        font-weight: bold;
+        line-height: 1;
+        color: $color-3;
+        text-transform: uppercase;
+        > li {
+          display: flex;
+          align-items: center;
+          min-height: 36px;
+          margin-right: 3em;
+
+          > span {
+
+            &.circle-icon {
+              width: 15px;
+              height: 15px;
+              border-radius: 100%;
+              margin-right: 5px;
+
+              &.-blue {
+                border: 1px solid #006eb8;
+                background-color: #007bcd;
+              }
+
+              &.-purple {
+                border: 1px solid $color-4;
+                background-color: #b85fff;
+              }
+
+              &.-orange {
+                border: 1px solid #e86b16;
+                background-color: $color-6;
+              }
+            }
+          }
+
+          > svg {
+
+            &.marker-icon {
+              height: 20px;
+              width: 20px;
+              margin-right: 5px;
+              &.-orange {
+                fill: $color-6;
+                stroke: #e86b16;
+              }
+              &.-blue {
+                fill: #007bcd;
+                stroke: #006eb8;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
