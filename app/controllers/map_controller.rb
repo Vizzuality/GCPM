@@ -13,9 +13,13 @@ class MapController < ApplicationController
     @user_data = current_user.present? ? JSON.generate(build_user_data) : nil
 
     if params.key?(:data) && params[:data] == 'events'
-      @items = Event.fetch_all(projects_params).order('created_at DESC').limit(limit)
+      events = Event.fetch_all(projects_params).order('created_at DESC')
+      @items = events.limit(limit)
+      @more = (events.size > @items.size)
     else
-      @items = Project.fetch_all(projects_params).order('created_at DESC').limit(limit)
+      projects = Project.fetch_all(projects_params).order('created_at DESC')
+      @items = projects.limit(limit)
+      @more = (projects.size > @items.size)
     end
 
     respond_with(@items)
@@ -24,7 +28,7 @@ class MapController < ApplicationController
   private
 
     def projects_params
-      params.permit(:sortby, :user, :start_date, :end_date, project_types:[], countries:[], cancer_types:[], organization_types:[], organizations:[], regions:[], investigators:[])
+      params.permit(:sortby, :user, :start_date, :end_date, :region, :country, project_types:[], cancer_types:[], organization_types:[], organizations:[], investigators:[])
     end
 
     def build_user_data

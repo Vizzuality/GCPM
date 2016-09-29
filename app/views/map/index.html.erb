@@ -46,21 +46,10 @@
   </div>
 </div>
 
-<div class="c-card-grid" id="content">
+<div id="content">
   <% if @current_type == 'events' %>
-    <%= render 'events/grid', items: @items %>
+    <%= render 'events/grid', items: @items, more: @more %>
   <% else %>
-    <%= render 'projects/grid', items: @items %>
+    <%= render 'projects/grid', items: @items, more: @more %>
   <% end %>
-</div>
-
-<div class="c-card-grid">
-  <div class="c-pagination-button">
-    <% page = params.key(:page) && params[:page] ? params[:page] + 1 : 2 %>
-    <%= link_to (t 'show_more'),
-      map_path(request.query_parameters.merge({ page: page })),
-      class: "circle-button",
-      remote: true
-    %>
-  </div>
 </div>

@@ -60,7 +60,7 @@ class Project < ApplicationRecord
   scope :by_investigators,      -> investigators       { joins(:investigators).where(investigators: { id: investigators }) }
   scope :by_organizations,      -> organizations       { joins(:organizations).where(organizations: { id: organizations }) }
   scope :by_organization_types, -> organization_types  { joins(organizations: :organization_type).where(organization_types: { id: organization_types }) }
-  scope :by_countries,          -> countries           { joins(:countries).where(countries: { id: countries }) }
+  scope :by_countries,          -> countries           { joins(:countries).where(countries: { country_iso_3: countries }) }
   scope :by_regions,            -> regions             { joins(:countries).where(countries: { region_iso: regions }) }
   scope :by_start_date,         -> start_date          { where('projects.start_date > ?', start_date ) }
   scope :by_end_date,           -> end_date            { where('projects.end_date < ?', end_date ) }
@@ -68,12 +68,15 @@ class Project < ApplicationRecord
 
   class << self
     def fetch_all(options={})
-      self.published
+      projects = self.published
+      if options[:country]
+        projects = projects.by_countries(options[:country])
+      elsif options[:region]
+        projects = projects.by_regions(options[:region])
+      end
       # projects = projects.by_investigators(options[:investigators])           if options[:investigators]
       # projects = projects.by_project_types(options[:project_types])           if options[:project_types]
       # projects = projects.by_cancer_types(options[:cancer_types])             if options[:cancer_types]
-      # projects = projects.by_countries(options[:countries])                   if options[:countries]
-      # projects = projects.by_regions(options[:regions])                       if options[:regions]
       # projects = projects.by_organizations(options[:organizations])           if options[:organizations]
       # projects = projects.by_organization_types(options[:organization_types]) if options[:organization_types]
       # projects = projects.by_start_date(options[:start_date])                 if options[:start_date]
@@ -85,7 +88,7 @@ class Project < ApplicationRecord
       # projects = projects.order('projects.title DESC')                        if options[:sortby] && options[:sortby] == 'title_desc'
       # projects = projects.limit(options[:limit])                              if options[:limit]
       # projects = projects.offset(options[:offset])                            if options[:offset]
-      # projects.uniq
+      projects.uniq
     end
 
     def build_project(options)
