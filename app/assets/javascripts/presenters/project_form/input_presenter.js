@@ -10,7 +10,7 @@
 
   _.extend(App.Presenter.Input.prototype, {
 
-  	initialize: function(params) {
+    initialize: function() {
       this.state = new StateModel();
       this.Input = new App.View.Input({
         el: '#title',
@@ -23,7 +23,7 @@
         }
       });
     },
-    
+
     setInputValue: function(input) {
       var value = input.$el.find('input')[0].value;
       var obj = {};

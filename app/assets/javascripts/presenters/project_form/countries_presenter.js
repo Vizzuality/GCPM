@@ -26,7 +26,7 @@
 
         // Use this if you want a single select
         allowClear: true,
-        templateSelection: function (data, container) {
+        templateSelection: function(data) {
           // Return the placeholder
           if (!data.id) {
             return data.text;

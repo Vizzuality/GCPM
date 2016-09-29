@@ -37,14 +37,14 @@
       onStop: function() {
         this.$root.find( 'button, select' ).attr( 'disabled', false );
       },
-      onSet: function(context) {
+      onSet: function() {
         this.$root.find( 'button, select' ).attr( 'disabled', false );
       }
     },
 
     initialize: function(settings) {
       this.el = settings.el;
-      this.options = _.extend({}, this.defaults, settings.options || {});
+      this.options = _.extend({}, this.defaults, settings.options||{});
     },
 
     render: function() {
@@ -81,8 +81,8 @@
 
     triggerChange: function(e) {
       if (e.select) {
-        var start = this.$startDatePicker.get('select');
-        var end = this.$endDatePicker.get('select');
+        // var start = this.$startDatePicker.get('select');
+        // var end = this.$endDatePicker.get('select');
         this.trigger('change', this);
       }
     }

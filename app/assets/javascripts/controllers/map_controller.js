@@ -14,7 +14,6 @@
       new App.Presenter.Breadcrumbs(params);
       new App.Presenter.UserNav(params);
       new App.Presenter.Legends(params);
-      user_data = null;
     }
 
   });

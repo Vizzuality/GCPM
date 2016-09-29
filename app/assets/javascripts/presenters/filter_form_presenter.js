@@ -110,7 +110,7 @@
         App.trigger('Modal:loading', { loading: true });
 
         var promises = _.compact(_.map(this.children, function(child) {
-          if (!!child.fetchData) {
+          if (!child.fetchData) {
             return child.fetchData();
           }
           return null;

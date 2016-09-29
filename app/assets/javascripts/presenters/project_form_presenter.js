@@ -10,7 +10,7 @@
 
   _.extend(App.Presenter.ProjectForm.prototype, {
 
-    initialize: function(params) {
+    initialize: function() {
       this.state = new StateModel();
 
       this.initializeFormComponents();
@@ -79,10 +79,6 @@
           var required = this.components[field].$el.find('.c-required');
           required && required.removeClass('-hidden');
         }.bind(this));
-
-      } else {
-        // this.state.save();
-        console.log('All fields filled!');
       }
     }
 

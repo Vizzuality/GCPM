@@ -24,17 +24,17 @@
             <label class="title">Projects</label>
             <p class="number"><%= @projectsCount %></p>
           </div>
-          <div class="number-info">
+          <!-- <div class="number-info">
             <label class="title">Organizations</label>
             <p class="number"> - </p>
-          </div>
+          </div> -->
           <div class="number-info">
             <label class="title">Events</label>
             <p class="number"><%= @eventsCount %></p>
           </div>
           <div class="number-info">
             <label class="title">Daly datasets</label>
-            <p class="number">5</p>
+            <p class="number">0</p>
           </div>
         </div>
       </div>
@@ -46,10 +46,22 @@
           <a href="#" class="c-button -inverse">+ Event</a>
         </div>
       </div>
-      <ul class="c-section-menu wrapper -color-0">
-        <li><%= link_to (t 'projects'), country_path(request.query_parameters.merge({ type: 'org-project-markers' })), :class => !params['type'] ? '-active' : active_param?('type','org-project-markers') %></li>
-        <li><%= link_to (t 'events'), country_path(request.query_parameters.merge({ type: 'org-event-markers' })), :class => active_param?('type','org-event-markers') %></li>
-      </ul>
+    </div>
+    <div class="section-tabnav">
+      <div id="dataTabNav" class="c-tabnav">
+        <div class="row collapse">
+          <div class="column small-12">
+            <ul class="tabnav-list">
+               <% @filters.each do |filter| %>
+                <%# @class = !params['type'] and filter == "projects" ? "-active" : active_param?('type', filter) %>
+                <li class="tabnav-item">
+                  <a class="js-btn-mapmenu-type" href="#" data-type="<%= filter %>"><%= t (filter) %></a>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -71,42 +83,23 @@
     </div>
   </div> -->
 
-  <% if @projects && @projects.size() > 0 %>
+  <!-- c-grid-proyects -->
   <div class="c-card-grid" id="content">
-  <!-- Project cards -->
-  <% @projects.each do |p| %>
-    <div class="card -mobile-large-1-2 -tablet-1-3">
-      <h4 class="c-card-title -border-2">
-        <a href="/map?investigators[]=<%= p.project_leads.first.try(:id) %>" class="tag">
-          <%= p.project_leads.first.try(:name) %>
-        </a>
-      </h4>
-      <%= link_to project_path(p.id), { :class => "link" } do %>
-        <h3 class="c-title"><%= p.title %></h3>
-      <% end %>
-      <!-- Project summary replaced by cancer tags -->
-      <div class="c-tag-list -closer">
-        <% p.cancer_types.each do |t| %>
-        <a href="/map?cancer_types[]=<%= t.id %>" class="tag"><%= t.name %></a>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
+    <%= render('map/' + @current_type) %>
+  </div>
 
+  <div class="c-card-grid">
   <% @realLimit = params['limit'] ? params['limit'].to_i : 1 %>
-  <% if (@realLimit * @limit) < @projectsCount %>
-    <div class="c-pagination-button">
-      <%= link_to (t 'show_more'),
-              map_path(request.query_parameters.merge({ limit: (params['limit'] ? params['limit'].to_i + 1 : 2 )  })),
-              class: "circle-button",
-              remote: true,
-              data: {magic: true} %>
-    </div>
+    <% if (@realLimit * @limit) < @projectsCount %>
+      <div class="c-pagination-button">
+        <%= link_to (t 'show_more'),
+                map_path(request.query_parameters.merge({ limit: (params['limit'] ? params['limit'].to_i + 1 : 2 )  })),
+                class: "circle-button",
+                remote: true,
+                data: {magic: true} %>
+      </div>
+    <% end %>
   </div>
-  <% end %>
-<% else %>
-  <div class="c-no-items -padding wrapper">
-    <p>No projects</p>
-  </div>
-<% end %>
+
+
 </section>

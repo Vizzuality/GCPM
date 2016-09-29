@@ -38,14 +38,15 @@
       onStop: function() {
         this.$root.find( 'button, select' ).attr( 'disabled', false );
       },
-      onSet: function(context) {
+      onSet: function() {
         this.$root.find( 'button, select' ).attr( 'disabled', false );
       }
     },
 
     initialize: function(settings) {
       this.el = settings.el;
-      this.options = _.extend({}, this.defaults, settings.options || {});
+      var opts = settings.options||{};
+      this.options = _.extend({}, this.defaults, opts);
       this.state = settings.state;
     },
 

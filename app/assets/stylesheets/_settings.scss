@@ -41,11 +41,23 @@ $breakpoint-mobile-large:  425px;
 $breakpoint-tablet:        768px;
 $breakpoint-laptop:       1024px;
 
+$breakpoint-small:        40em;
+$breakpoint-medium:   40.063em;
+$breakpoint-large:    64.063em;
+$breakpoint-xLarge:   90.063em;
+$breakpoint-xxLarge: 120.063em;
+
 /* Media queries */
 $mq-mobile-small: "screen and (min-width: #{$breakpoint-mobile-small})";
 $mq-mobile-large: "screen and (min-width: #{$breakpoint-mobile-large})";
 $mq-tablet:       "screen and (min-width: #{$breakpoint-tablet})";
 $mq-laptop:       "screen and (min-width: #{$breakpoint-laptop})";
+
+$mq-small:   "screen and (min-width: #{$breakpoint-small})";
+$mq-medium:  "screen and (min-width: #{$breakpoint-medium})";
+$mq-large:   "screen and (min-width: #{$breakpoint-large})";
+$mq-xLarge:  "screen and (min-width: #{$breakpoint-xLarge})";
+$mq-xxLarge: "screen and (min-width: #{$breakpoint-xxLarge})";
 
 $mq-body-width: "screen and (min-width: #{$body-max-width})";
 

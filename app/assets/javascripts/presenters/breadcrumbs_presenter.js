@@ -32,10 +32,9 @@
     },
 
     setEvents: function() {
-      this.breadcrumbs.on('change', function(breadcrumb) {
-        if (breadcrumb.name === 'global') {
-
-        }
+      // this.breadcrumbs.on('change', function(breadcrumb) {
+        // if (breadcrumb.name === 'global') {
+        // }
         // console.log(breadcrumb);
         // var newState = {};
         // _.each(breadcrumb, function(b, k) {
@@ -44,7 +43,7 @@
         // });
         // console.log(newState);
         // this.setState();
-      }, this);
+      // }, this);
       this.state.on('change', function() {
         this.renderBreadcrumbs();
         App.trigger('Breadcrumbs:change', this.getState());

@@ -1,37 +1,47 @@
 .l-footer.wrapper {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 25px;
+  padding-bottom: 25px;
   border-top: 1px solid rgba(0, 0, 0, .15);
 
-  @media #{$mq-tablet} {
+  @media #{$mq-medium} {
     padding-top: 60px;
     padding-bottom: 60px;
   }
 
-  > ul {
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     margin: 0;
     padding: 0;
     list-style: none;
+    justify-content: center;
+    width: 100%;
+
+    @media #{$mq-medium} {
+      justify-content: flex-start;
+    }
+
+    & > li {
+      margin-bottom: 15px;
+    }
   }
 
   .medias {
-    display: flex;
-    align-items: center;
-    margin-top: 15px;
 
-    @media #{$mq-tablet} {
+    @media #{$mq-medium} {
       margin-top: 0;
+      margin-bottom: 0;
     }
 
     > li {
       margin-right: 30px;
 
-      &:last-of-type { margin-right: 0; }
-
       &.-big {
         font-size: $font-size-x-medium;
         font-weight: bold;
         letter-spacing: -.5px;
+        line-height: 21px;
       }
 
       &.-notext > a {
@@ -68,10 +78,9 @@
   }
 
   .menu {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    flex-wrap: wrap;
+    @media #{$mq-medium} {
+      justify-content: flex-end;
+    }
 
     & .separator {
       height: 30px;
@@ -79,22 +88,15 @@
     }
 
     > li {
-      flex-basis: 50%;
-      margin-bottom: 15px;
+      margin-bottom: 0;
+      margin-left: 40px;
 
-      @media #{$mq-mobile-large} {
-        flex-basis: 33.33%;
+      @media #{$mq-medium} {
+        margin-bottom: 15px;
       }
-
-      @media #{$mq-tablet} {
-        flex-basis: auto;
-        margin-bottom: 0;
-        margin-left: 40px;
-      }
-
 
       &:first-of-type {
-        @media #{$mq-tablet} {
+        @media #{$mq-medium} {
           margin-left: 0;
         }
       }
@@ -103,6 +105,8 @@
         color: $color-2;
 
         &.-color-1 { color: $color-1; }
+
+        &:hover { opacity: .6; }
       }
     }
   }

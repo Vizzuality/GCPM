@@ -1,3 +1,4 @@
+/* global URI */
 (function(App) {
 
   'use strict';
@@ -10,8 +11,12 @@
      * @type {Object}
      */
     routes: {
-      'map(?*query)': 'Map#index',
-      'network/:id/projects/new': 'Project#new'
+      'map(?*query)':             'Map#index',
+      'network/:id/projects/new': 'Project#new',
+      'countries':                'Countries#index',
+      'countries/:iso':           'Countries#show',
+      'cancer-types':             'CancerTypes#index',
+      'cancer-types/:id':         'CancerTypes#show'
     },
 
     initialize: function() {
@@ -72,7 +77,6 @@
         fragment = Backbone.history.getFragment(),
         routes = _.pairs(Router.routes),
         route = null,
-        params = null,
         matched;
 
       matched = _.find(routes, function(handler) {
@@ -83,7 +87,7 @@
       if(matched) {
         // NEW: Extracts the params using the internal
         // function _extractParameters
-        params = Router._extractParameters(route, fragment);
+        // params = Router._extractParameters(route, fragment);
         route = matched[1];
       }
 
@@ -124,7 +128,7 @@
      */
     _serializeParams: function(params) {
       var uri = new URI();
-      var params = _.pick(params, function(value, key, object){ 
+      params = _.pick(params, function(value) {
         return value != null
       });
 

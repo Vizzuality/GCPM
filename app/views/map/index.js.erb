@@ -1,6 +1,8 @@
 (function(App) {
+
   'use strict'
-  App.Events.trigger('remote:load', {
-    content: "<%= j render(:partial => @current_type) %>"
-  });
+
+  var items = "<%= escape_javascript render(partial: 'projects/grid', locals: {items: @items}) %>";
+  document.getElementById('content').innerHTML = items;
+
 })(this.App);

@@ -23,30 +23,30 @@
   };
 
   // Extending Handlebars
-  Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
-    switch (operator) {
-      case '==':
-        return (v1 == v2) ? options.fn(this) : options.inverse(this);
-      case '===':
-        return (v1 === v2) ? options.fn(this) : options.inverse(this);
-      case '!==':
-        return (v1 !== v2) ? options.fn(this) : options.inverse(this);
-      case '<':
-        return (v1 < v2) ? options.fn(this) : options.inverse(this);
-      case '<=':
-        return (v1 <= v2) ? options.fn(this) : options.inverse(this);
-      case '>':
-        return (v1 > v2) ? options.fn(this) : options.inverse(this);
-      case '>=':
-        return (v1 >= v2) ? options.fn(this) : options.inverse(this);
-      case '&&':
-        return (v1 && v2) ? options.fn(this) : options.inverse(this);
-      case '||':
-        return (v1 || v2) ? options.fn(this) : options.inverse(this);
-      default:
-        return options.inverse(this);
-    }
-  });
+  // Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
+  //   switch (operator) {
+  //     case '==':
+  //       return (v1 == v2) ? options.fn(this) : options.inverse(this);
+  //     case '===':
+  //       return (v1 === v2) ? options.fn(this) : options.inverse(this);
+  //     case '!==':
+  //       return (v1 !== v2) ? options.fn(this) : options.inverse(this);
+  //     case '<':
+  //       return (v1 < v2) ? options.fn(this) : options.inverse(this);
+  //     case '<=':
+  //       return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+  //     case '>':
+  //       return (v1 > v2) ? options.fn(this) : options.inverse(this);
+  //     case '>=':
+  //       return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+  //     case '&&':
+  //       return (v1 && v2) ? options.fn(this) : options.inverse(this);
+  //     case '||':
+  //       return (v1 || v2) ? options.fn(this) : options.inverse(this);
+  //     default:
+  //       return options.inverse(this);
+  //   }
+  // });
 
   App.Helper = App.Helper || {};
 
@@ -63,8 +63,9 @@
       paramString.split('&').forEach(function(pair) {
         pair = pair.split('=');
         var key = decodeURIComponent(pair[0]),
-            val = decodeURIComponent(pair[1]),
-            val = val ? val.replace(/\++/g,' ').trim() : '';
+            val = decodeURIComponent(pair[1]);
+
+        val = val ? val.replace(/\++/g,' ').trim() : '';
 
         if (key.length === 0) {
           return;

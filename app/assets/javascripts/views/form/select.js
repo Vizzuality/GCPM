@@ -25,7 +25,8 @@
     template: HandlebarsTemplates['form/select'],
 
     initialize: function(settings) {
-      var opts = (settings && settings.options) || {};
+      var opts = settings && settings.options;
+      opts = opts || new Object();
       opts.class = [this.defaults.class, opts.class || ''].join(' ');
       this.state = settings.state;
       this.options = _.extend({}, this.defaults, opts);

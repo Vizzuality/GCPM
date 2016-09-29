@@ -96,6 +96,20 @@
       left: 0;
     }
   }
+
+  .section-tabnav {
+    position: absolute;
+    bottom: 0;
+    margin: 0 $wrapper-mobile-padding;
+
+    @media #{$mq-mobile-large} {
+      margin: 0 $wrapper-tablet-padding;
+    }
+
+    @media #{$mq-tablet} {
+      margin: 0 $wrapper-padding;
+    }
+  }
 }
 
 
