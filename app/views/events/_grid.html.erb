@@ -1,0 +1,23 @@
+<% if items && items.size() > 0 %>
+  <!-- Events cards -->
+  <% items.each do |e| %>
+    <div class="card -mobile-large-1-2 -tablet-1-3">
+      <% if e.country? %>
+      <h4 class="c-card-title -border-2">
+        <a href="/map?type=events&group=countries&countries[]=<%= Country.find_by( country_name: e.country ).id %>">
+          <%= e.city %>, <%= e.country %>
+        </a>
+      </h4>
+      <% end %>
+      <%= link_to event_path(e.id), { :class => "link" } do %>
+        <h3 class="c-title"><%= e.title %></h3>
+      <% end %>
+      <p><%= truncate(e.description, :length => 300) %></p>
+    </div>
+  <% end %>
+
+<% else %>
+  <div class="c-no-items -padding wrapper">
+    <p>No events</p>
+  </div>
+<% end %>

@@ -3,33 +3,22 @@ class MapController < ApplicationController
   respond_to :html, :js
 
   def index
+    params = request.query_parameters
+    page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
+    limit = 10 + (page * 10)
+
     @title = t 'map'
-    @params = request.query_parameters
-
-    # Common vars
-    @countries = Country.order('country_name')
-    @organizations = Organization.order('name')
-    @organization_types = OrganizationType.all
-    @cancer_types = CancerType.order('name')
-    @project_types = ProjectType.order('name')
-    @investigators = Investigator.order('name')
-
-    @limit = 15
-    # Projects
-    #Limit of projects shown at the beginning and added when show more button clicked
-    @projects  = Project.fetch_all(projects_params).order('created_at DESC').limit(@limit).offset(params[:limit] ? params[:limit].to_i : @limit)
-    @projectsCount = Project.count
-
-    # Events
-    #Limit of events shown at the beginning and added when show more button clicked
-    @events  = Event.fetch_all(projects_params).order('created_at DESC').limit(@limit).offset(params[:limit] ? params[:limit].to_i : @limit)
-    @eventsCount = Event.count
-
-    @current_type = params[:data] || 'projects'
-    @filters = ['projects', 'events']
+    @filters = %w(projects events)
+    @current_type = params.key?(:data) ? params[:data] : 'projects'
     @user_data = current_user.present? ? JSON.generate(build_user_data) : nil
-    respond_with(@projects)
 
+    if params.key?(:data) && params[:data] == 'events'
+      @items = Event.fetch_all(projects_params).order('created_at DESC').limit(limit)
+    else
+      @items = Project.fetch_all(projects_params).order('created_at DESC').limit(limit)
+    end
+
+    respond_with(@items)
   end
 
   private

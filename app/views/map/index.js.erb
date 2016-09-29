@@ -1,7 +1,8 @@
 (function(App) {
+
   'use strict'
 
-  var nextProjects = "<%= escape_javascript(render partial: 'map/' + @current_type ) %>";
-  document.getElementById('content').innerHTML += nextProjects;
+  var items = "<%= escape_javascript render(partial: 'projects/grid', locals: {items: @items}) %>";
+  document.getElementById('content').innerHTML = items;
 
 })(this.App);

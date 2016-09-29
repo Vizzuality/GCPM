@@ -3,5 +3,5 @@ eslint:
   config_file: .eslintrc
   ignore_file: .eslintignore
 ruby:
-  enabled: false
+  enabled: true
   config_file: .rubocop.yml
