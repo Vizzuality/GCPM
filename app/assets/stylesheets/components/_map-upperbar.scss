@@ -31,17 +31,18 @@
       background-color: $color-1;
 
       > a {
-        padding: 0.7rem 1rem;
+        padding: 0 1rem;
         height: 36px;
         font-size: 11px;
         font-weight: bold;
         color: $color-3;
         text-transform: uppercase;
         display: flex;
-        align-content: flex-end;
+        align-items: center;
 
         > .globe-icon {
           display: none;
+          height: 70%;
           padding-right: 1rem;
           border-right: 0.5px solid $color-3;
           margin-right: 1rem;
@@ -129,7 +130,8 @@
         }
         > a {
           > .globe-icon {
-            display: inherit;
+            display: flex;
+            align-items: center;
 
           }
         }
