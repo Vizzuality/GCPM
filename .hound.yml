@@ -5,3 +5,5 @@ eslint:
 ruby:
   enabled: true
   config_file: .rubocop.yml
+scss:
+  enabled: false

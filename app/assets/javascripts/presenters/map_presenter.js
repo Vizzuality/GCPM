@@ -21,7 +21,6 @@
           minZoom: 2,
           maxZoom: 14
         }
-        // options: this.getMapOptions()
       });
 
       this.setSubscriptions();
@@ -94,22 +93,7 @@
           });
         }
       }.bind(this));
-    },
-
-    /**
-     * Get default map options from params
-     * @return {Object}
-     */
-    // getMapOptions: function() {
-    //   var mapSettings = _.pick(this.state.attributes, 'zoom', 'lat', 'lng');
-    //   if (Object.keys(mapSettings).length > 0) {
-    //     return {
-    //       center: [mapSettings.lat, mapSettings.lng],
-    //       zoom: mapSettings.zoom
-    //     };
-    //   }
-    //   return {};
-    // }
+    }
 
   });
 
