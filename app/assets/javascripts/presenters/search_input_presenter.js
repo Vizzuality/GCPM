@@ -1,3 +1,4 @@
+/* global Fuse */
 (function(App) {
 
   'use strict';

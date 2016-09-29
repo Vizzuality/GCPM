@@ -32,21 +32,23 @@
     },
 
     setEvents: function() {
-      // this.breadcrumbs.on('change', function(breadcrumb) {
-        // if (breadcrumb.name === 'global') {
-        // }
-        // console.log(breadcrumb);
-        // var newState = {};
-        // _.each(breadcrumb, function(b, k) {
-        //   console.log(b, k);
-        //   newState[b] = k;
-        // });
-        // console.log(newState);
-        // this.setState();
-      // }, this);
+      this.breadcrumbs.on('change', function(breadcrumb) {
+        var newState = {};
+        if (breadcrumb.name === 'country') {
+          newState.region = this.getState().region;
+          newState.country = breadcrumb.value;
+        } else if (breadcrumb.name === 'region') {
+          newState.region = breadcrumb.value;
+          newState.country = null;
+        } else {
+          newState.region = null;
+          newState.country = null;
+        }
+        this.setState(newState);
+        App.trigger('Breadcrumbs:change', this.getState());
+       }, this);
       this.state.on('change', function() {
         this.renderBreadcrumbs();
-        App.trigger('Breadcrumbs:change', this.getState());
       }, this);
     },
 
@@ -58,7 +60,7 @@
     renderBreadcrumbs: function() {
       var data = [];
       _.each(this.getState(), function(value, key) {
-        data.push({ link: '?' + key + '=' + value, name: value, value: key });
+        data.push({ link: '?' + key + '=' + value, name: key, value: value });
       });
       this.breadcrumbs.updateData(data);
     }

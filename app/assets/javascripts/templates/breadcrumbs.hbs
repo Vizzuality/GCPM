@@ -1,10 +1,18 @@
 <ul>
   {{#each data}}
-    <li>
-      <a href="{{link}}"
-        class="js-breadcrumb"
-        {{#if value}}data-value="{{value}}"{{/if}}
-      >{{name}}</a>
-    </li>
+    {{#if value}}
+      <li>
+        <span class="rhombus -last"></span>
+        <span class="arrow-tail"></span>
+        <a href="{{link}}"
+          class="js-breadcrumb"
+          name={{name}}
+          {{#if value}}data-value="{{value}}"{{/if}}
+        > <span class="globe-icon"><svg><use xlink:href="#icon-globe"</svg></span>
+          {{value}}
+        </a>
+        <span class="rhombus"></span>
+      </li>
+    {{/if}}
   {{/each}}
 </ul>

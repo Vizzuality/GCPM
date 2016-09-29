@@ -29,7 +29,7 @@
         e.preventDefault();
       }
       this.trigger('change', {
-        name: e.currentTarget.innerHTML,
+        name: e.currentTarget.getAttribute('name'),
         value: e.currentTarget.getAttribute('data-value')
       });
     }

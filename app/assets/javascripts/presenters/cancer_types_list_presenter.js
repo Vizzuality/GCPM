@@ -10,7 +10,7 @@
 
   _.extend(App.Presenter.CancerTypesList.prototype, {
 
-    initialize: function(params) {
+    initialize: function() {
       this.state = new StateModel();
 
       this.renderComponents();

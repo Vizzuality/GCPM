@@ -57,11 +57,10 @@
 
     color: white;
     font-weight: bold;
-    font-size: 38px;
+    font-size: 18px;
 
     background-color: white;
 
-    border: 1px solid #006eb8;
     border-radius: 100%;
 
     box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.3);
@@ -74,12 +73,10 @@
 
     &.-blue {
       background-color: #007bcd;
-      border-color: #006eb8;
     }
 
     &.-orange {
       background-color: #f57823;
-      border-color: #e86b16;
     }
 
     &.prunecluster {
@@ -109,7 +106,7 @@
     box-shadow: 0 3px 5px 0 rgba(3, 11, 43, 0.2);
   }
 
-  .oval-icon {
+  .marker-icon {
     .icon {
       fill: #007bcd;
       width: 26px;
@@ -119,43 +116,6 @@
       filter: drop-shadow(0 3px 5px rgba(3, 11, 43, 0.2));
     }
   }
-
-  /* !important needed to force the change from the library */
-  // .leaflet-popup {
-  //   bottom: 2px !important;
-
-  //   .leaflet-popup-content { margin: 0; }
-
-  //   .leaflet-popup-content-wrapper {
-  //     padding: 25px 40px;
-  //     border-radius: 0;
-  //     max-height: 190px;
-  //     max-width: 190px;
-  //     overflow-y: auto;
-  //     font-weight: $font-weight-bold;
-  //   }
-
-  //   .leaflet-popup-close-button {
-  //     display: none;
-  //   }
-
-  //   .people {
-  //     display: flex;
-  //     flex-flow: column;
-  //     text-align: center;
-  //   }
-
-  //   .person {
-  //     font-size: $font-size-x-small;
-  //     color: $color-2;
-  //     margin: 0;
-  //     margin-bottom: 12px;
-
-  //     &:last-child {
-  //       margin-bottom: 0;
-  //     }
-  //   }
-  // }
 }
 
 // #map-legend {
