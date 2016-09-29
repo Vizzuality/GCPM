@@ -39,9 +39,10 @@
 
   &.-icon {
     background-color: rgba(0, 0, 0, 0);
-    & .icon-Oval {
+    & .icon-marker {
       width: 26px;
       height: 37px;
+      fill: #007bcd;
       stroke: #005e9c;
       transform: translate(-50%, -50%);
     }

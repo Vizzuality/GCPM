@@ -32,18 +32,18 @@
     },
 
     setEvents: function() {
-      // this.breadcrumbs.on('change', function(breadcrumb) {
-        // if (breadcrumb.name === 'global') {
-        // }
-        // console.log(breadcrumb);
-        // var newState = {};
-        // _.each(breadcrumb, function(b, k) {
-        //   console.log(b, k);
-        //   newState[b] = k;
-        // });
-        // console.log(newState);
-        // this.setState();
-      // }, this);
+      this.breadcrumbs.on('change', function(breadcrumb) {
+        var newState = {};
+
+        if(breadcrumb.key === 'country'){
+          newState.country = breadcrumb.value;
+          newState.region = this.getState().region;
+        }
+        else if(breadcrumb.key === 'region'){
+          newState.region = breadcrumb.value;
+        }
+         this.setState(newState);
+       }, this);
       this.state.on('change', function() {
         this.renderBreadcrumbs();
         App.trigger('Breadcrumbs:change', this.getState());
@@ -58,7 +58,7 @@
     renderBreadcrumbs: function() {
       var data = [];
       _.each(this.getState(), function(value, key) {
-        data.push({ link: '?' + key + '=' + value, name: value, value: key });
+        data.push({ link: '?' + key + '=' + value, name: key, value: value });
       });
       this.breadcrumbs.updateData(data);
     }

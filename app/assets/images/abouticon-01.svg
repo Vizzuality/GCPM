@@ -9,7 +9,7 @@
             <g id="01" transform="translate(60.000000, 543.000000)">
                 <g id="abouticon01" transform="translate(110.000000, 0.000000)">
                     <g>
-                        <circle id="Oval-213" cx="63.5" cy="63.5" r="63.5"></circle>
+                        <circle id="marker-213" cx="63.5" cy="63.5" r="63.5"></circle>
                         <g id="Group-2" transform="translate(45.000000, 47.000000)">
                             <path d="M36.6666667,0.333333333 L0,37" id="Line" stroke-linecap="square"></path>
                             <polyline id="Path-151" points="6.66666667 0.333333333 36.6666667 0.333333333 36.6666667 30.3333333"></polyline>

@@ -60,17 +60,17 @@
       html: ''
     });
 
-    var ovalIcon = new L.divIcon({
+    var markerIcon = new L.divIcon({
       iconSize: [26, 36],
-      className: 'oval-icon',
-      html: '<svg class="icon icon-Oval"><use xlink:href="#icon-Oval"></use></svg>'
+      className: 'marker-icon',
+      html: '<svg class="icon icon-marker"><use xlink:href="#icon-marker"></use></svg>'
     });
 
     pruneCluster.BuildLeafletIcon = function(feature) {
       var location = feature.geometry.coordinates;
       var marker = new PruneCluster.Marker(location[0], location[1]); // lat, lng
       if (feature.properties.is_project_lead) {
-        marker.data.icon = ovalIcon;
+        marker.data.icon = markerIcon;
       } else {
         marker.data.icon = circleIcon;
       }
