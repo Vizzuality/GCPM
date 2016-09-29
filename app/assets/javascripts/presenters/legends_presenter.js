@@ -44,30 +44,31 @@
       var data;
       var attributes = this.getState();
 
-      if (attributes.data === 'projects') {
-        data = [{ blueCircle: true, description: 'Number of Projects' }];
-        if (typeof attributes.country !== 'undefined') {
-          data = [
-            { blueMarker: true, description: 'Project Leads' },
-            { purpleCircle: true, description: 'Researchers' }
-          ];
-        }
-
-      } else if (attributes.data === 'events') {
-        data = [
-          { orangeCircle: true, description: 'Events Per Region' }
-        ];
-        if (typeof attributes.region !== 'undefined') {
-          data = [
-            { orangeCircle: true, description: 'Number of Events' }
-          ];
+      switch (attributes.data) {
+        case 'projects':
+          data = [{ blueCircle: true, description: 'Number of Projects' }];
           if (typeof attributes.country !== 'undefined') {
             data = [
-              { orangeMarker: true, description: 'Events' }
+              { blueMarker: true, description: 'Project Leads' },
+              { purpleCircle: true, description: 'Researchers' }
             ];
           }
-        }
+          break;
+        case 'events':
+          data = [{ orangeCircle: true, description: 'Events Per Region' }];
+          if (typeof attributes.region !== 'undefined') {
+            data = [{ orangeCircle: true, description: 'Number of Events' }];
+            if (typeof attributes.country !== 'undefined') {
+              data = [{ orangeMarker: true, description: 'Events' }];
+            }
+          }
+          break;
+        case 'people':
+          break;
+        default:
+          break;
       }
+
       this.legends.updateData(data);
     }
   });

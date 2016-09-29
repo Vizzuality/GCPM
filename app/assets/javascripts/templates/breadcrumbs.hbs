@@ -1,10 +1,15 @@
 <ul>
+    <li></li>
   {{#each data}}
     <li>
+        <span class="rhombus -last"></span>
+        <span class="arrow-tail"></span>
       <a href="{{link}}"
         class="js-breadcrumb"
         {{#if value}}data-value="{{value}}"{{/if}}
       >{{name}}</a>
+        <span class="rhombus"></span>
+
     </li>
   {{/each}}
 </ul>

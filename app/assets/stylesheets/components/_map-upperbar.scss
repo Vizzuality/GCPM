@@ -4,7 +4,7 @@
   left: 0;
   min-height: 36px;
   width: 100%;
-  background-color: rgba($color-1, 0.7);
+  background-color: rgba($color-1, 0.8);
   z-index: 1;
 
   ul {
@@ -23,46 +23,90 @@
   }
 
   .-map-breadcrumbs > ul {
-
+    overflow-y: hidden;
     > li {
       display: flex;
       align-items: center;
       min-height: 36px;
+      background-color: $color-1;
 
       > a {
-        padding: .5rem 1rem;
-
+        padding: 0.7rem 2rem;
+        height: 36px;
         font-size: 11px;
         font-weight: bold;
-        line-height: 1;
         color: $color-3;
         text-transform: uppercase;
 
-        border: solid 1px $color-3;
-
       }
 
-      &:after {
-        content: '/';
-        margin: 0 0.5rem;
-        color: $color-3;
-        font-size: 10px;
-        font-weight: bold;
+      > .arrow-tail {
+        display: none;
+        width: 0;
+        height: 0;
       }
-      &:last-child {
-        &:after {
-          content: '';
+
+      > .rhombus {
+        display: none;
+        width: 21px;
+        height: 21px;
+        border: 1px solid transparent;
+        border-right: 1px solid rgba($color-3, 0.5);
+        border-top: 1px solid rgba($color-3, 0.5);
+        background-color: $color-1;
+        transform: rotate(45deg) skew(15deg, 15deg);
+        position: relative;
+        right: 11px;
+
+        &.-last {
+          display: inherit;
         }
-
-        > a {
-          color: $color-2;
-          border-color: $color-2;
-        }
+      ;
       }
+
       &:first-child {
         > a {
           color: $color-3;
-          border-color: $color-3;
+        }
+      }
+
+      &:last-child {
+        background-color: transparent;
+        > a {
+          color: $color-2;
+          background-color: $color-3;
+        }
+
+        >.rhombus {
+          display: none;
+
+          &.-last {
+            display: none;
+          }
+        }
+
+        > .arrow-tail {
+            display: inherit;
+            border-top: 18px solid $color-3;
+            border-bottom: 18px solid $color-3;
+            border-left: 15px solid $color-1;
+        }
+
+        >.rhombus {
+          display: inherit;
+          background-color: $color-3;
+        }
+      }
+
+      &:nth-child(2) {
+        >.arrow-tail {
+          display: none;
+        }
+
+        >.rhombus {
+          &.-last {
+            display: none;
+          }
         }
       }
     }
