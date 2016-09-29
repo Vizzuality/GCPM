@@ -2,7 +2,8 @@
 
   'use strict'
 
-  var items = "<%= escape_javascript render(partial: 'projects/grid', locals: {items: @items}) %>";
+  <% template = @current_type == 'events' ? 'events/grid' : 'projects/grid'  %>
+  var items = "<%= escape_javascript render(partial: template, locals: {items: @items}) %>";
   document.getElementById('content').innerHTML = items;
 
 })(this.App);

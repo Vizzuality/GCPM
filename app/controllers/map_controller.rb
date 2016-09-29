@@ -17,7 +17,7 @@ class MapController < ApplicationController
     else
       @items = Project.fetch_all(projects_params).order('created_at DESC').limit(limit)
     end
-
+    logger.debug @items
     respond_with(@items)
   end
 

@@ -8,20 +8,17 @@
       'click li > a': 'onClickItem'
     },
 
-    initialize: function() {
-    },
-
     onClickItem: function(e) {
       e.preventDefault();
-      var el = $(e.currentTarget);
-      var value = el.data('type');
-      this.setActive({ data: value });
-      this.trigger('change', value);
+      var $el = $(e.currentTarget);
+      var dataType = $el.data('datatype');
+      this.setActive({ data: dataType });
+      this.trigger('change', dataType);
     },
 
-    setActive: function(state) {
-      this.$el.find('a').removeClass('-active');
-      this.$el.find('a[data-type="' + state.data + '"]').addClass('-active');
+    setActive: function(data) {
+      this.$el.find('a[data-datatype="' + data.data + '"]').addClass('-active')
+        .parent().siblings().find('a').removeClass('-active');
     }
 
   });
