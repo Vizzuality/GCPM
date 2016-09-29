@@ -4,7 +4,7 @@
 
   var basemapSpec = {
     default: {
-      url: 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+      url: '<%= ENV["BASEMAP_URL"] %>',
       options: {}
     },
     noLabel: {
