@@ -29,11 +29,11 @@
     },
 
     setSubscriptions: function() {
-      App.on('Router:change', this.setState, this);
+      App.on('Router:change Map:change', this.setState, this);
     },
 
     setState: function(state) {
-      this.state.set(_.pick(state, 'data'));
+      this.state.set(state);
     },
 
     getState: function() {
@@ -42,6 +42,14 @@
 
     activeItem: function() {
       this.tabnav.setActive(this.getState());
+      this.updateURI();
+    },
+
+    updateURI: function() {
+      var uri = new URI('');
+      var params = this.getState();
+      var newUrl = uri.query(_.omit(params, 'dataSingular', 'vars')).toString();
+      this.tabnav.updateUrl(newUrl);
     }
 
   });

@@ -12,7 +12,7 @@
 
     initialize: function(params) {
       this.$el = $(params.el);
-      this.user_data = JSON.parse(sessionStorage.getItem('user_data'));
+      // this.user_data = JSON.parse(sessionStorage.getItem('user_data'));
       this.$el.find('.initials').text(this.user_data ?
         this.user_data.user_initial :
         'U');

@@ -5,5 +5,6 @@
   <% template = @current_type == 'events' ? 'events/grid' : 'projects/grid'  %>
   var items = "<%= escape_javascript render(partial: template, locals: { items: @items, more: @more }) %>";
   document.getElementById('content').innerHTML = items;
+  App.trigger('Remote:load');
 
 })(this.App);

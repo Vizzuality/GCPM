@@ -4,13 +4,14 @@ class MapController < ApplicationController
 
   def index
     params = request.query_parameters
-    page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
-    limit = 12 + (page * 9)
 
+    @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
     @title = t 'map'
     @filters = %w(projects events)
     @current_type = params.key?(:data) ? params[:data] : 'projects'
     @user_data = current_user.present? ? JSON.generate(build_user_data) : nil
+
+    limit = 12 + (@page * 9)
 
     if params.key?(:data) && params[:data] == 'events'
       events = Event.fetch_all(projects_params).order('created_at DESC')

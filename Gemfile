@@ -81,8 +81,8 @@ group :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'spring-commands-rspec'
   gem 'email_spec'
-  gem 'capybara'
-  gem 'capybara-webkit'
+  # gem 'capybara'
+  # gem 'capybara-webkit'
   gem 'cucumber-rails', require: false
   gem 'factory_girl_rails'
   gem 'to_factory'

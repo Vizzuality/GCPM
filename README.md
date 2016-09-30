@@ -4,19 +4,18 @@ TODO: Write a project description
 
 ## Requirements:
 
-* Ruby 2.3.0 [How to install](https://gorails.com/setup/osx/10.10-yosemite)
+* NodeJs 4+ [How to install](https://nodejs.org/en/download/)
+* Ruby 2.3.1 [How to install](https://gorails.com/setup/osx/10.10-yosemite)
 * PostgreSQL 9+ [How to install](http://exponential.io/blog/2015/02/21/install-postgresql-on-mac-os-x-via-brew/)
 * Cron or similar tool is required for periodically sending notification emails
 
 ## Installation
 
-Install global dependencies:
-
-    gem install bundler
-
 Install project dependencies:
 
-    bundle install
+```
+gem install bundler && bundle install
+```
 
 Set up environment variables by copying `.env.sample` to `.env` and filling up the necessary values accordingly
 See also the [CartoDB integration](#cartodb-integration) section for information on how to configure your CartoDB account.
@@ -26,37 +25,17 @@ To set up the database, run:
     bundle exec rake db:create
     bundle exec rake db:migrate
 
+To add existing data, run:
 
-### Using Docker (recommended)
-
-Very useful for **development**, it ensures everybody have the same environment. Also you can test production environment.
-You can install Docker from [here](https://www.docker.com).
-
-Building docker container:
-
-```bash
-docker-compose build
-```
-
-Runing container:
-
-```bash
-docker-compose up
-```
-
-Maybe, first time you will need run these tasks:
-
-```bash
-docker-compose run web rake db:create
-docker-compose run web rake db:migrate
-```
+    bundle exec rake db:seed
+    bundle exec rake db:geo
+    bundle exec rake events:create
 
 ## Running
 
 To run application:
 
     bundle exec rails server
-
 
 To send periodic notification emails to users, run the following `rake` task using `cron` or a similar tool:
 
