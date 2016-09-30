@@ -46,16 +46,10 @@
   </div>
 </div>
 
-<div class="c-card-grid" id="content">
+<div id="content">
   <% if @current_type == 'events' %>
-    <%= render 'events/grid', items: @items %>
+    <%= render 'events/grid', items: @items, more: @more %>
   <% else %>
-    <%= render 'projects/grid', items: @items %>
+    <%= render 'projects/grid', items: @items, more: @more %>
   <% end %>
-</div>
-
-<div class="c-card-grid">
-  <div class="c-pagination-button" id="show_more_button_filtered">
-    
-  </div>
 </div>
