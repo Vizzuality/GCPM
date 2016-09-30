@@ -34,19 +34,21 @@
     setEvents: function() {
       this.breadcrumbs.on('change', function(breadcrumb) {
         var newState = {};
-
-        if(breadcrumb.key === 'country'){
-          newState.country = breadcrumb.value;
+        if (breadcrumb.name === 'country') {
           newState.region = this.getState().region;
-        }
-        else if(breadcrumb.key === 'region'){
+          newState.country = breadcrumb.value;
+        } else if (breadcrumb.name === 'region') {
           newState.region = breadcrumb.value;
+          newState.country = null;
+        } else {
+          newState.region = null;
+          newState.country = null;
         }
-         this.setState(newState);
+        this.setState(newState);
+        App.trigger('Breadcrumbs:change', this.getState());
        }, this);
       this.state.on('change', function() {
         this.renderBreadcrumbs();
-        App.trigger('Breadcrumbs:change', this.getState());
       }, this);
     },
 

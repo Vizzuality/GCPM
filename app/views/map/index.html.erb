@@ -1,10 +1,12 @@
 <div class="c-section-intro">
   <div class="c-map-upperbar">
-    <div class="row collapse">
-      <div class="column small-12 medium-6">
-        <div class="-map-breadcrumbs" id="breadcrumbs"></div>
-      </div>
-      <div class="column small-12 medium-6">
+    <div class="wrapper">
+      <div class="row collapse">
+        <div class="column small-12 medium-6">
+          <div class="-map-breadcrumbs" id="breadcrumbs"></div>
+        </div>
+        <div class="column small-12 medium-6">
+        </div>
       </div>
     </div>
   </div>
@@ -44,25 +46,16 @@
   </div>
 </div>
 
+
 <div class="c-legends-bar">
 <div class="-legends-row row collapse" id="legends"></div>
 </div>
 
-<div class="c-card-grid" id="content">
-  <% if @current_type == 'events' %>
-    <%= render 'events/grid', items: @items %>
-  <% else %>
-    <%= render 'projects/grid', items: @items %>
-  <% end %>
-</div>
+<div id="content">
 
-<div class="c-card-grid">
-  <div class="c-pagination-button">
-    <% page = params.key(:page) && params[:page] ? params[:page] + 1 : 2 %>
-    <%= link_to (t 'show_more'),
-      map_path(request.query_parameters.merge({ page: page })),
-      class: "circle-button",
-      remote: true
-    %>
-  </div>
+  <% if @current_type == 'events' %>
+    <%= render 'events/grid', items: @items, more: @more %>
+  <% else %>
+    <%= render 'projects/grid', items: @items, more: @more %>
+  <% end %>
 </div>
