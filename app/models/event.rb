@@ -51,15 +51,13 @@ class Event < ApplicationRecord
     elsif options[:region]
       events = events.by_regions(options[:region])
     end
-    # events = events.by_user(options[:user])              if options[:user]
-    # events = events.by_countries(options[:countries])    if options[:countries]
-    # events = events.by_regions(options[:regions])        if options[:regions]
-    # events = events.by_start_date(options[:start_date])  if options[:start_date]
-    # events = events.by_end_date(options[:end_date])      if options[:end_date]
-    # events = events.order('events.created_at ASC')       if options[:sortby] && options[:sortby] == 'created_asc'
-    # events = events.order('events.created_at DESC')      if options[:sortby] && options[:sortby] == 'created_desc'
-    # events = events.order('events.title ASC')            if options[:sortby] && options[:sortby] == 'title_asc'
-    # events = events.order('events.title DESC')           if options[:sortby] && options[:sortby] == 'title_desc'
-    # events = events.uniq
+    events = events.by_user(options[:user])              if options[:user]
+    events = events.by_start_date(options[:start_date])  if options[:start_date]
+    events = events.by_end_date(options[:end_date])      if options[:end_date]
+    events = events.order('events.created_at ASC')       if options[:sortby] && options[:sortby] == 'created_asc'
+    events = events.order('events.created_at DESC')      if options[:sortby] && options[:sortby] == 'created_desc'
+    events = events.order('events.title ASC')            if options[:sortby] && options[:sortby] == 'title_asc'
+    events = events.order('events.title DESC')           if options[:sortby] && options[:sortby] == 'title_desc'
+    events.uniq
   end
 end
