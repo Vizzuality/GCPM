@@ -5,11 +5,12 @@
   display: flex;
   align-items: center;
   .-legends-row {
-    display: flex;
-    align-content: space-between;
+
     font-family: $font-family-1;
     font-weight: $font-weight-bold;
     color: $color-2;
+    margin: 0;
+    width: 100%;
 
     .legend {
       font-size: $font-size-x-small;
