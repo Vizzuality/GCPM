@@ -1,9 +1,16 @@
 .c-legends-bar {
   margin: 0;
   height: 211px;
-  background-color: rgba($color-1, 0.1);
   display: flex;
   align-items: center;
+
+  &.-light-blue {
+    background-color: rgba($color-1, 0.1);
+  }
+
+  &.-light-orange {
+    background-color: rgba($color-6, 0.1);
+  }
   .-legends-row {
 
     font-family: $font-family-1;
