@@ -1,14 +1,16 @@
-{{#if data.style.projects}}<div class="c-legends-bar -light-blue">{{/if}}
-{{#if data.style.events}}<div class="c-legends-bar -light-orange">{{/if}}
+<div
+{{#if data.style.projects}} class="c-legends-bar -light-blue"{{/if}}
+{{#if data.style.events}} class="c-legends-bar -light-orange"{{/if}}
+>
     <div class="-legends-row row collapse">
 {{#each data.content}}
       <div class="column small-4 small-centered">
         <span class="legend">
-          {{#if blueCircle}}<span class="circle-icon -blue"></span>{{/if}}
-          {{#if blueSquare}}<span class="square-icon -blue"></span>{{/if}}
-          {{#if whiteSquare}}<span class="square-icon -white"></span>{{/if}}
-          {{#if orangeSquare}} <span class="square-icon -orange"></span>{{/if}}
-          {{#if orangeCircle}} <span class="circle-icon -orange"></span>{{/if}}
+          {{#if blueCircle}}<span class="circle-icon -small -blue"></span>{{/if}}
+          {{#if blueSquare}}<span class="square-icon -small -blue"></span>{{/if}}
+          {{#if whiteSquare}}<span class="square-icon -small -white"></span>{{/if}}
+          {{#if orangeSquare}} <span class="square-icon -small -orange"></span>{{/if}}
+          {{#if orangeCircle}} <span class="circle-icon -small -orange"></span>{{/if}}
           {{description}}
         </span>
           <div class="number">{{number}}</div>

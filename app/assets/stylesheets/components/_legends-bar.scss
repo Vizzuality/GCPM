@@ -29,8 +29,7 @@
       > span {
 
         &.circle-icon {
-          width: 15px;
-          height: 15px;
+          @extend .c-icon;
           border-radius: 100%;
           margin-right: 5px;
 
@@ -51,8 +50,7 @@
         }
 
         &.square-icon {
-          width: 15px;
-          height: 15px;
+          @extend .c-icon;
           margin-right: 5px;
 
           &.-blue {
@@ -68,24 +66,6 @@
           &.-orange {
             border: 1px solid #e86b16;
             background-color: $color-6;
-          }
-        }
-      }
-
-      > svg {
-
-        &.marker-icon {
-          height: 20px;
-          width: 20px;
-          margin-right: 5px;
-
-          &.-orange {
-            fill: $color-6;
-            stroke: #e86b16;
-          }
-          &.-blue {
-            fill: #007bcd;
-            stroke: #006eb8;
           }
         }
       }
