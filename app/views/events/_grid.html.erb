@@ -21,10 +21,10 @@
     <p>No events</p>
   </div>
 <% end %>
-<%= "more" %>
+
 <% if more %>
   <div class="c-card-grid">
-    <div class="c-pagination-button">
+    <div class="c-pagination-button" id="show_more_button_filtered">
       <% page = params.key(:page) && params[:page] ? params[:page] + 1 : 2 %>
       <%= link_to (t 'show_more'),
         map_path(request.query_parameters.merge({ page: page })),
