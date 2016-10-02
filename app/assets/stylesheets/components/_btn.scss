@@ -1,11 +1,13 @@
 .c-btn {
   @extend %reset-btn;
+  padding: $button-y-padding $button-x-padding;
 
   font-size: $small-font-size;
   font-weight: bold;
   line-height: 1.2;
   text-transform: uppercase;
-  padding: $button-y-padding $button-x-padding;
+
+  border-radius: 0;
 
   &.-circle {
     display: flex;
@@ -23,5 +25,15 @@
   &.-primary {
     color: $inverse-font-color;
     background-color: $primary-color;
+  }
+
+  &.-global {
+    color: $inverse-font-color;
+    background-color: $secondary-color;
+  }
+
+  &.-alternative {
+    color: $inverse-font-color;
+    background-color: $alternative-color;
   }
 }

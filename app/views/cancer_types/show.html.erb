@@ -1,0 +1,104 @@
+<%
+  @CANCER_TYPE_ID = false
+  if (@cancer_type.id)
+    @CANCER_TYPE_ID = @cancer_type.id
+  end
+%>
+<script> var CANCER_TYPE_ID = <%= @CANCER_TYPE_ID %>;</script>
+<section class="country">
+  <div class="c-section-intro -color-4">
+    <div id="map" class="map c-map -detail">
+      <div class="c-map-intro-legend">
+        <ul class="legend-list">
+          <li class="item"><div class="icon -first"></div><%= t 'project_leads' %></li>
+          <li class="item"><div class="icon -second"></div><%= t 'collaborators' %></li>
+        </ul>
+        <div class="viel"></div>
+      </div>
+    </div>
+
+    <div class="intro-info">
+      <div class="info">
+        <h1 class="c-title -big"><%= @cancer_type.name %></h1>
+        <div class="c-numbers-grid">
+          <div class="number-info">
+            <label class="title">Projects</label>
+            <p class="number"><%= @projectsCount %></p>
+          </div>
+          <!-- <div class="number-info">
+            <label class="title">Organizations</label>
+            <p class="number"> - </p>
+          </div> -->
+          <div class="number-info">
+            <label class="title">Events</label>
+            <p class="number"><%= @eventsCount %></p>
+          </div>
+          <div class="number-info">
+            <label class="title">Daly datasets</label>
+            <p class="number">0</p>
+          </div>
+        </div>
+      </div>
+      <div class="c-buttons-group">
+        <a href="#" class="c-button -inverse -filled btn-large">Follow</a>
+        <div class="row-buttons">
+          <a href="#" class="c-button -inverse">+ Project</a>
+          <a href="#" class="c-button -inverse">+ Post</a>
+          <a href="#" class="c-button -inverse">+ Event</a>
+        </div>
+      </div>
+    </div>
+    <div class="section-tabnav">
+      <div id="dataTabNav" class="c-tabnav">
+        <div class="row collapse">
+          <div class="column small-12">
+            <ul class="tabnav-list">
+               <% @filters.each do |filter| %>
+                <%# @class = !params['type'] and filter == "projects" ? "-active" : active_param?('type', filter) %>
+                <li class="tabnav-item">
+                  <a class="js-btn-mapmenu-type" href="#" data-type="<%= filter %>"><%= t (filter) %></a>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Data tab not showing at the moment  -->
+  <!-- <div class="country-data">
+    <div class="c-legend-map-container">
+      <div class="c-map"></div>
+
+      <div class="c-map-legend">
+        <h3 class="c-title -normal">Radiothearpy coverage and untreated deaths in pain</h3>
+        <ul class="legend">
+          <li class="item"><div class="legend-icon -color-1"></div>To be defined</li>
+          <li class="item"><div class="legend-icon -color-2"></div>To be defined</li>
+          <li class="item"><div class="legend-icon -color-3"></div>To be defined</li>
+          <li class="item"><div class="legend-icon -color-4"></div>To be defined</li>
+          <li class="item"><div class="legend-icon -color-5"></div>To be defined</li>
+        </ul>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- c-grid-proyects -->
+  <div class="c-card-grid" id="content">
+    <%= render('map/' + @current_type) %>
+  </div>
+
+  <div class="c-card-grid">
+  <% @realLimit = params['limit'] ? params['limit'].to_i : 1 %>
+    <% if (@realLimit * @limit) < @projectsCount %>
+      <div class="c-pagination-button">
+        <%= link_to (t 'show_more'),
+                map_path(request.query_parameters.merge({ limit: (params['limit'] ? params['limit'].to_i + 1 : 2 )  })),
+                class: "circle-button",
+                remote: true,
+                data: {magic: true} %>
+      </div>
+    <% end %>
+  </div>
+</section>

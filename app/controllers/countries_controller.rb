@@ -2,7 +2,6 @@ class CountriesController < ApplicationController
   before_action :set_country, only: :show
 
   def index
-    @title = t 'countries'
   end
 
   def show

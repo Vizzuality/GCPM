@@ -2,7 +2,6 @@ class CancerTypesController < ApplicationController
   before_action :set_cancer_type, only: :show
 
   def index
-    @title = t 'cancer_types'
   end
 
   def show
