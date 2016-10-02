@@ -1,39 +1,44 @@
 <% if items && items.size() > 0 %>
-  <div class="c-card-grid">
-    <!-- Events cards -->
+  <div class="row collapse">
     <% items.each do |e| %>
-      <div class="card -mobile-large-1-2 -tablet-1-3">
-        <% if e.country? %>
-          <h4 class="c-card-title -border-2">
-            <% country = Country.find_by( country_name: e.country ) %>
-            <a href="/map?type=events&group=countries&countries[]=<%= country ? country.id : nil %>">
-              <%= e.city %>, <%= e.country %>
-            </a>
-          </h4>
-        <% end %>
-        <%= link_to event_path(e.id), { :class => "link" } do %>
-          <h3 class="c-title"><%= e.title %></h3>
-        <% end %>
-        <p><%= truncate(e.description, :length => 300) %></p>
+      <div class="column small-12 medium-4">
+        <div class="c-card -alternative">
+          <% if e.country? %>
+            <h3>
+              <% country = Country.find_by( country_name: e.country ) %>
+              <a href="/map?type=events&group=countries&countries[]=<%= country ? country.id : nil %>">
+                <%= e.city %>, <%= e.country %>
+              </a>
+            </h3>
+          <% end %>
+          <h2><%= link_to e.title, event_path(e.id) %></h2>
+          <p><%= truncate(e.description, :length => 300) %></p>
+        </div>
       </div>
     <% end %>
   </div>
 <% else %>
-  <div class="c-no-items -padding wrapper">
-    <p>No events</p>
+  <div class="row collapse">
+    <div class="column small-12">
+      <div class="c-card">
+        <p>No events</p>
+      </div>
+    </div>
   </div>
 <% end %>
 
 <% if more %>
-  <div class="c-card-grid">
-    <div class="c-pagination-button">
-      <% page = params.key(:page) && params[:page] ? params[:page] + 1 : 2 %>
-      <%= link_to (t 'show_more'),
-        map_path(request.query_parameters.merge({ page: page })),
-        class: "circle-button",
-        id: 'showMoreButton',
-        remote: true
-      %>
+  <div class="row collapse">
+    <div class="column small-12">
+      <div class="c-card">
+        <% page = @page + 1 %>
+        <%= link_to (t 'show_more'),
+          map_path(request.query_parameters.merge({ page: page })),
+          class: "c-btn -circle",
+          id: 'showMoreButton',
+          remote: true
+        %>
+      </div>
     </div>
   </div>
 <% end %>

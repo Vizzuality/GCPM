@@ -12,7 +12,7 @@
 
     defaults: {
       multiple: true,
-      name: 'organizations',
+      name: 'organizations[]',
       label: 'Organizations',
       placeholder: 'All organizations',
       blank: null,

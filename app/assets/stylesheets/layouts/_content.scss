@@ -1,0 +1,10 @@
+.l-content {
+  padding-top: $box-space;
+  padding-bottom: $box-space;
+
+  border-bottom:  1px solid $border-color-1;
+
+  &:last-child {
+    border-bottom-width: 0;
+  }
+}

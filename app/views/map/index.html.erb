@@ -1,11 +1,13 @@
-<div class="c-section-intro">
-  <div class="c-map-upperbar">
+<% title "Map" %>
+
+<section class="l-app">
+  <div class="l-app-upperbar">
     <div class="wrapper">
       <div class="row collapse">
-        <div class="column small-12 medium-6">
-          <div class="-map-breadcrumbs" id="breadcrumbs"></div>
+        <div class="column small-6">
+          <div class="c-breadcrumbs" id="breadcrumbs"></div>
         </div>
-        <div class="column small-12 medium-6">
+        <div class="column small-6">
         </div>
       </div>
     </div>
@@ -13,11 +15,11 @@
 
   <div id="map" class="c-map"></div>
 
-  <div id="dataTabNav" class="c-tabnav">
+  <div class="l-app-navbar">
     <div class="wrapper">
       <div class="row collapse">
-        <div class="column small-12">
-          <ul class="tabnav-list">
+        <div class="column small-6">
+          <ul class="c-tabnav" id="dataTabNav">
              <% @filters.each do |filter| %>
               <li class="tabnav-item">
                 <%= link_to t(filter),
@@ -30,23 +32,27 @@
             <% end %>
           </ul>
         </div>
+        <div class="column small-6">
+          <div id="toolbar"></div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- toolbar -->
-<div class="c-toolbar">
-  <div class="wrapper">
-    <div class="row collapse">
-      <div class="column small-12">
-        <div id="toolbar"></div>
+  <div class="l-app-bottombar">
+    <div class="wrapper">
+      <div class="row collapse">
+        <div class="column small-12">
+          <div id="counters">
+            <%= render 'map/counters' %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<div id="content">
+<div class="l-grid" id="content">
   <% if @current_type == 'events' %>
     <%= render 'events/grid', items: @items, more: @more %>
   <% else %>

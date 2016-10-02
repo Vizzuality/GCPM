@@ -12,9 +12,10 @@
       new App.Presenter.Toolbar(params);
       new App.Presenter.FilterForm(params);
       new App.Presenter.Breadcrumbs(params);
-      new App.Presenter.UserNav(params);
+      // new App.Presenter.UserNav(params);
       new App.Presenter.ShowMore(params);
-      new App.Presenter.Legends(params);
+      // new App.Presenter.Legends(params);
+      new App.Presenter.Remote();
     }
 
   });

@@ -2,7 +2,7 @@ module Api
   module V1
     class MapController < ApiController
       def index
-        type = params[:type] && (params[:type] == 'events' || params[:type] == 'people') ? params[:type] : 'projects'
+        type = params[:data] && (params[:data] == 'events' || params[:data] == 'people') ? params[:data] : 'projects'
         group = params[:group] && ['countries', 'regions', 'points'].include?(params[:group]) ? params[:group] : 'regions'
         query = SqlQuery.new("#{type}_map_#{group}", params: map_params)
         json_list = query.execute
@@ -21,7 +21,7 @@ module Api
       end
 
       def map_params
-        params.permit(:user, :start_date, :end_date, project_types:[], countries:[], cancer_types:[], organization_types:[], organizations:[], regions:[], investigators:[])
+        params.permit(:format, :user, :start_date, :data, :end_date, project_types:[], countries:[], cancer_types:[], organization_types:[], organizations:[], regions:[], investigators:[])
       end
     end
   end

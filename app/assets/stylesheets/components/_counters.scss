@@ -1,0 +1,32 @@
+.c-counters {
+  padding-top: $box-space;
+  padding-bottom: $box-space;
+
+  h3 {
+    &:before {
+      content: " ";
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border-radius: 100%;
+      margin-right: 1rem;
+      vertical-align: -2px;
+    }
+
+    &.-projects:before {
+      background-color: $primary-color;
+    }
+
+    &.-events:before {
+      background-color: $alternative-color;
+    }
+  }
+
+  .amount {
+    display: block;
+
+    font-size: 66px;
+    font-weight: bold;
+    line-height: 0.8;
+  }
+}

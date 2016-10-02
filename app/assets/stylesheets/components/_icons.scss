@@ -1,0 +1,22 @@
+.c-icon {
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+
+  &.-small {
+    width: 12px;
+    height: 12px;
+    vertical-align: -2px;
+    margin-right: 5px;
+  }
+
+  &.-normal {
+    width: 15px;
+    height: 15px;
+  }
+
+  &.-medium {
+    width: 20px;
+    height: 20px;
+  }
+}

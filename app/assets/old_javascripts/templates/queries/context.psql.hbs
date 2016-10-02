@@ -1,8 +1,0 @@
-SELECT
-  b.admin AS country_name,
-  b.adm0_a3 AS country_iso,
-  a.{{column_name}} AS value,
-  b.the_geom_webmercator
-FROM crm_context_layer a, crm_countries_geoms b
-WHERE a.iso = b.adm0_a3
-ORDER BY b.admin

@@ -1,0 +1,31 @@
+.c-card {
+  width: 100%;
+  padding: $box-space;
+  background-color: $body-bg-color;
+  box-shadow: 0 0 0 1px $border-color-1;
+
+  h3:after {
+    display: block;
+    content: "";
+    height: 0;
+    width: 10px;
+    margin-top: $inline-space;
+
+    border-bottom: 3px solid $primary-color;
+  }
+
+  h2 {
+    margin-top: $inline-space;
+  }
+
+  .tag {
+    display: inline-block;
+    color: $base-font-color;
+  }
+
+  &.-alternative {
+    h3:after {
+      border-bottom-color: $alternative-color;
+    }
+  }
+}

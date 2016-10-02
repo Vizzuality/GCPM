@@ -1,7 +1,0 @@
-SELECT
-  admin AS country_name,
-  adm0_a3 AS country_iso,
-  region_iso,
-  ST_AsGeoJSON(ST_Centroid(the_geom)) AS centroid
-FROM crm_countries_geoms
-WHERE region_iso = '{{iso}}'

@@ -12,7 +12,7 @@
 
     defaults: {
       multiple: true,
-      name: 'project_types',
+      name: 'project_types[]',
       label: 'Project types',
       placeholder: 'All project types',
       blank: null,

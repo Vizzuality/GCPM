@@ -12,7 +12,7 @@
 
     defaults: {
       multiple: true,
-      name: 'organization_types',
+      name: 'organization_types[]',
       label: 'Organization Types',
       placeholder: 'All organization types',
       blank: null,

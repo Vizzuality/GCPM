@@ -12,7 +12,7 @@
 
     defaults: {
       multiple: false,
-      name: 'countries',
+      name: 'countries[]',
       label: 'Countries',
       placeholder: 'All countries',
       blank: true,

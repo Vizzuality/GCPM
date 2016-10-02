@@ -1,0 +1,28 @@
+.l-app {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 94px); // 100vh - header height
+
+  .c-map {
+    flex: 1;
+  }
+}
+
+.l-app-upperbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba($primary-color, .7);
+  z-index: 1;
+}
+
+.l-app-navbar {
+  position: relative;
+  background-color: rgba($primary-color, .7);
+}
+
+.l-app-bottombar {
+
+}

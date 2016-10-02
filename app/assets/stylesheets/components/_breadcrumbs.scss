@@ -1,0 +1,169 @@
+.c-breadcrumbs {
+  > ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    > li a {
+      display: block;
+      padding: 8px 21px 8px 31px;
+      position: relative;
+
+      color: $inverse-font-color;
+      font-size: $small-font-size;
+      font-weight: bold;
+      text-transform: uppercase;
+
+      background-color: $app-bg-color;
+
+      &:after {
+        display: block;
+        position: absolute;
+        content: " ";
+        width: 20px;
+        height: 20px;
+        top: 7px;
+        right: -10px;
+
+        border: 1px solid transparent;
+        border-right: 1px solid rgba($inverse-font-color, 0.5);
+        border-top: 1px solid rgba($inverse-font-color, 0.5);
+
+        background-color: $app-bg-color;
+
+        transform: rotate(45deg) skew(15deg, 15deg);
+        z-index: 1;
+      }
+    }
+
+    > li:last-child a {
+      color: $base-font-color;
+      background-color: $body-bg-color;
+
+      &:after {
+        border-right-color: $body-bg-color;
+        border-top-color: $body-bg-color;
+        background-color: $body-bg-color;
+      }
+    }
+  }
+}
+
+// .c-breadcrumbs > ul {
+//   overflow-y: hidden;
+
+//   > li {
+//     display: flex;
+//     align-items: center;
+//     min-height: 36px;
+//     // background-color: $color-1;
+
+//     > a {
+//       padding: 0 1rem;
+//       height: 36px;
+//       font-size: 11px;
+//       font-weight: bold;
+//       // color: $color-3;
+//       text-transform: uppercase;
+//       display: flex;
+//       align-items: center;
+
+//       > .globe-icon {
+//         display: none;
+//         height: 70%;
+//         padding-right: 1rem;
+//         // border-right: 0.5px solid $color-3;
+//         margin-right: 1rem;
+
+//         > svg {
+//           width: 15px;
+//           height: 15px;
+//           // fill: $color-3;
+//         }
+
+//       }
+//     }
+
+//     > .arrow-tail {
+//       display: none;
+//       width: 0;
+//       height: 0;
+//     }
+
+//     > .rhombus {
+//       display: none;
+//       width: 21px;
+//       height: 21px;
+//       border: 1px solid transparent;
+//       // border-right: 1px solid rgba($color-3, 0.5);
+//       // border-top: 1px solid rgba($color-3, 0.5);
+//       // background-color: $color-1;
+//       transform: rotate(45deg) skew(15deg, 15deg);
+//       position: relative;
+//       right: 11px;
+
+//       &.-last {
+//         display: inherit;
+//       }
+//     }
+
+//     &:first-child {
+//       > a {
+//         // color: $color-3;
+//       }
+//     }
+
+//     // &:last-child {
+//     //   background-color: transparent;
+
+//     //   > a {
+//     //     color: $color-2;
+//     //     background-color: $color-3;
+
+//     //     > .globe-icon {
+//     //       background-color: $color-3;
+//     //       border-right: 0.5px solid rgba($color-2, 0.6);
+//     //       > svg {
+//     //         fill: $color-2;
+//     //       }
+//     //     }
+//     //   }
+
+//     //   > .rhombus {
+//     //     display: inherit;
+//     //     background-color: $color-3;
+
+//     //     &.-last {
+//     //       display: none;
+//     //     }
+//     //   }
+
+//     //   > .arrow-tail {
+//     //     display: inherit;
+//     //     border-top: 18px solid $color-3;
+//     //     border-bottom: 18px solid $color-3;
+//     //     border-left: 15px solid $color-1;
+//     //   }
+//     // }
+
+//     // &:nth-child(1) {
+//     //   > .arrow-tail {
+//     //     display: none;
+//     //   }
+
+//     //   > .rhombus {
+//     //     &.-last {
+//     //       display: none;
+//     //     }
+//     //   }
+//     //   > a {
+//     //     > .globe-icon {
+//     //       display: flex;
+//     //       align-items: center;
+
+//     //     }
+//     //   }
+//     // }
+//   }
+// }

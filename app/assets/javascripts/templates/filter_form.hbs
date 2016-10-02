@@ -1,9 +1,14 @@
 <form class="c-grid" action="#">
-  <div class="row">
-    <div class="column small-12">
-      <h2 class="c-title">Filters</h2>
+
+  <div class="form-row">
+    <div class="row">
+      <div class="column small-12">
+        <h2 class="c-title">Filters</h2>
+      </div>
     </div>
   </div>
+
+  <div class="form-row">
   <div class="row">
     <div class="column small-12 medium-6">
       <div id="countries" class="c-select"></div>
@@ -12,37 +17,48 @@
       <div id="organization-types" class="c-select"></div>
     </div>
   </div>
-  <div class="row">
-    <div class="column small-12 medium-6">
-      <div id="cancer-types" class="c-select"></div>
-    </div>
-    <div class="column small-12 medium-6">
-      <div id="organizations" class="c-select"></div>
-    </div>
   </div>
-  <div class="row">
-    <div class="column small-12 medium-6">
-      <div id="project-types" class="c-select"></div>
-    </div>
-    <div class="column small-12 medium-6">
-      <div id="funding-sources" class="c-select"></div>
+
+  <div class="form-row">
+    <div class="row">
+      <div class="column small-12 medium-6">
+        <div id="cancer-types" class="c-select"></div>
+      </div>
+      <div class="column small-12 medium-6">
+        <div id="organizations" class="c-select"></div>
+      </div>
     </div>
   </div>
 
-  <div class="row">
-    <div class="column small-12 medium-6">
-      <div id="pickadate-start" class="c-pickadate"></div>
-    </div>
-    <div class="column small-12 medium-6">
-      <div id="pickadate-end" class="c-pickadate"></div>
+  <div class="form-row">
+    <div class="row">
+      <div class="column small-12 medium-6">
+        <div id="project-types" class="c-select"></div>
+      </div>
+      <div class="column small-12 medium-6">
+        <div id="funding-sources" class="c-select"></div>
+      </div>
     </div>
   </div>
 
-  <div class="row">
-    <div class="column small-12">
-      <div class="c-button-container -j-center -a-center">
-        <button type="button" class="c-button -filled -inverse js-filter-form-cancel">Cancel</button>
-        <button type="submit" class="c-button -filled js-filter-form-submit">Apply</button>
+  <div class="form-row">
+    <div class="row">
+      <div class="column small-12 medium-6">
+        <div id="pickadate-start" class="c-pickadate"></div>
+      </div>
+      <div class="column small-12 medium-6">
+        <div id="pickadate-end" class="c-pickadate"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <div class="row">
+      <div class="column small-12">
+        <div class="c-button-container -j-center -a-center">
+          <button type="button" class="c-btn js-filter-form-cancel">Cancel</button>
+          <button type="submit" class="c-btn js-filter-form-submit">Apply</button>
+        </div>
       </div>
     </div>
   </div>

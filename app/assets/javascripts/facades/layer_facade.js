@@ -15,7 +15,7 @@
 
     getLayer: function(params) {
       var deferred = new $.Deferred();
-      var fetchParams = _.pick(params, 'region');
+      var fetchParams = params;
 
       if (params.country) {
         fetchParams['countries[]'] = params.country;
@@ -24,8 +24,6 @@
         fetchParams['regions[]'] = params.region;
         fetchParams.group = 'countries';
       }
-
-      fetchParams.type = params.data;
 
       locations
         .fetch({ data: fetchParams })

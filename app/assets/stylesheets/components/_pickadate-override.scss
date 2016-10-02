@@ -1,0 +1,52 @@
+.c-pickadate {
+  margin: 20px 0 0;
+
+  label {
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: $small-font-size;
+  }
+
+	.pickadate-input {
+		display: none;
+	}
+
+	.pickadate-container {
+		&:focus {
+			outline: none;
+		}
+
+		.picker-custom {
+			// font-size: $font-size-tiny;
+
+			&:focus {
+				outline: none;
+			}
+
+			.picker-holder-custom {
+				&:focus {
+					outline: none;
+				}
+			}
+
+			// Year && month selectors
+			.picker__select--year,
+			.picker__select--month {
+				appearance: none;
+				margin: 0px 2px;
+				padding: 0 5px;
+				width: auto;
+				border: none;
+				background: none;
+				text-transform: uppercase;
+				color: $base-font-color;
+
+				cursor: pointer;
+				font-family: inherit;
+				font-weight: bold;
+			}
+		}
+	}
+}

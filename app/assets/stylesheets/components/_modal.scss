@@ -1,229 +1,53 @@
-/**
- *
- * 	This component is for all the modal of the app
- *
- *  <div class="c-modal">
- *  	<div class="modal-window">
- *  		<button href="#" class="modal-close js-btn-modal-close">
- *  	 		<svg><use xlink:href="#shape-close"></use></svg>
- *     	</button>
- *      <div class="modal-wrapper">
- *       	<div class="modal-content"> {content} </div>
- *  		  {{#if -has-footer}}
- *  			  <div class="modal-footer"> {content} </div>
- *  		  {{/if}}
- *  	  </div>
- *    </div>
- *  </div>
- *
- * 	Modifiers:
- * 		- "-active": class to show the modal (hidden by default)
- * 		- "-has-footer": tell the modal you want a fixed footer at its bottom
- *    - "-has-scroll": tell the modal you want to scroll the modal if it's neccessary
- */
-
-// Layout
 .c-modal {
   position: fixed;
   top: 0;
   left: 0;
-  // Just to be sure that is over all the content
-  z-index: 10;
   width: 100%;
   height: 100%;
+
+  background: rgba($overlay-bg-color, .3);
+
   opacity: 0;
   visibility: hidden;
-  transition: all 0.2s $easeInOutSine;
-  background: rgba($color-7, .3);
+  transition: all 0.2s ease-in;
+  z-index: 1000; // Just to be sure that is over all the content
 
   // Active styles
   &.-active, &.-open {
     visibility: visible;
     opacity: 1;
-
-    .modal-window {
-      @media #{$mq-tablet} {
-        transform: translate(-50%, -50%);
-      }
-    }
   }
 
-  .modal-window, .modal-container {
+  .modal-container {
     position: absolute;
-    top: $wrapper-mobile-padding;
-    left: $wrapper-mobile-padding;
-    width: calc(100% - 2 * #{$wrapper-mobile-padding});
-    height: calc(100% - 2 * #{$wrapper-mobile-padding});
-    transition: transform 0.2s $easeInOutSine;
-    background: $color-3;
-    z-index: 12;
+    padding: $box-space;
+    width: 100%;
+    max-width: 80%;
+    max-height: 80%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
-    @media #{$mq-mobile-large} {
-      top: $wrapper-tablet-padding;
-      left: $wrapper-tablet-padding;
-      width: calc(100% - 2 * #{$wrapper-tablet-padding});
-      height: calc(100% - 2 * #{$wrapper-tablet-padding});
-    }
+    background: $body-bg-color;
+    z-index: 1;
+  }
 
-    @media #{$mq-tablet} {
-      width: 700px;
-      top: 50%;
-      left: 50%;
-      height: auto;
-      min-height: 100px;
-      transform: translate(-50%, -50%);
-    }
-
-    &.-tall {
-      height: 80vh;
-      position: relative;
-      overflow: scroll;
-      margin: 5vh 0;
-    }
+  .modal-content {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .modal-close {
-  	@extend %reset-btn;
+    @extend %reset-btn;
     display: block;
     position: absolute;
-    top: 0px;
-    right: 0px;
+    top: 20px;
+    right: 20px;
     width: 40px;
     height: 40px;
     padding: 10px;
     cursor: pointer;
-    z-index: 13; /* Otherwise, it won't be reachable */
-  }
-
-  // MODAL WRAPPER
-  .modal-wrapper {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-    padding: $wrapper-mobile-padding;
-    padding-top: 40px; /* Padding needed for the close button */
-
-    @media #{$mq-mobile-large} {
-      padding:$wrapper-tablet-padding;
-      padding-top: 40px; /* Padding needed for the close button */
-    }
-
-    @media #{$mq-tablet} {
-      padding: $wrapper-padding;
-
-    }
-
-    /* Gradients for the content */
-    &:before, &:after {
-      content: "";
-      position: absolute;
-      height: 20px;
-      width: 100%;
-      left: 0;
-      pointer-events: none;
-    }
-
-    &:before {
-      top: 40px;
-      background: linear-gradient(to bottom, rgba($color-3, 1), rgba($color-3, 0));
-      z-index: 1; /* Mandatory for iOS */
-
-      @media #{$mq-tablet} {
-        top: $wrapper-padding;
-      }
-    }
-
-    // GRADIENTS
-    &:after {
-      bottom: $wrapper-mobile-padding;
-      background: linear-gradient(to top, rgba($color-3, 1), rgba($color-3, 0));
-      z-index: 1; /* Mandatory for iOS */
-
-      @media #{$mq-mobile-large} {
-        bottom: $wrapper-tablet-padding;
-      }
-
-      @media #{$mq-tablet} {
-        bottom: $wrapper-padding;
-      }
-    }
-  }
-
-  .modal-content {
-    flex-grow: 1;
-    width: 100%;
-    padding: 20px; /* The gradient isn't applied on the first and last line */
-    line-height: 1.6;
-    overflow: auto;
-    height: 100%;
-    max-height: calc(100vh - 50px);
-
-    .modal-title {
-    	margin: 0;
-  		font-size: $font-size-x-medium;
-  		font-weight: $font-weight-bold;
-    }
-
-    > ul {
-      list-style-type: disc;
-
-      > li {
-        padding: 10px 0 0;
-        margin-left: 20px;
-        line-height: 1.25;
-
-        &:first-child { padding: 0; }
-
-        > p { margin: 0;}
-      }
-    }
-
-    p {
-      margin-top: 10px;
-      margin-bottom: 10px;
-
-      a:not(.btn) {
-        color: $color-1;
-        &:hover { color: lighten($color-1, 5%); }
-      }
-    }
-  }
-
-  .modal-footer {
-    position: relative;
-    flex-basis: 70px;
-    flex-shrink: 0;
-    width: 100%;
-    background: $color-3;
-    padding-top: 40px;
-
-    // GRADIENTS
-    &:before {
-      content: "";
-      position: absolute;
-      height: 20px;
-      width: 100%;
-      left: 0;
-      top: -20px;
-      background: linear-gradient(to top, rgba($color-3, 1), rgba($color-3, 0));
-    }
-  }
-
-  &.-has-footer .modal-wrapper:after {
-    content: none;
-  }
-
-  &.-has-scroll {
-    .modal-wrapper {
-      max-height: 450px;
-    }
-
-    .modal-content {
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-    }
+    z-index: 2; /* Otherwise, it won't be reachable */
   }
 
   .modal-backdrop {
@@ -232,6 +56,5 @@
     height: 100%;
     top: 0;
     left: 0;
-    z-index: 11;
   }
 }
