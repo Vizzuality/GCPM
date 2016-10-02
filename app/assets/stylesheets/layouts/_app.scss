@@ -2,10 +2,19 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 94px); // 100vh - header height
+  height: 60vh;
 
   .c-map {
     flex: 1;
+    background-color: $secondary-color;
+  }
+
+  &.-main {
+    height: calc(100vh - 94px); // 100vh - header height
+
+    .c-map {
+      background-color: $primary-color;
+    }
   }
 }
 
