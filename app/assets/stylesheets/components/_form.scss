@@ -1,9 +1,40 @@
 $input-height: 38px;
 
-input, select {
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="email"],
+select {
   min-height: $input-height;
+  min-width: 300px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="email"], {
+  border: 0;
+  border-bottom: 1px solid $border-color-1;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+label {
+  display: block;
+
+  font-size: $small-font-size;
+  text-transform: uppercase;
 }
 
 .form-row {
   margin-bottom: $base-space;
+}
+
+.hint {
+  display: block;
+  font-size: $small-font-size;
+  margin-top: 5px;
 }
