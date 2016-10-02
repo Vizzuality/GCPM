@@ -19,4 +19,9 @@
     border: 1px solid $border-color-1;
     border-radius: 100%;
   }
+
+  &.-primary {
+    color: $inverse-font-color;
+    background-color: $primary-color;
+  }
 }
