@@ -26,6 +26,7 @@
       this.setEvents();
       this.setSubscriptions();
       this.setState(params);
+      this.toolbar.render(this.state.attributes);
     },
 
     setEvents: function() {

@@ -12,7 +12,7 @@
 
     defaults: {
       multiple: true,
-      name: 'cancer_types',
+      name: 'cancer_types[]',
       label: 'Cancer types',
       placeholder: 'All cancer types',
       blank: null,

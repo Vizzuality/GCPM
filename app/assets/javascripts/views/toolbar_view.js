@@ -7,7 +7,7 @@
     template: HandlebarsTemplates['toolbar'],
 
     events: {
-      'click .btn-mapmenu-action': 'fireAction'
+      'click .js-toolbar-action': 'fireAction'
     },
 
     render: function(data) {

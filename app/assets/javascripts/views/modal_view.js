@@ -12,6 +12,7 @@
     template: HandlebarsTemplates['modal'],
 
     initialize: function(settings) {
+      this.$body = $('body');
       this.options = _.extend({}, settings);
       this.$el.addClass('c-modal');
     },
@@ -34,6 +35,7 @@
         this.$content.html(content.render().$el);
       }
       this.$el.addClass('-active');
+      this.$body.addClass('-modal-open');
     },
 
     close: function(e) {
@@ -42,6 +44,7 @@
         e.stopPropagation();
       }
       this.$el.removeClass('-active');
+      this.$body.removeClass('-modal-open');
       setTimeout(function() {
         this.$el.remove();
       }.bind(this), 300);

@@ -1,19 +1,24 @@
-<div class="l-header wrapper">
-  <div class="desktop-menu">
-    <div class="row collapse align-middle">
-      <div class="column small-10 medium-4">
-        <div class="logo">
-          <%= link_to(home_path) do %>
-            <h1>Global cancer project map</h1>
-          <% end %>
-        </div>
+<header class="l-header">
+  <div class="wrapper">
+    <div class="row collapse">
+      <div class="column small-6 align-middle">
+        <%= link_to root_path, id: 'logo' do %>
+          <%= image_tag 'global-oncology-logo.png' %>
+        <% end %>
       </div>
-      <div class="column small-2 medium-8 flex align-right">
-        <%= render "shared/main_nav" %>
-        <svg class="icon icon-menu js-hamburger-menu">
-          <use xlink:href="#icon-menu"></use>
-        </svg>
+      <div class="column small-6 align-middle">
+        <nav class="c-nav -main">
+          <ul>
+            <%= render "shared/nav" %>
+            <% if user_signed_in? %>
+            <% else %>
+              <li class="<%= active_page?(user_session_path) ? '-active' : '' %>">
+                <%= link_to (t 'login'), user_session_path %></a>
+              </li>
+            <% end %>
+          </ul>
+        </nav>
       </div>
     </div>
   </div>
-</div>
+</header>

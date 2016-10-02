@@ -17,12 +17,14 @@ class MapController < ApplicationController
       events = Event.fetch_all(projects_params).order('created_at DESC')
       @items = events.limit(limit)
       @more = (events.size > @items.size)
+      @items_total = events.size
     else
       projects = Project.fetch_all(projects_params).order('created_at DESC')
       @items = projects.limit(limit)
       @project_leads = Project.joins(:memberships).fetch_all(projects_params).where('memberships.membership_type = 0').count
       @collaborators =  Project.joins(:memberships).fetch_all(projects_params).where('memberships.membership_type = 1').count
       @more = (projects.size > @items.size)
+      @items_total = projects.size
     end
 
     respond_with(@items)
@@ -31,7 +33,7 @@ class MapController < ApplicationController
   private
 
     def projects_params
-      params.permit(:sortby, :user, :start_date, :end_date, :region, :country, project_types:[], cancer_types:[], organization_types:[], organizations:[], investigators:[])
+      params.permit(:data, :sortby, :user, :start_date, :end_date, :region, :country, project_types:[], cancer_types:[], organization_types:[], organizations:[], investigators:[])
     end
 
     def build_user_data

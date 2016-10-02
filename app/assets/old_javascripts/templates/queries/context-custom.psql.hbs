@@ -1,9 +1,0 @@
-with r as (SELECT
-  b.admin AS country_name,
-  b.adm0_a3 AS country_iso,
-  a.{{column_name}} AS value
-FROM crm_context_layer a, crm_countries_geoms b
-WHERE a.iso = b.adm0_a3
-ORDER BY b.admin)
-
-SELECT CDB_JenksBins(array_agg(value::numeric), 5) from r

@@ -1,10 +1,12 @@
-(function(App) {
+(function() {
 
   'use strict'
 
   <% template = @current_type == 'events' ? 'events/grid' : 'projects/grid'  %>
-  var items = "<%= escape_javascript render(partial: template, locals: { items: @items, more: @more }) %>";
-  document.getElementById('content').innerHTML = items;
-  App.trigger('Remote:load');
+  var htmlContent = "<%= escape_javascript render(partial: template, locals: { items: @items, more: @more }) %>";
+  var htmlCounters = "<%= escape_javascript render(partial: 'map/counters') %>"
 
-})(this.App);
+  document.getElementById('content').innerHTML = htmlContent;
+  document.getElementById('counters').innerHTML = htmlCounters;
+
+})();

@@ -3,34 +3,18 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title><%= @title ? @title + ' - ' : nil %>Global Cancer Project Map</title>
+    <title><%= yield :title %> - Global Cancer Project Map</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
   </head>
-
   <body>
-    <%= render "shared/icons/icons" %>
+    <%= render "shared/icons" %>
     <%= render "shared/header" %>
-    <% if alert %>
-      <%= alert %>
-    <% else %>
-      <% if notice %>
-        <div class="c-notice">
-          <div class="container">
-            <%= notice %>
-            <div id="js-close" class="close-btn">
-              <span></span>
-              <span></span>
-            </div>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
-    <%= yield %>
+    <section class="l-main">
+      <%= yield %>
+    </section>
     <%= render "shared/footer" %>
-    <%# render "shared/modal" %>
-    <%= render "shared/javascripts" %>
     <%= javascript_include_tag 'application' %>
   </body>
 </html>

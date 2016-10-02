@@ -55,7 +55,7 @@
 
     setSubscriptions: function() {
       App.on('Router:change', this.setState, this);
-      App.on('TabNav:change Breadcrumbs:change', function(state) {
+      App.on('TabNav:change Breadcrumbs:change FilterForm:change', function(state) {
         this.setState(state, true);
       }, this);
     },
@@ -68,8 +68,20 @@
       var newState = merge ?
         Object.assign({}, this.getState(), params) : params;
 
+      newState = _.pick(params, 'data', 'region', 'country', 'cancer_types[]',
+        'organization_types[]', 'organizations[]', 'project_types[]',
+        'start_date', 'end_date');
+
       if (!newState.data) {
         newState.data = 'projects';
+      }
+
+      if (!newState.start_date) {
+        delete newState.start_date;
+      }
+
+      if (!newState.end_date) {
+        delete newState.end_date;
       }
 
       this.state.clear({ silent: true }).set(newState);
