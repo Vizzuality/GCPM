@@ -1,3 +1,4 @@
+//= require _fonts
 //= require custom-foundation
 //= require leaflet
 //= require select2
@@ -5,7 +6,6 @@
 //= require pickadate/classic.date
 
 @import
-  "fonts",
   "settings",
   "mixins",
   "base",

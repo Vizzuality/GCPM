@@ -1,26 +1,33 @@
 {{#if groups}}
   {{#each groups as |cancerTypes group|}}
-    <div class="row collapse">
-      <div class="small-12 medium-12">
-        <h3 class="c-card-title -border-1 -color-5 -normal single-list-title">
-          {{group}}
-        </h3>
+    <div class="l-content">
+      <div class="wrapper">
+        <div class="row collapse">
+          <div class="column small-12">
+            <h2 class="-underlined -global">{{region}}</h2>
+            <ul class="c-list row">
+              {{#each cancerTypes as |cancerType|}}
+                <li class="column small-6 medium-3">
+                  <a class="list-item"
+                    href="/cancer-types/{{cancerType.id}}?data=projects&sortby=title_asc&global=all&cancer_types={{cancerType.id}}">
+                    {{cancerType.name}}
+                  </a>
+                </li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="row collapse">
-      {{#each cancerTypes as |cancerType|}}
-        <ul class="column small-6 medium-3 c-list">
-            <a
-              class="list-item"
-              href="/cancer-types/{{cancerType.id}}?data=projects&sortby=title_asc&global=all&cancer_types={{cancerType.id}}">{{cancerType.name}}</a>
-        </ul>
-      {{/each}}
     </div>
   {{/each}}
 {{else}}
-  <div class="row collapse">
-    <div class="column small-12 medium-12">
-      <p>No results.</p>
+  <div class="l-content">
+    <div class="wrapper">
+      <div class="row collapse">
+        <div class="column small-12">
+          <p>No results.</p>
+        </div>
+      </div>
     </div>
   </div>
 {{/if}}
