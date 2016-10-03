@@ -9,13 +9,11 @@
     </div>
     <div class="row collapse">
       {{#each cancerTypes as |cancerType|}}
-        <div class="column small-6 medium-4 list-grid">
-          <div class="item">
+        <ul class="column small-6 medium-3 c-list">
             <a
-              class="item-link"
+              class="list-item"
               href="/cancer-types/{{cancerType.id}}?data=projects&sortby=title_asc&global=all&cancer_types={{cancerType.id}}">{{cancerType.name}}</a>
-          </div>
-        </div>
+        </ul>
       {{/each}}
     </div>
   {{/each}}
