@@ -46,22 +46,24 @@
 
       switch (attributes.data) {
         case 'projects':
-          data = [{ blueCircle: true, description: 'Number of Projects' }];
-          if (typeof attributes.country !== 'undefined') {
-            data = [
-              { blueMarker: true, description: 'Project Leads' },
-              { purpleCircle: true, description: 'Researchers' }
-            ];
-          }
+          data = {
+            style: { projects: true },
+            content: [
+              { blueCircle: true, description: 'Projects', number: '1,387' },
+              { blueSquare: true, description: 'Collaborators', number: '1,829' },
+              { whiteSquare: true, description: 'Project Leads', number: '16,322' }
+            ]
+          };
           break;
         case 'events':
-          data = [{ orangeCircle: true, description: 'Events Per Region' }];
-          if (typeof attributes.region !== 'undefined') {
-            data = [{ orangeCircle: true, description: 'Number of Events' }];
-            if (typeof attributes.country !== 'undefined') {
-              data = [{ orangeMarker: true, description: 'Events' }];
-            }
-          }
+          data = {
+            style: { events: true },
+            content: [
+              { orangeCircle: true, description: 'Events Per Region', number: '1,387' },
+              { orangeSquare: true, description: 'Public Events', number: '1,829' },
+              { whiteSquare: true, description: 'Private Events', number: '16,322' }
+            ]
+          };
           break;
         case 'people':
           break;
