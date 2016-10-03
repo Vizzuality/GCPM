@@ -1,0 +1,11 @@
+.c-sidebar {
+  padding: 0 $box-space;
+
+  border-left: solid rgba($black, 0.1) 0.5px;
+  .sidebar-item {
+    > ul {
+      list-style: none;
+      padding: 0;
+    }
+  }
+}

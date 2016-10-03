@@ -4,18 +4,19 @@
   <div id="map" class="c-map"></div>
 </section>
 
-<div class="l-content">
-  <div class="wrapper">
+<div class="wrapper">
     <div class="row collapse">
       <div class="column small-7">
+      <div class="l-content">
         <article>
 
         </article>
         <%= @project.summary.html_safe %>
+        </div>
       </div>
-      <div class="column small-1"></div>
-      <div class="column small-4">
-        <aside>
+      <div class="column small-4 small-offset-1">
+        <aside class="c-sidebar">
+         <div class="l-content">
           <div class="sidebar-item">
             <h3><%= t 'cancer_types' %></h3>
             <ul>
@@ -77,8 +78,8 @@
               <% end %>
             </ul>
           </div>
+          </div>
         </aside>
       </div>
     </div>
-  </div>
 </div>
