@@ -21,8 +21,8 @@ class MapController < ApplicationController
     else
       projects = Project.fetch_all(projects_params).order('created_at DESC')
       @items = projects.limit(limit)
-      @project_leads = Investigator.joins(:memberships).fetch_all(projects_params).where('memberships.membership_type = 0').count
-      @collaborators = Investigator.joins(:memberships).fetch_all(projects_params).where('memberships.membership_type = 1').count
+      @project_leads = Investigator.joins(projects: :memberships).fetch_all(projects_params).where('memberships.membership_type = 0').count
+      @collaborators = Investigator.joins(projects: :memberships).fetch_all(projects_params).where('memberships.membership_type = 1').count
       @more = (projects.size > @items.size)
       @items_total = projects.size
     end
