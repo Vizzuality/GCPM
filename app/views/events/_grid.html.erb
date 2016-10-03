@@ -2,9 +2,9 @@
   <div class="row collapse">
     <% items.each do |e| %>
       <div class="column small-12 medium-4">
-        <div class="c-card -alternative">
+        <div class="c-card">
           <% if e.country? %>
-            <h3>
+            <h3 class="-underlined -alternative">
               <% country = Country.find_by( country_name: e.country ) %>
               <a href="/map?type=events&group=countries&countries[]=<%= country ? country.id : nil %>">
                 <%= e.city %>, <%= e.country %>

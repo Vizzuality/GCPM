@@ -27,67 +27,67 @@
         <aside class="l-sidebar">
           <div class="sidebar-item">
             <h3><%= t 'cancer_types' %></h3>
-            <ul>
+            <ul class="c-list">
               <% @project.cancer_types.each do |ct| %>
-                <li><%= link_to ct.name, "/map?cancer_types[]=#{ct.id}" %></li>
+                <li class="list-item"><%= link_to ct.name, "/map?cancer_types[]=#{ct.id}" %></li>
               <% end %>
             </ul>
           </div>
 
           <div class="sidebar-item">
             <h3><%= t 'project_types' %></h3>
-            <ul>
+            <ul class="c-list">
               <% @project.project_types.each do |pt| %>
-                <li><%= link_to pt.name, "/map?project_types[]=#{pt.id}" %></li>
+                <li class="list-item"><%= link_to pt.name, "/map?project_types[]=#{pt.id}" %></li>
               <% end %>
             </ul>
           </div>
 
           <div class="sidebar-item">
             <h3><%= t 'location' %>(s)</h3>
-            <ul>
+            <ul class="c-list">
               <% @project.addresses.each do |l| %>
-                <li><%= link_to "#{l.city}, #{l.country_name}", "/map?countries[]=#{l.country_id}&group=points" %></li>
+                <li class="list-item"><%= link_to "#{l.city}, #{l.country_name}", "/map?countries[]=#{l.country_id}&group=points" %></li>
               <% end %>
           </div>
 
           <div class="sidebar-item">
             <h3><%= t 'organization' %>(s)</h3>
-            <ul>
+            <ul class="c-list">
               <% @project.organizations.each do |o| %>
-                <li><%= link_to o.name, "/map?organizations[]=#{o.id}" %></li>
+                <li class="list-item"><%= link_to o.name, "/map?organizations[]=#{o.id}" %></li>
               <% end %>
             </ul>
           </div>
 
           <div class="sidebar-item">
             <h3><%= t 'funding_source' %>(s)</h3>
-            <ul>
+            <ul class="c-list">
               <% @project.funding_sources.each do |fs| %>
-                <li><%= fs.name %></li>
+                <li class="list-item"><%= fs.name %></li>
               <% end %>
             </ul>
           </div>
 
           <div class="sidebar-item">
             <h3><%= t 'project_lead' %>(s)</h3>
-            <ul>
+            <ul class="c-list">
               <% @project.project_leads.each do |pl| %>
-                <li><%= link_to pl.name, "/map?investigators[]=#{pl.id}" %></li>
+                <li class="list-item"><%= link_to pl.name, "/map?investigators[]=#{pl.id}" %></li>
               <% end %>
             </ul>
           </div>
 
           <div class="sidebar-item">
             <h3><%= t 'collaborator' %>(s)</h3>
-            <ul>
+            <ul class="c-list">
               <% @project.secondary_investigators.each do |si| %>
-                <li><%= link_to si.name, "/map?investigators[]=#{si.id}" %></li>
+                <li class="list-item"><%= link_to si.name, "/map?investigators[]=#{si.id}" %></li>
               <% end %>
             </ul>
+          </div>
           </div>
         </aside>
       </div>
     </div>
-  </div>
 </div>

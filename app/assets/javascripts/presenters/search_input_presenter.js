@@ -35,7 +35,7 @@
         options: {
           name: 'title',
           class: 'js-search-list',
-          inputClass: 'c-title -bigger -bold -no-brd',
+          inputClass: '-large',
           type: 'text',
           placeholder: params.options.placeholder
         }

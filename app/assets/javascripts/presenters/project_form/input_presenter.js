@@ -17,7 +17,7 @@
         options: {
           name: 'title',
           class: '',
-          inputClass: 'c-title -bigger -bold',
+          inputClass: '-large',
           type: 'text',
           placeholder: 'Project Title_'
         }

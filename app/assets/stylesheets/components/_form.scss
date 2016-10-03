@@ -12,9 +12,36 @@ select {
 input[type="text"],
 input[type="number"],
 input[type="password"],
-input[type="email"], {
+input[type="email"] {
   border: 0;
   border-bottom: 1px solid $border-color-1;
+
+  &.-large {
+    color: $base-font-color;
+    font-size: $large-font-size;
+    font-weight: $bold-font-weight;
+    letter-spacing: -1px;
+    line-height: $box-space;
+    border: 0;
+    outline: none;
+
+    &::-webkit-input-placeholder {
+      color: $base-font-color;
+    }
+
+    &::-moz-placeholder {
+      color: $base-font-color;
+    }
+
+    &:-moz-placeholder {
+      color: $base-font-color;
+    }
+
+    &:-ms-input-placeholder {
+      color: $base-font-color;
+    }
+  }
+
 }
 
 input[type="radio"],

@@ -10,7 +10,7 @@
       name: null,
       type: 'text',
       required: false,
-      class: 'c-input'
+      class: ''
     },
 
     events: {
