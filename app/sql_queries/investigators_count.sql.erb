@@ -1,0 +1,8 @@
+SELECT count(distinct(investigators.id))
+from investigators
+INNER JOIN "research_units" ON "research_units"."investigator_id" = investigators.id
+INNER JOIN "memberships" ON "memberships"."research_unit_id" = "research_units"."id"
+INNER JOIN projects on projects.id = memberships.project_id
+INNER JOIN "addresses" ON "addresses"."id" = "research_units"."address_id"
+INNER JOIN "countries" ON "countries"."id" = "addresses"."country_id"
+WHERE "countries"."country_iso_3" = 'VEN' AND memberships.membership_type = 1

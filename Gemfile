@@ -67,6 +67,7 @@ group :development do
   gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
   gem 'rubocop', require: false
   gem 'byebug'
+  gem 'rails_db'
   # Deploy
   gem 'capistrano', '3.5'
   gem 'capistrano-env-config'
