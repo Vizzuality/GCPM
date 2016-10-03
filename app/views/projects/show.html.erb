@@ -2,20 +2,29 @@
 
 <section class="l-app">
   <div id="map" class="c-map"></div>
+  <div class="l-app-title">
+    <div class="wrapper">
+      <div class="row">
+        <div class="column small-8">
+          <h1><%= @project.title %></h1>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<div class="l-content">
+<div class="l-grid">
   <div class="wrapper">
     <div class="row collapse">
-      <div class="column small-7">
-        <article>
-
-        </article>
-        <%= @project.summary.html_safe %>
+      <div class="column small-8">
+        <div class="l-content">
+          <article class="l-content-article">
+            <%= @project.summary.html_safe %>
+          </article>
+        </div>
       </div>
-      <div class="column small-1"></div>
       <div class="column small-4">
-        <aside>
+        <aside class="l-sidebar">
           <div class="sidebar-item">
             <h3><%= t 'cancer_types' %></h3>
             <ul>
