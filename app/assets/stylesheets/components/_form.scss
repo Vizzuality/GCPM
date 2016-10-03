@@ -19,12 +19,25 @@ input[type="email"] {
   &.-large {
     color: $base-font-color;
     font-size: $large-font-size;
+    font-weight: $bold-font-weight;
     letter-spacing: -1px;
     line-height: $box-space;
     border: 0;
     outline: none;
 
     &::-webkit-input-placeholder {
+      color: $base-font-color;
+    }
+
+    &::-moz-placeholder {
+      color: $base-font-color;
+    }
+
+    &:-moz-placeholder {
+      color: $base-font-color;
+    }
+
+    &:-ms-input-placeholder {
       color: $base-font-color;
     }
   }

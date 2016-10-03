@@ -1,0 +1,30 @@
+<% title @event.title %>
+
+<section class="l-app">
+  <div id="map" class="c-map"></div>
+</section>
+
+<div class="wrapper">
+    <div class="row collapse">
+      <div class="column small-7">
+      <div class="l-content">
+        <article>
+
+        </article>
+       <%= @event.description %>
+        </div>
+      </div>
+      <div class="column small-4 small-offset-1">
+         <aside>
+           <div class="l-content">
+            <div class="sidebar-item">
+               <h3><%= t 'location' %>(s)</h3>
+                  <ul class="c-list">
+                    <li class="list-item"><%=@event.city%>, <%=@event.country%></li>
+                  </ul>
+            </div>
+            </div>
+            </aside>
+         </div>
+         </div>
+</div>
