@@ -57,11 +57,11 @@
     }
 
     &.-blue {
-      background-color: #007bcd;
+      background-color: rgba(#007bcd, 0.85);
     }
 
     &.-orange {
-      background-color: #f57823;
+      background-color: rgba(#f57823, 0.85);
     }
 
     &.prunecluster {
@@ -99,6 +99,17 @@
       stroke: #005e9c;
       stroke-width: 1px;
       filter: drop-shadow(0 3px 5px rgba(3, 11, 43, 0.2));
+    }
+  }
+
+  .point-icon {
+    background: white;
+    border: 0;
+    border-radius: 100%;
+    box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.2);
+
+    &.-alternative {
+      background-color: #f57823;
     }
   }
 }

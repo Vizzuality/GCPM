@@ -30,14 +30,19 @@ class Investigator < ApplicationRecord
   scope :by_investigators,      -> investigators       { joins(:investigators).where(investigators: { id: investigators }) }
   scope :by_organizations,      -> organizations       { joins(:organizations).where(organizations: { id: organizations }) }
   scope :by_organization_types, -> organization_types  { joins(organizations: :organization_type).where(organization_types: { id: organization_types }) }
-  scope :by_countries,          -> countries           { joins(:countries).where(countries: { id: countries }) }
-  scope :by_regions,            -> regions             { joins(:countries).where(countries: { region_iso: regions }) }
+  scope :by_countries,          -> countries           { joins(projects: :countries).where(countries: { country_iso_3: countries }) }
+  scope :by_regions,            -> regions             { joins(projects: :countries).where(countries: { region_iso: regions }) }
   scope :by_start_date,         -> start_date          { joins(:projects).where('projects.start_date > ?', start_date ) }
   scope :by_end_date,           -> end_date            { joins(:projects).where('projects.end_date < ?', end_date ) }
   scope :by_user,               -> user                { joins(:projects).where('projects.user_id = ?', user ) }
 
   def self.fetch_all(options={})
     investigators = Investigator.all
+    if options[:country]
+      investigators = investigators.by_countries(options[:country])
+    elsif options[:region]
+      investigators = investigators.by_regions(options[:region])
+    end
     investigators = investigators.by_investigators(options[:investigators])           if options[:investigators]
     investigators = investigators.by_project_types(options[:project_types])           if options[:project_types]
     investigators = investigators.by_cancer_types(options[:cancer_types])             if options[:cancer_types]

@@ -3,12 +3,8 @@
   'use strict';
 
   var basemapSpec = {
-    default: {
+    main: {
       url: '<%= ENV["BASEMAP_URL"] %>',
-      options: {}
-    },
-    noLabel: {
-      url: 'http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
       options: {}
     }
   };
@@ -18,7 +14,7 @@
     defaults: {
       center: [0, 0],
       scrollWheelZoom: false,
-      basemap: 'default',
+      basemap: null,
       attributionControl: false,
       zoom: 3
     },
@@ -54,15 +50,17 @@
      * Add basemap to map
      */
     setBasemap: function() {
-      var basemapConfig = basemapSpec[this.options.basemap || 'default'];
+      var basemapConfig = basemapSpec[this.options.basemap];
       if (!this.map || !(this.map instanceof L.Map)) {
         throw new Error('There isn\'t a valid map object');
       }
       if (this.basemap) {
         this.map.removeLayer(this.basemap);
       }
-      this.basemap = L.tileLayer(basemapConfig.url, basemapConfig.options);
-      this.basemap.addTo(this.map);
+      if (this.options.basemap) {
+        this.basemap = L.tileLayer(basemapConfig.url, basemapConfig.options);
+        this.basemap.addTo(this.map);
+      }
     },
 
     /**

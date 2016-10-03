@@ -8,6 +8,10 @@
 
     new: function() {
       new App.Presenter.ProjectForm();
+    },
+
+    show: function(params) {
+      new App.Presenter.MapVis(params);
     }
 
   });

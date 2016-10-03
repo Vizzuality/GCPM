@@ -2,7 +2,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  height: 60vh;
+  height: 80vh;
+  min-height: 50vh;
 
   .c-map {
     flex: 1;
@@ -10,11 +11,13 @@
   }
 
   &.-main {
-    height: calc(100vh - 94px); // 100vh - header height
-
     .c-map {
       background-color: $primary-color;
     }
+  }
+
+  &.-full {
+    height: calc(100vh - 94px); // 100vh - header height
   }
 }
 
@@ -30,6 +33,18 @@
 .l-app-navbar {
   position: relative;
   background-color: rgba($primary-color, .7);
+}
+
+.l-app-title {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  padding: $box-space 0;
+
+  color: $inverse-font-color;
+
+  background-image: linear-gradient(to top, #68299b, rgba(103, 40, 155, 0));
 }
 
 .l-app-bottombar {

@@ -19,7 +19,8 @@
         el: '#map',
         options: {
           minZoom: 2,
-          maxZoom: 14
+          maxZoom: 14,
+          basemap: 'main'
         }
       });
 

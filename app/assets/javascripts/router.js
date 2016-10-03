@@ -12,6 +12,7 @@
      */
     routes: {
       'map(?*query)':             'Map#index',
+      'projects/:id':             'Project#show',
       'network/:id/projects/new': 'Project#new',
       'countries':                'Countries#index',
       'countries/:iso':           'Countries#show',
@@ -99,7 +100,7 @@
      */
     updateUrl: function() {
       var uri = new URI();
-      var params = _.omit(this.getParams(), 'vars', 'dataSingular', 'userId');
+      var params = _.omit(this.getParams(), 'vars', 'dataSingular', 'userId', 'group', 'countries[]', 'regions[]');
       uri.query(this._serializeParams(params));
       this.navigate(uri.path().slice(1) + uri.search(), { trigger: false });
     },

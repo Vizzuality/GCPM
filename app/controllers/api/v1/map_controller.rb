@@ -11,8 +11,7 @@ module Api
 
       def show_project
         project = Project.find(params[:id])
-        @addresses = project.addresses
-        render json: @addresses, each_serializer: MapProjectSerializer, project: project
+        render json: project.addresses, each_serializer: MapProjectSerializer, project: project
       end
 
       def show_event
