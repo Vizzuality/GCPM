@@ -55,6 +55,32 @@ h3 {
   text-transform: uppercase;
 }
 
+h2, h3 {
+  &.-underlined {
+    &:after {
+      display: block;
+      content: "";
+      height: 0;
+      width: 10px;
+      margin-top: $inline-space;
+
+      border-bottom: 3px solid $primary-color;
+    }
+
+    &.-alternative {
+      &:after {
+        border-bottom-color: $alternative-color;
+      }
+    }
+
+    &.-global {
+      &:after {
+        border-bottom-color: $secondary-color;
+      }
+    }
+  }
+}
+
 a {
   color: $base-font-color;
   text-decoration: none;
@@ -82,4 +108,9 @@ a, button {
 
 p > a {
   color: $primary-color;
+}
+
+aside {
+  padding: 0 $box-space;
+  border-left: solid $border-color-1 0.5px;
 }

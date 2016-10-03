@@ -4,18 +4,16 @@
       <div class="wrapper">
         <div class="row collapse">
           <div class="column small-12">
-            <h2>{{region}}</h2>
+            <h2 class="-underlined -global">{{region}}</h2>
           </div>
         </div>
         <div class="row collapse">
-          <div class="c-list -columns">
             {{#each countries as |country|}}
-              <div class="column small-6 medium-3">
-                <a class="item-link" href="/countries/{{country.country_iso_3}}?data=projects&sortby=title_asc&global=all&region={{country.region_iso}}&country={{country.country_iso_3}}">{{country.name}}</a>
-              </div>
+              <ul class="c-list column small-6 medium-3">
+                <a class="list-item" href="/countries/{{country.country_iso_3}}?data=projects&sortby=title_asc&global=all&region={{country.region_iso}}&country={{country.country_iso_3}}">{{country.name}}</a>
+              </ul>
             {{/each}}
           </div>
-        </div>
       </div>
     </div>
   {{/each}}
