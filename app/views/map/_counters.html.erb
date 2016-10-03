@@ -6,13 +6,20 @@
       </h3>
       <span class="amount"><%= @items_total %></span>
     </div>
-    <div class="column small-4">
-      <h3>Project leads</h3>
-      <span class="amount">0</span>
-    </div>
-    <div class="column small-4">
-      <h3>Collaborators</h3>
-      <span class="amount">0</span>
-    </div>
+    <% if @current_type == 'projects' %>
+      <div class="column small-4">
+        <h3 class="-project-leads">Project leads</h3>
+        <span class="amount"><%= @project_leads %></span>
+      </div>
+      <div class="column small-4">
+        <h3 class="-collaborators">Collaborators</h3>
+        <span class="amount"><%= @collaborators %></span>
+      </div>
+    <% else %>
+      <div class="column small-4">
+      </div>
+      <div class="column small-4">
+      </div>
+    <% end %>
   </div>
 </div>
