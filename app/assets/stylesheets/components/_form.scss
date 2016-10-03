@@ -23,7 +23,12 @@ input[type="email"] {
     line-height: $box-space;
     border: 0;
     outline: none;
+
+    &::-webkit-input-placeholder {
+      color: $base-font-color;
+    }
   }
+
 }
 
 input[type="radio"],
