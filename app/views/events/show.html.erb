@@ -18,10 +18,16 @@
          <aside>
            <div class="l-content">
             <div class="sidebar-item">
-               <h3><%= t 'location' %>(s)</h3>
+               <h3><%= t 'location' %></h3>
                   <ul class="c-list">
                     <li class="list-item"><%=@event.city%>, <%=@event.country%></li>
                   </ul>
+            </div>
+            <div class="sidebar-item">
+                           <h3><%= t 'participants' %></h3>
+                              <ul class="c-list">
+                                <li class="list-item"><%=@event.participants%></li>
+                              </ul>
             </div>
             </div>
             </aside>
