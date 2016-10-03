@@ -14,39 +14,42 @@
     .c-map {
       background-color: $primary-color;
     }
+    .l-app-navbar {
+      background-color: rgba($primary-color, .7);
+    }
   }
 
   &.-full {
     height: calc(100vh - 94px); // 100vh - header height
   }
-}
 
-.l-app-upperbar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: rgba($primary-color, .7);
-  z-index: 1;
-}
+  .l-app-upperbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba($primary-color, .7);
+    z-index: 1;
+  }
 
-.l-app-navbar {
-  position: relative;
-  background-color: rgba($primary-color, .7);
-}
+  .l-app-navbar {
+    position: relative;
+    background-color: rgba($secondary-color, .7);
+  }
 
-.l-app-title {
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  left: 0;
-  padding: $box-space 0;
+  .l-app-title {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    padding: $box-space 0;
 
-  color: $inverse-font-color;
+    color: $inverse-font-color;
 
-  background-image: linear-gradient(to top, #68299b, rgba(103, 40, 155, 0));
-}
+    background-image: linear-gradient(to top, #68299b, rgba(103, 40, 155, 0));
+  }
 
-.l-app-bottombar {
+  .l-app-bottombar {
 
+  }
 }
