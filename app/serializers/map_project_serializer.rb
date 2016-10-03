@@ -14,6 +14,6 @@ class MapProjectSerializer < ActiveModel::Serializer
     @instance_options[:project].title
   end
   def centroid
-    '{"type":"point","coordinates":[' + object.latitude.to_s + ',' + object.longitude.to_s + ']}'
+    '{"type":"Point","coordinates":[' + object.latitude.to_s + ',' + object.longitude.to_s + ']}'
   end
 end

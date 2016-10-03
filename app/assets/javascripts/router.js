@@ -12,6 +12,7 @@
      */
     routes: {
       'map(?*query)':             'Map#index',
+      'projects/:id':             'Project#show',
       'network/:id/projects/new': 'Project#new',
       'countries':                'Countries#index',
       'countries/:iso':           'Countries#show',

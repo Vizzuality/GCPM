@@ -10,11 +10,13 @@
   }
 
   &.-main {
-    height: calc(100vh - 94px); // 100vh - header height
-
     .c-map {
       background-color: $primary-color;
     }
+  }
+
+  &.-full {
+    height: calc(100vh - 94px); // 100vh - header height
   }
 }
 

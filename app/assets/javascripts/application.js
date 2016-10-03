@@ -9,25 +9,25 @@
 //= require select2
 //= require pickadate/picker
 //= require pickadate/picker.date
+//= require PruneCluster/PruneCluster
 
 //= require_self
 
 //= require dispatcher
 //= require router
 
+//= require_tree ./helpers
 //= require_tree ./models
 //= require_tree ./collections
 //= require_tree ./presenters
-//= require_tree ./helpers
 //= require_tree ./templates
 //= require_tree ./views
 //= require_tree ./controllers
 //= require_tree ./facades
-//= require_tree ./lib
 
 this.App = {
   facade: {},
-  Helper: {},
+  helper: {},
   Model: {},
   Collection: {},
   Controller: {},

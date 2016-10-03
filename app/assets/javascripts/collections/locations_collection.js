@@ -18,9 +18,13 @@
       return {
         type: 'FeatureCollection',
         features: _.map(this.models, function(m) {
+          var centroid = JSON.parse(m.attributes.centroid);
+          if (centroid.type === 'point') {
+            centroid.type = 'Point';
+          }
           return {
             type: 'Feature',
-            geometry: JSON.parse(m.attributes.centroid),
+            geometry: centroid,
             properties: m.attributes
           };
         })
