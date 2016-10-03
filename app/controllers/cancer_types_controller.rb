@@ -52,4 +52,17 @@ class CancerTypesController < ApplicationController
     @cancer_type = CancerType.find_by(id: params['id'])
   end
 
+  def build_user_data
+    if current_user.name && current_user.email
+      user_initial = current_user.email[0].upcase
+    else
+      user_initial = 'U'
+    end
+    {
+      user_project: Project.where("user_id = #{current_user.id}").count,
+      user_event: Event.where("user_id = #{current_user.id}").count,
+      user_initial: user_initial
+    }
+  end
+
 end
