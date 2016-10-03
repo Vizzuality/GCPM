@@ -33,12 +33,9 @@
       this.organizationForm.on('cancel', this.closeForm, this);
       this.organizationForm.on('submit', function(newState) {
         this.setState(newState);
+        App.trigger('OrganizationForm:submit', this.state.attributes);
         this.closeForm();
       }, this);
-
-      this.state.on('change', function() {
-        App.trigger('OrganizationForm:change', this.state.attributes);
-      }, this)
     },
 
     /**

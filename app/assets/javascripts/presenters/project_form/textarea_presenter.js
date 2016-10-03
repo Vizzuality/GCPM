@@ -4,51 +4,95 @@
 
   var StateModel = Backbone.Model.extend();
 
-  App.Presenter.Textarea = function() {
+  App.Presenter.Investigators = function() {
     this.initialize.apply(this, arguments);
   };
 
-  _.extend(App.Presenter.Textarea.prototype, {
+  _.extend(App.Presenter.Investigators.prototype, {
 
-    initialize: function(params) {
-      this.state = new StateModel();
-      this.Textarea = new App.View.Textarea({
-        el: '#description',
-        options: {
-          name: 'summary',
-          type: 'textarea',
-          lableClass: 'c-section-title',
-          placeholder: 'Lorem'
-        }
-      });
+    defaults: {
+      multiple: true,
+      name: 'investigators',
+      label: 'Investigators',
+      placeholder: 'All investigators',
+      blank: null,
+      addNew: true,
+      select2Options: {
+        // closeOnSelect: false
+        // It solves the closing of the dropdown menu
+        // It adds a lot of UX issues
+        // - Scroll: On select, scroll will go to first highlighted choice => How to resolve the scroll issue https://github.com/select2/select2/issues/1672#issuecomment-240411031
+        // - Click: On each click dropdown will appear and dissapear
+      }
     },
 
-    setTextareaValue: function(textarea) {
-      var value = textarea.$el.find('textarea')[0].value;
-      var obj = {};
-      obj[textarea.options.name] = value;
+    initialize: function(viewSettings) {
+      this.state = new StateModel();
+      this.investigators = new App.Collection.Investigators();
 
-      this.state.set(obj);
+      // Creating view
+      this.select = new App.View.Select({
+        el: '#investigators',
+        options: _.extend({}, this.defaults, viewSettings || {}),
+        state: this.state
+      });
+
+      this.setEvents();
+    },
+
+    /**
+     * Setting internal events
+     */
+    setEvents: function() {
+      this.state.on('change', function() {
+        App.trigger('Investigators:change', this.state.attributes);
+      }, this);
+
+      this.select.on('change', this.setState, this);
+    },
+
+    /**
+     * Fetch cancer types from API
+     * @return {Promise}
+     */
+    fetchData: function() {
+      return this.investigators.fetch().done(function() {
+        var options = this.investigators.map(function(type) {
+          return {
+            name: type.attributes.name,
+            value: type.attributes.id
+          };
+        });
+        this.select.setOptions(options);
+      }.bind(this));
     },
 
     render: function() {
-      this.Textarea.render();
+      this.select.render();
     },
 
-    render: function(){
-      this.Textarea.render();
-    },
-
+    /**
+     * Method to set a new state
+     * @param {Object} state
+     */
     setState: function(state, options) {
       this.state.set(state, options);
     },
 
+    /**
+     * Rebinding element, events and render again
+     * @param {DOM|String} el
+     */
     setElement: function(el) {
-      this.Textarea.setElement(el);
+      this.select.setElement(el);
     },
 
+    /**
+     * Exposing DOM element
+     * @return {DOM}
+     */
     getElement: function() {
-      return this.Textarea.$el;
+      return this.select.$el;
     }
 
   });

@@ -19,12 +19,12 @@
       this.Input = new App.View.Input({
         el: '#investigatorwebsite',
         options: {
-          name: 'title',
+          label: 'Project Website',
+          placeholder: 'http://www.example.com',
+          name: 'investigatorWebsite',
           type: 'url',
-          class: '',
-          inputClass: '',
-          type: 'text',
-          placeholder: 'website'
+          required: true,
+          class: 'c-input'
         }
       });
 

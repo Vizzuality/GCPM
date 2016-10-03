@@ -10,30 +10,34 @@
 
   _.extend(App.Presenter.Input.prototype, {
 
+    defaults: {
+      name: 'title'
+    },
+
     initialize: function(params) {
       this.state = new StateModel();
       this.Input = new App.View.Input({
         el: '#title',
         options: {
+          label: false,
+          placeholder: 'Project Title_',
           name: 'title',
-          class: '',
-          inputClass: '-large',
           type: 'text',
-          placeholder: 'Project Title_'
+          required: true,
+          class: 'c-input',
+          inputClass: 'c-title -bigger -bold',
         }
       });
+
+      this.setEvents();
     },
 
-    setInputValue: function(input) {
-      var value = input.$el.find('input')[0].value;
-      var obj = {};
-      obj[input.options.name] = value;
+    setEvents: function(){
+      this.state.on('change', function(){
+        App.trigger('Input:change', this.state.attributes);
+      }, this);
 
-      this.state.set(obj);
-    },
-
-    render: function() {
-      this.Input.render();
+      this.Input.on('change', this.setState, this);
     },
 
     render: function(){

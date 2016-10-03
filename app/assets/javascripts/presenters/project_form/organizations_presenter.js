@@ -38,17 +38,29 @@
       });
 
       this.setEvents();
+      this.setSubscriptions();
     },
 
     /**
      * Setting internal events
      */
     setEvents: function() {
-      this.state.on('change', function() {
+      this.select.on('new', function(){
+        App.trigger('Organizations:new');
+      }, this);
+
+      this.select.on('change', function(newState){
+        this.setState(newState);
         App.trigger('Organizations:change', this.state.attributes);
       }, this);
 
-      this.select.on('change', this.setState, this);
+    },
+
+    setSubscriptions: function(){
+      App.on('OrganizationsForm:submit', function(newState){
+        this.organizations.push(newState);
+        this.select.addNew(this.organizations.at(this.organizations.length-1));
+      }, this);
     },
 
     /**

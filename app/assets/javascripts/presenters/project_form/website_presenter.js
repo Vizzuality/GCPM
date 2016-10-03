@@ -15,11 +15,13 @@
       this.websiteInput = new App.View.Input({
         el: '#project-website',
         options: {
+          label: false,
+          placeholder: 'http://example.org',
           name: 'project_website',
-          type: 'text',
-          label: 'Project website',
+          type: 'url',
+          required: true,
+          class: 'c-input',
           inputClass: 'c-section-title -one-line',
-          placeholder: 'http://example.org'
         }
       });
 

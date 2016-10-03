@@ -13,21 +13,11 @@
     initialize: function(params) {
       this.state = new StateModel(params);
 
-      var titleInput = new App.Presenter.Input({
-        label: null
-      });
-      var descTextarea = new App.Presenter.Textarea({
-        label: null
-      });
-      var startPickadate = new App.Presenter.PickadateStart({
-        label: null
-      });
-      var endPickadate = new App.Presenter.PickadateEnd({
-        label: null
-      });
-      var websiteInput = new App.Presenter.WebsiteInput({
-        label: null
-      });
+      var titleInput = new App.Presenter.Input();
+      var descTextarea = new App.Presenter.Textarea();
+      var startPickadate = new App.Presenter.PickadateStart();
+      var endPickadate = new App.Presenter.PickadateEnd();
+      var websiteInput = new App.Presenter.WebsiteInput();
       var projectTypes = new App.Presenter.ProjectTypes({
         label: null,
         addNew: false
@@ -42,18 +32,20 @@
       });
       var investigators  = new App.Presenter.Investigators({
         label: null,
-        addNew: false
+        addNew: true
       });
       var organizations = new App.Presenter.Organizations({
         label: null,
-        addNew: false
+        addNew: true
       });
+
+      this.investigatorForm = new App.Presenter.InvestigatorForm();
+      this.organizationForm = new App.Presenter.OrganizationForm();
 
       this.children = [titleInput, descTextarea, startPickadate, endPickadate,
          websiteInput, projectTypes, cancerTypes, fundingSources, investigators,
          organizations];
 
-      this.modal = new App.View.Modal();
       this.projectForm = new App.View.ProjectForm({
         children: this.children,
         el: '#project_form'
@@ -82,7 +74,19 @@
      * Subscribing to global events
      */
     setSubscriptions: function() {
+      App.on('Investigators:change', function(newState){
+        console.log(this);
+        if (newState.value[0] == "Add new"){
+          this.investigatorForm.openForm();
+        }
+      }, this);
 
+      App.on('Organizations:change', function(newState){
+        console.log(this);
+        if (newState.value[0] == "Add new"){
+          this.organizationForm.openForm();
+        }
+      }, this);
     },
 
     setState: function(newState) {
@@ -94,7 +98,7 @@
      */
     handleSubmit: function() {
       console.log(this.state.attributes);
-      var url = "";
+      /*var url = "";
       var req = new XMLHttpRequest();
       req.onload = function(){
         if(this.status = 200){
@@ -105,15 +109,26 @@
         }
       };
       req.open("POST", url, true);
-      req.send(this.state.attributes);
+      req.send(this.state.attributes);*/
     },
 
     renderForm: function(){
-      this.projectForm.render();
-      this.renderFormElements();
+
+      var promises = _.compact(_.map(this.children, function(child) {
+        if (!!child.fetchData) {
+          return child.fetchData();
+        }
+        return null;
+      }));
+
+      $.when.apply($, promises).done(function() {
+        this.renderFormElements();
+      }.bind(this));
+
     },
 
     renderFormElements: function() {
+      this.projectForm.render();
       _.each(this.children, function(child){
         // Get && set the value from the state thanks to the name
         // I need to pass the rest of the params because there are some presenters that need other params

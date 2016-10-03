@@ -10,13 +10,6 @@
 
   _.extend(App.Presenter.Investigators.prototype, {
 
-<<<<<<< efa37edac46b74986c8bda20783172157c8f3208
-    initialize: function(params) {
-      this.state = new StateModel();
-      this.investigators = new App.Collection.Investigators();
-      this.investigators.url = '/api/investigators?token=' + window.AUTH_TOKEN;
-      this.investigatorsId = 0;
-=======
     defaults: {
       multiple: true,
       name: 'investigators',
@@ -36,7 +29,6 @@
     initialize: function(viewSettings) {
       this.state = new StateModel();
       this.investigators = new App.Collection.Investigators();
->>>>>>> new project, investigator and organization forms
 
       // Creating view
       this.select = new App.View.Select({
@@ -56,26 +48,7 @@
         App.trigger('Investigators:change', this.state.attributes);
       }, this);
 
-<<<<<<< efa37edac46b74986c8bda20783172157c8f3208
-    renderOrganizations: function(investigatorId) {
-      $.ajax({
-        url: '/api/investigators/' + investigatorId + '?token=' + window.AUTH_TOKEN,
-        method: 'GET',
-        success: function(data) {
-          var organizations = data.organizations.map(function(organization) {
-            return {
-              name: organization.name,
-              value: organization.id
-            };
-          }.bind(this));
-          this.organizationsSelect.setOptions(organizations, true);
-          data.organizations.length !== 0 &&
-            this.renderAddresses(organizations[0].value);
-        }.bind(this)
-      });
-=======
       this.select.on('change', this.setState, this);
->>>>>>> new project, investigator and organization forms
     },
 
     /**

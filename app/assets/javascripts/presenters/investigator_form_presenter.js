@@ -33,12 +33,10 @@
       this.investigatorForm.on('cancel', this.closeForm, this);
       this.investigatorForm.on('submit', function(newState) {
         this.setState(newState);
+        App.trigger('InvestigatorForm:submit', this.state.attributes);
         this.closeForm();
       }, this);
 
-      this.state.on('change', function() {
-        App.trigger('InvestigatorForm:change', this.state.attributes);
-      }, this)
     },
 
     /**

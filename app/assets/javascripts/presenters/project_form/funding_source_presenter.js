@@ -14,11 +14,13 @@
       this.fundingInput = new App.View.Input({
         el: '#funding-sources',
         options: {
+          label: false,
+          placeholder: 'Name',
           name: 'funding-sources',
           type: 'text',
-          label: 'funding-sources',
-          inputClass: 'funding-sources',
-          placeholder: 'name'
+          required: true,
+          class: 'c-input',
+          inputClass: '',
         }
       });
 
