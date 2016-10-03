@@ -110,7 +110,6 @@ p > a {
   color: $primary-color;
 }
 
-aside {
-  padding: 0 $box-space;
-  border-left: solid $border-color-1 0.5px;
+ul {
+  padding-left: $base-space;
 }

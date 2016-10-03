@@ -2,9 +2,14 @@
   padding-top: $box-space;
   padding-bottom: $box-space;
 
+  border-top:  1px solid $border-color-1;
   border-bottom:  1px solid $border-color-1;
 
   &:last-child {
     border-bottom-width: 0;
+  }
+
+  .l-content-article {
+    padding-right: $box-space;
   }
 }

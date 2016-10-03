@@ -5,9 +5,10 @@
   App.helper.pointsLayer = function(geoJSON) {
     return L.geoJson(geoJSON, {
       pointToLayer: function(feature, latLng) {
+        var className = feature.properties.is_project_lead ? '-alternative' : '';
         var pointIcon = new L.divIcon({
           iconSize: [15, 15],
-          className: 'point-icon',
+          className: 'point-icon ' + className,
           html: ''
         });
 

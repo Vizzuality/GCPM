@@ -2,7 +2,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  height: 60vh;
+  height: 80vh;
+  min-height: 50vh;
 
   .c-map {
     flex: 1;
