@@ -32,7 +32,7 @@ module Gcpm
     #   end
     # end
 
-    config.web_console.whitelisted_ips = '172.19.0.1'
+    #config.web_console.whitelisted_ips = '172.19.0.1'
 
     config.generators do |g|
       g.test_framework  :rspec
