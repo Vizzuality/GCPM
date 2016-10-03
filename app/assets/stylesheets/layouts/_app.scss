@@ -35,6 +35,18 @@
   background-color: rgba($primary-color, .7);
 }
 
+.l-app-title {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  padding: $box-space 0;
+
+  color: $inverse-font-color;
+
+  background-image: linear-gradient(to top, #68299b, rgba(103, 40, 155, 0));
+}
+
 .l-app-bottombar {
 
 }

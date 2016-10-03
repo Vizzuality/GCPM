@@ -36,6 +36,11 @@
       var map = this.view.map;
       this.fc.getPointLayer(this.state.attributes).done(function(layer) {
         layer.addTo(map, 2);
+        setTimeout(function() {
+          map.fitBounds(layer.getBounds(), {
+            padding: [100, 100]
+          });
+        }, 100);
       });
     },
 
