@@ -1,24 +1,32 @@
 {{#if groups}}
   {{#each groups as |countries region|}}
-    <div class="row collapse">
-      <div class="small-12 medium-12">
-        <h3 class="c-card-title -border-1 -color-5 -normal single-list-title">{{region}}</h3>
-      </div>
-    </div>
-    <div class="row collapse">
-      {{#each countries as |country|}}
-        <div class="column small-6 medium-4 list-grid">
-          <div class="item">
-            <a class="item-link" href="/countries/{{country.country_iso_3}}?data=projects&sortby=title_asc&global=all&region={{country.region_iso}}&country={{country.country_iso_3}}">{{country.name}}</a>
+    <div class="l-content">
+      <div class="wrapper">
+        <div class="row collapse">
+          <div class="column small-12">
+            <h2>{{region}}</h2>
           </div>
         </div>
-      {{/each}}
+        <div class="row collapse">
+          <div class="c-list -columns">
+            {{#each countries as |country|}}
+              <div class="column small-6 medium-3">
+                <a class="item-link" href="/countries/{{country.country_iso_3}}?data=projects&sortby=title_asc&global=all&region={{country.region_iso}}&country={{country.country_iso_3}}">{{country.name}}</a>
+              </div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
     </div>
   {{/each}}
 {{else}}
-  <div class="row collapse">
-    <div class="column small-12 medium-12">
-      <p>No results.</p>
+  <div class="l-content">
+    <div class="wrapper">
+      <div class="row collapse">
+        <div class="column small-12">
+          <p>No results.</p>
+        </div>
+      </div>
     </div>
   </div>
 {{/if}}
