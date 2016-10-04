@@ -51,6 +51,7 @@
     },
 
     addNew: function(option){
+      console.log(option);
       var obj = {
         id: option.cid,
         value: JSON.stringify(option.attributes),

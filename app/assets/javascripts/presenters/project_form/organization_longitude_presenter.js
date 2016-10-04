@@ -4,27 +4,29 @@
 
   var StateModel = Backbone.Model.extend();
 
-  App.Presenter.InvestigatorWebsite = function() {
+  App.Presenter.OrganizationLongitude = function() {
     this.initialize.apply(this, arguments);
   };
 
-  _.extend(App.Presenter.InvestigatorWebsite.prototype, {
+  _.extend(App.Presenter.OrganizationLongitude.prototype, {
 
     defaults: {
-      name: 'title'
+      name: 'organizationlongitude'
     },
 
     initialize: function(params) {
       this.state = new StateModel();
       this.Input = new App.View.Input({
-        el: '#investigatorwebsite',
+        el: '#organizationlongitude',
         options: {
-          label: 'Investigator Website',
-          placeholder: 'http://www.example.com',
-          name: 'InvestigatorWebsite',
-          type: 'url',
+          label: 'Organization Longitude',
+          placeholder: '',
+          name: 'organizationLongitude',
+          type: 'number',
           required: true,
-          class: 'c-input'
+          class: 'c-input',
+          min: -180,
+          max: 180
         }
       });
 

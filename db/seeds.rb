@@ -14,16 +14,17 @@ if ProjectType.all.size == 0
     ProjectType.create(name: p)
   end
 end
-if Organizations.all.size == 0
+#
+if Organization.all.size == 0
   pt = ["Research, Basic", "Research, Clinical", "Research, Population-Based", "Training", "Capacity Building", "Cancer Prevention", "Cancer Screening", "Cancer Detection", "Cancer Treatment", "Cancer Surveillance, Cancer Registries", "Palliative Care"]
   pt.each do |p|
-    ProjectType.create(name: p)
+    Organization.create(name: p)
   end
 end
-if Investigators.all.size == 0
+if Investigator.all.size == 0
   pt = ["Research, Basic", "Research, Clinical", "Research, Population-Based", "Training", "Capacity Building", "Cancer Prevention", "Cancer Screening", "Cancer Detection", "Cancer Treatment", "Cancer Surveillance, Cancer Registries", "Palliative Care"]
   pt.each do |p|
-    ProjectType.create(name: p)
+    Investigator.create(name: p)
   end
 end
 OrganizationType.create(name: 'public') unless OrganizationType.find_by(name: 'public')

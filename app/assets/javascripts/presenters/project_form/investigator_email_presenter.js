@@ -4,11 +4,11 @@
 
   var StateModel = Backbone.Model.extend();
 
-  App.Presenter.InvestigatorWebsite = function() {
+  App.Presenter.InvestigatorEmail = function() {
     this.initialize.apply(this, arguments);
   };
 
-  _.extend(App.Presenter.InvestigatorWebsite.prototype, {
+  _.extend(App.Presenter.InvestigatorEmail.prototype, {
 
     defaults: {
       name: 'title'
@@ -17,12 +17,12 @@
     initialize: function(params) {
       this.state = new StateModel();
       this.Input = new App.View.Input({
-        el: '#investigatorwebsite',
+        el: '#investigatoremail',
         options: {
-          label: 'Investigator Website',
-          placeholder: 'http://www.example.com',
-          name: 'InvestigatorWebsite',
-          type: 'url',
+          label: 'Investigator Email',
+          placeholder: 'test@test.com',
+          name: 'InvestigatorEmail',
+          type: 'email',
           required: true,
           class: 'c-input'
         }

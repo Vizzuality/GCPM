@@ -10,20 +10,20 @@
       name: null,
       type: 'text',
       required: false,
-      class: ''
+      class: 'c-input',
+      min: false,
+      max: false
     },
 
     events: {
-      'blur input': 'triggerChange',
-      'keyup input': 'triggerKeyup',
-      'click input': 'triggerClick'
+      'blur input': 'triggerChange'
     },
 
     template: HandlebarsTemplates['form/input'],
 
     initialize: function(settings) {
-      var opts = (settings && settings.options)||{};
-      opts.class = [this.defaults.class, opts.class||''].join(' ');
+      var opts = (settings && settings.options) || {};
+      opts.class = [this.defaults.class, opts.class || ''].join(' ');
       this.options = _.extend({}, this.defaults, opts);
 
       this.$el.addClass(this.options.class);
@@ -40,18 +40,6 @@
         name: e.currentTarget.name,
         value: e.currentTarget.value
       });
-    },
-
-    triggerKeyup: function(e) {
-      this.trigger('keyup', {
-        name: e.currentTarget.name,
-        value: e.currentTarget.value
-      });
-    },
-
-    triggerClick: function(e) {
-      if (!e.currentTarget.value) return;
-      e.target.setSelectionRange(0, e.target.value.length);
     }
 
   });

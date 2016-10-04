@@ -28,7 +28,7 @@
       });
       var fundingSources = new App.Presenter.FundingSources({
         label: null,
-        addNew: false
+        addNew: true
       });
       var investigators  = new App.Presenter.Investigators({
         label: null,
@@ -41,6 +41,8 @@
 
       this.investigatorForm = new App.Presenter.InvestigatorForm();
       this.organizationForm = new App.Presenter.OrganizationForm();
+      this.fundingSourcesForm = new App.Presenter.FundingSourcesForm();
+
 
       this.children = [titleInput, descTextarea, startPickadate, endPickadate,
          websiteInput, projectTypes, cancerTypes, fundingSources, investigators,
@@ -86,6 +88,10 @@
         if (newState.value[0] == "Add new"){
           this.organizationForm.openForm();
         }
+      }, this);
+
+      App.on('FundingSources:new', function(){
+        this.fundingSourcesForm.openForm();
       }, this);
     },
 

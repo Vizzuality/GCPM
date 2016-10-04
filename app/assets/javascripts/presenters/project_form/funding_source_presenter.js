@@ -9,48 +9,106 @@
   };
 
   _.extend(App.Presenter.FundingSources.prototype, {
+<<<<<<< 3411801b0835e53939b8f997d2dd1ed0139b4929
     initialize: function(params) {
+=======
+
+    defaults: {
+      multiple: true,
+      name: 'funding_sources',
+      label: 'Funding Source',
+      placeholder: 'Funding Sources',
+      blank: null,
+      addNew: true,
+      select2Options: {
+        // closeOnSelect: false
+        // It solves the closing of the dropdown menu
+        // It adds a lot of UX issues
+        // - Scroll: On select, scroll will go to first highlighted choice => How to resolve the scroll issue https://github.com/select2/select2/issues/1672#issuecomment-240411031
+        // - Click: On each click dropdown will appear and dissapear
+      }
+    },
+
+    initialize: function(viewSettings) {
+>>>>>>> project form almost complete
       this.state = new StateModel();
-      this.fundingInput = new App.View.Input({
+      this.organizations = new App.Collection.Organizations();
+
+      // Creating view
+      this.select = new App.View.Select({
         el: '#funding-sources',
-        options: {
-          label: false,
-          placeholder: 'Name',
-          name: 'funding-sources',
-          type: 'text',
-          required: true,
-          class: 'c-input',
-          inputClass: '',
-        }
+        options: _.extend({}, this.defaults, viewSettings || {}),
+        state: this.state
       });
 
       this.setEvents();
+      this.setSubscriptions();
     },
 
+    /**
+     * Setting internal events
+     */
     setEvents: function() {
-      this.state.on('change', function(){
-        if (this.state.attributes.value && App.Helper.Utils.validateUrl(this.state.attributes.value)) {
-          App.trigger('fundingInput:change', this.state.attributes);
-        }
+      this.select.on('new', function(){
+        App.trigger('FundingSources:new');
       }, this);
 
-      this.fundingInput.on('change', this.setState, this);
+      this.select.on('change', function(newState){
+        this.setState(newState);
+        App.trigger('FundingSources:change', this.state.attributes);
+      }, this);
+
     },
 
-    render: function(){
-      this.fundingInput.render();
+    setSubscriptions: function(){
+      App.on('FundingSourcesForm:submit', function(newState){
+        this.organizations.push(newState);
+        this.select.addNew(this.organizations.at(this.organizations.length-1));
+      }, this);
     },
 
+    /**
+     * Fetch cancer types from API
+     * @return {Promise}
+     */
+    fetchData: function() {
+      return this.organizations.fetch().done(function() {
+        var options = this.organizations.map(function(type) {
+          return {
+            name: type.attributes.name,
+            value: type.attributes.id
+          };
+        });
+        this.select.setOptions(options);
+      }.bind(this));
+    },
+
+    render: function() {
+      this.select.render();
+    },
+
+    /**
+     * Method to set a new state
+     * @param {Object} state
+     */
     setState: function(state, options) {
       this.state.set(state, options);
     },
 
+    /**
+     * Rebinding element, events and render again
+     * @param {DOM|String} el
+     */
     setElement: function(el) {
-      this.fundingInput.setElement(el);
+      this.select.setElement(el);
     },
 
+    /**
+     * Exposing DOM element
+     * @return {DOM}
+     */
     getElement: function() {
-      return this.fundingInput.$el;
+      return this.select.$el;
     }
 
   });

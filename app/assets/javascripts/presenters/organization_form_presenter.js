@@ -13,9 +13,12 @@
     initialize: function(params) {
       this.state = new StateModel(params);
 
-      var titleInput = new App.Presenter.Input();
+      var organizationName = new App.Presenter.OrganizationName();
+      var organizationWebsite = new App.Presenter.OrganizationWebsite();
+      var organizationLatitude = new App.Presenter.OrganizationLatitude();
+      var organizationLongitude = new App.Presenter.OrganizationLongitude();
 
-      this.children = [titleInput];
+      this.children = [organizationName, organizationWebsite, organizationLatitude, organizationLongitude];
 
       this.modal = new App.View.Modal();
       this.organizationForm = new App.View.OrganizationForm({

@@ -4,23 +4,24 @@
 
   var StateModel = Backbone.Model.extend({});
 
-  App.Presenter.InvestigatorForm = function() {
+  App.Presenter.FundingSourcesForm = function() {
     this.initialize.apply(this, arguments);
   };
 
-  _.extend(App.Presenter.InvestigatorForm.prototype, {
+  _.extend(App.Presenter.FundingSourcesForm.prototype, {
 
     initialize: function(params) {
       this.state = new StateModel(params);
 
-      var investigatorName = new App.Presenter.InvestigatorName();
-      var investigatorEmail = new App.Presenter.InvestigatorEmail();
-      var investigatorWebsite = new App.Presenter.InvestigatorWebsite();
+      var organizationName = new App.Presenter.OrganizationName();
+      var organizationWebsite = new App.Presenter.OrganizationWebsite();
+      var organizationLatitude = new App.Presenter.OrganizationLatitude();
+      var organizationLongitude = new App.Presenter.OrganizationLongitude();
 
-      this.children = [investigatorName, investigatorEmail, investigatorWebsite];
+      this.children = [organizationName, organizationWebsite, organizationLatitude, organizationLongitude];
 
       this.modal = new App.View.Modal();
-      this.investigatorForm = new App.View.InvestigatorForm({
+      this.organizationForm = new App.View.OrganizationForm({
         children: this.children
       });
 
@@ -32,13 +33,12 @@
      * Setting internal events
      */
     setEvents: function() {
-      this.investigatorForm.on('cancel', this.closeForm, this);
-      this.investigatorForm.on('submit', function(newState) {
+      this.organizationForm.on('cancel', this.closeForm, this);
+      this.organizationForm.on('submit', function(newState) {
         this.setState(newState);
-        App.trigger('InvestigatorForm:submit', this.state.attributes);
+        App.trigger('FundingSourcesForm:submit', this.state.attributes);
         this.closeForm();
       }, this);
-
     },
 
     /**
@@ -60,7 +60,7 @@
      * Open modal and render form inside
      */
     openForm: function() {
-      this.modal.open(this.investigatorForm);
+      this.modal.open(this.organizationForm);
       this.renderForm();
     },
 
@@ -98,7 +98,7 @@
     },
 
     renderFormElements: function() {
-      this.investigatorForm.render();
+      this.organizationForm.render();
       _.each(this.children, function(child){
         // Get && set the value from the state thanks to the name
         // I need to pass the rest of the params because there are some presenters that need other params

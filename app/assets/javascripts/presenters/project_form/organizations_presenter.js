@@ -16,7 +16,7 @@
       label: 'Organizations',
       placeholder: 'All organizations',
       blank: null,
-      addNew: true,
+      addNew: false,
       select2Options: {
         // closeOnSelect: false
         // It solves the closing of the dropdown menu
@@ -57,7 +57,7 @@
     },
 
     setSubscriptions: function(){
-      App.on('OrganizationsForm:submit', function(newState){
+      App.on('OrganizationForm:submit', function(newState){
         this.organizations.push(newState);
         this.select.addNew(this.organizations.at(this.organizations.length-1));
       }, this);
