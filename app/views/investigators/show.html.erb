@@ -1,0 +1,38 @@
+<% title "Map" %>
+
+<section class="l-app -full">
+
+  <div id="map" class="c-map"></div>
+
+  <div class="l-app-navbar">
+    <div class="wrapper">
+      <div class="row collapse">
+        <div class="column small-6">
+          <ul class="c-tabnav" id="dataTabNav">
+             <% @filters.each do |filter| %>
+              <li class="tabnav-item">
+                <%= link_to t(filter),
+                  map_path(request.query_parameters.merge({ data: filter })),
+                  class: "js-btn-mapmenu-type",
+                  remote: true,
+                  data: { datatype: filter }
+                %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="column small-6">
+          <div id="toolbar"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="l-grid" id="content">
+  <% if @current_type == 'events' %>
+    <%= render 'events/list', items: @items, more: @more %>
+  <% else %>
+    <%= render 'projects/list', items: @items, more: @more %>
+  <% end %>
+</div>
