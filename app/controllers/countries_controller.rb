@@ -11,7 +11,6 @@ class CountriesController < ApplicationController
     @title = t 'map'
     @filters = %w(projects events)
     @current_type = params.key?(:data) ? params[:data] : 'projects'
-    @user_data = current_user.present? ? JSON.generate(build_user_data) : nil
 
     limit = 12 + (@page * 9)
 
