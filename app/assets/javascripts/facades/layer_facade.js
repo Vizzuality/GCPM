@@ -8,10 +8,11 @@
     small: 45
   };
 
+  var locations = new App.Collection.Locations();
+
   var layerFacade = {
 
     getLayer: function(params) {
-      var locations = new App.Collection.Locations();
       var deferred = new $.Deferred();
       var fetchParams = params;
 
