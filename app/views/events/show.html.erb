@@ -28,15 +28,22 @@
           <div class="sidebar-item">
             <h3><%= t 'location' %>(s)</h3>
             <ul class="c-list">
-              <li class="list-item"><%= @event.city %>, <%= @event.country %></li>
+            <% iso = Country.find_by(country_name: @event.country).country_iso_3 %>
+              <li class="list-item"><%= link_to "#{@event.city} , #{@event.country}", "/countries/#{iso}?data=projects&sortby=title_asc&country=#{iso}" %></li>
             </ul>
           </div>
-          <div class="sidebar-item">
-            <h3><%= t 'participants' %>(s)</h3>
-            <ul class="c-list">
-              <li class="list-item"><%= @event.participants %></li>
-            </ul>
-          </div>
+          <% if @event.participants %>
+            <div class="sidebar-item">
+              <h3><%= t 'participants' %>(s)</h3>
+              <ul class="c-list">
+                <% @event.participants.split(',').each do |p| %>
+                  <% participant = p[0] === ' ' ? p.slice(1, p.length-1) : p %>
+                  <% id = Investigator.find_by(name: participant).id %>
+                  <li class="list-item"><%= link_to "#{participant}", "/investigators/#{id}?data=projects&sortby=title_asc&investigators[]=#{id}" %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
         </aside>
       </div>
     </div>

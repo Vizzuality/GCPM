@@ -4,7 +4,7 @@
       <div class="column small-12 medium-4">
         <div class="c-card">
           <h3 class="-underlined">
-            <a href="/map?investigators[]=<%= p.project_leads.first.try(:id) %>">
+            <a href="/investigators/<%= p.project_leads.first.try(:id) %>?data=projects&sortby=title_asc&global=all&investigators[]=<%= p.project_leads.first.try(:id) %>">
               <%= p.project_leads.first.try(:name) %>
             </a>
           </h3>
@@ -13,7 +13,7 @@
 
           <p>
             <% p.cancer_types.each do |t| %>
-              <a href="/cancer-types/<%= t.id %>?sortby=title_asc&global=all&cancer_types=<%= t.id %>" class="tag"><%= t.name %></a>
+              <a href="/cancer-types/<%= t.id %>?data=projects&sortby=title_asc&global=all&cancer_types[]=<%= t.id %>" class="tag"><%= t.name %></a>
             <% end %>
           </p>
         </div>
