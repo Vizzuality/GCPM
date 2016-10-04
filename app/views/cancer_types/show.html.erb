@@ -41,8 +41,8 @@
 
 <div class="l-grid" id="content">
   <% if @current_type == 'events' %>
-    <%= render 'events/grid', items: @items, more: @more %>
+    <%= render 'events/list', items: @items, more: @more %>
   <% else %>
-    <%= render 'projects/grid', items: @items, more: @more %>
+    <%= render 'projects/list', items: @items, more: @more %>
   <% end %>
 </div>
