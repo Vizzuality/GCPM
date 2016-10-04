@@ -20,13 +20,16 @@
   _.extend(App.Presenter.Toolbar.prototype, {
 
     initialize: function(params) {
-      this.state = new StateModel();
+      this.state = new StateModel(params);
+
       this.toolbar = new App.View.Toolbar({ el: '#toolbar' });
+      this.sortby = new App.Presenter.SortBy({ el: '#sortby' });
 
       this.setEvents();
       this.setSubscriptions();
       this.setState(params);
-      this.toolbar.render(this.state.attributes);
+      this.sortby.setState({ value: this.state.defaults.sortby })
+      this.renderToolbar();
     },
 
     setEvents: function() {
@@ -38,6 +41,7 @@
 
     setSubscriptions: function() {
       App.on('TabNav:change', this.setState, this);
+      App.on('SortBy:change', this.setState, this);
     },
 
     setState: function(state) {
@@ -53,6 +57,10 @@
         data.userId = window.USER_ID;
       }
       this.toolbar.render(data);
+      this.sortby.setOptions();
+      this.sortby.setElement('#sortby');
+      this.sortby.render();
+
       App.trigger('Toolbar:change', this.state.attributes);
     }
 
