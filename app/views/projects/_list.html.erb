@@ -13,7 +13,7 @@
 
           <p>
             <% p.cancer_types.each do |t| %>
-              <a href="/map?cancer_types[]=<%= t.id %>" class="tag"><%= t.name %></a>
+              <a href="/cancer-types/<%= t.id %>?sortby=title_asc&global=all&cancer_types=<%= t.id %>" class="tag"><%= t.name %></a>
             <% end %>
           </p>
         </div>
