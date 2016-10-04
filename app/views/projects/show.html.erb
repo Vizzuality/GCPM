@@ -29,7 +29,7 @@
             <h3><%= t 'cancer_types' %></h3>
             <ul class="c-list">
               <% @project.cancer_types.each do |ct| %>
-                <li class="list-item"><%= link_to ct.name, "/map?cancer_types[]=#{ct.id}" %></li>
+                <li class="list-item"><%= link_to ct.name, "/cancer-types/#{ct.id}?data=projects&sortby=title_asc&global=all&cancer_types=#{ct.id}" %></li>
               <% end %>
             </ul>
           </div>
@@ -38,7 +38,7 @@
             <h3><%= t 'project_types' %></h3>
             <ul class="c-list">
               <% @project.project_types.each do |pt| %>
-                <li class="list-item"><%= link_to pt.name, "/map?project_types[]=#{pt.id}" %></li>
+                <li class="list-item"><%= link_to pt.name, "/map?data=projects&project_types=#{pt.id}" %></li>
               <% end %>
             </ul>
           </div>
@@ -47,7 +47,8 @@
             <h3><%= t 'location' %>(s)</h3>
             <ul class="c-list">
               <% @project.addresses.each do |l| %>
-                <li class="list-item"><%= link_to "#{l.city}, #{l.country_name}", "/map?countries[]=#{l.country_id}&group=points" %></li>
+                <% iso = Country.find_by_id(l.country_id).country_iso_3 %>
+                <li class="list-item"><%= link_to "#{l.city}, #{l.country_name}", "/countries/#{iso}?data=projects&sortby=title_asc&global=all&country=#{iso}" %></li>
               <% end %>
           </div>
 
@@ -55,7 +56,7 @@
             <h3><%= t 'organization' %>(s)</h3>
             <ul class="c-list">
               <% @project.organizations.each do |o| %>
-                <li class="list-item"><%= link_to o.name, "/map?organizations[]=#{o.id}" %></li>
+                <li class="list-item"><%= link_to o.name, "/organizations/#{o.id}?data=projects&sortby=title_asc&global=all&organizations=#{o.id}" %></li>
               <% end %>
             </ul>
           </div>
@@ -73,7 +74,7 @@
             <h3><%= t 'project_lead' %>(s)</h3>
             <ul class="c-list">
               <% @project.project_leads.each do |pl| %>
-                <li class="list-item"><%= link_to pl.name, "/map?investigators[]=#{pl.id}" %></li>
+                <li class="list-item"><%= link_to pl.name, "/investigators/#{pl.id}?data=projects&sortby=title_asc&global=all&investigators=#{pl.id}" %></li>
               <% end %>
             </ul>
           </div>
@@ -82,7 +83,7 @@
             <h3><%= t 'collaborator' %>(s)</h3>
             <ul class="c-list">
               <% @project.secondary_investigators.each do |si| %>
-                <li class="list-item"><%= link_to si.name, "/map?investigators[]=#{si.id}" %></li>
+                <li class="list-item"><%= link_to si.name, "/investigators/#{si.id}?data=projects&sortby=title_asc&global=all&investigators=#{si.id}" %></li>
               <% end %>
             </ul>
           </div>

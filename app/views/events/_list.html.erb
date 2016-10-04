@@ -6,7 +6,9 @@
           <% if e.country? %>
             <h3 class="-underlined -alternative">
               <% country = Country.find_by( country_name: e.country ) %>
-              <a href="/map?type=events&group=countries&countries[]=<%= country ? country.id : nil %>">
+              <!-- TODO: In case country dosen't exist -->
+              <a href="/countries/<%= country && country.country_iso_3 %>?sortby=title_asc&global=all&country=<%= country ?
+                country.country_iso_3 : nil %>">
                 <%= e.city %>, <%= e.country %>
               </a>
             </h3>
