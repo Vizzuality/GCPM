@@ -2,7 +2,7 @@
 
   'use strict'
 
-  <% template = @current_type == 'events' ? 'events/grid' : 'projects/grid'  %>
+  <% template = @current_type == 'events' ? 'events/list' : 'projects/list'  %>
   var htmlContent = "<%= escape_javascript render(partial: template, locals: { items: @items, more: @more }) %>";
   var htmlCounters = "<%= escape_javascript render(partial: 'map/counters') %>"
 
