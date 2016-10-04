@@ -1,36 +1,51 @@
 <% title @event.title %>
 
-<section class="l-app">
+<section class="l-app -full">
   <div id="map" class="c-map"></div>
-</section>
-
-<div class="wrapper">
-    <div class="row collapse">
-      <div class="column small-7">
-      <div class="l-content">
-        <article>
-
-        </article>
-       <%= @event.description %>
+  <div class="l-app-title">
+    <div class="wrapper">
+      <div class="row collapse">
+        <div class="column small-8">
+          <h1><%= @event.title %></h1>
         </div>
       </div>
-      <div class="column small-4 small-offset-1">
-         <aside>
-           <div class="l-content">
+    </div>
+  </div>
+</section>
+
+<div class="l-grid">
+  <div class="wrapper">
+    <div class="row collapse">
+      <div class="column small-8">
+        <div class="l-content">
+          <article class="l-content-article">
+            <%= @event.description.html_safe %>
+          </article>
+        </div>
+      </div>
+      <div class="column small-4">
+        <aside class="l-sidebar">
+          <div class="sidebar-item">
+            <h3><%= t 'location' %>(s)</h3>
+            <ul class="c-list">
+            <% iso = Country.find_by(country_name: @event.country).country_iso_3 %>
+              <li class="list-item"><%= link_to "#{@event.city} , #{@event.country}", "/countries/#{iso}?data=projects&sortby=title_asc&country=#{iso}" %></li>
+            </ul>
+          </div>
+          <% if @event.participants %>
             <div class="sidebar-item">
-               <h3><%= t 'location' %></h3>
-                  <ul class="c-list">
-                    <li class="list-item"><%=@event.city%>, <%=@event.country%></li>
-                  </ul>
+              <h3><%= t 'participants' %>(s)</h3>
+              <ul class="c-list">
+                <% @event.participants.split(',').each do |p| %>
+                  <% participant = p[0] === ' ' ? p.slice(1, p.length-1) : p %>
+                  <% id = Investigator.find_by(name: participant).id %>
+                  <li class="list-item"><%= link_to "#{participant}", "/investigators/#{id}?data=projects&sortby=title_asc&investigators[]=#{id}" %></li>
+                <% end %>
+              </ul>
             </div>
-            <div class="sidebar-item">
-                           <h3><%= t 'participants' %></h3>
-                              <ul class="c-list">
-                                <li class="list-item"><%=@event.participants%></li>
-                              </ul>
-            </div>
-            </div>
-            </aside>
-         </div>
-         </div>
+          <% end %>
+        </aside>
+      </div>
+    </div>
+  </div>
 </div>
