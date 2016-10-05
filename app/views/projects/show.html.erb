@@ -29,7 +29,7 @@
             <h3><%= t 'cancer_types' %></h3>
             <ul class="c-list">
               <% @project.cancer_types.each do |ct| %>
-                <li class="list-item"><%= link_to ct.name, "/cancer-types/#{ct.id}?data=projects&sortby=title_asc&global=all&cancer_types[]=#{ct.id}" %></li>
+                <li class="list-item"><%= link_to ct.name, "/cancer-types/#{ct.id}" %></li>
               <% end %>
             </ul>
           </div>
@@ -48,7 +48,7 @@
             <ul class="c-list">
               <% @project.addresses.each do |l| %>
                 <% iso = Country.find_by_id(l.country_id).country_iso_3 %>
-                <li class="list-item"><%= link_to "#{l.city}, #{l.country_name}", "/countries/#{iso}?data=projects&sortby=title_asc&country=#{iso}" %></li>
+                <li class="list-item"><%= link_to "#{l.city}, #{l.country_name}", "/countries/#{iso}" %></li>
               <% end %>
           </div>
 
@@ -56,7 +56,7 @@
             <h3><%= t 'organization' %>(s)</h3>
             <ul class="c-list">
               <% @project.organizations.each do |o| %>
-                <li class="list-item"><%= link_to o.name, "/organizations/#{o.id}?data=projects&sortby=title_asc&global=all&organizations[]=#{o.id}" %></li>
+                <li class="list-item"><%= link_to o.name, "/organizations/#{o.id}" %></li>
               <% end %>
             </ul>
           </div>
@@ -74,7 +74,7 @@
             <h3><%= t 'project_lead' %>(s)</h3>
             <ul class="c-list">
               <% @project.project_leads.each do |pl| %>
-                <li class="list-item"><%= link_to pl.name, "/investigators/#{pl.id}?data=projects&sortby=title_asc&global=all&investigators[]=#{pl.id}" %></li>
+                <li class="list-item"><%= link_to pl.name, "/investigators/#{pl.id}" %></li>
               <% end %>
             </ul>
           </div>
@@ -83,7 +83,7 @@
             <h3><%= t 'collaborator' %>(s)</h3>
             <ul class="c-list">
               <% @project.secondary_investigators.each do |si| %>
-                <li class="list-item"><%= link_to si.name, "/investigators/#{si.id}?data=projects&sortby=title_asc&global=all&investigators[]=#{si.id}" %></li>
+                <li class="list-item"><%= link_to si.name, "/investigators/#{si.id}" %></li>
               <% end %>
             </ul>
           </div>
