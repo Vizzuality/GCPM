@@ -32,6 +32,10 @@ class Event < ApplicationRecord
 
   validate :dates_timeline
 
+  def country
+    Country.find_by(country_name: self.country)
+  end
+
   def dates_timeline
     if self.start_date.present? && self.end_date.present?
       errors.add(:end_date, 'must be after start date') if self.start_date > self.end_date
