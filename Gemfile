@@ -27,6 +27,7 @@ gem 'autoprefixer-rails'
 gem 'pickadate-rails', '~> 3.5', '>= 3.5.6.0'
 gem "select2-rails"
 gem 'handlebars_assets'
+gem 'gon'
 
 # Email service integration
 gem 'sendgrid-ruby'

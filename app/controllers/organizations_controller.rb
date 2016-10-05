@@ -8,10 +8,10 @@ class OrganizationsController < ApplicationController
 
   def show
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
-    @title = t 'map'
     @filters = %w(projects events)
     @current_type = params.key?(:data) ? params[:data] : 'projects'
-    @user_data = current_user.present? ? JSON.generate(build_user_data) : nil
+
+    gon.server_params = { 'organizations[]': params[:id] }
 
     limit = 12 + (@page * 9)
 

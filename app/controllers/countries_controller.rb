@@ -11,6 +11,8 @@ class CountriesController < ApplicationController
     @filters = %w(projects events)
     @current_type = params.key?(:data) ? params[:data] : 'projects'
 
+    gon.server_params = { 'countries[]': params[:iso] }
+
     limit = 12 + (@page * 9)
 
     @events = Event.fetch_all(country: params[:iso]).order('created_at DESC')

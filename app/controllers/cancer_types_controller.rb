@@ -12,6 +12,8 @@ class CancerTypesController < ApplicationController
     @filters = %w(projects events)
     @current_type = params.key?(:data) ? params[:data] : 'projects'
 
+    gon.server_params = { 'cancer_types[]': params[:id] }
+
     limit = 12 + (@page * 9)
 
     @events = Event.fetch_all(cancer_types: @cancer_type.id).order('created_at DESC')
@@ -28,22 +30,6 @@ class CancerTypesController < ApplicationController
     end
 
     respond_with(@items)
-    # @filters = %w(projects events)
-    # @limit = 15
-    # @projects = Project.fetch_all(cancer_types: @cancer_type.id)
-    #   .order('created_at DESC')
-    #   .limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
-    # @projectsCount = Project.fetch_all(cancer_types: @cancer_type.id).length
-    # @events = Event.fetch_all(cancer_types: @cancer_type.id)
-    #   .order('created_at DESC')
-    #   .limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
-    # @eventsCount = Event.fetch_all(cancer_types: @cancer_type.id).length
-
-    # @current_type = params[:data] || 'projects'
-    # @organizations  = Organization.fetch_all(cancer_types: @cancer_type.id)
-    # .order('created_at DESC')
-    # .limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
-    # @organizationsCount = @organizations.length
   end
 
   private

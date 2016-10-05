@@ -38,7 +38,8 @@
         layer.addTo(map, 2);
         setTimeout(function() {
           map.fitBounds(layer.getBounds(), {
-            padding: [100, 100]
+            paddingTopLeft: [100, 100],
+            paddingBottomRight: [100, 200]
           });
         }, 100);
       });

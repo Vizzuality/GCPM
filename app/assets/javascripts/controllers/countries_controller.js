@@ -8,7 +8,6 @@
 
     index: function(params) {
       new App.Presenter.CountriesList(params);
-      new App.Presenter.UserNav(params);
     },
 
     show: function(params) {

@@ -46,13 +46,11 @@
     },
 
     getPointLayer: function(params) {
+      var fetchParams = Object.assign(gon.server_params, { group: 'points' });
       var deferred = new $.Deferred();
-      var LocationsCollection = App.Collection.Locations.extend({
-        url: '/api/map/projects/' + params.vars[0]
-      });
-      var locations = new LocationsCollection();
+      var locations = new App.Collection.Locations();
       locations
-        .fetch()
+        .fetch({ data: fetchParams })
         .done(function() {
           var layer = App.helper.pointsLayer(locations.toGeoJSON());
           deferred.resolve(layer);
