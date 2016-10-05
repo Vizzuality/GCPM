@@ -46,11 +46,8 @@ class Event < ApplicationRecord
 
   def self.fetch_all(options={})
     events = Event.all
-    if options[:country]
-      events = events.by_countries(options[:country])
-    elsif options[:region]
-      events = events.by_regions(options[:region])
-    end
+    events = events.by_countries(options[:countries])    if options[:countries]
+    events = events.by_regions(options[:regions])        if options[:regions]
     events = events.by_user(options[:user])              if options[:user]
     events = events.by_start_date(options[:start_date])  if options[:start_date]
     events = events.by_end_date(options[:end_date])      if options[:end_date]

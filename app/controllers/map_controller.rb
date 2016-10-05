@@ -20,8 +20,8 @@ class MapController < ApplicationController
     else
       projects = Project.fetch_all(projects_params).order('created_at DESC')
       @items = projects.limit(limit)
-      @project_leads = Project.joins(:memberships).fetch_all(projects_params).where('memberships.membership_type = 0').count
-      @collaborators =  Project.joins(:memberships).fetch_all(projects_params).where('memberships.membership_type = 1').count
+      @project_leads = SqlQuery.new("investigators_count", params: projects_params.merge!(membership_type: 0)).execute[0]["count"]
+      @collaborators = SqlQuery.new("investigators_count", params: projects_params.merge!(membership_type: 1)).execute[0]["count"]
       @more = (projects.size > @items.size)
     end
 
@@ -31,7 +31,7 @@ class MapController < ApplicationController
   private
 
     def projects_params
-      params.permit(:sortby, :user, :start_date, :end_date, :region, :country, project_types:[], cancer_types:[], organization_types:[], organizations:[], investigators:[])
+      params.permit(:sortby, :user, :start_date, :end_date, regions:[], countries:[], project_types:[], cancer_types:[], organization_types:[], organizations:[], investigators:[])
     end
 
     def build_user_data
