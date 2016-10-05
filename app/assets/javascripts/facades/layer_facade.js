@@ -8,20 +8,25 @@
     small: 45
   };
 
-  var locations = new App.Collection.Locations();
-
   var layerFacade = {
 
     getLayer: function(params) {
       var deferred = new $.Deferred();
+      var locations = new App.Collection.Locations();
       var fetchParams = params;
 
-      if (params.country) {
-        fetchParams['countries[]'] = params.country;
+      if (params['countries[]']) {
         fetchParams.group = 'points';
-      } else if (params.region) {
-        fetchParams['regions[]'] = params.region;
+      } else if (params['regions[]']) {
         fetchParams.group = 'countries';
+      }
+
+      if (!params['regions[]']) {
+        delete fetchParams['regions[]'];
+      }
+
+      if (!params['countries[]']) {
+        delete fetchParams['countries[]'];
       }
 
       locations
@@ -29,7 +34,7 @@
         .done(function() {
           var layer;
           var geoJson = locations.toGeoJSON();
-          if (params.country) {
+          if (params['countries[]']) {
             layer = App.helper.markerClusterLayer(geoJson, params);
           } else {
             layer = App.helper.bubbleLayer(geoJson, params, layerFacade);

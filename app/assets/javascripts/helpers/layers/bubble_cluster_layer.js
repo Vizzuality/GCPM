@@ -22,9 +22,9 @@
       leafletMarker.setIcon(data.icon);
       leafletMarker.off('click').on('click', function() {
         var eventName = null;
-        if (!params.region && !params.country) {
+        if (!params['regions[]'] && !params['countries[]']) {
           eventName = 'region';
-        } else if (params.region && !params.country) {
+        } else if (params['regions[]'] && !params['countries[]']) {
           eventName = 'country';
         }
         var newState = Object.assign(data.feature.properties, params);

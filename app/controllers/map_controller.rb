@@ -19,8 +19,8 @@ class MapController < ApplicationController
     else
       projects = Project.fetch_all(projects_params).order('created_at DESC')
       @items = projects.limit(limit)
-      @project_leads = SqlQuery.new("investigators_count", params: projects_params.merge!(membership_type: 0)).execute[0]["count"]
-      @collaborators = SqlQuery.new("investigators_count", params: projects_params.merge!(membership_type: 1)).execute[0]["count"]
+      @project_leads = SqlQuery.new("investigators_count", params: investigators_params.merge!(membership_type: 0)).execute[0]["count"]
+      @collaborators = SqlQuery.new("investigators_count", params: investigators_params.merge!(membership_type: 1)).execute[0]["count"]
       @more = (projects.size > @items.size)
       @items_total = projects.size
     end
