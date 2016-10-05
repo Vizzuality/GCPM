@@ -32,7 +32,7 @@ class Event < ApplicationRecord
 
   validate :dates_timeline
 
-  def country
+  def country_object
     Country.find_by(country_name: self.country)
   end
 
