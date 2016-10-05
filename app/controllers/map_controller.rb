@@ -31,11 +31,7 @@ class MapController < ApplicationController
   private
 
     def projects_params
-<<<<<<< HEAD
-      params.permit(:data, :sortby, :start_date, :end_date, :region, :country, project_types:[], cancer_types:[], organization_types:[], organizations:[], investigators:[])
-=======
       params.permit(:sortby, :user, :start_date, :end_date, regions:[], countries:[], project_types:[], cancer_types:[], organization_types:[], organizations:[], investigators:[])
->>>>>>> 50349ea88241f5238dd20a37150c88c6f81422e2
     end
 
     def investigators_params
