@@ -10,6 +10,23 @@
       <div class="row collapse">
         <div class="column small-8">
           <h1><%= @country.country_name %></h1>
+          <table class="c-numbers-list">
+            <thead>
+              <tr>
+                <th><%= t 'projects' %></th>
+                <th><%= t 'events' %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= @projects.size %></td>
+                <td><%= @events.size %></td>
+              </tr>
+            </tbody>
+          </table>
+          <br/>
+        </div>
+        <div class="column small-4">
         </div>
       </div>
     </div>
