@@ -8,19 +8,18 @@ class CountriesController < ApplicationController
 
   def show
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
-    @title = t 'map'
     @filters = %w(projects events)
     @current_type = params.key?(:data) ? params[:data] : 'projects'
 
     limit = 12 + (@page * 9)
 
     if params.key?(:data) && params[:data] == 'events'
-      events = Event.fetch_all(countries: @country.id).order('created_at DESC')
+      events = Event.fetch_all(country: params[:iso]).order('created_at DESC')
       @items = events.limit(limit)
       @more = (events.size > @items.size)
       @items_total = events.size
     else
-      projects = Project.fetch_all(countries: @country.id).order('created_at DESC')
+      projects = Project.fetch_all(country: params[:iso]).order('created_at DESC')
       @items = projects.limit(limit)
       @more = (projects.size > @items.size)
       @items_total = projects.size
