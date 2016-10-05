@@ -19,7 +19,7 @@
         options: {
           zoom: 2,
           minZoom: 1,
-          maxZoom: 14,
+          maxZoom: 10,
           center: [20, 0]
         }
       });
