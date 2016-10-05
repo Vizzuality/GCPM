@@ -19,7 +19,8 @@
       },
       onEachFeature: function (feature, layer) {
         // TODO: change href feature.properties.title by feature.properties.id
-        layer.bindPopup('<a href="/investigators/' + feature.properties.title + '">' + feature.properties.title + '</a>');
+        layer
+          .bindPopup('<a href="/investigators/' + feature.properties.title + '">' + feature.properties.title + '</a>');
       }
     });
   };
