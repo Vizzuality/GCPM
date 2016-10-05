@@ -53,7 +53,7 @@
         .fetch({ data: fetchParams })
         .done(function() {
           var layer = App.helper.pointsLayer(locations.toGeoJSON());
-          deferred.resolve(layer);
+          deferred.resolve(layer, markers);
         });
       return deferred.promise();
     }
