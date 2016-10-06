@@ -35,7 +35,7 @@
     addPoints: function() {
       var map = this.view.map;
       this.fc.getPointLayer(this.state.attributes).done(function(layer) {
-        layer.addTo(map, 2);
+        map.addLayer(layer);
         setTimeout(function() {
           map.fitBounds(layer.getBounds(), {
             paddingTopLeft: [100, 100],
