@@ -35,7 +35,7 @@
       this.breadcrumbs.on('change', function(breadcrumb) {
         var newState = {};
         if (breadcrumb.name === 'countries[]') {
-          newState['regions[]'] = this.getState().region;
+          newState['regions[]'] = this.getState()['regions[]'];
           newState['countries[]'] = breadcrumb.value;
         } else if (breadcrumb.name === 'regions[]') {
           newState['regions[]'] = breadcrumb.value;

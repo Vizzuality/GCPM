@@ -23,6 +23,7 @@
       link.data('remote', true);
       $.rails.handleRemote(link).done(function() {
         link.remove();
+        App.trigger('Remote:load');
       });
     }
 

@@ -52,7 +52,7 @@
       locations
         .fetch({ data: fetchParams })
         .done(function() {
-          var layer = App.helper.pointsLayer(locations.toGeoJSON());
+          var layer = App.helper.pointsClusterLayer(locations.toGeoJSON());
           deferred.resolve(layer);
         });
       return deferred.promise();
