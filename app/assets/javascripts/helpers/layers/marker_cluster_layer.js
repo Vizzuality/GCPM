@@ -17,6 +17,7 @@
    */
   App.helper.markerClusterLayer = function(geoJson) {
     var pruneCluster = new PruneClusterForLeaflet();
+    var infowindowTemplate = HandlebarsTemplates['infowindow'];
 
     var circleIcon = new L.divIcon({
       iconSize: [26, 26],
@@ -33,13 +34,19 @@
     pruneCluster.BuildLeafletIcon = function(feature) {
       var location = feature.geometry.coordinates;
       var marker = new PruneCluster.Marker(location[0], location[1]); // lat, lng
-      if (feature.properties.is_project_lead) {
-        marker.data.icon = markerIcon;
-      } else {
-        marker.data.icon = circleIcon;
-      }
       marker.data.feature = feature;
       return marker;
+    };
+
+    pruneCluster.PrepareLeafletMarker = function(leafletMarker, data) {
+      var tooltip = L.popup();
+      var htmlContent = infowindowTemplate(data.feature.properties);
+      if (data.feature.properties.is_project_lead) {
+        leafletMarker.setIcon(markerIcon);
+      } else {
+        leafletMarker.setIcon(circleIcon);
+      };
+      leafletMarker.bindPopup(htmlContent);
     };
 
     pruneCluster.originalIcon = pruneCluster.BuildLeafletClusterIcon;

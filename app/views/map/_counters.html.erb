@@ -1,24 +1,30 @@
 <div class="c-counters">
   <div class="row">
-    <div class="column small-4">
-      <h3 class="-<%= @current_type %>">
-        <%= t @current_type %>
-      </h3>
-      <span class="amount"><%= @items_total %></span>
-    </div>
     <% if @current_type == 'projects' %>
-      <div class="column small-4">
-        <h3 class="-project-leads">Project leads</h3>
+      <div class="column small-3">
+        <h3>Ongoing projects</h3>
+        <span class="amount"><%= @items_total %></span>
+      </div>
+      <div class="column small-3">
+        <h3>
+          <%= t @current_type %>
+        </h3>
+        <span class="amount"><%= @items_total %></span>
+      </div>
+      <div class="column small-3">
+        <h3>Project leads</h3>
         <span class="amount"><%= @project_leads %></span>
       </div>
-      <div class="column small-4">
-        <h3 class="-collaborators">Collaborators</h3>
+      <div class="column small-3">
+        <h3>Collaborators</h3>
         <span class="amount"><%= @collaborators %></span>
       </div>
     <% else %>
-      <div class="column small-4">
+      <div class="column small-6">
+        <h3>Events</h3>
+        <span class="amount"><%= @items_total %></span>
       </div>
-      <div class="column small-4">
+      <div class="column small-6">
       </div>
     <% end %>
   </div>
