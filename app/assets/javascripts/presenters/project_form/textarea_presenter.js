@@ -10,7 +10,7 @@
 
   _.extend(App.Presenter.Textarea.prototype, {
 
-    initialize: function() {
+    initialize: function(params) {
       this.state = new StateModel();
       this.Textarea = new App.View.Textarea({
         el: '#description',
@@ -31,6 +31,14 @@
 
       this.state.set(obj);
     },
+
+    render: function() {
+      this.Textarea.render();
+    },
+
+    setState: function(state, options) {
+      this.state.set(state, options);
+    }
 
   });
 

@@ -10,7 +10,7 @@
 
   _.extend(App.Presenter.WebsiteInput.prototype, {
 
-    initialize: function() {
+    initialize: function(params) {
       this.state = new StateModel();
       this.websiteInput = new App.View.Input({
         el: '#project-website',
@@ -43,6 +43,14 @@
         }
       }
     },
+
+    render: function() {
+      this.websiteInput.render();
+    },
+
+    setState: function(state, options) {
+      this.state.set(state, options);
+    }
 
   });
 

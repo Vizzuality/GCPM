@@ -10,7 +10,7 @@
 
   _.extend(App.Presenter.Input.prototype, {
 
-    initialize: function() {
+    initialize: function(params) {
       this.state = new StateModel();
       this.Input = new App.View.Input({
         el: '#title',
@@ -31,6 +31,14 @@
 
       this.state.set(obj);
     },
+
+    render: function() {
+      this.Input.render();
+    },
+
+    setState: function(state, options) {
+      this.state.set(state, options);
+    }
 
   });
 
