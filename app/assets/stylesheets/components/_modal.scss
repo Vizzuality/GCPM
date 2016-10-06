@@ -33,6 +33,7 @@
   }
 
   .modal-content {
+    height: 350px;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
@@ -56,5 +57,10 @@
     height: 100%;
     top: 0;
     left: 0;
+  }
+
+  .modal-buttons {
+    position: absolute;
+    bottom: 2px;
   }
 }
