@@ -37,9 +37,9 @@ $dropdown-width: 182px;
         font-weight: $bold-font-weight
       }
     }
-  }
 
-  &:hover > .dropdown-content {
+    &.-open {
       display: block;
     }
+  }
 }
