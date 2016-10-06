@@ -15,40 +15,38 @@
    * @param  {Object} geoJson
    * @return {Object}
    */
-  App.helper.markerClusterLayer = function(geoJson) {
+  App.helper.pointsClusterLayer = function(geoJson) {
     var pruneCluster = new PruneClusterForLeaflet();
-
-    var circleIcon = new L.divIcon({
-      iconSize: [26, 26],
-      className: 'circle-icon',
-      html: ''
-    });
-
-    var markerIcon = new L.divIcon({
-      iconSize: [26, 36],
-      className: 'marker-icon',
-      html: '<svg class="icon icon-marker"><use xlink:href="#icon-marker"></use></svg>'
-    });
+    var infowindowTemplate = HandlebarsTemplates['infowindow'];
 
     pruneCluster.BuildLeafletIcon = function(feature) {
       var location = feature.geometry.coordinates;
       var marker = new PruneCluster.Marker(location[0], location[1]); // lat, lng
-      if (feature.properties.is_project_lead) {
-        marker.data.icon = markerIcon;
-      } else {
-        marker.data.icon = circleIcon;
-      }
       marker.data.feature = feature;
       return marker;
     };
 
+    pruneCluster.PrepareLeafletMarker = function(leafletMarker, data) {
+      var className = data.feature.properties.is_project_lead ? '-alternative' : '';
+      var tooltip = L.popup();
+      var pointIcon = new L.divIcon({
+        iconSize: [15, 15],
+        className: 'point-icon ' + className,
+        html: ''
+      });
+      var htmlContent = infowindowTemplate(data.feature.properties);
+      leafletMarker.setIcon(pointIcon);
+      leafletMarker.bindPopup(htmlContent).openPopup();
+    };
+
     pruneCluster.originalIcon = pruneCluster.BuildLeafletClusterIcon;
 
-    pruneCluster.Cluster.Size = 20;
+    pruneCluster.Cluster.Size = 50;
 
     pruneCluster.BuildLeafletClusterIcon = function(cluster) {
       var icon = pruneCluster.originalIcon(cluster);
-      icon.options.iconSize = new L.Point(60, 60, null);
+      icon.options.iconSize = new L.Point(30, 30, null);
+      icon.options.className += ' -points-cluster-icon';
       return icon;
     };
 
