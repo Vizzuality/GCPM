@@ -22,6 +22,10 @@
     border-radius: 100%;
   }
 
+  &.-thin {
+    padding: ($button-y-padding / 2) ($button-x-padding / 2);
+  }
+
   &.-primary {
     color: $inverse-font-color;
     background-color: $primary-color;
