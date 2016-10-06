@@ -9,6 +9,10 @@ $select2-input-height: 38px;
 
 .select2-container--default .select2-selection--single .select2-selection__rendered {
   line-height: $select2-input-height;
+
+  & > .select2-selection__clear {
+    display: none;
+  }
 }
 
 .select2-container .select2-selection--single,
