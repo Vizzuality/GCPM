@@ -20,21 +20,24 @@
 
   .modal-container {
     position: absolute;
-    padding: $box-space;
-    width: 100%;
-    max-width: 80%;
-    max-height: 80%;
+    display: flex;
+    width: 80%;
+    max-width: $max-width;
+    max-height: 85%;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
 
     background: $body-bg-color;
+
+    transform: translate(-50%, -50%);
     z-index: 1;
   }
 
   .modal-content {
-    height: 350px;
-    overflow-y: auto;
+    position: relative;
+    flex: 1;
+    padding: $box-space;
+    overflow: auto;
     -webkit-overflow-scrolling: touch;
   }
 
@@ -57,10 +60,5 @@
     height: 100%;
     top: 0;
     left: 0;
-  }
-
-  .modal-buttons {
-    position: absolute;
-    bottom: 2px;
   }
 }
