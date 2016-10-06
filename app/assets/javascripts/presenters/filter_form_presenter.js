@@ -65,14 +65,6 @@
       App.on('Map:change', this.handleFieldChange, this);
     },
 
-    handleFieldChange: function(mapState) {
-      _.each(mapState, function(value, key) {
-        if (key === 'countries[]') {
-          App.trigger('MapCountry:change', value);
-        }
-      }.bind(this));
-    },
-
     /**
      * Subscribing to global events
      */
@@ -153,7 +145,18 @@
         // Render the child
         child.render();
       }.bind(this));
-    }
+    },
+
+    /**
+     * Trigger event depending on the filed required
+     */
+    handleFieldChange: function(mapState) {
+      _.each(mapState, function(value, key) {
+        if (key === 'countries[]') {
+          App.trigger('MapCountry:change', value);
+        }
+      }.bind(this));
+    },
 
   });
 
