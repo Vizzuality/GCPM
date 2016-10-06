@@ -47,7 +47,8 @@
      * [{ name: 'Title', value: 1 }]
      */
     setValue: function() {
-      $(this.select.selector).val(this.state.get('value')).trigger("change");
+      // @ TODO
+      //$(this.select.selector).val(this.state.get('value')).trigger("change");
     },
 
     setOptions: function(options) {

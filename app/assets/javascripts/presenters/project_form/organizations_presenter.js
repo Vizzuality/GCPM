@@ -85,7 +85,6 @@
      */
     setElement: function(el) {
       this.select.setElement(el);
-      this.select.render();
     },
 
     /**

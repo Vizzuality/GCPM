@@ -1,0 +1,56 @@
+<script> var AUTH_TOKEN = "<%= @user.authentication_token %>"</script>
+
+<div class="project_add c-section">
+
+  <!-- c-section-intro -->
+  <div class="c-section-intro">
+      <div id="title"></div>
+  </div>
+
+  <!-- c-section-container -->
+  <div class="c-section-container">
+
+    <!-- description -->
+    <div id="description"></div>
+
+    <!-- pickadate x2 -->
+    <div class="pickadate row">
+      <div class="c-pickadate column small-12 medium-6">
+        <h3 class="c-title">Start date</h3>
+        <div class="start-date"></div>
+        <div id="pickadate-start" class="pickadate-container" autofocus></div>
+      </div>
+
+      <div class="c-pickadate column small-12 medium-6">
+        <h3 class="c-title">End date</h3>
+        <div class="end-date"></div>
+        <div id="pickadate-end" class="pickadate-container" autofocus></div>
+      </div>
+
+      <p class="c-required -hidden">* Both dates are required</p>
+    </div>
+
+    <!-- project-info -->
+    <div class="project-info">
+      <h3 class="c-title">Project information</h3>
+      <div id="project-website" class="form-field"></div>
+      <div id="project-types" class="form-field"></div>
+      <div id="cancer-types" class="form-field"></div>
+      <div id="funding-sources" class="form-field"></div>
+    </div>
+
+    <!--<div class="investigators-organizations">
+      <div>
+        <h3 class="c-title">Invetigators & organizations</h3>
+        <div id="investigators" class="form-field"></div>
+        <div id="organizations" class="form-field"></div>
+        <div id="addresses" class="form-field"></div>
+        <div id="lead"></div>
+      </div>
+
+      <table class="investigators-added"></table>
+    </div>-->
+  </div>
+
+</div>
+<!-- endc-section -->

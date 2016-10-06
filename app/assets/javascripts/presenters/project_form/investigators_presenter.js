@@ -33,7 +33,7 @@
         options: {
           name: 'investigators',
           type: 'text',
-          label: 'Investigators',
+          label: null,
           inputClass: 'c-section-title -one-line',
           placeholder: 'Investigators'
         }
@@ -89,6 +89,7 @@
             this.renderOrganizations(options[0].value);
           }
         }.bind(this));
+        this.investigatorsSelect.render();
     },
 
     renderOrganizations: function(investigatorId) {
@@ -220,6 +221,14 @@
 
     setState: function(state, options) {
       this.state.set(state, options);
+    },
+
+    setElement: function(el) {
+      this.investigatorsSelect.setElement(el);
+    },
+
+    getElement: function() {
+      return this.investigatorsSelect.$el;
     }
 
   });

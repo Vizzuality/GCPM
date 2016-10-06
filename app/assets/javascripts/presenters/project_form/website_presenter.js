@@ -48,8 +48,20 @@
       this.websiteInput.render();
     },
 
+    render: function(){
+      this.websiteInput.render();
+    },
+
     setState: function(state, options) {
       this.state.set(state, options);
+    },
+
+    setElement: function(el) {
+      this.websiteInput.setElement(el);
+    },
+
+    getElement: function() {
+      return this.websiteInput.$el;
     }
 
   });

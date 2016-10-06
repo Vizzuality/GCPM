@@ -20,14 +20,13 @@
           name: 'funding_source_ids',
           addNew: true,
           type: 'text',
-          label: 'Funding sources',
+          label: null,
           inputClass: 'c-section-title -one-line',
-          placeholder: 'Funding sources'
+          placeholder: 'All Funding sources'
         }
       });
 
-      this.render();
-      this.setSubscriptions();
+      this.setEvents();
     },
 
     render: function() {
@@ -39,11 +38,16 @@
           });
           this.fundingSourcesSelect.setOptions(options);
         }.bind(this));
+        this.fundingSourcesSelect.render();
     },
 
-    setSubscriptions: function() {
-      this.fundingSourcesSelect.on('change', this.setSelectMultipleValues, this);
-      // this.fundingSourcesSelect.on('add-new-funding-click', this.renderModal, this);
+    setEvents: function() {
+      this.state.on('change', this.setSelectMultipleValues, this);
+      this.fundingSourcesSelect.on('change', this.setState, this);
+    },
+
+    setState: function(state, options) {
+      this.state.set(state, options);
     },
 
     setSelectMultipleValues: function(select) {
@@ -63,8 +67,12 @@
       }
     },
 
-    setState: function(state, options) {
-      this.state.set(state, options);
+    setElement: function(el) {
+      this.fundingSourcesSelect.setElement(el);
+    },
+
+    getElement: function() {
+      return this.fundingSourcesSelect.$el;
     }
 
   });

@@ -17,7 +17,6 @@
         options: {
           name: 'summary',
           type: 'textarea',
-          label: 'Description',
           lableClass: 'c-section-title',
           placeholder: 'Lorem'
         }
@@ -36,8 +35,20 @@
       this.Textarea.render();
     },
 
+    render: function(){
+      this.Textarea.render();
+    },
+
     setState: function(state, options) {
       this.state.set(state, options);
+    },
+
+    setElement: function(el) {
+      this.Textarea.setElement(el);
+    },
+
+    getElement: function() {
+      return this.Textarea.$el;
     }
 
   });

@@ -36,8 +36,20 @@
       this.Input.render();
     },
 
+    render: function(){
+      this.Input.render();
+    },
+
     setState: function(state, options) {
       this.state.set(state, options);
+    },
+
+    setElement: function(el) {
+      this.Input.setElement(el);
+    },
+
+    getElement: function() {
+      return this.Input.$el;
     }
 
   });
