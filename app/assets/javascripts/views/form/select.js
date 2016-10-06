@@ -47,8 +47,7 @@
      * [{ name: 'Title', value: 1 }]
      */
     setValue: function() {
-      // @ TODO
-      //$(this.select.selector).val(this.state.get('value')).trigger("change");
+      $(this.select.selector).val(this.state.get('value')).trigger("change");
     },
 
     setOptions: function(options) {
@@ -58,7 +57,7 @@
     triggerChange: function(e) {
       var selectedOptions = e.currentTarget.selectedOptions;
       var currentOptions = _.pluck(selectedOptions, 'value');
-      this.trigger('change', { value: currentOptions });
+      this.trigger('change', {value: currentOptions });
     }
 
   });

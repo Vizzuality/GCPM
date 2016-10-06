@@ -9,6 +9,7 @@
   };
 
   _.extend(App.Presenter.ProjectForm.prototype, {
+
     initialize: function(params) {
       this.state = new StateModel(params);
 
@@ -59,23 +60,10 @@
       });
 
       this.setEvents();
->>>>>>> projectForm presenter (added other fields)
       this.setSubscriptions();
+      this.renderForm();
     },
 
-<<<<<<< 59a01e2199cb4ae774af65929714291c9f6e7b37
-    initializeFormComponents: function() {
-      this.titleInput           = new App.Presenter.Input();
-      this.descTextarea         = new App.Presenter.Textarea();
-      this.pickdate             = new App.Presenter.Pickdate();
-      this.websiteInput         = new App.Presenter.WebsiteInput();
-      this.projectTypesSelect   = new App.Presenter.ProjectTypes();
-      this.cancerTypesSelect    = new App.Presenter.CancerTypes();
-      this.fundingSourcesSelect = new App.Presenter.FundingSources();
-      this.investigatorsSelect  = new App.Presenter.Investigators();
-      this.submitButton         = new App.Presenter.SubmitButton().submitButton;
-      this.modal                = new App.Presenter.Modal();
-=======
     /**
      * Setting internal events
      */
@@ -88,62 +76,23 @@
         this.setState(newState);
         this.handleSubmit();
       }, this);
->>>>>>> projectForm presenter (added other fields)
     },
 
+    /**
+     * Subscribing to global events
+     */
     setSubscriptions: function() {
-<<<<<<< 59a01e2199cb4ae774af65929714291c9f6e7b37
-      this.titleInput.Input.on(       'change', this.titleInput.setInputValue, this);
-      this.descTextarea.Textarea.on(  'change', this.descTextarea.setTextareaValue, this);
-      this.pickdate.pickdate.on(      'change', this.pickdate.setDates, this);
-      this.submitButton.on(           'click',  this.handleSubmit, this);
-
-      App.on('WebsiteInput:change',         this.setPresenterValue, this);
-      App.on('ProjectTypesSelect:change',   this.setPresenterValue, this);
-      App.on('CancerTypesSelect:change',    this.setPresenterValue, this);
-      App.on('FundingSourcesSelect:change', this.setPresenterValue, this);
-      App.on('InvestigatorsSelect:change',  this.setPresenterValue, this);
-    },
-
-    setComponentsKeys: function() {
-      this.components = {
-        'title': this.titleInput.Input,
-        'summary': this.descTextarea.Textarea,
-        'start_date': this.pickdate.pickdate,
-        'end_date': this.pickdate.pickdate,
-        'project_website': this.websiteInput.websiteInput,
-        'project_type_ids': this.projectTypesSelect.projectTypesSelect,
-        'cancer_type_ids': this.cancerTypesSelect.cancerTypesSelect,
-        'funding_source_ids': this.fundingSourcesSelect.fundingSourcesSelect
-      };
-    },
-
-    setPresenterValue: function(presenter) {
-      var obj = presenter.state.attributes;
-      this.state.set(obj);
-=======
 
     },
 
     setState: function(newState) {
       this.state.set(newState);
->>>>>>> projectForm presenter (added other fields)
     },
 
     /**
      * Subscribing to global events
      */
     handleSubmit: function() {
-<<<<<<< 59a01e2199cb4ae774af65929714291c9f6e7b37
-      var keys = Object.keys(this.components);
-      var fieldsLeft = keys.filter(function(key) {
-        if (this.state.attributes[key] && this.state.attributes[key].length !== 0) {
-          var required = this.components[key].$el.find('.c-required');
-          required && required.addClass('-hidden');
-        }
-
-        return !this.state.attributes[key] || this.state.attributes[key].length === 0;
-=======
       console.log(this.state.attributes);
       var url = "";
       var req = new XMLHttpRequest();
@@ -177,22 +126,8 @@
 
         // Render the child
         child.render();
->>>>>>> projectForm presenter (added other fields)
       }.bind(this));
-
-      if (fieldsLeft.length !== 0) {
-        fieldsLeft.map(function(field) {
-          var required = this.components[field].$el.find('.c-required');
-          required && required.removeClass('-hidden');
-        }.bind(this));
-      }
     }
-
-    // openModal: function(formType) {
-    //   var view = this.formsViews[formType];
-    //   this.modal.setView(view);
-    //   this.modal.open();
-    // }
 
   });
 
