@@ -10,7 +10,7 @@
 
   _.extend(App.Presenter.FundingSources.prototype, {
 
-    initialize: function() {
+    initialize: function(params) {
       this.state = new StateModel();
       this.fundingSources = new App.Collection.FundingSources();
       this.fundingSourcesSelect = new App.View.Select({
@@ -61,6 +61,10 @@
         this.state.set(obj);
         App.trigger('FundingSourcesSelect:change', this);
       }
+    },
+
+    setState: function(state, options) {
+      this.state.set(state, options);
     }
 
   });

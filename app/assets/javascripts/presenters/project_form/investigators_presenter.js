@@ -10,7 +10,7 @@
 
   _.extend(App.Presenter.Investigators.prototype, {
 
-    initialize: function() {
+    initialize: function(params) {
       this.state = new StateModel();
       this.investigators = new App.Collection.Investigators();
       this.investigators.url = '/api/investigators?token=' + window.AUTH_TOKEN;
@@ -216,6 +216,10 @@
       }.bind(this));
 
       this.$investAdded.find('td[value=lead]').text('');
+    },
+
+    setState: function(state, options) {
+      this.state.set(state, options);
     }
 
   });
