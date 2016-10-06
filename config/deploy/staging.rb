@@ -4,4 +4,4 @@ set :ssh_options, {
   auth_methods: %w(publickey password),
   password: fetch(:password)
 }
- set :branch, 'develop-cleanup'
+ set :branch, 'staging'

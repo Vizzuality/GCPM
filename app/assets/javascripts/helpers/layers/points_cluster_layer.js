@@ -36,7 +36,7 @@
       });
       var htmlContent = infowindowTemplate(data.feature.properties);
       leafletMarker.setIcon(pointIcon);
-      leafletMarker.bindPopup(htmlContent).openPopup();
+      leafletMarker.bindPopup(htmlContent);
     };
 
     pruneCluster.originalIcon = pruneCluster.BuildLeafletClusterIcon;

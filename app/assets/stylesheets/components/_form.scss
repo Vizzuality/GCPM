@@ -6,7 +6,7 @@ input[type="password"],
 input[type="email"],
 select {
   min-height: $input-height;
-  min-width: 300px;
+  width: 100%;
 }
 
 input[type="text"],
