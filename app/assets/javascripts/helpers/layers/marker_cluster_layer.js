@@ -44,6 +44,8 @@
 
     pruneCluster.originalIcon = pruneCluster.BuildLeafletClusterIcon;
 
+    pruneCluster.Cluster.Size = 20;
+
     pruneCluster.BuildLeafletClusterIcon = function(cluster) {
       var icon = pruneCluster.originalIcon(cluster);
       icon.options.iconSize = new L.Point(60, 60, null);
