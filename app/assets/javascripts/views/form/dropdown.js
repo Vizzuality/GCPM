@@ -60,7 +60,7 @@
       this.trigger('change', newState);
     },
 
-    triggerOpen: function(e) {
+    triggerOpen: function() {
       this.trigger('change', { open: !this.state.attributes.open });
     }
 
