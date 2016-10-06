@@ -1,0 +1,16 @@
+.c-actionbar {
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  color: $body-bg-color;
+  height: 100%;
+
+  .actionbar-item {
+    .c-btn > .c-icon {
+      fill: $body-bg-color;
+    }
+  }
+}
