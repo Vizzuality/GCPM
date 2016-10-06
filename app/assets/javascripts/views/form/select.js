@@ -40,6 +40,11 @@
       return this;
     },
 
+    setState: function(state) {
+      this.state = state;
+      this.setValue();
+    },
+
     /**
      * Render new options and render again
      * @param {Array} options

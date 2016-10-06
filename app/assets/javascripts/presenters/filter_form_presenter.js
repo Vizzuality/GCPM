@@ -60,7 +60,17 @@
 
       this.state.on('change', function() {
         App.trigger('FilterForm:change', this.state.attributes);
-      }, this)
+      }, this);
+
+      App.on('Map:change', this.handleFieldChange, this);
+    },
+
+    handleFieldChange: function(mapState) {
+      _.each(mapState, function(value, key) {
+        if (key === 'countries[]') {
+          App.trigger('MapCountry:change', value);
+        }
+      }.bind(this));
     },
 
     /**

@@ -27,12 +27,7 @@
         // Use this if you want a single select
         allowClear: true,
         templateSelection: function(data) {
-          // Return the placeholder
-          if (!data.id) {
-            return data.text;
-          }
-          // Return the selected option
-          return $('<span class="select2-selection__choice">' + data.text + '<span class="select2-selection__clear">×</span></span>');
+          return data.text;
         }
       }
     },
@@ -60,6 +55,8 @@
       }, this);
 
       this.select.on('change', this.setState, this);
+
+      App.on('MapCountry:change', this.triggerCountryChange, this);
     },
 
     /**
@@ -80,6 +77,19 @@
 
     render: function() {
       this.select.render();
+
+      if (arguments[0]) {
+        var state = new StateModel();
+        state.set(Object.assign({}, this.state.attributes, arguments[0]));
+        this.select.setState(state);
+      }
+    },
+
+    /**
+     * Trigger country change
+     */
+    triggerCountryChange: function(value) {
+      this.render({value: [value]});
     },
 
     /**
