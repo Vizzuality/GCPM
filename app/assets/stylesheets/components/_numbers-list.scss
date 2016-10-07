@@ -1,0 +1,17 @@
+
+.c-numbers-list {
+
+  th, td {
+    padding-right: 35px;
+  }
+
+  th {
+    text-transform: uppercase;
+    font-size: $small-font-size;
+  }
+
+  td {
+    font-size: $big-font-size;
+    font-weight: $bold-font-weight;
+  }
+}

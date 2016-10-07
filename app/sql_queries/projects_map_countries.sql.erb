@@ -3,6 +3,8 @@ countries.id as location_id,
 countries.country_name as location_name,
 countries.country_centroid as centroid,
 countries.country_iso_3 as iso,
+COALESCE(sum(CASE WHEN memberships.membership_type = 0 THEN 1 ELSE 0 END),1) AS project_leads,
+COALESCE(sum(CASE WHEN memberships.membership_type = 1 THEN 1 ELSE 0 END),1) AS collaborators,
 'country' as type
 from projects
  inner join memberships on memberships.project_id = projects.id

@@ -39,16 +39,16 @@
 
       this.fc.on('region:change', function(state) {
         if (state.type === 'region') {
-          this.setState({ region: state.iso, data: state.data });
+          this.setState({ 'regions[]': state.iso, data: state.data });
         }
       }, this);
 
       this.fc.on('country:change', function(state) {
         if (state.type === 'country') {
           this.setState({
-            region: state.region,
+            'regions[]': state['regions[]'],
             data: state.data,
-            country: state.iso
+            'countries[]': state.iso
           });
         }
       }, this);
@@ -69,7 +69,7 @@
       var newState = merge ?
         Object.assign({}, this.getState(), params) : params;
 
-      newState = _.pick(params, 'data', 'region', 'country', 'cancer_types[]',
+      newState = _.pick(params, 'data', 'regions[]', 'countries[]', 'cancer_types[]',
         'organization_types[]', 'organizations[]', 'project_types[]',
         'start_date', 'end_date');
 

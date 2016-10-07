@@ -14,7 +14,8 @@
   	"Backbone": true,
   	"_": true,
   	"App": true,
-    "HandlebarsTemplates": true
+    "HandlebarsTemplates": true,
+    "gon": true
   },
   "extends": "eslint:recommended"
 }

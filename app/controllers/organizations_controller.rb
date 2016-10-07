@@ -8,23 +8,24 @@ class OrganizationsController < ApplicationController
 
   def show
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
-    @title = t 'map'
     @filters = %w(projects events)
     @current_type = params.key?(:data) ? params[:data] : 'projects'
-    @user_data = current_user.present? ? JSON.generate(build_user_data) : nil
+
+    gon.server_params = { 'organizations[]': params[:id] }
 
     limit = 12 + (@page * 9)
 
+    @events = Event.fetch_all(organization: @organization.id).order('created_at DESC')
+    @projects = Project.fetch_all(organization: @organization.id).order('created_at DESC')
+
     if params.key?(:data) && params[:data] == 'events'
-      events = Event.fetch_all(organization: @organization.id).order('created_at DESC')
-      @items = events.limit(limit)
-      @more = (events.size > @items.size)
-      @items_total = events.size
+      @items = @events.limit(limit)
+      @more = (@events.size > @items.size)
+      @items_total = @events.size
     else
-      projects = Project.fetch_all(organization: @organization.id).order('created_at DESC')
-      @items = projects.limit(limit)
-      @more = (projects.size > @items.size)
-      @items_total = projects.size
+      @items = @projects.limit(limit)
+      @more = (@projects.size > @items.size)
+      @items_total = @projects.size
     end
 
     respond_with(@items)

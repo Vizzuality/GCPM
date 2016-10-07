@@ -2,6 +2,7 @@
 
 <section class="l-app -full">
   <div id="map" class="c-map"></div>
+  <%= render "shared/legend" %>
   <div class="l-app-title">
     <div class="wrapper">
       <div class="row collapse">
@@ -29,7 +30,7 @@
             <h3><%= t 'location' %>(s)</h3>
             <ul class="c-list">
             <% iso = Country.find_by(country_name: @event.country).country_iso_3 %>
-              <li class="list-item"><%= link_to "#{@event.city} , #{@event.country}", "/countries/#{iso}?data=projects&sortby=title_asc&country=#{iso}" %></li>
+              <li class="list-item"><%= link_to "#{@event.city} , #{@event.country}", "/countries/#{iso}" %></li>
             </ul>
           </div>
           <% if @event.participants %>
@@ -39,7 +40,7 @@
                 <% @event.participants.split(',').each do |p| %>
                   <% participant = p[0] === ' ' ? p.slice(1, p.length-1) : p %>
                   <% id = Investigator.find_by(name: participant).id %>
-                  <li class="list-item"><%= link_to "#{participant}", "/investigators/#{id}?data=projects&sortby=title_asc&investigators[]=#{id}" %></li>
+                  <li class="list-item"><%= link_to "#{participant}", "/investigators/#{id}" %></li>
                 <% end %>
               </ul>
             </div>
