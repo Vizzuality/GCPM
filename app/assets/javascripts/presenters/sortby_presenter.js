@@ -36,7 +36,7 @@
           label: 'Sort by',
           className: '-sortby',
           options: dropdownOptions,
-        }, viewSettings || {})
+        }, viewSettings||{})
       });
 
       this.setEvents();
@@ -65,7 +65,7 @@
      */
     setState: function(state) {
       var newState = _.pick(state, 'sortby');
-      this.state.set(state);
+      this.state.set(newState);
     },
 
     getState: function() {
