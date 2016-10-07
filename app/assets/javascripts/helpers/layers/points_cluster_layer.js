@@ -3,6 +3,12 @@
 
   'use strict';
 
+  var clusterSizes = {
+    big: 60,
+    medium: 45,
+    small: 30
+  };
+
   /**
    * Creating marker layer for country detail
    * showing project leaders and researchers
@@ -37,8 +43,14 @@
     pruneCluster.Cluster.Size = 50;
 
     pruneCluster.BuildLeafletClusterIcon = function(cluster) {
+      var size = clusterSizes.small;
+      if (cluster.totalWeight > 99) {
+        size = clusterSizes.medium;
+      } else if (cluster.totalWeight > 999) {
+        size = clusterSizes.big;
+      }
       var icon = pruneCluster.originalIcon(cluster);
-      icon.options.iconSize = new L.Point(30, 30, null);
+      icon.options.iconSize = new L.Point(size, size, null);
       icon.options.className += ' -points-cluster-icon';
       return icon;
     };
