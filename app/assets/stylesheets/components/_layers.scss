@@ -1,8 +1,31 @@
 .c-layers {
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+  font-weight: $base-font-weight;
+
+  height: 80%;
+  width: 25%;
+
   position: absolute;
-  height: 60%;
-  width: 30%;
-  background-color: $body-bg-color;
+  top: $inline-space * 3;
+  left: $base-space * 3;
   z-index: 1;
-  top: -20px;
+
+  box-shadow: $box-shadow;
+  background-color: $body-bg-color;
+
+  .layers-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: $inline-space $base-space;
+
+    .c-btn {
+      margin-left: 5px;
+    .c-icon {
+      fill: $body-bg-color;
+    }
+  }
+
+  }
 }
