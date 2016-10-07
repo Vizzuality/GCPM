@@ -1,8 +1,8 @@
 <div class="c-layers">
-  <div class="layers-item">
+{{!--   <div class="layers-item">
     <div class="layer">
       <div class="switch round">
-        <input type="radio" id="layer1" name="layer" value="hdi">
+        <input type="radio" id="layer1" name="layer" value="hdi" data-date="2000">
         <label for="layer1"></label>
       </div>
       human development index
@@ -12,7 +12,71 @@
         </svg>
       </button>
     </div>
+  </div> --}}
+
+  <div class="layers-item">
+    <div class="layer">
+      <div class="switch round">
+        <input type="radio" id="layer1" name="layer" value="incidence">
+        <label for="layer1"></label>
+      </div>
+      Incidence
+      <button class="c-btn -round-icon -primary">
+        <svg class="c-icon -small -inverse">
+          <use xlink:href="#icon-info"></use>
+        </svg>
+      </button>
+    </div>
   </div>
+
+  <div class="layers-item">
+    <div class="layer">
+      <div class="switch round">
+        <input type="radio" id="layer1" name="layer" value="mortality">
+        <label for="layer1"></label>
+      </div>
+      Mortality
+      <button class="c-btn -round-icon -primary">
+        <svg class="c-icon -small -inverse">
+          <use xlink:href="#icon-info"></use>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  {{!-- Example --}}
+  <div class="layers-item">
+    <div class="layer">
+      <button class="c-btn -thin">
+        <svg class="c-icon -small -primary layer-arrow">
+          <use xlink:href="#icon-arrow"></use>
+        </svg>
+      </button>
+      human development index
+      <button class="c-btn -round-icon -primary">
+        <svg class="c-icon -small -inverse">
+          <use xlink:href="#icon-info"></use>
+        </svg>
+      </button>
+    </div>
+    <ul class="layer-list">
+      <li class="layer">
+        <div class="switch round">
+          <input type="radio" id="layer2" name="layer" value="hdi" data-date="1980">
+          <label for="layer2"></label>
+        </div>
+        1980
+      </li>
+      <li class="layer">
+        <div class="switch round">
+          <input type="radio" id="layer3" name="layer" value="hdi" data-date="1985">
+          <label for="layer3"></label>
+        </div>
+        1985
+      </li>
+    </ul>
+  </div>
+  {{!-- -- --}}
 
   <div class="layers-item">
     <div class="layer">

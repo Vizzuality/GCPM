@@ -14,8 +14,7 @@
       this.cartoOpts = this.optionsFc.getCartoOptions({
         layer: this.layer,
         options: {
-          column_name: this.params && (this.params.cancer_type ||
-            'y_' + this.params.date),
+          column_name: this.params.cancer_type || 'y_' + this.params.date,
           // TO-DO: set ranges dinamically depending on each one
           range1: 23,
           range2: 50,
@@ -29,11 +28,7 @@
       return this.create();
     },
 
-    /************
-     * LAYER
-     * - create
-     * Returns carto layer
-     */
+    /* Returns carto layer */
     create: function() {
       var mapconfig = {
         "version": "1.3.1",

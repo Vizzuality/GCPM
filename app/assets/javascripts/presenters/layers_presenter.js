@@ -47,11 +47,18 @@
       this.layers.updateData(data);
     },
 
-    handleLayer: function(value) {
-      //Create layer
-      this.fc.getLayer({layer_name: value, params: {date: '2000'}}).done(function(layer) {
-        App.trigger('Layer:change', layer);
+    handleLayer: function(element) {
+      var options = {
+        layer_name: element.value,
+        params: {
+          date: $(element).data().date,
+          cancer_type: $(element).data()['cancer-type']
+        }
+      };
 
+      //Create layer
+      this.fc.getLayer(options).done(function(layer) {
+        App.trigger('Layer:change', layer);
       });
     }
 

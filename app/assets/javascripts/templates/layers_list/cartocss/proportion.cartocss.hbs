@@ -1,0 +1,24 @@
+/** choropleth visualization */
+
+#crm_globocan_2012 {
+  polygon-fill: transparent;
+  polygon-opacity: 0.8;
+  line-color: #FFF;
+  line-width: 1;
+  line-opacity: 1;
+}
+#crm_globocan_2012 [ value > 333.9] {
+  polygon-fill: #00ABA8;
+}
+#crm_globocan_2012 [ value <= 333.9] {
+  polygon-fill: #48C1BD;
+}
+#crm_globocan_2012 [ value <= 137.1] {
+  polygon-fill: #92D3CF;
+}
+#crm_globocan_2012 [ value <= 85.3] {
+  polygon-fill: #B4E2DE;
+}
+#crm_globocan_2012 [ value <= 62.5] {
+  polygon-fill: #BDE5E0;
+}
