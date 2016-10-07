@@ -33,6 +33,7 @@ $dropdown-width: 182px;
       cursor: pointer;
 
       & a {
+        display: block;
         color: $app-bg-color;
         font-weight: $bold-font-weight
       }

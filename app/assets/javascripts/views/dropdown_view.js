@@ -6,30 +6,30 @@
 
     defaults: {
       label: null,
-      showHeader: true,
-      class: '',
-      options: []
+      className: '',
+      options: [],
+      open: false
     },
 
     events: {
-      'click div.js-open': 'triggerOpen',
-      'click a.js-option': 'triggerChange'
+      'click .js-open': 'toggleDropdown',
+      'click .js-option': 'selectOption'
     },
 
     template: HandlebarsTemplates['dropdown'],
 
-
     initialize: function(settings) {
       var opts = settings && settings.options;
       opts = opts || new Object();
-      opts.class = [this.defaults.class, opts.class || ''].join(' ');
-      this.state = settings.state;
+      opts.className = [this.defaults.className, opts.className || ''].join(' ');
       this.options = _.extend({}, this.defaults, opts);
+      this.render();
     },
 
     render: function() {
-      this.options.header = this.state.attributes.name;
-      this.options.open = this.state.attributes.open;
+      this.options.current = _.findWhere(this.options.options, {
+        selected: true
+      });
       this.$el.html(this.template(this.options));
       return this;
     },
@@ -40,28 +40,26 @@
      * @example
      * [{ name: 'Title', value: 1 }]
      */
-
     setOptions: function(options) {
       this.options.options = options;
+      this.render();
     },
 
     setState: function(state) {
       this.state.attributes = state;
     },
 
-    triggerChange: function(e) {
+    selectOption: function(e) {
       var value = e.currentTarget.getAttribute('data-value');
       var name = e.currentTarget.getAttribute('name');
-      var newState = {
-        value: value,
-        name: name,
-        open: !this.state.attributes.open
-      };
-      this.trigger('change', newState);
+      this.$el.find('.dropdown-value').html(name);
+      this.trigger('change', { name: name, value: value });
+      this.toggleDropdown();
     },
 
-    triggerOpen: function() {
-      this.trigger('change', { open: !this.state.attributes.open });
+    toggleDropdown: function() {
+      this.options.open = !this.options.open;
+      this.$el.find('.dropdown-content').toggleClass('-open');
     }
 
   });

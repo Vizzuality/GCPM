@@ -1,15 +1,11 @@
-<div class="c-dropdown {{class}}">
-  {{#if showHeader}}
-    {{#if label}}
-      {{label}}
-    {{/if}}
-    <div class="dropdown-value js-open">{{header}}</div>
-  {{/if}}
-  <div class="dropdown-content {{#if open}} -open {{/if}}">
+<div class="c-dropdown {{className}}">
+  <span>{{#if label}}{{label}}{{/if}}</span>
+  <div class="dropdown-value js-open">{{current.name}}</div>
+  <div class="dropdown-content {{#if open}}-open{{/if}}">
     {{#each options}}
       <div class="dropdown-item">
         <a class="js-option" data-value="{{value}}" name="{{name}}">{{name}}</a>
       </div>
-      {{/each}}
+    {{/each}}
   </div>
 </div>
