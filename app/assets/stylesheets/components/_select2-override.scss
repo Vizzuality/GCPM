@@ -18,13 +18,35 @@ $select2-input-height: 38px;
 .select2-container .select2-selection--single,
 .select2-container .select2-selection--multiple {
   height: $select2-input-height;
+  &:after {
+    content: ' ';
+    position: absolute;
+    top: 10px;
+    right: 5px;
+    width: 10px;
+    height: 10px;
+    transform: rotate(45deg);
+    border-bottom: 2px solid $primary-color;
+    border-right: 2px solid $primary-color;
+  }
 }
 .select2-container .select2-selection--multiple {
+  display: flex;
+  align-items: center;
   min-height: $select2-input-height;
+}
+
+.select2-selection--single .select2-selection__arrow {
+  display: none;
 }
 
 .select2-container .select2-search--inline .select2-search__field {
   margin-top: 0;
+}
+
+span.select2.select2-container.select2-container--default {
+  width: 100% !important;
+  cursor: pointer;
 }
 
 .select2-dropdown,
