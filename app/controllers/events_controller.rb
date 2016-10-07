@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
-    @current_type = params[:type] || 'event-info'
+    gon.server_params = { }
+    gon.api_location_path = "/api/map/events/#{params[:id]}"
   end
 end
