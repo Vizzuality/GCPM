@@ -13,6 +13,8 @@
     initialize: function (params) {
       this.state = new StateModel();
       this.layers = new App.View.Layers({ el: '#layers' });
+      this.fc = App.facade.cartoLayer;
+
       this.setEvents();
       this.setSubscriptions();
       this.setState(params);
@@ -31,6 +33,8 @@
         this.render();
         App.trigger('Layers:change', this.getState());
       }, this);
+
+      this.layers.on('change', this.handleLayer.bind(this));
     },
 
     setSubscriptions: function () {
@@ -41,6 +45,14 @@
       var data;
       var attributes = this.getState();
       this.layers.updateData(data);
+    },
+
+    handleLayer: function(value) {
+      //Create layer
+      this.fc.getLayer({layer_name: value, params: {date: '2000'}}).done(function(layer) {
+        App.trigger('Layer:change', layer);
+
+      });
     }
 
   });
