@@ -23,6 +23,10 @@
       display: flex;
       align-items: center;
       justify-content: flex-start;
+
+      .layer-arrow {
+        transform: rotate(90deg);
+      }
     }
 
     .switch {
@@ -30,8 +34,19 @@
       margin: 0;
     }
 
-    > ul {
+    > .layer-list {
       list-style: none;
+    }
+
+    &.-collapsed {
+
+      .layer-arrow {
+        transform: rotate(0deg);
+      }
+
+      > .layer-list {
+        display: none;
+      }
     }
   }
 
