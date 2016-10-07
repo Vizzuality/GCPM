@@ -2,12 +2,13 @@
 
   'use strict';
 
-  App.View.Legends = Backbone.View.extend({
+  App.View.Legend = Backbone.View.extend({
 
-    template: HandlebarsTemplates['legends'],
+    template: HandlebarsTemplates['legend'],
 
     initialize: function(settings) {
-      this.data = (settings && settings.data)||[];
+      this.data = (settings && settings.data) ? settings.data : [];
+      this.render();
     },
 
     updateData: function(data) {
@@ -16,7 +17,7 @@
     },
 
     render: function() {
-      this.$el.html(this.template({ data: this.data }));
+      this.$el.html(this.template({ items: this.data }));
       return this;
     }
 

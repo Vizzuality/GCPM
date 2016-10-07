@@ -23,8 +23,16 @@
     }
   }
 
-  .leaflet-top {
-    top: 36px;
+  .leaflet-left .leaflet-control {
+    margin-left: $base-space;
+  }
+
+  .leaflet-top .leaflet-control {
+    margin-top: $base-space;
+  }
+
+  .l-app.-main & .leaflet-top .leaflet-control {
+    margin-top: $base-space + 35px;
   }
 
   .leaflet-top,

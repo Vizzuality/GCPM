@@ -1,21 +1,24 @@
 <div class="c-counters">
   <div class="row">
     <% if @current_type == 'projects' %>
-      <div class="column small-3">
-        <h3>Investigations</h3>
-        <span class="amount"><%= @investigations %></span>
-      </div>
-      <div class="column small-3">
+      <% gridSize = params.key?('countries') ? 3 : 4 %>
+      <% if params.key?('countries') %>
+        <div class="column small-#{gridSize}">
+          <h3>Investigations</h3>
+          <span class="amount"><%= @investigations %></span>
+        </div>
+      <% end %>
+      <div class="column small-#{gridSize}">
         <h3>
           <%= t @current_type %>
         </h3>
         <span class="amount"><%= @items_total %></span>
       </div>
-      <div class="column small-3">
+      <div class="column small-#{gridSize}">
         <h3>Project leads</h3>
         <span class="amount"><%= @project_leads %></span>
       </div>
-      <div class="column small-3">
+      <div class="column small-#{gridSize}">
         <h3>Collaborators</h3>
         <span class="amount"><%= @collaborators %></span>
       </div>

@@ -1,8 +1,12 @@
 
 .c-legend {
   position: absolute;
-  right: 10px;
+  top: $base-space;
+  right: $base-space;
   padding: $button-y-padding $button-x-padding;
+
+  color: $inverse-font-color;
+
   background-color: rgba(#68299b, .7);
 
   .legend-label {
@@ -20,10 +24,12 @@
   li {
     display: flex;
     align-items: center;
+    letter-spacing: 1px;
     list-style: none;
-    color: white;
     margin-top: 0;
     margin-left: $base-space;
+
+    line-height: 1;
 
     &:first-child {
       margin-left: 0;
@@ -32,11 +38,89 @@
     &:last-child .dot { background-color: $alternative-color; }
   }
 
+  .legend-icon {
+    position: relative;
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+
+    svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 12px;
+      height: 12px;
+
+      &.marker-icon {
+        fill: $primary-color;
+      }
+    }
+
+    .cluster-icon {
+      width: 12px;
+      height: 12px;
+      border: 3px solid rgba($primary-color, .9);
+      border-radius: 100%;
+      background-color: $body-bg-color;
+    }
+
+    .circle-icon {
+      width: 12px;
+      height: 12px;
+      border-radius: 100%;
+      background-color: $secondary-color;
+    }
+
+    &.-projects .circle-icon {
+      background-color: $primary-color;
+    }
+
+    &.-collaborators .circle-icon {
+      background-color: $secondary-color;
+    }
+
+    &.-events .circle-icon {
+      background-color: $alternative-color;
+    }
+  }
+
   .dot {
     width: 12px;
     height: 12px;
     border-radius: 50%;
     background-color: white;
     margin-right: 5px;
+  }
+
+  &.-main {
+    top: 35px + $base-space;
+    padding: 0;
+    // background-color: rgba(#007bcd, 0.7);
+    background-color: $body-bg-color;
+    box-shadow: $box-shadow;
+
+    ul {
+      display: block;
+      padding: $base-space / 2;
+    }
+
+    li {
+      justify-content: flex-start;
+      margin: 0;
+      padding: $base-space / 2;
+
+      color: $base-font-color;
+
+      &:first-child {
+        margin-top: 0;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    .legend-label {
+    }
   }
 }

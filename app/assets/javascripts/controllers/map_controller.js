@@ -9,6 +9,7 @@
     index: function(params) {
       new App.Presenter.Remote();
       new App.Presenter.Map(params);
+      new App.Presenter.Legend(params);
       new App.Presenter.TabNav(params);
       new App.Presenter.Toolbar(params);
       new App.Presenter.FilterForm(params);

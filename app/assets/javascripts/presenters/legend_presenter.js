@@ -3,21 +3,35 @@
   'use strict';
 
   var StateModel = Backbone.Model.extend({});
+  var MARKER_ICON = '<svg class="marker-icon"><use xlink:href="#icon-marker"></use></svg>';
+  var CIRCLE_ICON = '<div class="circle-icon"></div>'
+  var CLUSTER_ICON = '<div class="cluster-icon"></div>';
 
-  App.Presenter.Legends = function () {
+  App.Presenter.Legend = function () {
     this.initialize.apply(this, arguments);
   };
 
-  _.extend(App.Presenter.Legends.prototype, {
+  _.extend(App.Presenter.Legend.prototype, {
 
     initialize: function (params) {
       this.state = new StateModel();
-      this.legends = new App.View.Legends({ el: '#legends' });
 
-      this.setEvents();
-      this.setSubscriptions();
+      var legendData = [
+        { name: 'Projects', icon: CIRCLE_ICON, dataType: 'projects' },
+        { name: 'Cluster', icon: CLUSTER_ICON, dataType: 'projects' },
+        { name: 'Project leads', icon: MARKER_ICON, dataType: 'projects' },
+        { name: 'Collaborators', icon: CIRCLE_ICON, dataType: 'collaborators' }
+      ];
 
-      this.setState(params);
+      this.legend = new App.View.Legend({
+        el: '#legend',
+        data: legendData
+      });
+
+      // this.setEvents();
+      // this.setSubscriptions();
+
+      // this.setState(params);
     },
 
     setState: function (params) {
