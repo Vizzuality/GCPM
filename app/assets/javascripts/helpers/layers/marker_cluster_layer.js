@@ -39,13 +39,12 @@
     };
 
     pruneCluster.PrepareLeafletMarker = function(leafletMarker, data) {
-      var tooltip = L.popup();
       var htmlContent = infowindowTemplate(data.feature.properties);
       if (data.feature.properties.is_project_lead) {
         leafletMarker.setIcon(markerIcon);
       } else {
         leafletMarker.setIcon(circleIcon);
-      };
+      }
       leafletMarker.bindPopup(htmlContent);
     };
 
