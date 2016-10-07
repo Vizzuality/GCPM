@@ -24,7 +24,7 @@
       params.global = 'all'; // Always show global link
       this.state
         .clear({ silent: true })
-        .set(_.pick(params, 'global', 'regions[]', 'countries[]'));
+        .set(_.pick(params, 'global', 'region', 'country'));
     },
 
     getState: function() {
@@ -34,15 +34,15 @@
     setEvents: function() {
       this.breadcrumbs.on('change', function(breadcrumb) {
         var newState = {};
-        if (breadcrumb.name === 'countries[]') {
-          newState['regions[]'] = this.getState()['regions[]'];
-          newState['countries[]'] = breadcrumb.value;
-        } else if (breadcrumb.name === 'regions[]') {
-          newState['regions[]'] = breadcrumb.value;
-          newState['countries[]'] = null;
+        if (breadcrumb.name === 'country') {
+          newState.region = this.getState().region;
+          newState.country = breadcrumb.value;
+        } else if (breadcrumb.name === 'region') {
+          newState.region = breadcrumb.value;
+          newState.country = null;
         } else {
-          newState['regions[]'] = null;
-          newState['countries[]'] = null;
+          newState.region = null;
+          newState.country = null;
         }
         this.setState(newState);
         App.trigger('Breadcrumbs:change', this.getState());

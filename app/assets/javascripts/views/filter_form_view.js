@@ -8,7 +8,7 @@
 
     events: {
       'click .js-filter-form-cancel': 'triggerCancel',
-      'click .js-filter-form-submit': 'triggerSubmit'
+      'submit form': 'triggerSubmit'
     },
 
     initialize: function(settings) {
@@ -33,7 +33,6 @@
     },
 
     triggerSubmit: function(e) {
-
       if (e) {
         e.preventDefault();
       }

@@ -37,9 +37,9 @@
       onEachFeature: function(feature, layer) {
         layer.on('click', function() {
           var eventName = null;
-          if (!params['regions[]'] && !params['countries[]']) {
+          if (!params.region && !params.country) {
             eventName = 'region';
-          } else if (params['regions[]'] && !params['countries[]']) {
+          } else if (params.region && !params.country) {
             eventName = 'country';
           }
           var newState = Object.assign(feature.properties, params);

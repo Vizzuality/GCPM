@@ -16,21 +16,6 @@
 
 class Country < ApplicationRecord
   has_many :addresses
-  has_many :research_units, through: :addresses
-  has_many :memberships, through: :research_units
-  has_many :projects, through: :memberships
-  has_many :organizations, through: :addresses
-
-  def projects_count
-    self.projects.uniq.size
-  end
-  def organizations_count
-    self.organizations.uniq.size
-  end
-  def events_count
-    Event.where(country: c.country_name).uniq.size
-  end
-
   def self.names
     Country.all.order(:country_name).pluck(:country_name)
   end

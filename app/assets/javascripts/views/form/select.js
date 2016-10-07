@@ -23,7 +23,6 @@
     },
 
     template: HandlebarsTemplates['form/select'],
-    //template: HandlebarsTemplates['dropdown'],
 
     initialize: function(settings) {
       var opts = settings && settings.options;

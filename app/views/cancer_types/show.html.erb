@@ -4,28 +4,11 @@
 
   <div id="map" class="c-map"></div>
 
-  <%= render 'shared/legend' %>
-
   <div class="l-app-title">
     <div class="wrapper">
       <div class="row collapse">
         <div class="column small-8">
           <h1><%= @cancer_type.name %></h1>
-          <table class="c-numbers-list">
-            <thead>
-              <tr>
-                <th><%= t 'projects' %></th>
-                <th><%= t 'events' %></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><%= @projects.size %></td>
-                <td><%= @events.size %></td>
-              </tr>
-            </tbody>
-          </table>
-          <br/>
         </div>
       </div>
     </div>

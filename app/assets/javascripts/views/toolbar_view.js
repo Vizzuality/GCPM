@@ -10,12 +10,10 @@
       'click .js-toolbar-action': 'fireAction'
     },
 
-    initialize: function() {
-      this.render();
-    },
-
-    render: function() {
-      this.$el.html(this.template());
+    render: function(data) {
+      if (data) {
+        this.$el.html(this.template(data));
+      }
     },
 
     fireAction: function(e) {

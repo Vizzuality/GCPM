@@ -20,24 +20,20 @@
 
   .modal-container {
     position: absolute;
-    display: flex;
-    width: 80%;
-    max-width: $max-width;
-    max-height: 85%;
+    padding: $box-space;
+    width: 100%;
+    max-width: 80%;
+    max-height: 80%;
     top: 50%;
     left: 50%;
+    transform: translate(-50%, -50%);
 
     background: $body-bg-color;
-
-    transform: translate(-50%, -50%);
     z-index: 1;
   }
 
   .modal-content {
-    position: relative;
-    flex: 1;
-    padding: $box-space;
-    overflow: auto;
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
 

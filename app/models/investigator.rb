@@ -38,8 +38,11 @@ class Investigator < ApplicationRecord
 
   def self.fetch_all(options={})
     investigators = Investigator.all
-    investigators = investigators.by_countries(options[:countries])                   if options[:countries]
-    investigators = investigators.by_regions(options[:regions])                       if options[:regions]
+    if options[:country]
+      investigators = investigators.by_countries(options[:country])
+    elsif options[:region]
+      investigators = investigators.by_regions(options[:region])
+    end
     investigators = investigators.by_investigators(options[:investigators])           if options[:investigators]
     investigators = investigators.by_project_types(options[:project_types])           if options[:project_types]
     investigators = investigators.by_cancer_types(options[:cancer_types])             if options[:cancer_types]

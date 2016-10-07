@@ -2,6 +2,40 @@
   padding-top: $box-space;
   padding-bottom: $box-space;
 
+  h3 {
+    &:before {
+      content: " ";
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      margin-right: 1rem;
+      vertical-align: -2px;
+      border: 1px solid;
+    }
+
+    &.-projects:before {
+      border-radius: 100%;
+      background-color: rgba(#007bcd, 0.85);
+      border-color: darken(rgba(#007bcd, 0.85), 10);
+    }
+
+    &.-project-leads:before {
+      background-color: #78bbe8;
+      border-color: darken(#78bbe8, 10);
+    }
+
+    &.-collaborators:before {
+      background-color: white;
+      border-color: darken(white, 10);
+    }
+
+    &.-events:before {
+      border-radius: 100%;
+      background-color: $alternative-color;
+      border-color: darken($alternative-color, 10);
+    }
+  }
+
   .amount {
     display: block;
 

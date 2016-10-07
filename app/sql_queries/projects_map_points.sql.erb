@@ -1,17 +1,14 @@
 select
 projects.id as project,
 projects.title as title,
-investigators.name as investigator_name,
-investigators.id as investigator,
 countries.country_name as location_name,
 '{"type":"Point","coordinates":[' || addresses.latitude || ',' || addresses.longitude || ']}' as centroid,
 countries.country_iso_3 as iso,
 'point' as type,
 case when (memberships.membership_type = 0) then true else false end as is_project_lead
 from projects
-    inner join memberships on memberships.project_id = projects.id
+ inner join memberships on memberships.project_id = projects.id
     inner join research_units on memberships.research_unit_id = research_units.id
-    inner join investigators on investigators.id = research_units.investigator_id
     inner join addresses on research_units.address_id = addresses.id
     inner join countries on addresses.country_id = countries.id
      <% if @params[:organizations] || @params[:organization_types] %>
@@ -19,6 +16,9 @@ from projects
     <% end %>
     <% if @params[:organization_types] %>
       inner join organization_types on organization_types.id = organizations.organization_type_id
+    <% end %>
+    <% if @params[:investigators] %>
+      inner join investigators on research_units.investigator_id = investigators.id
     <% end %>
     <% if @params[:project_types] %>
       inner join project_types_projects on project_types_projects.project_id = projects.id
@@ -59,4 +59,4 @@ from projects
     <% if @params[:user] %>
       and projects.user_id = <%= quote @params[:user] %>
     <% end %>
-group by project, title, location_name, centroid, iso, investigator_name, investigator, is_project_lead
+group by project, title, location_name, centroid, iso, is_project_lead

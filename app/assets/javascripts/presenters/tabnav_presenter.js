@@ -32,11 +32,8 @@
       App.on('Router:change Map:change', this.setState, this);
     },
 
-    setState: function(newState) {
-      if (!newState.data) {
-        newState.data = 'projects';
-      }
-      this.state.set(newState);
+    setState: function(state) {
+      this.state.set(state);
     },
 
     getState: function() {

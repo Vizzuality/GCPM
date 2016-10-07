@@ -68,10 +68,10 @@
      */
     fetchData: function() {
       return this.countries.fetch().done(function() {
-        var options = this.countries.map(function(country) {
+        var options = this.countries.map(function(type) {
           return {
-            name: country.attributes.name,
-            value: country.attributes.country_iso_3
+            name: type.attributes.name,
+            value: type.attributes.id
           };
         });
         this.select.setOptions(options);

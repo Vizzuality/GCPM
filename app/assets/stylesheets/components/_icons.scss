@@ -19,12 +19,4 @@
     width: 20px;
     height: 20px;
   }
-
-  &.-blue { fill: $dark-sky-blue; }
-
-  &:hover {
-    &.-hv-opac { opacity: .5; }
-    &.-hv-blue { fill: $dark-sky-blue; }
-    &.-hv-black { fill: $black; }
-  }
 }

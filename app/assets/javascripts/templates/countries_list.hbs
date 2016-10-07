@@ -8,7 +8,7 @@
             <ul class="c-list row">
               {{#each countries as |country|}}
                 <li class="column small-6 medium-3">
-                  <a class="list-item" href="/countries/{{country.country_iso_3}}">{{country.name}}</a>
+                  <a class="list-item" href="/countries/{{country.country_iso_3}}?data=projects&sortby=title_asc&global=all&region={{country.region_iso}}&country={{country.country_iso_3}}">{{country.name}}</a>
                 </li>
               {{/each}}
             </ul>

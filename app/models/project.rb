@@ -69,8 +69,11 @@ class Project < ApplicationRecord
   class << self
     def fetch_all(options={})
       projects = self.published
-      projects = projects.by_countries(options[:countries])                   if options[:countries]
-      projects = projects.by_regions(options[:regions])                       if options[:regions]
+      if options[:country]
+        projects = projects.by_countries(options[:country])
+      elsif options[:region]
+        projects = projects.by_regions(options[:region])
+      end
       projects = projects.by_investigators(options[:investigators])           if options[:investigators]
       projects = projects.by_project_types(options[:project_types])           if options[:project_types]
       projects = projects.by_cancer_types(options[:cancer_types])             if options[:cancer_types]

@@ -16,11 +16,6 @@
         var marker = L.marker(location, { icon: pointIcon });
 
         return marker;
-      },
-      onEachFeature: function (feature, layer) {
-        var htmlContent = '<a href="/investigators/' + feature.properties.investigator + '">'
-          + feature.properties.investigator_name + '</a>';
-        layer.bindPopup(htmlContent);
       }
     });
   };

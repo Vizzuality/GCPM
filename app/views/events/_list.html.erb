@@ -7,7 +7,8 @@
             <h3 class="-underlined -alternative">
               <% country = Country.find_by( country_name: e.country ) %>
               <!-- TODO: In case country dosen't exist -->
-              <a href="/countries/<%= country && country.country_iso_3 %>">
+              <a href="/countries/<%= country && country.country_iso_3 %>?data=projects&sortby=title_asc&country=<%= country ?
+                country.country_iso_3 : nil %>">
                 <%= e.city %>, <%= e.country %>
               </a>
             </h3>

@@ -8,7 +8,7 @@
               {{#each cancerTypes as |cancerType|}}
                 <li class="column small-6 medium-3">
                   <a class="list-item"
-                    href="/cancer-types/{{cancerType.id}}">
+                    href="/cancer-types/{{cancerType.id}}?data=projects&sortby=title_asc&global=all&cancer_types={{cancerType.id}}">
                     {{cancerType.name}}
                   </a>
                 </li>
