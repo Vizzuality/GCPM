@@ -42,7 +42,7 @@
     setSubscriptions: function() {
       var eventsNames = [
         'Map:change', 'TabNav:change',
-        'Toolbar:change', 'FilterForm:change',
+        'SortBy:change', 'FilterForm:change',
         'Breadcrumbs:change'
       ].join(' ');
       App.on(eventsNames, this.setParams, this);
@@ -103,7 +103,7 @@
      */
     updateUrl: function() {
       var uri = new URI();
-      var params = _.omit(this.getParams(), 'vars', 'dataSingular', 'userId', 'group', 'countries[]', 'regions[]');
+      var params = _.omit(this.getParams(), 'vars', 'dataSingular', 'userId', 'group');
       uri.query(this._serializeParams(params));
       this.navigate(uri.path().slice(1) + uri.search(), { trigger: false });
     },

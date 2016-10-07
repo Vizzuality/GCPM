@@ -19,7 +19,7 @@
         options: {
           zoom: 2,
           minZoom: 1,
-          maxZoom: 14,
+          maxZoom: 10,
           center: [20, 0]
         }
       });
@@ -35,10 +35,11 @@
     addPoints: function() {
       var map = this.view.map;
       this.fc.getPointLayer(this.state.attributes).done(function(layer) {
-        layer.addTo(map, 2);
+        map.addLayer(layer);
         setTimeout(function() {
           map.fitBounds(layer.getBounds(), {
-            padding: [100, 100]
+            paddingTopLeft: [100, 100],
+            paddingBottomRight: [100, 200]
           });
         }, 100);
       });

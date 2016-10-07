@@ -1,4 +1,4 @@
-SELECT count(distinct(investigators.id))
+SELECT count(memberships.id) as total
 FROM investigators
 INNER JOIN research_units ON research_units.investigator_id = investigators.id
 INNER JOIN memberships ON memberships.research_unit_id = research_units.id
@@ -19,7 +19,7 @@ INNER JOIN countries ON countries.id = addresses.country_id
   inner join cancer_types_projects on cancer_types_projects.project_id = projects.id
   inner join cancer_types on cancer_types_projects.cancer_type_id = cancer_types.id
 <% end %>
-WHERE memberships.membership_type = <%= @params[:membership_type].to_i %>
+WHERE 1 = 1
 <% if @params[:countries] %>
   and countries.country_iso_3 in     <%= @params[:countries].to_s.gsub('[', '(').gsub(']',')').gsub('"',"'") %>
 <% end %>

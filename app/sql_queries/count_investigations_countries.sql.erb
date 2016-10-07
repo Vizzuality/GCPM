@@ -1,16 +1,17 @@
-select count(distinct(projects.id)),
-countries.region_name as location_name,
-countries.region_centroid as centroid,
-countries.region_iso as iso,
+with countries_totals as (select count(distinct(projects.id)) as count,
+countries.id as location_id,
+countries.country_name as location_name,
+countries.country_centroid as centroid,
+countries.country_iso_3 as iso,
 COALESCE(sum(CASE WHEN memberships.membership_type = 0 THEN 1 ELSE 0 END),1) AS project_leads,
 COALESCE(sum(CASE WHEN memberships.membership_type = 1 THEN 1 ELSE 0 END),1) AS collaborators,
-'region' as type
+'country' as type
 from projects
  inner join memberships on memberships.project_id = projects.id
     inner join research_units on memberships.research_unit_id = research_units.id
     inner join addresses on research_units.address_id = addresses.id
     inner join countries on addresses.country_id = countries.id
-     <% if @params[:organizations] || @params[:organization_types] %>
+    <% if @params[:organizations] || @params[:organization_types] %>
       inner join organizations on addresses.organization_id = organizations.id
     <% end %>
     <% if @params[:organization_types] %>
@@ -58,4 +59,5 @@ from projects
     <% if @params[:user] %>
       and projects.user_id = <%= quote @params[:user] %>
     <% end %>
-group by location_name, centroid, iso
+group by location_id, location_name, centroid, iso)
+select sum(count) as total from countries_totals
