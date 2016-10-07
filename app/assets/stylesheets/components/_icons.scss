@@ -19,8 +19,10 @@
     height: 20px;
   }
 
-  &.-blue { fill: $dark-sky-blue; }
-  
+  &.-primary { fill: $dark-sky-blue; }
+
+  &.-inverse { fill: $body-bg-color; }
+
   &:hover {
     &.-hv-opac { opacity: .5; }
     &.-hv-blue { fill: $dark-sky-blue; }

@@ -11,21 +11,24 @@
   left: $base-space * 3;
   z-index: 1;
 
-  box-shadow: $box-shadow;
   background-color: $body-bg-color;
+  box-shadow: $box-shadow;
+  cursor: auto;
 
   .layers-item {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+    text-transform: capitalize;
     margin: $inline-space $base-space;
 
-    .c-btn {
-      margin-left: 5px;
-    .c-icon {
-      fill: $body-bg-color;
+
+    .layer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    > ul {
+      list-style: none;
     }
   }
 
-  }
 }
