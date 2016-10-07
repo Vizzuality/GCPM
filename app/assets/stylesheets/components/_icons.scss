@@ -23,6 +23,8 @@
   &.-blue { fill: $dark-sky-blue; }
 
   &:hover {
+    opacity: .5;
+
     &.-hv-opac { opacity: .5; }
     &.-hv-blue { fill: $dark-sky-blue; }
     &.-hv-black { fill: $black; }

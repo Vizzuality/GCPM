@@ -1,0 +1,31 @@
+
+.c-infowindow {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  color: $base-font-color;
+  text-align: center;
+  font-family: $base-font-family;
+
+  h3 {
+    & > a {
+      color: $base-font-color;
+
+      &:hover {
+        color: $primary-color;
+      }
+    }
+
+    & + a {
+      color: $primary-color;
+
+      &:hover {
+        opacity: .7;
+      }
+    }
+  }
+
+  .c-tag {
+    margin-top: 15px;
+  }
+}
