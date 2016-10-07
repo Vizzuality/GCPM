@@ -25,7 +25,7 @@
     },
 
     triggerChange: function(e) {
-      this.trigger('change', e.target.value);
+      this.trigger('change', e.target);
     }
 
   });
