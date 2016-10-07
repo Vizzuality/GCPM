@@ -1,12 +1,12 @@
 <div class="c-infowindow">
   {{#if project}}
     <h3><a href="/projects/{{project}}">{{title}}</a></h3>
+    <a href="/investigators/{{investigator}}">{{investigator_name}}</a>
+    {{#if is_project_lead}}
+      <span class="c-tag">Project lead</span>
+    {{/if}}
   {{/if}}
   {{#if event}}
     <h3><a href="/events/{{event}}">{{title}}</a></h3>
-  {{/if}}
-  <a href="/investigators/{{investigator}}">{{investigator_name}}</a>
-  {{#if is_project_lead}}
-    <span class="c-tag">Project lead</span>
   {{/if}}
 </div>
