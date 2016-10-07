@@ -7,11 +7,14 @@
     template: HandlebarsTemplates['layers'],
 
     events: {
+      'click input[name="layer"]': 'uncheckRadio',
       'change input[name="layer"]': 'triggerChange'
     },
 
     initialize: function(settings) {
       this.data = (settings && settings.data)||[];
+      this.current = null;
+      this.opened = [];
     },
 
     updateData: function(data) {
@@ -20,12 +23,22 @@
     },
 
     render: function() {
-      this.$el.html(this.template({ data: this.data }));
+      this.$el.html(this.template(this.data));
       return this;
     },
 
     triggerChange: function(e) {
-      this.trigger('change', e.target);
+      var radio = e.target;
+      this.current = radio.getAttribute('id');
+      this.trigger('change', radio);
+    },
+
+    uncheckRadio: function (e) {
+      var radio = e.target;
+      if(radio.getAttribute('id') === this.current) {
+        radio.checked = false;
+        this.current = null;
+      }
     }
 
   });

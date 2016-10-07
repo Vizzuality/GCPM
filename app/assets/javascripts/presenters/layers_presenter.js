@@ -14,7 +14,34 @@
       this.state = new StateModel();
       this.layers = new App.View.Layers({ el: '#layers' });
       this.fc = App.facade.cartoLayer;
-
+      var data = {
+        layers: [
+        {
+          value: 'incidence',
+          id: 'layerIncidence'
+        },
+        {
+          value: 'mortality',
+          id: 'layerMortality'
+        },
+        {
+          value: 'human development index',
+          group: [
+            {
+              value: 'hdi',
+              date: '1980',
+              id: 'layer1980'
+            },
+            {
+              value: 'hdi',
+              date: '1985',
+              id: 'layer1985'
+            }
+          ]}
+        ]
+      }
+      params.data = data;
+      params.active = false;
       this.setEvents();
       this.setSubscriptions();
       this.setState(params);
@@ -38,12 +65,11 @@
     },
 
     setSubscriptions: function () {
-      App.on('Map:change', this.setState, this);
+      App.on('Actionbar:action', this.toggleActive, this);
     },
 
     render: function () {
-      var data;
-      var attributes = this.getState();
+      var data = this.state.attributes;
       this.layers.updateData(data);
     },
 
@@ -60,6 +86,10 @@
       this.fc.getLayer(options).done(function(layer) {
         App.trigger('Layer:change', layer);
       });
+    },
+    toggleActive: function(){
+      var active = this.getState().active ? false : true;
+      this.setState({active: active});
     }
 
   });

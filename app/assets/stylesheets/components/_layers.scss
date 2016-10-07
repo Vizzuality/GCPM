@@ -12,11 +12,12 @@
 
   background-color: $body-bg-color;
   box-shadow: $box-shadow;
+  pointer-events: all;
   cursor: auto;
 
   .layers-item {
     text-transform: capitalize;
-    margin: $inline-space ($base-space / 2);
+    margin: 0 ($inline-space / 2);
 
 
     .layer {
@@ -36,6 +37,7 @@
 
     > .layer-list {
       list-style: none;
+      margin: 0;
     }
 
     &.-collapsed {
@@ -50,4 +52,11 @@
     }
   }
 
+  .layers-item:first-child {
+    margin-top: $inline-space;
+  }
+
+  .layers-item:last-child {
+    margin-bottom: $inline-space;
+  }
 }
