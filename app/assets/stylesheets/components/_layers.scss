@@ -2,12 +2,11 @@
   font-family: $base-font-family;
   font-size: $base-font-size;
   font-weight: $base-font-weight;
-
-  height: 80%;
   width: 25%;
 
   position: absolute;
-  top: $inline-space * 3;
+  top: ($inline-space * 2) + $base-space;
+  bottom: $base-space;
   left: $base-space * 3;
   z-index: 1;
 
@@ -17,17 +16,37 @@
 
   .layers-item {
     text-transform: capitalize;
-    margin: $inline-space $base-space;
+    margin: $inline-space ($base-space / 2);
 
 
     .layer {
       display: flex;
       align-items: center;
       justify-content: flex-start;
+
+      .layer-arrow {
+        transform: rotate(90deg);
+      }
     }
 
-    > ul {
+    .switch {
+      padding: ($button-y-padding / 2) ($button-x-padding / 2);
+      margin: 0;
+    }
+
+    > .layer-list {
       list-style: none;
+    }
+
+    &.-collapsed {
+
+      .layer-arrow {
+        transform: rotate(0deg);
+      }
+
+      > .layer-list {
+        display: none;
+      }
     }
   }
 

@@ -2,7 +2,8 @@
   <div class="layers-item">
     <div class="layer">
       <div class="switch round">
-        <input type="radio" name="layer" value="hdi">
+        <input type="radio" id="layer1" name="layer" value="hdi">
+        <label for="layer1"></label>
       </div>
       human development index
       <button class="c-btn -round-icon -primary">
@@ -16,7 +17,7 @@
   <div class="layers-item">
     <div class="layer">
       <button class="c-btn -thin">
-        <svg class="c-icon -small -primary">
+        <svg class="c-icon -small -primary layer-arrow">
           <use xlink:href="#icon-arrow"></use>
         </svg>
       </button>
@@ -27,16 +28,18 @@
         </svg>
       </button>
     </div>
-    <ul>
+    <ul class="layer-list">
       <li class="layer">
         <div class="switch round">
-          <input type="radio" name="layer" value="bladder">
+          <input type="radio" id="layer2" name="layer">
+          <label for="layer2"></label>
         </div>
         bladder cancer
       </li>
       <li class="layer">
         <div class="switch round">
-          <input type="radio" name="layer" value="mal">
+          <input type="radio" id="layer3" name="layer">
+          <label for="layer3"></label>
         </div>
         malignant neoplasms
       </li>
