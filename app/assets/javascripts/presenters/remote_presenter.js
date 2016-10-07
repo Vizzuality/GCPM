@@ -13,7 +13,10 @@
     },
 
     setSubscriptions: function() {
-      var eventNames = ['Map:change', 'Router:change', 'FilterForm:change'];
+      var eventNames = [
+        'Map:change', 'Router:change',
+        'FilterForm:change', 'SortBy:change'
+      ];
       App.on(eventNames.join(' '), this.fetchContent, this);
     },
 

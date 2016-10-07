@@ -42,7 +42,7 @@
     setSubscriptions: function() {
       var eventsNames = [
         'Map:change', 'TabNav:change',
-        'Toolbar:change', 'FilterForm:change',
+        'SortBy:change', 'FilterForm:change',
         'Breadcrumbs:change'
       ].join(' ');
       App.on(eventsNames, this.setParams, this);

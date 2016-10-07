@@ -3,12 +3,6 @@
 
   'use strict';
 
-  var blubbleSizes = {
-    big: 90,
-    medium: 65,
-    small: 45
-  };
-
   /**
    * Creating marker layer for country detail
    * showing project leaders and researchers
@@ -28,7 +22,6 @@
 
     pruneCluster.PrepareLeafletMarker = function(leafletMarker, data) {
       var className = data.feature.properties.is_project_lead ? '-alternative' : '';
-      var tooltip = L.popup();
       var pointIcon = new L.divIcon({
         iconSize: [15, 15],
         className: 'point-icon ' + className,

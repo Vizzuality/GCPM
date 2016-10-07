@@ -16,7 +16,7 @@
 #
 
 class LayerGroupSerializer < ActiveModel::Serializer
-    cache key: "layer_group"
+  cache key: "layer_group"
   attributes :name, :slug, :category, :active, :order, :info, :super_group_id, :super_group_name
   has_one :super_group, serializer: LayerGroupSerializer, include: true
   def type
