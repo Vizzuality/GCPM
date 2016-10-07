@@ -21,7 +21,8 @@ class MapController < ApplicationController
       @items = projects.limit(limit)
       @project_leads = SqlQuery.new("investigators_count", params: investigators_params.merge!(membership_type: 0)).execute[0]["count"]
       @collaborators = SqlQuery.new("investigators_count", params: investigators_params.merge!(membership_type: 1)).execute[0]["count"]
-      @investigations = SqlQuery.new("investigations_count", params: investigators_params).execute[0]["count"]
+      detail = params[:detail] && ['countries', 'regions', 'points'].include?(params[:detail]) ? params[:detail] : 'points'
+      @investigations = SqlQuery.new("count_investigations_#{detail}", params: investigators_params).execute[0]["total"]
       @more = (projects.size > @items.size)
       @items_total = projects.size
     end

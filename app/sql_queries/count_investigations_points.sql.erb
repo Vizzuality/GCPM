@@ -1,4 +1,4 @@
-SELECT count(memberships.id)
+SELECT count(memberships.id) as total
 FROM investigators
 INNER JOIN research_units ON research_units.investigator_id = investigators.id
 INNER JOIN memberships ON memberships.research_unit_id = research_units.id
