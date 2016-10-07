@@ -13,7 +13,10 @@
     },
 
     setSubscriptions: function() {
-      var eventNames = ['Map:change', 'Router:change', 'FilterForm:change'];
+      var eventNames = [
+        'Map:change', 'Router:change',
+        'FilterForm:change', 'SortBy:change'
+      ];
       App.on(eventNames.join(' '), this.fetchContent, this);
     },
 
@@ -23,6 +26,7 @@
       link.data('remote', true);
       $.rails.handleRemote(link).done(function() {
         link.remove();
+        App.trigger('Remote:load');
       });
     }
 
