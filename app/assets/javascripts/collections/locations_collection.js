@@ -4,7 +4,7 @@
 
   App.Collection.Locations = Backbone.Collection.extend({
 
-    url: '/api/map',
+    url: gon.api_location_path || '/api/map',
 
     model: App.Model.Location,
 

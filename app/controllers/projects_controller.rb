@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
-    # @current_type = params[:type] || 'project-info'
+    gon.server_params = { }
+    gon.api_location_path = "/api/map/projects/#{params[:id]}"
   end
 end

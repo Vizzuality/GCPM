@@ -15,7 +15,7 @@
    * @param  {Object} geoJson
    * @return {Object}
    */
-  App.helper.markerClusterLayer = function(geoJson) {
+  App.helper.markerClusterLayer = function(geoJson, params) {
     var pruneCluster = new PruneClusterForLeaflet();
     var infowindowTemplate = HandlebarsTemplates['infowindow'];
 
@@ -39,13 +39,13 @@
     };
 
     pruneCluster.PrepareLeafletMarker = function(leafletMarker, data) {
-      var tooltip = L.popup();
       var htmlContent = infowindowTemplate(data.feature.properties);
-      if (data.feature.properties.is_project_lead) {
-        leafletMarker.setIcon(markerIcon);
-      } else {
-        leafletMarker.setIcon(circleIcon);
-      };
+      var icon = circleIcon;
+      if (data.feature.properties.is_project_lead || params.data === 'events') {
+        icon = markerIcon;
+      }
+      icon.options.className += ' -' + params.data;
+      leafletMarker.setIcon(icon);
       leafletMarker.bindPopup(htmlContent);
     };
 
