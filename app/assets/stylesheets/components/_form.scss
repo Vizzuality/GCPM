@@ -65,3 +65,15 @@ label {
   font-size: $small-font-size;
   margin-top: 5px;
 }
+
+.form-actions .column {
+  display: flex;
+
+  & button {
+    margin-right: 18px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
