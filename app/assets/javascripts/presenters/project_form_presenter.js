@@ -15,8 +15,12 @@
 
       var titleInput = new App.Presenter.Input();
       var descTextarea = new App.Presenter.Textarea();
-      var startPickadate = new App.Presenter.PickadateStart();
-      var endPickadate = new App.Presenter.PickadateEnd();
+      var startPickadate = new App.Presenter.PickadateStart({
+        label: null,
+      });
+      var endPickadate = new App.Presenter.PickadateEnd({
+        label: null,
+      });
       var websiteInput = new App.Presenter.WebsiteInput();
       var projectTypes = new App.Presenter.ProjectTypes({
         label: null,
@@ -76,18 +80,12 @@
      * Subscribing to global events
      */
     setSubscriptions: function() {
-      App.on('Investigators:change', function(newState){
-        console.log(this);
-        if (newState.value[0] == "Add new"){
-          this.investigatorForm.openForm();
-        }
+      App.on('Investigators:new', function(){
+        this.investigatorForm.openForm();
       }, this);
 
-      App.on('Organizations:change', function(newState){
-        console.log(this);
-        if (newState.value[0] == "Add new"){
-          this.organizationForm.openForm();
-        }
+      App.on('Organizations:new', function(){
+        this.organizationForm.openForm();
       }, this);
 
       App.on('FundingSources:new', function(){
@@ -139,11 +137,11 @@
         // Get && set the value from the state thanks to the name
         // I need to pass the rest of the params because there are some presenters that need other params
         // Then, inside of each presenter, they will handle its state
-        var state = _.extend({}, this.state.toJSON(), {
-          value: this.state.get(child.defaults.name),
-        });
-
-        child.setState(state, { silent: true });
+        // var state = _.extend({}, this.state.toJSON(), {
+        //   value: this.state.get(child.defaults.name),
+        // });
+        //
+        // child.setState(state, { silent: true });
 
         // Render the child
         child.render();

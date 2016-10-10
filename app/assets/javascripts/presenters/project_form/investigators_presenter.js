@@ -12,7 +12,7 @@
 
     defaults: {
       multiple: true,
-      name: 'investigators',
+      name: 'investigators[]',
       label: 'Investigators',
       placeholder: 'All investigators',
       blank: null,
@@ -38,17 +38,30 @@
       });
 
       this.setEvents();
+      this.setSubscriptions();
     },
 
     /**
      * Setting internal events
      */
     setEvents: function() {
-      this.state.on('change', function() {
+      this.select.on('new', function(){
+        App.trigger('Investigators:new');
+      }, this);
+
+      this.select.on('change', function(newState){
+        this.setState(newState);
         App.trigger('Investigators:change', this.state.attributes);
       }, this);
 
-      this.select.on('change', this.setState, this);
+    },
+
+    setSubscriptions: function(){
+      App.on('InvestigatorForm:submit', function(newState){
+        newState.name = newState.investigatorName;
+        this.investigators.push(newState);
+        this.select.addNew(this.investigators.at(this.investigators.length-1));
+      }, this);
     },
 
     /**

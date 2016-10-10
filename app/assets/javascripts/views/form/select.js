@@ -55,7 +55,7 @@
       var obj = {
         id: option.cid,
         value: JSON.stringify(option.attributes),
-        name: option.cid
+        name: option.attributes.name
       };
       this.options.options.push(obj);
       this.render();

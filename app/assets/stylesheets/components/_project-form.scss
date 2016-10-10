@@ -1,0 +1,81 @@
+.c-project-form{
+  margin: 40px 0;
+
+  & .c-required{
+    font-size: 12px;
+    color: red;
+  }
+
+  & h3.c-title{
+    text-transform: none;
+    color: #000;
+    margin: 40px 0;
+    font-size: 25px;
+  }
+
+  & h4.c-title{
+    text-transform: none;
+    color: #000;
+    font-size: 12px;
+  }
+
+  /* Project Title input */
+  & #title{
+    margin: 80px 0;
+
+    & .c-title{
+
+      &.-bigger.-bold{
+        width: 100%;
+        font-weight: bold;
+        font-size: 65px;
+
+        &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+          color:#000;
+        }
+        &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+          color:#000;
+           opacity:1;
+        }
+        &::-moz-placeholder { /* Mozilla Firefox 19+ */
+          color:#000;
+          opacity:1;
+        }
+        &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+          color:#000;
+        }
+
+      }
+    }
+  }
+
+  /* Project Title input */
+  & #description{
+    margin: 40px 0;
+
+    & textarea{
+      width: 100%;
+      min-height: 400px;
+      border: 1px solid #eee;
+      border-radius: 0;
+    }
+  }
+
+  & .c-button-container{
+    margin: 40px 0;
+
+    & .c-button{
+      min-width: 130px;
+      padding: 20px;
+      background-color: #68299b;
+      color: #fff;
+      font-size: 12px;
+      text-transform: uppercase;
+      border-radius: 0;
+    }
+
+  }
+
+
+
+}

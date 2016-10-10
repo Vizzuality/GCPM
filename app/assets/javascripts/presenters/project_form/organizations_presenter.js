@@ -50,6 +50,7 @@
       }, this);
 
       this.select.on('change', function(newState){
+        newState.name = newState.organizationName;
         this.setState(newState);
         App.trigger('Organizations:change', this.state.attributes);
       }, this);

@@ -9,9 +9,6 @@
   };
 
   _.extend(App.Presenter.FundingSources.prototype, {
-<<<<<<< 3411801b0835e53939b8f997d2dd1ed0139b4929
-    initialize: function(params) {
-=======
 
     defaults: {
       multiple: true,
@@ -30,7 +27,6 @@
     },
 
     initialize: function(viewSettings) {
->>>>>>> project form almost complete
       this.state = new StateModel();
       this.organizations = new App.Collection.Organizations();
 
@@ -62,6 +58,7 @@
 
     setSubscriptions: function(){
       App.on('FundingSourcesForm:submit', function(newState){
+        newState.name = newState.organizationName;
         this.organizations.push(newState);
         this.select.addNew(this.organizations.at(this.organizations.length-1));
       }, this);
