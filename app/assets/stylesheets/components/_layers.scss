@@ -43,6 +43,7 @@
     &.-collapsed {
 
       .layer-arrow {
+        transition: transform 0.3s;
         transform: rotate(0deg);
       }
 

@@ -10,7 +10,7 @@
       </div>
       {{/unless}}
       {{#if group}}
-      <button class="c-btn -thin">
+      <button class="c-btn -thin js-collapse-layer">
         <svg class="c-icon -small -primary layer-arrow">
           <use xlink:href="#icon-arrow"></use>
         </svg>
@@ -23,7 +23,6 @@
         </svg>
       </button>
     </div>
-  </div>
       {{#if group}}
       <ul class="layer-list">
         {{#each group}}
@@ -44,6 +43,7 @@
         {{/each}}
       </ul>
       {{/if}}
+    </div>
       {{/each}}
     </div>
 {{/if}}

@@ -8,7 +8,8 @@
 
     events: {
       'click input[name="layer"]': 'uncheckRadio',
-      'change input[name="layer"]': 'triggerChange'
+      'change input[name="layer"]': 'triggerChange',
+      'click button.js-collapse-layer': 'collapseLayer'
     },
 
     initialize: function(settings) {
@@ -33,12 +34,17 @@
       this.trigger('change', radio);
     },
 
-    uncheckRadio: function (e) {
+    uncheckRadio: function(e) {
       var radio = e.target;
       if(radio.getAttribute('id') === this.current) {
         radio.checked = false;
         this.current = null;
       }
+    },
+
+    collapseLayer: function(e) {
+      var layersItem = $(e.target).closest('div.layers-item');
+      layersItem.toggleClass('-collapsed');
     }
 
   });
