@@ -42,6 +42,12 @@
     background-color: $primary-color;
   }
 
+  &.-inverse {
+    color: $primary-color;
+    background-color: white;
+    border: 1px solid $primary-color;
+  }
+
   &.-global {
     color: $inverse-font-color;
     background-color: $secondary-color;

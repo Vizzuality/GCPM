@@ -24,6 +24,8 @@
   &.-inverse { fill: $body-bg-color; }
 
   &:hover {
+    opacity: .5;
+
     &.-hv-opac { opacity: .5; }
     &.-hv-blue { fill: $dark-sky-blue; }
     &.-hv-black { fill: $black; }
