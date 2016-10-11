@@ -83,6 +83,10 @@
 
     toggleActive: function(){
       var active = this.getState().active ? false : true;
+      var layerBtn = $('.js-actionbar-action[data-action=layers]');
+
+      active ? layerBtn.addClass('-active') : layerBtn.removeClass('-active') ;
+
       this.setState({active: active});
     }
 
