@@ -6,8 +6,7 @@
   &.-small {
     width: 12px;
     height: 12px;
-    vertical-align: -2px;
-    margin-right: 5px;
+
   }
 
   &.-normal {
@@ -20,7 +19,9 @@
     height: 20px;
   }
 
-  &.-blue { fill: $dark-sky-blue; }
+  &.-primary { fill: $dark-sky-blue; }
+
+  &.-inverse { fill: $body-bg-color; }
 
   &:hover {
     opacity: .5;
