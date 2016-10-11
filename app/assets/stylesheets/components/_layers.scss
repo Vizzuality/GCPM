@@ -9,7 +9,7 @@
   bottom: $base-space;
   left: $base-space * 3;
   z-index: 1;
-  padding: 30px 8px;
+  padding: 33px 8px;
 
   background-color: $body-bg-color;
   box-shadow: $box-shadow;
@@ -19,8 +19,8 @@
 
   .js-actionbar-action {
     position: absolute;
-    right: 1px;
-    top: 4px;
+    right: 3px;
+    top: 6px;
   }
 
   .layers-item {
@@ -69,7 +69,7 @@
   }
 
   .layers-item:first-child {
-    margin-top: $inline-space;
+    margin-top: 5px;
   }
 
   .layers-item:last-child {
