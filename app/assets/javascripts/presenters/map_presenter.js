@@ -71,7 +71,7 @@
       var newState = merge ?
         Object.assign({}, this.getState(), params) : params;
 
-      newState = _.pick(params, 'data', 'regions[]', 'countries[]', 'cancer_types[]',
+      newState = _.pick(newState, 'data', 'regions[]', 'countries[]', 'cancer_types[]',
         'organization_types[]', 'organizations[]', 'project_types[]',
         'start_date', 'end_date');
 
