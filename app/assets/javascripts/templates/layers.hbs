@@ -1,49 +1,49 @@
 {{#if active}}
-<div class="c-layers">
-  {{#each data.layers}}
-  <div class="layers-item">
-    <div class="layer">
-      {{#unless group}}
-      <div class="switch round tiny">
-        <input class="switch-input" type="radio" id="{{id}}" name="layer" value="{{value}}">
-        <label class="switch-paddle" for="{{id}}"></label>
-      </div>
-      {{/unless}}
-      {{#if group}}
-      <button class="c-btn -thin js-collapse-layer">
-        <svg class="c-icon -small -primary layer-arrow">
-          <use xlink:href="#icon-arrow"></use>
-        </svg>
-      </button>
-      {{/if}}
-      {{value}}
-      <button class="c-btn -round-icon -primary">
-        <svg class="c-icon -small -inverse">
-          <use xlink:href="#icon-info"></use>
-        </svg>
-      </button>
-    </div>
-      {{#if group}}
-      <ul class="layer-list">
-        {{#each group}}
-        <div class="layers-item">
-          <div class="layer">
+  <div class="c-layers">
+    {{#each data.layers}}
+      <div class="layers-item">
+        <div class="layer">
+          {{#unless group}}
             <div class="switch round tiny">
-              <input class="switch-input" type="radio" id="{{id}}" name="layer" value="{{value}}" data-date="{{date}}">
+              <input class="switch-input" type="radio" id="{{id}}" name="layer" value="{{value}}">
               <label class="switch-paddle" for="{{id}}"></label>
             </div>
-            {{date}}
-            <button class="c-btn -round-icon -primary">
-              <svg class="c-icon -small -inverse">
-                <use xlink:href="#icon-info"></use>
-              </svg>
-            </button>
-          </div>
+          {{/unless}}
+          {{#if group}}
+          <button class="c-btn -thin js-collapse-layer">
+            <svg class="c-icon -small -primary layer-arrow">
+              <use xlink:href="#icon-arrow"></use>
+            </svg>
+          </button>
+          {{/if}}
+          {{value}}
+          <button class="c-btn -round-icon -primary">
+            <svg class="c-icon -small -inverse">
+              <use xlink:href="#icon-info"></use>
+            </svg>
+          </button>
         </div>
-        {{/each}}
-      </ul>
-      {{/if}}
-    </div>
-      {{/each}}
-    </div>
+        {{#if group}}
+          <ul class="layer-list">
+            {{#each group}}
+              <div class="layers-item">
+                <div class="layer">
+                  <div class="switch round tiny">
+                    <input class="switch-input" type="radio" id="{{id}}" name="layer" value="{{value}}" data-date="{{date}}">
+                    <label class="switch-paddle" for="{{id}}"></label>
+                  </div>
+                  {{date}}
+                  <button class="c-btn -round-icon -primary">
+                    <svg class="c-icon -small -inverse">
+                      <use xlink:href="#icon-info"></use>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            {{/each}}
+          </ul>
+        {{/if}}
+      </div>
+    {{/each}}
+  </div>
 {{/if}}

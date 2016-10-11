@@ -14,6 +14,9 @@
       this.state = new StateModel();
       this.layers = new App.View.Layers({ el: '#layers' });
       this.fc = App.facade.cartoLayer;
+
+      this.layersCollection = new App.Collection.Layers();
+
       var data = {
         layers: [
         {
@@ -42,17 +45,10 @@
       }
       params.data = data;
       params.active = false;
+      this.getLayers();
       this.setEvents();
       this.setSubscriptions();
       this.setState(params);
-    },
-
-    setState: function (params) {
-      this.state.set(params);
-    },
-
-    getState: function () {
-      return this.state.attributes;
     },
 
     setEvents: function () {
@@ -68,25 +64,42 @@
       App.on('Actionbar:action', this.toggleActive, this);
     },
 
+    getLayers: function() {
+      this.layersCollection.fetch().done(function(data) {
+      }.bind(this));
+    },
+
+    setState: function (params) {
+      this.state.set(params);
+    },
+
+    getState: function () {
+      return this.state.attributes;
+    },
+
+
     render: function () {
       var data = this.state.attributes;
       this.layers.updateData(data);
     },
 
     handleLayer: function(element) {
-      var options = {
-        layer_name: element.value,
-        params: {
-          date: $(element).data().date,
-          cancer_type: $(element).data()['cancer-type']
-        }
-      };
+      if (element) {
+        var options = {
+          layer_name: element.value,
+          params: {
+            date: $(element).data().date,
+            cancer_type: $(element).data()['cancer-type']
+          }
+        };
 
-      //Create layer
-      this.fc.getLayer(options).done(function(layer) {
-        App.trigger('Layer:change', layer);
-      });
+        /* Create layer */
+        this.fc.getLayer(options).done(function(layer) {
+          App.trigger('Layer:change', layer);
+        });
+      } else App.trigger('Layer:remove', null);
     },
+
     toggleActive: function(){
       var active = this.getState().active ? false : true;
       this.setState({active: active});

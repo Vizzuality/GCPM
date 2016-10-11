@@ -60,6 +60,7 @@
         this.setState(state, true);
       }, this);
       App.on('Layer:change', this.addLayer, this);
+      App.on('Layer:remove', this.removeLayer, this);
     },
 
     getState: function() {
@@ -109,12 +110,23 @@
       }.bind(this));
     },
 
+    /**
+     * Add layer
+     */
     addLayer: function(layer) {
       if (this.cartoLayer) {
         this.map.removeLayer(this.cartoLayer);
       }
       this.cartoLayer = layer;
       this.map.addLayer(this.cartoLayer);
+    },
+
+    /**
+     * Remove layer
+     */
+    removeLayer: function() {
+      this.map.removeLayer(this.cartoLayer);
+      this.cartoLayer = null;
     }
 
   });
