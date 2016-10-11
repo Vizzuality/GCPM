@@ -2,7 +2,6 @@
 
   'use strict';
 
-
   var cartoLayerFacade = {
 
     getLayer: function(params) {
