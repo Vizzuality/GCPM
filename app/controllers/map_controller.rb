@@ -6,7 +6,7 @@ class MapController < ApplicationController
     params = request.query_parameters
 
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
-    @filters = %w(projects events)
+    @filters = %w(projects people events)
     @current_type = params.key?(:data) ? params[:data] : 'projects'
 
     limit = 12 + (@page * 9)
@@ -16,6 +16,11 @@ class MapController < ApplicationController
       @items = events.limit(limit)
       @more = (events.size > @items.size)
       @items_total = events.size
+    elsif params.key?(:data) && params[:data] == 'people'
+      people = Investigator.fetch_all(people_params).order('created_At DESC')
+      @items = people.limit(limit)
+      @more = (people.size > @items.size)
+      @items_total = people.size
     else
       projects = Project.fetch_all(projects_params).order(sort_param)
       @items = projects.limit(limit)
@@ -37,6 +42,10 @@ class MapController < ApplicationController
     end
 
     def investigators_params
+      params.permit(:data, :sortby, :start_date, :end_date, regions:[], countries:[], project_types:[], cancer_types:[], organization_types:[], organizations:[])
+    end
+
+    def people_params
       params.permit(:data, :sortby, :start_date, :end_date, regions:[], countries:[], project_types:[], cancer_types:[], organization_types:[], organizations:[])
     end
 
