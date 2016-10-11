@@ -27,9 +27,6 @@ class CancerTypesController < ApplicationController
       @more = (@projects.size > @items.size)
       @items_total = @projects.size
     elsif params.key?(:data) && params[:data] == 'people'
-      puts '############################################'
-      puts params
-      puts '############################################'
       @items = @people.limit(limit)
       @more = (@people.size > @items.size)
       @items_total = @people.size
