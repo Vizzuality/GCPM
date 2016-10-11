@@ -4,17 +4,17 @@
 
   var StateModel = Backbone.Model.extend();
 
-  App.Presenter.Investigators = function() {
+  App.Presenter.Organization = function() {
     this.initialize.apply(this, arguments);
   };
 
-  _.extend(App.Presenter.Investigators.prototype, {
+  _.extend(App.Presenter.Organization.prototype, {
 
     defaults: {
       multiple: false,
-      name: 'investigators',
-      label: 'Investigators',
-      placeholder: 'All investigators',
+      name: 'organization',
+      label: 'Organization',
+      placeholder: 'All organizations',
       blank: null,
       addNew: true,
       select2Options: {
@@ -28,11 +28,11 @@
 
     initialize: function(viewSettings) {
       this.state = new StateModel();
-      this.investigators = new App.Collection.Investigators();
+      this.organizations = new App.Collection.Organizations();
 
       // Creating view
       this.select = new App.View.Select({
-        el: '#investigators',
+        el: '#organization',
         options: _.extend({}, this.defaults, viewSettings || {}),
         state: this.state
       });
@@ -46,21 +46,21 @@
      */
     setEvents: function() {
       this.select.on('new', function(){
-        App.trigger('Investigators:new');
+        App.trigger('Organization:new');
       }, this);
 
       this.select.on('change', function(newState){
         this.setState(newState);
-        App.trigger('Investigators:change', this.state.attributes);
+        App.trigger('Organization:change', this.state.attributes);
       }, this);
 
     },
 
     setSubscriptions: function(){
-      App.on('InvestigatorForm:submit', function(newState){
-        newState.name = newState.investigatorName;
-        this.investigators.push(newState);
-        this.select.addNew(this.investigators.at(this.investigators.length-1));
+      App.on('OrganizationForm:submit', function(newState){
+        newState.name = newState.organizationName;
+        this.organizations.push(newState);
+        this.select.addNew(this.organizations.at(this.organizations.length-1));
       }, this);
     },
 
@@ -69,8 +69,8 @@
      * @return {Promise}
      */
     fetchData: function() {
-      return this.investigators.fetch().done(function() {
-        var options = this.investigators.map(function(type) {
+      return this.organizations.fetch().done(function() {
+        var options = this.organizations.map(function(type) {
           return {
             name: type.attributes.name,
             value: type.attributes.id

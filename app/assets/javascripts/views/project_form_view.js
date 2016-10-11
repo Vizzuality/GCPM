@@ -7,7 +7,8 @@
     template: HandlebarsTemplates['project_form'],
 
     events: {
-      'submit form': 'triggerSubmit'
+      'submit form': 'triggerSubmit',
+      'click .addnew': 'triggerNew'
     },
 
     initialize: function(settings) {
@@ -25,6 +26,10 @@
       }, this);
 
       return this;
+    },
+
+    triggerNew: function(e){
+      this.trigger('newInvestigator');
     },
 
     triggerSubmit: function(e) {

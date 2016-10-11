@@ -34,25 +34,12 @@
         label: null,
         addNew: true
       });
-      var investigators  = new App.Presenter.Investigators({
-        label: null,
-        addNew: true,
-        multiple: false
-      });
-      var organizations = new App.Presenter.Organizations({
-        label: null,
-        addNew: true,
-        multiple: false
-      });
+      var investigatorOrganization = new App.Presenter.InvestigatorOrganization();
 
-      this.investigatorForm = new App.Presenter.InvestigatorForm();
-      this.organizationForm = new App.Presenter.OrganizationForm();
       this.fundingSourcesForm = new App.Presenter.FundingSourcesForm();
 
-
       this.children = [titleInput, descTextarea, startPickadate, endPickadate,
-         websiteInput, projectTypes, cancerTypes, fundingSources, investigators,
-         organizations];
+         websiteInput, projectTypes, cancerTypes, fundingSources, investigatorOrganization];
 
       this.projectForm = new App.View.ProjectForm({
         children: this.children,
@@ -76,20 +63,17 @@
         this.setState(newState);
         this.handleSubmit();
       }, this);
+
+      this.projectForm.on('newInvestigator', function(newState) {
+        this.setState(newState);
+        this.addInvestigator();
+      }, this);
     },
 
     /**
      * Subscribing to global events
      */
     setSubscriptions: function() {
-      App.on('Investigators:new', function(){
-        this.investigatorForm.openForm();
-      }, this);
-
-      App.on('Organizations:new', function(){
-        this.organizationForm.openForm();
-      }, this);
-
       App.on('FundingSources:new', function(){
         this.fundingSourcesForm.openForm();
       }, this);
@@ -100,15 +84,27 @@
     },
 
     /**
+     *
+     */
+    addInvestigator: function() {
+      //this.investigators.addNew();
+      console.log("hey");
+    },
+
+    /**
      * Subscribing to global events
      */
     handleSubmit: function() {
       console.log(this.state.attributes);
 
-      //@TODO VALIDATION (fields != null, undefined, or empty arrays)
+      // title OK, summary OK, start_date OK, end_date OK, project_website OK
+      // @TODO project_types[] change to project_type_ids
+      // @TODO cancer_types[] change to cancer_tpye_ids
+      // @TODO funding_sources -> if string -> funding_source_ids
+      // @TODO funding_sources -> if object -> new_funders
+
       //@TODO request (validate response)
-      //@TODO generic error
-      /*var url = "";
+      /*var url = "/api/projects?token=AUTH_TOKEN";
       var req = new XMLHttpRequest();
       req.onload = function(){
         if(this.status = 200){
@@ -140,14 +136,6 @@
     renderFormElements: function() {
       this.projectForm.render();
       _.each(this.children, function(child){
-        // Get && set the value from the state thanks to the name
-        // I need to pass the rest of the params because there are some presenters that need other params
-        // Then, inside of each presenter, they will handle its state
-        // var state = _.extend({}, this.state.toJSON(), {
-        //   value: this.state.get(child.defaults.name),
-        // });
-        //
-        // child.setState(state, { silent: true });
 
         // Render the child
         child.render();

@@ -14,11 +14,11 @@
       this.state = new StateModel(params);
 
       var organizationName = new App.Presenter.OrganizationName();
-      var organizationWebsite = new App.Presenter.OrganizationWebsite();
+      //var organizationWebsite = new App.Presenter.OrganizationWebsite();
       var organizationLatitude = new App.Presenter.OrganizationLatitude();
       var organizationLongitude = new App.Presenter.OrganizationLongitude();
 
-      this.children = [organizationName, organizationWebsite, organizationLatitude, organizationLongitude];
+      this.children = [organizationName, organizationLatitude, organizationLongitude];
 
       this.modal = new App.View.Modal();
       this.organizationForm = new App.View.OrganizationForm({

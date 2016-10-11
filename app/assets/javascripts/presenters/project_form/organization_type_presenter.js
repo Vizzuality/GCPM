@@ -4,19 +4,19 @@
 
   var StateModel = Backbone.Model.extend();
 
-  App.Presenter.Organizations = function() {
+  App.Presenter.OrganizationType = function() {
     this.initialize.apply(this, arguments);
   };
 
-  _.extend(App.Presenter.Organizations.prototype, {
+  _.extend(App.Presenter.OrganizationType.prototype, {
 
     defaults: {
       multiple: false,
-      name: 'organizations',
-      label: 'Organizations',
-      placeholder: 'All organizations',
+      name: 'organizationType',
+      label: 'Organization Type',
+      placeholder: 'All organizations Type',
       blank: null,
-      addNew: true,
+      addNew: false,
       select2Options: {
         // closeOnSelect: false
         // It solves the closing of the dropdown menu
@@ -28,40 +28,28 @@
 
     initialize: function(viewSettings) {
       this.state = new StateModel();
-      this.organizations = new App.Collection.Organizations();
+      this.organizationType = new App.Collection.OrganizationTypes();
 
       // Creating view
       this.select = new App.View.Select({
-        el: '#organizations',
+        el: '#organizationtype',
         options: _.extend({}, this.defaults, viewSettings || {}),
         state: this.state
       });
 
       this.setEvents();
-      this.setSubscriptions();
     },
 
     /**
      * Setting internal events
      */
     setEvents: function() {
-      this.select.on('new', function(){
-        App.trigger('Organizations:new');
-      }, this);
-
       this.select.on('change', function(newState){
-        this.setState(newState);
-        App.trigger('Organizations:change', this.state.attributes);
+        App.trigger('OrganizationType:change', this.state.attributes);
       }, this);
 
-    },
+      this.select.on('change', this.setState, this);
 
-    setSubscriptions: function(){
-      App.on('OrganizationForm:submit', function(newState){
-        newState.name = newState.organizationName;
-        this.organizations.push(newState);
-        this.select.addNew(this.organizations.at(this.organizations.length-1));
-      }, this);
     },
 
     /**
@@ -69,8 +57,8 @@
      * @return {Promise}
      */
     fetchData: function() {
-      return this.organizations.fetch().done(function() {
-        var options = this.organizations.map(function(type) {
+      return this.organizationType.fetch().done(function() {
+        var options = this.organizationType.map(function(type) {
           return {
             name: type.attributes.name,
             value: type.attributes.id
