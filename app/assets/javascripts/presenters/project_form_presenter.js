@@ -36,11 +36,13 @@
       });
       var investigators  = new App.Presenter.Investigators({
         label: null,
-        addNew: true
+        addNew: true,
+        multiple: false
       });
       var organizations = new App.Presenter.Organizations({
         label: null,
-        addNew: true
+        addNew: true,
+        multiple: false
       });
 
       this.investigatorForm = new App.Presenter.InvestigatorForm();
@@ -102,6 +104,10 @@
      */
     handleSubmit: function() {
       console.log(this.state.attributes);
+
+      //@TODO VALIDATION (fields != null, undefined, or empty arrays)
+      //@TODO request (validate response)
+      //@TODO generic error
       /*var url = "";
       var req = new XMLHttpRequest();
       req.onload = function(){

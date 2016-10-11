@@ -61,6 +61,16 @@
     }
   }
 
+  /* Project Title input */
+  & #project-website{
+
+    & input {
+      width: 100%;
+    }
+
+  }
+
+
   & .c-button-container{
     margin: 40px 0;
 
@@ -76,6 +86,40 @@
 
   }
 
+}
 
+.c-modal-investigator, .c-modal-organization{
+
+  & label{
+    margin: 10px 0 0 0;
+  }
+
+  & p.c-required{
+    margin: 0;
+    font-size: 12px;
+    color: red;
+  }
+
+  & .c-button-container{
+    margin: 40px 0;
+
+    & .c-button{
+      min-width: 130px;
+      padding: 20px;
+      background-color: #5aade4;
+      color: #fff;
+      font-size: 12px;
+      text-transform: uppercase;
+      border-radius: 0;
+
+      &.js-filter-form-cancel{
+        color: #5aade4;
+        background-color: #fff;
+        border: 1px solid #5aade4;
+      }
+
+    }
+
+  }
 
 }

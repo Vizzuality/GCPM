@@ -11,8 +11,8 @@
   _.extend(App.Presenter.Investigators.prototype, {
 
     defaults: {
-      multiple: true,
-      name: 'investigators[]',
+      multiple: false,
+      name: 'investigators',
       label: 'Investigators',
       placeholder: 'All investigators',
       blank: null,

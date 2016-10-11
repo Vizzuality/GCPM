@@ -12,7 +12,7 @@
 
     defaults: {
       multiple: true,
-      name: 'funding_sources',
+      name: 'funding_sources[]',
       label: 'Funding Source',
       placeholder: 'Funding Sources',
       blank: null,

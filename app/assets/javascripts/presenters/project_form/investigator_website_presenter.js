@@ -21,7 +21,7 @@
         options: {
           label: 'Investigator Website',
           placeholder: 'http://www.example.com',
-          name: 'InvestigatorWebsite',
+          name: 'investigatorWebsite',
           type: 'url',
           required: true,
           class: 'c-input'

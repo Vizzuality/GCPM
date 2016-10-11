@@ -11,12 +11,12 @@
   _.extend(App.Presenter.Organizations.prototype, {
 
     defaults: {
-      multiple: true,
-      name: 'organizations[]',
+      multiple: false,
+      name: 'organizations',
       label: 'Organizations',
       placeholder: 'All organizations',
       blank: null,
-      addNew: false,
+      addNew: true,
       select2Options: {
         // closeOnSelect: false
         // It solves the closing of the dropdown menu
@@ -50,7 +50,6 @@
       }, this);
 
       this.select.on('change', function(newState){
-        newState.name = newState.organizationName;
         this.setState(newState);
         App.trigger('Organizations:change', this.state.attributes);
       }, this);
@@ -59,6 +58,7 @@
 
     setSubscriptions: function(){
       App.on('OrganizationForm:submit', function(newState){
+        newState.name = newState.organizationName;
         this.organizations.push(newState);
         this.select.addNew(this.organizations.at(this.organizations.length-1));
       }, this);

@@ -21,7 +21,7 @@
         options: {
           label: 'Investigator Email',
           placeholder: 'test@test.com',
-          name: 'InvestigatorEmail',
+          name: 'investigatorEmail',
           type: 'email',
           required: true,
           class: 'c-input'

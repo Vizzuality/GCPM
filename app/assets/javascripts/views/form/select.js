@@ -51,13 +51,12 @@
     },
 
     addNew: function(option){
-      console.log(option);
       var obj = {
         id: option.cid,
         value: JSON.stringify(option.attributes),
         name: option.attributes.name
       };
-      this.options.options.push(obj);
+      this.options.options.unshift(obj);
       this.render();
     },
 

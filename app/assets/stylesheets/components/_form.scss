@@ -4,7 +4,7 @@ input[type="text"],
 input[type="number"],
 input[type="password"],
 input[type="email"],
-input[type="website"],
+input[type="url"],
 select {
   min-height: $input-height;
   min-width: 300px;
@@ -13,6 +13,7 @@ select {
 input[type="text"],
 input[type="number"],
 input[type="password"],
+input[type="url"],
 input[type="email"] {
   border: 0;
   border-bottom: 1px solid $border-color-1;
