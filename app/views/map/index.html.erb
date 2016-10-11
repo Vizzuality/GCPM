@@ -59,7 +59,9 @@
 <div class="l-grid" id="content">
   <% if @current_type == 'events' %>
     <%= render 'events/list', items: @items, more: @more %>
-  <% else %>
+  <% elsif @current_type == 'projects' %>
     <%= render 'projects/list', items: @items, more: @more %>
+  <% else @current_type %>
+    <%= render 'investigators/list', items: @items, more: @more %>
   <% end %>
 </div>

@@ -16,12 +16,14 @@
             <thead>
               <tr>
                 <th><%= t 'projects' %></th>
+                <th><%= t 'people' %></th>
                 <th><%= t 'events' %></th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td><%= @projects.size %></td>
+                <td><%= @people.size %></td>
                 <td><%= @events.size %></td>
               </tr>
             </tbody>
@@ -62,7 +64,9 @@
 <div class="l-grid" id="content">
   <% if @current_type == 'events' %>
     <%= render 'events/list', items: @items, more: @more %>
-  <% else %>
+  <% elsif @current_type == 'projects' %>
     <%= render 'projects/list', items: @items, more: @more %>
+  <% else @current_type %>
+    <%= render 'investigators/list', items: @items, more: @more %>
   <% end %>
 </div>
