@@ -1,6 +1,11 @@
 
 {{#if active}}
   <div class="c-layers">
+    <button class="c-btn -thin js-actionbar-action">
+      <svg class="c-icon -small -primary layer-arrow">
+        <use xlink:href="#icon-close"></use>
+      </svg>
+    </button>
     {{#each layers as |type|}}
       {{#if type.groups}}
         {{#each type.elements as |group key|}}

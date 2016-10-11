@@ -9,12 +9,19 @@
   bottom: $base-space;
   left: $base-space * 3;
   z-index: 1;
+  padding: 30px 8px;
 
   background-color: $body-bg-color;
   box-shadow: $box-shadow;
   pointer-events: all;
   cursor: auto;
   overflow-y: auto;
+
+  .js-actionbar-action {
+    position: absolute;
+    right: 1px;
+    top: 4px;
+  }
 
   .layers-item {
     text-transform: capitalize;

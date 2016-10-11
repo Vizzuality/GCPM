@@ -31,6 +31,7 @@
       }, this);
 
       this.layersView.on('change', this.handleLayer.bind(this));
+      this.layersView.on('close', this.toggleActive.bind(this));
     },
 
     setSubscriptions: function () {

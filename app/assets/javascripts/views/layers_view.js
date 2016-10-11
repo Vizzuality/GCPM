@@ -8,7 +8,9 @@
 
     events: {
       'click input[name="layer"]': 'handleRadio',
-      'click button.js-collapse-layer': 'collapseLayer'
+      'click button.js-collapse-layer': 'collapseLayer',
+      'click button.js-actionbar-action': 'hideLayersWindow',
+
     },
 
     initialize: function(settings) {
@@ -47,6 +49,10 @@
     collapseLayer: function(e) {
       var layersItem = $(e.target).closest('div.layers-item');
       layersItem.toggleClass('-collapsed');
+    },
+
+    hideLayersWindow: function() {
+      this.trigger('close');
     }
 
   });

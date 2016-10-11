@@ -28,9 +28,6 @@
 
     setEvents: function() {
       this.state.on('change', this.render, this);
-      this.actionbar.on('action', function(actionName) {
-        App.trigger('Actionbar:action', actionName);
-      }, this);
     },
 
     setSubscriptions: function() {
