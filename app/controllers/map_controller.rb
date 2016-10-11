@@ -11,10 +11,6 @@ class MapController < ApplicationController
 
     limit = 12 + (@page * 9)
 
-    puts '###########'
-    puts params[:data]
-    puts '###########'
-
     if params.key?(:data) && params[:data] == 'events'
       events = Event.fetch_all(projects_params).order(sort_param)
       @items = events.limit(limit)
