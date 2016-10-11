@@ -29,7 +29,7 @@
       return this;
     },
 
-    triggerChange: function(e) {
+    triggerChange: function() {
       this.trigger('change', this.current);
     },
 
@@ -42,7 +42,7 @@
         this.current = radio;
       }
 
-      this.triggerChange(e);
+      this.triggerChange();
     },
 
     collapseLayer: function(e) {
