@@ -30,26 +30,29 @@ module Api::V1
                             "project_type_ids": ["#{project_type.id}"],
                             "cancer_type_ids": ["#{cancer_type.id}"],
                             "new_funders": [{ "name": "Test funder 1", "email_address": "", "organization_type_id": 1,
-                                              "addresses_attributes": [{
-                                                                                                "country_id": "#{country.id}",
-                                                                                                "latitude": "",
-                                                                                                "longitude": "",
-                                                                                                "primary": true
-                                                                                              }] },
+                                              "addresses_attributes": [{"country_id": "#{country.id}",
+                                                                        "latitude": "",
+                                                                        "longitude": "",
+                                                                        "primary": true
+                                                                      }] },
                                               { "name": "Test funder 2", "email_address": "", "organization_type_id": 2,
-                                                "addresses_attributes": [{
-                                                                                                  "country_id": "#{country.id}",
-                                                                                                  "latitude": "",
-                                                                                                  "longitude": "",
-                                                                                                  "primary": true
-                                                                                                }] }]
+                                                "addresses_attributes": [{"country_id": "#{country.id}",
+                                                                          "latitude": "",
+                                                                          "longitude": "",
+                                                                          "primary": false
+                                                                        }] }]
                           }
                         } }
 
         let(:params_without_f_s_ids) { { "project": {
                                          "title": "Project updated",
                                          "summary": "Lorem ipsum...",
-                                         "new_funders": [{ "name": "Second project funder", "address_ids": [address.id] }]
+                                         "new_funders": [{ "name": "Test funder 1", "email_address": "", "organization_type_id": 1,
+                                                           "addresses_attributes": [{"country_id": "#{country.id}",
+                                                                                     "latitude": "",
+                                                                                     "longitude": "",
+                                                                                     "primary": true
+                                                                                   }] }]
                                        }
                                      } }
 
