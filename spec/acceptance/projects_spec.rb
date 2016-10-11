@@ -29,7 +29,20 @@ module Api::V1
                             "funding_source_ids": ["#{funder.id}"],
                             "project_type_ids": ["#{project_type.id}"],
                             "cancer_type_ids": ["#{cancer_type.id}"],
-                            "new_funders": [{ "name": "Second project funder", "address_ids": [address.id] }]
+                            "new_funders": [{ "name": "Test funder 1", "email_address": "", "organization_type_id": 1,
+                                              "addresses_attributes": [{
+                                                                                                "country_id": "#{country.id}",
+                                                                                                "latitude": "",
+                                                                                                "longitude": "",
+                                                                                                "primary": true
+                                                                                              }] },
+                                              { "name": "Test funder 2", "email_address": "", "organization_type_id": 2,
+                                                "addresses_attributes": [{
+                                                                                                  "country_id": "#{country.id}",
+                                                                                                  "latitude": "",
+                                                                                                  "longitude": "",
+                                                                                                  "primary": true
+                                                                                                }] }]
                           }
                         } }
 
@@ -68,7 +81,7 @@ module Api::V1
           expect(json['id']).to                     be_present
           expect(json['cancer_types']).to           be_present
           expect(json['project_types']).to          be_present
-          expect(json['funding_sources'].length).to eq(2)
+          expect(json['funding_sources'].length).to eq(3)
         end
 
         it 'Allows to update project without existing funders' do
@@ -137,7 +150,7 @@ module Api::V1
           expect(json['id']).to                                     be_present
           expect(json['cancer_types']).to                           be_present
           expect(json['project_types']).to                          be_present
-          expect(json['funding_sources'].length).to                 eq(2)
+          expect(json['funding_sources'].length).to                 eq(3)
           expect(Project.find_by(title: 'Project updated').user).to be_present
         end
 
