@@ -8,7 +8,7 @@
 
     events: {
       'click input[name="layer"]': 'handleRadio',
-      'click button.js-collapse-layer': 'collapseLayer',
+      'click .js-collapse-layer': 'collapseLayer',
       'click button.js-actionbar-action': 'hideLayersWindow',
 
     },
