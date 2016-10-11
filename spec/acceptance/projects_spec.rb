@@ -216,14 +216,12 @@ module Api::V1
 
           expect(status).to eq(200)
           expect(json.length).to eq (1)
-          expect(json.length).to eq (1)
         end
 
         it 'Get project-types list' do
           get "/api/cancer-types"
 
           expect(status).to eq(200)
-          expect(json.length).to eq (1)
           expect(json.length).to eq (1)
         end
 
@@ -232,7 +230,6 @@ module Api::V1
 
           expect(status).to eq(200)
           expect(json.length).to eq (1)
-          expect(json.length).to eq (1)
         end
 
         it 'Get organization-types list' do
@@ -240,7 +237,14 @@ module Api::V1
 
           expect(status).to eq(200)
           expect(json.length).to eq (1)
+        end
+
+        it 'Get countries list' do
+          get "/api/countries"
+
+          expect(status).to eq(200)
           expect(json.length).to eq (1)
+          expect(json[0]['name']).to eq ('Andorra')
         end
       end
     end
