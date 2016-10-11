@@ -30,7 +30,6 @@
     },
 
     triggerChange: function(e) {
-      var radio = e.target;
       this.trigger('change', this.current);
     },
 

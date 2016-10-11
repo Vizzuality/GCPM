@@ -39,7 +39,7 @@
     },
 
     setLayers: function() {
-      this.layersCollection.fetch().done(function(data) {
+      this.layersCollection.fetch().done(function() {
         var groups = _.groupBy(_.filter(this.layersCollection.toJSON(), 'layer_group'),
           function(layer) { return layer.layer_group.name; });
         var individual = $.extend({}, _.reject(this.layersCollection.toJSON(), 'layer_group'));
