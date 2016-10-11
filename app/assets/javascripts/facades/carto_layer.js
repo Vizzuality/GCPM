@@ -6,24 +6,9 @@
   var cartoLayerFacade = {
 
     getLayer: function(params) {
-      this.params = params.params;
       this.db = params.db || 'crm';
-      this.layer = params.layer_name;
-      this.optionsFc = App.facade.cartoLayerOptions;
-
-      this.cartoOpts = this.optionsFc.getCartoOptions({
-        layer: this.layer,
-        options: {
-          column_name: this.params.cancer_type || 'y_' + this.params.date,
-          // TO-DO: set ranges dinamically depending on each one
-          range1: 23,
-          range2: 50,
-          range3: 70,
-          range4: 90
-        }
-      });
-      this.cartocss = this.cartoOpts.cartocss;
-      this.sql = this.cartoOpts.sql;
+      this.cartocss = params.cartocss;
+      this.sql = params.sql;
 
       return this.create();
     },

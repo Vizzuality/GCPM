@@ -7,18 +7,18 @@
     template: HandlebarsTemplates['layers'],
 
     events: {
-      'click input[name="layer"]': 'uncheckRadio',
+      'click input[name="layer"]': 'handleRadio',
       'click button.js-collapse-layer': 'collapseLayer'
     },
 
     initialize: function(settings) {
-      this.data = (settings && settings.data)||[];
+      this.data = (settings && settings.layers) || [];
       this.current = null;
       this.opened = [];
     },
 
-    updateData: function(data) {
-      this.data = data||[];
+    updateData: function(layers) {
+      this.data = layers || [];
       this.render();
     },
 
@@ -29,11 +29,10 @@
 
     triggerChange: function(e) {
       var radio = e.target;
-      // this.current = radio.getAttribute('id');
       this.trigger('change', this.current);
     },
 
-    uncheckRadio: function(e) {
+    handleRadio: function(e) {
       var radio = e.target;
       if(this.current && radio.getAttribute('id') === this.current.getAttribute('id')) {
         radio.checked = false;

@@ -11,44 +11,46 @@
   _.extend(App.Presenter.Layers.prototype, {
 
     initialize: function (params) {
+      this.params = params;
       this.state = new StateModel();
       this.layers = new App.View.Layers({ el: '#layers' });
       this.fc = App.facade.cartoLayer;
 
       this.layersCollection = new App.Collection.Layers();
 
-      var data = {
-        layers: [
-        {
-          value: 'incidence',
-          id: 'layerIncidence'
-        },
-        {
-          value: 'mortality',
-          id: 'layerMortality'
-        },
-        {
-          value: 'human development index',
-          group: [
-            {
-              value: 'hdi',
-              date: '1980',
-              id: 'layer1980'
-            },
-            {
-              value: 'hdi',
-              date: '1985',
-              id: 'layer1985'
-            }
-          ]}
-        ]
-      }
-      params.data = data;
-      params.active = false;
-      this.getLayers();
+      // var data = {
+      //   layers: [
+      //   {
+      //     value: 'incidence',
+      //     id: 'layerIncidence'
+      //   },
+      //   {
+      //     value: 'mortality',
+      //     id: 'layerMortality'
+      //   },
+      //   {
+      //     value: 'human development index',
+      //     group: [
+      //       {
+      //         value: 'hdi',
+      //         date: '1980',
+      //         id: 'layer1980'
+      //       },
+      //       {
+      //         value: 'hdi',
+      //         date: '1985',
+      //         id: 'layer1985'
+      //       }
+      //     ]}
+      //   ]
+      // }
+      // this.params.layers = data;
+      this.params.active = false;
+
+      this.setLayers();
       this.setEvents();
       this.setSubscriptions();
-      this.setState(params);
+      this.setState(this.params);
     },
 
     setEvents: function () {
@@ -64,8 +66,17 @@
       App.on('Actionbar:action', this.toggleActive, this);
     },
 
-    getLayers: function() {
+    setLayers: function() {
       this.layersCollection.fetch().done(function(data) {
+        this.layersList = _.groupBy(this.layersCollection.toJSON(), function(layer) {
+          if (layer.layer_group) {
+            return layer.layer_group.name;
+          } else {
+            return;
+          }
+        });
+
+        this.setState({ layers: this.layersList });
       }.bind(this));
     },
 
@@ -85,12 +96,11 @@
 
     handleLayer: function(element) {
       if (element) {
+        var layer = _.findWhere(this.layersCollection.toJSON(), {slug: element.id});
         var options = {
-          layer_name: element.value,
-          params: {
-            date: $(element).data().date,
-            cancer_type: $(element).data()['cancer-type']
-          }
+          layer_slug: element.value,
+          sql: layer.query,
+          cartocss: layer.css
         };
 
         /* Create layer */

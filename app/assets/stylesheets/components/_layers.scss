@@ -14,6 +14,7 @@
   box-shadow: $box-shadow;
   pointer-events: all;
   cursor: auto;
+  overflow-y: auto;
 
   .layers-item {
     text-transform: capitalize;
