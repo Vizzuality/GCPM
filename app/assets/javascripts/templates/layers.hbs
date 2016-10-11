@@ -1,56 +1,3 @@
-{{!-- {{#if active}}
-  <div class="c-layers">
-    {{#each layers as |layer key|}}
-      <div class="layers-item -collapsed">
-        <div class="layer">
-          {{#unless key}}
-            <div class="switch round tiny">
-              <input class="switch-input" type="radio" id="{{slug}}" name="layer" value="{{slug}}">
-              <label class="switch-paddle" for="{{slug}}"></label>
-            </div>
-          {{/unless}}
-          {{#if key}}
-            <button class="c-btn -thin js-collapse-layer">
-              <svg class="c-icon -small -primary layer-arrow">
-                <use xlink:href="#icon-arrow"></use>
-              </svg>
-            </button>
-          {{/if}}
-          {{key}}
-          <button class="c-btn -round-icon -primary">
-            <svg class="c-icon -small -inverse">
-              <use xlink:href="#icon-info"></use>
-            </svg>
-          </button>
-        </div>
-        {{#if key}}
-          <ul class="layer-list">
-            {{#each layer}}
-              <div class="layers-item">
-                <div class="layer">
-                  <div class="switch round tiny">
-                    <input class="switch-input" type="radio" id="{{slug}}" name="layer" value="{{slug}}" data-group="{{key}}">
-                    <label class="switch-paddle" for="{{slug}}"></label>
-                  </div>
-                  {{name}}
-                  <button class="c-btn -round-icon -primary">
-                    <svg class="c-icon -small -inverse">
-                      <use xlink:href="#icon-info"></use>
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            {{/each}}
-          </ul>
-        {{/if}}
-      </div>
-    {{/each}}
-  </div>
-{{/if}}
-
- --}}
-
-
 
 {{#if active}}
   <div class="c-layers">
@@ -64,12 +11,14 @@
                   <use xlink:href="#icon-arrow"></use>
                 </svg>
               </button>
-              {{key}}
-              <button class="c-btn -round-icon -primary">
-                <svg class="c-icon -small -inverse">
-                  <use xlink:href="#icon-info"></use>
-                </svg>
-              </button>
+              <div class="group-title">
+                {{key}}
+                <button class="c-btn -round-icon -primary">
+                  <svg class="c-icon -small -inverse">
+                    <use xlink:href="#icon-info"></use>
+                  </svg>
+                </button>
+              </div>
             </div>
             <ul class="layer-list">
               {{#each group as |layer|}}
