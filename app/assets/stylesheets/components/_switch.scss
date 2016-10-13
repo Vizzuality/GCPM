@@ -20,17 +20,17 @@ input:checked ~ .switch-paddle::after {
 }
 
 .switch.tiny .switch-paddle {
-  width: 24px;
-  height: 12px;
+  width: 18px;
+  height: 10px;
 }
 
 .switch.tiny .switch-paddle::after {
-  width: 10px;
-  height: 10px;
-  top: 0px;
+  width: 6px;
+  height: 6px;
+  top: 1px;
   left: 1px;
 }
 
 .switch.tiny input:checked ~ .switch-paddle::after {
-  left: 0.8rem;
+  left: 0.6rem;
 }
