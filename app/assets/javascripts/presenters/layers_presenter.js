@@ -18,16 +18,15 @@
       this.layersCollection = new App.Collection.Layers();
       this.params.active = false;
 
+      this.setState(this.params);
       this.setLayers();
       this.setEvents();
       this.setSubscriptions();
-      this.setState(this.params);
     },
 
     setEvents: function () {
       this.state.on('change', function () {
         this.render();
-        App.trigger('Layers:change', this.getState());
       }, this);
 
       this.layersView.on('change', this.handleLayer.bind(this));
@@ -51,6 +50,10 @@
         };
 
         this.setState({ layers: this.layersList });
+
+        if (this.state.get('cartoLayer') && this.layersCollection.toJSON().length > 0) {
+          this.handleLayer({id: this.state.get('cartoLayer')});
+        }
       }.bind(this));
     },
 
@@ -77,7 +80,7 @@
 
         /* Create layer */
         this.fc.getLayer(options).done(function(layer) {
-          App.trigger('Layer:change', {layer: layer, name: element.value});
+          App.trigger('Layer:change', {layer: layer, name: element.id});
         });
       } else App.trigger('Layer:remove', null);
     },
