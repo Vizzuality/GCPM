@@ -17,8 +17,10 @@
     },
 
     render: function() {
-      this.$el.html(this.template({ items: this.data }));
-      return this;
+      if (this.data.length) {
+        this.$el.html(this.template({ items: this.data }));
+        return this;
+      }
     }
 
   });

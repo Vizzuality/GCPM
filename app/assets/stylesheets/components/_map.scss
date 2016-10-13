@@ -64,31 +64,11 @@
       z-index: 1000 !important;
     }
 
-    &.-blue {
-      background-color: rgba(#007bcd, 0.85);
-    }
-
-    &.-orange {
-      background-color: rgba(#f57823, 0.85);
-    }
-
     &.prunecluster {
       color: #007bcd;
       font-size: 21px;
-
       background-color: white;
-
       border: 3px solid #007bcd;
-
-      &.-blue {
-        color: #007bcd;
-        border-color: #007bcd;
-      }
-
-      &.-orange {
-        color: #f57823;
-        border-color: #f57823;
-      }
 
       &.-points-cluster-icon {
         color: $base-font-color;
@@ -99,16 +79,40 @@
     }
   }
 
+  &.-projects .bubble-icon {
+    background-color: rgba(#007bcd, 0.85);
+  }
+  &.-projects .prunecluster {
+    color: #007bcd;
+    border-color: #007bcd;
+  }
+
+  &.-events .bubble-icon {
+    background-color: rgba($alternative-color, 0.85);
+  }
+  &.-events .prunecluster {
+    color: $alternative-color;
+    border-color: $alternative-color;
+  }
+
+  &.-people .bubble-icon {
+    background-color: rgba($secondary-color, 0.85);
+  }
+  &.-people .prunecluster {
+    color: $secondary-color;
+    border-color: $secondary-color;
+  }
+
   .circle-icon {
     border: 1px solid #9440d7;
     background: #b85fff;
     border-radius: 100%;
     box-shadow: 0 3px 5px 0 rgba(3, 11, 43, 0.2);
+  }
 
-    &.-events {
-      background-color: #f57823;
-      border: 1px solid #e66d1b;
-    }
+  &.-events .circle-icon {
+    background-color: #f57823;
+    border: 1px solid #e66d1b;
   }
 
   .marker-icon {
@@ -120,11 +124,16 @@
       stroke-width: 1px;
       filter: drop-shadow(0 3px 5px rgba(3, 11, 43, 0.2));
     }
+  }
 
-    &.-events .icon {
-      fill: #f57823;
-      stroke: #e66d1b;
-    }
+  &.-events .marker-icon svg.icon {
+    fill: $alternative-color;
+    stroke: #e66d1b;
+  }
+
+  &.-people .marker-icon svg.icon {
+    fill: $secondary-color;
+    stroke: #e66d1b;
   }
 
   .point-icon {

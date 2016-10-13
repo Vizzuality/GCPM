@@ -71,16 +71,31 @@
       background-color: $secondary-color;
     }
 
-    &.-projects .circle-icon {
-      background-color: $primary-color;
+    // Projects
+    &.-projects {
+      .circle-icon {
+        background-color: $primary-color;
+      }
+      .cluster-icon {
+        border-color: rgba($primary-color, .9);
+      }
     }
 
-    &.-collaborators .circle-icon {
-      background-color: $secondary-color;
+    // Events
+    &.-events {
+      .circle-icon {
+        background-color: $alternative-color;
+      }
+      .cluster-icon {
+        border-color: $alternative-color;
+      }
     }
 
-    &.-events .circle-icon {
-      background-color: $alternative-color;
+    // Collaborators
+    &.-collaborators {
+      .circle-icon {
+        background-color: $secondary-color;
+      }
     }
   }
 

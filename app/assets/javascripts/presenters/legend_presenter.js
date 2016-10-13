@@ -16,27 +16,20 @@
     initialize: function (params) {
       this.state = new StateModel();
 
-      var legendData = [
-        { name: 'Projects', icon: CIRCLE_ICON, dataType: 'projects' },
-        { name: 'Cluster', icon: CLUSTER_ICON, dataType: 'projects' },
-        { name: 'Project leads', icon: MARKER_ICON, dataType: 'projects' },
-        { name: 'Collaborators', icon: CIRCLE_ICON, dataType: 'collaborators' }
-      ];
-
       this.legend = new App.View.Legend({
         el: '#legend',
-        data: legendData
+        data: null
       });
 
-      // this.setEvents();
-      // this.setSubscriptions();
+      this.setEvents();
+      this.setSubscriptions();
 
-      // this.setState(params);
+      this.setState(params);
     },
 
     setState: function (params) {
       this.state
-        .set(_.pick(params, 'data', 'global', 'region', 'country'));
+        .set(_.pick(params, 'data', 'global', 'regions[]', 'countries[]'));
     },
 
     getState: function () {
@@ -51,39 +44,44 @@
     },
 
     setSubscriptions: function () {
-      App.on('Map:change', this.setState, this);
+      App.on('TabNav:change Breadcrumbs:change FilterForm:change Map:change', this.setState, this);
     },
 
     renderLegends: function () {
       var data;
       var attributes = this.getState();
+      console.log(attributes);
 
       switch (attributes.data) {
         case 'projects':
-          data = [{ blueCircle: true, description: 'Number of Projects' }];
-          if (typeof attributes.country !== 'undefined') {
+          data = [
+            { name: 'Projects', icon: CIRCLE_ICON, dataType: 'projects' }
+          ];
+
+          if (attributes['countries[]']) {
             data = [
-              { blueMarker: true, description: 'Project Leads' },
-              { purpleCircle: true, description: 'Researchers' }
+              { name: 'Cluster', icon: CLUSTER_ICON, dataType: 'projects' },
+              { name: 'Project leads', icon: MARKER_ICON, dataType: 'projects' },
+              { name: 'Collaborators', icon: CIRCLE_ICON, dataType: 'collaborators' }
             ];
           }
           break;
         case 'events':
-          data = [{ orangeCircle: true, description: 'Events Per Region' }];
-          if (typeof attributes.region !== 'undefined') {
-            data = [{ orangeCircle: true, description: 'Number of Events' }];
-            if (typeof attributes.country !== 'undefined') {
-              data = [{ orangeMarker: true, description: 'Events' }];
-            }
-          }
+          data = [
+            { name: 'Events', icon: CIRCLE_ICON, dataType: 'events' },
+            { name: 'Cluster', icon: CLUSTER_ICON, dataType: 'events' }
+          ];
           break;
         case 'people':
           break;
         default:
+          data = [
+            { name: 'Projects', icon: CIRCLE_ICON, dataType: 'projects' }
+          ]
           break;
       }
 
-      this.legends.updateData(data);
+      this.legend.updateData(data);
     }
   });
 
