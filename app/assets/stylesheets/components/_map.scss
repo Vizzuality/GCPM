@@ -59,20 +59,8 @@
     &.prunecluster {
       color: #007bcd;
       font-size: 21px;
-
       background-color: white;
-
       border: 3px solid #007bcd;
-
-      &.-blue {
-        color: #007bcd;
-        border-color: #007bcd;
-      }
-
-      &.-orange {
-        color: #f57823;
-        border-color: #f57823;
-      }
 
       &.-points-cluster-icon {
         color: $base-font-color;
@@ -91,14 +79,20 @@
     border-color: #007bcd;
   }
 
-  &.-events .prunecluster,
   &.-events .bubble-icon {
-    background-color: rgba(#f57823, 0.85);
+    background-color: rgba($alternative-color, 0.85);
+  }
+  &.-events .prunecluster {
+    color: $alternative-color;
+    border-color: $alternative-color;
   }
 
-  &.-people .prunecluster,
   &.-people .bubble-icon {
     background-color: rgba($secondary-color, 0.85);
+  }
+  &.-people .prunecluster {
+    color: $secondary-color;
+    border-color: $secondary-color;
   }
 
   .circle-icon {
@@ -124,8 +118,13 @@
     }
   }
 
-  &.-events .maker-icon .icon {
-    fill: #f57823;
+  &.-events .marker-icon svg.icon {
+    fill: $alternative-color;
+    stroke: #e66d1b;
+  }
+
+  &.-people .marker-icon svg.icon {
+    fill: $secondary-color;
     stroke: #e66d1b;
   }
 
