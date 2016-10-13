@@ -5,8 +5,8 @@
 
   var blubbleSizes = {
     big: 90,
-    medium: 65,
-    small: 45
+    medium: 70,
+    small: 50
   };
 
   /**
@@ -55,7 +55,14 @@
 
     pruneCluster.BuildLeafletClusterIcon = function(cluster) {
       var icon = pruneCluster.originalIcon(cluster);
-      icon.options.iconSize = new L.Point(60, 60, null);
+      var bubleSize = blubbleSizes.small;
+      if (cluster.totalWeight >= 100 &&
+        cluster.totalWeight < 999) {
+        bubleSize = blubbleSizes.medium;
+      } else if (cluster.totalWeight > 999) {
+        bubleSize = blubbleSizes.big;
+      }
+      icon.options.iconSize = new L.Point(bubleSize, bubleSize, null);
       return icon;
     };
 

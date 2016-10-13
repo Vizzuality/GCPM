@@ -27,12 +27,12 @@
       this.setSubscriptions();
       this.setEvents();
 
-      // Setting firs state
+      // Setting first state
       this.setState(params);
     },
 
     setEvents: function() {
-      this.state.on('change', function() {
+      this.state.on('change', function(newState) {
         this.updateClassName();
         this.drawLayer();
         App.trigger('Map:change', this.getState());
@@ -40,7 +40,7 @@
 
       this.fc.on('region:change', function(state) {
         if (state.type === 'region') {
-          this.setState({ 'regions[]': state.iso, data: state.data });
+          this.setState({ 'regions[]': state.iso, data: state.data }, true);
         }
       }, this);
 
@@ -50,7 +50,7 @@
             'regions[]': state['regions[]'],
             data: state.data,
             'countries[]': state.iso
-          });
+          }, true);
         }
       }, this);
     },
@@ -60,8 +60,8 @@
       App.on('TabNav:change Breadcrumbs:change FilterForm:change', function(state) {
         this.setState(state, true);
       }, this);
-      App.on('Layer:change', this.addLayer, this);
-      App.on('Layer:remove', this.removeLayer, this);
+      App.on('Layer:change', this.addCartoLayer, this);
+      App.on('Layer:remove', this.removeCartoLayer, this);
     },
 
     getState: function() {
@@ -69,12 +69,11 @@
     },
 
     setState: function(params, merge) {
-      var newState = merge ?
-        Object.assign({}, this.getState(), params) : params;
+      var newState = merge ? Object.assign({}, this.getState(), params) : params;
 
       newState = _.pick(newState, 'data', 'regions[]', 'countries[]', 'cancer_types[]',
         'organization_types[]', 'organizations[]', 'project_types[]',
-        'start_date', 'end_date');
+        'start_date', 'end_date', 'cartoLayer');
 
       if (!newState.data) {
         newState.data = 'projects';
@@ -123,20 +122,26 @@
     /**
      * Add layer
      */
-    addLayer: function(layer) {
+    addCartoLayer: function(layerOptions) {
       if (this.cartoLayer) {
         this.map.removeLayer(this.cartoLayer);
       }
-      this.cartoLayer = layer;
+      this.cartoLayer = layerOptions.layer;
       this.map.addLayer(this.cartoLayer);
+      App.trigger('Map:change', Object.assign(this.getState(), {
+        cartoLayer: layerOptions.name
+      }));
     },
 
     /**
      * Remove layer
      */
-    removeLayer: function() {
+    removeCartoLayer: function() {
       this.map.removeLayer(this.cartoLayer);
       this.cartoLayer = null;
+      App.trigger('Map:change', Object.assign(this.getState(), {
+        cartoLayer: null
+      }));
     }
 
   });

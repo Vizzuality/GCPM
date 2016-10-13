@@ -23,8 +23,16 @@
     }
   }
 
-  .leaflet-top {
-    top: 36px;
+  .leaflet-left .leaflet-control {
+    margin-left: $base-space;
+  }
+
+  .leaflet-top .leaflet-control {
+    margin-top: $base-space;
+  }
+
+  .l-app.-main & .leaflet-top .leaflet-control {
+    margin-top: $base-space + 35px;
   }
 
   .leaflet-top,
@@ -56,11 +64,17 @@
       z-index: 1000 !important;
     }
 
+    .marker-arc {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
     &.prunecluster {
       color: #007bcd;
-      font-size: 21px;
+      font-size: 18px;
       background-color: white;
-      border: 3px solid #007bcd;
+      border: 1px solid #007bcd;
 
       &.-points-cluster-icon {
         color: $base-font-color;
@@ -96,8 +110,8 @@
   }
 
   .circle-icon {
-    border: 1px solid #9440d7;
-    background: #b85fff;
+    border: 1px solid $secondary-color;
+    background: $secondary-color;
     border-radius: 100%;
     box-shadow: 0 3px 5px 0 rgba(3, 11, 43, 0.2);
   }

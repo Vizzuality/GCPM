@@ -1,23 +1,61 @@
 
 {{#if active}}
   <div class="c-layers">
-    <button class="c-btn -thin js-actionbar-action">
-      <svg class="c-icon -small -primary layer-arrow">
-        <use xlink:href="#icon-close"></use>
-      </svg>
-    </button>
-    {{#each layers as |type|}}
-      {{#if type.groups}}
-        {{#each type.elements as |group key|}}
-          <div class="layers-item -collapsed">
-            <div class="layer">
-              <button class="c-btn -thin js-collapse-layer">
-                <svg class="c-icon -small -primary layer-arrow">
-                  <use xlink:href="#icon-arrow"></use>
-                </svg>
-              </button>
-              <div class="group-title">
-                <span class="js-collapse-layer">{{key}}</span>
+    <div class="layers-content">
+      <button class="c-btn -thin js-actionbar-action">
+        <svg class="c-icon -small -primary layer-arrow">
+          <use xlink:href="#icon-close"></use>
+        </svg>
+      </button>
+      {{#each layers as |type|}}
+        {{#if type.groups}}
+          {{#each type.elements as |group key|}}
+            <div class="layers-item -collapsed">
+              <div class="layer">
+                <button class="c-btn -thin js-collapse-layer">
+                  <svg class="c-icon -small -primary layer-arrow">
+                    <use xlink:href="#icon-arrow"></use>
+                  </svg>
+                </button>
+                <div class="group-title">
+                  <span class="js-collapse-layer">{{key}}</span>
+                  {{!-- <button class="c-btn -round-icon -primary">
+                    <svg class="c-icon -small -inverse">
+                      <use xlink:href="#icon-info"></use>
+                    </svg>
+                  </button> --}}
+                </div>
+              </div>
+              <ul class="layer-list">
+                {{#each group as |layer|}}
+                  <div class="layers-item">
+                    <div class="layer">
+                      <div class="switch round tiny">
+                        <input class="switch-input" type="radio" id="{{layer.slug}}" name="layer" value="{{layer.slug}}">
+                        <label class="switch-paddle" for="{{layer.slug}}"></label>
+                      </div>
+                      <label class="switch-title" for="{{layer.slug}}">{{layer.name}}</label>
+                      {{!-- <button class="c-btn -round-icon -primary">
+                        <svg class="c-icon -small -inverse">
+                          <use xlink:href="#icon-info"></use>
+                        </svg>
+                      </button> --}}
+                    </div>
+                  </div>
+                {{/each}}
+              </ul>
+            </div>
+          {{/each}}
+        {{/if}}
+        {{#if type.individual}}
+          {{#each type.elements as |layer|}}
+            <div class="layers-item">
+              <div class="layer">
+                <div class="switch round tiny">
+                  <input class="switch-input" type="radio" id="{{layer.slug}}" name="layer" value="{{layer.slug}}">
+                  <label class="switch-paddle" for="{{layer.slug}}"></label>
+                </div>
+                <label class="switch-title" for="{{layer.slug}}">{{layer.name}}</label>
                 {{!-- <button class="c-btn -round-icon -primary">
                   <svg class="c-icon -small -inverse">
                     <use xlink:href="#icon-info"></use>
@@ -25,46 +63,10 @@
                 </button> --}}
               </div>
             </div>
-            <ul class="layer-list">
-              {{#each group as |layer|}}
-                <div class="layers-item">
-                  <div class="layer">
-                    <div class="switch round tiny">
-                      <input class="switch-input" type="radio" id="{{layer.slug}}" name="layer" value="{{layer.slug}}">
-                      <label class="switch-paddle" for="{{layer.slug}}"></label>
-                    </div>
-                    {{layer.name}}
-                    {{!-- <button class="c-btn -round-icon -primary">
-                      <svg class="c-icon -small -inverse">
-                        <use xlink:href="#icon-info"></use>
-                      </svg>
-                    </button> --}}
-                  </div>
-                </div>
-              {{/each}}
-            </ul>
-          </div>
-        {{/each}}
-      {{/if}}
-      {{#if type.individual}}
-        {{#each type.elements as |layer|}}
-          <div class="layers-item">
-            <div class="layer">
-              <div class="switch round tiny">
-                <input class="switch-input" type="radio" id="{{layer.slug}}" name="layer" value="{{layer.slug}}">
-                <label class="switch-paddle" for="{{layer.slug}}"></label>
-              </div>
-              {{layer.name}}
-              {{!-- <button class="c-btn -round-icon -primary">
-                <svg class="c-icon -small -inverse">
-                  <use xlink:href="#icon-info"></use>
-                </svg>
-              </button> --}}
-            </div>
-          </div>
-        {{/each}}
-      {{/if}}
-    {{/each}}
+          {{/each}}
+        {{/if}}
+      {{/each}}
+    </div>
   </div>
 {{/if}}
 

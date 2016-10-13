@@ -35,6 +35,11 @@
     width: 100%;
     background-color: rgba($primary-color, .7);
     z-index: 1;
+
+
+    #layers {
+      position: relative;
+    }
   }
 
   .l-app-navbar {
