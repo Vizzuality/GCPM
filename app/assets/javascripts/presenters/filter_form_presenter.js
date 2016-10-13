@@ -39,6 +39,9 @@
 
       this.children = [countries, organizations, cancerTypes, projectTypes, organizationsTypes, pickadateStart, pickadateEnd];
 
+      this.countries = new App.Collection.Countries();
+      this.countries.fetch();
+
       this.modal = new App.View.Modal();
       this.filterForm = new App.View.FilterForm({
         children: this.children
@@ -54,6 +57,10 @@
     setEvents: function() {
       this.filterForm.on('cancel', this.closeForm, this);
       this.filterForm.on('submit', function(newState) {
+        // Set the region before setting the newState
+        if (newState['countries[]']) {
+          newState['regions[]'] = _.findWhere(this.countries.toJSON(), { country_iso_3: newState['countries[]'] }).region_iso;
+        }
         this.setState(newState);
         this.closeForm();
       }, this);
