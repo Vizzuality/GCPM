@@ -59,7 +59,7 @@
     },
 
     setSubscriptions: function() {
-      App.on('TabNav:change Breadcrumbs:change FilterForm:change Map:change', this.setState, this);
+      App.on('TabNav:change FilterForm:change Map:change', this.setState, this);
     },
 
     renderBreadcrumbs: function() {

@@ -69,7 +69,9 @@
         App.trigger('FilterForm:change', this.state.attributes);
       }, this);
 
-      App.on('Map:change', this.handleFieldChange, this);
+      App.on('TabNav:change Breadcrumbs:change Map:change', function(newState){
+        this.setState(newState, { silent: true });
+      }, this);
     },
 
     /**
@@ -92,8 +94,10 @@
      * Setting form state
      * @param {Object} newState
      */
-    setState: function(newState) {
-      this.state.set(newState);
+    setState: function(newState, options) {
+      this.state
+        .clear({ silent: true })
+        .set(newState, options);
     },
 
     /**
@@ -145,26 +149,14 @@
         // Then, inside of each presenter, they will handle its state
         var state = _.extend({}, this.state.toJSON(), {
           value: this.state.get(child.defaults.name)
-        })
+        });
 
         child.setState(state, { silent: true });
 
         // Render the child
         child.render();
       }.bind(this));
-    },
-
-    /**
-     * Trigger event depending on the filed required
-     */
-    handleFieldChange: function(mapState) {
-      _.each(mapState, function(value, key) {
-        if (key === 'countries[]') {
-          App.trigger('MapCountry:change', value);
-        }
-      }.bind(this));
     }
-
   });
 
 })(this.App);
