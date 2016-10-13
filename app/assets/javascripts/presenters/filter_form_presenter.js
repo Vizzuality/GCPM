@@ -137,7 +137,7 @@
         // I need to pass the rest of the params because there are some presenters that need other params
         // Then, inside of each presenter, they will handle its state
         var state = _.extend({}, this.state.toJSON(), {
-          value: this.state.get(child.defaults.name),
+          value: this.state.get(child.defaults.name)
         })
 
         child.setState(state, { silent: true });
@@ -156,7 +156,7 @@
           App.trigger('MapCountry:change', value);
         }
       }.bind(this));
-    },
+    }
 
   });
 
