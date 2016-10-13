@@ -15,6 +15,8 @@
    * @return {Object} layer
    */
   App.helper.bubbleLayer = function(geoJson, params, layerFacade) {
+    var markerTemplate = HandlebarsTemplates['marker_bubble'];
+
     return L.geoJson(geoJson, {
       pointToLayer: function(feature) {
         var location = feature.geometry.coordinates;
@@ -25,12 +27,49 @@
         } else if (feature.properties.count > 999) {
           bubleSize = blubbleSizes.big;
         }
-        var className = 'bubble-icon ' +
-          (params.data === 'events' ? '-orange' : '-blue');
+        var className = 'bubble-icon';
+        var chartData = [];
+        var markerData = {};
+        var chartColors = [];
+        if (params.data === 'events') {
+          chartColors = ['#fbbf96', '#ffffff'];
+          // chartData = [
+          //   { value: feature.properties.collaborators },
+          //   { value: feature.properties.project_leads }
+          // ];
+        } else if (params.data === 'people') {
+          chartColors = ['#68299b', '#ffffff'];
+          // chartData = [
+          //   { value: feature.properties.collaborators },
+          //   { value: feature.properties.project_leads }
+          // ];
+        } else if (params.data === 'projects') {
+          chartColors = ['#78bbe8', '#ffffff'];
+          chartData = [
+            { value: feature.properties.collaborators },
+            { value: feature.properties.project_leads }
+          ];
+        }
+        if (chartData.length > 0) {
+          var donutChart = App.helper.donutChart(chartData, {
+            size: {
+              width: bubleSize,
+              height: bubleSize,
+              radius: 3,
+              padding: 3
+            },
+            colors: chartColors
+          });
+          markerData = Object.assign({}, feature.properties, {
+            chart:  App.helper.utils.svgToHTml(donutChart)
+          })
+        } else {
+          markerData = feature.properties;
+        }
         var bubbleIcon = L.divIcon({
           iconSize: [bubleSize, bubleSize],
           className: className,
-          html: feature.properties.count
+          html: markerTemplate(markerData)
         });
         return L.marker(location, { icon: bubbleIcon });
       },
