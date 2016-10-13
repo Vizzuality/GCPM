@@ -60,8 +60,8 @@
       App.on('TabNav:change Breadcrumbs:change FilterForm:change', function(state) {
         this.setState(state, true);
       }, this);
-      App.on('Layer:change', this.addLayer, this);
-      App.on('Layer:remove', this.removeLayer, this);
+      App.on('Layer:change', this.addCartoLayer, this);
+      App.on('Layer:remove', this.removeCartoLayer, this);
     },
 
     getState: function() {
@@ -122,7 +122,7 @@
     /**
      * Add layer
      */
-    addLayer: function(layerOptions) {
+    addCartoLayer: function(layerOptions) {
       if (this.cartoLayer) {
         this.map.removeLayer(this.cartoLayer);
       }
@@ -136,7 +136,7 @@
     /**
      * Remove layer
      */
-    removeLayer: function() {
+    removeCartoLayer: function() {
       this.map.removeLayer(this.cartoLayer);
       this.cartoLayer = null;
       App.trigger('Map:change', Object.assign(this.getState(), {
