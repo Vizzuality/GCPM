@@ -14,11 +14,15 @@
       this.state = new StateModel(params);
 
       var investigator  = new App.Presenter.Investigator({
+        DOMelement: "#investigator-1",
+        name: "investigator-1",
         label: null,
         addNew: true,
         multiple: false
       });
       var organization = new App.Presenter.Organization({
+        DOMelement: "#organization-1",
+        name: "organization-1",
         label: null,
         addNew: true,
         multiple: false
@@ -28,10 +32,9 @@
       this.organizationForm = new App.Presenter.OrganizationForm();
 
       this.children = [investigator, organization];
-
-      this.investigators= new App.View.InvestigatorOrganization({
+      this.investigatorsOrganization = new App.View.InvestigatorOrganization({
         children: this.children,
-        el: '#investigators'
+        el: '#investigatororganization'
       });
 
       this.setEvents();
@@ -55,6 +58,10 @@
 
       App.on('Organization:new', function(){
         this.organizationForm.openForm();
+      }, this);
+
+      App.on('ProjectForm:newInvestigator', function(){
+        this.addNew();
       }, this);
     },
 
@@ -83,7 +90,7 @@
     },
 
     renderFields: function() {
-      this.investigators.render();
+      this.investigatorsOrganization.render();
       _.each(this.children, function(child){
 
         // Render the child
@@ -96,7 +103,7 @@
      * @param {DOM|String} el
      */
     setElement: function(el) {
-      this.investigators.setElement(el);
+      this.investigatorsOrganization.setElement(el);
     },
 
     /**
@@ -104,11 +111,27 @@
      * @return {DOM}
      */
     getElement: function() {
-      return this.investigators.$el;
+      return this.investigatorsOrganization.$el;
     },
 
     addNew: function(){
-
+      this.investigatorsOrganization.addNew();
+      var investigator  = new App.Presenter.Investigator({
+        DOMelement: "#investigator-"+this.investigatorsOrganization.getId(),
+        name:"investigator-"+this.investigatorsOrganization.getId(),
+        label: null,
+        addNew: true,
+        multiple: false
+      });
+      var organization = new App.Presenter.Organization({
+        DOMelement: "#organization-"+this.investigatorsOrganization.getId(),
+        name:"organization-"+this.investigatorsOrganization.getId(),
+        label: null,
+        addNew: true,
+        multiple: false
+      });
+      this.children.push(investigator, organization);
+      this.render();
     }
 
 

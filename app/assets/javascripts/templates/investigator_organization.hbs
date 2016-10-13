@@ -1,11 +1,36 @@
-<h3 class="c-title">Investigators & organizations</h3>
-<div class="row">
-  <div class="column small-12 medium-6">
-    <h4 class="c-title">Investigators</h4>
-    <div id="investigator" class="c-select"></div>
-  </div>
-  <div class="column small-12 medium-6">
-    <h4 class="c-title">Organizations</h4>
-    <div id="organization" class="c-select"></div>
-  </div>
-</div>
+
+  <h3 class="c-title">Investigators & organizations</h3>
+
+  {{#each elements}}
+
+    <div class="row">
+      <div class="column small-12 medium-6">
+        <h4 class="c-title">Investigators</h4>
+        <div id="investigator-{{id}}" class="investigator c-select"></div>
+      </div>
+      <div class="column small-12 medium-6">
+        <h4 class="c-title">Organizations</h4>
+        <div id="organization-{{id}}" class="organization c-select"></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column small-12 medium-12">
+        <h4 class="c-title">Address</h4>
+        <div id="address-{{id}}" class="address c-select"></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column small-12 medium-6">
+        <h4 class="c-title">Investigators</h4>
+        <div id="investigator-{{id}}" class="investigator c-select"></div>
+      </div>
+      <div class="column small-12 medium-6">
+        <h4 class="c-title">Organizations</h4>
+        <div id="organization-{{id}}" class="organization c-select"></div>
+      </div>
+    </div>
+
+
+  {{/each}}

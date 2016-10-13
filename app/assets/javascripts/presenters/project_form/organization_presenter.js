@@ -32,7 +32,7 @@
 
       // Creating view
       this.select = new App.View.Select({
-        el: '#organization',
+        el: viewSettings.DOMelement,
         options: _.extend({}, this.defaults, viewSettings || {}),
         state: this.state
       });

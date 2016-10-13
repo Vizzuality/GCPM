@@ -65,8 +65,7 @@
       }, this);
 
       this.projectForm.on('newInvestigator', function(newState) {
-        this.setState(newState);
-        this.addInvestigator();
+        App.trigger('ProjectForm:newInvestigator');
       }, this);
     },
 
@@ -84,14 +83,6 @@
     },
 
     /**
-     *
-     */
-    addInvestigator: function() {
-      //this.investigators.addNew();
-      console.log("hey");
-    },
-
-    /**
      * Subscribing to global events
      */
     handleSubmit: function() {
@@ -103,7 +94,7 @@
       // @TODO funding_sources -> if string -> funding_source_ids
       // @TODO funding_sources -> if object -> new_funders
 
-      //@TODO request (validate response)
+      // @TODO request (validate response)
       /*var url = "/api/projects?token=AUTH_TOKEN";
       var req = new XMLHttpRequest();
       req.onload = function(){

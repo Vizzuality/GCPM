@@ -32,7 +32,7 @@
 
       // Creating view
       this.select = new App.View.Select({
-        el: '#investigator',
+        el: viewSettings.DOMelement,
         options: _.extend({}, this.defaults, viewSettings || {}),
         state: this.state
       });
