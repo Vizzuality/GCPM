@@ -22,7 +22,7 @@
         e.stopPropagation();
       }
       var $currentTarget = $(e.currentTarget);
-      App.trigger('Actionbar:action', $currentTarget.data('action'));
+      App.trigger('Actionbar:'+ $currentTarget.data('action'));
     }
 
   });

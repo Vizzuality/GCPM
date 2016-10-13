@@ -35,7 +35,7 @@
     },
 
     setSubscriptions: function () {
-      App.on('Actionbar:action', this.toggleActive, this);
+      App.on('Actionbar:layers', this.toggleActive, this);
     },
 
     setLayers: function() {
