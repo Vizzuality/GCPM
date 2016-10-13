@@ -11,16 +11,16 @@
      * @type {Object}
      */
     routes: {
-      'map(?*query)':             'Map#index',
-      'projects/:id':             'Project#show',
-      'events/:id':               'Events#show',
-      'network/:id/projects/new': 'Project#new',
-      'countries':                'Countries#index',
-      'countries/:iso':           'Countries#show',
-      'investigators/:id':        'Investigators#show',
-      'organizations/:id':        'Organizations#show',
-      'cancer-types':             'CancerTypes#index',
-      'cancer-types/:id':         'CancerTypes#show'
+      'map(?*query)(/)':             'Map#index',
+      'projects/:id(/)':             'Project#show',
+      'events/:id(/)':               'Events#show',
+      'network/:id/projects/new(/)': 'Project#new',
+      'countries(/)':                'Countries#index',
+      'countries/:iso(/)':           'Countries#show',
+      'investigators/:id(/)':        'Investigators#show',
+      'organizations/:id(/)':        'Organizations#show',
+      'cancer-types(/)':             'CancerTypes#index',
+      'cancer-types/:id(/)':         'CancerTypes#show'
     },
 
     initialize: function() {

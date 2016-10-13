@@ -33,6 +33,7 @@
 
     setEvents: function() {
       this.state.on('change', function() {
+        this.updateClassName();
         this.drawLayer();
         App.trigger('Map:change', this.getState());
       }, this);
@@ -88,6 +89,15 @@
       }
 
       this.state.clear({ silent: true }).set(newState);
+    },
+
+    updateClassName: function() {
+      var mapElement = this.map.$el;
+      mapElement
+        .removeClass('-projects')
+        .removeClass('-events')
+        .removeClass('-people');
+      mapElement.addClass('-' + this.getState().data || '');
     },
 
     /**
