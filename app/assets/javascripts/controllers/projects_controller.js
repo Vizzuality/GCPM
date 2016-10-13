@@ -12,6 +12,7 @@
 
     show: function(params) {
       new App.Presenter.MapVis(params);
+      new App.View.DatesTimeline();
     }
 
   });
