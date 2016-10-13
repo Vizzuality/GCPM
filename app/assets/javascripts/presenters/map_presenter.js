@@ -27,12 +27,12 @@
       this.setSubscriptions();
       this.setEvents();
 
-      // Setting firs state
+      // Setting first state
       this.setState(params);
     },
 
     setEvents: function() {
-      this.state.on('change', function() {
+      this.state.on('change', function(newState) {
         this.updateClassName();
         this.drawLayer();
         App.trigger('Map:change', this.getState());
@@ -74,7 +74,7 @@
 
       newState = _.pick(newState, 'data', 'regions[]', 'countries[]', 'cancer_types[]',
         'organization_types[]', 'organizations[]', 'project_types[]',
-        'start_date', 'end_date');
+        'start_date', 'end_date', 'cartoLayer');
 
       if (!newState.data) {
         newState.data = 'projects';
@@ -128,8 +128,10 @@
         this.map.removeLayer(this.cartoLayer);
       }
       this.cartoLayer = layerOptions.layer;
-      this.state.set({cartoLayer: layerOptions.name});
       this.map.addLayer(this.cartoLayer);
+      App.trigger('Map:change', Object.assign(this.getState(), {
+        cartoLayer: layerOptions.name
+      }));
     },
 
     /**
@@ -138,7 +140,9 @@
     removeLayer: function() {
       this.map.removeLayer(this.cartoLayer);
       this.cartoLayer = null;
-      this.state.set({cartoLayer: null});
+      App.trigger('Map:change', Object.assign(this.getState(), {
+        cartoLayer: null
+      }));
     }
 
   });
