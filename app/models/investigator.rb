@@ -30,7 +30,7 @@ class Investigator < ApplicationRecord
   scope :by_investigators,      -> investigators       { joins(:investigators).where(investigators: { id: investigators }) }
   scope :by_organizations,      -> organizations       { joins(:organizations).where(organizations: { id: organizations }) }
   scope :by_organization_types, -> organization_types  { joins(organizations: :organization_type).where(organization_types: { id: organization_types }) }
-  scope :by_countries,          -> countries           { joins(projects: :countries).where(countries: { country_iso_3: countries }) }
+  scope :by_countries,          -> countries           { joins([research_units: [address: :country]]).where(countries: { country_iso_3: countries }) }
   scope :by_regions,            -> regions             { joins(projects: :countries).where(countries: { region_iso: regions }) }
   scope :by_start_date,         -> start_date          { joins(:projects).where('projects.start_date > ?', start_date ) }
   scope :by_end_date,           -> end_date            { joins(:projects).where('projects.end_date < ?', end_date ) }
