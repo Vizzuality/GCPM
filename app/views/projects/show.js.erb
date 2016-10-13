@@ -1,0 +1,10 @@
+(function() {
+
+  'use strict'
+
+  <% template = 'info' %>
+  var htmlContent = "<%= escape_javascript render(partial: template) %>";
+
+  document.getElementById('content').innerHTML = htmlContent;
+
+})();
