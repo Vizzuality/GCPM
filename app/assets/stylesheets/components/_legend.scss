@@ -44,7 +44,29 @@
     height: 12px;
     margin-right: 5px;
 
-    svg {
+    .circle-icon {
+      width: 12px;
+      height: 12px;
+      border-radius: 100%;
+    }
+
+    .square-icon {
+      position: relative;
+      top: 3px;
+      width: 12px;
+      height: 4px;
+      border: 1px solid transparent;
+    }
+
+    .cluster-icon {
+      width: 12px;
+      height: 12px;
+      border: 1px solid transparent;
+      border-radius: 100%;
+      background-color: $body-bg-color;
+    }
+
+    .marker-icon {
       position: absolute;
       top: 0;
       left: 0;
@@ -52,30 +74,19 @@
       height: 12px;
     }
 
-    .circle-icon {
-      width: 12px;
-      height: 12px;
-      border-radius: 100%;
-    }
-
-    .cluster-icon {
-      width: 12px;
-      height: 12px;
-      border: 3px solid transparent;
-      border-radius: 100%;
-      background-color: $body-bg-color;
-    }
-
     // Projects
     &.-projects {
       .circle-icon {
-        background-color: $primary-color;
+        background-color: #007BCE;
       }
       .cluster-icon {
-        border-color: rgba($primary-color, .9);
+        border-color: $primary-color;
       }
       .marker-icon {
         fill: $primary-color;
+      }
+      .square-icon {
+        border-color: $primary-color;
       }
     }
 
@@ -85,10 +96,13 @@
         background-color: $secondary-color;
       }
       .cluster-icon {
-        border-color: rgba($secondary-color, .9);
+        border-color: $secondary-color;
       }
       .marker-icon {
         fill: $secondary-color;
+      }
+      .square-icon {
+        border-color: $secondary-color;
       }
     }
 
@@ -102,6 +116,9 @@
       }
       .marker-icon {
         fill: $alternative-color;
+      }
+      .square-icon {
+        border-color: $alternative-color;
       }
     }
 
