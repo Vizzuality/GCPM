@@ -15,9 +15,9 @@ class CountriesController < ApplicationController
 
     limit = 12 + (@page * 9)
 
-    @events = Event.fetch_all(countries: params[:iso]).order('created_at DESC')
-    @projects = Project.fetch_all(countries: params[:iso]).order('created_at DESC')
-    @people = Investigator.fetch_all(countries: params[:iso]).order('created_at DESC')
+    @events = Event.fetch_all(countries: params[:iso]).uniq.order('created_at DESC')
+    @projects = Project.fetch_all(countries: params[:iso]).uniq.order('created_at DESC')
+    @people = Investigator.fetch_all(countries: params[:iso]).uniq.order('created_at DESC')
 
     if params.key?(:data) && params[:data] == 'events'
       @items = @events.limit(limit)

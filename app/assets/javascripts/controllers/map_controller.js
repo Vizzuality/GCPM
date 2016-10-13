@@ -18,6 +18,7 @@
       new App.Presenter.Layers(params);
       new App.Presenter.SortBy(params);
       new App.Presenter.ShowMore(params);
+      new App.Presenter.Share(params);
     }
 
   });
