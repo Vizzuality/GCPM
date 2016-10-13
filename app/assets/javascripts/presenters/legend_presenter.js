@@ -27,10 +27,10 @@
       this.setState(params);
     },
 
-    setState: function (params) {
+    setState: function (newState) {
       this.state
         .clear({ silent: true })
-        .set(_.pick(params, 'data', 'global', 'regions[]', 'countries[]'));
+        .set(newState);
     },
 
     getState: function () {

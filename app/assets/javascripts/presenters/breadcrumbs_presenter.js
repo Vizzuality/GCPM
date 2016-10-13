@@ -22,11 +22,11 @@
       this.setState(params);
     },
 
-    setState: function(params) {
-      params.global = 'all'; // Always show global link
+    setState: function(newState) {
+      newState.global = 'all'; // Always show global link
       this.state
         .clear({ silent: true })
-        .set(_.pick(params, 'data', 'global', 'regions[]', 'countries[]'));
+        .set(newState);
     },
 
     getState: function() {
@@ -55,16 +55,17 @@
     },
 
     setSubscriptions: function() {
-      App.on('Router:change', this.setState, this);
-      App.on('Map:change', this.setState, this);
+      App.on('TabNav:change Breadcrumbs:change FilterForm:change Map:change', this.setState, this);
     },
 
     renderBreadcrumbs: function() {
-      var data = [];
-      _.each(this.getState(), function(value, key) {
-        if (key !== 'data') {          
-          data.push({ link: '?' + key + '=' + value, name: key, value: value });
-        }
+      var state = _.pick(this.getState(), 'global', 'regions[]', 'countries[]');
+      var data = _.map(state, function(value, key) {
+        return {
+          link: '?' + key + '=' + value,
+          name: key,
+          value: value
+        };
       });
       this.breadcrumbs.updateData(data);
     }
