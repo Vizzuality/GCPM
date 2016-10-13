@@ -40,7 +40,7 @@
 
       this.fc.on('region:change', function(state) {
         if (state.type === 'region') {
-          this.setState({ 'regions[]': state.iso, data: state.data });
+          this.setState({ 'regions[]': state.iso, data: state.data }, true);
         }
       }, this);
 
@@ -50,7 +50,7 @@
             'regions[]': state['regions[]'],
             data: state.data,
             'countries[]': state.iso
-          });
+          }, true);
         }
       }, this);
     },
