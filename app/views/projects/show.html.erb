@@ -52,8 +52,11 @@
             <h3><%= t 'location' %>(s)</h3>
             <ul class="c-list">
               <% @project.addresses.each do |l| %>
-                <% iso = Country.find_by_id(l.country_id).country_iso_3 %>
-                <li class="list-item"><%= link_to "#{l.city}, #{l.country_name}", "/countries/#{iso}" %></li>
+                <% country = Country.find_by_id(l.country_id) %>
+                <% iso = country ? country.country_iso_3 : nil %>
+                <% if iso %>
+                  <li class="list-item"><%= link_to "#{l.city}, #{l.country_name}", "/countries/#{iso}" %></li>
+                <% end %>
               <% end %>
           </div>
 
