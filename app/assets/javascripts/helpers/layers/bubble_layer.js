@@ -56,7 +56,7 @@
               width: bubleSize,
               height: bubleSize,
               radius: 3,
-              padding: 3
+              padding: 2
             },
             colors: chartColors
           });
