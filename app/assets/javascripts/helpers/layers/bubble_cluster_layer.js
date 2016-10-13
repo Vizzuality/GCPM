@@ -5,8 +5,8 @@
 
   var blubbleSizes = {
     big: 90,
-    medium: 65,
-    small: 45
+    medium: 70,
+    small: 50
   };
 
   /**
