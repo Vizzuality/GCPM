@@ -113,11 +113,12 @@
     /**
      * Add layer
      */
-    addLayer: function(layer) {
+    addLayer: function(layerOptions) {
       if (this.cartoLayer) {
         this.map.removeLayer(this.cartoLayer);
       }
-      this.cartoLayer = layer;
+      this.cartoLayer = layerOptions.layer;
+      this.state.set({cartoLayer: layerOptions.name});
       this.map.addLayer(this.cartoLayer);
     },
 
@@ -127,6 +128,7 @@
     removeLayer: function() {
       this.map.removeLayer(this.cartoLayer);
       this.cartoLayer = null;
+      this.state.set({cartoLayer: null});
     }
 
   });

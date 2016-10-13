@@ -36,6 +36,7 @@
 
     setSubscriptions: function () {
       App.on('Actionbar:action', this.toggleActive, this);
+      App.on('Map:change', this.setState, this);
     },
 
     setLayers: function() {
@@ -76,7 +77,7 @@
 
         /* Create layer */
         this.fc.getLayer(options).done(function(layer) {
-          App.trigger('Layer:change', layer);
+          App.trigger('Layer:change', {layer: layer, name: element.value});
         });
       } else App.trigger('Layer:remove', null);
     },
