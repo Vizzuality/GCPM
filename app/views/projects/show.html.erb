@@ -18,6 +18,22 @@
           <h1><%= @project.title %></h1>
         </div>
       </div>
+      <div class="row collapse">
+        <div class="column small-8">
+          <div class="c-summary-info row -collapse">
+            <div class="column small-12 medium-4 align-middle">
+              <h3><%= @project.project_lead.name %></h3>
+            </div>
+            <div class="column small-12 medium-4 align-middle">
+              <h3"><%= @project.investigators.count %> <%= t 'collaborator'%>(s)</h3>
+            </div>
+            <div class="column small-12 medium-4 align-middle">
+              <h3><%= t 'funding_source' %></h3>
+              <span><%= @project.funding_sources.first.name %></span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
