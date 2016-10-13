@@ -35,7 +35,14 @@
 
     setSubscriptions: function () {
       App.on('Actionbar:layers', this.toggleActive, this);
-      App.on('Map:change', this.setState, this);
+      App.on('Map:change Router:change', this.setState, this);
+      App.on('Router:change', function(params) {
+        if (params.cartoLayer) {
+          this.handleLayer({ id: params.cartoLayer });
+        } else {
+          this.handleLayer();
+        }
+      }.bind(this), this);
     },
 
     setLayers: function() {
