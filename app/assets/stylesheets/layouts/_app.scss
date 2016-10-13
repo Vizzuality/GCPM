@@ -5,9 +5,14 @@
   height: 80vh;
   min-height: 50vh;
 
-  .c-map {
+  .l-app-map {
+    position: relative;
     flex: 1;
-    background-color: $secondary-color;
+
+    .c-map {
+      height: 100%;
+      background-color: $secondary-color;
+    }
   }
 
   &.-main {

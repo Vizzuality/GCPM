@@ -22,57 +22,58 @@ See also the [CartoDB integration](#cartodb-integration) section for information
 
 To set up the database, run:
 
-    bundle exec rake db:create
-    bundle exec rake db:migrate
+		bundle exec rake db:create
+		bundle exec rake db:migrate
 
 To add existing data, run:
 
-    bundle exec rake db:seed
-    bundle exec rake db:geo
-    bundle exec rake events:create
+		bundle exec rake db:seed
+		bundle exec rake db:geo
+		bundle exec rake events:create
+		bundle exec rake layers:import
 
 ## Running
 
 To run application:
 
-    bundle exec rails server
+		bundle exec rails server
 
 To send periodic notification emails to users, run the following `rake` task using `cron` or a similar tool:
 
-    rake notifications:send
+		rake notifications:send
 
 
 ## Development
 
 ## Test
 
-  Run rspec:
+	Run rspec:
 
 ```ruby
-  bin/rspec
+	bin/rspec
 ```
-  Run teaspoon:
+	Run teaspoon:
 
 ```ruby
-  rake teaspoon
+	rake teaspoon
 ```
-  Run cucumber:
+	Run cucumber:
 
 ```ruby
-  rake cucumber
+	rake cucumber
 ```
-  Run all (cucumber, spec):
+	Run all (cucumber, spec):
 
 ```ruby
-  rake
+	rake
 ```
 
 capybara-webkit depends on a WebKit implementation from Qt (version >= 4.8), a cross-platform development toolkit. You'll need to download the Qt libraries to build and install the gem. [more](https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit)
 
 OS X Mavericks:
 
-    brew update
-    brew install qt
+		brew update
+		brew install qt
 
 In cucumber, tag scenarios with '@javascript' to run them using a headless WebKit browser.
 

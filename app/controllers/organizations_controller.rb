@@ -8,7 +8,7 @@ class OrganizationsController < ApplicationController
 
   def show
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
-    @filters = %w(projects events)
+    @filters = %w(projects people events)
     @current_type = params.key?(:data) ? params[:data] : 'projects'
 
     gon.server_params = { 'organizations[]': params[:id] }
@@ -17,11 +17,16 @@ class OrganizationsController < ApplicationController
 
     @events = Event.fetch_all(organization: @organization.id).order('created_at DESC')
     @projects = Project.fetch_all(organization: @organization.id).order('created_at DESC')
+    @people = Investigator.fetch_all(organization: @organization.id).order('created_at DESC')
 
     if params.key?(:data) && params[:data] == 'events'
       @items = @events.limit(limit)
       @more = (@events.size > @items.size)
       @items_total = @events.size
+    elsif params.key?(:data) && params[:data] == 'people'
+      @items = @people.limit(limit)
+      @more = (@people.size > @items.size)
+      @items_total = @people.size
     else
       @items = @projects.limit(limit)
       @more = (@projects.size > @items.size)

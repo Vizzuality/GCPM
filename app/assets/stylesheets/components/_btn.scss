@@ -22,9 +22,30 @@
     border-radius: 100%;
   }
 
+  &.-thin {
+    padding: ($button-y-padding / 2) ($button-x-padding / 2);
+  }
+
+  &.-round-icon {
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    margin: ($button-y-padding / 2) ($button-x-padding / 2);
+
+  }
+
   &.-primary {
     color: $inverse-font-color;
     background-color: $primary-color;
+  }
+
+  &.-inverse {
+    color: $primary-color;
+    background-color: white;
+    border: 1px solid $primary-color;
   }
 
   &.-global {

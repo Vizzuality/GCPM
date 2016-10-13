@@ -12,4 +12,17 @@
     display: inline-block;
     color: $base-font-color;
   }
+  &.-person {
+    h2, h3 {
+      text-align: center;
+      margin: 4px 0 0;
+    }
+    h3 {
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-transform: none;
+    }
+  }
 }

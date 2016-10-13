@@ -59,6 +59,8 @@
       App.on('TabNav:change Breadcrumbs:change FilterForm:change', function(state) {
         this.setState(state, true);
       }, this);
+      App.on('Layer:change', this.addLayer, this);
+      App.on('Layer:remove', this.removeLayer, this);
     },
 
     getState: function() {
@@ -69,7 +71,7 @@
       var newState = merge ?
         Object.assign({}, this.getState(), params) : params;
 
-      newState = _.pick(params, 'data', 'regions[]', 'countries[]', 'cancer_types[]',
+      newState = _.pick(newState, 'data', 'regions[]', 'countries[]', 'cancer_types[]',
         'organization_types[]', 'organizations[]', 'project_types[]',
         'start_date', 'end_date');
 
@@ -106,6 +108,25 @@
           });
         }
       }.bind(this));
+    },
+
+    /**
+     * Add layer
+     */
+    addLayer: function(layer) {
+      if (this.cartoLayer) {
+        this.map.removeLayer(this.cartoLayer);
+      }
+      this.cartoLayer = layer;
+      this.map.addLayer(this.cartoLayer);
+    },
+
+    /**
+     * Remove layer
+     */
+    removeLayer: function() {
+      this.map.removeLayer(this.cartoLayer);
+      this.cartoLayer = null;
     }
 
   });

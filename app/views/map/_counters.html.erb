@@ -22,9 +22,16 @@
         <h3>Collaborators</h3>
         <span class="amount"><%= @collaborators %></span>
       </div>
-    <% else %>
+    <% elsif @current_type == 'events' %>
       <div class="column small-6">
         <h3>Events</h3>
+        <span class="amount"><%= @items_total %></span>
+      </div>
+      <div class="column small-6">
+      </div>
+    <% elsif @current_type == 'people' %>
+      <div class="column small-6">
+        <h3>People</h3>
         <span class="amount"><%= @items_total %></span>
       </div>
       <div class="column small-6">

@@ -60,7 +60,9 @@
 
       this.state.on('change', function() {
         App.trigger('FilterForm:change', this.state.attributes);
-      }, this)
+      }, this);
+
+      App.on('Map:change', this.handleFieldChange, this);
     },
 
     /**
@@ -143,7 +145,18 @@
         // Render the child
         child.render();
       }.bind(this));
-    }
+    },
+
+    /**
+     * Trigger event depending on the filed required
+     */
+    handleFieldChange: function(mapState) {
+      _.each(mapState, function(value, key) {
+        if (key === 'countries[]') {
+          App.trigger('MapCountry:change', value);
+        }
+      }.bind(this));
+    },
 
   });
 

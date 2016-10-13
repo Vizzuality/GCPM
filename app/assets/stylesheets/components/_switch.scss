@@ -1,0 +1,36 @@
+/* Override for the foundation's switch component */
+.switch-paddle {
+  background: $body-bg-color;
+  border-radius: 30px;
+  border: $app-bg-color solid 1px;
+}
+
+.switch-paddle::after {
+    background: $app-bg-color;
+    border-radius: 30px;
+    top: 0.12rem;
+}
+
+input:checked ~ .switch-paddle {
+  background: $app-bg-color;
+}
+
+input:checked ~ .switch-paddle::after {
+    background: $body-bg-color;
+}
+
+.switch.tiny .switch-paddle {
+  width: 24px;
+  height: 12px;
+}
+
+.switch.tiny .switch-paddle::after {
+  width: 10px;
+  height: 10px;
+  top: 0px;
+  left: 1px;
+}
+
+.switch.tiny input:checked ~ .switch-paddle::after {
+  left: 0.8rem;
+}
