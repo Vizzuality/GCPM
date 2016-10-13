@@ -37,10 +37,12 @@
       this.fc.getPointLayer(this.state.attributes).done(function(layer) {
         map.addLayer(layer);
         setTimeout(function() {
-          map.fitBounds(layer.getBounds(), {
-            paddingTopLeft: [100, 100],
-            paddingBottomRight: [100, 200]
-          });
+          if (layer && layer.getBounds()) {
+            map.fitBounds(layer.getBounds(), {
+              paddingTopLeft: [100, 100],
+              paddingBottomRight: [100, 200]
+            });
+          }
         }, 100);
       });
     },
