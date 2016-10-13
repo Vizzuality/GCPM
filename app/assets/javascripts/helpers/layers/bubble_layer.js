@@ -15,6 +15,8 @@
    * @return {Object} layer
    */
   App.helper.bubbleLayer = function(geoJson, params, layerFacade) {
+    var markerTemplate = HandlebarsTemplates['marker_bubble'];
+
     return L.geoJson(geoJson, {
       pointToLayer: function(feature) {
         var location = feature.geometry.coordinates;
@@ -27,10 +29,17 @@
         }
         var className = 'bubble-icon ' +
           (params.data === 'events' ? '-orange' : '-blue');
+        var chartData = [
+          { value: feature.properties.project_leads },
+          { value: feature.properties.collaborators }
+        ];
+        var donutChart = App.helper.donutChart(chartData);
         var bubbleIcon = L.divIcon({
           iconSize: [bubleSize, bubleSize],
           className: className,
-          html: feature.properties.count
+          html: markerTemplate(Object.assign({}, feature.properties, {
+            chart:  App.helper.utils.svgToHTml(donutChart)
+          }))
         });
         return L.marker(location, { icon: bubbleIcon });
       },
