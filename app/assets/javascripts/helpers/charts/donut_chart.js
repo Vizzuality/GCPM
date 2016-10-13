@@ -9,7 +9,7 @@
    */
 
   var defaults = {
-    size: { width: 100, height: 100, radius: 30 },
+    size: { width: 100, height: 100, radius: 4, padding: 4 },
     colors: ['#98abc5', '#8a89a6', '#7b6888'],
     dataName: 'value'
   };
@@ -28,8 +28,8 @@
 
     // Creating arc
     var arc = d3.svg.arc()
-      .outerRadius(radius - 10)
-      .innerRadius(radius - 70);
+      .outerRadius(radius - opts.size.padding)
+      .innerRadius(radius - (opts.size.radius + opts.size.padding));
 
     // Pie chart layout
     var pie = d3.layout.pie()
@@ -51,7 +51,7 @@
 
     g.append('path')
       .attr('d', arc)
-      .style('fill', function(d) { '#ff0000'; });
+      .style('fill', function(d) { return color(d.value); });
 
     return svgElement;
   };

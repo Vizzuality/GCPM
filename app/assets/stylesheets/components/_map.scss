@@ -56,6 +56,12 @@
       z-index: 1000 !important;
     }
 
+    .marker-arc {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
     &.prunecluster {
       color: #007bcd;
       font-size: 21px;
