@@ -12,7 +12,9 @@
 
     initialize: function(params) {
       this.state = new StateModel();
-      this.breadcrumbs = new App.View.Breadcrumbs({ el: '#breadcrumbs' });
+      this.breadcrumbs = new App.View.Breadcrumbs({
+        el: '#breadcrumbs'
+      });
 
       this.setEvents();
       this.setSubscriptions();
@@ -24,7 +26,7 @@
       params.global = 'all'; // Always show global link
       this.state
         .clear({ silent: true })
-        .set(_.pick(params, 'global', 'regions[]', 'countries[]'));
+        .set(_.pick(params, 'data', 'global', 'regions[]', 'countries[]'));
     },
 
     getState: function() {
@@ -60,7 +62,9 @@
     renderBreadcrumbs: function() {
       var data = [];
       _.each(this.getState(), function(value, key) {
-        data.push({ link: '?' + key + '=' + value, name: key, value: value });
+        if (key !== 'data') {          
+          data.push({ link: '?' + key + '=' + value, name: key, value: value });
+        }
       });
       this.breadcrumbs.updateData(data);
     }

@@ -20,7 +20,10 @@
     },
 
     render: function() {
-      this.$el.html(this.template({ data: this.data }));
+      console.log(this.data);
+      this.$el.html(this.template({
+        data: this.data
+      }));
       return this;
     },
 

@@ -29,14 +29,16 @@
     },
 
     setSubscriptions: function() {
-      App.on('Router:change Map:change', this.setState, this);
+      App.on('Router:change Breadcrumbs:change FilterForm:change Map:change', this.setState, this);
     },
 
     setState: function(newState) {
       if (!newState.data) {
         newState.data = 'projects';
       }
-      this.state.set(newState);
+      this.state
+        .clear({ silent: true })
+        .set(newState);
     },
 
     getState: function() {

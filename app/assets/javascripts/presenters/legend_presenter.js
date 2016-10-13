@@ -29,6 +29,7 @@
 
     setState: function (params) {
       this.state
+        .clear({ silent: true })
         .set(_.pick(params, 'data', 'global', 'regions[]', 'countries[]'));
     },
 
@@ -50,7 +51,6 @@
     renderLegends: function () {
       var data;
       var attributes = this.getState();
-      console.log(attributes);
 
       switch (attributes.data) {
         case 'projects':
@@ -68,11 +68,27 @@
           break;
         case 'events':
           data = [
-            { name: 'Events', icon: CIRCLE_ICON, dataType: 'events' },
-            { name: 'Cluster', icon: CLUSTER_ICON, dataType: 'events' }
+            { name: 'Events', icon: CIRCLE_ICON, dataType: 'events' }
           ];
+
+          if (attributes['countries[]']) {
+            data = [
+              { name: 'Events', icon: MARKER_ICON, dataType: 'events' },
+              { name: 'Cluster', icon: CLUSTER_ICON, dataType: 'events' }
+            ];
+          }
           break;
         case 'people':
+          data = [
+            { name: 'People', icon: CIRCLE_ICON, dataType: 'people' }
+          ];
+
+          if (attributes['countries[]']) {
+            data = [
+              { name: 'People', icon: MARKER_ICON, dataType: 'people' },
+              { name: 'Cluster', icon: CLUSTER_ICON, dataType: 'people' }
+            ];
+          }
           break;
         default:
           data = [

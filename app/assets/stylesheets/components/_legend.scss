@@ -50,25 +50,20 @@
       left: 0;
       width: 12px;
       height: 12px;
-
-      &.marker-icon {
-        fill: $primary-color;
-      }
-    }
-
-    .cluster-icon {
-      width: 12px;
-      height: 12px;
-      border: 3px solid rgba($primary-color, .9);
-      border-radius: 100%;
-      background-color: $body-bg-color;
     }
 
     .circle-icon {
       width: 12px;
       height: 12px;
       border-radius: 100%;
-      background-color: $secondary-color;
+    }
+
+    .cluster-icon {
+      width: 12px;
+      height: 12px;
+      border: 3px solid transparent;
+      border-radius: 100%;
+      background-color: $body-bg-color;
     }
 
     // Projects
@@ -79,6 +74,22 @@
       .cluster-icon {
         border-color: rgba($primary-color, .9);
       }
+      .marker-icon {
+        fill: $primary-color;
+      }
+    }
+
+    // People
+    &.-people {
+      .circle-icon {
+        background-color: $secondary-color;
+      }
+      .cluster-icon {
+        border-color: rgba($secondary-color, .9);
+      }
+      .marker-icon {
+        fill: $secondary-color;
+      }
     }
 
     // Events
@@ -88,6 +99,9 @@
       }
       .cluster-icon {
         border-color: $alternative-color;
+      }
+      .marker-icon {
+        fill: $alternative-color;
       }
     }
 
