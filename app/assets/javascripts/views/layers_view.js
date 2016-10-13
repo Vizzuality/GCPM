@@ -9,8 +9,7 @@
     events: {
       'click input[name="layer"]': 'handleRadio',
       'click .js-collapse-layer': 'collapseLayer',
-      'click button.js-actionbar-action': 'hideLayersWindow',
-
+      'click button.js-actionbar-action': 'hideLayersWindow'
     },
 
     initialize: function(settings) {
@@ -19,13 +18,23 @@
       this.opened = [];
     },
 
-    updateData: function(layers) {
-      this.data = layers || [];
+    updateData: function(data) {
+      this.data = data || [];
       this.render();
     },
 
     render: function() {
       this.$el.html(this.template(this.data));
+
+      if (this.data.cartoLayer) {
+        var current = $('.c-layers .layers-content')
+        .find('input[value=' + this.data.cartoLayer + ']');
+        if (current && current.length > 0) {
+          this.current = current[0];
+          this.current.checked = true;
+        }
+
+      }
       return this;
     },
 
@@ -43,6 +52,7 @@
       }
 
       this.triggerChange();
+      setTimeout(function () { this.hideLayersWindow(); }.bind(this), 300);
     },
 
     collapseLayer: function(e) {
