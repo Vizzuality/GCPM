@@ -5,7 +5,11 @@
   padding-right: 0;
 
   .sidebar-item {
-    margin-bottom: $box-space;
+    margin-bottom: $base-space;
+
+    > h3 {
+      margin-bottom: 6px;
+    }
   }
 
   .list-item {

@@ -14,6 +14,30 @@
       </div>
     </div>
   </div>
+
+  <div class="l-app-navbar">
+  <div class="wrapper">
+    <div class="row collapse">
+      <div class="column small-6">
+        <ul class="c-tabnav" id="dataTabNav">
+           <% @filters.each do |filter| %>
+            <li class="tabnav-item">
+              <%= link_to t(filter),
+                project_path(request.query_parameters.merge({ data: filter })),
+                class: "js-btn-mapmenu-type",
+                remote: true,
+                data: { datatype: filter }
+              %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="column small-6">
+        <div id="toolbar"></div>
+      </div>
+    </div>
+  </div>
+</div>
 </section>
 
 <div class="l-grid">
