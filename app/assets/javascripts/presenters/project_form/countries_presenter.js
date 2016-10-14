@@ -26,8 +26,13 @@
 
         // Use this if you want a single select
         allowClear: true,
-        templateSelection: function(data) {
-          return data.text;
+        templateSelection: function (data) {
+          // Return the placeholder
+          if (!data.id) {
+            return data.text;
+          }
+          // Return the selected option
+          return $('<span class="select2-selection__choice">' + data.text + '<span class="select2-selection__clear">×</span></span>');
         }
       }
     },
