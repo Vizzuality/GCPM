@@ -15,7 +15,7 @@
       }
 
       h3 + span {
-        opacity: .7;
+        font-family: $base-font-family-light;
       }
     }
   }
@@ -31,7 +31,7 @@
       background-color: $purple;
       border-radius: 10px;
       width: 0;
-      transition: width 3s ease-out;
+      transition: width 1.5s ease-out;
     }
   }
 }

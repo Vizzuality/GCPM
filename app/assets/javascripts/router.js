@@ -11,6 +11,7 @@
      * @type {Object}
      */
     routes: {
+      '(/)':                         'Home#index',
       'map(?*query)(/)':             'Map#index',
       'projects/:id(/)':             'Project#show',
       'events/:id(/)':               'Events#show',

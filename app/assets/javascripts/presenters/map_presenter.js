@@ -10,18 +10,18 @@
 
   _.extend(App.Presenter.Map.prototype, {
 
-    initialize: function(params) {
+    initialize: function(params, settings, viewSettings) {
       this.fc = App.facade.layer;
-
+      this.options = settings || {};
       this.state = new StateModel();
       this.layersSpec = new App.Collection.LayersSpec();
       this.map = new App.View.Map({
         el: '#map',
-        options: {
+        options: Object.assign({
           minZoom: 2,
           maxZoom: 14,
           basemap: 'main'
-        }
+        }, viewSettings)
       });
 
       this.setSubscriptions();
@@ -38,21 +38,23 @@
         App.trigger('Map:change', this.getState());
       }, this);
 
-      this.fc.on('region:change', function(state) {
-        if (state.type === 'region') {
-          this.setState({ 'regions[]': state.iso, data: state.data }, true);
-        }
-      }, this);
+      if (!this.options.noInteractivity) {
+        this.fc.on('region:change', function(state) {
+          if (state.type === 'region') {
+            this.setState({ 'regions[]': state.iso, data: state.data }, true);
+          }
+        }, this);
 
-      this.fc.on('country:change', function(state) {
-        if (state.type === 'country') {
-          this.setState({
-            'regions[]': state['regions[]'],
-            data: state.data,
-            'countries[]': state.iso
-          }, true);
-        }
-      }, this);
+        this.fc.on('country:change', function(state) {
+          if (state.type === 'country') {
+            this.setState({
+              'regions[]': state['regions[]'],
+              data: state.data,
+              'countries[]': state.iso
+            }, true);
+          }
+        }, this);
+      }
     },
 
     setSubscriptions: function() {
@@ -112,7 +114,7 @@
           var bounds = layer.getBounds();
           this.currentLayer = layer;
           this.map.addLayer(this.currentLayer);
-          if (bounds) {
+          if (bounds && !this.options.noAnimateBounds) {
             this.map.map.fitBounds(bounds, {
               padding: [50, 50]
             });

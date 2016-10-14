@@ -1,7 +1,4 @@
-<script type="text/javascript">
-  var START_DATE = '<%= @project.start_date || 0 %>' || '0';
-  var END_DATE = '<%= @project.end_date || 0 %>' || '0';
-</script>
+<% title @project.title %>
 
 <section class="l-app -full">
   <div class="l-app-map">
@@ -16,23 +13,29 @@
         <div class="column small-8">
           <h1><%= @project.title %></h1>
         </div>
-      </div>
+      </div><br/>
       <div class="row collapse">
         <div class="column small-8">
           <div class="c-summary-info row -collapse">
+
             <div class="column small-12 medium-4 align-middle">
-              <h3><%= @project.project_lead.name %></h3>
+              <h3><%= @project.project_lead && @project.project_lead.name %></h3>
             </div>
+
             <div class="column small-12 medium-4 align-middle">
               <h3><%= @project.investigators.count %> <%= t 'collaborator'%>(s)</h3>
             </div>
-            <div class="column small-12 medium-4 align-middle">
-              <h3><%= t 'funding_source' %></h3>
-              <span><%= @project.funding_sources.first.name %></span>
-            </div>
+
+            <% if @project.funding_sources && @project.funding_sources.size > 0 %>
+              <div class="column small-12 medium-4 align-middle">
+                <h3><%= t 'funding_source' %></h3>
+                <span><%= @project.funding_sources.first.name %></span>
+              </div>
+            <% end %>
+
           </div>
         </div>
-      </div>
+      </div><br/>
     </div>
   </div>
 
@@ -66,7 +69,5 @@
     <%= render 'projects/info' %>
   <%else%>
     <%= render 'projects/list' %>
-
   <% end %>
 </div>
-

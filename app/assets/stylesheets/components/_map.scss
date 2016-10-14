@@ -35,6 +35,10 @@
     margin-top: $base-space + 35px;
   }
 
+  path.leaflet-clickable {
+    stroke: $app-bg-color;
+  }
+
   .leaflet-top,
   .leaflet-bottom,
   .leaflet-left,

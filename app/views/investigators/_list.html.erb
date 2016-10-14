@@ -4,9 +4,6 @@
       <div class="column small-12 medium-4">
         <div class="c-card -person">
           <h2><a href="/investigators/<%=e.id%>"><%=e.name%></a></h2>
-          <% if e.email? && e.email != 'Not Provided' %>
-            <h3><a href="mailto:<%= e.email %>"><%= e.email %></a></h3>
-          <% end %>
         </div>
       </div>
     <% end %>
