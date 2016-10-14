@@ -1,6 +1,6 @@
 <script type="text/javascript">
-  var START_DATE = '<%= @project.start_date || 0 %>';
-  var END_DATE = '<%= @project.end_date || 0 %>';
+  var START_DATE = '<%= @project.start_date || 0 %>' || '0';
+  var END_DATE = '<%= @project.end_date || 0 %>' || '0';
 </script>
 
 <section class="l-app -full">
