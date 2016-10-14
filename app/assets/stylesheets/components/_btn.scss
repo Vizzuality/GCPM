@@ -58,6 +58,35 @@
     background-color: $alternative-color;
   }
 
+  &.-with-icon {
+    display: flex;
+    > * {
+      margin: 0 5px 0 0;
+      &:last-child { margin: 0;}
+    }
+  }
+
+  &.-facebook {
+    background: #3b5998;
+    &:hover {
+      background: darken(#3b5998, 5%);
+    }
+  }
+
+  &.-twitter {
+    background: #55acee;
+    &:hover {
+      background: darken(#55acee, 5%);
+    }
+  }
+
+  &.-linkedin {
+    background: #007bb5;
+    &:hover {
+      background: darken(#007bb5, 5%);
+    }
+  }
+
   .notification-bubble {
     font-size: 9px;
     color: #5aade4;
