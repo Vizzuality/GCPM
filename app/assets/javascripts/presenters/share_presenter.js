@@ -14,7 +14,9 @@
       this.state = new StateModel();
 
       this.share = new App.View.Share();
-      this.modal = new App.View.Modal();
+      this.modal = new App.View.Modal({
+        className: '-tiny'
+      });
 
       this.setEvents();
       this.setSubscriptions();
