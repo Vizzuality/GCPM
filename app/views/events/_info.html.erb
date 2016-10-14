@@ -13,7 +13,7 @@
             <h3><%= t 'location' %>(s)</h3>
             <ul class="c-list">
             <% iso = Country.find_by(country_name: @event.country).country_iso_3 %>
-              <li class="list-item"><%= link_to "#{@event.city} , #{@event.country}", "/countries/#{iso}" %></li>
+              <li class="list-item -mg-less"><%= link_to "#{@event.city} , #{@event.country}", "/countries/#{iso}" %></li>
             </ul>
           </div>
           <% if @event.participants %>
@@ -23,7 +23,7 @@
                 <% @event.participants.split(',').each do |p| %>
                   <% participant = p[0] === ' ' ? p.slice(1, p.length-1) : p %>
                   <% id = Investigator.find_by(name: participant).id %>
-                  <li class="list-item"><%= link_to "#{participant}", "/investigators/#{id}" %></li>
+                  <li class="list-item -mg-less"><%= link_to "#{participant}", "/investigators/#{id}" %></li>
                 <% end %>
               </ul>
             </div>
@@ -33,7 +33,7 @@
             <div class="sidebar-item">
               <h3><%= t 'website' %></h3>
               <ul class="c-list">
-                <li class="list-item"><a href="<%= @event.website %>" target="_blank"><%= @event.website %></a></li>
+                <li class="list-item -mg-less"><a href="<%= @event.website %>" target="_blank"><%= @event.website %></a></li>
               </ul>
             </div>
           <% end %>

@@ -6,6 +6,14 @@
   .list-item {
     display: block;
     font-family: $base-font-family-light;
-    margin-bottom: 2px;
+    margin-bottom: $inline-space;
+
+    &.-mg-less {
+      margin-bottom: 2px;
+    }
+
+    &:hover {
+      color: $primary-color;
+    }
   }
 }
