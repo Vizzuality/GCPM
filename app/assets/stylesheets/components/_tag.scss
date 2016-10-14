@@ -1,12 +1,12 @@
 
 .c-tag {
+  display: inline-block;
   padding: 2px 8px;
   background-color: $base-bg-color;
   font-weight: normal;
 
   //Margin
   &.-mg {
-    line-height: 25px;
-    margin-right: 3px;
+    margin-bottom: 3px;
   }
 }
