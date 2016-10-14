@@ -13,6 +13,7 @@
     initialize: function(params) {
       this.state = new StateModel();
       this.tabnav = new App.View.TabNav({ el: '#dataTabNav' });
+      this.dataType = params.dataType || 'projects';
 
       this.setEvents();
       this.setSubscriptions();
@@ -34,7 +35,7 @@
 
     setState: function(newState) {
       if (!newState.data) {
-        newState.data = 'projects';
+        newState.data = this.dataType;
       }
       this.state
         .clear({ silent: true })

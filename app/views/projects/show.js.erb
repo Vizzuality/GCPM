@@ -2,7 +2,7 @@
 
   'use strict'
 
-  <% template = 'info' %>
+  <% template = @current_type %>
   var htmlContent = "<%= escape_javascript render(partial: template) %>";
 
   document.getElementById('content').innerHTML = htmlContent;

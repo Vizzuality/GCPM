@@ -59,6 +59,9 @@
 <div class="l-grid" id="content">
   <% if @current_type == 'info' %>
     <%= render 'projects/info' %>
+  <%else%>
+    <%= render 'projects/list' %>
+
   <% end %>
 </div>
 
