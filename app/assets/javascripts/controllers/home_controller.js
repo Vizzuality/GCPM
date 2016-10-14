@@ -12,7 +12,7 @@
         noAnimateBounds: true,
       }, {
         zoom: 3,
-        center: [15, -15],
+        center: [25, -15],
         zoomControl: false,
         attributionControl: false,
         dragging: false,
