@@ -39,6 +39,7 @@
     };
 
     pruneCluster.PrepareLeafletMarker = function(leafletMarker, data) {
+      console.log(data.feature.properties)
       var htmlContent = infowindowTemplate(data.feature.properties);
       var icon = circleIcon;
       if (data.feature.properties.is_project_lead || params.data === 'events') {
