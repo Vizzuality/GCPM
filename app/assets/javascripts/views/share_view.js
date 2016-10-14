@@ -8,7 +8,8 @@
 
     events: {
       'focus .js-input-share': 'triggerSelect',
-      'click .js-btn-share': 'triggerCopy'
+      'click .js-btn-share': 'triggerCopy',
+      'click .js-btn-share-social': 'triggerPopup'
     },
 
     initialize: function() {
@@ -21,7 +22,8 @@
 
     render: function() {
       this.$el.html(this.template({
-        url: window.location.href
+        url: window.location.href,
+        urlEncoded: encodeURIComponent(window.location.href)
       }));
 
       // Rebinding elements and events
@@ -47,6 +49,22 @@
       } catch(err) {
         console.error(err);
       }
+    },
+
+    triggerPopup: function(e) {
+      e && e.preventDefault();
+      var width  = 575,
+          height = 400,
+          left   = ($(window).width()  - width)  / 2,
+          top    = ($(window).height() - height) / 2,
+          url    = $(e.currentTarget).attr('href'),
+          opts   = 'status=1' +
+                   ',width='  + width  +
+                   ',height=' + height +
+                   ',top='    + top    +
+                   ',left='   + left;
+
+      window.open(url, 'Share this analysis', opts);
     }
 
   });
