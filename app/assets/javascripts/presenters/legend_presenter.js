@@ -55,7 +55,9 @@
       switch (attributes.data) {
         case 'projects':
           data = [
-            { name: 'Projects', icon: CIRCLE_ICON, dataType: 'projects' }
+            { name: 'Projects', icon: CIRCLE_ICON, dataType: 'projects' },
+            { name: 'Project leads', icon: '<div class="square-icon" style="background: #FFFFFF"></div>', dataType: 'projects' },
+            { name: 'Collaborators', icon: '<div class="square-icon" style="background: #78bbe8"></div>', dataType: 'projects' }
           ];
 
           if (attributes['countries[]']) {

@@ -32,22 +32,22 @@
         var markerData = {};
         var chartColors = [];
         if (params.data === 'events') {
-          chartColors = ['#fbbf96', '#ffffff'];
+          chartColors = ['#ffffff', '#fbbf96'];
           // chartData = [
           //   { value: feature.properties.collaborators },
           //   { value: feature.properties.project_leads }
           // ];
         } else if (params.data === 'people') {
-          chartColors = ['#68299b', '#ffffff'];
+          chartColors = ['#ffffff', '#68299b'];
           // chartData = [
           //   { value: feature.properties.collaborators },
           //   { value: feature.properties.project_leads }
           // ];
         } else if (params.data === 'projects') {
-          chartColors = ['#78bbe8', '#ffffff'];
+          chartColors = ['#ffffff', '#78bbe8'];
           chartData = [
-            { value: feature.properties.collaborators },
-            { value: feature.properties.project_leads }
+            { value: feature.properties.project_leads },
+            { value: feature.properties.collaborators }
           ];
         }
         if (chartData.length > 0) {
