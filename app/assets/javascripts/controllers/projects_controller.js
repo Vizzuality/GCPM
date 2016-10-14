@@ -11,8 +11,10 @@
     },
 
     show: function(params) {
+      var newParams = Object.assign({}, params, {dataType: 'info'});
+
       new App.Presenter.MapVis(params);
-      new App.Presenter.TabNav(Object.assign({}, params, {dataType: 'info'}));
+      new App.Presenter.TabNav(newParams);
       new App.View.DatesTimeline();
     }
 
