@@ -5,4 +5,10 @@
   .sidebar-item {
     margin-bottom: $box-space;
   }
+
+  .list-item {
+    & a:hover {
+      color: $primary-color;
+    }
+  }
 }
