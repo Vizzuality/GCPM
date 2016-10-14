@@ -57,4 +57,18 @@
     color: $inverse-font-color;
     background-color: $alternative-color;
   }
+
+  .notification-bubble {
+    font-size: 9px;
+    color: #5aade4;
+    background: white;
+    width: 14px;
+    height: 14px;
+    line-height: 14px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 50%;
+    display: inline-block;
+    transform: translate(-3px,-8px);
+  }
 }

@@ -62,9 +62,9 @@
 
           if (attributes['countries[]']) {
             data = [
-              { name: 'Cluster', icon: CLUSTER_ICON, dataType: 'projects' },
               { name: 'Project leads', icon: MARKER_ICON, dataType: 'projects' },
-              { name: 'Collaborators', icon: CIRCLE_ICON, dataType: 'collaborators' }
+              { name: 'Collaborators', icon: CIRCLE_ICON, dataType: 'collaborators' },
+              { name: 'Cluster', icon: CLUSTER_ICON, dataType: 'projects' }
             ];
           }
           break;
