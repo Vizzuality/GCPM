@@ -110,13 +110,15 @@
         this.map.removeLayer(this.currentLayer);
       }
       this.fc.getLayer(this.getState()).done(function(layer) {
-        var bounds = layer.getBounds();
-        this.currentLayer = layer;
-        this.map.addLayer(this.currentLayer);
-        if (bounds && !this.options.noAnimateBounds) {
-          this.map.map.fitBounds(bounds, {
-            padding: [50, 50]
-          });
+        if(!jQuery.isEmptyObject(layer._layers)){
+          var bounds = layer.getBounds();
+          this.currentLayer = layer;
+          this.map.addLayer(this.currentLayer);
+          if (bounds && !this.options.noAnimateBounds) {
+            this.map.map.fitBounds(bounds, {
+              padding: [50, 50]
+            });
+          }
         }
       }.bind(this));
     },

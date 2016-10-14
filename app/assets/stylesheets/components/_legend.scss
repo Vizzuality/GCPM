@@ -4,10 +4,26 @@
   top: $base-space;
   right: $base-space;
   padding: $button-y-padding $button-x-padding;
+  color: $base-font-color;
+  background-color: $body-bg-color;
+  max-width: 300px;
 
-  color: $inverse-font-color;
+  > ul {
+    border-top: 1px solid $border-color-1;
+    &:first-child {
+      border-top: none;
+    }
+  }
 
-  background-color: rgba(#68299b, .7);
+  li {
+    list-style: none;
+  }
+
+  &.-main {
+    top: 35px + $base-space;
+    padding: 0;
+    box-shadow: $box-shadow;
+  }
 
   .legend-label {
     text-transform: uppercase;
@@ -15,27 +31,34 @@
     font-weight: bold;
   }
 
-  ul {
-    display: flex;
+  // MARKER LEGEND
+  .marker-legend {
+    display: block;
+    padding: ($button-x-padding/2) $button-x-padding;
     margin: 0;
-    padding: 0;
-  }
 
-  li {
-    display: flex;
-    align-items: center;
-    letter-spacing: 1px;
-    list-style: none;
-    margin-top: 0;
-    margin-left: $base-space;
+    > li {
+      display: flex;
+      align-items: center;
+      letter-spacing: 1px;
+      margin-top: 0;
+      margin-left: $base-space;
 
-    line-height: 1;
+      line-height: 1;
 
-    &:first-child {
-      margin-left: 0;
+      justify-content: flex-start;
+      margin: 0;
+      padding: ($base-space/2) 0;
+
+      &:first-child {
+        margin-top: 0;
+        margin-left: 0;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
-
-    &:last-child .dot { background-color: $alternative-color; }
   }
 
   .legend-icon {
@@ -130,43 +153,49 @@
     }
   }
 
-  .dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: white;
-    margin-right: 5px;
-  }
 
-  &.-main {
-    top: 35px + $base-space;
-    padding: 0;
-    // background-color: rgba(#007bcd, 0.7);
-    background-color: $body-bg-color;
-    box-shadow: $box-shadow;
+  // LAYER LEGEND
+  .layer-legend {
+    display: block;
+    margin: 0;
+    padding: ($button-x-padding/2) $button-x-padding;
 
-    ul {
-      display: block;
-      padding: $base-space / 2;
-    }
+    > li {
+      padding: ($base-space/2) 0;
 
-    li {
-      justify-content: flex-start;
-      margin: 0;
-      padding: $base-space / 2;
-
-      color: $base-font-color;
-
-      &:first-child {
-        margin-top: 0;
+      .name {
+        font-size: $small-font-size;
+        font-weight: $bold-font-weight;
       }
 
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
+      .legend {
+        font-size: $small-font-size;
+        padding: 4px 0 0 ($button-x-padding/2);
 
-    .legend-label {
+        > li {
+          display: flex;
+          align-items: center;
+
+          .square {
+            display: inline-block;
+            width: 9px;
+            height: 9px;
+            margin: 0 5px 0 0;
+            box-shadow: 0 0 0 1px $border-color-1 inset;
+          }
+
+          .value {
+
+          }
+        }
+      }
+
+      .metrics {
+        font-size: $small-font-size;
+        margin: 0;
+        padding: 5px ($button-x-padding/2);
+        line-height: 1.2;
+      }
     }
   }
 }
