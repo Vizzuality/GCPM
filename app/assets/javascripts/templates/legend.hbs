@@ -1,4 +1,4 @@
-<ul>
+<ul class="marker-legend">
   {{#each items}}
     <li>
       <div class="legend-icon -{{dataType}}">
@@ -8,3 +8,23 @@
     </li>
   {{/each}}
 </ul>
+{{#if layer}}
+<ul class="layer-legend">
+  <li>
+    <span class="name">{{layer.name}}</span>
+    {{#if layer.legend}}
+      <ul class="legend">
+        {{#each layer.legend.items}}
+          <li>
+            <span class="square" style="background: {{color}}"></span>
+            <span class="value">{{value}}</span>
+          </li>
+        {{/each}}
+      </ul>
+      {{#if layer.legend.Metrics}}
+        <p class="metrics">{{layer.legend.Metrics}}</p>
+      {{/if}}
+    {{/if}}
+  </li>
+</ul>
+{{/if}}
