@@ -1,0 +1,27 @@
+.c-claim {
+  position: relative;
+  padding: $box-space;
+  color: $inverse-font-color;
+  background-color: $primary-color;
+
+  h1 {
+    font-size: $large-font-size;
+    line-height: 1.2;
+    margin-bottom: 0;
+  }
+
+  a {
+    position: absolute;
+    padding: $button-y-padding $button-x-padding;
+    bottom: 0;
+    left: 0;
+
+    background-color: $body-bg-color;
+
+    text-transform: uppercase;
+    color: $primary-color;
+    letter-spacing: 1px;
+
+    transform: translateY(100%);
+  }
+}

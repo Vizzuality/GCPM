@@ -42,8 +42,16 @@
     }
   }
 
+  .l-app-claim {
+    position: absolute;
+    top: 37%;
+    left: $box-space;
+    transform: translate(0, -50%);
+  }
+
   .l-app-navbar {
     position: relative;
+    margin-top: -52px;
     background-color: rgba($secondary-color, .7);
   }
 
@@ -60,6 +68,5 @@
   }
 
   .l-app-bottombar {
-
   }
 }

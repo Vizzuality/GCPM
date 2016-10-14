@@ -1,8 +1,16 @@
 .l-sidebar {
+  width: 100%;
   border-left: 1px solid $border-color-1;
   padding: $box-space;
+  padding-right: 0;
 
   .sidebar-item {
     margin-bottom: $box-space;
+  }
+
+  .list-item {
+    & a:hover {
+      color: $primary-color;
+    }
   }
 }

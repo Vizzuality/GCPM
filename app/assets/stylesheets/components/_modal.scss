@@ -18,6 +18,12 @@
     opacity: 1;
   }
 
+  &.-tiny {
+    .modal-container {
+      max-width: $modal-tiny-max-width;
+    }
+  }
+
   .modal-container {
     position: absolute;
     display: flex;

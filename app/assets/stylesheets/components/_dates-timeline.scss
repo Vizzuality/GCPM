@@ -1,0 +1,37 @@
+.c-dates-timeline {
+  .dates {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+
+    .date {
+      text-align: left;
+
+      &:last-child { text-align: right; }
+      &:first-child { text-align: left; }
+
+      h3 {
+        margin-bottom: 3px;
+      }
+
+      h3 + span {
+        opacity: .7;
+      }
+    }
+  }
+
+  .timeline {
+    width: 100%;
+    height: 10px;
+    background-color: $base-bg-color;
+    border-radius: 10px;
+
+    .timeline-line {
+      height: 100%;
+      background-color: $purple;
+      border-radius: 10px;
+      width: 0;
+      transition: width 1.5s ease-out;
+    }
+  }
+}

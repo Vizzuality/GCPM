@@ -14,89 +14,54 @@
           <h1><%= @project.title %></h1>
         </div>
       </div>
+      <div class="row collapse">
+        <div class="column small-8">
+          <div class="c-summary-info row -collapse">
+            <div class="column small-12 medium-4 align-middle">
+              <h3><%= @project.project_lead.name %></h3>
+            </div>
+            <div class="column small-12 medium-4 align-middle">
+              <h3><%= @project.investigators.count %> <%= t 'collaborator'%>(s)</h3>
+            </div>
+            <div class="column small-12 medium-4 align-middle">
+              <h3><%= t 'funding_source' %></h3>
+              <span><%= @project.funding_sources.first.name %></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="l-app-navbar">
+    <div class="wrapper">
+      <div class="row collapse">
+        <div class="column small-6">
+          <ul class="c-tabnav" id="dataTabNav">
+             <% @filters.each do |filter| %>
+              <li class="tabnav-item">
+                <%= link_to t(filter),
+                  project_path(request.query_parameters.merge({ data: filter })),
+                  class: "js-btn-mapmenu-type",
+                  remote: true,
+                  data: { datatype: filter }
+                %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="column small-6">
+          <div id="toolbar"></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<div class="l-grid">
-  <div class="wrapper">
-    <div class="row collapse">
-      <div class="column small-8">
-        <div class="l-content">
-          <article class="l-content-article">
-            <%= @project.summary.html_safe %>
-          </article>
-        </div>
-      </div>
-      <div class="column small-4">
-        <aside class="l-sidebar">
-          <div class="sidebar-item">
-            <h3><%= t 'cancer_types' %></h3>
-            <ul class="c-list">
-              <% @project.cancer_types.each do |ct| %>
-                <li class="list-item"><%= link_to ct.name, "/cancer-types/#{ct.id}" %></li>
-              <% end %>
-            </ul>
-          </div>
-
-          <div class="sidebar-item">
-            <h3><%= t 'project_types' %></h3>
-            <ul class="c-list">
-              <% @project.project_types.each do |pt| %>
-                <li class="list-item"><%= link_to pt.name, "/map?data=projects&project_types[]=#{pt.id}" %></li>
-              <% end %>
-            </ul>
-          </div>
-
-          <div class="sidebar-item">
-            <h3><%= t 'location' %>(s)</h3>
-            <ul class="c-list">
-              <% @project.addresses.each do |l| %>
-                <% country = Country.find_by_id(l.country_id) %>
-                <% iso = country ? country.country_iso_3 : nil %>
-                <% if iso %>
-                  <li class="list-item"><%= link_to "#{l.city}, #{l.country_name}", "/countries/#{iso}" %></li>
-                <% end %>
-              <% end %>
-          </div>
-
-          <div class="sidebar-item">
-            <h3><%= t 'organization' %>(s)</h3>
-            <ul class="c-list">
-              <% @project.organizations.each do |o| %>
-                <li class="list-item"><%= link_to o.name, "/organizations/#{o.id}" %></li>
-              <% end %>
-            </ul>
-          </div>
-
-          <div class="sidebar-item">
-            <h3><%= t 'funding_source' %>(s)</h3>
-            <ul class="c-list">
-              <% @project.funding_sources.each do |fs| %>
-                <li class="list-item"><%= fs.name %></li>
-              <% end %>
-            </ul>
-          </div>
-
-          <div class="sidebar-item">
-            <h3><%= t 'project_lead' %>(s)</h3>
-            <ul class="c-list">
-              <% @project.project_leads.each do |pl| %>
-                <li class="list-item"><%= link_to pl.name, "/investigators/#{pl.id}" %></li>
-              <% end %>
-            </ul>
-          </div>
-
-          <div class="sidebar-item">
-            <h3><%= t 'collaborator' %>(s)</h3>
-            <ul class="c-list">
-              <% @project.secondary_investigators.each do |si| %>
-                <li class="list-item"><%= link_to si.name, "/investigators/#{si.id}" %></li>
-              <% end %>
-            </ul>
-          </div>
-          </div>
-        </aside>
-      </div>
-    </div>
+<div class="l-grid" id="content">
+  <% if @current_type == 'info' %>
+    <%= render 'projects/info' %>
+  <%else%>
+    <%= render 'projects/list' %>
+  <% end %>
 </div>

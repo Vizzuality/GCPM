@@ -58,6 +58,10 @@ label {
 
 .form-row {
   margin-bottom: $base-space;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .hint {

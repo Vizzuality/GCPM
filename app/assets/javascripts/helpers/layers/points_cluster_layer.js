@@ -33,7 +33,11 @@
         className: 'point-icon ' + className,
         html: ''
       });
-      var htmlContent = infowindowTemplate(data.feature.properties);
+      var infowindowData = data.feature.properties;
+      if(infowindowData.type !== 'point'){
+        infowindowData[infowindowData.type] = infowindowData.id || infowindowData.location_id;
+      }
+      var htmlContent = infowindowTemplate(infowindowData);
       leafletMarker.setIcon(pointIcon);
       leafletMarker.bindPopup(htmlContent);
     };
