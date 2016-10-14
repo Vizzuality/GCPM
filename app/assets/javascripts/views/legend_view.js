@@ -11,14 +11,20 @@
       this.render();
     },
 
-    updateData: function(data) {
+    updateData: function(data, layer) {
       this.data = data||[];
+      this.layer = layer;
+
       this.render();
     },
 
     render: function() {
+      console.log(this.layer);
       if (this.data.length) {
-        this.$el.html(this.template({ items: this.data }));
+        this.$el.html(this.template({
+          items: this.data,
+          layer: this.layer
+        }));
         return this;
       }
     }
