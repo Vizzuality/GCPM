@@ -1,7 +1,4 @@
-<script type="text/javascript">
-  var START_DATE = '<%= @project.start_date || 0 %>' || '0';
-  var END_DATE = '<%= @project.end_date || 0 %>' || '0';
-</script>
+<% title @project.title %>
 
 <section class="l-app -full">
   <div class="l-app-map">
@@ -66,7 +63,5 @@
     <%= render 'projects/info' %>
   <%else%>
     <%= render 'projects/list' %>
-
   <% end %>
 </div>
-

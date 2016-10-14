@@ -22,8 +22,8 @@
 
     getTimelineWith: function() {
       var current = new Date().getTime();
-      var start = new Date(START_DATE).getTime();
-      var end = new Date(END_DATE).getTime();
+      var start = new Date(gon.start_date).getTime();
+      var end = new Date(gon.end_date).getTime();
 
       var width = ((current - start) * 100) / (end - start);
 
