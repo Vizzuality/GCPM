@@ -6,7 +6,7 @@
 
     el: '.c-dates-timeline',
 
-    initialize: function(settings) {
+    initialize: function() {
       this.cache();
       this.$timeline.length > 0 && this.setTimelineLineWidth();
     },
