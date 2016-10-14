@@ -12,6 +12,8 @@
 
     show: function(params) {
       new App.Presenter.MapVis(params);
+      new App.Presenter.TabNav(Object.assign({}, params, {dataType: 'info'}));
+      new App.View.DatesTimeline();
     }
 
   });
