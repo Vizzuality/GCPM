@@ -1,12 +1,15 @@
 <div class="c-legend">
-  <ul>
+  <ul class="marker-legend">
     <li>
-      <div class="dot"></div>
-      <span class="legend-label"><%= t 'project_leads' %></span>
+      <div class="legend-icon -events">
+        <div class="circle-icon"></div>
+        <!-- <svg class="marker-icon"><use xlink:href="#icon-marker"></use></svg> -->
+      </div>
+      <div class="legend-label"><%= t 'project_leads' %></div>
     </li>
     <li>
-      <div class="dot"></div>
-      <span class="legend-label"><%= t 'collaborators' %></span>
+      <div class="legend-icon -points"><div class="circle-icon"></div></div>
+      <div class="legend-label"><%= t 'collaborators' %></div>
     </li>
   </ul>
 </div>
