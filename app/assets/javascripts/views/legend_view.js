@@ -19,7 +19,6 @@
     },
 
     render: function() {
-      console.log(this.layer);
       if (this.data.length) {
         this.$el.html(this.template({
           items: this.data,
