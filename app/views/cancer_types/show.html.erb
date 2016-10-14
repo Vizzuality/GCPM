@@ -59,11 +59,13 @@
 </section>
 
 <div class="l-grid" id="content">
-  <% if @current_type == 'events' %>
-    <%= render 'events/list', items: @items, more: @more %>
-  <% elsif @current_type == 'projects' %>
+  <% if @current_type == 'projects' %>
     <%= render 'projects/list', items: @items, more: @more %>
-  <% else @current_type %>
-    <%= render 'investigators/list', items: @items, more: @more %>
+  <% #elsif @current_type == 'events' %>
+    <% #render 'events/list', items: @items, more: @more %>
+  <% #else @current_type %>
+    <% #render 'investigators/list', items: @items, more: @more %>
+  <% else %>
+    No data
   <% end %>
 </div>
