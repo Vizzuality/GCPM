@@ -124,3 +124,21 @@
   }
 
 }
+
+#investigatororganization{
+
+  & .element{
+    margin: 10px 0;
+    border-bottom: 2px;
+    border-bottom-style: dashed;
+    border-color: #eeeeee;
+
+    & .delete{
+      color: #68299b;
+      float: right;
+      padding: 20px;
+    }
+
+  }
+
+}

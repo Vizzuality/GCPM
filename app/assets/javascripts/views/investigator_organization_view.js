@@ -6,21 +6,31 @@
 
     template: HandlebarsTemplates['investigator_organization'],
 
+    events:{
+      'click .delete': 'deleteElement'
+    },
+
     initialize: function(settings) {
-      var obj = {id:1}
-      this.elements = [obj];
-      this.children = (settings && settings.children) || {};
+      this.elements = [];
+      this.elementId = 0;
+      this.generateId();
+      this.createElements(settings.children);
     },
 
-    addNew: function(){
-      var obj = {}
-      this.elements.push(obj);
-      this.elements[this.elements.length-1].id = this.getId();
-      this.render();
+    createElements: function(children){
+      var element = {}
+      element.id = this.elementId;
+      element.children = children;
+      this.elements.push(element);
     },
 
-    getId: function(){
-      return this.elements.length;
+    deleteElement: function(e, el){
+      var elementId = e.target.id.split("-")[1];
+      this.trigger('deleteElement', elementId);
+    },
+
+    generateId: function(){
+      this.elementId++;
     },
 
     render: function() {
@@ -29,13 +39,16 @@
       // Rebinding elements and events
       this.delegateEvents();
 
-      _.each(this.children, function(presenter) {
-        presenter.setElement(presenter.getElement().selector);
+      _.each(this.elements, function(element) {
+
+        _.each(element.children, function(presenter) {
+          presenter.setElement(presenter.getElement().selector);
+        }, this);
+
       }, this);
 
       return this;
-    },
-
+    }
 
   });
 

@@ -27,15 +27,27 @@
         addNew: true,
         multiple: false
       });
+      var address = new App.Presenter.OrganizationAddress({
+        DOMelement: "#address-1",
+        name: "address-1",
+        label: null,
+        addNew: false,
+        multiple: false
+      });
+      var lead = new App.Presenter.OrganizationLead({
+        DOMelement: "#lead-1",
+        name: "lead-1",
+        label: false,
+      });
 
       this.investigatorForm = new App.Presenter.InvestigatorForm();
       this.organizationForm = new App.Presenter.OrganizationForm();
 
-      this.children = [investigator, organization];
-      this.investigatorsOrganization = new App.View.InvestigatorOrganization({
-        children: this.children,
+      this.investigatorOrganization = new App.View.InvestigatorOrganization({
+        children: [investigator, organization, address, lead],
         el: '#investigatororganization'
       });
+      this.elements = this.investigatorOrganization.elements;
 
       this.setEvents();
       this.setSubscriptions();
@@ -45,6 +57,24 @@
      * Setting internal events
      */
     setEvents: function() {
+      this.investigatorOrganization.on('deleteElement', function(elementId){
+        console.log(this.elements);
+        console.log(elementId);
+        if(this.elements.length === 1){
+          return false;
+        }
+
+        _.each(this.elements, function(element) {
+          if(element.id === parseInt(elementId)){
+            var index = this.elements.indexOf(element);
+            this.elements.splice(index, 1);
+            this.investigatorOrganization.elements = this.elements;
+            this.render();
+            return true;
+          }
+        }, this);
+
+      }, this);
 
     },
 
@@ -61,7 +91,12 @@
       }, this);
 
       App.on('ProjectForm:newInvestigator', function(){
-        this.addNew();
+        this.createElement();
+      }, this);
+
+      App.on('Organization:change', function(data){
+        var selector = data.el.$el.selector;
+        App.trigger('Organization:'+selector, data.state.attributes)
       }, this);
     },
 
@@ -76,26 +111,33 @@
 
     render: function(){
 
-      var promises = _.compact(_.map(this.children, function(child) {
-       if (!!child.fetchData) {
-         return child.fetchData();
-       }
-       return null;
-      }));
+      _.each(this.elements, function(element) {
 
-      $.when.apply($, promises).done(function() {
-       this.renderFields();
-      }.bind(this));
+        var promises = _.compact(_.map(element.children, function(child) {
+         if (!!child.fetchData) {
+           return child.fetchData();
+         }
+         return null;
+        }));
 
-    },
+        $.when.apply($, promises).done(function() {
 
-    renderFields: function() {
-      this.investigatorsOrganization.render();
-      _.each(this.children, function(child){
+          this.investigatorOrganization.render();
 
-        // Render the child
-        child.render();
-      }.bind(this));
+          _.each(this.elements, function(element) {
+
+            _.each(element.children, function(child){
+
+              // Render the child
+              child.render();
+            }.bind(this));
+
+          }, this);
+
+        }.bind(this));
+
+      }, this);
+
     },
 
     /**
@@ -103,7 +145,7 @@
      * @param {DOM|String} el
      */
     setElement: function(el) {
-      this.investigatorsOrganization.setElement(el);
+      this.investigatorOrganization.setElement(el);
     },
 
     /**
@@ -111,26 +153,40 @@
      * @return {DOM}
      */
     getElement: function() {
-      return this.investigatorsOrganization.$el;
+      return this.investigatorOrganization.$el;
     },
 
-    addNew: function(){
-      this.investigatorsOrganization.addNew();
+    createElement: function(){
+      this.investigatorOrganization.generateId();
       var investigator  = new App.Presenter.Investigator({
-        DOMelement: "#investigator-"+this.investigatorsOrganization.getId(),
-        name:"investigator-"+this.investigatorsOrganization.getId(),
+        DOMelement: "#investigator-"+this.investigatorOrganization.elementId,
+        name:"investigator-"+this.investigatorOrganization.elementId,
         label: null,
         addNew: true,
         multiple: false
       });
       var organization = new App.Presenter.Organization({
-        DOMelement: "#organization-"+this.investigatorsOrganization.getId(),
-        name:"organization-"+this.investigatorsOrganization.getId(),
+        DOMelement: "#organization-"+this.investigatorOrganization.elementId,
+        name:"organization-"+this.investigatorOrganization.elementId,
         label: null,
         addNew: true,
         multiple: false
       });
-      this.children.push(investigator, organization);
+      var address = new App.Presenter.OrganizationAddress({
+        DOMelement: "#address-"+this.investigatorOrganization.elementId,
+        name: "address-"+this.investigatorOrganization.elementId,
+        label: null,
+        addNew: false,
+        multiple: false
+      });
+      var lead = new App.Presenter.OrganizationLead({
+        DOMelement: "#lead-"+this.investigatorOrganization.elementId,
+        name: "lead-"+this.investigatorOrganization.elementId,
+        label: false,
+      });
+      this.investigatorOrganization.createElements([investigator, organization,
+        address, lead]);
+      this.elements = this.investigatorOrganization.elements;
       this.render();
     }
 

@@ -56,6 +56,7 @@
         value: JSON.stringify(option.attributes),
         name: option.attributes.name
       };
+      //$(this.select.selector)[0].selectedOptions[$(this.select.selector)[0].selectedOptions.length] = obj;
       this.options.options.unshift(obj);
       this.render();
     },

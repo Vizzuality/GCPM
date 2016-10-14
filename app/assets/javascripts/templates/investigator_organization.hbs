@@ -3,6 +3,8 @@
 
   {{#each elements}}
 
+  <div class="element">
+
     <div class="row">
       <div class="column small-12 medium-6">
         <h4 class="c-title">Investigators</h4>
@@ -23,14 +25,14 @@
 
     <div class="row">
       <div class="column small-12 medium-6">
-        <h4 class="c-title">Investigators</h4>
-        <div id="investigator-{{id}}" class="investigator c-select"></div>
+        <h4 class="c-title">Lead</h4>
+        <div id="lead-{{id}}" class="lead c-select"></div>
       </div>
       <div class="column small-12 medium-6">
-        <h4 class="c-title">Organizations</h4>
-        <div id="organization-{{id}}" class="organization c-select"></div>
+        <a href="javascript:void(0);" id="delete-{{id}}" class="delete">Delete</a>
       </div>
     </div>
 
+  </div>
 
   {{/each}}
