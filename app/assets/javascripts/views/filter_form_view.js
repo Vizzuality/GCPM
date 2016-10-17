@@ -41,7 +41,7 @@
       this.trigger('submit', this.serializeForm());
     },
 
-    triggerReset: function(e) {
+    triggerReset: function() {
       this.trigger('reset');
     },
 
