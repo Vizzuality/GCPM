@@ -34,18 +34,20 @@
         label: null,
         addNew: true
       });
-      var investigatorOrganization = new App.Presenter.InvestigatorOrganization();
 
+      this.investigatorOrganization = new App.Presenter.InvestigatorOrganization();
       this.fundingSourcesForm = new App.Presenter.FundingSourcesForm();
 
       this.children = [titleInput, descTextarea, startPickadate, endPickadate,
-         websiteInput, projectTypes, cancerTypes, fundingSources, investigatorOrganization];
+         websiteInput, projectTypes, cancerTypes, fundingSources, this.investigatorOrganization];
 
       this.projectForm = new App.View.ProjectForm({
         children: this.children,
         el: '#project_form'
       });
 
+      this.request = {};
+      this.request.project = {};
       this.setEvents();
       this.setSubscriptions();
       this.renderForm();
@@ -76,6 +78,7 @@
       App.on('FundingSources:new', function(){
         this.fundingSourcesForm.openForm();
       }, this);
+
     },
 
     setState: function(newState) {
@@ -86,27 +89,76 @@
      * Subscribing to global events
      */
     handleSubmit: function() {
-      console.log(this.state.attributes);
+      this.buildRequest();
+      console.log(this.request);
 
-      // title OK, summary OK, start_date OK, end_date OK, project_website OK
-      // @TODO project_types[] change to project_type_ids
-      // @TODO cancer_types[] change to cancer_tpye_ids
-      // @TODO funding_sources -> if string -> funding_source_ids
-      // @TODO funding_sources -> if object -> new_funders
+      // @TODO I have the elements and the Ids in this.investigatorOrganization.elements
+      // for each one -> get the data from attributes and make a proper request
+      // then just spend 1 hour to focus in other bugs like input.
 
       // @TODO request (validate response)
-      /*var url = "/api/projects?token=AUTH_TOKEN";
-      var req = new XMLHttpRequest();
-      req.onload = function(){
-        if(this.status = 200){
-          console.log("success");
+      var p = new Promise(function(resolve, reject){
+        var url = "/api/projects?token="+AUTH_TOKEN;
+        var q = new XMLHttpRequest();
+        q.open('POST', url, true);
+        q.setRequestHeader('Content-Type', 'application/json');
+        q.onreadystatechange = function(){
+          if(this.readyState == 4 && this.status == 200){
+            if(this.response !== undefined && this.response !== ""){
+              resolve(this.response);
+            }
+          }
+          // else if(ERROR){
+          //   reject(q.response);
+          // }
+        }
+        q.send(JSON.stringify(this.request));
+      }.bind(this)).then(function(response){
+        var response = JSON.parse(response);
+        console.log(response);
+      }.bind(this)).catch(function(response){
+        throw Error(response);
+      });
+    },
+
+    buildRequest: function(){
+      this.request.project["title"] = this.state.attributes["title"];
+      this.request.project["summary"] = this.state.attributes["summary"];
+      this.request.project["start_date"] = this.state.attributes["start_date"];
+      this.request.project["end_date"] = this.state.attributes["end_date"];
+      this.request.project["project_website"] = this.state.attributes["project_website"];
+      this.request.project["project_type_ids"] = this.state.attributes["project_types[]"];
+      this.request.project["cancer_tpye_ids"] = this.state.attributes["cancer_types[]"];
+      this.buildFundingSources();
+      this.buildInvestigators();
+    },
+
+    buildFundingSources(){
+      this.request.project["funding_source_ids"] = [];
+      this.request.project["new_funders"] = [];
+      _.each(this.state.attributes["funding_sources[]"], function(element) {
+        if(!isNaN(parseInt(element))){
+          this.request.project["funding_source_ids"].push(element);
         }
         else{
-          console.log("error");
+          element = JSON.parse(element);
+          var funder = {};
+          funder["name"] = element["organizationName"];
+          funder["organization_type_id"] = element["organizationType"];
+          funder["addresses_attributes"] = [];
+          var funderAdd = {};
+          funderAdd["country_id"] = element["organizationCountry"];
+          funderAdd["latitude"] = element["organizationLatitude"];
+          funderAdd["longitude"] = element["organizationLongitude"];
+          funderAdd["primary"] = true;
+          funder["addresses_attributes"].push(funderAdd);
+          this.request.project["new_funders"].push(funder);
         }
-      };
-      req.open("POST", url, true);
-      req.send(this.state.attributes);*/
+      }, this);
+    },
+
+    buildInvestigators(){
+
     },
 
     renderForm: function(){

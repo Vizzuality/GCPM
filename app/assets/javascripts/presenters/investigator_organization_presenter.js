@@ -58,8 +58,6 @@
      */
     setEvents: function() {
       this.investigatorOrganization.on('deleteElement', function(elementId){
-        console.log(this.elements);
-        console.log(elementId);
         if(this.elements.length === 1){
           return false;
         }
