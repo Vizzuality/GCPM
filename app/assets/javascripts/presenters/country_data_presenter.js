@@ -13,18 +13,20 @@
     initialize: function(params) {
       this.state = new StateModel();
       this.params = params;
-      this.getCountryData();
+
+      this.render();
+    },
+
+    render: function() {
+      this.getCountryData().done(function(data) {
+        this.data = data.rows[0];
+      });
     },
 
     getCountryData: function() {
-      var sql = "SELECT * from radiotherapy_centers_all_countries where iso3='" + this.params.vars[0] + "'";
-      $.getJSON('https://' + gon.carto_account + '.carto.com/api/v2/sql/?q=' +
-        sql + '&api_key=' + gon.carto_key, function(data) {
-        $.each(data.rows, function(key, val) {
-
-
-        });
-      });
+      var sql = "SELECT * from canceratlas_downloadabledata where iso3='" + this.params.vars[0] + "'";
+      return $.getJSON('https://' + gon.carto_account + '.carto.com/api/v2/sql/?q=' +
+        sql + '&api_key=' + gon.carto_key);
     }
 
   });
