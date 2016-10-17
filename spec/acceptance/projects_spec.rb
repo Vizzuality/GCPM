@@ -12,7 +12,8 @@ module Api::V1
       let!(:project)           { FactoryGirl.create(:project, title: 'Project title', user_id: user.id)               }
       let(:r_u_id)             { investigator.research_units.first.id                                                 }
       let(:r_u_id_2)           { investigator_2.research_units.first.id                                               }
-      let!(:membership)        { Membership.create(project_id: project.id, research_unit_id: r_u_id)                  }
+      let!(:membership)        { Membership.create(project_id: project.id,
+                                                   research_unit_id: r_u_id, membership_type: 'secondary')            }
       let(:funder)             { FactoryGirl.create(:organization, name: 'Project funder', address_ids: [address.id]) }
       let!(:cancer_type)       { FactoryGirl.create(:cancer_type)                                                     }
       let!(:project_type)      { FactoryGirl.create(:project_type)                                                    }
@@ -43,7 +44,7 @@ module Api::V1
                                                                           "longitude": "",
                                                                           "primary": false
                                                                         }] }],
-                            "memberships": [{"research_unit_id": "#{r_u_id_2}", "membership_type": "main" }]
+                            "memberships": [{ "research_unit_id": "#{r_u_id_2}", "membership_type": "main" }]
                           }
                         } }
 
@@ -58,6 +59,20 @@ module Api::V1
                                                                                    }] }]
                                        }
                                      } }
+
+      let(:update_params_for_membership) { { "project": {
+                                             "title": "Project updated",
+                                             "summary": "Lorem ipsum...",
+                                             "new_funders": [{ "name": "Test funder 1", "email_address": "", "organization_type_id": 1,
+                                                               "addresses_attributes": [{"country_id": "#{country.id}",
+                                                                                         "latitude": "",
+                                                                                         "longitude": "",
+                                                                                         "primary": true
+                                                                                       }] }],
+                                            "memberships": [{ "id": "#{membership.id}", "membership_type": "main" },
+                                                            { "research_unit_id": "#{r_u_id_2}", "membership_type": "secondary" }]
+                                           }
+                                         } }
 
       context 'Update Project' do
         it 'Allows to update project' do
@@ -75,7 +90,7 @@ module Api::V1
                                                                                                        ] } }
 
           expect(status).to eq(422)
-          expect(json['message']).to                                     eq(["Title can't be blank"])
+          expect(json['message']).to eq(["Title can't be blank"])
           expect(Organization.find_by(name: "Second project funder")).to be_nil
         end
 
@@ -88,15 +103,15 @@ module Api::V1
           expect(json['cancer_types']).to           be_present
           expect(json['project_types']).to          be_present
           expect(json['funding_sources'].length).to eq(3)
-          # Check membership for project
           expect(Membership.find_by(research_unit_id: r_u_id_2).project_id).to eq(json['id'])
         end
 
         it 'Allows to update project without existing funders' do
-          put "/api/projects/#{project_id}?token=#{user.authentication_token}", params: params_without_f_s_ids
+          put "/api/projects/#{project_id}?token=#{user.authentication_token}", params: update_params_for_membership
 
           expect(status).to eq(200)
           expect(json['funding_sources'].length).to eq(1)
+          expect(Project.find(project_id).memberships.map(&:membership_type)).to eq(['main', 'secondary'])
         end
 
         context 'For project memberships' do
@@ -113,7 +128,7 @@ module Api::V1
                                                                                                                         }}
 
             expect(status).to eq(200)
-            expect(json['message']).to                  eq('Membership updated!')
+            expect(json['message']).to eq('Membership updated!')
             expect(Membership.first.membership_type).to eq('main')
           end
 
@@ -183,7 +198,7 @@ module Api::V1
                                                                                           ] } }
 
           expect(status).to eq(422)
-          expect(json['message']).to                                     eq(["Title can't be blank", "Summary can't be blank"])
+          expect(json['message']).to eq(["Title can't be blank", "Summary can't be blank"])
           expect(Organization.find_by(name: "Second project funder")).to be_nil
         end
       end
