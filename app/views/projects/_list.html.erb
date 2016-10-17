@@ -2,7 +2,7 @@
   <div class="row collapse">
     <% items.each do |p| %>
       <div class="column small-12 medium-4">
-        <div class="c-card">
+        <div class="c-card -projects">
           <h3 class="-underlined">
             <a href="/investigators/<%= p.project_leads.first.try(:id) %>">
               <%= p.project_leads.first.try(:name) %>
@@ -13,7 +13,11 @@
 
           <p>
             <% p.cancer_types.each do |t| %>
-              <a href="/cancer-types/<%= t.id %>" class="tag"><%= t.name %></a>
+              <span class="c-tag -mg">
+                <a href="/cancer-types/<%= t.id %>">
+                  <%= t.name %>
+                </a>
+              </span>
             <% end %>
           </p>
         </div>

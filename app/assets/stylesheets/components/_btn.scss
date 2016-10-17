@@ -2,6 +2,8 @@
   @extend %reset-btn;
   padding: $button-y-padding $button-x-padding;
 
+  display: inline-block;
+
   font-size: $small-font-size;
   font-weight: bold;
   line-height: 1.2;
@@ -26,6 +28,84 @@
     padding: ($button-y-padding / 2) ($button-x-padding / 2);
   }
 
+  &.-extra-thin {
+    padding: $button-y-padding 0;
+  }
+
+  &.-primary {
+    color: $inverse-font-color;
+    background-color: $primary-color;
+
+    &.-inverse {
+      color: $primary-color;
+      background-color: $inverse-font-color;
+      border: 1px solid $primary-color;
+    }
+  }
+
+  &:hover {
+    box-shadow: $box-shadow-2;
+  }
+
+  // Global
+  &.-global {
+    color: $inverse-font-color;
+    background-color: $secondary-color;
+
+    &.-inverse {
+      background-color: $inverse-font-color;
+      color: $secondary-color;
+    }
+  }
+
+  // Alternative
+  &.-alternative {
+    color: $inverse-font-color;
+    background-color: $alternative-color;
+
+    &.-inverse {
+      color: $alternative-color;
+      background-color: $inverse-font-color;
+      border: 1px solid $alternative-color;
+    }
+  }
+
+  // Transparent
+  &.-transparent {
+    color: $inverse-font-color;
+    background-color: transparent;
+    border: 1px solid $inverse-font-color;
+  }
+
+  &.-with-icon {
+    display: flex;
+    > * {
+      margin: 0 5px 0 0;
+      &:last-child { margin: 0;}
+    }
+  }
+
+  &.-facebook {
+    background: #3b5998;
+    &:hover {
+      background: darken(#3b5998, 5%);
+    }
+  }
+
+  &.-twitter {
+    background: #55acee;
+    &:hover {
+      background: darken(#55acee, 5%);
+    }
+  }
+
+  &.-linkedin {
+    background: #007bb5;
+    &:hover {
+      background: darken(#007bb5, 5%);
+    }
+  }
+
   &.-round-icon {
     width: 15px;
     height: 15px;
@@ -34,27 +114,19 @@
     display: flex;
     align-items: center;
     margin: ($button-y-padding / 2) ($button-x-padding / 2);
-
   }
 
-  &.-primary {
-    color: $inverse-font-color;
-    background-color: $primary-color;
-  }
-
-  &.-inverse {
-    color: $primary-color;
-    background-color: white;
-    border: 1px solid $primary-color;
-  }
-
-  &.-global {
-    color: $inverse-font-color;
-    background-color: $secondary-color;
-  }
-
-  &.-alternative {
-    color: $inverse-font-color;
-    background-color: $alternative-color;
+  .notification-bubble {
+    font-size: 9px;
+    color: #5aade4;
+    background: white;
+    width: 14px;
+    height: 14px;
+    line-height: 14px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 50%;
+    display: inline-block;
+    transform: translate(-3px,-8px);
   }
 }

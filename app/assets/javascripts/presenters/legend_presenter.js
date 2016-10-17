@@ -15,6 +15,8 @@
 
     initialize: function (params) {
       this.state = new StateModel();
+      this.layersCollection = new App.Collection.Layers();
+      this.layersCollection.fetch();
 
       this.legend = new App.View.Legend({
         el: '#legend',
@@ -38,6 +40,10 @@
     },
 
     setEvents: function () {
+      this.layersCollection.on('reset sync change', function(){
+        this.renderLegends();
+      }, this);
+
       this.state.on('change', function () {
         this.renderLegends();
         App.trigger('Legends:change', this.getState());
@@ -49,9 +55,15 @@
     },
 
     renderLegends: function () {
+      var markerLegend = this.getMarkerLegend();
+      var layerLegend = this.getLayerLegend();
+
+      this.legend.updateData(markerLegend, layerLegend);
+    },
+
+    getMarkerLegend: function() {
       var data;
       var attributes = this.getState();
-
       switch (attributes.data) {
         case 'projects':
           data = [
@@ -62,9 +74,9 @@
 
           if (attributes['countries[]']) {
             data = [
-              { name: 'Cluster', icon: CLUSTER_ICON, dataType: 'projects' },
               { name: 'Project leads', icon: MARKER_ICON, dataType: 'projects' },
-              { name: 'Collaborators', icon: CIRCLE_ICON, dataType: 'collaborators' }
+              { name: 'Collaborators', icon: CIRCLE_ICON, dataType: 'collaborators' },
+              { name: 'Cluster', icon: CLUSTER_ICON, dataType: 'projects' }
             ];
           }
           break;
@@ -99,8 +111,21 @@
           break;
       }
 
-      this.legend.updateData(data);
+      return data;
+    },
+
+    getLayerLegend: function() {
+      var attributes = this.getState();
+      var layers = this.layersCollection.toJSON();
+
+      if (attributes.cartoLayer && layers && !!layers.length) {
+        var layer = _.findWhere(layers, { slug: attributes.cartoLayer });
+        layer.legend = (layer.legend) ? JSON.parse(layer.legend) : null;
+        return layer;
+      }
+      return null;
     }
+
   });
 
 })(this.App);

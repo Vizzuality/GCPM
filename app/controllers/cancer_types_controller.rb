@@ -9,7 +9,7 @@ class CancerTypesController < ApplicationController
   def show
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
     @title = t 'map'
-    @filters = %w(projects people)
+    @filters = %w(projects)
     @current_type = params.key?(:data) ? params[:data] : 'projects'
     gon.server_params = { 'cancer_types[]': params[:id] }
 

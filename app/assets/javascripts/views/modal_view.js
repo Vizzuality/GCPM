@@ -52,7 +52,7 @@
 
     toggleLoader: function(loading) {
       this.$el.find('#modal-loader').toggleClass('-start', loading);
-    },
+    }
 
 
   });

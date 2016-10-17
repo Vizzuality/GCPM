@@ -1,0 +1,16 @@
+
+.c-summary-info {
+
+  h3 {
+    margin-bottom: 0;
+    text-transform: none;
+    font-weight: bold;
+    font-size: $base-font-size;
+  }
+
+  span {
+    font-family: $base-font-family-normal;
+    display: inline-block;
+    margin-top: 5px;
+  }
+}
