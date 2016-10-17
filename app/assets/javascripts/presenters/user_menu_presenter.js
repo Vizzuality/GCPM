@@ -11,10 +11,9 @@
   _.extend(App.Presenter.UserMenu.prototype, {
 
     initialize: function() {
-      this.state = new StateModel();
+      this.state = new StateModel({ active: false });
       this.userMenu = new App.View.UserMenu();
 
-      this.setState({ active: false });
       this.setSubscriptions();
     },
 
@@ -35,6 +34,7 @@
     toggleUserMenu: function() {
       var active = this.state.get('active');
       var element = this.userMenu.$el.find('.c-user-menu');
+
       active ?
         element.attr('style', 'display:flex') :
         element.attr('style', 'display:none')

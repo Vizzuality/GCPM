@@ -5,7 +5,7 @@
   min-width: 200px;
   position: absolute;
   top: 82px;
-  right: -23px;
+  right: 0;
   background-color: $body-bg-color;
   box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.2);
 
@@ -52,7 +52,7 @@
     content: '';
     position: absolute;
     top: -7px;
-    right: 30px;
+    right: 22px;
     width: 15px;
     height: 15px;
     transform: rotate(45deg);

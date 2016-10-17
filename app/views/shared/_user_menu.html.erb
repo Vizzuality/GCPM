@@ -1,10 +1,10 @@
 <div class="c-user-menu">
   <ul>
     <li class="<%= active_page?(user_session_path) ? '-active' : '' %>">
-      <%= link_to (t 'network'), user_path(:id => '1') %></a>
+      <%= link_to (t 'network'), user_path(:id => current_user.id) %></a>
     </li>
     <li class="<%= active_page?(user_session_path) ? '-active' : '' %>">
-      <%= link_to (t 'projects'), user_path(:data => 'projects', :id => '1') %></a>
+      <%= link_to (t 'projects'), user_path(:data => 'projects', :id => current_user.id) %></a>
     </li>
   </ul>
   <ul>

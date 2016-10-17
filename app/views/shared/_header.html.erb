@@ -12,7 +12,9 @@
             <%= render "shared/nav" %>
             <% if user_signed_in? %>
               <li class="js-user-menu <%= active_page?(user_session_path) ? '-active' : '' %>">
-                <button>O</button>
+                <button class="user-btn">
+                  <div class="c-avatar"><%= current_user.name ? current_user.name[0] : 'U' %></div>
+                </button>
                 <%= render 'shared/user_menu' %>
               </li>
             <% else %>

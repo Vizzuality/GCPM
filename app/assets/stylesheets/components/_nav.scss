@@ -22,6 +22,11 @@
     }
 
     &:hover > a { color: $primary-color; }
+    &:hover > button { color: $primary-color; }
+  }
+
+  > button {
+    padding: 0;
   }
 
   & + .c-nav,
@@ -53,6 +58,8 @@
          position: relative;
          line-height: 24px;
          padding: $base-space 0.5rem;
+
+         &.user-btn { padding: 0; }
        }
 
        &.-active > a {

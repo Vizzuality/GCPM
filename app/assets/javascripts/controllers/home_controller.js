@@ -21,8 +21,6 @@
         trackResize: false,
         closePopupOnClick: false
       });
-
-      new App.Presenter.UserMenu();
     }
 
 
