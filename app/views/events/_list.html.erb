@@ -1,8 +1,8 @@
 <% if items && items.size() > 0 %>
   <div class="row collapse">
-    <% items.each_with_index do |e, index| %>
+    <% items.each do |e| %>
       <div class="column small-12 medium-4">
-        <div class="c-card -events <% if index == 0 && defined?(hightligh_first) %>-inverse<% end %>">
+        <div class="c-card -events">
           <% if e.country? %>
             <h3 class="-underlined -alternative">
               <% country = Country.find_by( country_name: e.country ) %>

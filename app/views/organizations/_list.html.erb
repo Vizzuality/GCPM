@@ -1,8 +1,8 @@
 <% if items && items.size() > 0 %>
   <div class="row collapse">
-    <% items.each_with_index do |o, index| %>
+    <% items.each do |o| %>
       <div class="column small-12 medium-4">
-        <div class="c-card <% if index == 0 && defined?(hightligh_first) %>-inverse<% end %>">
+        <div class="c-card">
           <h3 class="-underlined">
             Organization
           </h3>
