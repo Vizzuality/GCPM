@@ -12,7 +12,7 @@
 
     initialize: function(params, settings, viewSettings) {
       this.fc = App.facade.layer;
-      this.options = settings || {};
+      this.options = settings || {};
       this.state = new StateModel();
       this.layersSpec = new App.Collection.LayersSpec();
       this.map = new App.View.Map({
@@ -121,7 +121,7 @@
             });
           }
         }
-        
+
       }.bind(this));
     },
 
