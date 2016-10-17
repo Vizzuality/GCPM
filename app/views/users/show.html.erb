@@ -1,0 +1,83 @@
+
+<% user = current_user %>
+
+<section class="l-app -full">
+
+  <div class="l-app-map">
+    <div id="map" class="c-map"></div>
+  </div>
+
+  <%= render "shared/legend" %>
+
+  <div class="l-app-title">
+    <div class="wrapper">
+      <div class="row collapse">
+        <div class="column small-8">
+          <div class="c-avatar -big"><%= current_user.name ?
+            current_user.name[0] :
+            'U' %></div>
+            <h1><%= user.try(:name) %></h1>
+
+            <div class="row">
+              <div class="column small-12 medium-6">
+                <div>
+                  <span><%= user.position ?
+                    user.position : '' %></span>
+                  <span><%= user.position ?
+                    ' | ' + user.position : '' %></span>
+                </div>
+              </div>
+              <div class="column small-12 medium-6">
+                <span>
+                  <%= user.twitter_account ?
+                    user.twitter_account : 'Twitter account' %>
+                </span>
+                <span>
+                  <%= user.linkedin_account ?
+                    ' | ' + user.linkedin_account : '| Linkedin account' %>
+                </span>
+                <span>
+                  <%= user.pubmed ?
+                    ' | ' + user.pubmed : ' | Pumbed account' %>
+                </span>
+              </div>
+            </div>
+        </div>
+        <div class="column small-4">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="l-app-navbar">
+    <div class="wrapper">
+      <div class="row collapse">
+        <div class="column small-6">
+          <ul class="c-tabnav" id="dataTabNav">
+             <% @filters.each do |filter| %>
+              <li class="tabnav-item">
+                <%= link_to t(filter),
+                  map_path(request.query_parameters.merge({ data: filter })),
+                  class: "js-btn-mapmenu-type",
+                  remote: true,
+                  data: { datatype: filter }
+                %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="column small-6">
+          <div id="toolbar"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="l-grid" id="content">
+  <% if @current_type == 'projects' %>
+    <%= render 'projects/list', items: @items, more: @more %>
+  <% #else @current_type %>
+    <% #render 'investigators/list', items: @items, more: @more %>
+  <% end %>
+</div>
