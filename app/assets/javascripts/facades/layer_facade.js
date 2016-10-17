@@ -2,12 +2,6 @@
 
   'use strict';
 
-  var blubbleSizes = {
-    big: 90,
-    medium: 65,
-    small: 45
-  };
-
   var layerFacade = {
 
     getLayer: function(params) {
@@ -34,10 +28,11 @@
         .done(function() {
           var layer;
           var geoJson = locations.toGeoJSON();
+
           if (params['countries[]']) {
-            layer = App.helper.markerClusterLayer(geoJson, params);
+            layer = (geoJson.features.length) ? App.helper.markerClusterLayer(geoJson, params) : null;
           } else {
-            layer = App.helper.bubbleLayer(geoJson, params, layerFacade);
+            layer = (geoJson.features.length) ? App.helper.bubbleLayer(geoJson, params, layerFacade) : null;
           }
           deferred.resolve(layer);
         });
@@ -45,7 +40,7 @@
       return deferred.promise();
     },
 
-    getPointLayer: function(params) {
+    getPointLayer: function() {
       var fetchParams = Object.assign(gon.server_params, { group: 'points' });
       var deferred = new $.Deferred();
       var locations = new App.Collection.Locations();
