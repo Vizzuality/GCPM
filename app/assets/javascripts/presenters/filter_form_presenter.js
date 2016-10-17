@@ -10,6 +10,15 @@
 
   _.extend(App.Presenter.FilterForm.prototype, {
 
+    defaults: {
+      cancerTypes: null,
+      organization_types: null,
+      organizations: null,
+      project_types: null,
+      start_date: null,
+      end_date: null
+    },
+
     initialize: function(params) {
       this.state = new StateModel(params);
 
@@ -64,6 +73,11 @@
         this.setState(newState);
         this.closeForm();
       }, this);
+
+      this.filterForm.on('reset', function() {
+        this.setState(this.defaults);
+        this.closeForm();
+      }, this)
 
       this.state.on('change', function() {
         App.trigger('FilterForm:change', this.state.attributes);
@@ -150,7 +164,6 @@
         var state = _.extend({}, this.state.toJSON(), {
           value: this.state.get(child.defaults.name)
         });
-
         child.setState(state, { silent: true });
 
         // Render the child
