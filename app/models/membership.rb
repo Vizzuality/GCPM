@@ -19,7 +19,6 @@ class Membership < ApplicationRecord
   has_one :investigator, through: :research_unit
   has_one :organization, through: :research_unit
 
-  validates_presence_of :project_id, :research_unit_id
   validates :project_id, uniqueness: { scope: :research_unit_id }
 
   def address

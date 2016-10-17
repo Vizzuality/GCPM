@@ -3,18 +3,20 @@ require 'acceptance_helper'
 module Api::V1
   describe 'Projects', type: :request do
     context 'For projects' do
-      let!(:organization) { FactoryGirl.create(:organization, name: 'Test orga 1', address_ids: [address.id])    }
-      let!(:address)      { FactoryGirl.create(:address, country_id: country.id, line_1: 'Paris, France')        }
-      let!(:investigator) { FactoryGirl.create(:investigator, name: 'Investigator', address_ids: [address.id])   }
-      let!(:user)         { FactoryGirl.create(:user, authentication_token: '7Nw1A13xrHrZDHj631MA')              }
-      let!(:country)      { FactoryGirl.create(:country)                                                         }
-      let!(:project)      { FactoryGirl.create(:project, title: 'Project title', user_id: user.id)               }
-      let(:r_u_id)        { investigator.research_units.first.id                                                 }
-      let!(:membership)   { Membership.create(project_id: project.id, research_unit_id: r_u_id)                  }
-      let(:funder)        { FactoryGirl.create(:organization, name: 'Project funder', address_ids: [address.id]) }
-      let!(:cancer_type)   { FactoryGirl.create(:cancer_type)                                                    }
-      let!(:project_type)  { FactoryGirl.create(:project_type)                                                   }
-      let!(:organization_type) { FactoryGirl.create(:organization_type)                                          }
+      let!(:organization)      { FactoryGirl.create(:organization, name: 'Test orga 1', address_ids: [address.id])    }
+      let!(:address)           { FactoryGirl.create(:address, country_id: country.id, line_1: 'Paris, France')        }
+      let!(:investigator)      { FactoryGirl.create(:investigator, name: 'Investigator', address_ids: [address.id])   }
+      let!(:investigator_2)    { FactoryGirl.create(:investigator, name: 'Investigator 2', address_ids: [address.id]) }
+      let!(:user)              { FactoryGirl.create(:user, authentication_token: '7Nw1A13xrHrZDHj631MA')              }
+      let!(:country)           { FactoryGirl.create(:country)                                                         }
+      let!(:project)           { FactoryGirl.create(:project, title: 'Project title', user_id: user.id)               }
+      let(:r_u_id)             { investigator.research_units.first.id                                                 }
+      let(:r_u_id_2)           { investigator_2.research_units.first.id                                               }
+      let!(:membership)        { Membership.create(project_id: project.id, research_unit_id: r_u_id)                  }
+      let(:funder)             { FactoryGirl.create(:organization, name: 'Project funder', address_ids: [address.id]) }
+      let!(:cancer_type)       { FactoryGirl.create(:cancer_type)                                                     }
+      let!(:project_type)      { FactoryGirl.create(:project_type)                                                    }
+      let!(:organization_type) { FactoryGirl.create(:organization_type)                                               }
 
       let(:project_id) { project.id }
       let(:params)     { { "project": { "title": "Project updated" } } }
@@ -40,7 +42,8 @@ module Api::V1
                                                                           "latitude": "",
                                                                           "longitude": "",
                                                                           "primary": false
-                                                                        }] }]
+                                                                        }] }],
+                            "memberships": [{"research_unit_id": "#{r_u_id_2}", "membership_type": "main" }]
                           }
                         } }
 
@@ -85,6 +88,8 @@ module Api::V1
           expect(json['cancer_types']).to           be_present
           expect(json['project_types']).to          be_present
           expect(json['funding_sources'].length).to eq(3)
+          # Check membership for project
+          expect(Membership.find_by(research_unit_id: r_u_id_2).project_id).to eq(json['id'])
         end
 
         it 'Allows to update project without existing funders' do
