@@ -20,26 +20,26 @@
 
             <div class="row">
               <div class="column small-12 medium-6">
-                <ul>
-                  <li><%= user.position ?
-                    user.position : '' %></li>
-                  <li><%= user.position ?
-                    user.position : '' %></li>
+                <ul class="c-pipe-list">
+                  <li><%= user.position ? user.position : '' %></li>
+                </ul>
+                <ul class="c-pipe-list">
+                  <li><%= @following ? @following : 0 %> Following</li>
+                  <li><%= @followers ? @followers : 0 %> Followers</li>
                 </ul>
               </div>
               <div class="column small-12 medium-6">
-                <span>
-                  <%= user.twitter_account ?
-                    user.twitter_account : 'Twitter account' %>
-                </span>
-                <span>
-                  <%= user.linkedin_account ?
-                    ' | ' + user.linkedin_account : '| Linkedin account' %>
-                </span>
-                <span>
-                  <%= user.pubmed ?
-                    ' | ' + user.pubmed : ' | Pumbed account' %>
-                </span>
+                <ul class="c-pipe-list">
+                  <li>
+                    <%= user.twitter_account ? user.twitter_account : 'Twitter account' %>
+                  </li>
+                  <li>
+                    <%= user.linkedin_account ? user.linkedin_account : 'Linkedin account' %>
+                  </li>
+                  <li>
+                    <%= user.pubmed ? user.pubmed : 'Pumbed account' %>
+                  </li>
+                </ul>
               </div>
             </div>
         </div>
