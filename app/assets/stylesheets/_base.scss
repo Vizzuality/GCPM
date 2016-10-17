@@ -64,19 +64,7 @@ h2, h3 {
       width: 10px;
       margin-top: $inline-space;
 
-      border-bottom: 3px solid $primary-color;
-    }
-
-    &.-alternative {
-      &:after {
-        border-bottom-color: $alternative-color;
-      }
-    }
-
-    &.-global {
-      &:after {
-        border-bottom-color: $secondary-color;
-      }
+      border-bottom: 3px solid $secondary-color;
     }
   }
 }
