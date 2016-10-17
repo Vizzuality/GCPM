@@ -13,8 +13,8 @@
     <div class="wrapper">
       <div class="row collapse">
         <div class="column small-8">
-          <div class="c-avatar -big"><%= current_user.name ?
-            current_user.name[0] :
+          <div class="c-avatar -big"><%= user.name ?
+            user.name[0] :
             'U' %></div>
             <h1><%= user.try(:name) %></h1>
 

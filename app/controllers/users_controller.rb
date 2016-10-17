@@ -9,6 +9,12 @@ class UsersController < ApplicationController
     #   @user.published_projects.limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
     # @isProfile = true
 
+    if !current_user
+      redirect_to map_path and return
+    elsif current_user != User.find_by_id(params[:id])
+      redirect_to map_path and return
+    end
+
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
     @filters = %w(network projects posts)
     @current_type = params.key?(:data) ? params[:data] : 'projects'
