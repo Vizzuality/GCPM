@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     # @isProfile = true
 
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
-    @filters = %w(projects)
+    @filters = %w(network projects posts)
     @current_type = params.key?(:data) ? params[:data] : 'projects'
 
     gon.server_params = { 'investigators[]': @investigator.size > 0 ? @investigator.first.id : '0' }
@@ -19,11 +19,16 @@ class UsersController < ApplicationController
 
     @projects = Project.fetch_all(user: params[:id]).uniq.order('created_at DESC')
     @people = Investigator.fetch_all(user: params[:id]).uniq.order('created_at DESC')
+    @posts = []
 
-    if params.key?(:data) && params[:data] == 'people'
+    if params.key?(:data) && params[:data] == 'network'
       @items = @people.limit(limit)
       @more = (@people.size > @items.size)
       @items_total = @people.size
+    elsif params.key?(:data) && params[:data] == 'post'
+      @items = []
+      @more = false
+      @items_total = 0
     else
       @items = @projects.limit(limit)
       @more = (@projects.size > @items.size)
