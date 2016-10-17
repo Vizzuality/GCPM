@@ -98,6 +98,7 @@
 
       // @TODO request (validate response)
       var p = new Promise(function(resolve, reject){
+        console.log(this.request);
         var url = "/api/projects?token="+AUTH_TOKEN;
         var q = new XMLHttpRequest();
         q.open('POST', url, true);
@@ -128,19 +129,19 @@
       this.request.project["end_date"] = this.state.attributes["end_date"];
       this.request.project["project_website"] = this.state.attributes["project_website"];
       this.request.project["project_type_ids"] = this.state.attributes["project_types[]"];
-      this.request.project["cancer_tpye_ids"] = this.state.attributes["cancer_types[]"];
+      this.request.project["cancer_type_ids"] = this.state.attributes["cancer_types[]"];
       this.buildFundingSources();
       this.buildInvestigators();
     },
 
     buildFundingSources(){
       this.request.project["funding_source_ids"] = [];
-      this.request.project["new_funders"] = [];
       _.each(this.state.attributes["funding_sources[]"], function(element) {
         if(!isNaN(parseInt(element))){
           this.request.project["funding_source_ids"].push(element);
         }
         else{
+          this.request.project["new_funders"] = [];
           element = JSON.parse(element);
           var funder = {};
           funder["name"] = element["organizationName"];
