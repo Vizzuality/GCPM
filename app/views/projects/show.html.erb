@@ -12,10 +12,7 @@
       <div class="row collapse">
         <div class="column small-8">
           <h1><%= @project.title %></h1>
-        </div>
-      </div><br/>
-      <div class="row collapse">
-        <div class="column small-8">
+
           <div class="c-summary-info row -collapse">
 
             <div class="column small-12 medium-4 align-middle">
@@ -35,7 +32,13 @@
 
           </div>
         </div>
-      </div><br/>
+
+        <% if (current_user) %>
+          <%= render "shared/user_actions" %>
+        <% end %>
+      </div>
+
+
     </div>
   </div>
 
