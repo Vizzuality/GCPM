@@ -26,7 +26,7 @@
       this.state.set(params);
     },
 
-    handleUserMenu: function(element) {
+    handleUserMenu: function() {
       var active = this.state.get('active');
       this.setState({ active: !active });
     },
