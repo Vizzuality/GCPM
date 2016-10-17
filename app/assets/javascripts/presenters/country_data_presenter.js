@@ -45,23 +45,25 @@
 
     setState: function(newState) {
       this.state
-        .set(newState);
+        .set(newState, { silent: true });
+
+      this.renderSubviews()
     },
 
     getState: function() {
       return this.state.attributes;
     },
 
-    changeData: function() {
+    renderSubviews: function() {
       if (this.state.get('data') === 'data') {
         this.country.setUrl(this.state.attributes.vars[0]);
         this.country.fetch().done(function(){
-          this.updateData();
+          this.updateCountryData();
         }.bind(this));
       }
     },
 
-    updateData: function() {
+    updateCountryData: function() {
       var country = this.country.toJSON();
       this.countryData.setElement('#countryData');
       this.countryData.setOptions(country);
