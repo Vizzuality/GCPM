@@ -1,0 +1,64 @@
+
+.c-user-menu {
+  display: none;
+  flex-flow: column;
+  min-width: 200px;
+  position: absolute;
+  top: 82px;
+  right: -23px;
+  background-color: $body-bg-color;
+  box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.2);
+
+  > ul {
+    @extend %clearlist;
+    width: 100%;
+    padding-top: $base-space/4;
+    padding-bottom: $base-space/4;
+
+    &:last-child {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    > li {
+
+      > a {
+        cursor: pointer;
+        font-size: $small-font-size;
+        padding: $base-space/4 $base-space!important;
+        color: $primary-color;
+        text-transform: uppercase;
+        font-weight: bold;
+
+        &:hover {
+          opacity: .5;
+        }
+      }
+    }
+  }
+
+  .logout {
+    width: 100%;
+    text-align: center;
+    background-color: $primary-color;
+
+    a {
+      text-transform: none;
+      color: $inverse-font-color;
+    }
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: -7px;
+    right: 30px;
+    width: 15px;
+    height: 15px;
+    transform: rotate(45deg);
+    background-color: $body-bg-color;
+    box-shadow: -1px -1px 1px 0px rgba(0, 0, 0, 0.1);
+
+  }
+
+}
