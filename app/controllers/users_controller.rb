@@ -25,16 +25,16 @@ class UsersController < ApplicationController
 
     @projects = Project.fetch_all(user: params[:id]).uniq.order('created_at DESC')
     @people = Investigator.fetch_all(user: params[:id]).uniq.order('created_at DESC')
-    @posts = []
+    @posts = Post.where(user_id: current_user.id)
 
     if params.key?(:data) && params[:data] == 'network'
       @items = @people.limit(limit)
       @more = (@people.size > @items.size)
       @items_total = @people.size
-    elsif params.key?(:data) && params[:data] == 'post'
-      @items = []
-      @more = false
-      @items_total = 0
+    elsif params.key?(:data) && params[:data] == 'posts'
+      @items = @posts.first(limit)
+      @more = (@posts.size > @items.size)
+      @items_total = @posts.size
     else
       @items = @projects.limit(limit)
       @more = (@projects.size > @items.size)

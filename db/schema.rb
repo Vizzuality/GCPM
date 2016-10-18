@@ -173,9 +173,10 @@ ActiveRecord::Schema.define(version: 20161018125246) do
   create_table "investigators", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
+    t.string   "position_title"
     t.text     "website"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "layer_groups", force: :cascade do |t|
@@ -221,6 +222,8 @@ ActiveRecord::Schema.define(version: 20161018125246) do
     t.integer  "membership_type",  default: 1
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+    t.integer  "address_id"
+    t.index ["address_id"], name: "index_memberships_on_address_id", using: :btree
     t.index ["membership_type"], name: "index_memberships_on_membership_type", using: :btree
     t.index ["project_id"], name: "index_memberships_on_project_id", using: :btree
     t.index ["research_unit_id"], name: "index_memberships_on_research_unit_id", using: :btree

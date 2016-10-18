@@ -1,19 +1,19 @@
-<p id="notice"><%= notice %></p>
+<% investigator = User.find_by_id(@post.user_id) %>
+<div class="l-content">
+  <div class="wrapper">
+    <div class="row collapse">
+      <div class="column small-12">         
+        <h1><%= @post.title %></h1>
+        <p><%= @post.body.html_safe %></p>
+        <div>
+          <div class="c-avatar -ph -small"></div>
+          <p><%= investigator && investigator.name && investigator.name %></p>      
+        </div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
+        <%= link_to 'Edit', edit_post_path(@post), class: 'c-btn -primary' %>          
+      </div>
+    </div>
+  </div>  
+</div>
 
-<p>
-  <strong>Body:</strong>
-  <%= @post.body.html_safe %>
-</p>
 
-<p>
-  <strong>User:</strong>
-  <%= @post.user_id %>
-</p>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>

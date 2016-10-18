@@ -3,7 +3,8 @@
     <% items.each do |p| %>
       <div class="column small-12">
         <div class="c-card">
-          <h3>p.name</h3>
+          <h3><%= link_to p.title, p %></h3>
+          <p><%= p.body && p.body.html_safe %></p>
         </div>
       </div>
     <% end %>

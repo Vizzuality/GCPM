@@ -6,8 +6,8 @@
 
         <%= render 'form', post: @post %>
 
-        <% link_to 'Show', @post %> |
-        <% link_to 'Back', posts_path %>
+          <%= link_to 'Destroy', @post, class: 'c-btn -primary -inverse', method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
       </div>
     </div>
   </div>

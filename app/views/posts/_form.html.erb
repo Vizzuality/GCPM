@@ -1,3 +1,4 @@
+
 <%= simple_form_for(@post) do |f| %>
   <%= f.error_notification %>
     <div class="form-row">
@@ -6,10 +7,13 @@
     <div class="form-row">
       <%= f.cktext_area :body %>
     </div>
+    <div class="form-row">
+      <%= f.input :user_id %>
+    </div>
 
     <div class="form-row">
-      <%= f.button :submit, "Create Post", class: 'c-btn -primary' %>
-    </div>
+      <%= f.button :submit, "Submit", class: 'c-btn -primary' %>
+    
 
 <% end %>
 
