@@ -8,7 +8,6 @@
 
     index: function(params) {
       new App.Presenter.CancerTypesList(params);
-      new App.Presenter.UserNav(params);
     },
 
     show: function(params) {

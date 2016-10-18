@@ -8,24 +8,18 @@ class InvestigatorsController < ApplicationController
 
   def show
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
-    @title = t 'map'
-    @filters = %w(projects events)
+    @filters = %w(projects)
     @current_type = params.key?(:data) ? params[:data] : 'projects'
-    @user_data = current_user.present? ? JSON.generate(build_user_data) : nil
+
+    gon.server_params = { 'investigators[]': params[:id] }
 
     limit = 12 + (@page * 9)
 
-    if params.key?(:data) && params[:data] == 'events'
-      events = Event.fetch_all(investigator: @investigator.id).order('created_at DESC')
-      @items = events.limit(limit)
-      @more = (events.size > @items.size)
-      @items_total = events.size
-    else
-      projects = Project.fetch_all(investigator: @investigator.id).order('created_at DESC')
-      @items = projects.limit(limit)
-      @more = (projects.size > @items.size)
-      @items_total = projects.size
-    end
+    @projects = Project.fetch_all(investigators: @investigator.id).order('created_at DESC')
+
+    @items = @projects.limit(limit)
+    @more = (@projects.size > @items.size)
+    @items_total = @projects.size
 
     respond_with(@items)
   end

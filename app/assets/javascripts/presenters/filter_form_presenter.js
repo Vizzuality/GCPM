@@ -10,6 +10,15 @@
 
   _.extend(App.Presenter.FilterForm.prototype, {
 
+    defaults: {
+      cancerTypes: undefined,
+      organization_types: undefined,
+      organizations: undefined,
+      project_types: undefined,
+      start_date: undefined,
+      end_date: undefined
+    },
+
     initialize: function(params) {
       this.state = new StateModel(params);
 
@@ -39,6 +48,9 @@
 
       this.children = [countries, organizations, cancerTypes, projectTypes, organizationsTypes, pickadateStart, pickadateEnd];
 
+      this.countries = new App.Collection.Countries();
+      this.countries.fetch();
+
       this.modal = new App.View.Modal();
       this.filterForm = new App.View.FilterForm({
         children: this.children
@@ -54,13 +66,26 @@
     setEvents: function() {
       this.filterForm.on('cancel', this.closeForm, this);
       this.filterForm.on('submit', function(newState) {
+        // Set the region before setting the newState
+        if (newState['countries[]']) {
+          newState['regions[]'] = _.findWhere(this.countries.toJSON(), { country_iso_3: newState['countries[]'] }).region_iso;
+        }
         this.setState(newState);
         this.closeForm();
       }, this);
 
+      this.filterForm.on('reset', function() {
+        this.setState(this.defaults);
+        this.closeForm();
+      }, this)
+
       this.state.on('change', function() {
         App.trigger('FilterForm:change', this.state.attributes);
-      }, this)
+      }, this);
+
+      App.on('TabNav:change Breadcrumbs:change Map:change', function(newState){
+        this.setState(newState, { silent: true });
+      }, this);
     },
 
     /**
@@ -83,8 +108,10 @@
      * Setting form state
      * @param {Object} newState
      */
-    setState: function(newState) {
-      this.state.set(newState);
+    setState: function(newState, options) {
+      this.state
+        .clear({ silent: true })
+        .set(newState, options);
     },
 
     /**
@@ -135,16 +162,14 @@
         // I need to pass the rest of the params because there are some presenters that need other params
         // Then, inside of each presenter, they will handle its state
         var state = _.extend({}, this.state.toJSON(), {
-          value: this.state.get(child.defaults.name),
-        })
-
+          value: this.state.get(child.defaults.name)
+        });
         child.setState(state, { silent: true });
 
         // Render the child
         child.render();
       }.bind(this));
     }
-
   });
 
 })(this.App);

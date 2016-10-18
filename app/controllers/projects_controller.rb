@@ -1,6 +1,14 @@
 class ProjectsController < ApplicationController
+  respond_to :html, :js
+
   def show
     @project = Project.find(params[:id])
-    # @current_type = params[:type] || 'project-info'
+    gon.server_params = { }
+    gon.api_location_path = "/api/map/projects/#{params[:id]}"
+    gon.start_date = @project.start_date || 0
+    gon.end_date = @project.end_date || 0
+    @filters = %w(info)
+    @current_type = params.key?(:data) ? params[:data] : 'info'
+    respond_with(@project)
   end
 end

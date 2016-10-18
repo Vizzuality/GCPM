@@ -7,9 +7,18 @@
 
   .toolbar-item {
     color: $inverse-font-color;
+    display: flex;
+    align-items: center;
+    font-weight: $bold-font-weight;
 
     .c-icon, svg {
-      fill: $inverse-font-color;
+      vertical-align: -2px;
+      margin-right: 5px;
+    }
+
+    &.-sortby {
+      font-size: $small-font-size;
+      text-transform: uppercase;
     }
 
     &.-highlighted {

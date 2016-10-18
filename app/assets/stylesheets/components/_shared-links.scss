@@ -1,0 +1,16 @@
+
+.c-shared-links {
+  @extend %clearlist;
+  padding-top: $base-space;
+
+  li {
+    padding: ($base-space/6) 0;
+
+    a {
+      &:hover {
+        color: $primary-color;
+      }
+    }
+  }
+}
+

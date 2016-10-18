@@ -1,9 +1,13 @@
 /* Layout */
 $max-width: 1400px;
+$modal-max-width: 800px;
+$modal-tiny-max-width: 550px;
 
 /* Font */
 $base-font-family: "Montserrat", Arial, sans-serif;
-$base-font-size: 15px;
+$base-font-family-light: "Montserrat-light", Arial, sans-serif;
+$base-font-family-normal: "Montserrat-normal", Arial, sans-serif;
+$base-font-size: 14px;
 $base-font-weight: lighter;
 $base-line-height: 1.6;
 
@@ -13,6 +17,7 @@ $h3-font-size: 12px;
 
 $small-font-size: 12px;
 $medium-font-size: 20px;
+$big-font-size: 30px;
 $large-font-size: 65px;
 
 $bold-font-weight: bold;
@@ -40,12 +45,24 @@ $overlay-bg-color: rgba($black, .3);
 
 $border-color-1: #e5e5e5;
 
+$box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+$box-shadow-2: 0 7px 15px 0 rgba(0, 0, 0, 0.2);
+
 $base-space: 23px;
 $box-space: 60px;
 $inline-space: 18px;
 
 $button-x-padding: 23px;
 $button-y-padding: 18px;
+
+/* Eases */
+$easeInCubic: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+$easeOutCubic: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+$easeInOutCubic: cubic-bezier(0.645, 0.045, 0.355, 1.000);
+
+$easeInSine: cubic-bezier(0.470, 0.000, 0.745, 0.715);
+$easeOutSine: cubic-bezier(0.390, 0.575, 0.565, 1.000);
+$easeInOutSine: cubic-bezier(0.445, 0.050, 0.550, 0.950);
 
 // /* General layout */
 // $body-max-width:         1404px;
@@ -109,12 +126,3 @@ $button-y-padding: 18px;
 // $mq-xxLarge: "screen and (min-width: #{$breakpoint-xxLarge})";
 
 // $mq-body-width: "screen and (min-width: #{$body-max-width})";
-
-// /* Eases */
-// $easeInCubic: cubic-bezier(0.550, 0.055, 0.675, 0.190);
-// $easeOutCubic: cubic-bezier(0.215, 0.610, 0.355, 1.000);
-// $easeInOutCubic: cubic-bezier(0.645, 0.045, 0.355, 1.000);
-
-// $easeInSine: cubic-bezier(0.470, 0.000, 0.745, 0.715);
-// $easeOutSine: cubic-bezier(0.390, 0.575, 0.565, 1.000);
-// $easeInOutSine: cubic-bezier(0.445, 0.050, 0.550, 0.950);

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get '/organizations/:id',     to: 'organizations#show', as: 'organization'
   get '/about',                 to: 'about#index',        as: 'about'
   get '/downloads/user-manual', to: 'downloads#show',     as: 'download_user_manual'
+  get '/network/:id',           to: 'users#show',         as: 'user'
 
   resources :projects, only: :show
   resources :events, except: :destroy
@@ -24,7 +25,13 @@ Rails.application.routes.draw do
     resources :events,   controller: 'network_events',   except: :destroy
   end
 
+  # Network
   get '/network/:id/projects', to: 'users#show'
+
+  post 'follows/:resource/:id', to: 'follows#create', as: :follows
+  delete 'follows/:resource/:id', to: 'follows#destroy', as: :follow
+  post 'block/:user_id', to: 'follows#block', as: :blocks
+  delete 'block/:user_id', to: 'follows#unblock', as: :block
 
   # Admin
   #get 'admin/excel-uploader', to: 'admin/excel_uploader#new', as: :admin_excel_uploader
@@ -36,6 +43,7 @@ Rails.application.routes.draw do
       resources :project_types,      only: [:index],        path: 'project-types'
       resources :organization_types, only: [:index],        path: 'organization-types'
       resources :map,                only: [:index]
+      get '/map/projects/:id',  to: 'map#show_project'
 
       resources :projects,      only: [:update, :create] do
         resources :memberships, only: [:index, :create, :destroy]
@@ -52,10 +60,10 @@ Rails.application.routes.draw do
       get 'lists/cancer-types',  to: 'lists#cancer_types'
       get 'map/projects/:id',    to: 'map#show_project'
       get 'map/events/:id',      to: 'map#show_event'
-      get  'layer-groups',       to: 'layer_groups#index',          as: 'layer_groups'
-      get  '/layers',            to: 'layers#index',                as: 'layers'
+      get 'layer-groups',        to: 'layer_groups#index',          as: 'layer_groups'
+      get '/layers',             to: 'layers#index',                as: 'layers'
     end
   end
 
-  root to: 'map#index'
+  root to: 'home#index'
 end

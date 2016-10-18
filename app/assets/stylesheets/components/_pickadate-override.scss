@@ -29,6 +29,61 @@
 				&:focus {
 					outline: none;
 				}
+
+        .picker__header {
+          display: flex;
+          justify-content: center;
+          margin-top: 0;
+
+          select {
+            min-width: 0;
+          }
+
+          .picker__select--year,
+          .picker__select--month {
+            color: $dark-sky-blue;
+          }
+
+          .picker__nav--prev,
+          .picker__nav--next {
+            top: 14px;
+            padding: 0;
+
+            &:hover {
+              background-color: transparent;
+
+              &:before {
+                opacity: .7;
+              }
+            }
+          }
+
+          .picker__nav--next {
+            right: 15px;
+          }
+
+          .picker__nav--prev {
+            left: 15px;
+          }
+
+          .picker__nav--prev:before,
+          .picker__nav--next:before {
+            width: 8px;
+            height: 8px;
+            border: 0;
+            transform: rotate(45deg);
+          }
+
+          .picker__nav--prev:before {
+            border-bottom: 2px solid $dark-sky-blue;
+            border-left: 2px solid $dark-sky-blue;
+          }
+
+          .picker__nav--next:before {
+            border-top: 2px solid $dark-sky-blue;
+            border-right: 2px solid $dark-sky-blue;
+          }
+        }
 			}
 
 			// Year && month selectors
@@ -46,6 +101,10 @@
 				cursor: pointer;
 				font-family: inherit;
 				font-weight: bold;
+
+        &:hover {
+          opacity: .7;
+        }
 			}
 		}
 	}

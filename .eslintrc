@@ -10,11 +10,12 @@
     "jquery": true
   },
   "globals": {
-  	"L": true,
-  	"Backbone": true,
-  	"_": true,
-  	"App": true,
-    "HandlebarsTemplates": true
+    "L": true,
+    "Backbone": true,
+    "_": true,
+    "App": true,
+    "HandlebarsTemplates": true,
+    "gon": true
   },
   "extends": "eslint:recommended"
 }

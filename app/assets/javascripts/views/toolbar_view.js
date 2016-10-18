@@ -10,10 +10,25 @@
       'click .js-toolbar-action': 'fireAction'
     },
 
-    render: function(data) {
-      if (data) {
-        this.$el.html(this.template(data));
-      }
+    initialize: function() {
+      this.activeFilters = 0;
+      this.render();
+      this.cache();
+    },
+
+    cache: function() {
+      this.$filterBubble = this.$el.find('.js-notification-bubble');
+    },
+
+    render: function() {
+      this.$el.html(this.template());
+    },
+
+    updateActiveFilters: function(activeFilters) {
+      this.activeFilters = activeFilters;
+      this.$filterBubble
+        .html(this.activeFilters)
+        .toggle(!!this.activeFilters)
     },
 
     fireAction: function(e) {

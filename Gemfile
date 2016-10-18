@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 ruby '2.3.1'
 
@@ -27,6 +27,7 @@ gem 'autoprefixer-rails'
 gem 'pickadate-rails', '~> 3.5', '>= 3.5.6.0'
 gem "select2-rails"
 gem 'handlebars_assets'
+gem 'gon'
 
 # Email service integration
 gem 'sendgrid-ruby'
@@ -35,6 +36,8 @@ gem 'sendgrid-ruby'
 gem 'cartomodel', git: 'https://github.com/Vizzuality/cartomodel'
 # gem 'rack-cors', require: 'rack/cors'
 gem 'sql_query'
+
+gem "acts_as_follower"
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-normalize-css'

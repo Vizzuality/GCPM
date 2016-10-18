@@ -1,0 +1,49 @@
+SELECT count(memberships.id) as total
+FROM investigators
+INNER JOIN research_units ON research_units.investigator_id = investigators.id
+INNER JOIN memberships ON memberships.research_unit_id = research_units.id
+INNER JOIN projects on projects.id = memberships.project_id
+INNER JOIN addresses ON addresses.id = research_units.address_id
+INNER JOIN countries ON countries.id = addresses.country_id
+ <% if @params[:organizations] || @params[:organization_types] %>
+  inner join organizations on addresses.organization_id = organizations.id
+<% end %>
+<% if @params[:organization_types] %>
+  inner join organization_types on organization_types.id = organizations.organization_type_id
+<% end %>
+<% if @params[:project_types] %>
+  inner join project_types_projects on project_types_projects.project_id = projects.id
+  inner join project_types on project_types_projects.project_type_id = project_types.id
+<% end %>
+<% if @params[:cancer_types] %>
+  inner join cancer_types_projects on cancer_types_projects.project_id = projects.id
+  inner join cancer_types on cancer_types_projects.cancer_type_id = cancer_types.id
+<% end %>
+WHERE 1 = 1
+<% if @params[:countries] %>
+  and countries.country_iso_3 in     <%= @params[:countries].to_s.gsub('[', '(').gsub(']',')').gsub('"',"'") %>
+<% end %>
+<% if @params[:organizations] %>
+  and organizations.id in <%= "#{'(' + @params[:organizations].join(',') + ')'}" %>
+<% end %>
+<% if @params[:organization_types] %>
+  and organization_types.id in <%= "#{'(' + @params[:organization_types].join(',') + ')'}" %>
+<% end %>
+<% if @params[:project_types] %>
+  and project_types.id in <%= "#{'(' + @params[:project_types].join(',') + ')'}" %>
+<% end %>
+<% if @params[:cancer_types] %>
+  and cancer_types.id in <%= "#{'(' + @params[:cancer_types].join(',') + ')'}" %>
+<% end %>
+<% if @params[:regions] %>
+  and countries.region_iso in <%= @params[:regions].to_s.gsub('[', '(').gsub(']',')').gsub('"',"'") %>
+<% end %>
+<% if @params[:start_date] %>
+  and (projects.start_date > date(<%= quote @params[:start_date] %>))
+<% end %>
+<% if @params[:end_date] %>
+  and (projects.end_date < date(<%= quote @params[:end_date] %>))
+<% end %>
+<% if @params[:user] %>
+  and projects.user_id = <%= quote @params[:user] %>
+<% end %>

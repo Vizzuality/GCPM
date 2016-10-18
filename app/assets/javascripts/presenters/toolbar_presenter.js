@@ -2,16 +2,7 @@
 
   'use strict';
 
-  var StateModel = Backbone.Model.extend({
-
-    defaults: {
-      'sortby': 'title_asc', // title_asc, title_desc, created_as, created_desc
-      'data': 'projects',
-      'dataSingular': 'project',
-      'layer': null
-    }
-
-  });
+  var StateModel = Backbone.Model.extend();
 
   App.Presenter.Toolbar = function() {
     this.initialize.apply(this, arguments);
@@ -21,40 +12,56 @@
 
     initialize: function(params) {
       this.state = new StateModel();
-      this.toolbar = new App.View.Toolbar({ el: '#toolbar' });
-
+      this.toolbar = new App.View.Toolbar({
+        el: '#toolbar'
+      });
       this.setEvents();
       this.setSubscriptions();
+
       this.setState(params);
-      this.toolbar.render(this.state.attributes);
     },
 
     setEvents: function() {
-      this.state.on('change', this.renderToolbar, this);
+      this.state.on('change', this.setActiveFilters, this);
+
       this.toolbar.on('action', function(actionName) {
         App.trigger('Toolbar:action', actionName);
       }, this);
     },
 
     setSubscriptions: function() {
-      App.on('TabNav:change', this.setState, this);
+      App.on('Router:change Breadcrumbs:change FilterForm:change Map:change', this.setState, this);
     },
 
-    setState: function(state) {
-      if (state.data) {
-        state.dataSingular = state.data.slice(0, state.data.length - 1);
-      }
-      this.state.set(state);
+    setState: function(newState) {
+      this.state
+        .clear({ silent: true })
+        .set(newState);
     },
 
-    renderToolbar: function() {
-      var data = this.state.attributes;
-      if (window.USER_ID) {
-        data.userId = window.USER_ID;
-      }
-      this.toolbar.render(data);
-      App.trigger('Toolbar:change', this.state.attributes);
+    getState: function() {
+      return this.state.attributes;
+    },
+
+    setActiveFilters: function() {
+      var filters = _.pick(this.getState(), 'countries[]', 'cancer_types[]',
+        'organization_types[]', 'organizations[]', 'project_types[]',
+        'start_date', 'end_date');
+
+      var activeFilters = _.filter(filters, function(value){
+        var active;
+        // If they are arrays
+        if (_.isArray(value)) {
+          active = value.length
+          return !!active;
+        }
+        return value != null
+      }).length;
+
+      this.toolbar.updateActiveFilters(activeFilters);
     }
+
+
 
   });
 

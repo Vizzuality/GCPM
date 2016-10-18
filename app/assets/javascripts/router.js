@@ -11,16 +11,18 @@
      * @type {Object}
      */
     routes: {
-      'map(?*query)':             'Map#index',
-      'projects/:id':             'Project#show',
-      'events/:id':               'Events#show',
-      'network/:id/projects/new': 'Project#new',
-      'countries':                'Countries#index',
-      'countries/:iso':           'Countries#show',
-      'investigators/:id':        'Investigators#show',
-      'organizations/:id':        'Organizations#show',
-      'cancer-types':             'CancerTypes#index',
-      'cancer-types/:id':         'CancerTypes#show'
+      '(/)':                         'Home#index',
+      'map(?*query)(/)':             'Map#index',
+      'projects/:id(/)':             'Project#show',
+      'events/:id(/)':               'Events#show',
+      'network/:id/projects/new(/)': 'Project#new',
+      'countries(/)':                'Countries#index',
+      'countries/:iso(/)':           'Countries#show',
+      'investigators/:id(/)':        'Investigators#show',
+      'organizations/:id(/)':        'Organizations#show',
+      'cancer-types(/)':             'CancerTypes#index',
+      'cancer-types/:id(/)':         'CancerTypes#show',
+      'network/:id(/)':              'Users#show'
     },
 
     initialize: function() {
@@ -42,7 +44,7 @@
     setSubscriptions: function() {
       var eventsNames = [
         'Map:change', 'TabNav:change',
-        'Toolbar:change', 'FilterForm:change',
+        'SortBy:change', 'FilterForm:change',
         'Breadcrumbs:change'
       ].join(' ');
       App.on(eventsNames, this.setParams, this);

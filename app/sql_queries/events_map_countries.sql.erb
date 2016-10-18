@@ -9,7 +9,7 @@ from events
 inner join countries on events.country = countries.country_name
 where 1=1
 <% if @params[:countries] %>
-  and countries.id in         <%= "#{'(' + @params[:countries].join(',') + ')'}" %>
+  and countries.country_iso_3 in      <%= @params[:countries].to_s.gsub('[', '(').gsub(']',')').gsub('"',"'") %>
 <% end %>
 <% if @params[:regions] %>
   and countries.region_iso in <%= @params[:regions].to_s.gsub('[', '(').gsub(']',')').gsub('"',"'") %>

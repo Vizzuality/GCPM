@@ -23,6 +23,7 @@
     },
 
     template: HandlebarsTemplates['form/select'],
+    //template: HandlebarsTemplates['dropdown'],
 
     initialize: function(settings) {
       var opts = settings && settings.options;
@@ -38,6 +39,11 @@
       this.select = this.$el.find('select').select2(this.options.select2Options);
       this.setValue();
       return this;
+    },
+
+    setState: function(state) {
+      this.state = state;
+      this.setValue();
     },
 
     /**

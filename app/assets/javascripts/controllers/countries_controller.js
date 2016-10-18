@@ -8,12 +8,12 @@
 
     index: function(params) {
       new App.Presenter.CountriesList(params);
-      new App.Presenter.UserNav(params);
     },
 
     show: function(params) {
       new App.Presenter.MapVis(params);
       new App.Presenter.TabNav(params);
+      new App.Presenter.CountryData(params);
       new App.Presenter.ShowMore(params);
     }
 

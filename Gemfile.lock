@@ -38,7 +38,7 @@ GIT
       responders
 
 GEM
-  remote: https://rubygems.org/
+  remote: http://rubygems.org/
   remote: https://rails-assets.org/
   specs:
     actioncable (5.0.0.1)
@@ -84,6 +84,7 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    acts_as_follower (0.2.1)
     addressable (2.4.0)
     airbrussh (1.1.1)
       sshkit (>= 1.6.1, != 1.7.0)
@@ -206,6 +207,11 @@ GEM
     gherkin (4.0.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    gon (6.1.0)
+      actionpack (>= 3.0)
+      json
+      multi_json
+      request_store (>= 1.0)
     handlebars_assets (0.23.1)
       execjs (~> 2.0)
       multi_json (~> 1.0)
@@ -323,6 +329,7 @@ GEM
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    request_store (1.3.1)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
     roo (2.5.1)
@@ -433,6 +440,7 @@ DEPENDENCIES
   active_admin_theme
   active_model_serializers (~> 0.10.0)
   activeadmin!
+  acts_as_follower
   annotate
   autoprefixer-rails
   awesome_print
@@ -455,6 +463,7 @@ DEPENDENCIES
   email_spec
   factory_girl_rails
   faker
+  gon
   handlebars_assets
   hirb
   inherited_resources!

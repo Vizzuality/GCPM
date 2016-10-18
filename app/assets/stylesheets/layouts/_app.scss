@@ -5,9 +5,14 @@
   height: 80vh;
   min-height: 50vh;
 
-  .c-map {
+  .l-app-map {
+    position: relative;
     flex: 1;
-    background-color: $secondary-color;
+
+    .c-map {
+      height: 100%;
+      background-color: $secondary-color;
+    }
   }
 
   &.-main {
@@ -30,10 +35,23 @@
     width: 100%;
     background-color: rgba($primary-color, .7);
     z-index: 1;
+
+
+    #layers {
+      position: relative;
+    }
+  }
+
+  .l-app-claim {
+    position: absolute;
+    top: 37%;
+    left: $box-space;
+    transform: translate(0, -50%);
   }
 
   .l-app-navbar {
     position: relative;
+    margin-top: -52px;
     background-color: rgba($secondary-color, .7);
   }
 
@@ -42,14 +60,15 @@
     width: 100%;
     bottom: 0;
     left: 0;
-    padding: $box-space 0;
+    padding: ($box-space * 1.5) 0;
 
     color: $inverse-font-color;
 
     background-image: linear-gradient(to top, #68299b, rgba(103, 40, 155, 0));
+
+    pointer-events: none;
   }
 
   .l-app-bottombar {
-
   }
 }

@@ -26,7 +26,7 @@
 
         // Use this if you want a single select
         allowClear: true,
-        templateSelection: function(data) {
+        templateSelection: function (data) {
           // Return the placeholder
           if (!data.id) {
             return data.text;
@@ -60,6 +60,8 @@
       }, this);
 
       this.select.on('change', this.setState, this);
+
+      App.on('MapCountry:change', this.triggerCountryChange, this);
     },
 
     /**
@@ -68,10 +70,10 @@
      */
     fetchData: function() {
       return this.countries.fetch().done(function() {
-        var options = this.countries.map(function(type) {
+        var options = this.countries.map(function(country) {
           return {
-            name: type.attributes.name,
-            value: type.attributes.id
+            name: country.attributes.name,
+            value: country.attributes.country_iso_3
           };
         });
         this.select.setOptions(options);
@@ -80,6 +82,19 @@
 
     render: function() {
       this.select.render();
+
+      if (arguments[0]) {
+        var state = new StateModel();
+        state.set(Object.assign({}, this.state.attributes, arguments[0]));
+        this.select.setState(state);
+      }
+    },
+
+    /**
+     * Trigger country change
+     */
+    triggerCountryChange: function(value) {
+      this.render({value: [value]});
     },
 
     /**

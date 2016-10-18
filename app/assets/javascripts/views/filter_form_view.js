@@ -8,7 +8,8 @@
 
     events: {
       'click .js-filter-form-cancel': 'triggerCancel',
-      'submit form': 'triggerSubmit'
+      'click .js-filter-form-submit': 'triggerSubmit',
+      'click .js-filter-form-reset': 'triggerReset'
     },
 
     initialize: function(settings) {
@@ -33,10 +34,15 @@
     },
 
     triggerSubmit: function(e) {
+
       if (e) {
         e.preventDefault();
       }
       this.trigger('submit', this.serializeForm());
+    },
+
+    triggerReset: function() {
+      this.trigger('reset');
     },
 
     /**

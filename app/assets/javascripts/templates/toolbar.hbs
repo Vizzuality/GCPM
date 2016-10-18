@@ -1,19 +1,13 @@
 <ul class="c-toolbar">
-  {{!-- <li>
-    <button class="item btn-mapmenu-action {{color}}" data-action="sortby">
-      <svg class="c-svg {{color}}">
-        <use xlink:href="#icon-sort"></use>
-      </svg>
-      Sort by
-    </button>
-  </li> --}}
+  <li id="sortby"class="toolbar-item -sortby"></li>
 
   <li class="toolbar-item -highlighted">
     <button class="c-btn js-toolbar-action" data-action="filter">
-      <svg class="c-icon -small">
+      <svg class="c-icon -small -inverse">
         <use xlink:href="#icon-filter"></use>
       </svg>
       Filter
+      <span class="notification-bubble js-notification-bubble"></span>
     </button>
   </li>
 </ul>

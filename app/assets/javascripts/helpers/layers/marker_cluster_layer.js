@@ -5,8 +5,8 @@
 
   var blubbleSizes = {
     big: 90,
-    medium: 65,
-    small: 45
+    medium: 70,
+    small: 50
   };
 
   /**
@@ -15,8 +15,9 @@
    * @param  {Object} geoJson
    * @return {Object}
    */
-  App.helper.markerClusterLayer = function(geoJson) {
+  App.helper.markerClusterLayer = function(geoJson, params) {
     var pruneCluster = new PruneClusterForLeaflet();
+    var infowindowTemplate = HandlebarsTemplates['infowindow'];
 
     var circleIcon = new L.divIcon({
       iconSize: [26, 26],
@@ -33,20 +34,35 @@
     pruneCluster.BuildLeafletIcon = function(feature) {
       var location = feature.geometry.coordinates;
       var marker = new PruneCluster.Marker(location[0], location[1]); // lat, lng
-      if (feature.properties.is_project_lead) {
-        marker.data.icon = markerIcon;
-      } else {
-        marker.data.icon = circleIcon;
-      }
       marker.data.feature = feature;
       return marker;
     };
 
+    pruneCluster.PrepareLeafletMarker = function(leafletMarker, data) {
+      var htmlContent = infowindowTemplate(data.feature.properties);
+      var icon = circleIcon;
+      if (data.feature.properties.is_project_lead || params.data === 'events') {
+        icon = markerIcon;
+      }
+      icon.options.className += ' -' + params.data;
+      leafletMarker.setIcon(icon);
+      leafletMarker.bindPopup(htmlContent);
+    };
+
     pruneCluster.originalIcon = pruneCluster.BuildLeafletClusterIcon;
+
+    pruneCluster.Cluster.Size = 20;
 
     pruneCluster.BuildLeafletClusterIcon = function(cluster) {
       var icon = pruneCluster.originalIcon(cluster);
-      icon.options.iconSize = new L.Point(60, 60, null);
+      var bubleSize = blubbleSizes.small;
+      if (cluster.totalWeight >= 100 &&
+        cluster.totalWeight < 999) {
+        bubleSize = blubbleSizes.medium;
+      } else if (cluster.totalWeight > 999) {
+        bubleSize = blubbleSizes.big;
+      }
+      icon.options.iconSize = new L.Point(bubleSize, bubleSize, null);
       return icon;
     };
 

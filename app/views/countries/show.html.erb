@@ -1,15 +1,37 @@
 
-<% title "Map" %>
+<% title @country.country_name %>
 
 <section class="l-app -full">
 
-  <div id="map" class="c-map"></div>
+  <div class="l-app-map">
+    <div id="map" class="c-map"></div>
+  </div>
+
+  <%= render "shared/legend_people" %>
 
   <div class="l-app-title">
     <div class="wrapper">
       <div class="row collapse">
         <div class="column small-8">
           <h1><%= @country.country_name %></h1>
+          <table class="c-numbers-list">
+            <thead>
+              <tr>
+                <th><%= t 'projects' %></th>
+                <th><%= t 'people' %></th>
+                <th><%= t 'events' %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= @projects.size %></td>
+                <td><%= @people.size %></td>
+                <td><%= @events.size %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="column small-4">
         </div>
       </div>
     </div>
@@ -43,7 +65,11 @@
 <div class="l-grid" id="content">
   <% if @current_type == 'events' %>
     <%= render 'events/list', items: @items, more: @more %>
-  <% else %>
+  <% elsif @current_type == 'projects' %>
     <%= render 'projects/list', items: @items, more: @more %>
+  <% elsif @current_type == 'data' %>
+    <%= render 'data/list'%>
+  <% else @current_type %>
+    <%= render 'investigators/list', items: @items, more: @more %>
   <% end %>
 </div>

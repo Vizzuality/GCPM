@@ -13,6 +13,7 @@
     initialize: function(params) {
       this.state = new StateModel();
       this.tabnav = new App.View.TabNav({ el: '#dataTabNav' });
+      this.dataType = params.dataType || 'projects';
 
       this.setEvents();
       this.setSubscriptions();
@@ -29,11 +30,16 @@
     },
 
     setSubscriptions: function() {
-      App.on('Router:change Map:change', this.setState, this);
+      App.on('Router:change Breadcrumbs:change FilterForm:change Map:change', this.setState, this);
     },
 
-    setState: function(state) {
-      this.state.set(state);
+    setState: function(newState) {
+      if (!newState.data) {
+        newState.data = this.dataType;
+      }
+      this.state
+        .clear({ silent: true })
+        .set(newState);
     },
 
     getState: function() {
