@@ -1,13 +1,13 @@
 <div class="column small-4">
-  <div id="userActions">
+  <div>
     <ul class="c-btn-container">
-      <li>
-        <form method="POST" action="/follows/<%= @followed_resource %>/<%= @followed_id %>"
-          data-remote=true>
-          <button type="submit" class="c-btn -secondary -inverse">
-            <%= (@followed) ? 'Unfollow' : 'Follow' %>
-          </button>
-        </form>
+      <li id="followButton">
+        <button type="submit" class="c-btn -secondary -inverse js-btn-follow"
+          data-followed="<%= @followed %>"
+          data-id="<%= @followed_id %>"
+          data-resource="<%= @followed_resource %>">
+          <%= (@followed) ? 'Unfollow' : 'Follow' %>
+        </button>
       </li>
     </ul>
     <ul class="c-btn-container">

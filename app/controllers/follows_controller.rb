@@ -1,11 +1,9 @@
 class FollowsController < ApplicationController
-
   before_action :find_resource, only: [:create, :destroy]
   before_action :find_user, only: [:block, :unblock]
 
   def create
     if current_user.follow(@entity)
-      puts "************************************************************************************************#{@entity.id}"
       respond_to do |format|
         format.js
       end
