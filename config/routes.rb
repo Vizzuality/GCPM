@@ -29,6 +29,7 @@ Rails.application.routes.draw do
 
   post 'follows/:resource/:id', to: 'follows#create', as: :follows
   delete 'follows/:resource/:id', to: 'follows#destroy', as: :follow
+  
   post 'block/:user_id', to: 'follows#block', as: :blocks
   delete 'block/:user_id', to: 'follows#unblock', as: :block
 

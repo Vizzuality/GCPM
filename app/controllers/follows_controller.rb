@@ -51,7 +51,7 @@ class FollowsController < ApplicationController
   private
 
   def find_resource
-    if @entity = params[:entity].classify.safe_constantize.send(:find, params[:id])
+    if @entity = params[:resource].classify.safe_constantize.send(:find, params[:id])
       @entity
     else
       not_found
