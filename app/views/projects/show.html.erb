@@ -19,11 +19,7 @@
                 <% #if @project.project_lead && @project.project_lead.img %>
                   <!-- <img src="<%# @project.project_lead.img %>" class="c-avatar -small" /> -->
                 <% #else %>
-                  <div class="c-avatar -small">
-                    <% if @project.project_lead && @project.project_lead.name %>
-                      <%= @project.project_lead.name[0] %>
-                    <% end %>
-                  </div>
+                  <div class="c-avatar -small -ph"></div>
                 <% #end %>
               <h3>
                 <%= @project.project_lead && @project.project_lead.name %>
@@ -32,7 +28,9 @@
 
             <div class="column small-12 large-4 align-middle">
               <div class="c-avatar -small">
-                <!-- svg -->
+                <svg class="c-icon icon-colab_icon">
+                  <use xlink:href="#icon-colab_icon"></use>
+                </svg>
               </div>
               <h3><%= @project.investigators.count %> <%= t 'collaborator'%>(s)</h3>
             </div>
@@ -40,7 +38,9 @@
             <% if @project.funding_sources && @project.funding_sources.size > 0 %>
               <div class="column small-12 large-4 align-middle">
                 <div class="c-avatar -small">
-                  <!-- svg -->
+                  <svg class="c-icon icon-funding_icon">
+                    <use xlink:href="#icon-funding_icon"></use>
+                  </svg>
                 </div>
                 <div>
                   <h3><%= t 'funding_source' %></h3>

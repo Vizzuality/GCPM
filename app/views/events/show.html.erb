@@ -18,7 +18,9 @@
           <div class="c-summary-info row -collapse">
             <div class="column small-12 medium-4 align-middle">
               <div class="c-avatar -small">
-                <!-- svg -->
+                <svg class="c-icon icon-colab_icon">
+                  <use xlink:href="#icon-colab_icon"></use>
+                </svg>
               </div>
               <h3><%= @event.participants != nil ? @event.participants.split(',').length : 0 %>
                 Participants</h3>

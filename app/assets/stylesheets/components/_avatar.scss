@@ -9,6 +9,11 @@
   background-color: $primary-color;
   color: $inverse-font-color;
 
+  &.-ph {
+    background-image: url('placeholder.png');
+    background-size: cover;
+  }
+
   &.-small {
     width: 38px;
     height: 38px;
