@@ -17,7 +17,8 @@
         <div class="column small-8">
           <div class="c-summary-info row -collapse">
             <div class="column small-12 medium-4 align-middle">
-              <h3><%= @event.participants.split(',').length %> Participants</h3>
+              <h3><%= @event.participants != nil ? @event.participants.split(',').length : nil%>
+                Participants</h3>
             </div>
           </div>
         </div>
