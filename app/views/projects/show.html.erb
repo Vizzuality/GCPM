@@ -15,18 +15,37 @@
 
           <div class="c-summary-info row -collapse">
 
-            <div class="column small-12 medium-4 align-middle">
-              <h3><%= @project.project_lead && @project.project_lead.name %></h3>
+            <div class="column small-12 large-4 align-middle">
+                <% #if @project.project_lead && @project.project_lead.img %>
+                  <!-- <img src="<%# @project.project_lead.img %>" class="c-avatar -small" /> -->
+                <% #else %>
+                  <div class="c-avatar -small">
+                    <% if @project.project_lead && @project.project_lead.name %>
+                      <%= @project.project_lead.name[0] %>
+                    <% end %>
+                  </div>
+                <% #end %>
+              <h3>
+                <%= @project.project_lead && @project.project_lead.name %>
+              </h3>
             </div>
 
-            <div class="column small-12 medium-4 align-middle">
+            <div class="column small-12 large-4 align-middle">
+              <div class="c-avatar -small">
+                <!-- svg -->
+              </div>
               <h3><%= @project.investigators.count %> <%= t 'collaborator'%>(s)</h3>
             </div>
 
             <% if @project.funding_sources && @project.funding_sources.size > 0 %>
-              <div class="column small-12 medium-4 align-middle">
-                <h3><%= t 'funding_source' %></h3>
-                <span><%= @project.funding_sources.first.name %></span>
+              <div class="column small-12 large-4 align-middle">
+                <div class="c-avatar -small">
+                  <!-- svg -->
+                </div>
+                <div>
+                  <h3><%= t 'funding_source' %></h3>
+                  <span><%= @project.funding_sources.first.name %></span>
+                </div>
               </div>
             <% end %>
 
