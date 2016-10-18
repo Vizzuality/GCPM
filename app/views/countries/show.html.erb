@@ -67,6 +67,8 @@
     <%= render 'events/list', items: @items, more: @more %>
   <% elsif @current_type == 'projects' %>
     <%= render 'projects/list', items: @items, more: @more %>
+  <% elsif @current_type == 'data' %>
+    <%= render 'data/list'%>
   <% else @current_type %>
     <%= render 'investigators/list', items: @items, more: @more %>
   <% end %>
