@@ -1,0 +1,63 @@
+
+#cke_post_body, .cke_chrome {
+  box-shadow: none;
+
+  a {
+    cursor: pointer;
+
+    &:hover {
+      background: transparent;
+      background-image: none;
+    }
+  }
+
+  .cke_top {
+    background-image: none;
+    background: transparent;
+
+    .cke_toolgroup {
+      border-radius: 0;
+      background-image: none;
+      background: transparent;
+    }
+
+    a.cke_button_on:hover, a.cke_button_on:focus, a.cke_button_on:active {
+      box-shadow: none!important;
+      background-image: none!important;
+      background: transparent!important;
+    }
+
+    a.cke_button_off:hover, a.cke_button_off:focus, a.cke_button_off:active,
+    a.cke_button_disabled:hover, a.cke_button_disabled:focus,
+    a.cke_button_disabled:active {
+      box-shadow: none!important;
+      background-image: none!important;
+      background: transparent!important;
+    }
+
+    a.cke_button_on {
+      background: $overlay-bg-color;
+    }
+
+    a.cke_combo_button {
+      cursor: pointer;
+      background-image: none;
+      background: transparent;
+      border-radius: 0;
+
+      &:active {
+        border: 0;
+        box-shadow: 0;
+      }
+    }
+  }
+
+  .cke_bottom {
+    background: transparent!important;
+    background-image: none!important;
+
+    & .cke_resizer {
+      display: none;
+    }
+  }
+}
