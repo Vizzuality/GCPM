@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get '/organizations/:id',     to: 'organizations#show', as: 'organization'
   get '/about',                 to: 'about#index',        as: 'about'
   get '/downloads/user-manual', to: 'downloads#show',     as: 'download_user_manual'
+  get '/network/:id',           to: 'users#show',         as: 'user'
 
   resources :projects, only: :show
   resources :events, except: :destroy
