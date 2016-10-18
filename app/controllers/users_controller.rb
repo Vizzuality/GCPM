@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     @filters = %w(network projects posts)
     @current_type = params.key?(:data) ? params[:data] : 'projects'
 
-    gon.server_params = { 'investigators[]': @investigator.size > 0 ? @investigator.first.id : '0' }
+    gon.server_params = { 'investigators[]': @investigator.size.positive? ? @investigator.first.id : '0' }
 
     limit = 12 + (@page * 9)
 
