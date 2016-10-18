@@ -22,7 +22,7 @@
 
   /* Project Title input */
   & #title{
-    margin: 80px 0;
+    margin: 80px 0 40px 0;
 
     & .c-title{
 
@@ -56,7 +56,7 @@
 
     & textarea{
       width: 100%;
-      min-height: 400px;
+      min-height: 200px;
       border: 1px solid #eee;
       border-radius: 0;
     }

@@ -14,7 +14,7 @@
       label: null,
       placeholder: 'Lead',
       name: 'lead',
-      type: 'checkbox',
+      type: 'radio',
       class: 'c-input',
     },
 

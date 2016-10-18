@@ -23,7 +23,7 @@
           placeholder: '',
           name: 'organizationLongitude',
           type: 'number',
-          required: true,
+          required: false,
           class: 'c-input',
           min: -180,
           max: 180

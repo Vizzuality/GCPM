@@ -19,7 +19,7 @@
           placeholder: 'http://example.org',
           name: 'project_website',
           type: 'url',
-          required: true,
+          required: false,
           class: 'c-input',
           inputClass: 'c-section-title -one-line',
         }

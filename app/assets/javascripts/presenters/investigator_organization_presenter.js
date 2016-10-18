@@ -36,7 +36,8 @@
       });
       var lead = new App.Presenter.OrganizationLead({
         DOMelement: "#lead-1",
-        name: "lead-1",
+        name: "lead",
+        value: "lead-1",
         label: false,
       });
 
@@ -179,7 +180,8 @@
       });
       var lead = new App.Presenter.OrganizationLead({
         DOMelement: "#lead-"+this.investigatorOrganization.elementId,
-        name: "lead-"+this.investigatorOrganization.elementId,
+        name: "lead",
+        value: "lead-"+this.investigatorOrganization.elementId,
         label: false,
       });
       this.investigatorOrganization.createElements([investigator, organization,

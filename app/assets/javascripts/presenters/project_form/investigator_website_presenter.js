@@ -23,7 +23,7 @@
           placeholder: 'http://www.example.com',
           name: 'investigatorWebsite',
           type: 'url',
-          required: true,
+          required: false,
           class: 'c-input'
         }
       });

@@ -23,7 +23,7 @@
           placeholder: '',
           name: 'organizationLatitude',
           type: 'number',
-          required: true,
+          required: false,
           class: 'c-input',
           min: -90,
           max: 90

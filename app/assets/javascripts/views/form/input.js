@@ -16,7 +16,8 @@
     },
 
     events: {
-      'blur input': 'triggerChange'
+      'blur input': 'triggerChange',
+      'focus input': 'triggerFocus'
     },
 
     template: HandlebarsTemplates['form/input'],
@@ -40,6 +41,10 @@
         name: e.currentTarget.name,
         value: e.currentTarget.value
       });
+    },
+
+    triggerFocus: function(e){
+      e.currentTarget.placeholder = '';
     }
 
   });

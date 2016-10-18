@@ -47,7 +47,6 @@
       });
 
       this.request = {};
-      this.request.project = {};
       this.setEvents();
       this.setSubscriptions();
       this.renderForm();
@@ -92,10 +91,6 @@
       this.buildRequest();
       console.log(this.request);
 
-      // @TODO I have the elements and the Ids in this.investigatorOrganization.elements
-      // for each one -> get the data from attributes and make a proper request
-      // then just spend 1 hour to focus in other bugs like input.
-
       // @TODO request (validate response)
       var p = new Promise(function(resolve, reject){
         console.log(this.request);
@@ -109,27 +104,27 @@
               resolve(this.response);
             }
           }
-          // else if(ERROR){
-          //   reject(q.response);
-          // }
         }
         q.send(JSON.stringify(this.request));
       }.bind(this)).then(function(response){
         var response = JSON.parse(response);
-        console.log(response);
+        //ALERT OK REDIRECT
       }.bind(this)).catch(function(response){
         throw Error(response);
+        //ALERT ERROR
       });
     },
 
     buildRequest: function(){
-      this.request.project["title"] = this.state.attributes["title"];
-      this.request.project["summary"] = this.state.attributes["summary"];
-      this.request.project["start_date"] = this.state.attributes["start_date"];
-      this.request.project["end_date"] = this.state.attributes["end_date"];
-      this.request.project["project_website"] = this.state.attributes["project_website"];
-      this.request.project["project_type_ids"] = this.state.attributes["project_types[]"];
-      this.request.project["cancer_type_ids"] = this.state.attributes["cancer_types[]"];
+      this.request.project = {
+        title: this.state.attributes["title"],
+        summary: this.state.attributes["summary"],
+        start_date: this.state.attributes["start_date"],
+        end_date: this.state.attributes["end_date"],
+        project_website: this.state.attributes["project_website"],
+        project_type_ids: this.state.attributes["project_types[]"],
+        cancer_type_ids: this.state.attributes["cancer_types[]"]
+      };
       this.buildFundingSources();
       this.buildInvestigators();
     },
@@ -143,15 +138,17 @@
         else{
           this.request.project["new_funders"] = [];
           element = JSON.parse(element);
-          var funder = {};
-          funder["name"] = element["organizationName"];
-          funder["organization_type_id"] = element["organizationType"];
-          funder["addresses_attributes"] = [];
-          var funderAdd = {};
-          funderAdd["country_id"] = element["organizationCountry"];
-          funderAdd["latitude"] = element["organizationLatitude"];
-          funderAdd["longitude"] = element["organizationLongitude"];
-          funderAdd["primary"] = true;
+          var funder = {
+            name: element["organizationName"],
+            organization_type_id: element["organizationType"],
+            addresses_attributes: []
+          };
+          var funderAdd = {
+            country_id: element["organizationCountry"],
+            latitude: element["organizationLatitude"],
+            longitude: element["organizationLongitude"],
+            primary: true,
+          };
           funder["addresses_attributes"].push(funderAdd);
           this.request.project["new_funders"].push(funder);
         }
@@ -159,7 +156,74 @@
     },
 
     buildInvestigators(){
+      if(this.investigatorOrganization.elements.length > 0){
+        this.request.project["investigators"] = [];
+        _.each(this.investigatorOrganization.elements, function(element) {
+          var id = element.id;
+          var investigator = JSON.parse(this.state.attributes["investigator-"+id]);
+          var organization = JSON.parse(this.state.attributes["organization-"+id]);
+          var address = this.state.attributes["address-"+id];
+          var lead = this.state.attributes["lead"];
+          var obj = {};
 
+          // LEAD
+          if(lead.split("-")[1] == id){
+            obj.membership_type = "main";
+          }
+          else{
+            obj.membership_type = "secondary";
+          }
+
+          // EE
+          if(!isNaN(parseInt(investigator)) && !isNaN(parseInt(organization))){
+            obj.research_unit_attributes = {
+              investigator_id: investigator,
+              address_id: address
+            };
+          } // EN
+          else if(!isNaN(parseInt(investigator)) && isNaN(parseInt(organization))){
+            obj.research_unit_attributes = {
+              investigator_id: investigator,
+              addresses_attributes: {
+                country_id: organization.organizationCountry,
+                organization_attributes: {
+                  name: organization.organizationName,
+                  organization_type_id: organization.organizationType
+                }
+              }
+            };
+          } // NE
+          else if(isNaN(parseInt(investigator)) && !isNaN(parseInt(organization))){
+            obj.research_unit_attributes = {
+              address_id: address,
+              investigator_attributes: {
+                name: investigator.investigatorName,
+                email: investigator.investigatorName,
+                website: investigator.investigatorWebsite
+              }
+            };
+          } // NN
+          else{
+            obj.research_unit_attributes = {
+              investigator_attributes: {
+                name: investigator.investigatorName,
+                email: investigator.investigatorName,
+                website: investigator.investigatorWebsite,
+                addresses_attributes: [
+                  {
+                    country_id: organization.organizationCountry,
+                    organization_attributes: {
+                      name: organization.organizationName,
+                      organization_type_id: organization.organizationType
+                    }
+                  }
+                ]
+              }
+            };
+          }
+          this.request.project["investigators"].push(obj);
+        }, this);
+      }
     },
 
     renderForm: function(){
