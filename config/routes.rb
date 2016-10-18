@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+  mount Ckeditor::Engine => '/ckeditor'
   devise_for :users, controllers: { sessions: 'sessions' }
 
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -17,6 +19,7 @@ Rails.application.routes.draw do
 
   resources :projects, only: :show
   resources :events, except: :destroy
+  resources :posts
 
   # User profile
   resources :users, only: :show, path: :network do
