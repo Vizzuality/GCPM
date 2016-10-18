@@ -5,6 +5,7 @@ class FollowsController < ApplicationController
 
   def create
     if current_user.follow(@entity)
+      puts "************************************************************************************************#{@entity.id}"
       respond_to do |format|
         format.js
       end
