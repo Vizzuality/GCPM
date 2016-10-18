@@ -43,7 +43,7 @@ gem 'cartomodel', git: 'https://github.com/Vizzuality/cartomodel'
 # gem 'rack-cors', require: 'rack/cors'
 gem 'sql_query'
 
-gem "acts_as_follower"
+gem "acts_as_follower", git: 'https://github.com/tcocca/acts_as_follower'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-normalize-css'

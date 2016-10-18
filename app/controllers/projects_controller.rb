@@ -15,7 +15,7 @@ class ProjectsController < ApplicationController
     @followed_resource = 'Project'
 
     puts '***************************'
-    puts current_user.follow_count
+    puts "*************************************************************************************#{current_user.follow_count}"
     puts '***************************'
 
     respond_with(@project)
