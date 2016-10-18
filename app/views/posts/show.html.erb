@@ -11,6 +11,7 @@
         </div>
 
         <%= link_to 'Edit', edit_post_path(@post), class: 'c-btn -primary' %>          
+        <%= link_to 'View all', user_path(id: current_user.id, data: 'posts'), class: 'c-btn -primary -inverse' %>          
       </div>
     </div>
   </div>  
