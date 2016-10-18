@@ -4,13 +4,21 @@
 
   App.View.UserMenu = Backbone.View.extend({
 
-    el: '.js-user-menu',
-
     events: {
       'click': 'handleUserMenu'
     },
 
     initialize: function() {
+      this.setEvents();
+    },
+
+    setEvents: function() {
+      $(document).on('click', this.handleDocumentClick.bind(this));
+    },
+
+    handleDocumentClick: function(e) {
+      var isContained = this.el.contains(e.target);
+      !isContained && this.trigger('close', this);
     },
 
     handleUserMenu: function() {

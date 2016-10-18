@@ -7,7 +7,7 @@
     <div id="map" class="c-map"></div>
   </div>
 
-  <%= render "shared/legend" %>
+  <%= render "shared/legend_people" %>
 
   <div class="l-app-title">
     <div class="wrapper">
@@ -30,7 +30,6 @@
               </tr>
             </tbody>
           </table>
-          <br/>
         </div>
         <div class="column small-4">
         </div>
@@ -68,6 +67,8 @@
     <%= render 'events/list', items: @items, more: @more %>
   <% elsif @current_type == 'projects' %>
     <%= render 'projects/list', items: @items, more: @more %>
+  <% elsif @current_type == 'data' %>
+    <%= render 'data/list'%>
   <% else @current_type %>
     <%= render 'investigators/list', items: @items, more: @more %>
   <% end %>

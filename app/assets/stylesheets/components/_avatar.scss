@@ -19,8 +19,16 @@
     height: 38px;
   }
 
-  &.-big {
+  &.-medium {
     width: 120px;
     height: 120px;
+    font-size: $medium-font-size;
   }
+
+  &.-big {
+    width: 150px;
+    height: 150px;
+    font-size: $big-font-size;
+  }
+
 }
