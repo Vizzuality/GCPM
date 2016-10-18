@@ -11,7 +11,11 @@
 #
 
 class Investigator < ApplicationRecord
+
+  acts_as_followable
+
   has_many :research_units
+
   has_many :addresses,     through: :research_units
   has_many :organizations, through: :addresses
   has_many :memberships,   through: :research_units
