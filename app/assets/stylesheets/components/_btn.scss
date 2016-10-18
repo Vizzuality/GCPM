@@ -41,20 +41,24 @@
       background-color: $inverse-font-color;
       border: 1px solid $primary-color;
     }
-  }
 
-  &:hover {
-    box-shadow: $box-shadow-2;
+    &:hover {
+      box-shadow: $box-shadow-2;
+    }
   }
 
   // Global
-  &.-global {
+  &.-secondary {
     color: $inverse-font-color;
     background-color: $secondary-color;
 
     &.-inverse {
       background-color: $inverse-font-color;
       color: $secondary-color;
+    }
+
+    &:hover {
+      box-shadow: $box-shadow-2;
     }
   }
 
@@ -68,6 +72,10 @@
       background-color: $inverse-font-color;
       border: 1px solid $alternative-color;
     }
+
+    &:hover {
+      box-shadow: $box-shadow-2;
+    }
   }
 
   // Transparent
@@ -75,6 +83,10 @@
     color: $inverse-font-color;
     background-color: transparent;
     border: 1px solid $inverse-font-color;
+
+    &:hover {
+      box-shadow: $box-shadow-2;
+    }
   }
 
   &.-with-icon {
