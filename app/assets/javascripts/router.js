@@ -21,7 +21,8 @@
       'investigators/:id(/)':        'Investigators#show',
       'organizations/:id(/)':        'Organizations#show',
       'cancer-types(/)':             'CancerTypes#index',
-      'cancer-types/:id(/)':         'CancerTypes#show'
+      'cancer-types/:id(/)':         'CancerTypes#show',
+      'network/:id(/)':              'Users#show'
     },
 
     initialize: function() {
