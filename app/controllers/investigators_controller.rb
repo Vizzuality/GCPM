@@ -21,10 +21,11 @@ class InvestigatorsController < ApplicationController
     @more = (@projects.size > @items.size)
     @items_total = @projects.size
 
-
-    @followed = current_user.following?(@investigator)
-    @followed_id = @investigator.id
-    @followed_resource = 'Investigator'
+    if current_user
+      @followed = current_user.following?(@investigator)
+      @followed_id = @investigator.id
+      @followed_resource = 'Investigator'
+    end
 
     respond_with(@items)
   end
