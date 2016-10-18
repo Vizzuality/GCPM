@@ -21,6 +21,8 @@ class Membership < ApplicationRecord
 
   validates :project_id, uniqueness: { scope: :research_unit_id }
 
+  accepts_nested_attributes_for :research_unit
+
   def address
     if research_unit && research_unit.address.present?
       self.research_unit.address
