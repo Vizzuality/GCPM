@@ -4,24 +4,25 @@
 
   var StateModel = Backbone.Model.extend();
 
-  App.Presenter.OrganizationLead = function() {
+  App.Presenter.Policy = function() {
     this.initialize.apply(this, arguments);
   };
 
-  _.extend(App.Presenter.OrganizationLead.prototype, {
+  _.extend(App.Presenter.Policy.prototype, {
 
     defaults: {
       label: null,
-      info: 'Lead',
-      name: 'lead',
-      type: 'radio',
+      name: 'policy',
+      info: 'Accept privacy policy',
+      type: 'checkbox',
+      required: true,
       class: 'c-input',
     },
 
     initialize: function(viewSettings) {
       this.state = new StateModel();
       this.input = new App.View.Input({
-        el: viewSettings.DOMelement,
+        el: '#policy',
         options: _.extend({}, this.defaults, viewSettings || {}),
         state: this.state
       });
@@ -29,9 +30,8 @@
     },
 
     setEvents: function(){
-      this.state.on('change', function(newState){
-        this.setState(newState);
-        App.trigger('OrganizationLead:change', this.state);
+      this.state.on('change', function(){
+        App.trigger('Policy:change', this.state.attributes);
       }, this);
 
       this.input.on('change', this.setState, this);

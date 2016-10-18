@@ -21,7 +21,7 @@
         options: {
           value: null,
           label: false,
-          required: false,
+          required: true,
           class: 'c-textarea',
           name: 'summary',
           type: 'textarea',

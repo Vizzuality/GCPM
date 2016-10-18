@@ -10,6 +10,7 @@
       name: null,
       type: 'text',
       required: false,
+      info: false,
       class: 'c-input',
       min: false,
       max: false

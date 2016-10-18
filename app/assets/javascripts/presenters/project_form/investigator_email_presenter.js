@@ -23,7 +23,7 @@
           placeholder: 'test@test.com',
           name: 'investigatorEmail',
           type: 'email',
-          required: true,
+          required: false,
           class: 'c-input'
         }
       });

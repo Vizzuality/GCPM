@@ -34,12 +34,13 @@
         label: null,
         addNew: true
       });
+      var policy = new App.Presenter.Policy();
 
       this.investigatorOrganization = new App.Presenter.InvestigatorOrganization();
       this.fundingSourcesForm = new App.Presenter.FundingSourcesForm();
 
       this.children = [titleInput, descTextarea, startPickadate, endPickadate,
-         websiteInput, projectTypes, cancerTypes, fundingSources, this.investigatorOrganization];
+         websiteInput, projectTypes, cancerTypes, fundingSources, policy, this.investigatorOrganization];
 
       this.projectForm = new App.View.ProjectForm({
         children: this.children,
@@ -93,25 +94,30 @@
 
       // @TODO request (validate response)
       var p = new Promise(function(resolve, reject){
-        console.log(this.request);
         var url = "/api/projects?token="+AUTH_TOKEN;
         var q = new XMLHttpRequest();
         q.open('POST', url, true);
         q.setRequestHeader('Content-Type', 'application/json');
         q.onreadystatechange = function(){
-          if(this.readyState == 4 && this.status == 200){
-            if(this.response !== undefined && this.response !== ""){
+          if(this.readyState === 4){
+            if(this.status.toString()[0] == "2"){
               resolve(this.response);
+            }
+            else if(this.status.toString()[0] == "4" || this.status.toString()[0] == "5"){
+              reject(this.response);
+            }
+            else{
+              // foo
             }
           }
         }
         q.send(JSON.stringify(this.request));
       }.bind(this)).then(function(response){
-        var response = JSON.parse(response);
-        //ALERT OK REDIRECT
+        var pId = JSON.parse(response).id;
+        window.location.href = "/projects/"+pId;
       }.bind(this)).catch(function(response){
-        throw Error(response);
-        //ALERT ERROR
+        var messages = JSON.parse(response).messages;
+        console.log(messages);
       });
     },
 
@@ -157,72 +163,75 @@
 
     buildInvestigators(){
       if(this.investigatorOrganization.elements.length > 0){
-        this.request.project["investigators"] = [];
-        _.each(this.investigatorOrganization.elements, function(element) {
-          var id = element.id;
-          var investigator = JSON.parse(this.state.attributes["investigator-"+id]);
-          var organization = JSON.parse(this.state.attributes["organization-"+id]);
-          var address = this.state.attributes["address-"+id];
-          var lead = this.state.attributes["lead"];
-          var obj = {};
+        var firstId = this.investigatorOrganization.elements[0].id;
+        if(JSON.parse(this.state.attributes["investigator-"+firstId]) !== null){
+          this.request.project["memberships"] = [];
+          _.each(this.investigatorOrganization.elements, function(element) {
+            var id = element.id;
+            var investigator = JSON.parse(this.state.attributes["investigator-"+id]);
+            var organization = JSON.parse(this.state.attributes["organization-"+id]);
+            var address = this.state.attributes["address-"+id];
+            var lead = this.state.attributes["lead"];
+            var obj = {};
 
-          // LEAD
-          if(lead.split("-")[1] == id){
-            obj.membership_type = "main";
-          }
-          else{
-            obj.membership_type = "secondary";
-          }
+            // LEAD
+            if(lead.split("-")[1] == id){
+              obj.membership_type = "main";
+            }
+            else{
+              obj.membership_type = "secondary";
+            }
 
-          // EE
-          if(!isNaN(parseInt(investigator)) && !isNaN(parseInt(organization))){
-            obj.research_unit_attributes = {
-              investigator_id: investigator,
-              address_id: address
-            };
-          } // EN
-          else if(!isNaN(parseInt(investigator)) && isNaN(parseInt(organization))){
-            obj.research_unit_attributes = {
-              investigator_id: investigator,
-              addresses_attributes: {
-                country_id: organization.organizationCountry,
-                organization_attributes: {
-                  name: organization.organizationName,
-                  organization_type_id: organization.organizationType
-                }
-              }
-            };
-          } // NE
-          else if(isNaN(parseInt(investigator)) && !isNaN(parseInt(organization))){
-            obj.research_unit_attributes = {
-              address_id: address,
-              investigator_attributes: {
-                name: investigator.investigatorName,
-                email: investigator.investigatorName,
-                website: investigator.investigatorWebsite
-              }
-            };
-          } // NN
-          else{
-            obj.research_unit_attributes = {
-              investigator_attributes: {
-                name: investigator.investigatorName,
-                email: investigator.investigatorName,
-                website: investigator.investigatorWebsite,
-                addresses_attributes: [
-                  {
-                    country_id: organization.organizationCountry,
-                    organization_attributes: {
-                      name: organization.organizationName,
-                      organization_type_id: organization.organizationType
-                    }
+            // EE
+            if(!isNaN(parseInt(investigator)) && !isNaN(parseInt(organization))){
+              obj.research_unit_attributes = {
+                investigator_id: investigator,
+                address_id: address
+              };
+            } // EN
+            else if(!isNaN(parseInt(investigator)) && isNaN(parseInt(organization))){
+              obj.research_unit_attributes = {
+                investigator_id: investigator,
+                addresses_attributes: {
+                  country_id: organization.organizationCountry,
+                  organization_attributes: {
+                    name: organization.organizationName,
+                    organization_type_id: organization.organizationType
                   }
-                ]
-              }
-            };
-          }
-          this.request.project["investigators"].push(obj);
-        }, this);
+                }
+              };
+            } // NE
+            else if(isNaN(parseInt(investigator)) && !isNaN(parseInt(organization))){
+              obj.research_unit_attributes = {
+                address_id: address,
+                investigator_attributes: {
+                  name: investigator.investigatorName,
+                  email: investigator.investigatorName,
+                  website: investigator.investigatorWebsite
+                }
+              };
+            } // NN
+            else{
+              obj.research_unit_attributes = {
+                investigator_attributes: {
+                  name: investigator.investigatorName,
+                  email: investigator.investigatorName,
+                  website: investigator.investigatorWebsite,
+                  addresses_attributes: [
+                    {
+                      country_id: organization.organizationCountry,
+                      organization_attributes: {
+                        name: organization.organizationName,
+                        organization_type_id: organization.organizationType
+                      }
+                    }
+                  ]
+                }
+              };
+            }
+            this.request.project["memberships"].push(obj);
+          }, this);
+        }
       }
     },
 
