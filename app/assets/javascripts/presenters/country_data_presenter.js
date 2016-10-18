@@ -11,7 +11,17 @@
     },
 
     parse: function(response) {
-      return response.rows[0];
+      var data = response.rows[0];
+      // Exceptions:
+      // Parse screening programs
+      data.screening_programs = !!_.filter(_.pick(data,
+        'breast_cancer_screening_programscountries_with_organized_or_uno',
+        'cervical_cancer_screening_programscountries_with_organized_or_u',
+        'colorectal_cancer_screening_programscountries_with_organized_or'), function(param){
+          return param === 'Has screening program'
+        }).length;
+
+      return data;
     }
   });
 
@@ -33,21 +43,21 @@
       this.setSubscriptions();
 
       this.setState(params);
+      this.renderSubviews();
     },
 
     setEvents: function() {
-      this.state.on('change', this.changeData, this);
+      this.state.on('change', this.renderSubviews, this);
     },
 
     setSubscriptions: function() {
       App.on('TabNav:change', this.setState, this);
+      App.on('Remote:load', this.renderSubviews, this);
     },
 
     setState: function(newState) {
       this.state
         .set(newState, { silent: true });
-
-      this.renderSubviews()
     },
 
     getState: function() {
@@ -57,19 +67,16 @@
     renderSubviews: function() {
       if (this.state.get('data') === 'data') {
         this.country.setUrl(this.state.attributes.vars[0]);
-        this.country.fetch().done(function(){
-          this.updateCountryData();
-        }.bind(this));
+        this.country.fetch()
+          .done(function(){
+            var country = this.country.toJSON();
+
+            this.countryData.setElement('#countryData');
+            this.countryData.setOptions(country);
+            this.countryData.render();
+          }.bind(this));
       }
-    },
-
-    updateCountryData: function() {
-      var country = this.country.toJSON();
-      this.countryData.setElement('#countryData');
-      this.countryData.setOptions(country);
-      this.countryData.render();
     }
-
   });
 
 })(this.App);

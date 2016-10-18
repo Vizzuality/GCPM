@@ -3,7 +3,9 @@
     <div class="column small-12 medium-6 large-4">
       <div class="c-data-item">
         <p class="title">Presence of screening programs</p>
-        <h2 class="answer">Yes</h2>
+        <h2 class="answer">
+          {{#if screening_programs}} Yes {{else}} No {{/if}}
+        </h2>
       </div>
     </div>
     <div class="column small-12 medium-6 large-4">
@@ -18,7 +20,7 @@
       <div class="c-data-item">
         <p class="title">Pink Ribbon Red Ribbon Collaboration</p>
         <h2 class="answer">
-          {{pink_ribbon_red_ribbon_collaborationpink_ribbon_red_ribbon_prr}}
+          {{#if pink_ribbon_red_ribbon_collaborationpink_ribbon_red_ribbon_prr}} Yes {{else}} No {{/if}}
         </h2>
       </div>
     </div>

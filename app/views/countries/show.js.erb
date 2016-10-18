@@ -8,6 +8,6 @@
   // If I use pure javascript, the trigger will never happen
   $('#content').html(htmlContent);
 
-  App.trigger('TabNav:change', { data: "<%= @current_type %>" })
+  App.trigger('Remote:load');
 
 })();
