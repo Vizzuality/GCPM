@@ -37,6 +37,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :lockable, :timeoutable
 
+  acts_as_follower
+
   has_many :projects, inverse_of: :user
   has_many :events, inverse_of: :user
 
