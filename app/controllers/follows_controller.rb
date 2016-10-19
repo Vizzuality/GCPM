@@ -1,28 +1,20 @@
 class FollowsController < ApplicationController
-
   before_action :find_resource, only: [:create, :destroy]
   before_action :find_user, only: [:block, :unblock]
 
   def create
-    if current_user.follow(@entity)
-      respond_to do |format|
-        format.js
-      end
+    follow = current_user.follow(@entity)
+    if follow
+      render json: { data: follow }, status: 201
     else
-      respond_to do |format|
-          format.js{ render js: "alert('An error has ocurred. Please, try again later.');" }
-        end
+      render json: { error: 'An error has ocurred. Please, try again later.' }
     end
   end
   def destroy
     if current_user.stop_following(@entity)
-      respond_to do |format|
-        format.js
-      end
+      render json: nil, status: 204
     else
-      respond_to do |format|
-          format.js{ render js: "alert('An error has ocurred. Please, try again later.');" }
-        end
+      render json: { error: 'An error has ocurred. Please, try again later.' }
     end
   end
   def block
@@ -51,7 +43,7 @@ class FollowsController < ApplicationController
   private
 
   def find_resource
-    if @entity = params[:entity].classify.safe_constantize.send(:find, params[:id])
+    if @entity = params[:resource].classify.safe_constantize.send(:find, params[:id])
       @entity
     else
       not_found
