@@ -41,7 +41,7 @@ class UsersController < ApplicationController
       @items_total = @projects.size
     end
 
-    @following = 0
+    @following = @user.follow_count || 0
     @followers = 0
 
     respond_with(@items)
