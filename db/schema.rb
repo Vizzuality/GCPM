@@ -292,6 +292,7 @@ ActiveRecord::Schema.define(version: 20161018125246) do
     t.integer  "investigator_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.index ["address_id", "investigator_id"], name: "index_research_units_on_address_id_and_investigator_id", unique: true, using: :btree
     t.index ["address_id"], name: "index_research_units_on_address_id", using: :btree
     t.index ["investigator_id"], name: "index_research_units_on_investigator_id", using: :btree
   end
