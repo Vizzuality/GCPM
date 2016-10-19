@@ -44,6 +44,8 @@ en:
   events: "Events"
   featured_organization: "Featured organization"
   featured_project: "Featured project"
+  follow: "Follow"
+  unfollow: "Unfollow"
   follow_us: "Follow us"
   following: "Following"
   funding_source: "Funding source"

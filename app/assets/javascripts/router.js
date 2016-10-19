@@ -63,7 +63,7 @@
     setParams: function(params) {
       var uri = new URI();
       var newParams = params ?
-        Object.assign(uri.search(true), params) : uri.search(true);
+        _.extend({}, uri.search(true), params) : uri.search(true);
       this.params.clear({ silent: true }).set(newParams);
     },
 

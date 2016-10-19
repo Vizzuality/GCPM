@@ -27,7 +27,8 @@
         } else if (params['regions[]'] && !params['countries[]']) {
           eventName = 'country';
         }
-        var newState = Object.assign(data.feature.properties, params);
+
+        var newState = _.extend({}, data.feature.properties, params);
         if (eventName) {
           layerFacade.trigger(eventName + ':change', newState);
         }

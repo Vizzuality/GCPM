@@ -3,18 +3,22 @@ require 'acceptance_helper'
 module Api::V1
   describe 'Projects', type: :request do
     context 'For projects' do
-      let!(:organization) { FactoryGirl.create(:organization, name: 'Test orga 1', address_ids: [address.id])    }
-      let!(:address)      { FactoryGirl.create(:address, country_id: country.id, line_1: 'Paris, France')        }
-      let!(:investigator) { FactoryGirl.create(:investigator, name: 'Investigator', address_ids: [address.id])   }
-      let!(:user)         { FactoryGirl.create(:user, authentication_token: '7Nw1A13xrHrZDHj631MA')              }
-      let!(:country)      { FactoryGirl.create(:country)                                                         }
-      let!(:project)      { FactoryGirl.create(:project, title: 'Project title', user_id: user.id)               }
-      let(:r_u_id)        { investigator.research_units.first.id                                                 }
-      let!(:membership)   { Membership.create(project_id: project.id, research_unit_id: r_u_id)                  }
-      let(:funder)        { FactoryGirl.create(:organization, name: 'Project funder', address_ids: [address.id]) }
-      let!(:cancer_type)   { FactoryGirl.create(:cancer_type)                                                    }
-      let!(:project_type)  { FactoryGirl.create(:project_type)                                                   }
-      let!(:organization_type) { FactoryGirl.create(:organization_type)                                          }
+      let!(:organization)      { FactoryGirl.create(:organization, name: 'Test orga 1', address_ids: [address.id])    }
+      let!(:address)           { FactoryGirl.create(:address, country_id: country.id, line_1: 'Paris, France')        }
+      let!(:investigator)      { FactoryGirl.create(:investigator, name: 'Investigator', address_ids: [address.id])   }
+      let!(:investigator_2)    { FactoryGirl.create(:investigator, name: 'Investigator 2', address_ids: [address.id]) }
+      let!(:investigator_3)    { FactoryGirl.create(:investigator, name: 'Investigator 3')                            }
+      let!(:user)              { FactoryGirl.create(:user, authentication_token: '7Nw1A13xrHrZDHj631MA')              }
+      let!(:country)           { FactoryGirl.create(:country)                                                         }
+      let!(:project)           { FactoryGirl.create(:project, title: 'Project title', user_id: user.id)               }
+      let(:r_u_id)             { investigator.research_units.first.id                                                 }
+      let(:r_u_id_2)           { investigator_2.research_units.first.id                                               }
+      let!(:membership)        { Membership.create(project_id: project.id,
+                                                   research_unit_id: r_u_id, membership_type: 'secondary')            }
+      let(:funder)             { FactoryGirl.create(:organization, name: 'Project funder', address_ids: [address.id]) }
+      let!(:cancer_type)       { FactoryGirl.create(:cancer_type)                                                     }
+      let!(:project_type)      { FactoryGirl.create(:project_type)                                                    }
+      let!(:organization_type) { FactoryGirl.create(:organization_type)                                               }
 
       let(:project_id) { project.id }
       let(:params)     { { "project": { "title": "Project updated" } } }
@@ -29,16 +33,52 @@ module Api::V1
                             "funding_source_ids": ["#{funder.id}"],
                             "project_type_ids": ["#{project_type.id}"],
                             "cancer_type_ids": ["#{cancer_type.id}"],
-                            "new_funders": [{ "name": "Second project funder", "address_ids": [address.id] }]
-                          }
+                            "new_funders": [{ "name": "Test funder 1", "email_address": "", "organization_type_id": 1,
+                                              "addresses_attributes": [{"country_id": "#{country.id}",
+                                                                        "latitude": "",
+                                                                        "longitude": "",
+                                                                        "primary": true
+                                                                      }] },
+                                              { "name": "Test funder 2", "email_address": "", "organization_type_id": 2,
+                                                "addresses_attributes": [{"country_id": "#{country.id}",
+                                                                          "latitude": "",
+                                                                          "longitude": "",
+                                                                          "primary": false
+                                                                        }] }],
+                            "memberships": [{ "research_unit_attributes": { "investigator_attributes": { "name": "Test investigator 3", "email": "testuser@sample.com", "website": "http://www.testwebsite.com", "addresses_attributes": [{ "country_id": "#{country.id}", "organization_attributes": { "name": "Test orga 5", "organization_type_id": "#{organization_type.id}" }}]}}, "membership_type": "main" },
+                                                             { "research_unit_attributes": { "investigator_attributes": { "name": "Test investigator 7000000000", "email": "testuser@sample.com", "website": "http://www.testwebsite.com"}, "address_id": "#{address.id}" }, "membership_type": "secondary" },
+                                                             { "research_unit_attributes": { "investigator_id": "#{investigator.id}", "address_attributes": { "country_id": "#{country.id}", "organization_attributes": { "name": "Test orga 1000000", "organization_type_id": "#{organization_type.id}" }}}, "membership_type": "secondary" },
+                                                             { "research_unit_attributes": { "investigator_id": "#{investigator_3.id}", "address_id": "#{address.id}" }, "membership_type": "secondary" }]
+                                           }
                         } }
 
         let(:params_without_f_s_ids) { { "project": {
                                          "title": "Project updated",
                                          "summary": "Lorem ipsum...",
-                                         "new_funders": [{ "name": "Second project funder", "address_ids": [address.id] }]
+                                         "new_funders": [{ "name": "Test funder 1", "email_address": "", "organization_type_id": 1,
+                                                           "addresses_attributes": [{"country_id": "#{country.id}",
+                                                                                     "latitude": "",
+                                                                                     "longitude": "",
+                                                                                     "primary": true
+                                                                                   }] }]
                                        }
                                      } }
+
+      let(:update_params_for_membership) { { "project": {
+                                             "title": "Project updated",
+                                             "summary": "Lorem ipsum...",
+                                             "cancer_type_ids": ["#{cancer_type.id}"],
+                                             "project_type_ids": ["#{project_type.id}"],
+                                             "funding_source_ids": ["#{funder.id}"],
+                                             "new_funders": [{ "name": "Test funder 1", "email_address": "", "organization_type_id": 1,
+                                                               "addresses_attributes": [{"country_id": "#{country.id}",
+                                                                                         "latitude": "",
+                                                                                         "longitude": "",
+                                                                                         "primary": true
+                                                                                       }] }],
+                                            "memberships": [{ "research_unit_id": "#{r_u_id_2}", "membership_type": "main" }]
+                                            }
+                                         } }
 
       context 'Update Project' do
         it 'Allows to update project' do
@@ -56,12 +96,12 @@ module Api::V1
                                                                                                        ] } }
 
           expect(status).to eq(422)
-          expect(json['message']).to                                     eq(["Title can't be blank"])
+          expect(json['message']).to eq(["Title can't be blank"])
           expect(Organization.find_by(name: "Second project funder")).to be_nil
         end
 
         it 'Allows to update project with funding_sources_ids and new funders' do
-          put "/api/projects/#{project_id}?token=#{user.authentication_token}", params: full_params
+          put "/api/projects/#{project_id}?token=#{user.authentication_token}", params: update_params_for_membership
 
           expect(status).to eq(200)
           expect(json['title']).to eq('Project updated')
@@ -69,13 +109,16 @@ module Api::V1
           expect(json['cancer_types']).to           be_present
           expect(json['project_types']).to          be_present
           expect(json['funding_sources'].length).to eq(2)
+          expect(Membership.find_by(research_unit_id: r_u_id_2).project_id).to eq(json['id'])
         end
 
-        it 'Allows to update project without existing funders' do
-          put "/api/projects/#{project_id}?token=#{user.authentication_token}", params: params_without_f_s_ids
+        # Memeberships
+        it 'Allows to update project without existing funders and all cases for memberships' do
+          put "/api/projects/#{project_id}?token=#{user.authentication_token}", params: full_params
 
           expect(status).to eq(200)
-          expect(json['funding_sources'].length).to eq(1)
+          expect(json['funding_sources'].length).to eq(3)
+          expect(Project.find(project_id).memberships.map(&:membership_type)).to eq(['secondary', 'main', 'secondary', 'secondary', 'secondary'])
         end
 
         context 'For project memberships' do
@@ -92,7 +135,7 @@ module Api::V1
                                                                                                                         }}
 
             expect(status).to eq(200)
-            expect(json['message']).to                  eq('Membership updated!')
+            expect(json['message']).to eq('Membership updated!')
             expect(Membership.first.membership_type).to eq('main')
           end
 
@@ -129,7 +172,7 @@ module Api::V1
           expect(Project.find_by(title: 'Project updated').user).to be_present
         end
 
-        it 'Allows to create project with funder' do
+        it 'Allows to create project with funder and memberships' do
           post "/api/projects?token=#{user.authentication_token}", params: full_params
 
           expect(status).to eq(201)
@@ -137,7 +180,7 @@ module Api::V1
           expect(json['id']).to                                     be_present
           expect(json['cancer_types']).to                           be_present
           expect(json['project_types']).to                          be_present
-          expect(json['funding_sources'].length).to                 eq(2)
+          expect(json['funding_sources'].length).to                 eq(3)
           expect(Project.find_by(title: 'Project updated').user).to be_present
         end
 
@@ -162,7 +205,7 @@ module Api::V1
                                                                                           ] } }
 
           expect(status).to eq(422)
-          expect(json['message']).to                                     eq(["Title can't be blank", "Summary can't be blank"])
+          expect(json['message']).to eq(["Title can't be blank", "Summary can't be blank"])
           expect(Organization.find_by(name: "Second project funder")).to be_nil
         end
       end
@@ -200,14 +243,12 @@ module Api::V1
 
           expect(status).to eq(200)
           expect(json.length).to eq (1)
-          expect(json.length).to eq (1)
         end
 
         it 'Get project-types list' do
           get "/api/cancer-types"
 
           expect(status).to eq(200)
-          expect(json.length).to eq (1)
           expect(json.length).to eq (1)
         end
 
@@ -216,7 +257,6 @@ module Api::V1
 
           expect(status).to eq(200)
           expect(json.length).to eq (1)
-          expect(json.length).to eq (1)
         end
 
         it 'Get organization-types list' do
@@ -224,7 +264,14 @@ module Api::V1
 
           expect(status).to eq(200)
           expect(json.length).to eq (1)
+        end
+
+        it 'Get countries list' do
+          get "/api/countries"
+
+          expect(status).to eq(200)
           expect(json.length).to eq (1)
+          expect(json[0]['name']).to eq ('Andorra')
         end
       end
     end

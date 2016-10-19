@@ -56,6 +56,16 @@
       $(this.select.selector).val(this.state.get('value')).trigger("change");
     },
 
+    addNew: function(option){
+      var obj = {
+        id: option.cid,
+        value: JSON.stringify(option.attributes),
+        name: option.attributes.name
+      };
+      this.options.options.unshift(obj);
+      this.render();
+    },
+
     setOptions: function(options) {
       this.options.options = options;
     },
@@ -63,7 +73,15 @@
     triggerChange: function(e) {
       var selectedOptions = e.currentTarget.selectedOptions;
       var currentOptions = _.pluck(selectedOptions, 'value');
-      this.trigger('change', { value: currentOptions });
+      var index = currentOptions.indexOf("Add new");
+      if (index > -1){
+        //currentOptions.splice(index, 1);
+        this.render();
+        this.trigger('new');
+      }
+      else{
+        this.trigger('change', {value: currentOptions });
+      }
     }
 
   });
