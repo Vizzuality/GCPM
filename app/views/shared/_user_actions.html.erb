@@ -1,17 +1,20 @@
 <div>
   <ul class="c-btn-container">
-    <li id="followButton">
-      <button class="c-btn -secondary -inverse js-btn-follow"
-        data-followed="<%= @followed %>"
-        data-id="<%= @followed_id %>"
-        data-resource="<%= @followed_resource %>">
-        <%= (@followed) ? 'Unfollow' : 'Follow' %>
-      </button>
-    </li>
+    <% if controller.controller_name === 'users' %>
+    <% else %>
+      <li id="followButton">
+        <button class="c-btn -secondary -inverse js-btn-follow"
+          data-followed="<%= @followed %>"
+          data-id="<%= @followed_id %>"
+          data-resource="<%= @followed_resource %>">
+          <%= (@followed) ? 'Unfollow' : 'Follow' %>
+        </button>
+      </li>
+    <% end %>
   </ul>
   <ul class="c-btn-container">
     <li><%= link_to '+ Project', new_user_project_path(user_id: current_user.id), class: 'c-btn -transparent -extra-thin' %></li>
     <li><%= link_to '+ Post', new_post_path, class: 'c-btn -transparent -extra-thin' %></li>
-    <li><%= link_to '+ Event', new_user_event_path(user_id: current_user.id), class: 'c-btn -transparent -extra-thin' %></li>
+    <!-- <li><% link_to '+ Event', new_user_event_path(user_id: current_user.id), class: 'c-btn -transparent -extra-thin', disabled: true %></li> -->
   </ul>
 </div>
