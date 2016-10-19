@@ -21,7 +21,7 @@
 
       this.children = [organizationName, organizationType, organizationCountry,
          organizationLatitude, organizationLongitude];
-         
+
       this.modal = new App.View.Modal();
       this.organizationForm = new App.View.OrganizationForm({
         children: this.children
@@ -81,7 +81,7 @@
         App.trigger('Modal:loading', { loading: true });
 
         var promises = _.compact(_.map(this.children, function(child) {
-          if (!!child.fetchData) {
+          if (child.fetchData) {
             return child.fetchData();
           }
           return null;

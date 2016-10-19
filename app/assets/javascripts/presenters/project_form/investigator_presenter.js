@@ -58,18 +58,6 @@
 
     setSubscriptions: function(){
       App.on('InvestigatorForm:submit', function(newState){
-        // var newInvestigator = {
-        //   name: investigator.investigatorName,
-        //   id: investigator.investigatorName,
-        //   investigatorName: investigator.investigatorName,
-        //   investigatorEmail: investigator.investigatorEmail,
-        //   investigatorWebsite: investigator.investigatorWebsite,
-        //   value: "0"+investigator.investigatorName
-        // };
-        // this.investigators.push(newInvestigator);
-        // this.select.options.options.unshift(newInvestigator);
-        // this.select.render();
-        // this.select.addNew(this.investigators.at(this.investigators.length-1));
         newState.name = newState.investigatorName;
         this.investigators.push(newState);
         this.select.addNew(this.investigators.at(this.investigators.length-1));

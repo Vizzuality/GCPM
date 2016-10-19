@@ -12,7 +12,7 @@
     },
 
     initialize: function(settings) {
-      this.children = (settings && settings.children) || {};
+      this.children = (settings && settings.children)||{};
     },
 
     render: function() {

@@ -116,7 +116,7 @@
       _.each(this.elements, function(element) {
 
         var promises = _.compact(_.map(element.children, function(child) {
-         if (!!child.fetchData) {
+         if (child.fetchData) {
            return child.fetchData();
          }
          return null;

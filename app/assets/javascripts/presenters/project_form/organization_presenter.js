@@ -57,9 +57,9 @@
     },
 
     setSubscriptions: function(){
-      App.on('OrganizationForm:submit', function(newState){
-        newState.name = newState.organizationName;
-        this.organizations.push(newState);
+      App.on('OrganizationForm:submit', function(organization){
+        organization.name = organization.organizationName;
+        this.organizations.push(organization);
         this.select.addNew(this.organizations.at(this.organizations.length-1));
       }, this);
     },
