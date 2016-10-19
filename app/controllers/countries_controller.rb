@@ -35,6 +35,12 @@ class CountriesController < ApplicationController
       @items_total = @projects.size
     end
 
+    if current_user
+      @followed = current_user.following?(@country)
+      @followed_id = @country.id
+      @followed_resource = 'Country'
+    end
+
     respond_with(@items)
   end
 
