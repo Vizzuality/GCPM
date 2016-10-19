@@ -4,19 +4,19 @@
 
   var StateModel = Backbone.Model.extend();
 
-  App.Presenter.CancerTypes = function() {
+  App.Presenter.Organization = function() {
     this.initialize.apply(this, arguments);
   };
 
-  _.extend(App.Presenter.CancerTypes.prototype, {
+  _.extend(App.Presenter.Organization.prototype, {
 
     defaults: {
-      multiple: true,
-      name: 'cancer_types[]',
-      label: 'Cancer types',
-      placeholder: 'All cancer types',
+      multiple: false,
+      name: 'organization',
+      label: 'Organization',
+      placeholder: 'All organizations',
       blank: null,
-      addNew: false,
+      addNew: true,
       select2Options: {
         // closeOnSelect: false
         // It solves the closing of the dropdown menu
@@ -28,27 +28,40 @@
 
     initialize: function(viewSettings) {
       this.state = new StateModel();
-      this.cancerTypes = new App.Collection.CancerTypes();
+      this.organizations = new App.Collection.Organizations();
 
       // Creating view
       this.select = new App.View.Select({
-        el: '#cancer-types',
+        el: viewSettings.DOMelement,
         options: _.extend({}, this.defaults, viewSettings || {}),
         state: this.state
       });
 
       this.setEvents();
+      this.setSubscriptions();
     },
 
     /**
      * Setting internal events
      */
     setEvents: function() {
-      this.state.on('change', function() {
-        App.trigger('CancerTypes:change', this.state.attributes);
+      this.select.on('new', function(){
+        App.trigger('Organization:new');
       }, this);
 
-      this.select.on('change', this.setState, this);
+      this.select.on('change', function(newState){
+        this.setState(newState);
+        App.trigger('Organization:change', {state:this.state, el:this.select});
+      }, this);
+
+    },
+
+    setSubscriptions: function(){
+      App.on('OrganizationForm:submit', function(organization){
+        organization.name = organization.organizationName;
+        this.organizations.push(organization);
+        this.select.addNew(this.organizations.at(this.organizations.length-1));
+      }, this);
     },
 
     /**
@@ -56,8 +69,11 @@
      * @return {Promise}
      */
     fetchData: function() {
-      return this.cancerTypes.fetch().done(function() {
-        var options = this.cancerTypes.map(function(type) {
+      if(this.organizations.length > 0){
+        return this.organizations;
+      }
+      return this.organizations.fetch({add: true}).done(function() {
+        var options = this.organizations.map(function(type) {
           return {
             name: type.attributes.name,
             value: type.attributes.id

@@ -4,28 +4,29 @@
 
   var StateModel = Backbone.Model.extend();
 
-  App.Presenter.Input = function() {
+  App.Presenter.OrganizationLatitude = function() {
     this.initialize.apply(this, arguments);
   };
 
-  _.extend(App.Presenter.Input.prototype, {
+  _.extend(App.Presenter.OrganizationLatitude.prototype, {
 
     defaults: {
-      name: 'title'
+      name: 'organizationlatitude'
     },
 
     initialize: function() {
       this.state = new StateModel();
       this.Input = new App.View.Input({
-        el: '#title',
+        el: '#organizationlatitude',
         options: {
-          label: false,
-          placeholder: 'Project Title_',
-          name: 'title',
-          type: 'text',
-          required: true,
+          label: 'Organization Latitude',
+          placeholder: '',
+          name: 'organizationLatitude',
+          type: 'number',
+          required: false,
           class: 'c-input',
-          inputClass: 'c-title -bigger -bold',
+          min: -90,
+          max: 90
         }
       });
 

@@ -23,6 +23,7 @@ class Investigator < ApplicationRecord
 
   accepts_nested_attributes_for :organizations, allow_destroy: true
   accepts_nested_attributes_for :addresses,     allow_destroy: true
+  accepts_nested_attributes_for :research_units
 
   validates_presence_of :name
 

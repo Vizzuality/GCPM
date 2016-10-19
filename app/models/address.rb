@@ -31,7 +31,7 @@ class Address < ApplicationRecord
 
   before_save :assign_country
 
-  accepts_nested_attributes_for :organization, allow_destroy: true
+  accepts_nested_attributes_for :organization
 
   def assign_country
     if self.country.present?

@@ -4,17 +4,17 @@
 
   var StateModel = Backbone.Model.extend();
 
-  App.Presenter.Organizations = function() {
+  App.Presenter.Investigator = function() {
     this.initialize.apply(this, arguments);
   };
 
-  _.extend(App.Presenter.Organizations.prototype, {
+  _.extend(App.Presenter.Investigator.prototype, {
 
     defaults: {
-      multiple: true,
-      name: 'organizations[]',
-      label: 'Organizations',
-      placeholder: 'All organizations',
+      multiple: false,
+      name: 'investigator',
+      label: 'Investigator',
+      placeholder: 'All investigators',
       blank: null,
       addNew: true,
       select2Options: {
@@ -28,27 +28,40 @@
 
     initialize: function(viewSettings) {
       this.state = new StateModel();
-      this.organizations = new App.Collection.Organizations();
+      this.investigators = new App.Collection.Investigators();
 
       // Creating view
       this.select = new App.View.Select({
-        el: '#organizations',
+        el: viewSettings.DOMelement,
         options: _.extend({}, this.defaults, viewSettings || {}),
         state: this.state
       });
 
       this.setEvents();
+      this.setSubscriptions();
     },
 
     /**
      * Setting internal events
      */
     setEvents: function() {
-      this.state.on('change', function() {
-        App.trigger('Organizations:change', this.state.attributes);
+      this.select.on('new', function(){
+        App.trigger('Investigator:new');
       }, this);
 
-      this.select.on('change', this.setState, this);
+      this.select.on('change', function(newState){
+        this.setState(newState);
+        App.trigger('Investigator:change', this.state.attributes);
+      }, this);
+
+    },
+
+    setSubscriptions: function(){
+      App.on('InvestigatorForm:submit', function(newState){
+        newState.name = newState.investigatorName;
+        this.investigators.push(newState);
+        this.select.addNew(this.investigators.at(this.investigators.length-1));
+      }, this);
     },
 
     /**
@@ -56,15 +69,20 @@
      * @return {Promise}
      */
     fetchData: function() {
-      return this.organizations.fetch().done(function() {
-        var options = this.organizations.map(function(type) {
-          return {
-            name: type.attributes.name,
-            value: type.attributes.id
-          };
-        });
-        this.select.setOptions(options);
-      }.bind(this));
+      if(this.investigators.length > 0){
+        return this.investigators;
+      }
+      else{
+        return this.investigators.fetch({add: true}).done(function() {
+          var options = this.investigators.map(function(type) {
+            return {
+              name: type.attributes.name,
+              value: type.attributes.id
+            };
+          });
+          this.select.setOptions(options);
+        }.bind(this));
+      }
     },
 
     render: function() {
@@ -85,7 +103,6 @@
      */
     setElement: function(el) {
       this.select.setElement(el);
-      this.select.render();
     },
 
     /**

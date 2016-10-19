@@ -91,29 +91,45 @@ class Project < ApplicationRecord
     end
 
     def build_project(options)
-      options = build_project_attributes(options) if options['new_funders'].present?
+      options = build_project_attributes(options) if options['new_funders'].present? || options['memberships'].present?
       Project.new(options)
     end
 
     def update_project(options, project)
-      options = build_project_attributes(options, project) if options['new_funders'].present?
+      options = build_project_attributes(options, project) if options['new_funders'].present? || options['memberships'].present?
       project.update(options)
     end
 
     def build_project_attributes(options, project=nil)
       funders            = options['new_funders']
-      options            = options.except(:new_funders)
+      memberships        = options['memberships']
+      options            = options.except(:new_funders, :memberships)
       project.attributes = options if project.present?
       validate_project   = project.present? ? project.valid? : Project.new(options).valid?
 
       if validate_project
-        funding_sources = []
-        funders.each do |funder_params|
-          funding_sources << Organization.create(funder_params)
-        end
-        options['funding_source_ids']  = [] if options['funding_source_ids'].blank?
-        options['funding_source_ids'] += funding_sources.map(&:id)
+        build_funding_sources(funders, options) if funders.present?
+        build_memberships(memberships, options) if memberships.present?
       end
+      options
+    end
+
+    def build_funding_sources(funders, options)
+      funding_sources = []
+      funders.each do |funder_params|
+        funding_sources << Organization.create(funder_params)
+      end
+      options['funding_source_ids']  = [] if options['funding_source_ids'].blank?
+      options['funding_source_ids'] += funding_sources.map(&:id)
+      options
+    end
+
+    def build_memberships(memberships, options)
+      memberships_attributes = []
+      memberships.each do |membership_params|
+        memberships_attributes << membership_params
+      end
+      options['memberships_attributes'] = memberships_attributes
       options
     end
   end
