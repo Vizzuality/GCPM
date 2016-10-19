@@ -1,24 +1,35 @@
 <% investigator = User.find_by_id(@post.user_id) %>
 
-<div class="l-content">
-  <div class="wrapper">
-    <div class="row collapse">
-      <div class="column small-12">
-        <h1><%= @post.title %></h1>
-        <p><%= @post.body.html_safe %></p>
-        <div>
-          <div class="c-avatar -ph -small"></div>
-          <p><%= investigator && investigator.name && investigator.name %></p>
+<div class="l-grid">
+  <section class="l-content-section wrapper">
+    <div class="wrapper">
+      <div class="row">
+        <div class="column small-12">
+          <h1><%= @post.title %></h1>
+          <div class="investigator">
+            <div class="c-avatar -ph -small"></div>
+            <p><%= investigator && investigator.name && investigator.name %></p>
+          </div>
         </div>
-
-        <% if current_user.id === @post.user_id %>
-          <%= link_to 'Edit', edit_post_path(@post), class: 'c-btn -primary' %>
-        <% end %>
-
-        <% link_to 'View all', user_path(id: current_user.id, data: 'posts'), class: 'c-btn -primary -inverse' %>
       </div>
     </div>
-  </div>
+  </section>
+
+  <section class="l-content-section wrapper">
+    <div class="wrapper">
+      <div class="row">
+        <div class="column small-12">
+          <div class="wrapper">
+            <h2 class="-underlined -primary"><%= t 'description' %></h2>
+            <div class="content"><%= @post.body.html_safe %></div>
+            <% if current_user && current_user.id === @post.user_id %>
+              <%= link_to 'Edit', edit_post_path(@post), class: 'c-btn -secondary' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
 
 
