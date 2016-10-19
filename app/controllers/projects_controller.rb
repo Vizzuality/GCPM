@@ -9,6 +9,13 @@ class ProjectsController < ApplicationController
     gon.end_date = @project.end_date || 0
     @filters = %w(info)
     @current_type = params.key?(:data) ? params[:data] : 'info'
+
+    if current_user
+      @followed = current_user.following?(@project)
+      @followed_id = @project.id
+      @followed_resource = 'Project'
+    end
+
     respond_with(@project)
   end
 end

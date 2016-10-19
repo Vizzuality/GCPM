@@ -67,6 +67,12 @@ h2, h3 {
       border-bottom: 3px solid $secondary-color;
     }
   }
+
+  &.-primary {
+    &:after {
+      border-bottom: 3px solid $primary-color;
+    }
+  }
 }
 
 a {

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161018111559) do
+ActiveRecord::Schema.define(version: 20161018125246) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,6 +89,21 @@ ActiveRecord::Schema.define(version: 20161018111559) do
     t.integer "cancer_type_id"
     t.index ["cancer_type_id"], name: "index_cancer_types_projects_on_cancer_type_id", using: :btree
     t.index ["project_id"], name: "index_cancer_types_projects_on_project_id", using: :btree
+  end
+
+  create_table "ckeditor_assets", force: :cascade do |t|
+    t.string   "data_file_name",               null: false
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.integer  "assetable_id"
+    t.string   "assetable_type",    limit: 30
+    t.string   "type",              limit: 30
+    t.integer  "width"
+    t.integer  "height"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.index ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
+    t.index ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
   end
 
   create_table "countries", force: :cascade do |t|
@@ -237,6 +252,15 @@ ActiveRecord::Schema.define(version: 20161018111559) do
     t.index ["organization_type_id"], name: "index_organizations_on_organization_type_id", using: :btree
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
+  end
+
   create_table "project_types", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -268,6 +292,7 @@ ActiveRecord::Schema.define(version: 20161018111559) do
     t.integer  "investigator_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.index ["address_id", "investigator_id"], name: "index_research_units_on_address_id_and_investigator_id", unique: true, using: :btree
     t.index ["address_id"], name: "index_research_units_on_address_id", using: :btree
     t.index ["investigator_id"], name: "index_research_units_on_investigator_id", using: :btree
   end
