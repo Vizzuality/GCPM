@@ -30,7 +30,7 @@
       }, this);
 
       this.layersView.on('change', this.handleLayer.bind(this));
-      this.layersView.on('close', this.toggleActive.bind(this));
+      this.layersView.on('close', this.closeLayer.bind(this));
     },
 
     setSubscriptions: function () {
@@ -90,6 +90,10 @@
           App.trigger('Layer:change', {layer: layer, name: element.id});
         });
       } else App.trigger('Layer:remove', null);
+    },
+
+    closeLayer: function() {
+      this.getState().active && this.toggleActive();
     },
 
     toggleActive: function(){

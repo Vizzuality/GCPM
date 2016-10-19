@@ -26,7 +26,6 @@
         options: _.extend({}, this.defaults, viewSettings || {}),
         state: this.state
       });
-
       this.setEvents();
     },
 

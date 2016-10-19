@@ -28,6 +28,12 @@ class InvestigatorsController < ApplicationController
       @items_total = @projects.size
     end
 
+    if current_user
+      @followed = current_user.following?(@investigator)
+      @followed_id = @investigator.id
+      @followed_resource = 'Investigator'
+    end
+    
     respond_with(@items)
   end
 

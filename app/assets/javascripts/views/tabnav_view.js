@@ -25,7 +25,7 @@
       var uri = new URI(url);
       var urlParams = uri.query(true);
       this.$el.find('a').each(function(i, el) {
-        uri.query(Object.assign(urlParams, {
+        uri.query(_.extend({}, urlParams, {
           data: el.getAttribute('data-datatype')
         }));
         el.setAttribute('href', uri.toString());
