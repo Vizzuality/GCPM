@@ -12,6 +12,7 @@
 
     defaults: {
       'countries[]': undefined,
+      'regions[]': undefined,
       'cancer_types[]': undefined,
       'organization_types[]': undefined,
       'organizations[]': undefined,
