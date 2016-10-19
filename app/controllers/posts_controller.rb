@@ -34,4 +34,3 @@ class PostsController < InheritedResources::Base
     end
   end
 end
-
