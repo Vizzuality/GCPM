@@ -79,10 +79,10 @@ class User < ApplicationRecord
 
         if user.nil?
           user = User.create(
-                   email:      email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
-                   password:   Devise.friendly_token[0,20],
-                   name:       name_atr
-                 )
+            email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
+            password: Devise.friendly_token[0,20],
+            name: name_atr
+          )
         end
       end
 
