@@ -50,6 +50,7 @@ class User < ApplicationRecord
 
   has_many :projects, inverse_of: :user
   has_many :events, inverse_of: :user
+  has_many :posts
 
   before_save :check_authentication_token
 
