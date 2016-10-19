@@ -12,7 +12,7 @@
 
     initialize: function() {
       this.state = new StateModel({ active: false });
-      this.userMenu = new App.View.UserMenu();
+      this.userMenu = new App.View.UserMenu({ el: '.js-user-menu' });
 
       this.setSubscriptions();
     },
@@ -20,6 +20,7 @@
     setSubscriptions: function() {
       this.state.on('change', this.toggleUserMenu.bind(this));
       this.userMenu.on('click', this.handleUserMenu.bind(this));
+      this.userMenu.on('close', this.handleClose.bind(this));
     },
 
     setState: function(params) {
@@ -29,6 +30,10 @@
     handleUserMenu: function() {
       var active = this.state.get('active');
       this.setState({ active: !active });
+    },
+
+    handleClose: function() {
+      this.state.get('active') && this.handleUserMenu();
     },
 
     toggleUserMenu: function() {

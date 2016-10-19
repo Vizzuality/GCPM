@@ -54,13 +54,22 @@ label {
 
   font-size: $small-font-size;
   text-transform: uppercase;
+  margin-bottom: $base-space/3.5;
+
+  abbr[title] {
+    border: 0;
+  }
 }
 
 .form-row {
   margin-bottom: $base-space;
-  
+
   &:last-child {
     margin-bottom: 0;
+  }
+
+  input:focus {
+    outline: none;
   }
 }
 

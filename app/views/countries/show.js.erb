@@ -1,12 +1,13 @@
 (function() {
 
-  'use strict'
   <% template = @current_type == 'people' ? "investigators/list" : "#{@current_type}/list" %>
 
+  var $content = $('#content');
   var htmlContent = "<%= escape_javascript render(partial: template, locals: { items: @items, more: @more }) %>";
-  var htmlCounters = "<%= escape_javascript render(partial: 'map/counters') %>"
 
-  document.getElementById('content').innerHTML = htmlContent;
-  document.getElementById('counters').innerHTML = htmlCounters;
+  // If I use pure javascript, the trigger will never happen
+  $('#content').html(htmlContent);
+
+  App.trigger('Remote:load');
 
 })();
