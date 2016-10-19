@@ -11,10 +11,10 @@
   _.extend(App.Presenter.FilterForm.prototype, {
 
     defaults: {
-      cancerTypes: undefined,
-      organization_types: undefined,
-      organizations: undefined,
-      project_types: undefined,
+      cancerTypes: null,
+      organization_types: null,
+      organizations: null,
+      project_types: null,
       start_date: undefined,
       end_date: undefined
     },
