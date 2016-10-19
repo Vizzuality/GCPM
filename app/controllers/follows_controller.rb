@@ -8,9 +8,9 @@ class FollowsController < ApplicationController
         format.js
       end
     else
-    respond_to do |format|
-        format.js{ render js: "alert('An error has ocurred. Please, try again later.');" }
-      end
+      respond_to do |format|
+          format.js{ render js: "alert('An error has ocurred. Please, try again later.');" }
+        end
     end
   end
   def destroy
@@ -19,9 +19,9 @@ class FollowsController < ApplicationController
         format.js
       end
     else
-    respond_to do |format|
-        format.js{ render js: "alert('An error has ocurred. Please, try again later.');" }
-      end
+      respond_to do |format|
+          format.js{ render js: "alert('An error has ocurred. Please, try again later.');" }
+        end
     end
   end
   def block
@@ -30,9 +30,9 @@ class FollowsController < ApplicationController
         format.js
       end
     else
-    respond_to do |format|
-        format.js{ render js: "alert('An error has ocurred. Please, try again later.');" }
-      end
+      respond_to do |format|
+          format.js{ render js: "alert('An error has ocurred. Please, try again later.');" }
+        end
     end
   end
   def unblock
@@ -41,9 +41,9 @@ class FollowsController < ApplicationController
         format.js
       end
     else
-    respond_to do |format|
-        format.js{ render js: "alert('An error has ocurred. Please, try again later.');" }
-      end
+      respond_to do |format|
+          format.js{ render js: "alert('An error has ocurred. Please, try again later.');" }
+        end
     end
   end
 

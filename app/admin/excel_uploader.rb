@@ -2,7 +2,6 @@ ActiveAdmin.register_page "Excel Upload" do
   menu parent: "Administration", priority: 1
 
   controller do
-    skip_before_action :verify_authenticity_token
     after_action :reset_keys, only: :import
     def index
       render 'admin/excel_upload/new', layout: 'active_admin'

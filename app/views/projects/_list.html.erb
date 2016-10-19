@@ -40,7 +40,9 @@
       <div class="c-card">
         <% page = @page + 1 %>
         <%= link_to (t 'show_more'),
-          map_path(request.query_parameters.merge({ page: page })),
+          {
+            :params => request.query_parameters.merge({ page: page })
+          },
           class: "c-btn -circle",
           id: 'showMoreButton',
           remote: true

@@ -28,15 +28,17 @@
 
     pruneCluster.PrepareLeafletMarker = function(leafletMarker, data) {
       var className = data.feature.properties.is_project_lead ? '-alternative' : '';
+      var infowindowData = data.feature.properties;
+      if(infowindowData.type !== 'point'){
+        infowindowData[infowindowData.type] = infowindowData.id || infowindowData.location_id;
+        className = '-alternative';
+      }
       var pointIcon = new L.divIcon({
         iconSize: [15, 15],
         className: 'point-icon ' + className,
         html: ''
       });
-      var infowindowData = data.feature.properties;
-      if(infowindowData.type !== 'point'){
-        infowindowData[infowindowData.type] = infowindowData.id || infowindowData.location_id;
-      }
+
       var htmlContent = infowindowTemplate(infowindowData);
       leafletMarker.setIcon(pointIcon);
       leafletMarker.bindPopup(htmlContent);

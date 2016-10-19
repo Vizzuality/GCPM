@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { sessions: 'sessions' }
-
+  devise_for :users, controllers: { sessions: 'users/sessions', omniauth_callbacks: 'users/omniauth_callbacks' }
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
@@ -14,9 +13,11 @@ Rails.application.routes.draw do
   get '/organizations/:id',     to: 'organizations#show', as: 'organization'
   get '/about',                 to: 'about#index',        as: 'about'
   get '/downloads/user-manual', to: 'downloads#show',     as: 'download_user_manual'
+  get '/network/:id',           to: 'users#show',         as: 'user'
 
   resources :projects, only: :show
   resources :events, except: :destroy
+  resources :posts
 
   # User profile
   resources :users, only: :show, path: :network do
