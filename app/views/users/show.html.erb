@@ -13,9 +13,11 @@
     <div class="wrapper">
       <div class="row collapse">
         <div class="column small-8">
-          <div class="c-avatar -big"><%= user.name ?
-            user.name[0] :
-            'U' %></div>
+          <div class="c-avatar -big -ph -mg-bt"></div>
+        </div>
+      </div>
+      <div class="row collapse">
+        <div class="column small-8">
             <h1><%= user.try(:name) %></h1>
 
             <div class="row">
@@ -44,6 +46,9 @@
             </div>
         </div>
         <div class="column small-4">
+           <% if (current_user) %>
+            <%= render "shared/user_actions" %>
+          <% end %>
         </div>
       </div>
     </div>
