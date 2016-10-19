@@ -17,8 +17,10 @@
     },
 
     handleDocumentClick: function(e) {
-      var isContained = this.el.contains(e.target);
-      !isContained && this.trigger('close', this);
+      if (this.el) {
+        var isContained = this.el.contains(e.target);
+        !isContained && this.trigger('close', this);
+      }
     },
 
     handleUserMenu: function() {
