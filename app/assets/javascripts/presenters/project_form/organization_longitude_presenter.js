@@ -4,28 +4,29 @@
 
   var StateModel = Backbone.Model.extend();
 
-  App.Presenter.Input = function() {
+  App.Presenter.OrganizationLongitude = function() {
     this.initialize.apply(this, arguments);
   };
 
-  _.extend(App.Presenter.Input.prototype, {
+  _.extend(App.Presenter.OrganizationLongitude.prototype, {
 
     defaults: {
-      name: 'title'
+      name: 'organizationlongitude'
     },
 
     initialize: function(params) {
       this.state = new StateModel();
       this.Input = new App.View.Input({
-        el: '#title',
+        el: '#organizationlongitude',
         options: {
-          label: false,
-          placeholder: 'Project Title_',
-          name: 'title',
-          type: 'text',
-          required: true,
+          label: 'Organization Longitude',
+          placeholder: '',
+          name: 'organizationLongitude',
+          type: 'number',
+          required: false,
           class: 'c-input',
-          inputClass: 'c-title -bigger -bold',
+          min: -180,
+          max: 180
         }
       });
 

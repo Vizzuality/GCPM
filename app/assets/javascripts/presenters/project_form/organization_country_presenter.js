@@ -4,17 +4,17 @@
 
   var StateModel = Backbone.Model.extend();
 
-  App.Presenter.CancerTypes = function() {
+  App.Presenter.OrganizationCountry = function() {
     this.initialize.apply(this, arguments);
   };
 
-  _.extend(App.Presenter.CancerTypes.prototype, {
+  _.extend(App.Presenter.OrganizationCountry.prototype, {
 
     defaults: {
-      multiple: true,
-      name: 'cancer_types[]',
-      label: 'Cancer types',
-      placeholder: 'All cancer types',
+      multiple: false,
+      name: 'organizationCountry',
+      label: 'Organization Country',
+      placeholder: 'All Countries',
       blank: null,
       addNew: false,
       select2Options: {
@@ -28,11 +28,11 @@
 
     initialize: function(viewSettings) {
       this.state = new StateModel();
-      this.cancerTypes = new App.Collection.CancerTypes();
+      this.organizationCountry = new App.Collection.Countries();
 
       // Creating view
       this.select = new App.View.Select({
-        el: '#cancer-types',
+        el: '#organizationcountry',
         options: _.extend({}, this.defaults, viewSettings || {}),
         state: this.state
       });
@@ -44,11 +44,12 @@
      * Setting internal events
      */
     setEvents: function() {
-      this.state.on('change', function() {
-        App.trigger('CancerTypes:change', this.state.attributes);
+      this.select.on('change', function(newState){
+        App.trigger('OrganizationCountry:change', this.state.attributes);
       }, this);
 
       this.select.on('change', this.setState, this);
+
     },
 
     /**
@@ -56,8 +57,8 @@
      * @return {Promise}
      */
     fetchData: function() {
-      return this.cancerTypes.fetch().done(function() {
-        var options = this.cancerTypes.map(function(type) {
+      return this.organizationCountry.fetch().done(function() {
+        var options = this.organizationCountry.map(function(type) {
           return {
             name: type.attributes.name,
             value: type.attributes.id

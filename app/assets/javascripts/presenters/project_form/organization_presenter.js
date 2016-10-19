@@ -4,16 +4,16 @@
 
   var StateModel = Backbone.Model.extend();
 
-  App.Presenter.Organizations = function() {
+  App.Presenter.Organization = function() {
     this.initialize.apply(this, arguments);
   };
 
-  _.extend(App.Presenter.Organizations.prototype, {
+  _.extend(App.Presenter.Organization.prototype, {
 
     defaults: {
-      multiple: true,
-      name: 'organizations[]',
-      label: 'Organizations',
+      multiple: false,
+      name: 'organization',
+      label: 'Organization',
       placeholder: 'All organizations',
       blank: null,
       addNew: true,
@@ -32,23 +32,36 @@
 
       // Creating view
       this.select = new App.View.Select({
-        el: '#organizations',
+        el: viewSettings.DOMelement,
         options: _.extend({}, this.defaults, viewSettings || {}),
         state: this.state
       });
 
       this.setEvents();
+      this.setSubscriptions();
     },
 
     /**
      * Setting internal events
      */
     setEvents: function() {
-      this.state.on('change', function() {
-        App.trigger('Organizations:change', this.state.attributes);
+      this.select.on('new', function(){
+        App.trigger('Organization:new');
       }, this);
 
-      this.select.on('change', this.setState, this);
+      this.select.on('change', function(newState){
+        this.setState(newState);
+        App.trigger('Organization:change', {state:this.state, el:this.select});
+      }, this);
+
+    },
+
+    setSubscriptions: function(){
+      App.on('OrganizationForm:submit', function(newState){
+        newState.name = newState.organizationName;
+        this.organizations.push(newState);
+        this.select.addNew(this.organizations.at(this.organizations.length-1));
+      }, this);
     },
 
     /**
@@ -85,7 +98,6 @@
      */
     setElement: function(el) {
       this.select.setElement(el);
-      this.select.render();
     },
 
     /**

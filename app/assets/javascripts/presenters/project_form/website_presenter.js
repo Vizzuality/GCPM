@@ -10,16 +10,18 @@
 
   _.extend(App.Presenter.WebsiteInput.prototype, {
 
-    initialize: function() {
+    initialize: function(params) {
       this.state = new StateModel();
       this.websiteInput = new App.View.Input({
         el: '#project-website',
         options: {
+          label: false,
+          placeholder: 'http://example.org',
           name: 'project_website',
-          type: 'text',
-          label: 'Project website',
+          type: 'url',
+          required: false,
+          class: 'c-input',
           inputClass: 'c-section-title -one-line',
-          placeholder: 'http://example.org'
         }
       });
 
@@ -43,6 +45,26 @@
         }
       }
     },
+
+    render: function() {
+      this.websiteInput.render();
+    },
+
+    render: function(){
+      this.websiteInput.render();
+    },
+
+    setState: function(state, options) {
+      this.state.set(state, options);
+    },
+
+    setElement: function(el) {
+      this.websiteInput.setElement(el);
+    },
+
+    getElement: function() {
+      return this.websiteInput.$el;
+    }
 
   });
 

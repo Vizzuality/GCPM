@@ -4,11 +4,11 @@
 
   var StateModel = Backbone.Model.extend();
 
-  App.Presenter.Input = function() {
+  App.Presenter.InvestigatorName = function() {
     this.initialize.apply(this, arguments);
   };
 
-  _.extend(App.Presenter.Input.prototype, {
+  _.extend(App.Presenter.InvestigatorName.prototype, {
 
     defaults: {
       name: 'title'
@@ -17,15 +17,14 @@
     initialize: function(params) {
       this.state = new StateModel();
       this.Input = new App.View.Input({
-        el: '#title',
+        el: '#investigatorname',
         options: {
-          label: false,
-          placeholder: 'Project Title_',
-          name: 'title',
+          label: 'Investigator Name',
+          placeholder: 'Investigator Name',
+          name: 'investigatorName',
           type: 'text',
           required: true,
-          class: 'c-input',
-          inputClass: 'c-title -bigger -bold',
+          class: 'c-input'
         }
       });
 

@@ -10,27 +10,53 @@
 
   _.extend(App.Presenter.Textarea.prototype, {
 
-    initialize: function() {
+    defaults: {
+      name: 'summary'
+    },
+
+    initialize: function(params) {
       this.state = new StateModel();
       this.Textarea = new App.View.Textarea({
         el: '#description',
         options: {
+          value: null,
+          label: false,
+          required: true,
+          class: 'c-textarea',
           name: 'summary',
           type: 'textarea',
-          label: 'Description',
           lableClass: 'c-section-title',
-          placeholder: 'Lorem'
+          placeholder: "Cancer is the second leading cause of deaths globally with 70% of all cancer deaths occurring in developing countries. Morocco's cancer burden is increasing and therefore, the country has prioritized cancer prevention and control as part of its health strategy. To achieve the goal of reducing the national cancer burden Morocco is strengthening its two population based cancer registries, has opened new cancer treatment hospitals in underserved regions and a breast cancer and cervical cancer screening facility in its capital. \
+            Finally, Morocco has allocated funding for cancer research. However much remains to be done including documenting the cancer distribution and the factors associated with cancer, as well as treatment outcomes to inform cancer prevention and treatment guidelines nationally."
         }
       });
+
+      this.setEvents();
     },
 
-    setTextareaValue: function(textarea) {
-      var value = textarea.$el.find('textarea')[0].value;
-      var obj = {};
-      obj[textarea.options.name] = value;
+    setEvents: function(){
+      this.state.on('change', function(){
+        App.trigger('Textarea:change', this.state.attributes);
+      }, this);
 
-      this.state.set(obj);
+      this.Textarea.on('change', this.setState, this);
     },
+
+    render: function(){
+      this.Textarea.render();
+    },
+
+    setState: function(state, options) {
+      this.state.set(state, options);
+    },
+
+    setElement: function(el) {
+      this.Textarea.setElement(el);
+    },
+
+    getElement: function() {
+      return this.Textarea.$el;
+    }
 
   });
 
