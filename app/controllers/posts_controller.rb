@@ -13,7 +13,10 @@ class PostsController < InheritedResources::Base
     end
 
     @post = Post.new
-    @post.user_id = current_user.id
+  end
+
+  def create
+    @post.user = current_user
   end
 
   private
