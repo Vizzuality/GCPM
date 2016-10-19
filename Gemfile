@@ -7,7 +7,6 @@ gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 # Rails plugins
 gem 'puma', '~> 3.0'
 gem 'jbuilder', '~> 2.0'
-gem 'devise'
 gem 'dotenv-rails', '2.1.0'
 gem 's3'
 gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
@@ -20,6 +19,13 @@ gem 'simple_form'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'ckeditor'
+
+# User login
+gem 'devise'
+## Omniauth
+gem 'omniauth'
+gem 'omniauth-linkedin'
+gem 'omniauth-google-oauth2'
 
 # Assets pipeline
 gem 'uglifier', '>= 1.3.0'
