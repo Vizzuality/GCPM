@@ -65,7 +65,7 @@
     setMin: function() {
       this.state.set({
         // If it doesn't exist set it to 'undefined'. Otherwise it will break the filters
-        min: this.state.get('start_date') || undefined
+        min: this.state.get('start_date') || this.defaults.min
       }, { silent: true });
     },
 
