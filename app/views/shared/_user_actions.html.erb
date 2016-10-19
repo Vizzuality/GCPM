@@ -1,20 +1,24 @@
 <div>
   <ul class="c-btn-container">
-    <% if controller.controller_name === 'users' %>
-    <% else %>
-      <li id="followButton">
-        <button class="c-btn -secondary -inverse js-btn-follow"
-          data-followed="<%= @followed %>"
-          data-id="<%= @followed_id %>"
-          data-resource="<%= @followed_resource %>">
-          <%= (@followed) ? 'Unfollow' : 'Follow' %>
-        </button>
-      </li>
-    <% end %>
+    <li id="followButton">
+      <% if user_signed_in? %>
+        <% if controller.controller_name == 'users' %>
+        <% else %>
+          <button class="c-btn -secondary -inverse js-btn-follow"
+            data-followed="<%= @followed %>"
+            data-id="<%= @followed_id %>"
+            data-resource="<%= @followed_resource %>">
+              <%= (@followed) ? 'Unfollow' : 'Follow' %>
+          </button>
+        <% end %>
+      <% else %>
+        <%= link_to (t 'follow'), user_session_path, class: 'c-btn -secondary -inverse' %>
+      <% end %>
+    </li>
   </ul>
   <ul class="c-btn-container">
-    <li><%= link_to '+ Project', new_user_project_path(user_id: current_user.id), class: 'c-btn -transparent -extra-thin' %></li>
-    <li><%= link_to '+ Post', new_post_path, class: 'c-btn -transparent -extra-thin' %></li>
-    <!-- <li><% link_to '+ Event', new_user_event_path(user_id: current_user.id), class: 'c-btn -transparent -extra-thin', disabled: true %></li> -->
+    <li><%= link_to '+ Project', (user_signed_in?) ? new_user_project_path(user_id: current_user.id) : user_session_path, class: 'c-btn -transparent -extra-thin' %></li>
+    <li><%= link_to '+ Post', (user_signed_in?) ? new_post_path : user_session_path, class: 'c-btn -transparent -extra-thin' %></li>
+    <!-- <li><% link_to '+ Event', (user_signed_in?) ? new_user_event_path(user_id: current_user.id) : user_session_path, class: 'c-btn -transparent -extra-thin' %></li> -->
   </ul>
 </div>
