@@ -29,6 +29,11 @@
             </tbody>
           </table>
         </div>
+        <div class="column small-4">
+          <% if (current_user) %>
+            <%= render "shared/user_actions" %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
