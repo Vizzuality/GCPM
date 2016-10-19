@@ -7,6 +7,9 @@
     <div class="form-row">
       <%= f.cktext_area :body %>
     </div>
+    <% if params[:error] %>
+      <p class="error">* Required field missing.</p>
+    <% end %>
 
     <div class="form-row">
       <%= f.button :submit, "Submit", class: 'c-btn -primary' %>
