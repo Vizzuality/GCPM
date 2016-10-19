@@ -17,6 +17,7 @@
     },
 
     events: {
+      'click input': 'triggerClick',
       'blur input': 'triggerChange',
       'focus input': 'triggerFocus'
     },
@@ -45,7 +46,18 @@
     },
 
     triggerFocus: function(e){
+      if (!e.currentTarget.value) return;
       e.currentTarget.placeholder = '';
+    },
+
+    triggerClick: function(e){
+      if (!e.currentTarget.value) return;
+      if(e.currentTarget.type == "radio"){
+        this.trigger('change', {
+          name: e.currentTarget.name,
+          value: e.currentTarget.value
+        });
+      }
     }
 
   });

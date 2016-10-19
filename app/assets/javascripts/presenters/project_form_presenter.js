@@ -66,7 +66,7 @@
         this.handleSubmit();
       }, this);
 
-      this.projectForm.on('newInvestigator', function(newState) {
+      this.projectForm.on('newInvestigator', function() {
         App.trigger('ProjectForm:newInvestigator');
       }, this);
     },
@@ -91,9 +91,10 @@
     handleSubmit: function() {
       this.buildRequest();
       console.log(this.request);
+      //console.log(this.state.attributes);
 
       // @TODO request (validate response)
-      var p = new Promise(function(resolve, reject){
+      new Promise(function(resolve, reject){
         var url = "/api/projects?token="+AUTH_TOKEN;
         var q = new XMLHttpRequest();
         q.open('POST', url, true);
@@ -135,7 +136,7 @@
       this.buildInvestigators();
     },
 
-    buildFundingSources(){
+    buildFundingSources: function(){
       this.request.project["funding_source_ids"] = [];
       _.each(this.state.attributes["funding_sources[]"], function(element) {
         if(!isNaN(parseInt(element))){
@@ -161,10 +162,12 @@
       }, this);
     },
 
-    buildInvestigators(){
+    buildInvestigators: function(){
       if(this.investigatorOrganization.elements.length > 0){
         var firstId = this.investigatorOrganization.elements[0].id;
-        if(JSON.parse(this.state.attributes["investigator-"+firstId]) !== null){
+        var firstInvestigator = JSON.parse(this.state.attributes["investigator-"+firstId]);
+        var firstOrganization = JSON.parse(this.state.attributes["organization-"+firstId]);
+        if(firstInvestigator !== null && firstOrganization !== null){
           this.request.project["memberships"] = [];
           _.each(this.investigatorOrganization.elements, function(element) {
             var id = element.id;

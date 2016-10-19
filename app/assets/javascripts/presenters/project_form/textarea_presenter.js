@@ -14,7 +14,7 @@
       name: 'summary'
     },
 
-    initialize: function(params) {
+    initialize: function() {
       this.state = new StateModel();
       this.Textarea = new App.View.Textarea({
         el: '#description',
@@ -27,7 +27,7 @@
           type: 'textarea',
           lableClass: 'c-section-title',
           placeholder: "Cancer is the second leading cause of deaths globally with 70% of all cancer deaths occurring in developing countries. Morocco's cancer burden is increasing and therefore, the country has prioritized cancer prevention and control as part of its health strategy. To achieve the goal of reducing the national cancer burden Morocco is strengthening its two population based cancer registries, has opened new cancer treatment hospitals in underserved regions and a breast cancer and cervical cancer screening facility in its capital. \
-            Finally, Morocco has allocated funding for cancer research. However much remains to be done including documenting the cancer distribution and the factors associated with cancer, as well as treatment outcomes to inform cancer prevention and treatment guidelines nationally."
+Finally, Morocco has allocated funding for cancer research. However much remains to be done including documenting the cancer distribution and the factors associated with cancer, as well as treatment outcomes to inform cancer prevention and treatment guidelines nationally."
         }
       });
 

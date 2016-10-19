@@ -13,7 +13,7 @@
     defaults: {
       label: null,
       name: 'policy',
-      info: 'Accept privacy policy',
+      info: 'I accept these terms',
       type: 'checkbox',
       required: true,
       class: 'c-input',

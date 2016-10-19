@@ -76,7 +76,7 @@
       var currentOptions = _.pluck(selectedOptions, 'value');
       var index = currentOptions.indexOf("Add new");
       if (index > -1){
-        currentOptions.splice(index, 1);
+        //currentOptions.splice(index, 1);
         this.render();
         this.trigger('new');
       }

@@ -53,9 +53,9 @@
 
     setSubscriptions: function(){
       App.on('Organization:#organization-'+this.selector.split("-")[1], function(data){
-        if(data.value.length > 0){
+        if(data.value.length > 0 && !isNaN(parseInt(data.value[0]))){
           var organizationId = data.value[0];
-          var p = new Promise(function(resolve, reject){
+          new Promise(function(resolve){
             var url = "/api/organizations/"+organizationId;
             var q = new XMLHttpRequest();
             q.open('GET', url, true);
@@ -70,8 +70,8 @@
               // }
             }
             q.send();
-          }).then(function(response){
-            var response = JSON.parse(response);
+          }).then(function(data){
+            var response = JSON.parse(data);
             var addresses = response.addresses;
             var options = addresses.map(function(address) {
                return {
@@ -86,6 +86,35 @@
           }.bind(this)).catch(function(response){
             throw Error(response);
           });
+        }
+        else if(data.value.length > 0){
+          var countryId = [JSON.parse(data.value).organizationCountry][0];
+          var countries = new App.Collection.Countries();
+          countries.fetch().done(function(){
+
+            var data = countries.map(function(type) {
+              return {
+                name: type.attributes.name,
+                id: type.attributes.id
+              };
+            });
+
+            var selected = {};
+            _.each(data, function(country){
+              if(parseInt(countryId) == country.id){
+                selected = country;
+                return true;
+              }
+            });
+            var options = [{
+              name: selected.name,
+              value: selected.id
+            }];
+            if(options){
+              this.select.setOptions(options);
+              this.select.render();
+            }
+          }.bind(this));
         }
       }, this);
     },

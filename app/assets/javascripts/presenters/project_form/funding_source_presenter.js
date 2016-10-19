@@ -59,6 +59,7 @@
     setSubscriptions: function(){
       App.on('FundingSourcesForm:submit', function(newState){
         newState.name = newState.organizationName;
+        debugger
         this.organizations.push(newState);
         this.select.addNew(this.organizations.at(this.organizations.length-1));
       }, this);

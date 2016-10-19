@@ -15,7 +15,7 @@
       this.children = (settings && settings.children) || {};
     },
 
-    render: function(params) {
+    render: function() {
       this.$el.html(this.template());
 
       // Rebinding elements and events
@@ -28,7 +28,7 @@
       return this;
     },
 
-    triggerNew: function(e){
+    triggerNew: function(){
       this.trigger('newInvestigator');
     },
 
@@ -44,7 +44,7 @@
      * @return {Object}
      */
     serializeForm: function() {
-      var searchString = this.$el.find('form').serialize();
+      //var searchString = this.$el.find('form').serialize();
       return this.form2Object(this.$el.find('form')[0]);
     },
 
@@ -60,6 +60,7 @@
       var body = {}
       var inputs = form.querySelectorAll('input, textarea, select, checkbox, radio');
       var names = _.groupBy(inputs, 'name');
+      var radios = [];
 
       _.each(inputs, function(el) {
         var key = el.name;
@@ -89,10 +90,32 @@
             }
           break;
 
+          case 'radio':
+            if(radios.length == 0){
+              if(el.checked == true){
+                radios.push(el);
+              }
+            }
+            else {
+              _.each(radios, function(radio){
+                if(el.name == radio.name){
+                  return false;
+                }
+                if(el.checked == true){
+                  radios.push(el);
+                }
+              });
+            }
+            break
+
           default:
             body[key] = el.value || null;
         }
       }.bind(this));
+
+      _.each(radios, function(radio){
+        body[radio.name] = radio.value || null;
+      });
 
       return body
     }

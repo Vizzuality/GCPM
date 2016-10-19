@@ -10,13 +10,13 @@
 
   _.extend(App.Presenter.WebsiteInput.prototype, {
 
-    initialize: function(params) {
+    initialize: function() {
       this.state = new StateModel();
       this.websiteInput = new App.View.Input({
         el: '#project-website',
         options: {
           label: false,
-          placeholder: 'http://example.org',
+          placeholder: 'http://www.example.org',
           name: 'project_website',
           type: 'url',
           required: false,
@@ -47,10 +47,6 @@
     },
 
     render: function() {
-      this.websiteInput.render();
-    },
-
-    render: function(){
       this.websiteInput.render();
     },
 

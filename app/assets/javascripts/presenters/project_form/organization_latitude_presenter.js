@@ -14,7 +14,7 @@
       name: 'organizationlatitude'
     },
 
-    initialize: function(params) {
+    initialize: function() {
       this.state = new StateModel();
       this.Input = new App.View.Input({
         el: '#organizationlatitude',

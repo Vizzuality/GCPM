@@ -10,7 +10,7 @@
 
   _.extend(App.Presenter.SubmitButton.prototype, {
 
-    initialize: function(params) {
+    initialize: function() {
       this.state = new StateModel();
       this.submitButton = new App.View.SubmitButton({ el: '.project_add'});
     },
