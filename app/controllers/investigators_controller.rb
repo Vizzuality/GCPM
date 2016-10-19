@@ -26,7 +26,7 @@ class InvestigatorsController < ApplicationController
       @followed_id = @investigator.id
       @followed_resource = 'Investigator'
     end
-
+    
     respond_with(@items)
   end
 
