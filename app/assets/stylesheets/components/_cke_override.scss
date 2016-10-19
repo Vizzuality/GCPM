@@ -20,6 +20,12 @@
       background-image: none;
       background: transparent;
     }
+    a.cke_button {
+
+      &:hover {
+        opacity: .5;
+      }
+    }
 
     a.cke_button_on:hover, a.cke_button_on:focus, a.cke_button_on:active {
       box-shadow: none!important;
@@ -36,7 +42,8 @@
     }
 
     a.cke_button_on {
-      background: $overlay-bg-color;
+      background: transparent!important;
+      background-image: none!important;
     }
 
     a.cke_combo_button {
@@ -45,9 +52,13 @@
       background: transparent;
       border-radius: 0;
 
+      &:hover {
+        opacity: .7;
+      }
+
       &:active {
         border: 0;
-        box-shadow: 0;
+        box-shadow: none;
       }
     }
   }
@@ -60,4 +71,11 @@
       display: none;
     }
   }
+}
+
+.cke_panel_block .cke_panel_grouptitle {
+  background-image: none!important;
+  background: transparent!important;
+  border-radius: 0!important;
+  border: 0!important;
 }

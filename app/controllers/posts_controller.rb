@@ -24,14 +24,14 @@ class PostsController < InheritedResources::Base
 
   private
 
-    def post_params
-      params.require(:post).permit(:title, :body, :user_id)
-    end
+  def post_params
+    params.require(:post).permit(:title, :body, :user_id)
+  end
 
-    def check_user
-      if !current_user
-        redirect_to new_user_session_path and return
-      end
+  def check_user
+    if !current_user
+      redirect_to new_user_session_path and return
     end
+  end
 end
 
