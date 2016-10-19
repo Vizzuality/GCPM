@@ -64,7 +64,7 @@
     setMax: function() {
       this.state.set({
         // If it doesn't exist set it to 'undefined'. Otherwise it will break the filters
-        max: this.state.get('end_date') || undefined
+        max: this.state.get('end_date') || this.defaults.max
       }, { silent: true });
     },
 
