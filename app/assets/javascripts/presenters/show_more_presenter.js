@@ -40,10 +40,7 @@
     updateURI: function() {
       var uri = new URI();
       var params = this.getState();
-      // var newParams = _.omit(Object.assign(params, {
-      //   page: parseInt(params.page || 1) + 1
-      // }), 'vars');
-      var newParams = _.omit(_.extend(params, {
+      var newParams = _.omit(_.extend({}, params, {
         page: parseInt(params.page || 1) + 1
       }), 'vars');
       var newUrl = uri.query(newParams).toString();

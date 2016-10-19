@@ -85,8 +85,7 @@
 
       if (arguments[0]) {
         var state = new StateModel();
-        // state.set(Object.assign({}, this.state.attributes, arguments[0]));
-        state.set(_.extend(this.state.attributes, arguments[0]));
+        state.set(_.extend({}, this.state.attributes, arguments[0]));
         this.select.setState(state);
       }
     },

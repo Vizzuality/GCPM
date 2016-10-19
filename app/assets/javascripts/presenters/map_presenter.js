@@ -17,12 +17,7 @@
       this.layersSpec = new App.Collection.LayersSpec();
       this.map = new App.View.Map({
         el: '#map',
-        // options: Object.assign({
-        //   minZoom: 2,
-        //   maxZoom: 14,
-        //   basemap: 'main'
-        // }, viewSettings)
-        options: _.extend({
+        options: _.extend({}, {
           minZoom: 2,
           maxZoom: 14,
           basemap: 'main'
@@ -76,8 +71,7 @@
     },
 
     setState: function(params, merge) {
-      // var newState = merge ? Object.assign({}, this.getState(), params) : params;
-      var newState = merge ? _.extend(this.getState(), params) : params;
+      var newState = merge ? _.extend({}, this.getState(), params) : params;
 
       newState = _.pick(newState, 'data', 'regions[]', 'countries[]', 'cancer_types[]',
         'organization_types[]', 'organizations[]', 'project_types[]',
@@ -140,10 +134,7 @@
       }
       this.cartoLayer = layerOptions.layer;
       this.map.addLayer(this.cartoLayer);
-      // App.trigger('Map:change', Object.assign(this.getState(), {
-      //   cartoLayer: layerOptions.name
-      // }));
-      App.trigger('Map:change', _.extend(this.getState(), {
+      App.trigger('Map:change', _.extend({}, this.getState(), {
         cartoLayer: layerOptions.name
       }));
     },
@@ -154,10 +145,7 @@
     removeCartoLayer: function() {
       this.map.removeLayer(this.cartoLayer);
       this.cartoLayer = null;
-      // App.trigger('Map:change', Object.assign(this.getState(), {
-      //   cartoLayer: null
-      // }));
-      App.trigger('Map:change', _.extend(this.getState(), {
+      App.trigger('Map:change', _.extend({}, this.getState(), {
         cartoLayer: null
       }));
     }

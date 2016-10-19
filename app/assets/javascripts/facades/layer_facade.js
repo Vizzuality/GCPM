@@ -41,8 +41,7 @@
     },
 
     getPointLayer: function() {
-      // var fetchParams = Object.assign(gon.server_params, { group: 'points' });
-      var fetchParams = _.extend(gon.server_params, { group: 'points' });
+      var fetchParams = _.extend({}, gon.server_params, { group: 'points' });
       var deferred = new $.Deferred();
       var locations = new App.Collection.Locations();
       locations

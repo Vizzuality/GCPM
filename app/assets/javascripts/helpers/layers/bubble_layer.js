@@ -60,10 +60,8 @@
             },
             colors: chartColors
           });
-          // markerData = Object.assign({}, feature.properties, {
-          //   chart:  App.helper.utils.svgToHTml(donutChart)
-          // });
-          markerData = _.extend(feature.properties, {
+
+          markerData = _.extend({}, feature.properties, {
             chart:  App.helper.utils.svgToHTml(donutChart)
           })
         } else {
@@ -84,8 +82,8 @@
           } else if (params['regions[]'] && !params['countries[]']) {
             eventName = 'country';
           }
-          // var newState = Object.assign(feature.properties, params);
-          var newState = _.extend(feature.properties, params);
+
+          var newState = _.extend({}, feature.properties, params);
           if (eventName) {
             layerFacade.trigger(eventName + ':change', newState);
           }
