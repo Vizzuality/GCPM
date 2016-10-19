@@ -13,6 +13,14 @@
     initialize: function() {
       this.state = new StateModel();
       this.submitButton = new App.View.SubmitButton({ el: '.project_add'});
+    },
+
+    render: function() {
+      this.submitButton.render();
+    },
+
+    setState: function(state, options) {
+      this.state.set(state, options);
     }
 
   });

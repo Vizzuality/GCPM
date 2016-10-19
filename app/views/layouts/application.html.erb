@@ -15,6 +15,7 @@
       <%= yield %>
     </section>
     <%= render "shared/footer" %>
+    <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.16.0/polyfill.min.js' %>
     <%= Gon::Base.render_data %>
     <%= javascript_include_tag 'https://d3js.org/d3.v3.min.js' %>
     <%= javascript_include_tag 'application' %>

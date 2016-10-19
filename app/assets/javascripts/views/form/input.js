@@ -10,21 +10,29 @@
       name: null,
       type: 'text',
       required: false,
-      class: ''
+      info: false,
+      class: 'c-input',
+      min: false,
+      max: false,
+      firstRadio: false
     },
 
     events: {
+      'click input': 'triggerClick',
       'blur input': 'triggerChange',
-      'keyup input': 'triggerKeyup',
-      'click input': 'triggerClick'
+      'focus input': 'triggerFocus'
     },
 
     template: HandlebarsTemplates['form/input'],
 
     initialize: function(settings) {
-      var opts = (settings && settings.options)||{};
-      opts.class = [this.defaults.class, opts.class||''].join(' ');
+      var opts = (settings && settings.options) || {};
+      opts.class = [this.defaults.class, opts.class || ''].join(' ');
       this.options = _.extend({}, this.defaults, opts);
+
+      if(this.options.type === "radio" && this.options.firstRadio){
+        this.options.checked = true;
+      }
 
       this.$el.addClass(this.options.class);
       this.render();
@@ -42,16 +50,18 @@
       });
     },
 
-    triggerKeyup: function(e) {
-      this.trigger('keyup', {
-        name: e.currentTarget.name,
-        value: e.currentTarget.value
-      });
+    triggerFocus: function(e){
+      e.currentTarget.placeholder = '';
     },
 
-    triggerClick: function(e) {
+    triggerClick: function(e){
       if (!e.currentTarget.value) return;
-      e.target.setSelectionRange(0, e.target.value.length);
+      if(e.currentTarget.type == "radio"){
+        this.trigger('change', {
+          name: e.currentTarget.name,
+          value: e.currentTarget.value
+        });
+      }
     }
 
   });
