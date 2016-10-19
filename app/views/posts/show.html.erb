@@ -1,20 +1,24 @@
 <% investigator = User.find_by_id(@post.user_id) %>
+
 <div class="l-content">
   <div class="wrapper">
     <div class="row collapse">
-      <div class="column small-12">         
+      <div class="column small-12">
         <h1><%= @post.title %></h1>
         <p><%= @post.body.html_safe %></p>
         <div>
           <div class="c-avatar -ph -small"></div>
-          <p><%= investigator && investigator.name && investigator.name %></p>      
+          <p><%= investigator && investigator.name && investigator.name %></p>
         </div>
 
-        <%= link_to 'Edit', edit_post_path(@post), class: 'c-btn -primary' %>          
-        <%= link_to 'View all', user_path(id: current_user.id, data: 'posts'), class: 'c-btn -primary -inverse' %>          
+        <% if current_user.id === @post.user_id %>
+          <%= link_to 'Edit', edit_post_path(@post), class: 'c-btn -primary' %>
+        <% end %>
+
+        <% link_to 'View all', user_path(id: current_user.id, data: 'posts'), class: 'c-btn -primary -inverse' %>
       </div>
     </div>
-  </div>  
+  </div>
 </div>
 
 
