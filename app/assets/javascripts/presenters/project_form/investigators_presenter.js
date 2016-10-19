@@ -212,7 +212,8 @@
 
     setInvestigatorsLead: function(investigators) {
       Object.keys(investigators).map(function(id) {
-        investigators[id] = Object.assign({}, investigators[id], {lead: false});
+        // investigators[id] = Object.assign({}, investigators[id], {lead: false});
+        investigators[id] = _.extend(investigators[id], {lead: false});
       }.bind(this));
 
       this.$investAdded.find('td[value=lead]').text('');

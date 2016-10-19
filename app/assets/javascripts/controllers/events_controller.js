@@ -11,7 +11,8 @@
     },
 
     show: function(params) {
-      var newParams = Object.assign({}, params, {dataType: 'info'});
+      // var newParams = Object.assign({}, params, {dataType: 'info'});
+      var newParams = _.extend(params, {dataType: 'info'});
 
       new App.Presenter.MapVis(params);
       new App.Presenter.TabNav(newParams);
