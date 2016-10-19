@@ -3,6 +3,7 @@
   'use strict';
 
   var StateModel = Backbone.Model.extend();
+  var FollowModel = Backbone.Model.extend();
 
   App.Presenter.FollowButton = function() {
     this.initialize.apply(this, arguments);
@@ -12,7 +13,7 @@
 
     initialize: function(params) {
       this.state = new StateModel();
-      this.follow = new App.Model.Follow();
+      this.follow = new FollowModel();
 
       this.followButton = new App.View.FollowButton({
         el: '#followButton'
@@ -36,17 +37,34 @@
 
     setEvents: function() {
       this.followButton.on('toggle', function(data) {
-        this.follow.setUrl(data);
-        this.follow.save();
+        this.follow.set(data, { silent: true });
+        this.followRequest();
       }, this);
 
-      this.follow.on('change', function(){
-        console.log(this.follow.toJSON());
-      }, this)
-
-      this.state.on('change', function() {
-
+      this.follow.on('change:followed', function() {
+        this.followButton.setFollowed(this.follow.toJSON());
       }, this);
+    },
+
+    followRequest: function() {
+      var type = (this.follow.attributes.followed) ? 'DELETE' : 'POST';
+      $.ajax({
+        url: '/follows/'+ this.follow.attributes.follow_resource + '/' + this.follow.attributes.follow_id,
+        type: type,
+        dataType: 'json',
+        success: this.followSuccess.bind(this),
+        error: this.followError.bind(this)
+      })
+
+    },
+
+    followSuccess: function() {
+      var followed = this.follow.get('followed');
+      this.follow.set('followed', !followed);
+    },
+
+    followError: function() {
+      console.error('Error doing query');
     },
 
     setSubscriptions: function() {
