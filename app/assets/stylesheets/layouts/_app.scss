@@ -66,9 +66,7 @@
     color: $inverse-font-color;
 
     background-image: linear-gradient(to top, #68299b, rgba(103, 40, 155, 0));
-
-    // I need to click in the follow buttons
-    // pointer-events: none;
+    pointer-events: none;
   }
 
   .l-app-bottombar {
