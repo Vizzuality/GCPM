@@ -17,6 +17,8 @@
 class Project < ApplicationRecord
   enum status: [:under_revision, :published, :unpublished]
 
+  acts_as_followable
+
   belongs_to :user, inverse_of: :projects, optional: true
 
   has_many :memberships

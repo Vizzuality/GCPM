@@ -1,0 +1,17 @@
+.c-btn-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  pointer-events: all;
+
+
+  > li {
+    width: 100%;
+    margin: 0 5px;
+    list-style: none;
+
+    * {
+      width: 100%;
+    }
+  }
+}

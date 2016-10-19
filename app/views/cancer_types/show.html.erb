@@ -6,7 +6,7 @@
     <div id="map" class="c-map"></div>
   </div>
 
-  <%= render 'shared/legend' %>
+  <%= render 'shared/legend_people' %>
 
   <div class="l-app-title">
     <div class="wrapper">
@@ -27,7 +27,11 @@
               </tr>
             </tbody>
           </table>
-          <br/>
+        </div>
+        <div class="column small-4">
+          <% if (current_user) %>
+            <%= render "shared/user_actions" %>
+          <% end %>
         </div>
       </div>
     </div>

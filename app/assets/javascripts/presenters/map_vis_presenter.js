@@ -20,11 +20,12 @@
           zoom: 2,
           minZoom: 1,
           maxZoom: 10,
-          center: [20, 0]
+          center: [20, 0],
+          basemap: 'secondary'
         }
       });
 
-      this.addCountries();
+      // this.addCountries();
       this.addPoints();
     },
 

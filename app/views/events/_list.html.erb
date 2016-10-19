@@ -2,7 +2,7 @@
   <div class="row collapse">
     <% items.each do |e| %>
       <div class="column small-12 medium-4">
-        <div class="c-card">
+        <div class="c-card -events">
           <% if e.country? %>
             <h3 class="-underlined -alternative">
               <% country = Country.find_by( country_name: e.country ) %>
@@ -34,7 +34,9 @@
       <div class="c-card">
         <% page = @page + 1 %>
         <%= link_to (t 'show_more'),
-          map_path(request.query_parameters.merge({ page: page })),
+          {
+            :params => request.query_parameters.merge({ page: page })
+          },
           class: "c-btn -circle",
           id: 'showMoreButton',
           remote: true

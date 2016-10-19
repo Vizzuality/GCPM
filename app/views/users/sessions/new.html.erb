@@ -1,7 +1,7 @@
 <div class="l-content">
   <div class="wrapper">
     <div class="row">
-      <div class="column small-12">
+      <div class="column small-12 medium-8 large-6">
         <h2>Log in</h2>
 
         <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -16,6 +16,15 @@
           </div>
           <div class="form-actions">
             <%= f.button :submit, "Log in", class: 'c-btn -primary' %>
+            <%- if devise_mapping.omniauthable? %>
+              <%- resource_class.omniauth_providers.each do |provider| %>
+              <% if provider.to_s == 'google_oauth2' %>
+                <%= link_to "Sign in with Google", omniauth_authorize_path(resource_name, provider), class: 'c-btn -primary -google' %>
+              <% else %>
+                <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), class: "c-btn -primary -#{provider.to_s}" %>
+              <% end %>
+              <% end -%>
+            <% end -%>
           </div>
         <% end %>
 

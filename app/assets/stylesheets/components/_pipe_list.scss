@@ -1,0 +1,21 @@
+
+.c-pipe-list {
+  @extend %clearlist;
+
+  display: flex;
+  padding-bottom: $base-space;
+
+  li {
+    padding: 0 ($base-space / 2);
+    border-right: 1px solid white;
+    line-height: $small-font-size;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      border: 0;
+    }
+  }
+}

@@ -8,6 +8,7 @@
   .l-app-map {
     position: relative;
     flex: 1;
+    z-index: 0;
 
     .c-map {
       height: 100%;
@@ -60,11 +61,14 @@
     width: 100%;
     bottom: 0;
     left: 0;
-    padding: $box-space 0;
+    padding: ($box-space * 1.5) 0;
 
     color: $inverse-font-color;
 
     background-image: linear-gradient(to top, #68299b, rgba(103, 40, 155, 0));
+
+    // I need to click in the follow buttons
+    // pointer-events: none;
   }
 
   .l-app-bottombar {

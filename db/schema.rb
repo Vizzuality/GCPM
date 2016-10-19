@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161004100702) do
+ActiveRecord::Schema.define(version: 20161018125246) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,21 @@ ActiveRecord::Schema.define(version: 20161004100702) do
     t.index ["project_id"], name: "index_cancer_types_projects_on_project_id", using: :btree
   end
 
+  create_table "ckeditor_assets", force: :cascade do |t|
+    t.string   "data_file_name",               null: false
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.integer  "assetable_id"
+    t.string   "assetable_type",    limit: 30
+    t.string   "type",              limit: 30
+    t.integer  "width"
+    t.integer  "height"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.index ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
+    t.index ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
+  end
+
   create_table "countries", force: :cascade do |t|
     t.string   "country_name"
     t.string   "region_name"
@@ -134,6 +149,18 @@ ActiveRecord::Schema.define(version: 20161004100702) do
     t.index ["user_id"], name: "index_events_on_user_id", using: :btree
   end
 
+  create_table "follows", force: :cascade do |t|
+    t.string   "followable_type",                 null: false
+    t.integer  "followable_id",                   null: false
+    t.string   "follower_type",                   null: false
+    t.integer  "follower_id",                     null: false
+    t.boolean  "blocked",         default: false, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["followable_id", "followable_type"], name: "fk_followables", using: :btree
+    t.index ["follower_id", "follower_type"], name: "fk_follows", using: :btree
+  end
+
   create_table "funders", force: :cascade do |t|
     t.integer  "organization_id"
     t.integer  "project_id"
@@ -141,6 +168,15 @@ ActiveRecord::Schema.define(version: 20161004100702) do
     t.datetime "updated_at",      null: false
     t.index ["organization_id"], name: "index_funders_on_organization_id", using: :btree
     t.index ["project_id"], name: "index_funders_on_project_id", using: :btree
+  end
+
+  create_table "identities", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_identities_on_user_id", using: :btree
   end
 
   create_table "investigators", force: :cascade do |t|
@@ -216,6 +252,15 @@ ActiveRecord::Schema.define(version: 20161004100702) do
     t.index ["organization_type_id"], name: "index_organizations_on_organization_type_id", using: :btree
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
+  end
+
   create_table "project_types", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -247,6 +292,7 @@ ActiveRecord::Schema.define(version: 20161004100702) do
     t.integer  "investigator_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.index ["address_id", "investigator_id"], name: "index_research_units_on_address_id_and_investigator_id", unique: true, using: :btree
     t.index ["address_id"], name: "index_research_units_on_address_id", using: :btree
     t.index ["investigator_id"], name: "index_research_units_on_investigator_id", using: :btree
   end
@@ -284,4 +330,5 @@ ActiveRecord::Schema.define(version: 20161004100702) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
   end
 
+  add_foreign_key "identities", "users"
 end

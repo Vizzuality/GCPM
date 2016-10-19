@@ -16,6 +16,12 @@
       this.data = (settings && settings.layers) || [];
       this.current = null;
       this.opened = [];
+
+      this.setEvents();
+    },
+
+    setEvents: function() {
+      $(document).on('click', this.handleDocumentClick.bind(this));
     },
 
     updateData: function(data) {
@@ -60,10 +66,16 @@
       layersItem.toggleClass('-collapsed');
     },
 
+    handleDocumentClick: function(e) {
+      if (this.$el.find('.js-actionbar-action').length > 0) {
+        var isContained = this.el.contains(e.target);
+        !isContained && this.hideLayersWindow();
+      }
+    },
+
     hideLayersWindow: function() {
       this.trigger('close');
     }
-
   });
 
 })(this.App);

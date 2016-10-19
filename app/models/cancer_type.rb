@@ -10,6 +10,9 @@
 #
 
 class CancerType < ApplicationRecord
+
+  acts_as_followable
+
   has_and_belongs_to_many :projects
   def projects_count
     self.projects.uniq.size

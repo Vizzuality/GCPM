@@ -11,6 +11,12 @@
           <ul>
             <%= render "shared/nav" %>
             <% if user_signed_in? %>
+              <li class="js-user-menu <%= active_page?(user_session_path) ? '-active' : '' %>">
+                <button class="user-btn">
+                  <div class="c-avatar -ph"></div>
+                </button>
+                <%= render 'shared/user_menu' %>
+              </li>
             <% else %>
               <li class="<%= active_page?(user_session_path) ? '-active' : '' %>">
                 <%= link_to (t 'login'), user_session_path %></a>

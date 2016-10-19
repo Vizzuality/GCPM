@@ -2,7 +2,7 @@
   <div class="row collapse">
     <% items.each do |p| %>
       <div class="column small-12 medium-4">
-        <div class="c-card">
+        <div class="c-card -projects">
           <h3 class="-underlined">
             <a href="/investigators/<%= p.project_leads.first.try(:id) %>">
               <%= p.project_leads.first.try(:name) %>
@@ -40,7 +40,9 @@
       <div class="c-card">
         <% page = @page + 1 %>
         <%= link_to (t 'show_more'),
-          map_path(request.query_parameters.merge({ page: page })),
+          {
+            :params => request.query_parameters.merge({ page: page })
+          },
           class: "c-btn -circle",
           id: 'showMoreButton',
           remote: true
