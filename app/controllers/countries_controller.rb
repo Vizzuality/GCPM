@@ -8,8 +8,8 @@ class CountriesController < ApplicationController
 
   def show
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
-    @filters = %w(projects people events data)
-    @current_type = params.key?(:data) ? params[:data] : 'projects'
+    @filters = %w(data projects people events)
+    @current_type = params.key?(:data) ? params[:data] : 'data'
 
     gon.server_params = { 'countries[]': params[:iso] }
     gon.carto_account = ENV["CARTO_ACCOUNT"]
