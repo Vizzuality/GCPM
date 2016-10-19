@@ -20,7 +20,7 @@
       return;
     }
 
-    var opts = Object.assign({}, defaults, options || {});
+    var opts = _.extend({}, defaults, options || {});
     var width = opts.size.width;
     var height = opts.size.height;
     var radius = Math.min(width, height) / 2;

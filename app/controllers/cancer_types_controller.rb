@@ -28,6 +28,12 @@ class CancerTypesController < ApplicationController
       @items_total = @projects.size
     end
 
+    if current_user
+      @followed = current_user.following?(@cancer_type)
+      @followed_id = @cancer_type.id
+      @followed_resource = 'CancerType'
+    end
+
     respond_with(@items)
   end
 

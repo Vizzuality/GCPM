@@ -19,7 +19,8 @@
 
     events: {
       'click input': 'triggerClick',
-      'blur input': 'triggerChange'
+      'blur input': 'triggerChange',
+      'keyup input': 'triggerKeyup'
     },
 
     template: HandlebarsTemplates['form/input'],
@@ -44,6 +45,13 @@
     triggerChange: function(e) {
       if (!e.currentTarget.value) return;
       this.trigger('change', {
+        name: e.currentTarget.name,
+        value: e.currentTarget.value
+      });
+    },
+
+    triggerKeyup: function(e) {
+      this.trigger('keyup', {
         name: e.currentTarget.name,
         value: e.currentTarget.value
       });

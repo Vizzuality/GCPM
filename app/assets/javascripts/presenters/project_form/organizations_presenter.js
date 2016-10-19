@@ -4,18 +4,18 @@
 
   var StateModel = Backbone.Model.extend();
 
-  App.Presenter.Countries = function() {
+  App.Presenter.Organizations = function() {
     this.initialize.apply(this, arguments);
   };
 
-  _.extend(App.Presenter.Countries.prototype, {
+  _.extend(App.Presenter.Organizations.prototype, {
 
     defaults: {
-      multiple: false,
-      name: 'countries[]',
-      label: 'Countries',
-      placeholder: 'All countries',
-      blank: true,
+      multiple: true,
+      name: 'organizations[]',
+      label: 'Organizations',
+      placeholder: 'All organizations',
+      blank: null,
       addNew: true,
       select2Options: {
         // closeOnSelect: false
@@ -23,27 +23,16 @@
         // It adds a lot of UX issues
         // - Scroll: On select, scroll will go to first highlighted choice => How to resolve the scroll issue https://github.com/select2/select2/issues/1672#issuecomment-240411031
         // - Click: On each click dropdown will appear and dissapear
-
-        // Use this if you want a single select
-        allowClear: true,
-        templateSelection: function (data) {
-          // Return the placeholder
-          if (!data.id) {
-            return data.text;
-          }
-          // Return the selected option
-          return $('<span class="select2-selection__choice">' + data.text + '<span class="select2-selection__clear">×</span></span>');
-        }
       }
     },
 
     initialize: function(viewSettings) {
       this.state = new StateModel();
-      this.countries = new App.Collection.Countries();
+      this.organizations = new App.Collection.Organizations();
 
       // Creating view
       this.select = new App.View.Select({
-        el: '#countries',
+        el: '#organizations',
         options: _.extend({}, this.defaults, viewSettings || {}),
         state: this.state
       });
@@ -56,12 +45,10 @@
      */
     setEvents: function() {
       this.state.on('change', function() {
-        App.trigger('Countries:change', this.state.attributes);
+        App.trigger('Organizations:change', this.state.attributes);
       }, this);
 
       this.select.on('change', this.setState, this);
-
-      App.on('MapCountry:change', this.triggerCountryChange, this);
     },
 
     /**
@@ -69,11 +56,11 @@
      * @return {Promise}
      */
     fetchData: function() {
-      return this.countries.fetch().done(function() {
-        var options = this.countries.map(function(country) {
+      return this.organizations.fetch().done(function() {
+        var options = this.organizations.map(function(type) {
           return {
-            name: country.attributes.name,
-            value: country.attributes.country_iso_3
+            name: type.attributes.name,
+            value: type.attributes.id
           };
         });
         this.select.setOptions(options);
@@ -82,19 +69,6 @@
 
     render: function() {
       this.select.render();
-
-      if (arguments[0]) {
-        var state = new StateModel();
-        state.set(_.extend({}, this.state.attributes, arguments[0]));
-        this.select.setState(state);
-      }
-    },
-
-    /**
-     * Trigger country change
-     */
-    triggerCountryChange: function(value) {
-      this.render({value: [value]});
     },
 
     /**
