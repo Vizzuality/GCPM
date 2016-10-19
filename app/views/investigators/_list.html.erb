@@ -3,6 +3,7 @@
     <% items.each do |e| %>
       <div class="column small-12 medium-4">
         <div class="c-card -person">
+          <div class="c-avatar -ph -mg-bt"></div>
           <h2><a href="/investigators/<%=e.id%>"><%=e.name%></a></h2>
         </div>
       </div>
@@ -24,8 +25,9 @@
       <div class="c-card">
         <% page = @page + 1 %>
         <%= link_to (t 'show_more'),
-          {:path => request.path,
-          :params => request.query_parameters.merge({ page: page })},
+          {
+            :params => request.query_parameters.merge({ page: page })
+          },
           class: "c-btn -circle",
           id: 'showMoreButton',
           remote: true

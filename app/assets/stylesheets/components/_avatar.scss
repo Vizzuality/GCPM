@@ -9,6 +9,16 @@
   background-color: $primary-color;
   color: $inverse-font-color;
 
+  &.-ph {
+    background-image: url('placeholder.png');
+    background-size: cover;
+  }
+
+  &.-small {
+    width: 38px;
+    height: 38px;
+  }
+
   &.-medium {
     width: 120px;
     height: 120px;
@@ -19,6 +29,10 @@
     width: 150px;
     height: 150px;
     font-size: $big-font-size;
+  }
+
+  &.-mg-bt {
+    margin-bottom: $base-space;
   }
 
 }

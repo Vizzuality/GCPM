@@ -89,6 +89,14 @@
     }
   }
 
+  // Social login
+  &.-linkedin {
+    background-color: #0077b5;
+  }
+  &.-google {
+    background-color: #ea4335;
+  }
+
   &.-with-icon {
     display: flex;
     > * {
