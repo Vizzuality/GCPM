@@ -3,6 +3,7 @@
   'use strict';
 
   var StateModel = Backbone.Model.extend();
+  var FollowModel = Backbone.Model.extend();
 
   App.Presenter.FollowButton = function() {
     this.initialize.apply(this, arguments);
@@ -12,7 +13,7 @@
 
     initialize: function(params) {
       this.state = new StateModel();
-      this.follow = new App.Model.Follow();
+      this.follow = new FollowModel();
 
       this.followButton = new App.View.FollowButton({
         el: '#followButton'
@@ -58,7 +59,6 @@
     },
 
     followSuccess: function() {
-      debugger;
       var followed = this.follow.get('followed');
       this.follow.set('followed', !followed);
     },
