@@ -44,7 +44,7 @@
      * Setting internal events
      */
     setEvents: function() {
-      this.select.on('change', function(newState){
+      this.select.on('change', function(){
         App.trigger('OrganizationType:change', this.state.attributes);
       }, this);
 

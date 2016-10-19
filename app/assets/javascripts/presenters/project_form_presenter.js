@@ -94,7 +94,7 @@
       this.buildRequest();
 
       new Promise(function(resolve, reject){
-        var url = "/api/projects?token="+AUTH_TOKEN;
+        var url = "/api/projects?token="+window.AUTH_TOKEN;
         var q = new XMLHttpRequest();
         q.open('POST', url, true);
         q.setRequestHeader('Content-Type', 'application/json');

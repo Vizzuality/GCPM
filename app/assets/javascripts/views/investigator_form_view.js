@@ -12,7 +12,7 @@
     },
 
     initialize: function(settings) {
-      this.children = (settings && settings.children) || {};
+      this.children = (settings && settings.children)||{};
     },
 
     render: function() {
@@ -28,7 +28,7 @@
       return this;
     },
 
-    triggerCancel: function(e) {
+    triggerCancel: function() {
       this.trigger('cancel');
     },
 
@@ -44,7 +44,7 @@
      * @return {Object}
      */
     serializeForm: function() {
-      var searchString = this.$el.find('form').serialize();
+      //var searchString = this.$el.find('form').serialize();
       return this.form2Object(this.$el.find('form')[0]);
     },
 
