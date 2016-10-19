@@ -10,6 +10,11 @@
     <div class="wrapper">
       <div class="row collapse">
         <div class="column small-8">
+          <div class="c-avatar -big -ph -mg-bt"></div>
+        </div>
+      </div>
+      <div class="row collapse">
+        <div class="column small-8">
           <h1><%= @investigator.name %></h1>
           <table class="c-numbers-list">
             <thead>
@@ -24,10 +29,11 @@
             </tbody>
           </table>
         </div>
-
-        <% if (current_user) %>
-          <%= render "shared/user_actions" %>
-        <% end %>
+        <div class="column small-4">
+          <% if (current_user) %>
+            <%= render "shared/user_actions" %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
@@ -58,5 +64,9 @@
 </section>
 
 <div class="l-grid" id="content">
-  <%= render 'projects/list', items: @items, more: @more %>
+  <% if @current_type === 'posts' %>
+    <%= render 'posts/list', items: @items, more: @more %>
+  <% else %>
+    <%= render 'projects/list', items: @items, more: @more %>
+  <% end %>
 </div>

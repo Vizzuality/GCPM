@@ -14,6 +14,10 @@
   }
 
   &.-person {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+
     h2, h3 {
       text-align: center;
       margin: 4px 0 0;
