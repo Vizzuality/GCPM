@@ -59,7 +59,6 @@
     setSubscriptions: function(){
       App.on('FundingSourcesForm:submit', function(newState){
         newState.name = newState.organizationName;
-        debugger
         this.organizations.push(newState);
         this.select.addNew(this.organizations.at(this.organizations.length-1));
       }, this);
@@ -70,7 +69,7 @@
      * @return {Promise}
      */
     fetchData: function() {
-      return this.organizations.fetch().done(function() {
+      return this.organizations.fetch({add: true}).done(function() {
         var options = this.organizations.map(function(type) {
           return {
             name: type.attributes.name,

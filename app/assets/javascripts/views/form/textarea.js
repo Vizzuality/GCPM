@@ -40,7 +40,6 @@
     },
 
     triggerFocus: function(e){
-      if (!e.currentTarget.value) return;
       e.currentTarget.placeholder = '';
     }
 

@@ -69,7 +69,10 @@
      * @return {Promise}
      */
     fetchData: function() {
-      return this.organizations.fetch().done(function() {
+      if(this.organizations.length > 0){
+        return this.organizations;
+      }
+      return this.organizations.fetch({add: true}).done(function() {
         var options = this.organizations.map(function(type) {
           return {
             name: type.attributes.name,

@@ -58,6 +58,18 @@
 
     setSubscriptions: function(){
       App.on('InvestigatorForm:submit', function(newState){
+        // var newInvestigator = {
+        //   name: investigator.investigatorName,
+        //   id: investigator.investigatorName,
+        //   investigatorName: investigator.investigatorName,
+        //   investigatorEmail: investigator.investigatorEmail,
+        //   investigatorWebsite: investigator.investigatorWebsite,
+        //   value: "0"+investigator.investigatorName
+        // };
+        // this.investigators.push(newInvestigator);
+        // this.select.options.options.unshift(newInvestigator);
+        // this.select.render();
+        // this.select.addNew(this.investigators.at(this.investigators.length-1));
         newState.name = newState.investigatorName;
         this.investigators.push(newState);
         this.select.addNew(this.investigators.at(this.investigators.length-1));
@@ -69,15 +81,20 @@
      * @return {Promise}
      */
     fetchData: function() {
-      return this.investigators.fetch().done(function() {
-        var options = this.investigators.map(function(type) {
-          return {
-            name: type.attributes.name,
-            value: type.attributes.id
-          };
-        });
-        this.select.setOptions(options);
-      }.bind(this));
+      if(this.investigators.length > 0){
+        return this.investigators;
+      }
+      else{
+        return this.investigators.fetch({add: true}).done(function() {
+          var options = this.investigators.map(function(type) {
+            return {
+              name: type.attributes.name,
+              value: type.attributes.id
+            };
+          });
+          this.select.setOptions(options);
+        }.bind(this));
+      }
     },
 
     render: function() {

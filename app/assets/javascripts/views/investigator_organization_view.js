@@ -10,21 +10,20 @@
       'click .delete': 'deleteElement'
     },
 
-    initialize: function(settings) {
+    initialize: function() {
       this.elements = [];
       this.elementId = 0;
       this.generateId();
-      this.createElements(settings.children);
     },
 
-    createElements: function(children){
+    createElement: function(children){
       var element = {}
       element.id = this.elementId;
       element.children = children;
       this.elements.push(element);
     },
 
-    deleteElement: function(e, el){
+    deleteElement: function(e){
       var elementId = e.target.id.split("-")[1];
       this.trigger('deleteElement', elementId);
     },

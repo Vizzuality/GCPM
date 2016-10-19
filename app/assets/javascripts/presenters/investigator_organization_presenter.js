@@ -39,15 +39,18 @@
         name: "lead",
         value: "lead-1",
         label: false,
+        firstRadio: true
       });
 
       this.investigatorForm = new App.Presenter.InvestigatorForm();
       this.organizationForm = new App.Presenter.OrganizationForm();
 
       this.investigatorOrganization = new App.View.InvestigatorOrganization({
-        children: [investigator, organization, address, lead],
         el: '#investigatororganization'
       });
+
+      var elementOneChildren = [investigator, organization, address, lead];
+      this.investigatorOrganization.createElement(elementOneChildren);
       this.elements = this.investigatorOrganization.elements;
 
       this.setEvents();
@@ -184,8 +187,8 @@
         value: "lead-"+this.investigatorOrganization.elementId,
         label: false,
       });
-      this.investigatorOrganization.createElements([investigator, organization,
-        address, lead]);
+      var newElementChildren = [investigator, organization, address, lead]
+      this.investigatorOrganization.createElement(newElementChildren);
       this.elements = this.investigatorOrganization.elements;
       this.render();
     }

@@ -13,7 +13,8 @@
       info: false,
       class: 'c-input',
       min: false,
-      max: false
+      max: false,
+      firstRadio: false
     },
 
     events: {
@@ -28,6 +29,10 @@
       var opts = (settings && settings.options) || {};
       opts.class = [this.defaults.class, opts.class || ''].join(' ');
       this.options = _.extend({}, this.defaults, opts);
+
+      if(this.options.type === "radio" && this.options.firstRadio){
+        this.options.checked = true;
+      }
 
       this.$el.addClass(this.options.class);
       this.render();
@@ -46,7 +51,6 @@
     },
 
     triggerFocus: function(e){
-      if (!e.currentTarget.value) return;
       e.currentTarget.placeholder = '';
     },
 

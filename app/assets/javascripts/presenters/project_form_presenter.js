@@ -35,12 +35,14 @@
         addNew: true
       });
       var policy = new App.Presenter.Policy();
+      var messagesList = new App.Presenter.MessagesList();
+
 
       this.investigatorOrganization = new App.Presenter.InvestigatorOrganization();
       this.fundingSourcesForm = new App.Presenter.FundingSourcesForm();
 
       this.children = [titleInput, descTextarea, startPickadate, endPickadate,
-         websiteInput, projectTypes, cancerTypes, fundingSources, policy, this.investigatorOrganization];
+         websiteInput, projectTypes, cancerTypes, fundingSources, policy, messagesList, this.investigatorOrganization];
 
       this.projectForm = new App.View.ProjectForm({
         children: this.children,
@@ -90,10 +92,7 @@
      */
     handleSubmit: function() {
       this.buildRequest();
-      console.log(this.request);
-      //console.log(this.state.attributes);
 
-      // @TODO request (validate response)
       new Promise(function(resolve, reject){
         var url = "/api/projects?token="+AUTH_TOKEN;
         var q = new XMLHttpRequest();
@@ -117,8 +116,8 @@
         var pId = JSON.parse(response).id;
         window.location.href = "/projects/"+pId;
       }.bind(this)).catch(function(response){
-        var messages = JSON.parse(response).messages;
-        console.log(messages);
+        var messages = JSON.parse(response).message;
+        App.trigger("ProjectForm:errors", messages);
       });
     },
 
@@ -195,7 +194,7 @@
             else if(!isNaN(parseInt(investigator)) && isNaN(parseInt(organization))){
               obj.research_unit_attributes = {
                 investigator_id: investigator,
-                addresses_attributes: {
+                address_attributes: {
                   country_id: organization.organizationCountry,
                   organization_attributes: {
                     name: organization.organizationName,
