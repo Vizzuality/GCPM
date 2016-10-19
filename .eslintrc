@@ -15,7 +15,8 @@
     "_": true,
     "App": true,
     "HandlebarsTemplates": true,
-    "gon": true
+    "gon": true,
+    "Promise": true
   },
   "extends": "eslint:recommended"
 }
