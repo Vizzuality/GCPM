@@ -11,12 +11,13 @@
   _.extend(App.Presenter.FilterForm.prototype, {
 
     defaults: {
-      cancerTypes: null,
-      organization_types: null,
-      organizations: null,
-      project_types: null,
-      start_date: undefined,
-      end_date: undefined
+      'countries[]': undefined,
+      'cancer_types[]': undefined,
+      'organization_types[]': undefined,
+      'organizations[]': undefined,
+      'project_types[]': undefined,
+      start_date: null,
+      end_date: null
     },
 
     initialize: function(params) {
