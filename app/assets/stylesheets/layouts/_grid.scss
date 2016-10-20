@@ -12,6 +12,10 @@
   .column {
     display: flex;
     align-items: stretch;
+
+    &.-align-bottom {
+      align-items: flex-end;
+    }
   }
 
   .l-content, .l-sidebar {
