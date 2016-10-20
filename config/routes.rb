@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   get '/network/:id',           to: 'users#show',         as: 'user'
 
   resources :projects, only: :show
-  resources :events, except: :destroy
+  resources :events, except: :index
   resources :posts
 
   # User profile
