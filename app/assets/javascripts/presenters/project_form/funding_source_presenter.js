@@ -57,10 +57,14 @@
     },
 
     setSubscriptions: function(){
-      App.on('FundingSourcesForm:submit', function(newState){
-        newState.name = newState.organizationName;
-        this.organizations.push(newState);
-        this.select.addNew(this.organizations.at(this.organizations.length-1));
+      App.on('FundingSourcesForm:submit', function(newFunding){
+        var newOption = {
+          value: JSON.stringify(newFunding)
+        };
+        newOption.name = newFunding.organizationName;
+        this.select.options.options.unshift(newOption);
+        this.select.render();
+        $(this.select.$el[0].children[this.select.options.name]).val(newOption.value).trigger("change");
       }, this);
     },
 

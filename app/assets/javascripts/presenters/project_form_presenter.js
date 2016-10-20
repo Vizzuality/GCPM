@@ -142,20 +142,20 @@
           this.request.project["funding_source_ids"].push(element);
         }
         else{
-          this.request.project["new_funders"] = [];
+          if(!this.request.project['new_funders']){
+            this.request.project["new_funders"] = [];
+          }
           element = JSON.parse(element);
           var funder = {
             name: element["organizationName"],
             organization_type_id: element["organizationType"],
-            addresses_attributes: []
+            addresses_attributes: [{
+              country_id: element["organizationCountry"],
+              latitude: element["organizationLatitude"],
+              longitude: element["organizationLongitude"],
+              primary: true
+            }]
           };
-          var funderAdd = {
-            country_id: element["organizationCountry"],
-            latitude: element["organizationLatitude"],
-            longitude: element["organizationLongitude"],
-            primary: true,
-          };
-          funder["addresses_attributes"].push(funderAdd);
           this.request.project["new_funders"].push(funder);
         }
       }, this);
