@@ -13,8 +13,7 @@
     },
 
     events: {
-      'blur textarea': 'triggerChange',
-      'focus textarea': 'triggerFocus'
+      'blur textarea': 'triggerChange'
     },
 
     template: HandlebarsTemplates['form/textarea'],
@@ -37,12 +36,7 @@
         name: e.currentTarget.name,
         value: e.currentTarget.value
       });
-    },
-
-    triggerFocus: function(e){
-      e.currentTarget.placeholder = '';
     }
-
 
   });
 

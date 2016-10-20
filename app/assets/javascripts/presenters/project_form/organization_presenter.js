@@ -57,10 +57,15 @@
     },
 
     setSubscriptions: function(){
-      App.on('OrganizationForm:submit', function(organization){
-        organization.name = organization.organizationName;
-        this.organizations.push(organization);
-        this.select.addNew(this.organizations.at(this.organizations.length-1));
+      App.on('OrganizationForm:submit', function(newOrganization){
+        var newOption = {
+          value: JSON.stringify(newOrganization)
+        };
+        newOption.name = newOrganization.organizationName;
+        this.select.options.options.unshift(newOption);
+        this.select.render();
+        // Auto set value
+        $(this.select.$el[0].children[this.select.options.name]).val(newOption.value).trigger("change");
       }, this);
     },
 
