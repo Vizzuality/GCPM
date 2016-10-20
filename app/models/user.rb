@@ -79,11 +79,13 @@ class User < ApplicationRecord
         update_attr(user, name_atr, auth) if user
 
         if user.nil?
-          user = User.create(
+          user = User.new(
             email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
             password: Devise.friendly_token[0,20],
             name: name_atr
           )
+          user.skip_confirmation!
+          user.save!
         end
       end
 
