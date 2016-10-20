@@ -6,7 +6,18 @@
 
   var CountryModel = Backbone.Model.extend({
     setUrl: function(iso) {
-      var sql = "SELECT * from canceratlas_downloadabledata where iso3='" + iso + "'";
+      var sql = "SELECT breast_cancer_screening_programscountries_with_organized_or_uno,"+
+                "cervical_cancer_screening_programscountries_with_organized_or_u,"+
+                "colorectal_cancer_screening_programscountries_with_organized_or,"+
+                "quality_of_vital_registration_dataquality_of_death_certificatio,"+
+                "pink_ribbon_red_ribbon_collaborationpink_ribbon_red_ribbon_prr,"+
+                "pink_ribbon_red_ribbon_collaborationpink_ribbon_red_ribbon_prr,"+
+                "union_for_international_cancer_control_membershipnumber_of_uicc,"+
+                "human_development_index_category2013,"+
+                "warning_labels_on_cigarette_packaging2013 "+
+                "FROM canceratlas_downloadabledata "+
+                "WHERE iso3='" + iso + "'";
+
       this.url = 'https://' + gon.carto_account + '.carto.com/api/v2/sql/?q=' + sql + '&api_key=' + gon.carto_key;
     },
 
