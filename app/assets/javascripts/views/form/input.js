@@ -20,7 +20,7 @@
     events: {
       'click input': 'triggerClick',
       'blur input': 'triggerChange',
-      'focus input': 'triggerFocus'
+      'keyup input': 'triggerKeyup'
     },
 
     template: HandlebarsTemplates['form/input'],
@@ -50,8 +50,11 @@
       });
     },
 
-    triggerFocus: function(e){
-      e.currentTarget.placeholder = '';
+    triggerKeyup: function(e) {
+      this.trigger('keyup', {
+        name: e.currentTarget.name,
+        value: e.currentTarget.value
+      });
     },
 
     triggerClick: function(e){
