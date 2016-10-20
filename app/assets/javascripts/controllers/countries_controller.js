@@ -15,6 +15,7 @@
       new App.Presenter.MapVis(newParams);
       new App.Presenter.TabNav(newParams);
       new App.Presenter.CountryData(newParams);
+      new App.Presenter.CountryDataMap(newParams);
       new App.Presenter.FollowButton(newParams);
       new App.Presenter.ShowMore(newParams);
     }
