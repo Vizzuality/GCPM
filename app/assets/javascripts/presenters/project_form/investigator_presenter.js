@@ -57,11 +57,21 @@
     },
 
     setSubscriptions: function(){
-      App.on('InvestigatorForm:submit', function(newState){
-        newState.name = newState.investigatorName;
-        this.investigators.push(newState);
-        this.select.addNew(this.investigators.at(this.investigators.length-1));
+      App.on('InvestigatorForm:submit', function(newInvestigator){
+        var newOption = {
+          value: JSON.stringify(newInvestigator)
+        };
+        newOption.name = newInvestigator.investigatorName;
+        this.select.options.options.unshift(newOption);
+        this.select.render();
+        $(this.select.$el[0].children[this.select.options.name]).val(newOption.value).trigger("change");
       }, this);
+
+      // App.on('InvestigatorForm:submit', function(newState){
+      //   newState.name = newState.investigatorName;
+      //   this.investigators.push(newState);
+      //   this.select.addNew(this.investigators.at(this.investigators.length-1));
+      // }, this);
     },
 
     /**

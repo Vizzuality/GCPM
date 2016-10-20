@@ -33,6 +33,10 @@
     }
   }
 
+  .leaflet-pane {
+    z-index: 0;
+  }
+
   .leaflet-left .leaflet-control {
     margin-left: $base-space;
   }
