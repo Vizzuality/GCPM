@@ -4,11 +4,6 @@ class UsersController < ApplicationController
   respond_to :html, :js
 
   def show
-    # @projects = user_signed_in? && @user == current_user ? @user.projects.includes(:cancer_types).limit(params[:limit] ?
-    #   params[:limit].to_i * @limit : @limit) :
-    #   @user.published_projects.limit(params[:limit] ? params[:limit].to_i * @limit : @limit)
-    # @isProfile = true
-
     if !current_user
       redirect_to new_user_session_path and return
     elsif current_user != User.find_by_id(params[:id])
@@ -28,9 +23,12 @@ class UsersController < ApplicationController
     @posts = Post.where(user_id: current_user.id)
 
     if params.key?(:data) && params[:data] == 'network'
-      @items = @people.limit(limit)
-      @more = (@people.size > @items.size)
-      @items_total = @people.size
+      @followProjects = @user.following_by_type('Project')
+      @followEvents = @user.following_by_type('Event')
+      @followPeople = @user.following_by_type('Investigator')
+      @followCancerTypes = @user.following_by_type('CancerType')
+      @followCountries = @user.following_by_type('Country')
+      @followOrganizations = @user.following_by_type('Organization')
     elsif params.key?(:data) && params[:data] == 'posts'
       @items = @posts.first(limit)
       @more = (@posts.size > @items.size)

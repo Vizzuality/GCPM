@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="column row small-12 medium-8 -column">
+    <article>
+      <div class="l-content wrapper">
+        <h2 class=""><%= t 'investigators' %></h2>
+      </div>
+      <%= render 'investigators/list', items: @followPeople, more: false %>
+    </article>
+
+    <article>
+      <div class="l-content wrapper">
+        <h2><%= t 'projects' %></h2>
+      </div>
+      <%= render 'projects/list', items: @followProjects, more: false %>
+    </article>
+  </div>
+  <div class="column small-12 medium-4">
+    <aside class="l-sidebar">
+      <div class="sidebar-item">
+        <h2><%= t 'countries' %></h2>
+        <ul class="c-list">
+          <% if @followCountries.size > 0 %>
+            <% @followCountries.each do |c| %>
+              <li class="list-item -mg-less"><%= link_to c.country_name, country_path(iso: c.country_iso_3) %></li>
+            <% end %>
+          <% else %>
+            <p>No countries</p>
+          <% end %>
+        </ul>
+      </div>
+
+      <div class="sidebar-item">
+        <h2><%= t 'cancer_types' %></h2>
+        <ul class="c-list">
+          <% if @followCancerTypes.size > 0 %>
+            <% @followCancerTypes.each do |ct| %>
+              <li class="list-item -mg-less"><%= link_to ct.name, cancer_path(id: ct.id) %></li>
+            <% end %>
+          <% else %>
+            <p>No cancer types</p>
+          <% end %>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</div>
