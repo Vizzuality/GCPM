@@ -73,7 +73,7 @@ class User < ApplicationRecord
 
       if user.nil?
         email    = auth.info.email
-        name_atr = "#{auth.info.first_name} auth.info.last_name"
+        name_atr = "#{auth.info.first_name} #{auth.info.last_name}"
         user     = User.where(email: email).first if email
 
         update_attr(user, name_atr, auth) if user
