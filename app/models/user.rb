@@ -47,6 +47,7 @@ class User < ApplicationRecord
   validates_format_of     :email, without: TEMP_EMAIL_REGEX, on: :update
 
   acts_as_follower
+  acts_as_messageable
 
   has_many :projects, inverse_of: :user
   has_many :events, inverse_of: :user
@@ -64,6 +65,10 @@ class User < ApplicationRecord
 
   def email_verified?
     email && email !~ TEMP_EMAIL_REGEX
+  end
+
+  def unread_messages
+    Mailboxer::Receipt.recipient(self).is_unread.not_trash.count
   end
 
   class << self
