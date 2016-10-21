@@ -11,6 +11,7 @@ addresses.line_2 as location_line_2,
 addresses.line_3 as location_line_3,
 addresses.postcode as location_postcode,
 addresses.state as location_state,
+organizations.id as organization,
 organizations.name as organization_name,
 '{"type":"Point","coordinates":[' || addresses.latitude || ',' || addresses.longitude || ']}' as centroid,
 countries.country_iso_3 as iso,
@@ -68,4 +69,4 @@ from projects
     <% if @params[:user] %>
       and projects.user_id = <%= quote @params[:user] %>
     <% end %>
-group by project, title, location_name, location_country_name, location_city, location_line_1, location_line_2, location_line_3, location_postcode, location_state, centroid, iso, investigator_name, investigator, is_project_lead, organization_name
+group by project, title, location_name, location_country_name, location_city, location_line_1, location_line_2, location_line_3, location_postcode, location_state, centroid, iso, investigator_name, investigator, is_project_lead, organization_name, organization
