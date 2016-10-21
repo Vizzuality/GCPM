@@ -9,6 +9,8 @@
     border-bottom-width: 0;
   }
 
+  &.-no-br { border: 0; }
+
   .l-content-article {
     font-family: $base-font-family-light;
     padding-right: $box-space;
