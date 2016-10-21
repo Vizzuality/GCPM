@@ -2,7 +2,11 @@
 
   'use strict';
 
-  var StateModel = Backbone.Model.extend({});
+  var StateModel = Backbone.Model.extend({
+    defaults: {
+      year: 2013
+    }
+  });
 
   App.Presenter.Layers = function () {
     this.initialize.apply(this, arguments);
@@ -11,14 +15,12 @@
   _.extend(App.Presenter.Layers.prototype, {
 
     initialize: function (params) {
-      this.params = params;
       this.state = new StateModel();
       this.layersView = new App.View.Layers({ el: '#layers' });
       this.fc = App.facade.cartoLayer;
       this.layersCollection = new App.Collection.Layers();
-      this.params.active = false;
 
-      this.setState(this.params);
+      this.setState(_.extend({},{ active: false },params));
       this.setLayers();
       this.setEvents();
       this.setSubscriptions();
@@ -47,13 +49,29 @@
 
     setLayers: function() {
       this.layersCollection.fetch().done(function() {
-        var groups = _.groupBy(_.filter(this.layersCollection.toJSON(), 'layer_group'),
-          function(layer) { return layer.layer_group.name; });
-        var individual = $.extend({}, _.reject(this.layersCollection.toJSON(), 'layer_group'));
+        var groups = _.groupBy(
+          _.filter(this.layersCollection.toJSON(), function(layer){
+            return layer.layer_group && layer.layer_group.slug === 'disability-adjusted-life-year'
+          }), function(layer) {
+          return layer.layer_group.name;
+        });
 
         this.layersList = {
           groups: {groups: true, elements: groups},
-          individual: {individual: true, elements: individual}
+          individual: {individual: true, elements: [
+            {
+              name: 'Human Development Index',
+              slug: 'human-development-index'
+            },
+            {
+              name: 'Mortality, ASR all years Globocan',
+              slug: 'mortality-asr-all-years-globocan'
+            },
+            {
+              name: 'Incidence, ASR all years Globocan',
+              slug: 'incidence-asr-all-years-globocan'
+            }
+          ]}
         };
 
         this.setState({ layers: this.layersList });
@@ -79,7 +97,11 @@
 
     handleLayer: function(element) {
       if (element) {
+        if (element.id == 'human-development-index') {
+          element.id = element.id + '-' + this.state.get('year');
+        }
         var layer = _.findWhere(this.layersCollection.toJSON(), {slug: element.id});
+
         var options = {
           sql: layer.query,
           cartocss: layer.css
