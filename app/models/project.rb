@@ -35,6 +35,8 @@ class Project < ApplicationRecord
   has_many :project_users
   has_many :users, through: :project_users
 
+  has_many :project_updates
+
   has_and_belongs_to_many :project_types
   has_and_belongs_to_many :cancer_types
 
