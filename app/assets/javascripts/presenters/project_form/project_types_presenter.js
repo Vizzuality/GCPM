@@ -79,6 +79,10 @@
       this.state.set(state, options);
     },
 
+    setValue: function(values){
+      this.select.$el.find("select").val(values).trigger("change");
+    },
+
     /**
      * Rebinding element, events and render again
      * @param {DOM|String} el

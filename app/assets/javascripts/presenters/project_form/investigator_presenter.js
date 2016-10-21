@@ -64,7 +64,7 @@
         newOption.name = newInvestigator.investigatorName;
         this.select.options.options.unshift(newOption);
         this.select.render();
-        this.select.$el.find("select").val(newOption.value).trigger("change");
+        this.setValue(newOption.value);
       }, this);
     },
 
@@ -99,6 +99,10 @@
      */
     setState: function(state, options) {
       this.state.set(state, options);
+    },
+
+    setValue: function(value){
+      this.select.$el.find("select").val(value).trigger("change");
     },
 
     /**

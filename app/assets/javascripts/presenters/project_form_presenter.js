@@ -13,8 +13,6 @@
     initialize: function(params) {
       this.state = new StateModel(params);
 
-      this.projectId = params[1];
-
       this.titleInput = new App.Presenter.Input();
       this.descTextarea = new App.Presenter.Textarea();
       this.startPickadate = new App.Presenter.PickadateStart({
@@ -273,23 +271,56 @@
 
   // Edit
   App.Presenter.EditProjectForm = function() {
+    this.getProject.apply(this, arguments);
     this.initialize.apply(this, arguments);
   };
 
   _.extend(App.Presenter.EditProjectForm.prototype, App.Presenter.ProjectForm.prototype);
   _.extend(App.Presenter.EditProjectForm.prototype, {
 
+    getProject: function(params){
+      this.projectId = params.vars[1];
+      this.project = {};
+    },
+
     loadData: function(){
-      // this.projectId;
-      var data = {
-        project: {
-          title: "Project TITLE EXAMPLE",
-          summary: "Project SUmmary example"
-        }
+      this.project = {
+        title: "Project TITLE EXAMPLE",
+        summary: "Project SUmmary example",
+        start_date: "1989-06-22",
+        end_date: "1989-06-23",
+        project_website: "http://www.esloquehay.com",
+        project_type_ids: [1,2,3],
+        cancer_type_ids: [1,2,3],
+        funding_sources: [1,2,3],
+        memberships:[
+          {
+            membership_type: "main",
+            research_unit_attributes:{
+              investigator_id: 1,
+              organization_id: 1,
+              address_id: 1
+            }
+          },
+          {
+            membership_type: "secondary",
+            research_unit_attributes:{
+              investigator_id: 2,
+              organization_id: 2,
+              address_id: 1
+            }
+          }
+        ]
       };
-      //debugger
-      this.titleInput.setValue(data.project.title);
-      this.descTextarea.setValue(data.project.summary);
+      this.titleInput.setValue(this.project.title);
+      this.descTextarea.setValue(this.project.summary);
+      this.startPickadate.setValue(this.project.start_date);
+      this.endPickadate.setValue(this.project.end_date);
+      this.websiteInput.setValue(this.project.project_website);
+      this.projectTypes.setValue(this.project.project_type_ids);
+      this.cancerTypes.setValue(this.project.cancer_type_ids);
+      this.fundingSources.setValue(this.project.funding_sources);
+      this.investigatorOrganization.setValue(this.project.memberships);
     },
 
     handleSubmit: function() {

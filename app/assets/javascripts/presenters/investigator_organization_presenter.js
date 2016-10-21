@@ -132,6 +132,7 @@
 
               // Render the child
               child.render();
+              App.trigger('InvestigatorOrganization:complete');
             }.bind(this));
 
           }, this);
@@ -156,6 +157,30 @@
      */
     getElement: function() {
       return this.investigatorOrganization.$el;
+    },
+
+    setValue: function(memberships){
+      var i;
+      for(i=1; i < memberships.length; i++){
+        this.createElement();
+      }
+
+      App.on('InvestigatorOrganization:complete', function(){
+
+        memberships.forEach(function(membership, index){
+          var elementChildren;
+          this.elements.forEach(function(element){
+            if(element.id == index+1){
+              elementChildren = element.children;
+            }
+          });
+
+          elementChildren[0].setValue(membership.research_unit_attributes.investigator_id);
+          elementChildren[1].setValue(membership.research_unit_attributes.organization_id);
+          elementChildren[2].setValue(membership.research_unit_attributes.address_id);
+          //elementChildren[3].setValue(membership.membership_type);
+        }, this);
+      }, this);
     },
 
     createElement: function(){
@@ -191,6 +216,7 @@
       this.investigatorOrganization.createElement(newElementChildren);
       this.elements = this.investigatorOrganization.elements;
       this.render();
+      return newElementChildren;
     }
 
 
