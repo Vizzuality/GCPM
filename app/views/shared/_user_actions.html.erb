@@ -1,3 +1,4 @@
+<% controller_name = controller && controller.controller_name %>
 <div>
   <ul class="c-btn-container">
     <li id="followButton">
@@ -17,8 +18,14 @@
     </li>
   </ul>
   <ul class="c-btn-container">
-    <li><%= link_to '+ Project', (user_signed_in?) ? new_user_project_path(user_id: current_user.id) : user_session_path, class: 'c-btn -transparent -extra-thin' %></li>
-    <li><%= link_to '+ Post', (user_signed_in?) ? new_post_path : user_session_path, class: 'c-btn -transparent -extra-thin' %></li>
-    <!-- <li><% link_to '+ Event', (user_signed_in?) ? new_user_event_path(user_id: current_user.id) : user_session_path, class: 'c-btn -transparent -extra-thin' %></li> -->
+    <% if controller_name == 'projects' %>
+      <li><%= link_to '+ Project', (user_signed_in?) ? new_user_project_path(user_id: current_user.id) : user_session_path, class: 'c-btn -transparent -extra-thin' %></li>
+    <% end %>
+    <% if controller_name != 'investigators' %>
+      <li><%= link_to '+ Post', (user_signed_in?) ? new_post_path : user_session_path, class: 'c-btn -transparent -extra-thin' %></li>
+    <% end %>
+    <% if controller_name == 'events' %>
+      <!-- <li><% link_to '+ Event', (user_signed_in?) ? new_user_event_path(user_id: current_user.id) : user_session_path, class: 'c-btn -transparent -extra-thin' %></li> -->
+    <% end %>
   </ul>
 </div>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :project_updates
   devise_for :users, controllers: { sessions: 'users/sessions', omniauth_callbacks: 'users/omniauth_callbacks' }
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -16,7 +17,7 @@ Rails.application.routes.draw do
   get '/network/:id',           to: 'users#show',         as: 'user'
 
   resources :projects, only: :show
-  resources :events, except: :destroy
+  resources :events, except: :index
   resources :posts
 
   # User profile
@@ -30,7 +31,7 @@ Rails.application.routes.draw do
 
   post 'follows/:resource/:id', to: 'follows#create', as: :follows
   delete 'follows/:resource/:id', to: 'follows#destroy', as: :follow
-  
+
   post 'block/:user_id', to: 'follows#block', as: :blocks
   delete 'block/:user_id', to: 'follows#unblock', as: :block
 
@@ -55,7 +56,7 @@ Rails.application.routes.draw do
       resources :organizations,  only: [:index, :show]
 
       get 'funding-sources',     to: 'organizations#index'
-      get 'countries',           to: 'organizations#index_countries'
+      get 'countries',           to: 'countries#index'
       get 'check_research_unit', to: 'memberships#check_research_unit'
       get 'lists/countries',     to: 'lists#countries'
       get 'lists/cancer-types',  to: 'lists#cancer_types'

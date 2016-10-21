@@ -40,10 +40,14 @@
       return deferred.promise();
     },
 
-    getPointLayer: function() {
-      var fetchParams = _.extend({}, gon.server_params, { group: 'points' });
+    getPointLayer: function(state) {
+      var fetchParams = _.extend({}, gon.server_params, {
+        group: 'points',
+        data: state.data || ''
+      });
       var deferred = new $.Deferred();
       var locations = new App.Collection.Locations();
+
       locations
         .fetch({ data: fetchParams })
         .done(function() {

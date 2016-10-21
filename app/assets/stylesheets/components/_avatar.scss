@@ -10,7 +10,7 @@
   color: $inverse-font-color;
 
   &.-ph {
-    background-image: url('placeholder.png');
+    background-image: asset-url('placeholder.png');
     background-size: cover;
   }
 

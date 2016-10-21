@@ -7,8 +7,28 @@
   text-align: center;
   font-family: $base-font-family;
 
+  &.-no-iteraction {
+    pointer-events: none;
+  }
+
+  > * {
+    margin: 20px 0 0;
+
+    &:first-child { margin: 0; }
+  }
+
+  .investigator, .organization {
+    > * {
+      display: block;
+      margin: 5px 0 0;
+
+      &:first-child { margin: 0; }
+    }
+  }
+
   h3 {
     width: 100%;
+    color: $base-font-color;
 
     & > a {
       color: $base-font-color;
@@ -25,9 +45,5 @@
         opacity: .7;
       }
     }
-  }
-
-  .c-tag {
-    margin-top: 15px;
   }
 }
