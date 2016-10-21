@@ -27,6 +27,15 @@
         display: inherit;
       }
     }
+
+    &.-align-bottom {
+      align-items: flex-end;
+    }
+
+    &.-align-right {
+      flex-flow: row;
+      justify-content: flex-end;
+    }
   }
 
   .l-content, .l-sidebar {

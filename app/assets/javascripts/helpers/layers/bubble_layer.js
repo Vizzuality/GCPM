@@ -16,6 +16,7 @@
    */
   App.helper.bubbleLayer = function(geoJson, params, layerFacade) {
     var markerTemplate = HandlebarsTemplates['marker_bubble'];
+    var infowindowTemplate = HandlebarsTemplates['infowindow_bubble'];
 
     return L.geoJson(geoJson, {
       pointToLayer: function(feature) {
@@ -72,22 +73,36 @@
           className: className,
           html: markerTemplate(markerData)
         });
-        return L.marker(location, { icon: bubbleIcon });
-      },
-      onEachFeature: function(feature, layer) {
-        layer.on('click', function() {
-          var eventName = null;
-          if (!params['regions[]'] && !params['countries[]']) {
-            eventName = 'region';
-          } else if (params['regions[]'] && !params['countries[]']) {
-            eventName = 'country';
-          }
 
-          var newState = _.extend({}, feature.properties, params);
-          if (eventName) {
-            layerFacade.trigger(eventName + ':change', newState);
-          }
+        var marker = L.marker(location, {
+          icon: bubbleIcon
         });
+        marker.bindPopup(infowindowTemplate(feature.properties));
+
+        return marker;
+      },
+
+      onEachFeature: function(feature, layer) {
+        layer
+          .on('click', function() {
+            var eventName = null;
+            if (!params['regions[]'] && !params['countries[]']) {
+              eventName = 'region';
+            } else if (params['regions[]'] && !params['countries[]']) {
+              eventName = 'country';
+            }
+
+            var newState = _.extend({}, feature.properties, params);
+            if (eventName) {
+              layerFacade.trigger(eventName + ':change', newState);
+            }
+          })
+          .on('mouseover', function () {
+            this.openPopup();
+          })
+          .on('mouseout', function () {
+            this.closePopup();
+          })
       }
     });
   };
