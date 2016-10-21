@@ -8,10 +8,11 @@
 #  website    :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  user_id    :integer
 #
 
 class InvestigatorSerializer < ActiveModel::Serializer
-  attributes :id, :name
+  attributes :id, :name, :user_id
 
   has_many :organizations
   has_many :addresses

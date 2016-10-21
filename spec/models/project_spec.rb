@@ -23,12 +23,12 @@ RSpec.describe Project, type: :model do
 
   context "Valid project" do
     before :each do
-      @project = create(:project, user_id: @user.id)
+      @project = create(:project, users: [@user])
     end
 
     it 'Projects count' do
-      expect(Project.count).to eq(1)
-      expect(@project.user).to be_valid
+      expect(Project.count).to  eq(1)
+      expect(@project.users).to be_any
     end
   end
 
@@ -38,14 +38,14 @@ RSpec.describe Project, type: :model do
     end
 
     it 'Project title validation' do
-      @project_reject = build(:project, title: '', user_id: @user.id)
+      @project_reject = build(:project, title: '', users: [@user])
 
       @project_reject.valid?
       expect {@project_reject.save!}.to raise_error(ActiveRecord::RecordInvalid, "Validation failed: Title can't be blank")
     end
 
     it 'Project summary validation' do
-      @project_reject = build(:project, title: 'Second project', summary: '', user_id: @user.id)
+      @project_reject = build(:project, title: 'Second project', summary: '', users: [@user])
 
       @project_reject.valid?
       expect {@project_reject.save!}.to raise_error(ActiveRecord::RecordInvalid, "Validation failed: Summary can't be blank")
@@ -54,8 +54,8 @@ RSpec.describe Project, type: :model do
     it 'Project user validation allow optional user' do
       @project = build(:project)
 
-      expect(@project).to      be_valid
-      expect(@project.user).to be_nil
+      expect(@project).to       be_valid
+      expect(@project.users).to be_empty
     end
 
     it 'Do not allow to create project with title douplications' do
