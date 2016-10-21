@@ -37,8 +37,8 @@
 
     setSubscriptions: function () {
       App.on('Actionbar:layers', this.toggleActive, this);
-      App.on('Map:change Router:change', this.setState, this);
-      App.on('Router:change', function(params) {
+      App.on('Map:change Router:change Timeline:change', this.setState, this);
+      App.on('Router:change Timeline:change', function(params) {
         if (params.cartoLayer) {
           this.handleLayer({ id: params.cartoLayer });
         } else {
@@ -49,29 +49,30 @@
 
     setLayers: function() {
       this.layersCollection.fetch().done(function() {
-        var groups = _.groupBy(
-          _.filter(this.layersCollection.toJSON(), function(layer){
-            return layer.layer_group && layer.layer_group.slug === 'disability-adjusted-life-year'
-          }), function(layer) {
-          return layer.layer_group.name;
-        });
-
         this.layersList = {
-          groups: {groups: true, elements: groups},
-          individual: {individual: true, elements: [
-            {
-              name: 'Human Development Index',
-              slug: 'human-development-index'
-            },
-            {
-              name: 'Mortality, ASR all years Globocan',
-              slug: 'mortality-asr-all-years-globocan'
-            },
-            {
-              name: 'Incidence, ASR all years Globocan',
-              slug: 'incidence-asr-all-years-globocan'
-            }
-          ]}
+          groups: {
+            groups: true,
+            elements: _.groupBy(this.layersCollection.getGroup('disability-adjusted-life-year'), function(layer) {
+              return layer.layer_group.name;
+            })
+          },
+          individual: {
+            individual: true,
+            elements: [
+              {
+                name: 'Human Development Index',
+                slug: 'human-development-index'
+              },
+              {
+                name: 'Mortality, ASR all years Globocan',
+                slug: 'mortality-asr-all-years-globocan'
+              },
+              {
+                name: 'Incidence, ASR all years Globocan',
+                slug: 'incidence-asr-all-years-globocan'
+              }
+            ]
+          }
         };
 
         this.setState({ layers: this.layersList });
@@ -97,10 +98,11 @@
 
     handleLayer: function(element) {
       if (element) {
+        // Harcode the human development index
         if (element.id == 'human-development-index') {
           element.id = element.id + '-' + this.state.get('year');
         }
-        var layer = _.findWhere(this.layersCollection.toJSON(), {slug: element.id});
+        var layer = this.layersCollection.getLayer(element.id);
 
         var options = {
           sql: layer.query,
