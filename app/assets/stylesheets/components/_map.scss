@@ -1,64 +1,160 @@
-/**
- *
- *  <div class="c-map"></div>
- *
- */
 .c-map {
-  min-height: 600px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
-  z-index: 1;
-  background: $color-4;
+  background-color: $primary-color;
 
-  &.-map, &.-map.leaflet-container {
-    background: $color-1;
-  }
+  .leaflet-bar {
+    border-radius: 0;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15), 0 1px 0 0 rgba(0, 0, 0, 0.05);
 
-  &.-detail, &.-detail.leaflet-container {
-    background: $color-4;
-  }
+    & a:first-child {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
 
-  .leaflet-control-attribution {
-    display: none;
+    & a:last-child {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      margin-bottom: 0;
+    }
 
-    @media #{$mq-tablet} {
-      display: inherit;
+    & a,
+    & a:hover {
+      border-bottom: 0;
+      margin-bottom: 1px;
     }
   }
 
-  /* !important needed to force the change from the library */
-  .leaflet-popup {
-    bottom: 2px !important;
+  .leaflet-left .leaflet-control {
+    margin-left: $base-space;
+  }
 
-    .leaflet-popup-content { margin: 0; }
+  .leaflet-top .leaflet-control {
+    margin-top: $base-space;
+  }
 
-    .leaflet-popup-content-wrapper {
-      padding: 25px 40px;
-      border-radius: 0;
-      max-height: 190px;
-      max-width: 190px;
-      overflow-y: auto;
-      font-weight: $font-weight-bold;
+  .l-app.-main & .leaflet-top .leaflet-control {
+    margin-top: $base-space + 35px;
+  }
+
+  .leaflet-top,
+  .leaflet-bottom,
+  .leaflet-left,
+  .leaflet-right {
+    z-index: 2;
+  }
+
+  .prunecluster,
+  .bubble-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+
+    background-color: white;
+
+    border-radius: 100%;
+
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.3);
+    transition: all .3s ease;
+
+    &:hover {
+      box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.5);
+      z-index: 1000 !important;
     }
 
-    .leaflet-popup-close-button {
-      display: none;
+    .marker-arc {
+      position: absolute;
+      top: 0;
+      left: 0;
     }
 
-    .people {
-      display: flex;
-      flex-flow: column;
-      text-align: center;
-    }
+    &.prunecluster {
+      color: #007bcd;
+      font-size: 18px;
+      background-color: white;
+      border: 1px solid #007bcd;
 
-    .person {
-      font-size: $font-size-x-small;
-      color: $color-2;
-      margin: 0;
-      margin-bottom: 12px;
-
-      &:last-child {
-        margin-bottom: 0;
+      &.-points-cluster-icon {
+        color: $base-font-color;
+        border: 0;
+        font-size: $small-font-size;
+        line-height: 0.8;
       }
+    }
+  }
+
+  &.-projects .bubble-icon {
+    background-color: rgba(#007bcd, 0.85);
+  }
+  &.-projects .prunecluster {
+    color: #007bcd;
+    border-color: #007bcd;
+  }
+
+  &.-events .bubble-icon {
+    background-color: rgba($alternative-color, 0.85);
+  }
+  &.-events .prunecluster {
+    color: $alternative-color;
+    border-color: $alternative-color;
+  }
+
+  &.-people .bubble-icon {
+    background-color: rgba($secondary-color, 0.85);
+  }
+  &.-people .prunecluster {
+    color: $secondary-color;
+    border-color: $secondary-color;
+  }
+
+  .circle-icon {
+    border: 1px solid $secondary-color;
+    background: $secondary-color;
+    border-radius: 100%;
+    box-shadow: 0 3px 5px 0 rgba(3, 11, 43, 0.2);
+  }
+
+  &.-events .circle-icon {
+    background-color: #f57823;
+    border: 1px solid #e66d1b;
+  }
+
+  .marker-icon {
+    .icon {
+      fill: #007bcd;
+      width: 26px;
+      height: 36px;
+      stroke: #005e9c;
+      stroke-width: 1px;
+      filter: drop-shadow(0 3px 5px rgba(3, 11, 43, 0.2));
+    }
+  }
+
+  &.-events .marker-icon svg.icon {
+    fill: $alternative-color;
+    stroke: #e66d1b;
+  }
+
+  &.-people .marker-icon svg.icon {
+    fill: $secondary-color;
+    stroke: #e66d1b;
+  }
+
+  .point-icon {
+    background: white;
+    border: 0;
+    border-radius: 100%;
+    box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.2);
+
+    &.-alternative {
+      background-color: #f57823;
     }
   }
 }

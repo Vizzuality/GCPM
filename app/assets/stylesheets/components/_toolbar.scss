@@ -1,0 +1,28 @@
+.c-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  .toolbar-item {
+    color: $inverse-font-color;
+    display: flex;
+    align-items: center;
+    font-weight: $bold-font-weight;
+
+    .c-icon, svg {
+      vertical-align: -2px;
+      margin-right: 5px;
+    }
+
+    &.-sortby {
+      font-size: $small-font-size;
+      text-transform: uppercase;
+    }
+
+    &.-highlighted {
+      background-color: $app-bg-color;
+    }
+  }
+}

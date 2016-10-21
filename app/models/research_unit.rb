@@ -17,7 +17,8 @@ class ResearchUnit < ApplicationRecord
   has_many :projects,     through: :memberships
   has_one  :organization, through: :address
 
-  validates :investigator_id, uniqueness: { scope: :address_id }
+  accepts_nested_attributes_for :investigator
+  accepts_nested_attributes_for :address
 
   def self.check_id(investigator_id, address_id)
     ResearchUnit.find_by(investigator_id: investigator_id, address_id: address_id)

@@ -1,0 +1,67 @@
+.c-card {
+  width: 100%;
+  padding: $box-space;
+  background-color: $body-bg-color;
+  box-shadow: 0 0 0 1px $border-color-1;
+
+  h2 {
+    margin-top: $inline-space;
+  }
+
+  .tag {
+    display: inline-block;
+    color: $base-font-color;
+  }
+
+  &.-person {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+
+    h2, h3 {
+      text-align: center;
+      margin: 4px 0 0;
+    }
+    h3 {
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-transform: none;
+    }
+  }
+
+  &.-projects {
+    h3.-underlined:after {
+      border-bottom-color: $primary-color;
+    }
+  }
+
+  &.-events {
+    h3.-underlined:after {
+      border-bottom-color: $alternative-color;
+    }
+  }
+
+  &.-inverse {
+    background-color: $secondary-color;
+    color: $inverse-font-color;
+
+    h2, h3,
+    h2 > a, h3 > a {
+      color: $inverse-font-color;
+    }
+
+    h3.-underlined:after {
+      border-bottom-color: $inverse-font-color;
+    }
+
+    &.-events {
+      background-color: $alternative-color;
+    }
+
+    &.-projects {
+      background-color: $primary-color;
+    }
+  }
+}

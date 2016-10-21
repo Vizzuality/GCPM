@@ -1,0 +1,82 @@
+.c-nav,
+.c-nav > ul {
+  @extend %clearlist;
+
+  display: flex;
+
+  > h2 {
+    margin-right: $base-space;
+    margin-top: 0;
+    margin-bottom: 0;
+    transform: translateY(-4px);
+  }
+
+  > li {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: $base-space;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &:hover > a { color: $primary-color; }
+    &:hover > button { color: $primary-color; }
+  }
+
+  > button {
+    padding: 0;
+  }
+
+  & + .c-nav,
+  & + ul {
+    &:before {
+      display: block;
+      content: " ";
+      height: 30px;
+      width: 0;
+      margin-left: $base-space;
+      margin-right: $base-space;
+
+      border-left: 1px solid $border-color-1;
+    }
+  }
+
+  &.-inverse {
+    a {
+      color: $primary-color;
+    }
+  }
+
+  &.-main {
+    justify-content: flex-end;
+
+    li {
+       > a, > button {
+         display: block;
+         position: relative;
+         line-height: 24px;
+         padding: $base-space 0.5rem;
+
+         &.user-btn { padding: 0; }
+       }
+
+       &.-active > a {
+         color: $secondary-color;
+         font-weight: normal;
+
+         &:after {
+           content: '';
+           position: absolute;
+           left: 50%;
+           bottom: 0;
+           margin-left: -5px;
+           width: 10px;
+           border-bottom: 3px solid $secondary-color;
+           z-index: 1;
+         }
+       }
+     }
+  }
+}

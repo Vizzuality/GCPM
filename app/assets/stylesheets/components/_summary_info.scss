@@ -1,0 +1,31 @@
+
+.c-summary-info {
+  padding-top: $base-space;
+
+  .column {
+    display: flex;
+    align-items: center;
+    margin-bottom: $inline-space - 8px;
+
+    > *:first-child {
+      margin-right: $inline-space - 5px;
+    }
+  }
+
+  .c-avatar {
+    flex-shrink: inherit;
+  }
+
+  h3 {
+    margin: 0;
+    text-transform: none;
+    font-weight: bold;
+    font-size: $base-font-size;
+  }
+
+  span {
+    font-family: $base-font-family-normal;
+    display: inline-block;
+    margin-top: 5px;
+  }
+}

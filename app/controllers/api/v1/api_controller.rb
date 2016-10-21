@@ -1,6 +1,7 @@
 module Api
   module V1
-    class ApiController < ApplicationController
+    class ApiController < ActionController::Base
+      protect_from_forgery with: :null_session
       rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
       before_action :verify_request
 

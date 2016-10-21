@@ -11,7 +11,6 @@
 #  status          :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  user_id         :integer
 #
 
 class ProjectSerializer < ActiveModel::Serializer
@@ -19,4 +18,7 @@ class ProjectSerializer < ActiveModel::Serializer
 
   has_many :investigators
   has_many :organizations
+  has_many :funding_sources
+  has_many :cancer_types
+  has_many :project_types
 end

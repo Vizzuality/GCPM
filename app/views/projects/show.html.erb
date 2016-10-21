@@ -1,70 +1,100 @@
-<section class="country">
-  <div class="c-section-intro -color-4">
-    <div id="map" class="map c-map -detail">
-      <div class="c-map-intro-legend">
-        <ul class="legend-list">
-          <li class="item"><div class="icon -first"></div><%= t 'project_leads' %></li>
-          <li class="item"><div class="icon -second"></div><%= t 'investigators' %></li>
-        </ul>
-        <div class="viel"></div>
-      </div>
-    </div>
+<% title @project.title %>
 
-    <div id="map-tooltip" class="c-map-tooltip"></div>
+<% if user_signed_in? && current_user.projects.include?(@project) %>
+  <%= link_to 'Remove relation', remove_relation_project_path(@project), method: :patch %>
+<% elsif user_signed_in? %>
+  <%= link_to 'Relation request', relation_request_project_path(@project), method: :patch %>
+<% end %>
 
-    <div class="intro-info">
-      <div class="info">
-        <h1 class="c-title -big"><%= @project.title %></h1>
+<section class="l-app -full">
+  <div class="l-app-map">
+    <div id="map" class="c-map"></div>
+  </div>
 
-        <div class="c-cards-profiles">
-          <div class="c-card-user-profile">
-            <a class="profile-picture">
-              <div class="c-user-profile-picture -small"><%= @project.project_leads.first ? @project.project_leads.first.name[0] : '' %></div>
-            </a>
-            <div class="info">
-              <a class="name"><%= @project.project_leads.first ? @project.project_leads.first.name : '' %></a>
+  <%= render "shared/legend_projects" %>
+
+  <div class="l-app-title">
+    <div class="wrapper">
+      <div class="row collapse">
+        <div class="column small-8">
+          <h1><%= @project.title %></h1>
+
+          <div class="c-summary-info row -collapse">
+
+            <div class="column small-12 large-4 align-middle">
+                <% #if @project.project_lead && @project.project_lead.img %>
+                  <!-- <img src="<%# @project.project_lead.img %>" class="c-avatar -small" /> -->
+                <% #else %>
+                  <div class="c-avatar -small -ph"></div>
+                <% #end %>
+              <h3>
+                <%= @project.project_lead && @project.project_lead.name %>
+              </h3>
             </div>
-          </div>
 
-          <div class="c-card-user-profile">
-            <a class="profile-picture">
-              <div class="c-user-profile-picture -small"><%= @project.secondary_investigators.first ? @project.secondary_investigators.first.name[0] : '' %></div>
-            </a>
-            <div class="info">
-              <a class="organization"><%= @project.secondary_investigators.size() %> Collaborators</a>
+            <div class="column small-12 large-4 align-middle">
+              <div class="c-avatar -small">
+                <svg class="c-icon icon-colab_icon">
+                  <use xlink:href="#icon-colab_icon"></use>
+                </svg>
+              </div>
+              <h3><%= @project.investigators.count %> <%= t 'collaborator'%>(s)</h3>
             </div>
-          </div>
 
-          <div class="c-card-user-profile">
-            <a class="profile-picture">
-              <div class="c-user-profile-picture -small"></div>
-            </a>
-            <div class="info">
-              <a class="name">Funding source</a>
-              <a class="organization"><%= @project.funding_sources.first ? @project.funding_sources.first.name : '' %></a>
-            </div>
+            <% if @project.funding_sources && @project.funding_sources.size > 0 %>
+              <div class="column small-12 large-4 align-middle">
+                <div class="c-avatar -small">
+                  <svg class="c-icon icon-funding_icon">
+                    <use xlink:href="#icon-funding_icon"></use>
+                  </svg>
+                </div>
+                <div>
+                  <h3><%= t 'funding_source' %></h3>
+                  <span><%= @project.funding_sources.first.name %></span>
+                </div>
+              </div>
+            <% end %>
+
           </div>
         </div>
-
+        <div class="column small-4">
+          <%= render "shared/user_actions" %>
+        </div>
       </div>
-      <div class="c-buttons-group">
-        <a class="c-button -inverse -filled btn-large">Follow</a>
-        <div class="row-buttons">
-          <a class="c-button -inverse">Share</a>
-          <a class="c-button -inverse">Contact</a>
-          <a class="c-button -inverse">More</a>
+
+
+    </div>
+  </div>
+
+  <div class="l-app-navbar">
+    <div class="wrapper">
+      <div class="row collapse">
+        <div class="column small-6">
+          <ul class="c-tabnav" id="dataTabNav">
+             <% @filters.each do |filter| %>
+              <li class="tabnav-item">
+                <%= link_to t(filter),
+                  project_path(request.query_parameters.merge({ data: filter })),
+                  class: "js-btn-mapmenu-type",
+                  remote: true,
+                  data: { datatype: filter }
+                %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="column small-6">
+          <div id="toolbar"></div>
         </div>
       </div>
     </div>
   </div>
-  <div class="c-card-grid" id="content">
-    <%= render(:partial => @current_type) %>
-  </div>
-
 </section>
 
-<script type="text/javascript">
-  var PROJECT_ID = <%= @project.id %>;
-  var PROJECT_START_DATE = "<%= @project.start_date || 0 %>";
-  var PROJECT_END_DATE = "<%= @project.end_date || 0 %>";
-</script>
+<div class="l-grid" id="content">
+  <% if @current_type == 'info' %>
+    <%= render 'projects/info' %>
+  <%else%>
+    <%= render 'projects/list' %>
+  <% end %>
+</div>

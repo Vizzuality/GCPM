@@ -9,15 +9,14 @@
    * The action is actually a method of the controller.
    * The previously active controller is automatically disposed.
    */
-  var Dispatcher = function() {
+  App.Dispatcher = function() {
     this.initialize.apply(this, arguments);
   };
 
-  _.extend(Dispatcher.prototype, {
+  _.extend(App.Dispatcher.prototype, {
 
     initialize: function() {
-      this.router = new App.Router();
-      this.router.on('route', this.runController);
+      this.commonActions();
     },
 
     /**
@@ -25,49 +24,49 @@
      * based on a user-defined configuration file.
      * It is responsible for observing and acting upon URL changes.
      * @param  {String} routeName
-     * @param  {Array} routeParams
+     * @param  {Object} routeParams
      */
-    runController: function(routeName, routeParams) {
+    runAction: function(routeName, routeParams) {
+      if (!routeName) {
+        return;
+      }
+
       var routeSplited = routeName.split('#');
       var controllerName = routeSplited[0];
       var actionName = routeSplited[1];
-      var params = this.getParams(routeParams[0]);
-      if (App.Controller[controllerName] &&
-        App.Controller.hasOwnProperty(controllerName)) {
-        var currentController = new App.Controller[controllerName]();
-        // Checking if action exists
-        if (currentController[actionName] &&
-          typeof currentController[actionName] === 'function') {
-          // Setting new params in model
-          !!params[0] && this.updateParams(params);
-          // Executing controller#action and passing url params
-          currentController[actionName](this.params.attributes);
+      var controller = this._getController(controllerName);
+
+      if (controller) {
+        var action = this._getAction(controller, actionName);
+        if (action) {
+          action(routeParams);
         } else {
           console.error('specified action doesn\'t exist');
         }
       } else {
         console.error('specified controller doesn\'t exist');
       }
+    },
+
+    _getController: function(controllerName) {
+      if (App.Controller[controllerName] &&
+        App.Controller.hasOwnProperty(controllerName)) {
+        return new App.Controller[controllerName]();
+      }
+    },
+
+    _getAction: function(controller, actionName) {
+      if (controller[actionName] &&
+        typeof controller[actionName] === 'function') {
+        return controller[actionName];
+      }
+    },
+
+    commonActions: function() {
+      new App.View.MobileHeader();
+      new App.Presenter.UserMenu();
     }
 
   });
-
-  /**
-   * App will be start when DOM is ready
-   */
-  function initApp() {
-    new App.MainView(); // Only temporal, this will be removed
-    new Dispatcher();
-
-    if (Backbone.History.started) {
-      Backbone.history.stop();
-    }
-
-    // Start listening changes in routes
-    Backbone.history.start({ pushState: true });
-  }
-
-  document.addEventListener('DOMContentLoaded', initApp);
-
 
 })(this.App);

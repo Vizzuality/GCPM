@@ -2,7 +2,7 @@ select
 events.id as event,
 events.title as title,
 countries.country_name as location_name,
-'{"type":"point","coordinates":[' || events.latitude || ',' || events.longitude || ']}' as centroid,
+'{"type":"Point","coordinates":[' || events.latitude || ',' || events.longitude || ']}' as centroid,
 countries.country_iso_3 as iso,
 countries.id as location_id,
 'point' as type
@@ -10,7 +10,7 @@ from events
 inner join countries on events.country = countries.country_name
 where 1=1
 <% if @params[:countries] %>
-  and countries.id in         <%= "#{'(' + @params[:countries].join(',') + ')'}" %>
+  and countries.country_iso_3 in      <%= @params[:countries].to_s.gsub('[', '(').gsub(']',')').gsub('"',"'") %>
 <% end %>
 <% if @params[:regions] %>
   and countries.region_iso in <%= @params[:regions].to_s.gsub('[', '(').gsub(']',')').gsub('"',"'") %>

@@ -1,0 +1,32 @@
+{{#if groups}}
+  {{#each groups as |cancerTypes group|}}
+    <div class="l-content">
+      <div class="wrapper">
+        <div class="row collapse">
+          <div class="column small-12">
+            <ul class="c-list row">
+              {{#each cancerTypes as |cancerType|}}
+                <li class="column small-6 medium-3">
+                  <a class="list-item"
+                    href="/cancer-types/{{cancerType.id}}">
+                    {{cancerType.name}}
+                  </a>
+                </li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/each}}
+{{else}}
+  <div class="l-content">
+    <div class="wrapper">
+      <div class="row collapse">
+        <div class="column small-12">
+          <p>No results.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+{{/if}}

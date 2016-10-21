@@ -1,0 +1,65 @@
+<% title @cancer_type.name %>
+
+<section class="l-app -full">
+
+  <div class="l-app-map">
+    <div id="map" class="c-map"></div>
+  </div>
+
+  <%= render 'shared/legend_people' %>
+
+  <div class="l-app-title">
+    <div class="wrapper">
+      <div class="row collapse">
+        <div class="column small-8">
+          <h1><%= @cancer_type.name %></h1>
+          <table class="c-numbers-list">
+            <thead>
+              <tr>
+                <th><%= t 'projects' %></th>
+                <th><%= t 'people' %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= @projects.size %></td>
+                <td><%= @people.size %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="column small-4">
+          <%= render "shared/user_actions" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="l-app-navbar">
+    <div class="wrapper">
+      <div class="row collapse">
+        <div class="column small-6">
+          <ul class="c-tabnav" id="dataTabNav">
+             <% @filters.each do |filter| %>
+              <li class="tabnav-item">
+                <%= link_to t(filter),
+                  map_path(request.query_parameters.merge({ data: filter })),
+                  class: "js-btn-mapmenu-type",
+                  remote: true,
+                  data: { datatype: filter }
+                %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="column small-6">
+          <div id="toolbar"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="l-grid" id="content">
+  <%= render 'projects/list', items: @items, more: @more %>
+</div>

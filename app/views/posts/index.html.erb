@@ -1,0 +1,21 @@
+
+<div class="l-content">
+  <div class="wrapper">
+    <div class="row collapse">
+      <h1>Posts</h1>
+      <% @posts.each do |p| %>
+        <div class="column small-12">
+          <div class="c-card">
+            <h3>
+              <%= link_to p.title, p %>
+            </h3>
+            <p><%= p.body && p.body.html_safe %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+<% link_to 'New Post', new_post_path %>

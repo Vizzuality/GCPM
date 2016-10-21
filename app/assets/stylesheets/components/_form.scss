@@ -1,0 +1,107 @@
+$input-height: 38px;
+
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+select {
+  min-height: $input-height;
+  width: 100%;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="url"],
+input[type="email"] {
+  border: 0;
+  border-bottom: 1px solid $border-color-1;
+
+  &.-large {
+    color: $base-font-color;
+    font-size: $large-font-size;
+    font-weight: $bold-font-weight;
+    letter-spacing: -1px;
+    line-height: $box-space;
+    border: 0;
+    outline: none;
+
+    &::-webkit-input-placeholder {
+      color: $base-font-color;
+    }
+
+    &::-moz-placeholder {
+      color: $base-font-color;
+    }
+
+    &:-moz-placeholder {
+      color: $base-font-color;
+    }
+
+    &:-ms-input-placeholder {
+      color: $base-font-color;
+    }
+  }
+
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+label {
+  display: block;
+
+  font-size: $small-font-size;
+  text-transform: uppercase;
+  margin-bottom: $base-space/3.5;
+
+  abbr[title] {
+    border: 0;
+  }
+}
+
+.form-row {
+  margin-bottom: $base-space;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  input:focus {
+    outline: none;
+  }
+}
+
+.hint {
+  display: block;
+  font-size: $small-font-size;
+  margin-top: 5px;
+}
+
+.form-actions .column {
+  display: flex;
+
+  & button {
+    margin-right: 18px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.required {
+  font-size: $small-font-size;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.error {
+  font-size: $small-font-size;
+  margin-top: 0;
+  padding-top: 0;
+  color: red;
+}

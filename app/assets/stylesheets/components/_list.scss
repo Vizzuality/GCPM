@@ -1,0 +1,19 @@
+.c-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  .list-item {
+    display: block;
+    font-family: $base-font-family-light;
+    margin-bottom: $inline-space;
+
+    &.-mg-less {
+      margin-bottom: 2px;
+    }
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}

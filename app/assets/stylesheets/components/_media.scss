@@ -1,0 +1,9 @@
+.c-media {
+  margin: $box-space 0;
+  text-align: center;
+
+  .thumbnail img {
+    display: block;
+    margin: 0 auto $base-space auto;
+  }
+}

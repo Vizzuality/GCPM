@@ -11,13 +11,14 @@
 #  status          :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  user_id         :integer
 #
 
 class Project < ApplicationRecord
   enum status: [:under_revision, :published, :unpublished]
 
-  belongs_to :user, inverse_of: :projects, optional: true
+  acts_as_followable
+
+  include UserRelationable
 
   has_many :memberships
   has_many :research_units,  through: :memberships
@@ -31,13 +32,18 @@ class Project < ApplicationRecord
   has_many :project_leads,           -> { where(memberships: { membership_type: 0 }) }, through: :research_units, source: :investigator
   has_many :secondary_investigators, -> { where(memberships: { membership_type: 1 }) }, through: :research_units, source: :investigator
 
+  has_many :project_users
+  has_many :users, through: :project_users
+
   has_and_belongs_to_many :project_types
   has_and_belongs_to_many :cancer_types
 
-  accepts_nested_attributes_for :memberships,   allow_destroy: true
-  accepts_nested_attributes_for :investigators, update_only:   true
-  accepts_nested_attributes_for :organizations, update_only:   true
-  accepts_nested_attributes_for :addresses,     update_only:   true
+  accepts_nested_attributes_for :memberships,     allow_destroy: true
+  accepts_nested_attributes_for :investigators,   update_only:   true
+  accepts_nested_attributes_for :organizations,   update_only:   true
+  accepts_nested_attributes_for :addresses,       update_only:   true
+  accepts_nested_attributes_for :funding_sources
+  accepts_nested_attributes_for :users
 
   validates_presence_of :title, :summary
   validates :title, uniqueness: true
@@ -59,31 +65,76 @@ class Project < ApplicationRecord
   scope :by_investigators,      -> investigators       { joins(:investigators).where(investigators: { id: investigators }) }
   scope :by_organizations,      -> organizations       { joins(:organizations).where(organizations: { id: organizations }) }
   scope :by_organization_types, -> organization_types  { joins(organizations: :organization_type).where(organization_types: { id: organization_types }) }
-  scope :by_countries,          -> countries           { joins(:countries).where(countries: { id: countries }) }
+  scope :by_countries,          -> countries           { joins(:countries).where(countries: { country_iso_3: countries }) }
   scope :by_regions,            -> regions             { joins(:countries).where(countries: { region_iso: regions }) }
   scope :by_start_date,         -> start_date          { where('projects.start_date > ?', start_date ) }
   scope :by_end_date,           -> end_date            { where('projects.end_date < ?', end_date ) }
   scope :by_user,               -> user                { where('projects.user_id = ?', user ) }
 
-  def self.fetch_all(options={})
-    projects = Project.published
-    projects = projects.by_investigators(options[:investigators])           if options[:investigators]
-    projects = projects.by_project_types(options[:project_types])           if options[:project_types]
-    projects = projects.by_cancer_types(options[:cancer_types])             if options[:cancer_types]
-    projects = projects.by_countries(options[:countries])                   if options[:countries]
-    projects = projects.by_regions(options[:regions])                       if options[:regions]
-    projects = projects.by_organizations(options[:organizations])           if options[:organizations]
-    projects = projects.by_organization_types(options[:organization_types]) if options[:organization_types]
-    projects = projects.by_start_date(options[:start_date])                 if options[:start_date]
-    projects = projects.by_end_date(options[:end_date])                     if options[:end_date]
-    projects = projects.by_user(options[:user])                             if options[:user]
-    projects = projects.order('projects.created_at ASC')                    if options[:sortby] && options[:sortby] == 'created_asc'
-    projects = projects.order('projects.created_at DESC')                   if options[:sortby] && options[:sortby] == 'created_desc'
-    projects = projects.order('projects.title ASC')                         if options[:sortby] && options[:sortby] == 'title_asc'
-    projects = projects.order('projects.title DESC')                        if options[:sortby] && options[:sortby] == 'title_desc'
-    projects = projects.limit(options[:limit])                              if options[:limit]
-    projects = projects.offset(options[:offset])                            if options[:offset]
-    projects.uniq
+  class << self
+    def fetch_all(options={})
+      projects = self.published
+      projects = projects.by_countries(options[:countries])                   if options[:countries]
+      projects = projects.by_regions(options[:regions])                       if options[:regions]
+      projects = projects.by_investigators(options[:investigators])           if options[:investigators]
+      projects = projects.by_project_types(options[:project_types])           if options[:project_types]
+      projects = projects.by_cancer_types(options[:cancer_types])             if options[:cancer_types]
+      projects = projects.by_organizations(options[:organizations])           if options[:organizations]
+      projects = projects.by_organization_types(options[:organization_types]) if options[:organization_types]
+      projects = projects.by_start_date(options[:start_date])                 if options[:start_date]
+      projects = projects.by_end_date(options[:end_date])                     if options[:end_date]
+      projects = projects.by_user(options[:user])                             if options[:user]
+      projects = projects.order('projects.created_at ASC')                    if options[:sortby] && options[:sortby] == 'created_asc'
+      projects = projects.order('projects.created_at DESC')                   if options[:sortby] && options[:sortby] == 'created_desc'
+      projects = projects.order('projects.title ASC')                         if options[:sortby] && options[:sortby] == 'title_asc'
+      projects = projects.order('projects.title DESC')                        if options[:sortby] && options[:sortby] == 'title_desc'
+      projects = projects.limit(options[:limit])                              if options[:limit]
+      projects = projects.offset(options[:offset])                            if options[:offset]
+      projects.distinct
+    end
+
+    def build_project(options)
+      options = build_project_attributes(options) if options['new_funders'].present? || options['memberships'].present?
+      Project.new(options)
+    end
+
+    def update_project(options, project)
+      options = build_project_attributes(options, project) if options['new_funders'].present? || options['memberships'].present?
+      project.update(options)
+    end
+
+    def build_project_attributes(options, project=nil)
+      funders            = options['new_funders']
+      memberships        = options['memberships']
+      options            = options.except(:new_funders, :memberships)
+      project.attributes = options if project.present?
+      validate_project   = project.present? ? project.valid? : Project.new(options).valid?
+
+      if validate_project
+        build_funding_sources(funders, options) if funders.present?
+        build_memberships(memberships, options) if memberships.present?
+      end
+      options
+    end
+
+    def build_funding_sources(funders, options)
+      funding_sources = []
+      funders.each do |funder_params|
+        funding_sources << Organization.create(funder_params)
+      end
+      options['funding_source_ids']  = [] if options['funding_source_ids'].blank?
+      options['funding_source_ids'] += funding_sources.map(&:id)
+      options
+    end
+
+    def build_memberships(memberships, options)
+      memberships_attributes = []
+      memberships.each do |membership_params|
+        memberships_attributes << membership_params
+      end
+      options['memberships_attributes'] = memberships_attributes
+      options
+    end
   end
 
   def project_lead

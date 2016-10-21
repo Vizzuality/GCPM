@@ -1,35 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<%= I18n.locale %>">
   <head>
-    <title><%= @title ? @title + ' - ' : nil %>Global Cancer Project Map</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title><%= yield :title %> - Global Cancer Project Map</title>
+    <meta name="viewport" content="width=1024">
     <%= csrf_meta_tags %>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': true %>
-    <%= javascript_include_tag 'application' %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
   </head>
-
   <body>
     <%= render "shared/icons" %>
     <%= render "shared/header" %>
-    <% if alert %>
-      <%= alert %>
-    <% else %>
-      <% if notice %>
-        <div class="c-notice">
-          <div class="container">
-            <%= notice %>
-            <div id="js-close" class="close-btn">
-              <span></span>
-              <span></span>
-            </div>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
-    <%= yield %>
+    <section class="l-main">
+      <%= yield %>
+    </section>
     <%= render "shared/footer" %>
-    <%= render "shared/modal" %>
-    <%= render "shared/javascripts" %>
+    <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.16.0/polyfill.min.js' %>
+    <%= Gon::Base.render_data %>
+    <%= javascript_include_tag 'https://d3js.org/d3.v3.min.js' %>
+    <%= javascript_include_tag 'application' %>
   </body>
 </html>

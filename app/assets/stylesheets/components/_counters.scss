@@ -1,0 +1,21 @@
+.c-counters {
+  padding-top: $box-space;
+  padding-bottom: $box-space;
+
+  @media screen and (max-height: 900px) {
+    padding-top: $base-space;
+    padding-bottom: $base-space;
+  }
+
+  .amount {
+    display: block;
+
+    font-size: $large-font-size;
+    font-weight: bold;
+    line-height: 0.8;
+
+    @media screen and (max-height: 900px) {
+      font-size: 45px;
+    }
+  }
+}

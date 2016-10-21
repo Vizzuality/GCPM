@@ -1,0 +1,60 @@
+$dropdown-width: 182px;
+
+.c-dropdown {
+  position: relative;
+  display: inline-flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: $button-x-padding / 2;
+  height: 100%;
+
+  .dropdown-value {
+    display: flex;
+    align-items: center;
+
+    border-bottom: $body-bg-color 1px solid;
+    margin: 0 ($button-x-padding / 2);
+    font-weight: $base-font-weight;
+    cursor: pointer;
+
+    &:after {
+      content: '';
+      margin-left: $inline-space / 2;
+      width: 0;
+      height: 0;
+      border-left: transparent 5px solid;
+      border-right: transparent 5px solid;
+      border-top: $body-bg-color 5px solid;
+
+    }
+  }
+
+  .dropdown-content {
+    background-color: $body-bg-color;
+    display: none;
+    position: absolute;
+    box-shadow: $box-shadow;
+    width: $dropdown-width;
+    padding: ($button-y-padding / 2) 0;
+
+    //TODO: Set this by JS
+    top: 52px;
+
+    .dropdown-item {
+      padding: ($button-y-padding / 2) $button-x-padding;
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
+
+      & a {
+        display: block;
+        color: $app-bg-color;
+        font-weight: $bold-font-weight
+      }
+    }
+
+    &.-open {
+      display: block;
+    }
+  }
+}

@@ -1,0 +1,51 @@
+.c-breadcrumbs {
+  > ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    > li a {
+      display: block;
+      padding: 8px 21px 8px 31px;
+      position: relative;
+
+      color: $inverse-font-color;
+      font-size: $small-font-size;
+      font-weight: bold;
+      text-transform: uppercase;
+
+      background-color: $app-bg-color;
+
+      &:after {
+        display: block;
+        position: absolute;
+        content: " ";
+        width: 20px;
+        height: 20px;
+        top: 7px;
+        right: -10px;
+
+        border: 1px solid transparent;
+        border-right: 1px solid rgba($inverse-font-color, 0.5);
+        border-top: 1px solid rgba($inverse-font-color, 0.5);
+
+        background-color: $app-bg-color;
+
+        transform: rotate(45deg) skew(15deg, 15deg);
+        z-index: 1;
+      }
+    }
+
+    > li:last-child a {
+      color: $base-font-color;
+      background-color: $body-bg-color;
+
+      &:after {
+        border-right-color: $body-bg-color;
+        border-top-color: $body-bg-color;
+        background-color: $body-bg-color;
+      }
+    }
+  }
+}

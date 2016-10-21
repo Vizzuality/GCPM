@@ -1,6 +1,11 @@
-(function(App) {
-  'use strict';
-  App.Events.trigger('remote:load', {
-    content: "<%= j render(:partial => @current_type) %>"
-  });
-})(this.App);
+(function() {
+
+  'use strict'
+  <% template = @current_type == 'network' ? "investigators/list" : "#{@current_type}/list" %>
+
+  var htmlContent = "<%= escape_javascript render(partial: template, locals: { items: @items, more: @more }) %>";
+  var htmlCounters = "<%= escape_javascript render(partial: 'map/counters') %>"
+
+  document.getElementById('content').innerHTML = htmlContent;
+  document.getElementById('counters').innerHTML = htmlCounters;
+})();

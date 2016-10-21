@@ -30,4 +30,11 @@ class Layer < ApplicationRecord
   has_many :layer_groups, through: :agrupations,  dependent: :destroy
 
   accepts_nested_attributes_for :agrupations, allow_destroy: true
+
+  def self.fetch_all(options={})
+    layers = Layer.all
+    layers = layers.order('name ASC')
+    layers
+  end
+
 end

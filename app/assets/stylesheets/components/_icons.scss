@@ -1,0 +1,32 @@
+.c-icon {
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+
+  &.-small {
+    width: 12px;
+    height: 12px;
+  }
+
+  &.-normal {
+    width: 15px;
+    height: 15px;
+  }
+
+  &.-medium {
+    width: 20px;
+    height: 20px;
+  }
+
+  &.-primary { fill: $dark-sky-blue; }
+
+  &.-inverse { fill: $body-bg-color; }
+
+  &:hover {
+    opacity: .5;
+
+    &.-hv-opac { opacity: .5; }
+    &.-hv-blue { fill: $dark-sky-blue; }
+    &.-hv-black { fill: $black; }
+  }
+}

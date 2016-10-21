@@ -1,0 +1,36 @@
+.c-tabnav {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  z-index: 1;
+
+  .tabnav-item {
+    color: $inverse-font-color;
+    font-weight: bold;
+    font-size: $medium-font-size;
+    text-align: center;
+
+    a {
+      display: block;
+      position: relative;
+      padding: 10px 5px;
+      min-width: 140px;
+
+      color: $inverse-font-color;
+
+      &.-active {
+        color: $base-font-color;
+        background-color: $body-bg-color;
+        box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15), 0 1px 0 0 rgba(0, 0, 0, 0.05);
+      }
+    }
+  }
+}
+
+.l-app.-main .c-tabnav {
+  .tabnav-item {
+    background-color: $app-bg-color;
+  }
+}

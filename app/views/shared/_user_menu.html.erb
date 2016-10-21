@@ -1,0 +1,18 @@
+<div class="c-user-menu">
+  <ul>
+    <li class="<%= active_page?(user_session_path) ? '-active' : '' %>">
+      <%= link_to (t 'network'), user_path(:data => 'network', :id => current_user.id) %></a>
+    </li>
+    <li class="<%= active_page?(user_session_path) ? '-active' : '' %>">
+      <%= link_to (t 'projects'), user_path(:data => 'projects', :id => current_user.id) %></a>
+    </li>
+    <li class="<%= active_page?(user_session_path) ? '-active' : '' %>">
+      <%= link_to (t 'posts'), user_path(:data => 'posts', :id => current_user.id) %></a>
+    </li>
+  </ul>
+  <ul>
+    <li class="logout">
+      <%= link_to (t 'logout'), destroy_user_session_path, :method => 'delete' %></a>
+    </li>
+  </ul>
+</div>

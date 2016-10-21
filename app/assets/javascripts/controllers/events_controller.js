@@ -2,42 +2,22 @@
 
   'use strict';
 
-  App.Controller = App.Controller || {};
+  App.Controller.Events = function() {};
 
-  App.Controller.Events = App.Controller.Page.extend({
-
-    index: function(params) {
-      // Map view
-      var layersActived = [2, 6];
-
-      var layersSpec = this.layersSpec = new App.Collection.LayersSpec();
-      var map = new App.View.Map({
-        el: '#map',
-        collection: this.layersSpec,
-        options: {
-          basemap: null,
-          apiUrl: '/api/map/events/' + EVENT_ID
-        }
-      });
-
-      layersSpec.on('change, reset', function() {
-        map.renderLayers();
-      });
-
-      layersSpec.fetch().done(function() {
-        // This method triggers an event called 'reset'
-        layersSpec.filterByIds(layersActived);
-      });
-
-
-      new App.View.EventDetail();
-    },
+  _.extend(App.Controller.Events.prototype, {
 
     new: function() {
-      new App.View.AddNewEvent();
+      // new App.Presenter.EventForm();
+    },
+
+    show: function(params) {
+      var newParams = _.extend({}, params, {dataType: 'info'});
+
+      new App.Presenter.MapVis(params);
+      new App.Presenter.TabNav(newParams);
+      new App.Presenter.ShowMore(params);
     }
 
   });
-
 
 })(this.App);

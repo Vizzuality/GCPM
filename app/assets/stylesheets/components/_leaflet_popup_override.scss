@@ -1,0 +1,20 @@
+
+.leaflet-popup {
+  .leaflet-popup-content-wrapper {
+    border-radius: 0;
+    padding: 35px;
+    padding-bottom: 30px;
+  }
+
+  .leaflet-popup-content {
+    margin: 0;
+  }
+
+  a.leaflet-popup-close-button {
+    top: 5px;
+    right: 5px;
+    color: $primary-color;
+
+    &:hover { opacity: .7; }
+  }
+}

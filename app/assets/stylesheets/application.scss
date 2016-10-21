@@ -1,14 +1,14 @@
-//= require_self
+//= require _fonts
+//= require custom-foundation
 //= require leaflet
-//= require chosen
+//= require select2
 //= require pickadate/classic
 //= require pickadate/classic.date
 
 @import
   "settings",
-  "fonts",
-  "base",
-  "chosen",
   "mixins",
+  "base",
+  "animations",
   "layouts/*",
   "components/*";
