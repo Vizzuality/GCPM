@@ -2,6 +2,14 @@ select distinct on (memberships.membership_type, investigators.id)
 investigators.id as resource_id,
 investigators.name as resource_name,
 countries.country_name as location_name,
+addresses.country_name as location_country_name,
+addresses.city as location_city,
+addresses.line_1 as location_line_1,
+addresses.line_2 as location_line_2,
+addresses.line_3 as location_line_3,
+addresses.postcode as location_postcode,
+addresses.state as location_state,
+organizations.name as organization_name,
 '{"type":"Point","coordinates":[' || addresses.latitude || ',' || addresses.longitude || ']}' as centroid,
 countries.country_iso_3 as iso,
 'point' as type
@@ -11,6 +19,7 @@ from investigators
     inner join projects on memberships.project_id = projects.id
     inner join addresses on research_units.address_id = addresses.id
     inner join countries on addresses.country_id = countries.id
+    inner join organizations on organizations.id = addresses.organization_id
      <% if @params[:organizations] || @params[:organization_types] %>
       inner join organizations on addresses.organization_id = organizations.id
     <% end %>
@@ -53,5 +62,5 @@ from investigators
     <% if @params[:user] %>
       and projects.user_id = <%= quote @params[:user] %>
     <% end %>
-group by resource_id, resource_name, location_name, centroid, iso, memberships.membership_type
+group by resource_id, resource_name, location_name, location_country_name, location_city, location_line_1, location_line_2, location_line_3, location_postcode, location_state, organization_name, centroid, iso, memberships.membership_type
 order by memberships.membership_type desc
