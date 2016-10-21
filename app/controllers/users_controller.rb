@@ -39,6 +39,7 @@ class UsersController < ApplicationController
     end
 
     @following = @user.follow_count || 0
+    # @followers = @user.investigator.present? ? @investigator.followers_count : 0
     @followers = 0
 
     respond_with(@items)

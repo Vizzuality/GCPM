@@ -1,5 +1,5 @@
 <% if items && items.size() > 0 %>
-  <div class="row collapse">
+  <div class="row collapse -no-mrg">
     <% items.each do |p| %>
       <div class="column small-12 medium-6">
         <div class="c-card -pad-bigger -projects">
@@ -18,6 +18,12 @@
               </span>
             <% end %>
           </p>
+        </div>
+      </div>
+    <% end %>
+    <% if items.size() % 2 != 0 %>
+      <div class="column small-12 medium-6 -extra">
+        <div class="c-card -pad-bigger -projects">
         </div>
       </div>
     <% end %>

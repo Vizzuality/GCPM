@@ -5,6 +5,10 @@
   padding: $box-space;
   padding-right: 0;
 
+  &.-no-pad {
+    padding: 0;
+  }
+
   .sidebar-item {
     margin-bottom: $base-space;
 

@@ -4,6 +4,10 @@
   background-color: $body-bg-color;
   box-shadow: 0 0 0 1px $border-color-1;
 
+  &.-no-shadow {
+    box-shadow: none;
+  }
+
   &.-pad-bigger {
     padding: $box-space + 15px;
   }
