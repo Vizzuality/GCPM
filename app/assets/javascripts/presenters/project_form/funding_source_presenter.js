@@ -64,7 +64,7 @@
         newOption.name = newFunding.organizationName;
         this.select.options.options.unshift(newOption);
         this.select.render();
-        $(this.select.$el[0].children[this.select.options.name]).val(newOption.value).trigger("change");
+        this.select.$el.find("select").val(newOption.value).trigger("change");
       }, this);
     },
 

@@ -16,6 +16,7 @@
       'projects/:id(/)':             'Project#show',
       'events/:id(/)':               'Events#show',
       'network/:id/projects/new(/)': 'Project#new',
+      'network/:network_id/projects/:id/edit(/)':'Project#edit',
       'countries(/)':                'Countries#index',
       'countries/:iso(/)':           'Countries#show',
       'investigators/:id(/)':        'Investigators#show',

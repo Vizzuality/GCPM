@@ -46,6 +46,10 @@ Finally, Morocco has allocated funding for cancer research. However much remains
       this.Textarea.render();
     },
 
+    setValue: function(value){
+      this.Textarea.$el.find("textarea").val(value).trigger("change");
+    },
+
     setState: function(state, options) {
       this.state.set(state, options);
     },
