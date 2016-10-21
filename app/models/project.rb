@@ -11,13 +11,14 @@
 #  status          :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  user_id         :integer
 #
 
 class Project < ApplicationRecord
   enum status: [:under_revision, :published, :unpublished]
 
   acts_as_followable
+
+  include UserRelationable
 
   has_many :memberships
   has_many :research_units,  through: :memberships
@@ -89,7 +90,7 @@ class Project < ApplicationRecord
       projects = projects.order('projects.title DESC')                        if options[:sortby] && options[:sortby] == 'title_desc'
       projects = projects.limit(options[:limit])                              if options[:limit]
       projects = projects.offset(options[:offset])                            if options[:offset]
-      projects.uniq
+      projects.distinct
     end
 
     def build_project(options)
