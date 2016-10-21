@@ -19,8 +19,6 @@ class Project < ApplicationRecord
 
   acts_as_followable
 
-  belongs_to :user, inverse_of: :projects, optional: true
-
   has_many :memberships
   has_many :research_units,  through: :memberships
   has_many :organizations,   through: :memberships
@@ -33,6 +31,9 @@ class Project < ApplicationRecord
   has_many :project_leads,           -> { where(memberships: { membership_type: 0 }) }, through: :research_units, source: :investigator
   has_many :secondary_investigators, -> { where(memberships: { membership_type: 1 }) }, through: :research_units, source: :investigator
 
+  has_many :project_users
+  has_many :users, through: :project_users
+
   has_and_belongs_to_many :project_types
   has_and_belongs_to_many :cancer_types
 
@@ -40,7 +41,8 @@ class Project < ApplicationRecord
   accepts_nested_attributes_for :investigators,   update_only:   true
   accepts_nested_attributes_for :organizations,   update_only:   true
   accepts_nested_attributes_for :addresses,       update_only:   true
-  accepts_nested_attributes_for :funding_sources, allow_destroy: true
+  accepts_nested_attributes_for :funding_sources
+  accepts_nested_attributes_for :users
 
   validates_presence_of :title, :summary
   validates :title, uniqueness: true

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161018125246) do
+ActiveRecord::Schema.define(version: 20161021073852) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -183,8 +183,11 @@ ActiveRecord::Schema.define(version: 20161018125246) do
     t.string   "name"
     t.string   "email"
     t.text     "website"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "user_id"
+    t.boolean  "is_approved", default: false
+    t.index ["user_id"], name: "index_investigators_on_user_id", using: :btree
   end
 
   create_table "layer_groups", force: :cascade do |t|
@@ -274,6 +277,17 @@ ActiveRecord::Schema.define(version: 20161018125246) do
     t.index ["project_type_id"], name: "index_project_types_projects_on_project_type_id", using: :btree
   end
 
+  create_table "project_users", force: :cascade do |t|
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.boolean  "is_approved", default: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.index ["project_id", "user_id"], name: "index_project_users_on_project_id_and_user_id", unique: true, using: :btree
+    t.index ["project_id"], name: "index_project_users_on_project_id", using: :btree
+    t.index ["user_id"], name: "index_project_users_on_user_id", using: :btree
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string   "title"
     t.text     "summary"
@@ -283,8 +297,6 @@ ActiveRecord::Schema.define(version: 20161018125246) do
     t.integer  "status"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.integer  "user_id"
-    t.index ["user_id"], name: "index_projects_on_user_id", using: :btree
   end
 
   create_table "research_units", force: :cascade do |t|
@@ -331,4 +343,5 @@ ActiveRecord::Schema.define(version: 20161018125246) do
   end
 
   add_foreign_key "identities", "users"
+  add_foreign_key "investigators", "users"
 end
