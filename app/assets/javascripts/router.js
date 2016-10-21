@@ -46,7 +46,7 @@
       var eventsNames = [
         'Map:change', 'TabNav:change',
         'SortBy:change', 'FilterForm:change',
-        'Breadcrumbs:change'
+        'Breadcrumbs:change', 'Timeline:change'
       ].join(' ');
       App.on(eventsNames, this.setParams, this);
     },
