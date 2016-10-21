@@ -2,10 +2,13 @@
   {{#if project}}
     <h3><a href="/projects/{{project}}">{{title}}</a></h3>
     {{#if investigator}}
-      <a href="/investigators/{{investigator}}">{{investigator_name}}</a>
-      {{#if is_project_lead}}
-        <span class="c-tag">Project lead</span>
-      {{/if}}
+      <div class="investigator">
+        <a href="/investigators/{{investigator}}">{{investigator_name}}</a>
+        {{#if location_city}}
+          <p>{{location_city}}, {{location_country_name}}</p>
+        {{/if}}
+        <span class="c-tag">{{#if is_project_lead}}Project lead{{else}}Collaborator{{/if}}</span>
+      </div>
     {{/if}}
   {{/if}}
   {{#if event}}
