@@ -15,8 +15,11 @@
             <p><%= investigator && investigator.name && investigator.name %></p>
           </div>
         </div>
-        <div class="column small-12 medium-4 -align-bottom">
-          <%= link_to 'Add Post', (user_signed_in?) ? new_post_path : user_session_path, class: 'c-btn -secondary -inverse' %>
+        <div class="column small-12 medium-4">
+          <ul class="c-btn-container">
+            <li><%= link_to 'Add Post', (user_signed_in?) ? new_post_path : user_session_path, class: 'c-btn -secondary -inverse' %></li>
+            <li><button class="c-btn -secondary -inverse js-share-button" data-actiona="save"><%= t 'share' %></button></li>
+          </ul>
         </div>
       </div>
     </div>
