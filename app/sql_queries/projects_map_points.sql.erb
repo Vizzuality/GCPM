@@ -11,7 +11,7 @@ addresses.line_2 as location_line_2,
 addresses.line_3 as location_line_3,
 addresses.postcode as location_postcode,
 addresses.state as location_state,
-organizations.name as organization_name
+organizations.name as organization_name,
 '{"type":"Point","coordinates":[' || addresses.latitude || ',' || addresses.longitude || ']}' as centroid,
 countries.country_iso_3 as iso,
 'point' as type,
