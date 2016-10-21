@@ -32,6 +32,10 @@
     padding: $button-y-padding 0;
   }
 
+  &.-mg-left {
+    margin-left: $inline-space / 2;
+  }
+
   &.-primary {
     color: $inverse-font-color;
     background-color: $primary-color;
