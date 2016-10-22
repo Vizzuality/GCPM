@@ -26,10 +26,12 @@ RSpec.configure do |config|
     Bullet.end_request
   end
 
-  config.infer_spec_type_from_file_location!
-  config.include Devise::TestHelpers, type: :controller
+  config.render_views
 
-  Capybara.server do |app, port|
+  config.infer_spec_type_from_file_location!
+  config.include Devise::Test::ControllerHelpers, type: :controller
+
+  Capybara.register_server :puma do |app, port|
     require 'rack/handler/puma'
     Rack::Handler::Puma.run(app, Port: port)
   end

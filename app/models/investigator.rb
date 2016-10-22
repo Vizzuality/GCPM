@@ -2,19 +2,21 @@
 #
 # Table name: investigators
 #
-#  id         :integer          not null, primary key
-#  name       :string
-#  email      :string
-#  website    :text
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :integer
+#  id          :integer          not null, primary key
+#  name        :string
+#  email       :string
+#  website     :text
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  user_id     :integer
+#  is_approved :boolean          default(FALSE)
 #
 
 class Investigator < ApplicationRecord
   acts_as_followable
 
   include Approvable
+  include UserRelationable
 
   belongs_to :user, inverse_of: :investigator, optional: true
 
