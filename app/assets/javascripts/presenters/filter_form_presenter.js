@@ -79,10 +79,11 @@
       this.filterForm.on('reset', function() {
         this.setState(this.defaults);
         this.closeForm();
+        App.trigger('FilterForm:reset');
       }, this)
 
       this.state.on('change', function() {
-        App.trigger('FilterForm:change', this.state.attributes);
+        App.trigger('FilterForm:change', this.getState());
       }, this);
 
       App.on('TabNav:change Breadcrumbs:change Map:change', function(newState){
@@ -114,6 +115,10 @@
       this.state
         .clear({ silent: true })
         .set(newState, options);
+    },
+
+    getState: function() {
+      return this.state.attributes
     },
 
     /**
