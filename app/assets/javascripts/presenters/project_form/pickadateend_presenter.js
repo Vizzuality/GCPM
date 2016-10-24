@@ -12,6 +12,7 @@
 
     defaults: {
       name: 'end_date',
+      slug: 'end_date',
       label: 'End date',
       min: new Date(1905,1,1),
       max: new Date(2040,1,1)

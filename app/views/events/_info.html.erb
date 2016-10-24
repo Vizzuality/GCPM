@@ -22,8 +22,14 @@
               <ul class="c-list">
                 <% @event.participants.split(',').each do |p| %>
                   <% participant = p[0] === ' ' ? p.slice(1, p.length-1) : p %>
-                  <% id = Investigator.find_by(name: participant).id %>
-                  <li class="list-item -mg-less"><%= link_to "#{participant}", "/investigators/#{id}" %></li>
+                  <% id = Investigator.find_by(name: participant).try(:id) %>
+                  <li class="list-item -mg-less">
+                    <% if id %>
+                      <%= link_to "#{participant}", "/investigators/#{id}" %>
+                    <% else %>
+                      <%= participant %>
+                    <% end %>
+                  </li>
                 <% end %>
               </ul>
             </div>

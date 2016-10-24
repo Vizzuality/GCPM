@@ -1,7 +1,7 @@
 
 <%= simple_form_for(@event) do |f| %>
   <% f.error_notification %>
-    <p class="required">* Required field</p>
+    <p class="required">* Required fields</p>
 
     <div class="form-row">
       <%= f.input :title %>
@@ -13,31 +13,34 @@
     </div>
 
     <div class="form-row">
-      <%= f.cktext_area :website %>
+      <%= f.input :website, as: :string %>
     </div>
 
     <div class="form-row">
-      <%= f.cktext_area :excerpt %>
+      <%= f.input :excerpt, as: :string %>
     </div>
 
     <div class="form-row">
-      <%= f.input :start_date, as: :date, html5: true %>
+      <div class="row">
+        <div class="column small-12 medium-6">
+          <div id="pickadate-start" class="c-pickadate"></div>
+        </div>
+        <div class="column small-12 medium-6">
+          <div id="pickadate-end" class="c-pickadate"></div>
+        </div>
+      </div>
     </div>
 
     <div class="form-row">
-      <%= f.input :end_date, as: :date, html5: true %>
+      <%= f.input :participants, as: :string %>
     </div>
 
     <div class="form-row">
-      <%= f.cktext_area :participants %>
+      <%= f.input :address, as: :string %>
     </div>
 
     <div class="form-row">
-      <%= f.cktext_area :address %>
-    </div>
-
-    <div class="form-row">
-      <%= f.cktext_area :address2 %>
+      <%= f.input :address2, as: :string %>
     </div>
 
     <div class="form-row">
