@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     end
 
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
-    @filters = %w(network projects posts)
+    @filters = %w(network projects posts events)
     @current_type = params.key?(:data) ? params[:data] : 'projects'
 
     gon.server_params = { 'investigators[]': @investigator.size.positive? ? @investigator.first.id : '0' }
