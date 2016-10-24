@@ -178,7 +178,7 @@
           elementChildren[0].setValue(membership.research_unit_attributes.investigator_id);
           elementChildren[1].setValue(membership.research_unit_attributes.organization_id);
           elementChildren[2].setValue(membership.research_unit_attributes.address_id);
-          //elementChildren[3].setValue(membership.membership_type);
+          elementChildren[3].setValue(membership.membership_type);
         }, this);
       }, this);
     },

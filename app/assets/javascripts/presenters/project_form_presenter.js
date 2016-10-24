@@ -295,7 +295,7 @@
         funding_sources: [1,2,3],
         memberships:[
           {
-            membership_type: "main",
+            membership_type: "secondary",
             research_unit_attributes:{
               investigator_id: 1,
               organization_id: 1,
@@ -303,11 +303,11 @@
             }
           },
           {
-            membership_type: "secondary",
+            membership_type: "main",
             research_unit_attributes:{
               investigator_id: 2,
               organization_id: 2,
-              address_id: 1
+              address_id: 2
             }
           }
         ]
