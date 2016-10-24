@@ -41,6 +41,12 @@
         this.pickadate.$datePicker && this.pickadate.$datePicker.set('max', new Date(state.value));
       }.bind(this));
 
+      App.on('FilterForm:reset', function() {
+        this.state
+          .clear({ silent: true })
+          .set(this.defaults, { silent: true });
+      }.bind(this));
+
       this.pickadate.on('change', this.setState, this);
     },
 
