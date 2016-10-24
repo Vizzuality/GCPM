@@ -63,7 +63,6 @@
       }
 
       this.triggerChange();
-      setTimeout(function () { this.hideLayersWindow(); }.bind(this), 300);
     },
 
     collapseLayer: function(e) {
