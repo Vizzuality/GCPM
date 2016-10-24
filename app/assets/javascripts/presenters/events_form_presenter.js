@@ -2,15 +2,13 @@
 
   'use strict';
 
-  var StateModel = Backbone.Model.extend({});
-
   App.Presenter.EventForm = function() {
     this.initialize.apply(this, arguments);
   };
 
   _.extend(App.Presenter.EventForm.prototype, {
 
-    initialize: function(params) {
+    initialize: function() {
       this.pickdate_start = new App.Presenter.PickadateStart({
         name: 'event[start_date]'
       });
