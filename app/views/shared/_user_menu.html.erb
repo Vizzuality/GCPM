@@ -9,6 +9,9 @@
     <li class="<%= active_page?(user_session_path) ? '-active' : '' %>">
       <%= link_to (t 'posts'), user_path(:data => 'posts', :id => current_user.id) %></a>
     </li>
+    <li class="<%= active_page?(user_session_path) ? '-active' : '' %>">
+      <%= link_to (t 'events'), user_path(:data => 'events', :id => current_user.id) %></a>
+    </li>
   </ul>
   <ul>
     <li class="logout">

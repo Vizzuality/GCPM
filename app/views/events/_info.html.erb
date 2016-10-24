@@ -9,13 +9,16 @@
       </div>
       <div class="column small-4">
         <aside class="l-sidebar">
-          <div class="sidebar-item">
-            <h3><%= t 'location' %>(s)</h3>
-            <ul class="c-list">
-            <% iso = Country.find_by(country_name: @event.country).country_iso_3 %>
-              <li class="list-item -mg-less"><%= link_to "#{@event.city} , #{@event.country}", "/countries/#{iso}" %></li>
-            </ul>
-          </div>
+          <% if @event.country && @event.country.size > 0 %>
+            <% country = Country.find_by(country_name: @event.country) %>
+            <div class="sidebar-item">
+              <h3><%= t 'location' %>(s)</h3>
+              <ul class="c-list">
+              <% iso = country.country_iso_3 %>
+                <li class="list-item -mg-less"><%= link_to "#{@event.city} , #{@event.country}", "/countries/#{iso}" %></li>
+              </ul>
+            </div>
+          <% end %>
           <% if @event.participants %>
             <div class="sidebar-item">
               <h3><%= t 'participants' %>(s)</h3>

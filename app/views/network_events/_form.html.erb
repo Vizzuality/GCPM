@@ -73,6 +73,7 @@
         <h4 class="c-title">Countries</h4>
         <% f.input :country, as: :select, collection: Country.all.pluck(:country_name), label: false %>
         <div id="countries" class="c-select"></div>
+        <p class="required">* Required field</p>
       </div>
 
       <div class="column small-12 medium-5">
