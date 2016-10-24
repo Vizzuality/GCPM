@@ -7,15 +7,7 @@
   _.extend(App.Controller.Events.prototype, {
 
     new: function() {
-      var pickdate_start = new App.Presenter.PickadateStart({
-        name: 'event[start_date]'
-      });
-      var pickdate_end = new App.Presenter.PickadateEnd({
-        name: 'event[end_date]'
-      });
-
-      pickdate_start.render();
-      pickdate_end.render();
+      new App.Presenter.EventForm();
     },
 
     show: function(params) {

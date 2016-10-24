@@ -6,6 +6,7 @@
     <div class="column small-12">
       <div id="title">
       <%= f.input :title, placeholder: 'Event title', label: false, input_html: { class: "c-title -bigger -bold"} %>
+      <p class="required">* Required field</p>
       </div>
     </div>
   </div>
@@ -45,61 +46,74 @@
 
     <div class="form-row row">
       <div class="column small-12 medium-5 medium-offset-1">
-        <%= f.input :website, as: :string , placeholder: "http://www.example.org" %>
+        <h4 class="c-title">Website</h4>
+        <%= f.input :website, as: :string , placeholder: "http://www.example.org", label: false %>
       </div>
 
       <div class="column small-12 medium-5">
-        <%= f.input :participants, as: :string %>
+        <h4 class="c-title">Participants</h4>
+        <%= f.input :participants, as: :string, label: false %>
       </div>
     </div>
 
     <div class="form-row row">
       <div class="column small-12 medium-5 medium-offset-1">
-        <%= f.input :address, as: :string %>
+        <h4 class="c-title">Address</h4>
+        <%= f.input :address, as: :string, label: false %>
       </div>
 
       <div class="column small-12 medium-5">
-        <%= f.input :address2, as: :string %>
+        <h4 class="c-title">Address 2</h4>
+        <%= f.input :address2, as: :string, label: false %>
       </div>
     </div>
 
     <div class="form-row"> <div class="form-row row">
       <div class="column small-12 medium-5 medium-offset-1">
-        <%= f.input :country, as: :select, collection: Country.all.pluck(:country_name) %>
+        <h4 class="c-title">Countries</h4>
+        <% f.input :country, as: :select, collection: Country.all.pluck(:country_name), label: false %>
+        <div id="countries" class="c-select"></div>
       </div>
 
       <div class="column small-12 medium-5">
-        <%= f.input :city %>
+        <h4 class="c-title">City</h4>
+        <%= f.input :city, label: false %>
       </div>
     </div>
 
     <div class="form-row row">
       <div class="column small-12 medium-5 medium-offset-1">
-        <%= f.input :state %>
+        <h4 class="c-title">State</h4>
+        <%= f.input :state, label: false %>
       </div>
 
       <div class="column small-12 medium-5">
-        <%= f.input :postcode %>
+        <h4 class="c-title">Postcode</h4>
+        <%= f.input :postcode, label: false %>
       </div>
     </div>
 
     <div class="form-row row">
       <div class="column small-12 medium-5 medium-offset-1">
-        <%= f.input :latitude %>
+        <h4 class="c-title">Latitude</h4>
+        <%= f.input :latitude, label: false %>
       </div>
 
       <div class="column small-12 medium-5">
-        <%= f.input :longitude %>
+        <h4 class="c-title">Longitude</h4>
+        <%= f.input :longitude, label: false %>
       </div>
     </div>
 
     <div class="form-row row">
       <div class="column small-12 medium-5 medium-offset-1">
-        <%= f.input :private, as: :radio_buttons %>
+        <h4 class="c-title">Private</h4>
+        <%= f.input :private, as: :radio_buttons, label: false %>
       </div>
 
       <div class="column small-12 medium-5">
-        <%= f.input :online, as: :radio_buttons %>
+        <h4 class="c-title">Online</h4>
+        <%= f.input :online, as: :radio_buttons, label: false %>
       </div>
     </div>
 
