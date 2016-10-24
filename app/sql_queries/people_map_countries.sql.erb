@@ -27,6 +27,9 @@ from investigators
       inner join cancer_types_projects on cancer_types_projects.project_id = projects.id
       inner join cancer_types on cancer_types_projects.cancer_type_id = cancer_types.id
     <% end %>
+    <% if @params[:user] %>
+      inner join project_users on projects.id = project_users.project_id
+    <% end %>
     where projects.status = 1
     <% if @params[:countries] %>
       and countries.country_iso_3 in      <%= @params[:countries].to_s.gsub('[', '(').gsub(']',')').gsub('"',"'") %>
@@ -56,6 +59,6 @@ from investigators
       and (projects.end_date < date(<%= quote @params[:end_date] %>))
     <% end %>
     <% if @params[:user] %>
-      and projects.user_id = <%= quote @params[:user] %>
+      and project_users.user_id = <%= quote @params[:user] %> and project_users.is_approved = 1
     <% end %>
 group by location_id, location_name, centroid, iso
