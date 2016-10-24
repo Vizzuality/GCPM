@@ -7,7 +7,7 @@
   _.extend(App.Controller.Events.prototype, {
 
     new: function() {
-      // new App.Presenter.EventForm();
+      new App.Presenter.EventForm();
     },
 
     show: function(params) {

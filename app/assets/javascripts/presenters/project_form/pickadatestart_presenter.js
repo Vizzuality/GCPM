@@ -12,6 +12,7 @@
 
     defaults: {
       name: 'start_date',
+      slug: 'start_date',
       label: 'Start date',
       min: new Date(1905,1,1),
       max: new Date(2040,1,1)
@@ -19,7 +20,6 @@
 
     initialize: function(viewSettings) {
       this.state = new StateModel();
-
       // Creating view
       this.pickadate = new App.View.PickadateNew({
         el: '#pickadate-start',
