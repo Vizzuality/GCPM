@@ -20,6 +20,10 @@
 
       color: $inverse-font-color;
 
+      &:hover {
+        background-color: darken($primary-color, 5%);
+      }
+
       &.-active {
         color: $base-font-color;
         background-color: $body-bg-color;
