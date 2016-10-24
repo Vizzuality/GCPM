@@ -6,7 +6,7 @@ class DataExtractor
   def initialize(row)
     @row = row
     @errors = []
-    @project_index = row['project_index']
+    @project_index = row['id']
   end
 
   attr_reader :errors, :row, :project_index
