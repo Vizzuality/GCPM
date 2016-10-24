@@ -17,7 +17,7 @@
     }
 
     .-active {
-      background-color: rgba(90, 173, 228, 0.7);
+      background-color: darken($primary-color, 5%);
     }
   }
 

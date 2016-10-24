@@ -20,9 +20,19 @@
 
       color: $inverse-font-color;
 
+      &:hover {
+        background-color: darken($primary-color, 5%);
+      }
+
+      &.-secondary {
+        &:hover {
+          background-color: darken($secondary-color, 5%);
+        }
+      }
+
       &.-active {
-        color: $base-font-color;
-        background-color: $body-bg-color;
+        color: $base-font-color !important;
+        background-color: $body-bg-color !important;
         box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15), 0 1px 0 0 rgba(0, 0, 0, 0.05);
       }
     }
