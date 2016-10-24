@@ -26,8 +26,8 @@
                   <li><%= user.position ? user.position : '' %></li>
                 </ul>
                 <ul class="c-pipe-list">
-                  <li><%= @following ? @following : 0 %> Following</li>
-                  <li><%= @followers ? @followers : 0 %> Followers</li>
+                  <li><%= @following %> Following</li>
+                  <li><%= @followers %> Followers</li>
                 </ul>
               </div>
               <div class="column small-12 medium-6">
@@ -82,11 +82,9 @@
 <div class="l-grid" id="content">
   <% if @current_type === 'projects' %>
     <%= render 'projects/list', items: @items, more: @more %>
-  <% #else @current_type %>
-    <% #render 'investigators/list', items: @items, more: @more %>
   <% elsif @current_type === 'posts' %>
     <%= render 'posts/list', items: @items, more: @more %>
   <% elsif @current_type === 'network' %>
-    <%= render 'investigators/list', items: @items, more: @more %>
+    <%= render 'network' %>
   <% end %>
 </div>
