@@ -51,7 +51,7 @@
               <li class="tabnav-item">
                 <%= link_to t(filter),
                   map_path(request.query_parameters.merge({ data: filter })),
-                  class: "js-btn-mapmenu-type",
+                  class: "-secondary js-btn-mapmenu-type",
                   remote: true,
                   data: { datatype: filter }
                 %>
