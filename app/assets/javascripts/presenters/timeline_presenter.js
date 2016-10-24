@@ -19,10 +19,10 @@
       this.layersCollection = new App.Collection.Layers();
       this.timeline = new App.View.Timeline({ el: '#timeline' });
 
-      this.setEvents();
-      this.setSubscriptions();
-
       this.layersCollection.fetch().done(function(){
+        this.setEvents();
+        this.setSubscriptions();
+
         this.renderTimeline();
         this.setState(params);
       }.bind(this))
@@ -42,7 +42,7 @@
     },
 
     setSubscriptions: function() {
-      App.on('Map:change', function(newState) {
+      App.on('Router:change Map:change', function(newState) {
         this.setState(newState);
       }.bind(this), this);
 
