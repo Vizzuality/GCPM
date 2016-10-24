@@ -70,6 +70,6 @@ from projects
       and (projects.end_date < date(<%= quote @params[:end_date] %>))
     <% end %>
     <% if @params[:user] %>
-      and project_users.user_id = <%= quote @params[:user] %> and project_users.is_approved = 1
+      and project_users.user_id = <%= quote @params[:user] %> and project_users.is_approved = true
     <% end %>
 group by project, title, location_name, location_country_name, location_city, location_line_1, location_line_2, location_line_3, location_postcode, location_state, centroid, iso, investigator_name, investigator, is_project_lead, organization_name, organization
