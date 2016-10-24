@@ -13,9 +13,10 @@
     show: function(params) {
       var newParams = _.extend({}, params, {dataType: 'info'});
 
-      new App.Presenter.MapVis(params);
+      new App.Presenter.MapVis(newParams);
       new App.Presenter.TabNav(newParams);
-      new App.Presenter.ShowMore(params);
+      new App.Presenter.FollowButton(newParams);
+      new App.Presenter.ShowMore(newParams);
     }
 
   });

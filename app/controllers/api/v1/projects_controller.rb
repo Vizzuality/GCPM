@@ -2,7 +2,7 @@ module Api::V1
   class ProjectsController < ApiController
     include ApiAuthenticable
 
-    before_action :set_user_project,  only: :update
+    before_action :set_user_project, only: :update
 
     def update
       if Project.update_project(project_params, @project)
@@ -13,7 +13,7 @@ module Api::V1
     end
 
     def create
-      @project = Project.build_project(project_params.merge(user: @user))
+      @project = Project.build_project(project_params.merge(users: [@user]))
       if @project.save
         render json: @project, status: 201, serializer: ProjectSerializer
       else

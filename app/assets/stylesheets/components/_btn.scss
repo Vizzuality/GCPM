@@ -94,6 +94,12 @@
     }
   }
 
+  &.-action {
+    &:hover {
+      background-color: darken($primary-color, 5%);
+    }
+  }
+
   // Social login
   &.-linkedin {
     background-color: #0077b5;
