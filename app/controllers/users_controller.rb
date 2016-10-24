@@ -49,6 +49,6 @@ class UsersController < ApplicationController
 
     def set_user
       @user = User.find(params[:id])
-      @investigator = Investigator.fetch_all(user: params[:id]);
+      @investigator = Investigator.fetch_all(user_id: params[:id]);
     end
 end

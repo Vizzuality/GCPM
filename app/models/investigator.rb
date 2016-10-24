@@ -48,7 +48,7 @@ class Investigator < ApplicationRecord
   scope :by_regions,            -> regions             { joins(projects: :countries).where(countries: { region_iso: regions }) }
   scope :by_start_date,         -> start_date          { joins(:projects).where('projects.start_date > ?', start_date ) }
   scope :by_end_date,           -> end_date            { joins(:projects).where('projects.end_date < ?', end_date ) }
-  scope :by_user,               -> user                { joins(:projects).where('projects.user_id = ?', user ) }
+  scope :by_user,               -> user                { joins(:projects).where('investigators.user_id = ? AND investigators.is_approved = ?', user, true ) }
 
   def self.fetch_all(options={})
     investigators = Investigator.all
