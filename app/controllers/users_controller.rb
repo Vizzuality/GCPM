@@ -21,6 +21,7 @@ class UsersController < ApplicationController
     @projects = Project.fetch_all(user: params[:id]).uniq.order('created_at DESC')
     @people = Investigator.fetch_all(user: params[:id]).uniq.order('created_at DESC')
     @posts = Post.where(user_id: current_user.id)
+    @events = Event.fetch_all(user: params[:id]).uniq.order('created_at DESC')
 
     if params.key?(:data) && params[:data] == 'network'
       @followProjects = @user.following_by_type('Project')
@@ -32,6 +33,10 @@ class UsersController < ApplicationController
       @items = @posts.first(limit)
       @more = (@posts.size > @items.size)
       @items_total = @posts.size
+    elsif params.key?(:data) && params[:data] == 'events'
+      @items = @events.limit(limit)
+      @more = (@events.size > @items.size)
+      @items_total = @events.size
     else
       @items = @projects.limit(limit)
       @more = (@projects.size > @items.size)
