@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
     if !current_user
       redirect_to new_user_session_path and return
-    elsif current_user != User.find_by_id(params[:id])
+    elsif current_user != User.find_by(id: params[:id])
       redirect_to map_path and return
     end
 
