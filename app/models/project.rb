@@ -11,7 +11,6 @@
 #  status          :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  user_id         :integer
 #
 
 class Project < ApplicationRecord
@@ -19,7 +18,7 @@ class Project < ApplicationRecord
 
   acts_as_followable
 
-  belongs_to :user, inverse_of: :projects, optional: true
+  include UserRelationable
 
   has_many :memberships
   has_many :research_units,  through: :memberships
@@ -33,6 +32,9 @@ class Project < ApplicationRecord
   has_many :project_leads,           -> { where(memberships: { membership_type: 0 }) }, through: :research_units, source: :investigator
   has_many :secondary_investigators, -> { where(memberships: { membership_type: 1 }) }, through: :research_units, source: :investigator
 
+  has_many :project_users
+  has_many :users, through: :project_users
+
   has_many :project_updates
 
   has_and_belongs_to_many :project_types
@@ -42,7 +44,8 @@ class Project < ApplicationRecord
   accepts_nested_attributes_for :investigators,   update_only:   true
   accepts_nested_attributes_for :organizations,   update_only:   true
   accepts_nested_attributes_for :addresses,       update_only:   true
-  accepts_nested_attributes_for :funding_sources, allow_destroy: true
+  accepts_nested_attributes_for :funding_sources
+  accepts_nested_attributes_for :users
 
   validates_presence_of :title, :summary
   validates :title, uniqueness: true
@@ -89,7 +92,7 @@ class Project < ApplicationRecord
       projects = projects.order('projects.title DESC')                        if options[:sortby] && options[:sortby] == 'title_desc'
       projects = projects.limit(options[:limit])                              if options[:limit]
       projects = projects.offset(options[:offset])                            if options[:offset]
-      projects.uniq
+      projects.distinct
     end
 
     def build_project(options)

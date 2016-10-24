@@ -10,7 +10,7 @@ module Api::V1
       let!(:investigator_3)    { FactoryGirl.create(:investigator, name: 'Investigator 3')                            }
       let!(:user)              { FactoryGirl.create(:user, authentication_token: '7Nw1A13xrHrZDHj631MA')              }
       let!(:country)           { FactoryGirl.create(:country)                                                         }
-      let!(:project)           { FactoryGirl.create(:project, title: 'Project title', user_id: user.id)               }
+      let!(:project)           { FactoryGirl.create(:project, title: 'Project title', users: [user])                  }
       let(:r_u_id)             { investigator.research_units.first.id                                                 }
       let(:r_u_id_2)           { investigator_2.research_units.first.id                                               }
       let!(:membership)        { Membership.create(project_id: project.id,
@@ -164,24 +164,24 @@ module Api::V1
           post "/api/projects?token=#{user.authentication_token}", params: create_params
 
           expect(status).to eq(201)
-          expect(json['title']).to                                  eq('Project updated')
-          expect(json['id']).to                                     be_present
-          expect(json['cancer_types']).not_to                       be_present
-          expect(json['project_types']).not_to                      be_present
-          expect(json['funding_sources']).not_to                    be_present
-          expect(Project.find_by(title: 'Project updated').user).to be_present
+          expect(json['title']).to                                   eq('Project updated')
+          expect(json['id']).to                                      be_present
+          expect(json['cancer_types']).not_to                        be_present
+          expect(json['project_types']).not_to                       be_present
+          expect(json['funding_sources']).not_to                     be_present
+          expect(Project.find_by(title: 'Project updated').users).to be_any
         end
 
         it 'Allows to create project with funder and memberships' do
           post "/api/projects?token=#{user.authentication_token}", params: full_params
 
           expect(status).to eq(201)
-          expect(json['title']).to                                  eq('Project updated')
-          expect(json['id']).to                                     be_present
-          expect(json['cancer_types']).to                           be_present
-          expect(json['project_types']).to                          be_present
-          expect(json['funding_sources'].length).to                 eq(3)
-          expect(Project.find_by(title: 'Project updated').user).to be_present
+          expect(json['title']).to                                   eq('Project updated')
+          expect(json['id']).to                                      be_present
+          expect(json['cancer_types']).to                            be_present
+          expect(json['project_types']).to                           be_present
+          expect(json['funding_sources'].length).to                  eq(3)
+          expect(Project.find_by(title: 'Project updated').users).to be_any
         end
 
         it 'Allows to create project with funder' do

@@ -2,17 +2,23 @@
 #
 # Table name: investigators
 #
-#  id         :integer          not null, primary key
-#  name       :string
-#  email      :string
-#  website    :text
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id          :integer          not null, primary key
+#  name        :string
+#  email       :string
+#  website     :text
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  user_id     :integer
+#  is_approved :boolean          default(FALSE)
 #
 
 class Investigator < ApplicationRecord
-
   acts_as_followable
+
+  include Approvable
+  include UserRelationable
+
+  belongs_to :user, inverse_of: :investigator, optional: true
 
   has_many :research_units
 
@@ -21,11 +27,14 @@ class Investigator < ApplicationRecord
   has_many :memberships,   through: :research_units
   has_many :projects,      through: :memberships
 
-  accepts_nested_attributes_for :organizations, allow_destroy: true
-  accepts_nested_attributes_for :addresses,     allow_destroy: true
-  accepts_nested_attributes_for :research_units
+  accepts_nested_attributes_for :organizations
+  accepts_nested_attributes_for :addresses
+  accepts_nested_attributes_for :research_units, allow_destroy: true
 
-  validates_presence_of :name
+  attr_accessor :assign_to_user
+
+  validates_presence_of   :name
+  validates_uniqueness_of :user_id, allow_blank: true
 
   scope :publihsed,             ->                     { joins(:projects).where(status: :published) }
   scope :active,                ->                     { joins(:projects).where('projects.end_date >= ? AND projects.start_date <= ?', Time.now, Time.now).or(where('projects.end_date IS NULL')) }
@@ -55,10 +64,10 @@ class Investigator < ApplicationRecord
     investigators = investigators.by_start_date(options[:start_date])                 if options[:start_date]
     investigators = investigators.by_end_date(options[:end_date])                     if options[:end_date]
     investigators = investigators.by_user(options[:user])                             if options[:user]
-    investigators = investigators.order('investigators.created_at ASC')                    if options[:sortby] && options[:sortby] == 'created_asc'
-    investigators = investigators.order('investigators.created_at DESC')                   if options[:sortby] && options[:sortby] == 'created_desc'
-    investigators = investigators.order('investigators.title ASC')                         if options[:sortby] && options[:sortby] == 'title_asc'
-    investigators = investigators.order('investigators.title DESC')                        if options[:sortby] && options[:sortby] == 'title_desc'
+    investigators = investigators.order('investigators.created_at ASC')               if options[:sortby] && options[:sortby] == 'created_asc'
+    investigators = investigators.order('investigators.created_at DESC')              if options[:sortby] && options[:sortby] == 'created_desc'
+    investigators = investigators.order('investigators.title ASC')                    if options[:sortby] && options[:sortby] == 'title_asc'
+    investigators = investigators.order('investigators.title DESC')                   if options[:sortby] && options[:sortby] == 'title_desc'
     investigators = investigators.limit(options[:limit])                              if options[:limit]
     investigators = investigators.offset(options[:offset])                            if options[:offset]
     investigators.uniq

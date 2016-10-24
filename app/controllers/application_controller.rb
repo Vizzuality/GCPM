@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
         user_initial = 'U'
       end
       @user_data = JSON.generate({
-        user_project: Project.where("user_id = #{current_user.id}").count,
+        user_project: current_user.projects.count,
         user_event: Event.where("user_id = #{current_user.id}").count,
         user_initial: user_initial
       })
