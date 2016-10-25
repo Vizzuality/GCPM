@@ -1,5 +1,6 @@
 class InvestigatorsController < ApplicationController
-  before_action :set_investigators, only: :show
+  before_action :set_investigator, except: :index
+  before_action :set_user,          only: [:remove_relation, :relation_request]
 
   respond_to :html, :js
 
@@ -33,13 +34,37 @@ class InvestigatorsController < ApplicationController
       @followed_id = @investigator.id
       @followed_resource = 'Investigator'
     end
-    
+
     respond_with(@items)
+  end
+
+  def remove_relation
+    if @investigator.remove_relation(@user.id)
+      redirect_to investigator_path(@investigator), notice: 'Relation removed'
+    else
+      redirect_to investigator_path(@investigator), notice: "Can't remove relation"
+    end
+  end
+
+  def relation_request
+    if @investigator.relation_request(@user.id)
+      redirect_to investigator_path(@investigator), notice: 'Relation requested'
+    else
+      redirect_to investigator_path(@investigator), notice: "Can't request relation"
+    end
   end
 
   private
 
-    def set_investigators
-      @investigator = Investigator.find_by(id: params[:id])
+    def set_investigator
+      @investigator = Investigator.find(params[:id])
+    end
+
+    def set_user
+      if user_signed_in?
+        @user = current_user
+      else
+        redirect_to investigator_url(@investigator)
+      end
     end
 end

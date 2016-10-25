@@ -49,7 +49,7 @@
           newState['regions[]'] = null;
           newState['countries[]'] = null;
         }
-        this.setState(newState);
+        this.setState(_.extend({}, this.getState(), newState));
         App.trigger('Breadcrumbs:change', this.getState());
        }, this);
 

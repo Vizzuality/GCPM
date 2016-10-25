@@ -1,7 +1,7 @@
 .c-btn {
   @extend %reset-btn;
   padding: $button-y-padding $button-x-padding;
-
+  color: white;
   display: inline-block;
 
   font-size: $small-font-size;
@@ -19,6 +19,7 @@
     padding: 0;
     width: 140px;
     height: 140px;
+    color: $base-font-color;
     text-align: center;
     border: 1px solid $border-color-1;
     border-radius: 100%;
@@ -91,6 +92,12 @@
 
     &:hover {
       box-shadow: $box-shadow-2;
+    }
+  }
+
+  &.-action {
+    &:hover {
+      background-color: darken($primary-color, 5%);
     }
   }
 

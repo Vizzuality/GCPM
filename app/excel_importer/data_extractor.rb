@@ -13,7 +13,7 @@ class DataExtractor
 
   def extract_project
     # Imports project
-    project_attributes = row.slice(*%w(project_title project_website project_summary project_start_date project_end_date project_cancer_types project_types))
+    project_attributes = row.slice('project_title', 'project_website', 'project_summary', 'project_start_date', 'project_end_date', 'project_cancer_types', 'project_types')
     return if project_attributes.values.compact.blank?
     project = ProjectImporter.new(project_index, project_attributes)
     unless project.import!
@@ -24,7 +24,7 @@ class DataExtractor
 
   def extract_project_lead
     # Imports project lead
-    main_research_unit_attributes = row.slice(*%w(investigator_name investigator_email_address investigator_website investigator_organization_name investigator_organization_type investigator_organization_address investigator_organization_city investigator_organization_country investigator_organization_country_iso_code investigator_organization_latitude investigator_organization_longitude))
+    main_research_unit_attributes = row.slice('investigator_name', 'investigator_email_address', 'investigator_website', 'investigator_organization_name', 'investigator_organization_type', 'investigator_organization_address', 'investigator_organization_city', 'investigator_organization_country', 'investigator_organization_country_iso_code', 'investigator_organization_latitude', 'investigator_organization_longitude')
     return if main_research_unit_attributes.values.compact.blank?
     research_unit = ResearchUnitImporter.new(main_research_unit_attributes, true)
     unless research_unit.import!
@@ -39,7 +39,7 @@ class DataExtractor
 
   def extract_collaborators
     # Imports other investigators
-    secondary_research_unit_attributes = row.slice(*%w(collaborator_name collaborator_email_address collaborator_website collaborator_organization_name collaborator_organization_type collaborator_organization_address collaborator_organization_city collaborator_organization_country collaborator_organization_country_iso_code collaborator_organization_latitude collaborator_organization_longitude))
+    secondary_research_unit_attributes = row.slice('collaborator_name', 'collaborator_email_address', 'collaborator_website', 'collaborator_organization_name', 'collaborator_organization_type', 'collaborator_organization_address', 'collaborator_organization_city', 'collaborator_organization_country', 'collaborator_organization_country_iso_code', 'collaborator_organization_latitude', 'collaborator_organization_longitude')
     return if secondary_research_unit_attributes.values.compact.blank?
     secondary_research_unit = ResearchUnitImporter.new(secondary_research_unit_attributes, false)
     unless secondary_research_unit.import!
@@ -54,7 +54,7 @@ class DataExtractor
 
   def extract_funding_sources
     # Imports funding sources
-    funding_source_attributes = row.slice(*%w(project_funding_source))
+    funding_source_attributes = row.slice('project_funding_source')
     return if funding_source_attributes.values.compact.blank?
     funding_source = FundingSourceImporter.new(funding_source_attributes)
     unless funding_source.import!

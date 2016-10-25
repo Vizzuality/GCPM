@@ -16,6 +16,7 @@
       'projects/:id(/)':             'Project#show',
       'events/:id(/)':               'Events#show',
       'network/:id/projects/new(/)': 'Project#new',
+      'network/:network_id/projects/:id/edit(/)':'Project#edit',
       'countries(/)':                'Countries#index',
       'countries/:iso(/)':           'Countries#show',
       'investigators/:id(/)':        'Investigators#show',
@@ -23,7 +24,8 @@
       'cancer-types(/)':             'CancerTypes#index',
       'cancer-types/:id(/)':         'CancerTypes#show',
       'network/:id(/)':              'Users#show',
-      'posts/:id(/)':                'Posts#show'
+      'posts/:id(/)':                'Posts#show',
+      'network/:id/events/:id(/)':   'Events#new'
     },
 
     initialize: function() {

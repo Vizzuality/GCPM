@@ -1,6 +1,8 @@
-<h1>Editing Project Update</h1>
-
-<%= render 'form', project_update: @project_update %>
-
-<%= link_to 'Show', @project_update %> |
-<%= link_to 'Back', project_updates_path %>
+<div class="c-project-form">
+  <div class="wrapper">
+    <%= render 'form', action: 'edit' %>
+          <%= link_to 'Delete', project_project_update_path(@project.id, @project_update.id), class: 'c-btn -primary -inverse', method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
+      </div>
+  </div>
+</div>

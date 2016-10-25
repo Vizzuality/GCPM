@@ -24,7 +24,7 @@
     setEvents: function() {
       this.state.on('change', this.activeItem, this);
       this.tabnav.on('change', function(value) {
-        this.setState({ data: value });
+        this.setState(_.extend({}, this.getState(), { data: value }));
         App.trigger('TabNav:change', this.getState());
       }, this);
     },

@@ -23,22 +23,22 @@ class MembershipSerializer < ActiveModel::Serializer
 
   def investigator
     investigator        = {}
-    investigator[:id]   = object.investigator.id
-    investigator[:name] = object.investigator.name
+    investigator[:id]   = object.investigator.try(:id)
+    investigator[:name] = object.investigator.try(:name)
     investigator
   end
 
   def organization
     organization        = {}
-    organization[:id]   = object.organization.id
-    organization[:name] = object.organization.name
+    organization[:id]   = object.organization.try(:id)
+    organization[:name] = object.organization.try(:name)
     organization
   end
 
   def address
     address          = {}
-    address[:id]     = object.address.id
-    address[:line_1] = object.address.line_1
+    address[:id]     = object.address.try(:id)
+    address[:line_1] = object.address.try(:line_1)
     address
   end
 end
