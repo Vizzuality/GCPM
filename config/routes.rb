@@ -57,7 +57,9 @@ Rails.application.routes.draw do
       resources :project_types,      only: [:index],        path: 'project-types'
       resources :organization_types, only: [:index],        path: 'organization-types'
       resources :map,                only: [:index]
-      get '/map/projects/:id',  to: 'map#show_project'
+
+      get '/map/projects/:id', to: 'map#show_project'
+      get '/map/download',     to: 'map#csv_download'
 
       resources :projects,      only: [:update, :create] do
         resources :memberships, only: [:index, :create, :destroy]

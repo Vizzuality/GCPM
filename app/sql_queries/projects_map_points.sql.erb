@@ -24,9 +24,6 @@ from projects
     inner join addresses on research_units.address_id = addresses.id
     inner join countries on addresses.country_id = countries.id
     inner join organizations on organizations.id = addresses.organization_id
-     <% if @params[:organizations] || @params[:organization_types] %>
-      inner join organizations on addresses.organization_id = organizations.id
-    <% end %>
     <% if @params[:organization_types] %>
       inner join organization_types on organization_types.id = organizations.organization_type_id
     <% end %>
