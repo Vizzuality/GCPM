@@ -1,5 +1,5 @@
 <% title @project.title %>
-<% owner = current_user.projects.include?(@project) %>
+<% owner = current_user ? current_user.projects.include?(@project) : nil %>
 <div class="row collapse">
   <div class="column row small-8">
     <div class="l-content wrapper">
