@@ -70,6 +70,10 @@ label {
     margin-bottom: 0;
   }
 
+  .column.-flex {
+    display: flex;
+  }
+
   input:focus {
     outline: none;
   }

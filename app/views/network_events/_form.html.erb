@@ -1,5 +1,11 @@
 
-<%= simple_form_for(@event) do |f| %>
+<%= simple_form_for @event,
+  url: action === 'new' ?
+    user_events_path(current_user.id) :
+    user_event_path(current_user.id, @event.id),
+  method: action === 'new' ?
+    :post :
+    :patch do |f| %>
   <p class="required">* Required fields</p>
 
   <div class="form-row row">
@@ -52,7 +58,7 @@
 
       <div class="column small-12 medium-5">
         <h4 class="c-title">Participants</h4>
-        <%= f.input :participants, as: :string, label: false %>
+        <%= f.input :participants, as: :string, placeholder: "George Weinstock, Coralia Bueno Muino", label: false %>
       </div>
     </div>
 
@@ -127,6 +133,15 @@
   <div class="form-row row">
     <div class="column small-12 medium-5 medium-offset-1">
       <%= f.button :submit, "Submit", class: 'c-btn -primary' %>
+    </div>
+    <% if action === 'edit' %>
+      <div class="column small-12 medium-5 -flex align-right">
+        <%= link_to (t 'delete'), user_event_path(current_user.id, @event.id),
+          class: 'c-btn -primary -inverse',
+          method: :delete, data: { confirm: 'Are you sure?' } %>
+      </div>
+    <% end %>
+  </div>
 
 <% end %>
 
