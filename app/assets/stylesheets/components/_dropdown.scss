@@ -5,15 +5,20 @@ $dropdown-width: 182px;
   display: inline-flex;
   justify-content: flex-end;
   align-items: center;
-  padding-right: $button-x-padding / 2;
+  padding: 0 $button-x-padding;
   height: 100%;
+
+  > span {
+    display: inline-block;
+    line-height: 52px;
+  }
 
   .dropdown-value {
     display: flex;
     align-items: center;
 
     border-bottom: $body-bg-color 1px solid;
-    margin: 0 ($button-x-padding / 2);
+    margin: 0 0 0 ($button-x-padding / 2);
     font-weight: $base-font-weight;
     cursor: pointer;
 
@@ -39,6 +44,7 @@ $dropdown-width: 182px;
 
     //TODO: Set this by JS
     top: 52px;
+    right: 0;
 
     .dropdown-item {
       padding: ($button-y-padding / 2) $button-x-padding;
