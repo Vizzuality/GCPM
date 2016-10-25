@@ -1,5 +1,11 @@
 
-<%= simple_form_for @project_update, url: project_project_updates_path(@project.id), method: :post do |f| %>
+<%= simple_form_for @project_update,
+  url: action === 'new' ?
+    project_project_updates_path(@project.id) :
+    project_project_update_path(@project.id, @project_update.id),
+  method: action === 'new' ?
+    :post :
+    :patch do |f| %>
   <p class="required">* Required fields</p>
 
   <div class="form-row">

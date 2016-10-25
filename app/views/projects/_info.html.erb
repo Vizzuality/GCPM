@@ -1,18 +1,29 @@
 <% title @project.title %>
-
+<% owner = current_user.projects.include?(@project) %>
 <div class="row collapse">
   <div class="column row small-8">
     <div class="l-content wrapper">
       <article class="l-content-article">
         <%= @project.summary.html_safe %>
       </article>
-      <div class="row -no-mrg align-right">
-        <%= link_to (t 'update_project'), new_project_project_update_path(@project.id), class: "c-btn -secondary -inverse" %>
-      </div>
+      <% if owner %>
+        <div class="row -no-mrg align-right">
+          <%= link_to (t 'update_project'), new_project_project_update_path(@project.id), class: "c-btn -secondary -inverse" %>
+        </div>
+      <% end %>
     </div>
     <% @updates.each do |u| %>
       <div class="c-card">
-        <h3 class="-underlined"><%= u.created_at.strftime("%Y / %m / %d - %H : %M") %></h3>
+        <div class="row -no-mrg align-justify">
+          <h3 class="-underlined">
+            <%= u.created_at.strftime("%Y / %m / %d - %H : %M") %>
+          </h3>
+          <% if owner %>
+            <%= link_to edit_project_project_update_path(@project.id, u.id) do %>
+              <svg class="c-icon -small icon-edit -hv-opac"><use xlink:href="#icon-edit"></use></svg>
+            <% end %>
+          <% end %>
+        </div>
         <h2><%= u.title %></h2>
         <%= u.body.html_safe %>
       </div>
