@@ -183,8 +183,11 @@ ActiveRecord::Schema.define(version: 20161021110754) do
     t.string   "name"
     t.string   "email"
     t.text     "website"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "user_id"
+    t.boolean  "is_approved", default: false
+    t.index ["user_id"], name: "index_investigators_on_user_id", using: :btree
   end
 
   create_table "layer_groups", force: :cascade do |t|
@@ -336,6 +339,17 @@ ActiveRecord::Schema.define(version: 20161021110754) do
     t.index ["project_id"], name: "index_project_updates_on_project_id", using: :btree
   end
 
+  create_table "project_users", force: :cascade do |t|
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.boolean  "is_approved", default: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.index ["project_id", "user_id"], name: "index_project_users_on_project_id_and_user_id", unique: true, using: :btree
+    t.index ["project_id"], name: "index_project_users_on_project_id", using: :btree
+    t.index ["user_id"], name: "index_project_users_on_user_id", using: :btree
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string   "title"
     t.text     "summary"
@@ -345,8 +359,6 @@ ActiveRecord::Schema.define(version: 20161021110754) do
     t.integer  "status"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.integer  "user_id"
-    t.index ["user_id"], name: "index_projects_on_user_id", using: :btree
   end
 
   create_table "research_units", force: :cascade do |t|
@@ -393,6 +405,7 @@ ActiveRecord::Schema.define(version: 20161021110754) do
   end
 
   add_foreign_key "identities", "users"
+  add_foreign_key "investigators", "users"
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
