@@ -2,7 +2,18 @@ module Api::V1
   class ProjectsController < ApiController
     include ApiAuthenticable
 
-    before_action :set_user_project, only: :update
+    before_action :set_user_project, only: [:show, :update]
+
+    def show
+      render json: @project, include: ['funding_sources',
+                                       'cancer_types',
+                                       'project_types',
+                                       'users',
+                                       'memberships',
+                                       'memberships.investigator',
+                                       'memberships.organization',
+                                       'memberships.address'], status: 200, serializer: ProjectSerializer
+    end
 
     def update
       if Project.update_project(project_params, @project)
@@ -24,7 +35,13 @@ module Api::V1
     private
 
       def set_user_project
-        @project = @user.projects.find(params[:id])
+        @project = Project.find(params[:id])
+
+        if @user.projects.include?(@project)
+          return
+        else
+          render json: { success: false, message: "You don't have permission to access this project" }, status: 401
+        end
       end
 
       def project_params

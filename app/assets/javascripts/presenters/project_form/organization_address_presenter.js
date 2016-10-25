@@ -51,6 +51,10 @@
       }, this);
     },
 
+    setValue: function(values){
+      this.select.$el.find("select").val(values).trigger("change");
+    },
+
     setSubscriptions: function(){
       App.on('Organization:#organization-'+this.selector.split("-")[1], function(data){
         if(data.value.length > 0 && !isNaN(parseInt(data.value[0]))){

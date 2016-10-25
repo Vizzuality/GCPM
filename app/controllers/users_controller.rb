@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     @filters = %w(network projects posts events messages)
     @current_type = params.key?(:data) ? params[:data] : 'projects'
 
-    gon.server_params = { 'investigators[]': @investigator.size.positive? ? @investigator.first.id : '0' }
+    gon.server_params = { 'user': @investigator.size.positive? ? @investigator.first.id : '0' }
 
     limit = 12 + (@page * 9)
 
@@ -42,9 +42,9 @@ class UsersController < ApplicationController
       @more = (@events.size > @items.size)
       @items_total = @events.size
     else
-      @items = @projects.limit(limit)
-      @more = (@projects.size > @items.size)
-      @items_total = @projects.size
+      @items = projects.limit(limit)
+      @more = (projects.size > @items.size)
+      @items_total = projects.size
     end
 
     @following = @user.follow_count || 0
