@@ -70,6 +70,10 @@ label {
     margin-bottom: 0;
   }
 
+  &.-mg-big {
+    margin-bottom: $box-space;
+  }
+
   .column.-flex {
     display: flex;
   }

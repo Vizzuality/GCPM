@@ -112,7 +112,7 @@
       </div>
     </div>
 
-    <div class="form-row row">
+    <div class="form-row row -mg-big">
       <div class="column small-12 medium-5 medium-offset-1">
         <h4 class="c-title">Private</h4>
         <%= f.input :private, as: :radio_buttons, label: false %>
@@ -133,14 +133,12 @@
   <div class="form-row row">
     <div class="column small-12 medium-5 medium-offset-1">
       <%= f.button :submit, "Submit", class: 'c-btn -primary' %>
+      <% if action === 'edit' %>
+          <%= link_to (t 'delete'), user_event_path(current_user.id, @event.id),
+            class: 'c-btn -primary -inverse -mg-left',
+            method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
     </div>
-    <% if action === 'edit' %>
-      <div class="column small-12 medium-5 -flex align-right">
-        <%= link_to (t 'delete'), user_event_path(current_user.id, @event.id),
-          class: 'c-btn -primary -inverse',
-          method: :delete, data: { confirm: 'Are you sure?' } %>
-      </div>
-    <% end %>
   </div>
 
 <% end %>
