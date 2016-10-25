@@ -27,8 +27,13 @@
      */
     setEvents: function() {
       this.state.on('change', function() {
-        var uri = new URI();
-        uri.query(this.getState());
+        var state = this.getState(),
+            uri = new URI(),
+            is_projects = (state.data === 'projects');
+
+
+        uri.query(state);
+        this.download.toggleBtn(is_projects);
         this.download.updateUrl('/api/map/download' + uri.search());
       }, this);
     },
