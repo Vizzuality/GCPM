@@ -32,6 +32,10 @@
     padding: $button-y-padding 0;
   }
 
+  &.-mg-left {
+    margin-left: $inline-space / 2;
+  }
+
   &.-primary {
     color: $inverse-font-color;
     background-color: $primary-color;
@@ -87,6 +91,12 @@
 
     &:hover {
       box-shadow: $box-shadow-2;
+    }
+  }
+
+  &.-action {
+    &:hover {
+      background-color: darken($primary-color, 5%);
     }
   }
 

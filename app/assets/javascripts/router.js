@@ -22,7 +22,9 @@
       'organizations/:id(/)':        'Organizations#show',
       'cancer-types(/)':             'CancerTypes#index',
       'cancer-types/:id(/)':         'CancerTypes#show',
-      'network/:id(/)':              'Users#show'
+      'network/:id(/)':              'Users#show',
+      'posts/:id(/)':                'Posts#show',
+      'network/:id/events/:id(/)':   'Events#new'
     },
 
     initialize: function() {
@@ -45,7 +47,7 @@
       var eventsNames = [
         'Map:change', 'TabNav:change',
         'SortBy:change', 'FilterForm:change',
-        'Breadcrumbs:change'
+        'Breadcrumbs:change', 'Timeline:change'
       ].join(' ');
       App.on(eventsNames, this.setParams, this);
     },

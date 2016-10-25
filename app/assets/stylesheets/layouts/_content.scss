@@ -3,11 +3,14 @@
   padding-top: $box-space;
   padding-bottom: $box-space;
 
-  border-top:  1px solid $border-color-1;
+  border-top: 1px solid $border-color-1;
 
   &:last-child {
     border-bottom-width: 0;
   }
+
+  &.-no-br { border: 0; }
+  &.-br-bottom { border-bottom: 1px solid $border-color-1; }
 
   .l-content-article {
     font-family: $base-font-family-light;

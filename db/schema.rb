@@ -406,6 +406,7 @@ ActiveRecord::Schema.define(version: 20161021110754) do
 
   add_foreign_key "identities", "users"
   add_foreign_key "investigators", "users"
+
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"

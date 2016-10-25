@@ -43,17 +43,21 @@ class User < ApplicationRecord
 
   has_many :identities, dependent: :destroy
 
-  validates_uniqueness_of :email
-  validates_format_of     :email, without: TEMP_EMAIL_REGEX, on: :update
-
   acts_as_follower
   acts_as_messageable
 
-  has_many :projects, inverse_of: :user
+  has_one  :investigator, inverse_of: :user
+  has_many :project_users
+  has_many :projects, through: :project_users
   has_many :events, inverse_of: :user
   has_many :posts
 
   before_save :check_authentication_token
+
+  validates_uniqueness_of :email
+  validates_format_of     :email, without: TEMP_EMAIL_REGEX, on: :update
+
+  accepts_nested_attributes_for :projects
 
   def published_projects
     projects.published.includes(:cancer_types)

@@ -1,0 +1,87 @@
+.c-timeline {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  padding: 0 0 52px;
+  transition: all 0.25s $easeInOutSine;
+  transform: translate(0,100%);
+
+  &.-active {
+    transform: translate(0,0%);
+  }
+
+  ul {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 60px;
+      left: 50%;
+      z-index: 0;
+      transform: translate(-50%,0);
+      width: calc(100% - 64px);
+      height: 1px;
+      background: #becacf;
+    }
+
+    > li {
+      position: relative;
+      z-index: 1;
+      font-size: 15px;
+      color: #becacf;
+      list-style: none;
+      min-width: 76px;
+      padding: 18px 0;
+      cursor: pointer;
+      text-align: center;
+
+      &:hover, &.-active {
+        color: $primary-color;
+
+        .radio {
+          border-color: $primary-color;
+          &:after {
+            background: $primary-color;
+          }
+        }
+      }
+
+      > div {
+        display: block;
+      }
+
+      .radio {
+        display: block;
+        position: relative;
+        width: 18px;
+        height: 18px;
+        background: white;
+        border: 1px solid #becacf;
+        border-radius: 50%;
+        margin: 10px auto 0;
+
+        &:after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%,-50%);
+          width: 50%;
+          height: 50%;
+          background: #becacf;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+}

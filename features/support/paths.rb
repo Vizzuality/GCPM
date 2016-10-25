@@ -17,17 +17,17 @@ module NavigationHelpers
     when /the register page/
       '/users/sign_up'
     when /the profile edit page for "(.*)"$/
-      edit_user_registration_path(User.find_by_email($1))
+      edit_user_registration_path(User.find_by(email: $1))
     when /the profile page for "(.*)"$/
-      user_path(User.find_by_email($1))
+      user_path(User.find_by(email: $1))
     when /the user projects page for "(.*)"$/
-      user_path(User.find_by_email($1))
+      user_path(User.find_by(email: $1))
     when /the project page for "(.*)"$/
-      project_path(Project.find_by_title($1))
+      project_path(Project.find_by(title: $1))
     when /the edit project page for "(.*)" "(.*)"$/
-      edit_user_project_path(User.find_by_email($1), Project.find_by_title($2))
+      edit_user_project_path(User.find_by(email: $1), Project.find_by(title: $2))
     when /the new project page for "(.*)"$/
-      new_user_project_path(User.find_by_email($1))
+      new_user_project_path(User.find_by(email: $1))
     else
       begin
         page_name =~ /the (.*) page/
