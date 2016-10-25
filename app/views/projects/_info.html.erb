@@ -7,6 +7,13 @@
         <article class="l-content-article">
           <%= @project.summary.html_safe %>
         </article>
+
+        <% @updates.each do |u| %>
+          <article class="l-content-article">
+            <h3><%= u.title %> - <%= u.created_at.strftime("%F %T") %></h3>
+            <%= u.body.html_safe %>
+          </article>
+        <% end %>
       </div>
     </div>
     <div class="column small-4">

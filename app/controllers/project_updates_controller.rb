@@ -1,15 +1,17 @@
 class ProjectUpdatesController < ApplicationController
   before_action :set_project_update, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:new, :edit, :create, :show, :index]
 
   # GET /project_updates
   # GET /project_updates.json
   def index
-    @project_updates = ProjectUpdate.all
+    redirect_to project_path(@project.id)
   end
 
   # GET /project_updates/1
   # GET /project_updates/1.json
   def show
+    redirect_to project_path(@project.id)
   end
 
   # GET /project_updates/new
@@ -19,17 +21,19 @@ class ProjectUpdatesController < ApplicationController
 
   # GET /project_updates/1/edit
   def edit
+    redirect_to project_path(@project.id)
   end
 
   # POST /project_updates
   # POST /project_updates.json
   def create
     @project_update = ProjectUpdate.new(project_update_params)
+    @project_update.project_id = @project.id
 
     respond_to do |format|
       if @project_update.save
-        format.html { redirect_to @project_update, notice: 'Project update was successfully created.' }
-        format.json { render :show, status: :created, location: @project_update }
+        format.html { redirect_to project_path(@project.id), notice: 'Project update was successfully created.' }
+        format.json { render :show, status: :created, location: project_path(@project.id) }
       else
         format.html { render :new }
         format.json { render json: @project_update.errors, status: :unprocessable_entity }
@@ -70,5 +74,10 @@ class ProjectUpdatesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_update_params
       params.require(:project_update).permit(:title, :body, :project_id)
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def set_project
+      @project = Project.find(params[:project_id])
     end
 end

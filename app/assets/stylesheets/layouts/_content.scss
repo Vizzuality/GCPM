@@ -15,6 +15,11 @@
   .l-content-article {
     font-family: $base-font-family-light;
     padding-right: $box-space;
+    padding-bottom: $box-space;
+
+    &:last-child {
+      padding-bottom: 0;
+    }
   }
 
 }
