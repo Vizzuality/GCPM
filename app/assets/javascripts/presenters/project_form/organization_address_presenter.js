@@ -51,8 +51,18 @@
       }, this);
     },
 
-    setValue: function(values){
-      this.select.$el.find("select").val(values).trigger("change");
+    setValue: function(value){
+      this.select.$el.find("select").val(value).trigger("change");
+    },
+
+    setFetchedValues: function(value){
+      var vals = [{
+        name: value.line_1,
+        value: value.id
+      }];
+      this.select.setOptions(vals);
+      this.select.render();
+      this.select.$el.find("select").val(value.id).trigger("change");
     },
 
     setSubscriptions: function(){

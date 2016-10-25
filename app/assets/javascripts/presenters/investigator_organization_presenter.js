@@ -132,10 +132,13 @@
 
               // Render the child
               child.render();
-              App.trigger('InvestigatorOrganization:complete');
             }.bind(this));
 
           }, this);
+
+          if(element.id === this.elements[this.elements.length-1].id){
+            App.trigger('InvestigatorOrganization:complete');
+          }
 
         }.bind(this));
 
@@ -177,7 +180,7 @@
 
           elementChildren[0].setValue(membership.investigator.id);
           elementChildren[1].setValue(membership.organization.id);
-          elementChildren[2].setValue(membership.address.id);
+          elementChildren[2].setFetchedValues(membership.address);
           elementChildren[3].setValue(membership.membership_type);
         }, this);
       }, this);
