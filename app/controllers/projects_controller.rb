@@ -18,6 +18,8 @@ class ProjectsController < ApplicationController
       @followed_resource = 'Project'
     end
 
+    @updates = ProjectUpdate.where(project_id: @project.id)
+
     respond_with(@project)
   end
 

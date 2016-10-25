@@ -1,55 +1,57 @@
-<div class="wrapper">
-  <div class="row collapse">
-    <div class="column small-8">
-      <div class="l-content">
-        <article class="l-content-article">
-          <%= @event.description.html_safe %>
-        </article>
-        <div class="row -no-mrg align-right wrapper">
+
+<div class="row collapse">
+  <div class="column small-8">
+    <div class="l-content wrapper">
+      <article class="l-content-article">
+        <%= @event.description.html_safe %>
+      </article>
+      <div class="row -no-mrg align-right wrapper">
+        <% if current_user.events.include?(@event) %>
           <%= link_to (t 'edit'), edit_user_event_path(current_user.id), class: "c-btn -secondary -inverse" %>
-        </div>
+        <% end %>
       </div>
     </div>
-    <div class="column small-4">
-      <aside class="l-sidebar">
-        <% if @event.country && @event.country.size > 0 %>
-          <% country = Country.find_by(country_name: @event.country) %>
-          <div class="sidebar-item">
-            <h3><%= t 'location' %>(s)</h3>
-            <ul class="c-list">
-            <% iso = country.country_iso_3 %>
-              <li class="list-item -mg-less"><%= link_to "#{@event.city} , #{@event.country}", "/countries/#{iso}" %></li>
-            </ul>
-          </div>
-        <% end %>
-        <% if @event.participants %>
-          <div class="sidebar-item">
-            <h3><%= t 'participants' %>(s)</h3>
-            <ul class="c-list">
-              <% @event.participants.split(',').each do |p| %>
-                <% participant = p[0] === ' ' ? p.slice(1, p.length-1) : p %>
-                <% id = Investigator.find_by(name: participant).try(:id) %>
-                <li class="list-item -mg-less">
-                  <% if id %>
-                    <%= link_to "#{participant}", "/investigators/#{id}" %>
-                  <% else %>
-                    <%= participant %>
-                  <% end %>
-                </li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
+  </div>
 
-        <% if @event.website %>
-          <div class="sidebar-item">
-            <h3><%= t 'website' %></h3>
-            <ul class="c-list">
-              <li class="list-item -mg-less"><a href="<%= @event.website %>" target="_blank"><%= @event.website %></a></li>
-            </ul>
-          </div>
-        <% end %>
-      </aside>
-    </div>
+  <div class="column small-4">
+    <aside class="l-sidebar">
+      <% if @event.country && @event.country.size > 0 %>
+        <% country = Country.find_by(country_name: @event.country) %>
+        <div class="sidebar-item">
+          <h3><%= t 'location' %>(s)</h3>
+          <ul class="c-list">
+          <% iso = country.country_iso_3 %>
+            <li class="list-item -mg-less"><%= link_to "#{@event.city} , #{@event.country}", "/countries/#{iso}" %></li>
+          </ul>
+        </div>
+      <% end %>
+      <% if @event.participants %>
+        <div class="sidebar-item">
+          <h3><%= t 'participants' %>(s)</h3>
+          <ul class="c-list">
+            <% @event.participants.split(',').each do |p| %>
+              <% participant = p[0] === ' ' ? p.slice(1, p.length-1) : p %>
+              <% id = Investigator.find_by(name: participant).try(:id) %>
+              <li class="list-item -mg-less">
+                <% if id %>
+                  <%= link_to "#{participant}", "/investigators/#{id}" %>
+                <% else %>
+                  <%= participant %>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <% if @event.website %>
+        <div class="sidebar-item">
+          <h3><%= t 'website' %></h3>
+          <ul class="c-list">
+            <li class="list-item -mg-less"><a href="<%= @event.website %>" target="_blank"><%= @event.website %></a></li>
+          </ul>
+        </div>
+      <% end %>
+    </aside>
   </div>
 </div>
