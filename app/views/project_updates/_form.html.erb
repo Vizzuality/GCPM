@@ -2,29 +2,26 @@
 <%= simple_form_for @project_update, url: project_project_updates_path(@project.id), method: :post do |f| %>
   <p class="required">* Required fields</p>
 
-  <div class="form-row row">
+  <div class="form-row">
     <div class="column small-12">
       <div id="title">
-      <%= f.input :title, placeholder: 'Update title', label: false, input_html: { class: "c-title -bigger -bold"} %>
+      <%= f.input :title, placeholder: 'Title', label: false, input_html: { class: "c-title -bigger -bold"} %>
       <p class="required">* Required field</p>
       </div>
     </div>
   </div>
 
-  <div class="">
-    <div class="form-row row">
-      <div class="column small-12 medium-10 medium-offset-1">
-        <h3 class="c-title">Description</h3>
-        <%= f.cktext_area :body %>
-        <p class="required">* Required field</p>
-      </div>
+  <div class="form-row row">
+    <div class="column small-12 medium-10 medium-offset-1">
+      <h3 class="c-title">Description</h3>
+      <%= f.cktext_area :body %>
+      <p class="required">* Required field</p>
     </div>
-
-    <% if params[:error] || f.error_notification %>
-      <p class="error">* Required field missing.</p>
-    <% end %>
-
   </div>
+
+  <% if params[:error] || f.error_notification %>
+    <p class="error">* Required field missing.</p>
+  <% end %>
 
   <div class="form-row row">
     <div class="column small-12 medium-5 medium-offset-1">
