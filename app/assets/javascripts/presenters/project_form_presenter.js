@@ -280,52 +280,47 @@
 
     getProject: function(params){
       this.projectId = params.vars[1];
-      this.project = {};
+      new Promise(function(resolve, reject){
+        var url = "/api/projects/"+this.projectId+"?token="+window.AUTH_TOKEN;
+        var q = new XMLHttpRequest();
+        q.open('GET', url, true);
+        q.onreadystatechange = function(){
+          if(this.readyState === 4){
+            if(this.status.toString()[0] == "2"){
+              resolve(this.response);
+            }
+            else if(this.status.toString()[0] == "4" || this.status.toString()[0] == "5"){
+              reject(this.response);
+            }
+            else{
+              // foo
+            }
+          }
+        }
+        q.send();
+      }.bind(this)).then(function(response){
+        this.project = JSON.parse(response);
+        this.loadData();
+      }.bind(this)).catch(function(response){
+        var messages = JSON.parse(response).message;
+        App.trigger("ProjectForm:errors", messages);
+      });
     },
 
     loadData: function(){
-      this.project = {
-        title: "Project TITLE EXAMPLE",
-        summary: "Project SUmmary example",
-        start_date: "1989-06-22",
-        end_date: "1989-06-23",
-        project_website: "http://www.esloquehay.com",
-        project_type_ids: [1,2,3],
-        cancer_type_ids: [1,2,3],
-        funding_sources: [1,2,3],
-        memberships:[
-          {
-            membership_type: "secondary",
-            research_unit_attributes:{
-              investigator_id: 1,
-              organization_id: 1,
-              address_id: 1
-            }
-          },
-          {
-            membership_type: "main",
-            research_unit_attributes:{
-              investigator_id: 2,
-              organization_id: 2,
-              address_id: 2
-            }
-          }
-        ]
-      };
       this.titleInput.setValue(this.project.title);
       this.descTextarea.setValue(this.project.summary);
       this.startPickadate.setValue(this.project.start_date);
       this.endPickadate.setValue(this.project.end_date);
       this.websiteInput.setValue(this.project.project_website);
-      this.projectTypes.setValue(this.project.project_type_ids);
-      this.cancerTypes.setValue(this.project.cancer_type_ids);
-      this.fundingSources.setValue(this.project.funding_sources);
+      this.projectTypes.setFetchedValues(this.project.project_types);
+      this.cancerTypes.setFetchedValues(this.project.cancer_types);
+      this.fundingSources.setFetchedValues(this.project.funding_sources);
       this.investigatorOrganization.setValue(this.project.memberships);
     },
 
     handleSubmit: function() {
       this.buildRequest();
-
       new Promise(function(resolve, reject){
         var url = "/api/projects/"+this.projectId+"?token="+window.AUTH_TOKEN;
         var q = new XMLHttpRequest();
@@ -365,7 +360,7 @@
 
       $.when.apply($, promises).done(function() {
         this.renderFormElements();
-        this.loadData();
+        //this.loadData();
       }.bind(this));
 
     },

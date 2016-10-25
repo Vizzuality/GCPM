@@ -83,6 +83,13 @@
       this.select.$el.find("select").val(values).trigger("change");
     },
 
+    setFetchedValues: function(values){
+      var vals = values.map(function(elem){
+        return elem.id;
+      });
+      this.select.$el.find("select").val(vals).trigger("change");
+    },
+
     /**
      * Rebinding element, events and render again
      * @param {DOM|String} el
