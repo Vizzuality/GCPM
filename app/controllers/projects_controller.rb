@@ -9,8 +9,18 @@ class ProjectsController < ApplicationController
     gon.api_location_path = "/api/map/projects/#{params[:id]}"
     gon.start_date = @project.start_date || 0
     gon.end_date = @project.end_date || 0
-    @filters = %w(info)
+    @filters = %w(info people)
     @current_type = params.key?(:data) ? params[:data] : 'info'
+    @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
+    limit = 12 + (@page * 9)
+
+    @people = @project.investigators
+
+    if params.key?(:data) && params[:data] == 'people'
+      @items = @people.first(limit)
+      @more = (@people.size > @items.size)
+      @items_total = @people.size
+    end
 
     if current_user
       @followed = current_user.following?(@project)
@@ -20,7 +30,7 @@ class ProjectsController < ApplicationController
 
     @updates = ProjectUpdate.where(project_id: @project.id)
 
-    respond_with(@project)
+    respond_with(@items)
   end
 
   def remove_relation
