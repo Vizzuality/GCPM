@@ -27,10 +27,17 @@
         </div>
 
       <% elsif @current_type == 'events' %>
-
-        <div class="column small-12">
-          <h3>Events</h3>
+        <div class="column small-4">
+          <h3>Total</h3>
           <span class="amount"><%= @items_total %></span>
+        </div>
+        <div class="column small-4">
+          <h3>Public events</h3>
+          <span class="amount"><%= @items_public_total %></span>
+        </div>
+        <div class="column small-4">
+          <h3>Private events</h3>
+          <span class="amount"><%= @items_private_total %></span>
         </div>
 
       <% elsif @current_type == 'people' %>
