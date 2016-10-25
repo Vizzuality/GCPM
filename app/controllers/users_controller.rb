@@ -18,10 +18,11 @@ class UsersController < ApplicationController
 
     limit = 12 + (@page * 9)
 
-    @projects = Project.fetch_all(user: params[:id]).uniq.order('created_at DESC')
-    @people = Investigator.fetch_all(user: params[:id]).uniq.order('created_at DESC')
-    @posts = Post.where(user_id: current_user.id)
-    @events = Event.fetch_all(user: params[:id]).uniq.order('created_at DESC')
+    @projects = @user.projects
+    @people = @user.investigator
+    @posts = @user.posts
+    @events = @user.events
+    @conversations = Mailboxer::Conversation.joins(:receipts).where(mailboxer_receipts: {receiver_id: current_user.id, deleted: false}).uniq.page(params[:page])
 
     if params.key?(:data) && params[:data] == 'network'
       @followProjects = @user.following_by_type('Project')
@@ -38,13 +39,13 @@ class UsersController < ApplicationController
       @more = (@events.size > @items.size)
       @items_total = @events.size
     elsif params.key?(:data) && params[:data] == 'messages'
-      @items = @events.limit(limit)
-      @more = (@events.size > @items.size)
-      @items_total = @events.size
+      @items = @conversations.limit(limit)
+      @more = (@conversations.size > @items.size)
+      @items_total = @conversations.size
     else
-      @items = projects.limit(limit)
-      @more = (projects.size > @items.size)
-      @items_total = projects.size
+      @items = @projects.limit(limit)
+      @more = (@projects.size > @items.size)
+      @items_total = @projects.size
     end
 
     @following = @user.follow_count || 0
