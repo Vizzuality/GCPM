@@ -5,7 +5,14 @@ module Api::V1
     before_action :set_user_project, only: [:show, :update]
 
     def show
-      render json: @project, status: 200, serializer: ProjectSerializer
+      render json: @project, include: ['funding_sources',
+                                       'cancer_types',
+                                       'project_types',
+                                       'users',
+                                       'memberships',
+                                       'memberships.investigator',
+                                       'memberships.organization',
+                                       'memberships.address'], status: 200, serializer: ProjectSerializer
     end
 
     def update

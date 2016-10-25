@@ -88,9 +88,13 @@ module Api::V1
           get "/api/projects/#{project_id}?token=#{user.authentication_token}"
 
           expect(status).to eq(200)
-          expect(json['title']).to          eq('Project title')
-          expect(json['id']).to             be_present
-          expect(json['users'][0]['id']).to be(user.id)
+          expect(json['title']).to                             eq('Project title')
+          expect(json['id']).to                                be_present
+          expect(json['users'][0]['id']).to                    be(user.id)
+          expect(json['memberships'][0]['membership_type']).to be_present
+          expect(json['memberships'][0]['investigator']).to    be_present
+          expect(json['memberships'][0]['organization']).to    be_present
+          expect(json['memberships'][0]['address']).to         be_present
         end
 
         it 'Not allow to access not owned project' do
