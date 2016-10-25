@@ -24,12 +24,12 @@
           basemap: 'secondary'
         }
       });
-      this.datasWithLayer = ['projects', 'events', 'people'];
+      this.datasWithLayer = ['projects', 'events', 'people', 'info'];
 
       this.setEvents();
       this.setSubscriptions();
 
-      if (this.datasWithLayer.indexOf(params.data) > -1) {
+      if (this.datasWithLayer.indexOf(params.data || params.dataType) > -1) {
         this.addPoints();
       }
       // this.addCountries();
