@@ -32,6 +32,10 @@
       this.websiteInput.on('change', this.setUrl, this);
     },
 
+    setValue: function(value){
+      this.websiteInput.$el.find("input").val(value).trigger("change");
+    },
+
     setUrl: function(input) {
       if (input.el === '#project-website') {
         var value = input.$el.find('input')[0].value;
