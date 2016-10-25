@@ -88,5 +88,7 @@
     <%= render 'posts/list', items: @items, more: @more %>
   <% elsif @current_type === 'network' %>
     <%= render 'network' %>
+  <% elsif @current_type === 'messages' %>
+    <%= render 'messages', items: @items, more: @more %>
   <% end %>
 </div>
