@@ -1,12 +1,11 @@
 <% title @project.title %>
-<% owner = current_user ? current_user.projects.include?(@project) : nil %>
 <div class="row collapse">
   <div class="column row small-8">
     <div class="l-content wrapper">
       <article class="l-content-article">
         <%= @project.summary.html_safe %>
       </article>
-      <% if owner %>
+      <% if @owner %>
         <div class="row -no-mrg align-right">
           <%= link_to (t 'update_project'), new_project_project_update_path(@project.id), class: "c-btn -secondary -inverse" %>
         </div>
@@ -18,7 +17,7 @@
           <h3 class="-underlined">
             <%= u.created_at.strftime("%Y / %m / %d - %H : %M") %>
           </h3>
-          <% if owner %>
+          <% if @owner %>
             <%= link_to edit_project_project_update_path(@project.id, u.id) do %>
               <svg class="c-icon -small icon-edit -hv-opac"><use xlink:href="#icon-edit"></use></svg>
             <% end %>

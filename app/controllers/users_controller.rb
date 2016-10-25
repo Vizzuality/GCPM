@@ -38,9 +38,9 @@ class UsersController < ApplicationController
       @more = (@events.size > @items.size)
       @items_total = @events.size
     else
-      @items = projects.limit(limit)
-      @more = (projects.size > @items.size)
-      @items_total = projects.size
+      @items = @projects.limit(limit)
+      @more = (@projects.size > @items.size)
+      @items_total = @projects.size
     end
 
     @following = @user.follow_count || 0
