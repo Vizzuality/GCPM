@@ -63,7 +63,7 @@
               <li class="tabnav-item">
                 <%= link_to t(filter),
                   map_path(request.query_parameters.merge({ data: filter })),
-                  class: "js-btn-mapmenu-type",
+                  class: "-secondary js-btn-mapmenu-type",
                   remote: true,
                   data: { datatype: filter }
                 %>
@@ -82,6 +82,8 @@
 <div class="l-grid" id="content">
   <% if @current_type === 'projects' %>
     <%= render 'projects/list', items: @items, more: @more %>
+  <% elsif @current_type === 'events' %>
+    <%= render 'events/list', items: @items, more: @more %>
   <% elsif @current_type === 'posts' %>
     <%= render 'posts/list', items: @items, more: @more %>
   <% elsif @current_type === 'network' %>

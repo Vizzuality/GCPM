@@ -23,7 +23,8 @@
       'cancer-types(/)':             'CancerTypes#index',
       'cancer-types/:id(/)':         'CancerTypes#show',
       'network/:id(/)':              'Users#show',
-      'posts/:id(/)':                'Posts#show'
+      'posts/:id(/)':                'Posts#show',
+      'network/:id/events/:id(/)':   'Events#new'
     },
 
     initialize: function() {
