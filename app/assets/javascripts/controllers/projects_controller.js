@@ -7,7 +7,11 @@
   _.extend(App.Controller.Project.prototype, {
 
     new: function() {
-      new App.Presenter.ProjectForm();
+      new App.Presenter.CreateProjectForm();
+    },
+
+    edit: function(params){
+      new App.Presenter.EditProjectForm(params);
     },
 
     show: function(params) {

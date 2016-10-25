@@ -59,6 +59,6 @@ from investigators
       and (projects.end_date < date(<%= quote @params[:end_date] %>))
     <% end %>
     <% if @params[:user] %>
-      and project_users.user_id = <%= quote @params[:user] %> and project_users.is_approved = 1
+      and project_users.user_id = <%= quote @params[:user] %> and project_users.is_approved = true
     <% end %>
 group by location_id, location_name, centroid, iso

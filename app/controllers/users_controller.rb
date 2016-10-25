@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def show
     if !current_user
       redirect_to new_user_session_path and return
-    elsif current_user != User.find_by_id(params[:id])
+    elsif current_user != User.find_by(id: params[:id])
       redirect_to map_path and return
     end
 
@@ -14,13 +14,14 @@ class UsersController < ApplicationController
     @filters = %w(network projects posts events)
     @current_type = params.key?(:data) ? params[:data] : 'projects'
 
-    gon.server_params = { 'investigators[]': @investigator.size.positive? ? @investigator.first.id : '0' }
+    gon.server_params = { 'user': @investigator.size.positive? ? @investigator.first.id : '0' }
 
     limit = 12 + (@page * 9)
 
     @projects = Project.fetch_all(user: params[:id]).uniq.order('created_at DESC')
     @people = Investigator.fetch_all(user: params[:id]).uniq.order('created_at DESC')
     @posts = Post.where(user_id: current_user.id)
+    @events = Event.fetch_all(user: params[:id]).uniq.order('created_at DESC')
 
     if params.key?(:data) && params[:data] == 'network'
       @followProjects = @user.following_by_type('Project')
@@ -32,10 +33,14 @@ class UsersController < ApplicationController
       @items = @posts.first(limit)
       @more = (@posts.size > @items.size)
       @items_total = @posts.size
+    elsif params.key?(:data) && params[:data] == 'events'
+      @items = @events.limit(limit)
+      @more = (@events.size > @items.size)
+      @items_total = @events.size
     else
-      @items = @projects.limit(limit)
-      @more = (@projects.size > @items.size)
-      @items_total = @projects.size
+      @items = projects.limit(limit)
+      @more = (projects.size > @items.size)
+      @items_total = projects.size
     end
 
     @following = @user.follow_count || 0

@@ -730,6 +730,8 @@ Metrics/PerceivedComplexity:
   Enabled: true
   Max: 50
 
+Metrics/BlockLength:
+  Enabled: false
 
 #################### Lint ################################
 

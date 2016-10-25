@@ -45,6 +45,12 @@
       this.state.set(state, options);
     },
 
+    setValue: function(value){
+      if(value == "main"){
+        this.input.$el.find("input").attr("checked", true);
+      }
+    },
+
     setElement: function(el) {
       this.input.setElement(el);
     },

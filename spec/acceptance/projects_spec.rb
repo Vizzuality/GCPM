@@ -11,6 +11,7 @@ module Api::V1
       let!(:user)              { FactoryGirl.create(:user, authentication_token: '7Nw1A13xrHrZDHj631MA')              }
       let!(:country)           { FactoryGirl.create(:country)                                                         }
       let!(:project)           { FactoryGirl.create(:project, title: 'Project title', users: [user])                  }
+      let!(:project_2)         { FactoryGirl.create(:project, title: 'Project not owned')                             }
       let(:r_u_id)             { investigator.research_units.first.id                                                 }
       let(:r_u_id_2)           { investigator_2.research_units.first.id                                               }
       let!(:membership)        { Membership.create(project_id: project.id,
@@ -20,7 +21,9 @@ module Api::V1
       let!(:project_type)      { FactoryGirl.create(:project_type)                                                    }
       let!(:organization_type) { FactoryGirl.create(:organization_type)                                               }
 
-      let(:project_id) { project.id }
+      let(:project_id)   { project.id   }
+      let(:project_2_id) { project_2.id }
+
       let(:params)     { { "project": { "title": "Project updated" } } }
 
       let(:full_params) { { "project": {
@@ -77,8 +80,34 @@ module Api::V1
                                                                                          "primary": true
                                                                                        }] }],
                                             "memberships": [{ "research_unit_id": "#{r_u_id_2}", "membership_type": "main" }]
-                                            }
-                                         } }
+                                            }}}
+
+      let(:update_memberships) { { "project": {
+                                  "memberships": [{ "id": membership.id, "membership_type": "main" }]
+                                  }}}
+
+
+      context 'Users projects' do
+        it 'Allows to view project owned by user' do
+          get "/api/projects/#{project_id}?token=#{user.authentication_token}"
+
+          expect(status).to eq(200)
+          expect(json['title']).to                             eq('Project title')
+          expect(json['id']).to                                be_present
+          expect(json['users'][0]['id']).to                    be(user.id)
+          expect(json['memberships'][0]['membership_type']).to be_present
+          expect(json['memberships'][0]['investigator']).to    be_present
+          expect(json['memberships'][0]['organization']).to    be_present
+          expect(json['memberships'][0]['address']).to         be_present
+        end
+
+        it 'Not allow to access not owned project' do
+          get "/api/projects/#{project_2_id}?token=#{user.authentication_token}"
+
+          expect(status).to eq(401)
+          expect(json['message']).to eq("You don't have permission to access this project")
+        end
+      end
 
       context 'Update Project' do
         it 'Allows to update project' do
@@ -109,7 +138,16 @@ module Api::V1
           expect(json['cancer_types']).to           be_present
           expect(json['project_types']).to          be_present
           expect(json['funding_sources'].length).to eq(2)
+          expect(json['memberships'].length).to     eq(2)
           expect(Membership.find_by(research_unit_id: r_u_id_2).project_id).to eq(json['id'])
+        end
+
+        it 'Allows to update project with funding_sources_ids and new funders' do
+          patch "/api/projects/#{project_id}?token=#{user.authentication_token}", params: update_memberships
+
+          expect(status).to eq(200)
+          expect(json['memberships'].length).to                eq(1)
+          expect(json['memberships'][0]['membership_type']).to eq('main')
         end
 
         # Memeberships
