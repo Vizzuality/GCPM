@@ -12,6 +12,9 @@
 
     initialize: function(params) {
       this.state = new StateModel();
+      this.download = new App.View.Download({
+        el: '#download'
+      });
       this.setEvents();
       this.setSubscriptions();
 
@@ -23,14 +26,19 @@
      */
     setEvents: function() {
       this.state.on('change', function() {
-
+        var uri = new URI();
+        uri.query(this.getState());
+        this.download.updateUrl('/api/map/download' + uri.search());
       }, this);
     },
 
     setSubscriptions: function() {
-      App.on('Toolbar:action', function(actionName){
-        console.log(actionName);
-      });
+      var eventsNames = [
+        'Router:change', 'Map:change', 'TabNav:change',
+        'SortBy:change', 'FilterForm:change',
+        'Breadcrumbs:change'
+      ].join(' ');
+      App.on(eventsNames, this.setState, this);
     },
 
     /**
