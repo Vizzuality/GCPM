@@ -12,6 +12,7 @@
 
     defaults: {
       name: 'end_date',
+      slug: 'end_date',
       label: 'End date',
       min: new Date(1905,1,1),
       max: new Date(2040,1,1)
@@ -26,7 +27,6 @@
         options: _.extend({}, this.defaults, viewSettings || {}),
         state: this.state
       });
-
       this.setEvents();
     },
 
@@ -40,6 +40,12 @@
 
       App.on('PickadateStart:change', function(state) {
         this.pickadate.$datePicker && this.pickadate.$datePicker.set('min', new Date(state.value));
+      }.bind(this));
+
+      App.on('FilterForm:reset', function() {
+        this.state
+          .clear({ silent: true })
+          .set(this.defaults, { silent: true });
       }.bind(this));
 
       this.pickadate.on('change', this.setState, this);
@@ -65,7 +71,7 @@
     setMin: function() {
       this.state.set({
         // If it doesn't exist set it to 'undefined'. Otherwise it will break the filters
-        min: this.state.get('start_date') || undefined
+        min: this.state.get('start_date') || this.defaults.min
       }, { silent: true });
     },
 

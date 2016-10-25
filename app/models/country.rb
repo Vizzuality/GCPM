@@ -15,6 +15,9 @@
 #
 
 class Country < ApplicationRecord
+
+  acts_as_followable
+
   has_many :addresses
   has_many :research_units, through: :addresses
   has_many :memberships, through: :research_units

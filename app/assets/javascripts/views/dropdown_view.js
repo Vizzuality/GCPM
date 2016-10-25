@@ -23,7 +23,9 @@
       opts = opts || new Object();
       opts.className = [this.defaults.className, opts.className || ''].join(' ');
       this.options = _.extend({}, this.defaults, opts);
+
       this.render();
+      this.setEvents();
     },
 
     render: function() {
@@ -32,6 +34,10 @@
       });
       this.$el.html(this.template(this.options));
       return this;
+    },
+
+    setEvents: function() {
+      $(document).on('click', this.handleDocumentClick.bind(this));
     },
 
     /**
@@ -55,6 +61,11 @@
       this.$el.find('.dropdown-value').html(name);
       this.trigger('change', { name: name, value: value });
       this.toggleDropdown();
+    },
+
+    handleDocumentClick: function(e) {
+      var isContained = this.el.contains(e.target);
+      !isContained && this.options.open && this.toggleDropdown();
     },
 
     toggleDropdown: function() {

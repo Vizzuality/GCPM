@@ -4,6 +4,7 @@ input[type="text"],
 input[type="number"],
 input[type="password"],
 input[type="email"],
+input[type="url"],
 select {
   min-height: $input-height;
   width: 100%;
@@ -12,6 +13,7 @@ select {
 input[type="text"],
 input[type="number"],
 input[type="password"],
+input[type="url"],
 input[type="email"] {
   border: 0;
   border-bottom: 1px solid $border-color-1;
@@ -54,10 +56,23 @@ label {
 
   font-size: $small-font-size;
   text-transform: uppercase;
+  margin-bottom: $base-space/3.5;
+
+  abbr[title] {
+    border: 0;
+  }
 }
 
 .form-row {
   margin-bottom: $base-space;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  input:focus {
+    outline: none;
+  }
 }
 
 .hint {
@@ -76,4 +91,17 @@ label {
       margin-right: 0;
     }
   }
+}
+
+.required {
+  font-size: $small-font-size;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.error {
+  font-size: $small-font-size;
+  margin-top: 0;
+  padding-top: 0;
+  color: red;
 }

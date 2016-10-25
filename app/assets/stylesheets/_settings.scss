@@ -5,7 +5,8 @@ $modal-tiny-max-width: 550px;
 
 /* Font */
 $base-font-family: "Montserrat", Arial, sans-serif;
-$base-font-family-light: "Montserrat-light";
+$base-font-family-light: "Montserrat-light", Arial, sans-serif;
+$base-font-family-normal: "Montserrat-normal", Arial, sans-serif;
 $base-font-size: 14px;
 $base-font-weight: lighter;
 $base-line-height: 1.6;
@@ -45,6 +46,7 @@ $overlay-bg-color: rgba($black, .3);
 $border-color-1: #e5e5e5;
 
 $box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+$box-shadow-2: 0 7px 15px 0 rgba(0, 0, 0, 0.2);
 
 $base-space: 23px;
 $box-space: 60px;

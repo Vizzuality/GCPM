@@ -1,12 +1,24 @@
 <% title @investigator.name %>
 
+<% if user_signed_in? && current_user.investigator == @investigator %>
+  <%= link_to 'Remove relation', remove_relation_investigator_path(@investigator), method: :patch %>
+<% elsif user_signed_in? && current_user.investigator.blank? && @investigator.user.blank? %>
+  <%= link_to 'Relation request', relation_request_investigator_path(@investigator), method: :patch %>
+<% end %>
+
 <section class="l-app -full">
   <div class="l-app-map">
     <div id="map" class="c-map"></div>
   </div>
-  <%= render "shared/legend" %>
+  <%= render "shared/legend_people" %>
+
   <div class="l-app-title">
     <div class="wrapper">
+      <div class="row collapse">
+        <div class="column small-8">
+          <div class="c-avatar -big -ph -mg-bt"></div>
+        </div>
+      </div>
       <div class="row collapse">
         <div class="column small-8">
           <h1><%= @investigator.name %></h1>
@@ -22,7 +34,9 @@
               </tr>
             </tbody>
           </table>
-          <br/>
+        </div>
+        <div class="column small-4">
+          <%= render "shared/user_actions" %>
         </div>
       </div>
     </div>
@@ -37,7 +51,7 @@
               <li class="tabnav-item">
                 <%= link_to t(filter),
                   map_path(request.query_parameters.merge({ data: filter })),
-                  class: "js-btn-mapmenu-type",
+                  class: "-secondary js-btn-mapmenu-type",
                   remote: true,
                   data: { datatype: filter }
                 %>
@@ -54,13 +68,9 @@
 </section>
 
 <div class="l-grid" id="content">
-  <% if @current_type == 'projects' %>
-    <%= render 'projects/list', items: @items, more: @more %>
-  <% #elsif @current_type == 'events' %>
-    <% #render 'events/list', items: @items, more: @more %>
-  <% #else @current_type %>
-    <% #render 'investigators/list', items: @items, more: @more %>
+  <% if @current_type === 'posts' %>
+    <%= render 'posts/list', items: @items, more: @more %>
   <% else %>
-    No data
+    <%= render 'projects/list', items: @items, more: @more %>
   <% end %>
 </div>

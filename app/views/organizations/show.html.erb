@@ -4,7 +4,7 @@
   <div class="l-app-map">
     <div id="map" class="c-map"></div>
   </div>
-  <%= render "shared/legend" %>
+  <%= render "shared/legend_people" %>
   <div class="l-app-title">
     <div class="wrapper">
       <div class="row collapse">
@@ -26,7 +26,6 @@
               </tr>
             </tbody>
           </table>
-          <br/>
         </div>
       </div>
     </div>
@@ -41,7 +40,7 @@
               <li class="tabnav-item">
                 <%= link_to t(filter),
                   map_path(request.query_parameters.merge({ data: filter })),
-                  class: "js-btn-mapmenu-type",
+                  class: "-secondary js-btn-mapmenu-type",
                   remote: true,
                   data: { datatype: filter }
                 %>
@@ -58,13 +57,5 @@
 </section>
 
 <div class="l-grid" id="content">
-  <% if @current_type == 'projects' %>
-    <%= render 'projects/list', items: @items, more: @more %>
-  <% #elsif @current_type == 'events' %>
-    <% #render 'events/list', items: @items, more: @more %>
-  <% #else @current_type %>
-    <% #render 'investigators/list', items: @items, more: @more %>
-  <% else %>
-    No data
-  <% end %>
+  <%= render 'projects/list', items: @items, more: @more %>
 </div>

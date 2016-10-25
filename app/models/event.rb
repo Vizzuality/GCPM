@@ -32,6 +32,8 @@ class Event < ApplicationRecord
 
   validate :dates_timeline
 
+  acts_as_followable
+
   def country_object
     Country.find_by(country_name: self.country)
   end

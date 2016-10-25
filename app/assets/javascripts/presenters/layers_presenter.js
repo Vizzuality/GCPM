@@ -2,7 +2,11 @@
 
   'use strict';
 
-  var StateModel = Backbone.Model.extend({});
+  var StateModel = Backbone.Model.extend({
+    defaults: {
+      year: 2013
+    }
+  });
 
   App.Presenter.Layers = function () {
     this.initialize.apply(this, arguments);
@@ -11,14 +15,12 @@
   _.extend(App.Presenter.Layers.prototype, {
 
     initialize: function (params) {
-      this.params = params;
       this.state = new StateModel();
       this.layersView = new App.View.Layers({ el: '#layers' });
       this.fc = App.facade.cartoLayer;
       this.layersCollection = new App.Collection.Layers();
-      this.params.active = false;
 
-      this.setState(this.params);
+      this.setState(_.extend({},{ active: false },params));
       this.setLayers();
       this.setEvents();
       this.setSubscriptions();
@@ -30,13 +32,13 @@
       }, this);
 
       this.layersView.on('change', this.handleLayer.bind(this));
-      this.layersView.on('close', this.toggleActive.bind(this));
+      this.layersView.on('close', this.closeLayer.bind(this));
     },
 
     setSubscriptions: function () {
       App.on('Actionbar:layers', this.toggleActive, this);
-      App.on('Map:change Router:change', this.setState, this);
-      App.on('Router:change', function(params) {
+      App.on('Map:change Router:change Timeline:change', this.setState, this);
+      App.on('Router:change Timeline:change', function(params) {
         if (params.cartoLayer) {
           this.handleLayer({ id: params.cartoLayer });
         } else {
@@ -47,13 +49,30 @@
 
     setLayers: function() {
       this.layersCollection.fetch().done(function() {
-        var groups = _.groupBy(_.filter(this.layersCollection.toJSON(), 'layer_group'),
-          function(layer) { return layer.layer_group.name; });
-        var individual = $.extend({}, _.reject(this.layersCollection.toJSON(), 'layer_group'));
-
         this.layersList = {
-          groups: {groups: true, elements: groups},
-          individual: {individual: true, elements: individual}
+          groups: {
+            groups: true,
+            elements: _.groupBy(this.layersCollection.getGroup('disability-adjusted-life-year'), function(layer) {
+              return layer.layer_group.name;
+            })
+          },
+          individual: {
+            individual: true,
+            elements: [
+              {
+                name: 'Human Development Index',
+                slug: 'human-development-index'
+              },
+              {
+                name: 'Mortality, ASR all years Globocan',
+                slug: 'mortality-asr-all-years-globocan'
+              },
+              {
+                name: 'Incidence, ASR all years Globocan',
+                slug: 'incidence-asr-all-years-globocan'
+              }
+            ]
+          }
         };
 
         this.setState({ layers: this.layersList });
@@ -79,7 +98,12 @@
 
     handleLayer: function(element) {
       if (element) {
-        var layer = _.findWhere(this.layersCollection.toJSON(), {slug: element.id});
+        // Harcode the human development index
+        if (element.id == 'human-development-index') {
+          element.id = element.id + '-' + this.state.get('year');
+        }
+        var layer = this.layersCollection.getLayer(element.id);
+
         var options = {
           sql: layer.query,
           cartocss: layer.css
@@ -90,6 +114,10 @@
           App.trigger('Layer:change', {layer: layer, name: element.id});
         });
       } else App.trigger('Layer:remove', null);
+    },
+
+    closeLayer: function() {
+      this.getState().active && this.toggleActive();
     },
 
     toggleActive: function(){

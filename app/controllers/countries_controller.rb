@@ -8,10 +8,12 @@ class CountriesController < ApplicationController
 
   def show
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
-    @filters = %w(projects people events)
-    @current_type = params.key?(:data) ? params[:data] : 'projects'
+    @filters = %w(data projects people events)
+    @current_type = params.key?(:data) ? params[:data] : 'data'
 
     gon.server_params = { 'countries[]': params[:iso] }
+    gon.carto_account = ENV["CARTO_ACCOUNT"]
+    gon.carto_key = ENV["CARTO_KEY"]
 
     limit = 12 + (@page * 9)
 
@@ -31,6 +33,12 @@ class CountriesController < ApplicationController
       @items = @projects.limit(limit)
       @more = (@projects.size > @items.size)
       @items_total = @projects.size
+    end
+
+    if current_user
+      @followed = current_user.following?(@country)
+      @followed_id = @country.id
+      @followed_resource = 'Country'
     end
 
     respond_with(@items)

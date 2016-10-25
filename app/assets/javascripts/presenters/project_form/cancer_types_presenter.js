@@ -16,7 +16,7 @@
       label: 'Cancer types',
       placeholder: 'All cancer types',
       blank: null,
-      addNew: true,
+      addNew: false,
       select2Options: {
         // closeOnSelect: false
         // It solves the closing of the dropdown menu

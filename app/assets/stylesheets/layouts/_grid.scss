@@ -9,9 +9,33 @@
 
 .l-grid {
   border-top:  1px solid $border-color-1;
+
+  .row {
+    .-no-mrg { margin: 0; }
+  }
+
   .column {
     display: flex;
     align-items: stretch;
+
+    &.-column { flex-flow: column; }
+
+    &.-extra {
+      display: none;
+
+      @media screen and (min-width: 40.063em) {
+        display: inherit;
+      }
+    }
+
+    &.-align-bottom {
+      align-items: flex-end;
+    }
+
+    &.-align-right {
+      flex-flow: row;
+      justify-content: flex-end;
+    }
   }
 
   .l-content, .l-sidebar {

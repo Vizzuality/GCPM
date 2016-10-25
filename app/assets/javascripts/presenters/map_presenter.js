@@ -12,12 +12,12 @@
 
     initialize: function(params, settings, viewSettings) {
       this.fc = App.facade.layer;
-      this.options = settings || {};
+      this.options = settings || {};
       this.state = new StateModel();
       this.layersSpec = new App.Collection.LayersSpec();
       this.map = new App.View.Map({
         el: '#map',
-        options: Object.assign({
+        options: _.extend({}, {
           minZoom: 2,
           maxZoom: 14,
           basemap: 'main'
@@ -71,7 +71,7 @@
     },
 
     setState: function(params, merge) {
-      var newState = merge ? Object.assign({}, this.getState(), params) : params;
+      var newState = merge ? _.extend({}, this.getState(), params) : params;
 
       newState = _.pick(newState, 'data', 'regions[]', 'countries[]', 'cancer_types[]',
         'organization_types[]', 'organizations[]', 'project_types[]',
@@ -110,14 +110,18 @@
         this.map.removeLayer(this.currentLayer);
       }
       this.fc.getLayer(this.getState()).done(function(layer) {
-        var bounds = layer.getBounds();
-        this.currentLayer = layer;
-        this.map.addLayer(this.currentLayer);
-        if (bounds && !this.options.noAnimateBounds) {
-          this.map.map.fitBounds(bounds, {
-            padding: [50, 50]
-          });
+
+        if (layer) {
+          var bounds = layer.getBounds();
+          this.currentLayer = layer;
+          this.map.addLayer(this.currentLayer);
+          if (bounds && !this.options.noAnimateBounds) {
+            this.map.map.fitBounds(bounds, {
+              padding: [50, 50]
+            });
+          }
         }
+
       }.bind(this));
     },
 
@@ -130,7 +134,7 @@
       }
       this.cartoLayer = layerOptions.layer;
       this.map.addLayer(this.cartoLayer);
-      App.trigger('Map:change', Object.assign(this.getState(), {
+      App.trigger('Map:change', _.extend({}, this.getState(), {
         cartoLayer: layerOptions.name
       }));
     },
@@ -141,7 +145,7 @@
     removeCartoLayer: function() {
       this.map.removeLayer(this.cartoLayer);
       this.cartoLayer = null;
-      App.trigger('Map:change', Object.assign(this.getState(), {
+      App.trigger('Map:change', _.extend({}, this.getState(), {
         cartoLayer: null
       }));
     }

@@ -1,11 +1,20 @@
 .l-sidebar {
   width: 100%;
+  height: 100%;
   border-left: 1px solid $border-color-1;
   padding: $box-space;
   padding-right: 0;
 
+  &.-no-pad {
+    padding: 0;
+  }
+
   .sidebar-item {
-    margin-bottom: $box-space;
+    margin-bottom: $base-space;
+
+    > h3 {
+      margin-bottom: 6px;
+    }
   }
 
   .list-item {

@@ -43,14 +43,27 @@
 
   .layers-item {
     text-transform: capitalize;
-    margin: 0 ($inline-space / 2);
+    margin: 0 ($inline-space / 2) 14px;
 
+    &:last-child {
+      margin: 0 ($inline-space / 2) 0;
+    }
+
+    &.-collapsed {
+      .layer-arrow {
+        transition: transform 0.3s;
+        transform: rotate(0deg);
+      }
+
+      > .layer-list {
+        display: none;
+      }
+    }
 
     .layer {
       display: flex;
       align-items: flex-start;
       justify-content: flex-start;
-      margin-bottom: 10px;
       line-height: 21px;
 
       .layer-arrow {
@@ -59,7 +72,7 @@
 
       .c-btn.-thin {
         padding-top: 4px;
-        padding-bottom: 4px;
+        padding-bottom: 2px;
       }
     }
 
@@ -72,23 +85,12 @@
       cursor: pointer;
       text-transform: none;
       font-size: $base-font-size;
+      margin-bottom: 0;
     }
 
     > .layer-list {
       list-style: none;
-      margin: 0;
-    }
-
-    &.-collapsed {
-
-      .layer-arrow {
-        transition: transform 0.3s;
-        transform: rotate(0deg);
-      }
-
-      > .layer-list {
-        display: none;
-      }
+      margin: ($inline-space / 2) 0 $inline-space;
     }
 
     .group-title {
@@ -103,11 +105,6 @@
     }
   }
 
-  .layers-item:first-child {
-    margin-top: 5px;
-  }
 
-  .layers-item:last-child {
-    margin-bottom: $inline-space;
-  }
+
 }

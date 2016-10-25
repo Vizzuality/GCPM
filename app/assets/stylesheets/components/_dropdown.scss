@@ -9,10 +9,24 @@ $dropdown-width: 182px;
   height: 100%;
 
   .dropdown-value {
+    display: flex;
+    align-items: center;
+
     border-bottom: $body-bg-color 1px solid;
     margin: 0 ($button-x-padding / 2);
     font-weight: $base-font-weight;
     cursor: pointer;
+
+    &:after {
+      content: '';
+      margin-left: $inline-space / 2;
+      width: 0;
+      height: 0;
+      border-left: transparent 5px solid;
+      border-right: transparent 5px solid;
+      border-top: $body-bg-color 5px solid;
+
+    }
   }
 
   .dropdown-content {

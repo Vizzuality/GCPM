@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { sessions: 'sessions' }
-
+  resources :project_updates
+  devise_for :users, controllers: { sessions: 'users/sessions', omniauth_callbacks: 'users/omniauth_callbacks' }
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
@@ -10,21 +10,42 @@ Rails.application.routes.draw do
   get '/countries/:iso',        to: 'countries#show',     as: 'country'
   get '/cancer-types',          to: 'cancer_types#index', as: 'cancers'
   get '/cancer-types/:id',      to: 'cancer_types#show',  as: 'cancer'
-  get '/investigators/:id',     to: 'investigators#show', as: 'investigator'
   get '/organizations/:id',     to: 'organizations#show', as: 'organization'
   get '/about',                 to: 'about#index',        as: 'about'
   get '/downloads/user-manual', to: 'downloads#show',     as: 'download_user_manual'
+  get '/network/:id',           to: 'users#show',         as: 'user'
+
+  resources :projects, only: :show do
+    patch 'relation_request', on: :member
+    patch 'remove_relation',  on: :member
+  end
+
+  resources :investigators, only: :show do
+    patch 'relation_request', on: :member
+    patch 'remove_relation',  on: :member
+  end
 
   resources :projects, only: :show
-  resources :events, except: :destroy
+  resources :events, except: [:index, :destroy]
+  resources :posts
 
   # User profile
   resources :users, only: :show, path: :network do
-    resources :projects, controller: 'network_projects', except: :index
+    resources :projects, controller: 'network_projects', except: :index do
+      patch 'remove_relation',  on: :member
+    end
+
     resources :events,   controller: 'network_events',   except: :destroy
   end
 
+  # Network
   get '/network/:id/projects', to: 'users#show'
+
+  post 'follows/:resource/:id', to: 'follows#create', as: :follows
+  delete 'follows/:resource/:id', to: 'follows#destroy', as: :follow
+
+  post 'block/:user_id', to: 'follows#block', as: :blocks
+  delete 'block/:user_id', to: 'follows#unblock', as: :block
 
   # Admin
   #get 'admin/excel-uploader', to: 'admin/excel_uploader#new', as: :admin_excel_uploader
@@ -36,7 +57,9 @@ Rails.application.routes.draw do
       resources :project_types,      only: [:index],        path: 'project-types'
       resources :organization_types, only: [:index],        path: 'organization-types'
       resources :map,                only: [:index]
-      get '/map/projects/:id',  to: 'map#show_project'
+
+      get '/map/projects/:id', to: 'map#show_project'
+      get '/map/download',     to: 'map#csv_download'
 
       resources :projects,      only: [:update, :create] do
         resources :memberships, only: [:index, :create, :destroy]
@@ -47,7 +70,7 @@ Rails.application.routes.draw do
       resources :organizations,  only: [:index, :show]
 
       get 'funding-sources',     to: 'organizations#index'
-      get 'countries',           to: 'organizations#index_countries'
+      get 'countries',           to: 'countries#index'
       get 'check_research_unit', to: 'memberships#check_research_unit'
       get 'lists/countries',     to: 'lists#countries'
       get 'lists/cancer-types',  to: 'lists#cancer_types'

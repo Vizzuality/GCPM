@@ -1,0 +1,92 @@
+
+<% user = current_user %>
+
+<section class="l-app -full">
+
+  <div class="l-app-map">
+    <div id="map" class="c-map"></div>
+  </div>
+
+  <%= render "shared/legend_people" %>
+
+  <div class="l-app-title">
+    <div class="wrapper">
+      <div class="row collapse">
+        <div class="column small-8">
+          <div class="c-avatar -big -ph -mg-bt"></div>
+        </div>
+      </div>
+      <div class="row collapse">
+        <div class="column small-8">
+            <h1><%= user.try(:name) %></h1>
+
+            <div class="row">
+              <div class="column small-12 medium-6">
+                <ul class="c-pipe-list">
+                  <li><%= user.position ? user.position : '' %></li>
+                </ul>
+                <ul class="c-pipe-list">
+                  <li><%= @following %> Following</li>
+                  <li><%= @followers %> Followers</li>
+                </ul>
+              </div>
+              <div class="column small-12 medium-6">
+                <ul class="c-pipe-list">
+                  <li>
+                    <%= user.twitter_account ? user.twitter_account : 'Twitter account' %>
+                  </li>
+                  <li>
+                    <%= user.linkedin_account ? user.linkedin_account : 'Linkedin account' %>
+                  </li>
+                  <li>
+                    <%= user.pubmed ? user.pubmed : 'Pumbed account' %>
+                  </li>
+                </ul>
+              </div>
+            </div>
+        </div>
+        <div class="column small-4">
+           <% if (current_user) %>
+            <%= render "shared/user_actions" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="l-app-navbar">
+    <div class="wrapper">
+      <div class="row collapse">
+        <div class="column small-6">
+          <ul class="c-tabnav" id="dataTabNav">
+             <% @filters.each do |filter| %>
+              <li class="tabnav-item">
+                <%= link_to t(filter),
+                  map_path(request.query_parameters.merge({ data: filter })),
+                  class: "-secondary js-btn-mapmenu-type",
+                  remote: true,
+                  data: { datatype: filter }
+                %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="column small-6">
+          <div id="toolbar"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="l-grid" id="content">
+  <% if @current_type === 'projects' %>
+    <%= render 'projects/list', items: @items, more: @more %>
+  <% elsif @current_type === 'events' %>
+    <%= render 'events/list', items: @items, more: @more %>
+  <% elsif @current_type === 'posts' %>
+    <%= render 'posts/list', items: @items, more: @more %>
+  <% elsif @current_type === 'network' %>
+    <%= render 'network' %>
+  <% end %>
+</div>

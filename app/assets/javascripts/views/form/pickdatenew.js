@@ -61,7 +61,7 @@
       this.$picker = this.$el.find('.pickadate-input')
         .val(this.state.get('value'))
         .pickadate(_.extend({}, this.pickadateOptions, {
-          container: '#'+this.options.name+'-container',
+          container: '#'+this.options.slug+'-container',
           min: this.state.get('min') || undefined,
           max: this.state.get('max') || undefined
         }));

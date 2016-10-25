@@ -10,6 +10,17 @@
 
   _.extend(App.Presenter.FilterForm.prototype, {
 
+    defaults: {
+      'countries[]': undefined,
+      'regions[]': undefined,
+      'cancer_types[]': undefined,
+      'organization_types[]': undefined,
+      'organizations[]': undefined,
+      'project_types[]': undefined,
+      start_date: null,
+      end_date: null
+    },
+
     initialize: function(params) {
       this.state = new StateModel(params);
 
@@ -65,8 +76,14 @@
         this.closeForm();
       }, this);
 
+      this.filterForm.on('reset', function() {
+        this.setState(this.defaults);
+        this.closeForm();
+        App.trigger('FilterForm:reset');
+      }, this)
+
       this.state.on('change', function() {
-        App.trigger('FilterForm:change', this.state.attributes);
+        App.trigger('FilterForm:change', this.getState());
       }, this);
 
       App.on('TabNav:change Breadcrumbs:change Map:change', function(newState){
@@ -98,6 +115,10 @@
       this.state
         .clear({ silent: true })
         .set(newState, options);
+    },
+
+    getState: function() {
+      return this.state.attributes
     },
 
     /**
@@ -150,7 +171,6 @@
         var state = _.extend({}, this.state.toJSON(), {
           value: this.state.get(child.defaults.name)
         });
-
         child.setState(state, { silent: true });
 
         // Render the child

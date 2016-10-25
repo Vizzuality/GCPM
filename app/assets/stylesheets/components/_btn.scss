@@ -2,6 +2,8 @@
   @extend %reset-btn;
   padding: $button-y-padding $button-x-padding;
 
+  display: inline-block;
+
   font-size: $small-font-size;
   font-weight: bold;
   line-height: 1.2;
@@ -26,36 +28,84 @@
     padding: ($button-y-padding / 2) ($button-x-padding / 2);
   }
 
-  &.-round-icon {
-    width: 15px;
-    height: 15px;
-    border-radius: 100%;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    margin: ($button-y-padding / 2) ($button-x-padding / 2);
+  &.-extra-thin {
+    padding: $button-y-padding 0;
+  }
 
+  &.-mg-left {
+    margin-left: $inline-space / 2;
   }
 
   &.-primary {
     color: $inverse-font-color;
     background-color: $primary-color;
+
+    &.-inverse {
+      color: $primary-color;
+      background-color: $inverse-font-color;
+      border: 1px solid $primary-color;
+    }
+
+    &:hover {
+      box-shadow: $box-shadow-2;
+    }
   }
 
-  &.-inverse {
-    color: $primary-color;
-    background-color: white;
-    border: 1px solid $primary-color;
-  }
-
-  &.-global {
+  // Global
+  &.-secondary {
     color: $inverse-font-color;
     background-color: $secondary-color;
+    border: 1px solid $secondary-color;
+
+    &.-inverse {
+      background-color: $inverse-font-color;
+      color: $secondary-color;
+    }
+
+    &:hover {
+      box-shadow: $box-shadow-2;
+    }
   }
 
+  // Alternative
   &.-alternative {
     color: $inverse-font-color;
     background-color: $alternative-color;
+
+    &.-inverse {
+      color: $alternative-color;
+      background-color: $inverse-font-color;
+      border: 1px solid $alternative-color;
+    }
+
+    &:hover {
+      box-shadow: $box-shadow-2;
+    }
+  }
+
+  // Transparent
+  &.-transparent {
+    color: $inverse-font-color;
+    background-color: transparent;
+    border: 1px solid $inverse-font-color;
+
+    &:hover {
+      box-shadow: $box-shadow-2;
+    }
+  }
+
+  &.-action {
+    &:hover {
+      background-color: darken($primary-color, 5%);
+    }
+  }
+
+  // Social login
+  &.-linkedin {
+    background-color: #0077b5;
+  }
+  &.-google {
+    background-color: #ea4335;
   }
 
   &.-with-icon {
@@ -85,6 +135,16 @@
     &:hover {
       background: darken(#007bb5, 5%);
     }
+  }
+
+  &.-round-icon {
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    margin: ($button-y-padding / 2) ($button-x-padding / 2);
   }
 
   .notification-bubble {

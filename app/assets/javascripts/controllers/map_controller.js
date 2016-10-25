@@ -20,6 +20,7 @@
       new App.Presenter.ShowMore(params);
       new App.Presenter.Share(params);
       new App.Presenter.Download(params);
+      new App.Presenter.Timeline(params);
     }
 
   });
