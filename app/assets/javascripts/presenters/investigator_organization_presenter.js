@@ -136,10 +136,6 @@
 
           }, this);
 
-          if(element.id === this.elements[this.elements.length-1].id){
-            App.trigger('InvestigatorOrganization:complete');
-          }
-
         }.bind(this));
 
       }, this);
@@ -160,30 +156,6 @@
      */
     getElement: function() {
       return this.investigatorOrganization.$el;
-    },
-
-    setValue: function(memberships){
-      var i;
-      for(i=1; i < memberships.length; i++){
-        this.createElement();
-      }
-
-      App.on('InvestigatorOrganization:complete', function(){
-
-        memberships.forEach(function(membership, index){
-          var elementChildren;
-          this.elements.forEach(function(element){
-            if(element.id == index+1){
-              elementChildren = element.children;
-            }
-          });
-
-          elementChildren[0].setValue(membership.investigator.id);
-          elementChildren[1].setValue(membership.organization.id);
-          elementChildren[2].setFetchedValues(membership.address);
-          elementChildren[3].setValue(membership.membership_type);
-        }, this);
-      }, this);
     },
 
     createElement: function(){

@@ -105,6 +105,11 @@
       this.select.$el.find("select").val(value).trigger("change");
     },
 
+    setFetchedValues: function(value){
+      this.select.$el.find("select").val(value).trigger("change");
+      this.select.$el.find("select").attr("disabled", true);
+    },
+
     /**
      * Rebinding element, events and render again
      * @param {DOM|String} el

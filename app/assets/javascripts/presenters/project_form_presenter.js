@@ -271,16 +271,73 @@
 
   // Edit
   App.Presenter.EditProjectForm = function() {
-    this.getProject.apply(this, arguments);
     this.initialize.apply(this, arguments);
+    this.getProject.apply(this, arguments);
   };
 
   _.extend(App.Presenter.EditProjectForm.prototype, App.Presenter.ProjectForm.prototype);
   _.extend(App.Presenter.EditProjectForm.prototype, {
 
+    initialize: function(params) {
+      this.state = new StateModel(params);
+
+      this.titleInput = new App.Presenter.Input();
+      this.descTextarea = new App.Presenter.Textarea();
+      this.startPickadate = new App.Presenter.PickadateStart({
+        label: null,
+      });
+      this.endPickadate = new App.Presenter.PickadateEnd({
+        label: null,
+      });
+      this.websiteInput = new App.Presenter.WebsiteInput();
+      this.projectTypes = new App.Presenter.ProjectTypes({
+        label: null,
+        addNew: false
+      });
+      this.cancerTypes = new App.Presenter.CancerTypes({
+        label: null,
+        addNew: false
+      });
+      this.fundingSources = new App.Presenter.FundingSources({
+        label: null,
+        addNew: true
+      });
+      this.policy = new App.Presenter.Policy();
+      this.messagesList = new App.Presenter.MessagesList();
+
+      this.investigatorOrganization = new App.Presenter.InvestigatorOrganization();
+      this.investigatorOrganizationEdit = new App.Presenter.InvestigatorOrganizationEdit();
+
+      this.fundingSourcesForm = new App.Presenter.FundingSourcesForm();
+
+      this.children = [this.titleInput, this.descTextarea, this.startPickadate,
+         this.endPickadate, this.websiteInput, this.projectTypes, this.cancerTypes,
+         this.fundingSources, this.policy, this.messagesList, this.investigatorOrganization,
+         this.investigatorOrganizationEdit];
+
+      this.projectForm = new App.View.ProjectForm({
+        children: this.children,
+        el: '#project_form'
+      });
+
+      this.request = {};
+      this.setEvents();
+      this.setSubscriptions();
+
+      this.project = this.getProject(params);
+      this.project.then(function(response){
+        this.project = JSON.parse(response);
+        this.renderForm();
+      }.bind(this)).catch(function(response){
+        var messages = JSON.parse(response).message;
+        App.trigger("ProjectForm:errors", messages);
+      });
+
+    },
+
     getProject: function(params){
       this.projectId = params.vars[1];
-      new Promise(function(resolve, reject){
+      return new Promise(function(resolve, reject){
         var url = "/api/projects/"+this.projectId+"?token="+window.AUTH_TOKEN;
         var q = new XMLHttpRequest();
         q.open('GET', url, true);
@@ -298,13 +355,7 @@
           }
         }
         q.send();
-      }.bind(this)).then(function(response){
-        this.project = JSON.parse(response);
-        this.loadData();
-      }.bind(this)).catch(function(response){
-        var messages = JSON.parse(response).message;
-        App.trigger("ProjectForm:errors", messages);
-      });
+      }.bind(this));
     },
 
     loadData: function(){
@@ -316,11 +367,60 @@
       this.projectTypes.setFetchedValues(this.project.project_types);
       this.cancerTypes.setFetchedValues(this.project.cancer_types);
       this.fundingSources.setFetchedValues(this.project.funding_sources);
-      this.investigatorOrganization.setValue(this.project.memberships);
+      this.investigatorOrganizationEdit.setValue(this.project.memberships);
+    },
+
+    buildInvestigatorsEdit: function(){
+      if(!this.investigatorOrganizationEdit.elements && !this.request.memberships){
+        return false;
+      }
+      if(!this.request.project.memberships){
+        this.request.project["memberships"] = [];
+      }
+      var id;
+      for(id = 1; id < this.investigatorOrganizationEdit.elements.length+1; id++){
+        var research_unit_id;
+        var membership_type = "secondary";
+        var investigator = this.state.attributes["investigatoredit-"+id];
+        var organization = this.state.attributes["organizationedit-"+id];
+        var lead = this.state.attributes["leadedit"];
+        _.each(this.project.memberships, function(membership){
+          if(investigator == membership.investigator.name && organization == membership.organization.name){
+            research_unit_id = membership.id;
+          }
+        });
+        if(lead.split("-")[1] == id){
+          membership_type = "main";
+        }
+        if(research_unit_id){
+          var membership = {
+            id: research_unit_id,
+            membership_type: membership_type
+          };
+          this.request.project.memberships.push(membership);
+        }
+      }
+    },
+
+    buildRequest: function(){
+      this.request.project = {
+        title: this.state.attributes["title"],
+        summary: this.state.attributes["summary"],
+        start_date: this.state.attributes["start_date"],
+        end_date: this.state.attributes["end_date"],
+        project_website: this.state.attributes["project_website"],
+        project_type_ids: this.state.attributes["project_types[]"],
+        cancer_type_ids: this.state.attributes["cancer_types[]"]
+      };
+      this.buildFundingSources();
+      this.buildInvestigators();
+      this.buildInvestigatorsEdit();
     },
 
     handleSubmit: function() {
       this.buildRequest();
+      console.log(this.request);
+      debugger
       new Promise(function(resolve, reject){
         var url = "/api/projects/"+this.projectId+"?token="+window.AUTH_TOKEN;
         var q = new XMLHttpRequest();
@@ -349,22 +449,15 @@
       });
     },
 
-    renderForm: function(){
+    renderFormElements: function() {
+      this.projectForm.render();
+      _.each(this.children, function(child){
 
-      var promises = _.compact(_.map(this.children, function(child) {
-        if (child.fetchData) {
-          return child.fetchData();
-        }
-        return null;
-      }));
-
-      $.when.apply($, promises).done(function() {
-        this.renderFormElements();
-        //this.loadData();
+        // Render the child
+        child.render();
       }.bind(this));
-
-    },
-
+      this.loadData();
+    }
 
   });
 
