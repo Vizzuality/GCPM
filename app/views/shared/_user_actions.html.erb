@@ -30,26 +30,20 @@
     <% if controller_name == 'projects' %>
       <li>
         <% if user_signed_in? && current_user.projects.include?(@project) %>
-          <% if @project.project_users.first.is_approved %>
-            <%= link_to 'Not mine', remove_relation_project_path(@project), method: :patch, class: 'c-btn -transparent -extra-thin' %>
-          <% else %>
-            <a href="" disabled class="c-btn -transparent -extra-thin">Pending...</a>
-          <% end %>
+          <%= link_to 'Not mine', remove_relation_project_path(@project), method: :patch, class: 'c-btn -transparent -extra-thin' %>
         <% else %>
-          <%= link_to 'Is mine', (user_signed_in?) ? relation_request_project_path(@project) : user_session_path, method: :patch, class: 'c-btn -transparent -extra-thin' %>
+          <%= link_to 'Is mine', (user_signed_in?) ? relation_request_project_path(@project) : user_session_path, method: (user_signed_in?) ? :patch : :post, class: 'c-btn -transparent -extra-thin' %>
         <% end %>
       </li>
     <% end %>
     <% if controller_name == 'investigators' %>
       <li>
         <% if user_signed_in? && current_user.investigator == @investigator %>
-          <% if @investigator.is_approved %>
-            <%= link_to 'Not me', remove_relation_investigator_path(@investigator), method: :patch, class: 'c-btn -transparent -extra-thin' %>
-          <% else %>
-            <a disabled class="c-btn -transparent -extra-thin">Pending...</a>
-          <% end %>
+          <%= link_to 'Not me', remove_relation_investigator_path(@investigator), method: :patch, class: 'c-btn -transparent -extra-thin' %>
         <% elsif user_signed_in? && current_user.investigator.blank? && @investigator.user.blank? %>
-          <%= link_to 'Is me', relation_request_investigator_path(@investigator), method: :patch, class: 'c-btn -transparent -extra-thin' %>
+          <%= link_to 'This is me', relation_request_investigator_path(@investigator), method: :patch, class: 'c-btn -transparent -extra-thin' %>
+        <% elsif !user_signed_in? %>
+          <%= link_to 'This is me', user_session_path, class: 'c-btn -transparent -extra-thin' %>
         <% end %>
       </li>
     <% end %>

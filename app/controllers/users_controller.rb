@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 
     limit = 12 + (@page * 9)
 
-    @projects = Project.fetch_all(user: params[:id]).uniq.order('created_at DESC')
+    @projects = @user.projects.order('created_at DESC')
     @people = Investigator.fetch_all(user: params[:id]).uniq.order('created_at DESC')
     @posts = Post.where(user_id: current_user.id)
     @events = Event.fetch_all(user: params[:id]).uniq.order('created_at DESC')

@@ -9,6 +9,11 @@ class ProjectsController < ApplicationController
     gon.api_location_path = "/api/map/projects/#{params[:id]}"
     gon.start_date = @project.start_date || 0
     gon.end_date = @project.end_date || 0
+
+    if notice
+      gon.notice = notice
+    end
+
     @filters = %w(info people)
     @current_type = params.key?(:data) ? params[:data] : 'info'
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
@@ -35,17 +40,17 @@ class ProjectsController < ApplicationController
 
   def remove_relation
     if @project.remove_relation(@user.id)
-      redirect_to project_url(@project), notice: 'Relation removed'
+      redirect_to project_url(@project), notice: { text: 'Relation removed.', show: true }
     else
-      redirect_to project_url(@project), notice: "Can't remove relation"
+      redirect_to project_url(@project), notice: { text: "Can't remove relation.", show: true }
     end
   end
 
   def relation_request
     if @project.relation_request(@user.id)
-      redirect_to project_url(@project), notice: 'Relation requested'
+      redirect_to project_url(@project), notice: { text: 'Your request is being revised, please, check your dashboard for updates.', show: true }
     else
-      redirect_to project_url(@project), notice: "Can't request relation"
+      redirect_to project_url(@project), notice: { text: "Can't request relation.", show: true }
     end
   end
 
