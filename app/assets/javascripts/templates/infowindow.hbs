@@ -18,6 +18,7 @@
   {{/if}}
   {{#if event}}
     <h3><a href="/events/{{event}}">{{title}}</a></h3>
+    <p>{{#if start_date}}{{start_date}}{{/if}} - {{#if end_date}}{{end_date}}{{/if}}</p>
   {{/if}}
   {{#if resource_id}}
     <h3><a href="/investigators/{{resource_id}}">{{resource_name}}</a></h3>
