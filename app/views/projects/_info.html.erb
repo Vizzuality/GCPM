@@ -1,4 +1,8 @@
 <% title @project.title %>
+<% owner = current_user &&
+  current_user.projects.find_by_id(@project.id) &&
+  current_user.projects.find_by_id(@project.id).project_users.first.is_approved %>
+
 <div class="row collapse">
   <div class="column row small-8">
     <div class="l-content wrapper">
