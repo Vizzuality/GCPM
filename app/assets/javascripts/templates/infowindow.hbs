@@ -20,8 +20,7 @@
     <h3><a href="/events/{{event}}">{{title}}</a></h3>
     {{#if start_date}}
       {{#if end_date}}
-        <p>{{#if start_date}}{{start_date}}{{else}}-{{/if}}</p>
-        <p>{{#if end_date}}{{end_date}}{{else}}-{{/if}}</p>
+        <p>{{#if start_date}}{{start_date}}{{else}}undefined{{/if}} / {{#if end_date}}{{end_date}}{{else}}undefined{{/if}}</p>
       {{/if}}
     {{/if}}
   {{/if}}
