@@ -1,27 +1,31 @@
 <% if items && items.size() > 0 %>
-  <div class="row collapse -no-mrg">
+  <div id="investigatorsActionsView" class="row collapse -no-mrg">
     <% items.each do |e| %>
       <div class="column small-12 medium-6">
         <div class="c-card -pad-bigger -no-shadow -person">
           <div class="c-avatar -medium -ph -mg-bt"></div>
-          <h2><a href="/investigators/<%=e.id%>"><%=e.name%></a></h2>
+          <h2><a href="/investigators/<%= e.id %>"><%= e.name %></a></h2>
           <% if e.user %>
-            <button type="button" name="button">
-              Message
+            <button class="c-btn -secondary js-btn-toggle-message" data-user="<%= e.user.id %>" type="button" name="button">
+              <svg class="c-icon -medium -inverse"><use xlink:href="#icon-edit"></use></svg>
             </button>
 
-            <%= form_for Mailboxer::Message.new, remote: true, url: :message, as: :message do |f| %>
-      				<div class="form-group">
-      					<%= f.label :subject, 'Asunto' %>
-      					<%= f.text_field :subject, class: 'form-control' %>
-      				</div>
-      				<div class="form-group">
-      					<%= f.label :body, 'Mensaje' %>
-      					<%= f.text_area :body, class: 'form-control' %>
-      					<%= f.hidden_field :receiver, value: e.user.id %>
-      				</div>
-      				<%= f.submit 'Enviar', class: 'c-btn -primary' %>
-      			<% end %>
+            <div id="form-message-<%= e.user.id %>" class="form-message js-form-message">
+              <%= form_for Mailboxer::Message.new, remote: true, url: :message, as: :message do |f| %>
+        				<div class="form-row">
+        					<%= f.label :subject, 'Subject' %>
+        					<%= f.text_field :subject %>
+        				</div>
+        				<div class="form-row">
+        					<%= f.label :body, 'Message' %>
+        					<%= f.text_area :body %>
+        					<%= f.hidden_field :receiver, value: e.user.id %>
+        				</div>
+                <div class="form-row">
+                  <%= f.submit 'Enviar', class: 'c-btn -secondary' %>
+                </div>
+        			<% end %>
+            </div>
           <% end %>
         </div>
       </div>

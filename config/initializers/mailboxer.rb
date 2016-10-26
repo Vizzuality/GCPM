@@ -4,10 +4,10 @@ Mailboxer.setup do |config|
   config.uses_emails = true
 
   #Configures the default from for emails sent for Messages and Notifications
-  config.default_from = "no-reply@gcpm.globaloncology.org"
+  config.default_from = "no-reply@gcpm.globalonc.org"
 
   #Configures the methods needed by mailboxer
-  config.email_method = :email
+  config.email_method = :mailboxer_email
   config.name_method = :name
 
   #Configures if you use or not a search engine and which one you are using

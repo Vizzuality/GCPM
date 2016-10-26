@@ -59,6 +59,10 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :projects
 
+  def mailboxer_email(object)
+    nil
+  end
+
   def published_projects
     projects.published.includes(:cancer_types)
   end
