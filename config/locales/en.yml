@@ -35,6 +35,7 @@ en:
   created_asc: "Created asc"
   created_desc: "Created desc"
   data: "Data"
+  delete: "Delete"
   description: "Description"
   download: "User Manual"
   edit: "Edit"
