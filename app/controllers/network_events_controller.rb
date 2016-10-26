@@ -46,7 +46,7 @@ class NetworkEventsController < ApplicationController
 
   def destroy
     if @event.destroy
-      redirect_to user_path(@user, {data: 'events'}), notice: 'Event succesfully deleted.'
+      redirect_to user_path(@user, { data: 'events' }), notice: 'Event succesfully deleted.'
     else
       redirect_to user_path(@user), notice: "There was an error and event can't be deleted."
     end
