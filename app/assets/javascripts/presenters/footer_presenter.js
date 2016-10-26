@@ -1,4 +1,3 @@
-/* global URI */
 (function(App) {
 
   'use strict';
