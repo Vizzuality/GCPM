@@ -1,122 +1,140 @@
 <% title @project.title %>
-
-<div class="wrapper">
-  <div class="row collapse">
-    <div class="column small-8">
-      <div class="l-content">
-        <article class="l-content-article">
-          <%= @project.summary.html_safe %>
-        </article>
-      </div>
+<div class="row collapse">
+  <div class="column row small-8">
+    <div class="l-content wrapper">
+      <article class="l-content-article">
+        <%= @project.summary.html_safe %>
+      </article>
+      <% if @owner %>
+        <div class="row -no-mrg align-right">
+          <%= link_to (t 'update_project'), new_project_project_update_path(@project.id), class: "c-btn -secondary -inverse" %>
+        </div>
+      <% end %>
     </div>
-    <div class="column small-4">
-      <aside class="l-sidebar">
+    <% @updates.each do |u| %>
+      <div class="c-card">
+        <div class="row -no-mrg align-justify">
+          <h3 class="-underlined">
+            <%= u.created_at.strftime("%Y / %m / %d - %H : %M") %>
+          </h3>
+          <% if @owner %>
+            <%= link_to edit_project_project_update_path(@project.id, u.id) do %>
+              <svg class="c-icon -small icon-edit -hv-opac"><use xlink:href="#icon-edit"></use></svg>
+            <% end %>
+          <% end %>
+        </div>
+        <h2><%= u.title %></h2>
+        <%= u.body.html_safe %>
+      </div>
+    <% end %>
+  </div>
+  <div class="column small-4">
+    <aside class="l-sidebar">
 
-        <% if @project.start_date || @project.end_date %>
-          <div class="sidebar-item c-dates-timeline">
-            <div class="dates">
-               <% if @project.start_date %>
-                <div class="date">
-                  <h3><%= t 'start_date' %></h3>
-                  <span><%= @project.start_date %></span>
-                </div>
-              <% end %>
-              <% if @project.end_date %>
-                <div class="date">
-                  <h3><%= t 'end_date' %></h3>
-                  <span><%= @project.end_date %></span>
-                </div>
-              <% end %>
-            </div>
-
-            <% if @project.start_date && @project.end_date %>
-              <div class="timeline">
-                <div class="timeline-line"></div>
+      <% if @project.start_date || @project.end_date %>
+        <div class="sidebar-item c-dates-timeline">
+          <div class="dates">
+             <% if @project.start_date %>
+              <div class="date">
+                <h3><%= t 'start_date' %></h3>
+                <span><%= @project.start_date %></span>
+              </div>
+            <% end %>
+            <% if @project.end_date %>
+              <div class="date">
+                <h3><%= t 'end_date' %></h3>
+                <span><%= @project.end_date %></span>
               </div>
             <% end %>
           </div>
-        <% end %>
 
-        <% if @project.cancer_types && @project.cancer_types.size > 0 %>
-          <div class="sidebar-item">
-            <h3><%= t 'cancer_types' %></h3>
-            <ul class="c-list">
-              <% @project.cancer_types.each do |ct| %>
-                <li class="list-item -mg-less"><%= link_to ct.name, "/cancer-types/#{ct.id}" %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
+          <% if @project.start_date && @project.end_date %>
+            <div class="timeline">
+              <div class="timeline-line"></div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
 
-        <% if @project.project_types && @project.project_types.size > 0 %>
-          <div class="sidebar-item">
-            <h3><%= t 'project_types' %></h3>
-            <ul class="c-list">
-              <% @project.project_types.each do |pt| %>
-                <li class="list-item -mg-less"><%= link_to pt.name, "/map?data=projects&project_types[]=#{pt.id}" %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
+      <% if @project.cancer_types && @project.cancer_types.size > 0 %>
+        <div class="sidebar-item">
+          <h3><%= t 'cancer_types' %></h3>
+          <ul class="c-list">
+            <% @project.cancer_types.each do |ct| %>
+              <li class="list-item -mg-less"><%= link_to ct.name, "/cancer-types/#{ct.id}" %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-        <% if @project.addresses && @project.addresses.size > 0 %>
-          <div class="sidebar-item">
-            <h3><%= t 'location' %>(s)</h3>
-            <ul class="c-list">
-              <% @project.addresses.each do |l| %>
-                <% country = Country.find_by_id(l.country_id) %>
-                <% iso = country ? country.country_iso_3 : nil %>
-                <% if iso %>
-                  <li class="list-item -mg-less"><%= link_to "#{l.city}, #{l.country_name}", "/countries/#{iso}" %></li>
-                <% end %>
-              <% end %>
-          </div>
-        <% end %>
+      <% if @project.project_types && @project.project_types.size > 0 %>
+        <div class="sidebar-item">
+          <h3><%= t 'project_types' %></h3>
+          <ul class="c-list">
+            <% @project.project_types.each do |pt| %>
+              <li class="list-item -mg-less"><%= link_to pt.name, "/map?data=projects&project_types[]=#{pt.id}" %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-        <% if @project.organizations && @project.organizations.size > 0 %>
-          <div class="sidebar-item">
-            <h3><%= t 'organization' %>(s)</h3>
-            <ul class="c-list">
-              <% @project.organizations.each do |o| %>
-                <li class="list-item -mg-less"><%= link_to o.name, "/organizations/#{o.id}" %></li>
+      <% if @project.addresses && @project.addresses.size > 0 %>
+        <div class="sidebar-item">
+          <h3><%= t 'location' %>(s)</h3>
+          <ul class="c-list">
+            <% @project.addresses.each do |l| %>
+              <% country = Country.find_by_id(l.country_id) %>
+              <% iso = country ? country.country_iso_3 : nil %>
+              <% if iso %>
+                <li class="list-item -mg-less"><%= link_to "#{l.city}, #{l.country_name}", "/countries/#{iso}" %></li>
               <% end %>
-            </ul>
-          </div>
-        <% end %>
+            <% end %>
+        </div>
+      <% end %>
 
-        <% if @project.funding_sources && @project.funding_sources.size > 0 %>
-          <div class="sidebar-item">
-            <h3><%= t 'funding_source' %>(s)</h3>
-            <ul class="c-list">
-              <% @project.funding_sources.each do |fs| %>
-                <li class="list-item -mg-less"><%= fs.name %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
+      <% if @project.organizations && @project.organizations.size > 0 %>
+        <div class="sidebar-item">
+          <h3><%= t 'organization' %>(s)</h3>
+          <ul class="c-list">
+            <% @project.organizations.each do |o| %>
+              <li class="list-item -mg-less"><%= link_to o.name, "/organizations/#{o.id}" %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-        <% if @project.project_leads && @project.project_leads.size > 0 %>
-          <div class="sidebar-item">
-            <h3><%= t 'project_lead' %>(s)</h3>
-            <ul class="c-list">
-              <% @project.project_leads.each do |pl| %>
-                <li class="list-item -mg-less"><%= link_to pl.name, "/investigators/#{pl.id}" %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
+      <% if @project.funding_sources && @project.funding_sources.size > 0 %>
+        <div class="sidebar-item">
+          <h3><%= t 'funding_source' %>(s)</h3>
+          <ul class="c-list">
+            <% @project.funding_sources.each do |fs| %>
+              <li class="list-item -mg-less"><%= fs.name %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-        <% if @project.secondary_investigators && @project.secondary_investigators.size > 0 %>
-          <div class="sidebar-item">
-            <h3><%= t 'collaborator' %>(s)</h3>
-            <ul class="c-list">
-              <% @project.secondary_investigators.each do |si| %>
-                <li class="list-item -mg-less"><%= link_to si.name, "/investigators/#{si.id}" %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
-      </div>
-    </aside>
-  </div>
+      <% if @project.project_leads && @project.project_leads.size > 0 %>
+        <div class="sidebar-item">
+          <h3><%= t 'project_lead' %>(s)</h3>
+          <ul class="c-list">
+            <% @project.project_leads.each do |pl| %>
+              <li class="list-item -mg-less"><%= link_to pl.name, "/investigators/#{pl.id}" %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <% if @project.secondary_investigators && @project.secondary_investigators.size > 0 %>
+        <div class="sidebar-item">
+          <h3><%= t 'collaborator' %>(s)</h3>
+          <ul class="c-list">
+            <% @project.secondary_investigators.each do |si| %>
+              <li class="list-item -mg-less"><%= link_to si.name, "/investigators/#{si.id}" %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+  </aside>
 </div>

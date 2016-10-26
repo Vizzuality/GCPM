@@ -13,8 +13,16 @@ class MapController < ApplicationController
 
     if params.key?(:data) && params[:data] == 'events'
       events = Event.fetch_all(projects_params).order(sort_param)
+      # Get public and private events
+      public , private = [], []
+      events.each do |event|
+        public << event if event.private == false
+        private << event if event.private == true
+      end
       @items = events.limit(limit)
       @more = (events.size > @items.size)
+      @items_public_total = public.size
+      @items_private_total = private.size
       @items_total = events.size
     elsif params.key?(:data) && params[:data] == 'people'
       people = Investigator.fetch_all(people_params).order('created_At DESC')

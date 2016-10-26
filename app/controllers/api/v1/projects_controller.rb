@@ -17,7 +17,14 @@ module Api::V1
 
     def update
       if Project.update_project(project_params, @project)
-        render json: @project, status: 200, serializer: ProjectSerializer
+        render json: @project, include: ['funding_sources',
+                                         'cancer_types',
+                                         'project_types',
+                                         'users',
+                                         'memberships',
+                                         'memberships.investigator',
+                                         'memberships.organization',
+                                         'memberships.address'], status: 200, serializer: ProjectSerializer
       else
         render json: { success: false, message: @project.errors.full_messages }, status: 422
       end
@@ -26,7 +33,14 @@ module Api::V1
     def create
       @project = Project.build_project(project_params.merge(users: [@user]))
       if @project.save
-        render json: @project, status: 201, serializer: ProjectSerializer
+        render json: @project, include: ['funding_sources',
+                                         'cancer_types',
+                                         'project_types',
+                                         'users',
+                                         'memberships',
+                                         'memberships.investigator',
+                                         'memberships.organization',
+                                         'memberships.address'], status: 201, serializer: ProjectSerializer
       else
         render json: { success: false, message: @project.errors.full_messages }, status: 422
       end

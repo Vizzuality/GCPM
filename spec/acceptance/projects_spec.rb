@@ -82,6 +82,10 @@ module Api::V1
                                             "memberships": [{ "research_unit_id": "#{r_u_id_2}", "membership_type": "main" }]
                                             }}}
 
+      let(:update_memberships) { { "project": {
+                                  "memberships": [{ "id": membership.id, "membership_type": "main" }]
+                                  }}}
+
 
       context 'Users projects' do
         it 'Allows to view project owned by user' do
@@ -134,7 +138,16 @@ module Api::V1
           expect(json['cancer_types']).to           be_present
           expect(json['project_types']).to          be_present
           expect(json['funding_sources'].length).to eq(2)
+          expect(json['memberships'].length).to     eq(2)
           expect(Membership.find_by(research_unit_id: r_u_id_2).project_id).to eq(json['id'])
+        end
+
+        it 'Allows to update project with funding_sources_ids and new funders' do
+          patch "/api/projects/#{project_id}?token=#{user.authentication_token}", params: update_memberships
+
+          expect(status).to eq(200)
+          expect(json['memberships'].length).to                eq(1)
+          expect(json['memberships'][0]['membership_type']).to eq('main')
         end
 
         # Memeberships

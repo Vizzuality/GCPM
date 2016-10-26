@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :project_updates
   devise_for :users, controllers: { sessions: 'users/sessions', omniauth_callbacks: 'users/omniauth_callbacks' }
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -18,6 +17,7 @@ Rails.application.routes.draw do
   resources :projects, only: :show do
     patch 'relation_request', on: :member
     patch 'remove_relation',  on: :member
+    resources :project_updates
   end
 
   resources :investigators, only: :show do
@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   end
 
   resources :projects, only: :show
-  resources :events, except: [:index, :destroy]
+  resources :events, except: [:index]
   resources :posts
 
   # User profile
@@ -35,7 +35,7 @@ Rails.application.routes.draw do
       patch 'remove_relation',  on: :member
     end
 
-    resources :events,   controller: 'network_events',   except: :destroy
+    resources :events,   controller: 'network_events',   except: :index
   end
 
   # Network
