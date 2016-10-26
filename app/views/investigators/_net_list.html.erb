@@ -5,6 +5,24 @@
         <div class="c-card -pad-bigger -no-shadow -person">
           <div class="c-avatar -medium -ph -mg-bt"></div>
           <h2><a href="/investigators/<%=e.id%>"><%=e.name%></a></h2>
+          <% if e.user %>
+            <button type="button" name="button">
+              Message
+            </button>
+
+            <%= form_for Mailboxer::Message.new, remote: true, url: :message, as: :message do |f| %>
+      				<div class="form-group">
+      					<%= f.label :subject, 'Asunto' %>
+      					<%= f.text_field :subject, class: 'form-control' %>
+      				</div>
+      				<div class="form-group">
+      					<%= f.label :body, 'Mensaje' %>
+      					<%= f.text_area :body, class: 'form-control' %>
+      					<%= f.hidden_field :receiver, value: e.user.id %>
+      				</div>
+      				<%= f.submit 'Enviar', class: 'c-btn -primary' %>
+      			<% end %>
+          <% end %>
         </div>
       </div>
     <% end %>

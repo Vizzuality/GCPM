@@ -22,7 +22,7 @@ class MessagesController < ApplicationController
         # Example redirect: redirect_to message_show_path(current_user, message.conversation), flash: { notice: "Message sent." }
       end
     else
-      receiver = User.find_by(slug: message_params[:receiver])
+      receiver = User.find_by(id: message_params[:receiver])
       message = Mailboxer::Message.new(receipts: [Mailboxer::Receipt.new(receiver: receiver)])
       sender = current_user
       #authorize! :create_message, message
