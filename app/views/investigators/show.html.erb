@@ -70,11 +70,13 @@
             <thead>
               <tr>
                 <th><%= t 'projects' %></th>
+                <th><%= t 'posts' %></th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td><%= @projects.size %></td>
+                <td><%= @posts.size %></td>
               </tr>
             </tbody>
           </table>
@@ -114,6 +116,8 @@
 <div class="l-grid" id="content">
   <% if @current_type === 'posts' %>
     <%= render 'posts/list', items: @items, more: @more %>
+  <% elsif @current_type === 'network' %>
+    <%= render 'users/network' %>
   <% else %>
     <%= render 'projects/list', items: @items, more: @more %>
   <% end %>
