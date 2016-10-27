@@ -9,7 +9,7 @@ class InvestigatorsController < ApplicationController
 
   def show
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
-    @filters = %w(projects posts)
+    @filters = (@investigator.user) ? %w(projects posts network) : %w(projects posts)
     @current_type = params.key?(:data) ? params[:data] : 'projects'
 
     gon.server_params = { 'investigators[]': params[:id] }
@@ -27,6 +27,12 @@ class InvestigatorsController < ApplicationController
       @items = @posts.first(limit)
       @more = (@posts.size > @items.size)
       @items_total = @posts.size
+    elsif params.key?(:data) && params[:data] == 'network'
+      @followProjects = @investigator.user.following_by_type('Project')
+      @followEvents = @investigator.user.following_by_type('Event')
+      @followPeople = @investigator.user.following_by_type('Investigator')
+      @followCancerTypes = @investigator.user.following_by_type('CancerType')
+      @followCountries = @investigator.user.following_by_type('Country')
     else
       @items = @projects.limit(limit)
       @more = (@projects.size > @items.size)
@@ -38,6 +44,9 @@ class InvestigatorsController < ApplicationController
       @followed_id = @investigator.id
       @followed_resource = 'Investigator'
     end
+
+    @following = @investigator.user && @investigator.user.follow_count || 0
+    @followers = @investigator.user && @investigator.followers_count || 0
 
     respond_with(@items)
   end
