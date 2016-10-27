@@ -39,6 +39,9 @@ class InvestigatorsController < ApplicationController
       @followed_resource = 'Investigator'
     end
 
+    @following = @investigator.user && @investigator.user.follow_count || 0
+    @followers = @investigator.user && @investigator.followers_count || 0
+
     respond_with(@items)
   end
 

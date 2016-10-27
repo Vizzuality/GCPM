@@ -18,32 +18,50 @@
       </div>
       <div class="row collapse">
         <div class="column small-8">
-            <h1><%= user.try(:name) %></h1>
+          <h1><%= user.try(:name) %></h1>
 
-            <div class="row">
-              <div class="column small-12 medium-6">
-                <ul class="c-pipe-list">
-                  <li><%= user.position ? user.position : '' %></li>
-                </ul>
-                <ul class="c-pipe-list">
-                  <li><%= @following %> Following</li>
-                  <li><%= @followers %> Followers</li>
-                </ul>
-              </div>
-              <div class="column small-12 medium-6">
-                <ul class="c-pipe-list">
-                  <li>
-                    <%= user.twitter_account ? user.twitter_account : 'Twitter account' %>
-                  </li>
-                  <li>
-                    <%= user.linkedin_account ? user.linkedin_account : 'Linkedin account' %>
-                  </li>
-                  <li>
-                    <%= user.pubmed ? user.pubmed : 'Pumbed account' %>
-                  </li>
-                </ul>
-              </div>
+          <div class="row">
+            <div class="column small-12 medium-6">
+              <ul class="c-pipe-list">
+                <li><%= user.position ? user.position : '' %></li>
+              </ul>
+              <ul class="c-pipe-list">
+                <li><%= @following %> Following</li>
+                <li><%= @followers %> Followers</li>
+              </ul>
             </div>
+            <div class="column small-12 medium-6">
+              <ul class="c-pipe-list">
+                <% if user.twitter_account %>
+                  <li>
+                    <a href="https://twitter.com/<%= user.twitter_account %>" class="-clickable -hv" target="_blank">
+                      @<%= user.twitter_account %>
+                    </a>
+                  </li>
+                <% else %>
+                  <li>Twitter</li>
+                <% end %>
+                <% if user.linkedin_account %>
+                  <li>
+                    <a href="https://www.linkedin.com/in/<%= user.linkedin_account %>" class="-clickable -hv" target="_blank">
+                      <%= user.linkedin_account %>
+                    </a>
+                  </li>
+                <% else %>
+                  <li>Linkedin</li>
+                <% end %>
+                <% if user.pubmed %>
+                  <li>
+                    <a href="http://www.ncbi.nlm.nih.gov/pubmed?term=<%= user.pubmed %>%5BAuthor%5D" class="-clickable -hv" target="_blank">
+                      Pubmed
+                    </a>
+                  </li>
+                <% else %>
+                  <li>Pubmed</li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
         </div>
         <div class="column small-4">
            <% if (current_user) %>
