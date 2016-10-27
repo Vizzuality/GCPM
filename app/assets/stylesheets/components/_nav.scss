@@ -54,7 +54,7 @@
 
     li {
        > a, > button {
-         display: block;
+         display: flex;
          position: relative;
          line-height: 24px;
          padding: $base-space 0.5rem;
