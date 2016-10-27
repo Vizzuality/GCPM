@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     limit = 12 + (@page * 9)
 
     @projects = @user.projects.order('created_at DESC')
-    @people = @user.investigator.order('created_at DESC')
+    @people = @user.investigator
     @posts = @user.posts
     @events = @user.events.order('created_at DESC')
     @conversations = Mailboxer::Conversation.joins(:receipts).where(mailboxer_receipts: {receiver_id: current_user.id, deleted: false}).uniq.page(params[:page])
