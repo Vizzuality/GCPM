@@ -75,7 +75,7 @@
       if (this.currentLayer) {
         map.removeLayer(this.currentLayer);
       }
-      this.fc.getPointLayer(this.state.attributes).done(function(layer) {
+      this.fc.getPointLayer(attributtes).done(function(layer) {
         this.currentLayer = layer;
         map.addLayer(layer);
         setTimeout(function() {
