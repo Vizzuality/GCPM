@@ -16,6 +16,15 @@
       <div class="row collapse">
         <div class="column small-8">
           <h1><%= @investigator.name %></h1>
+          <p>
+            <% if user_signed_in? && current_user.investigator == @investigator %>
+              <%= link_to 'Not me', remove_relation_investigator_path(@investigator), method: :patch, class: 'c-btn -transparent' %>
+            <% elsif user_signed_in? && current_user.investigator.blank? && @investigator.user.blank? %>
+              <%= link_to 'This is me', relation_request_investigator_path(@investigator), method: :patch, class: 'c-btn -transparent' %>
+            <% elsif !user_signed_in? %>
+              <%= link_to 'This is me', user_session_path, class: 'c-btn -transparent' %>
+            <% end %>
+          </p>
           <table class="c-numbers-list">
             <thead>
               <tr>
