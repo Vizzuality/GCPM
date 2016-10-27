@@ -25,6 +25,8 @@
 //= require_tree ./controllers
 //= require_tree ./facades
 
+//= require lazy_load
+
 this.App = {
   facade: {},
   helper: {},

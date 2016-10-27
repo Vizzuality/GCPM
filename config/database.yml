@@ -36,7 +36,7 @@ staging:
 
 production:
   <<: *default
-  url: <%= ENV['GCPM_DATABASE_URL'] %>
+  database: gcpm_development
 
 cucumber:
   <<: *test

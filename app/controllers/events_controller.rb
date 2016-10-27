@@ -59,7 +59,7 @@ class EventsController < ApplicationController
   private
 
   def set_user
-    @user = User.find(current_user.id)
+    @user = User.find(current_user.id) if current_user
   end
 
   def set_current_user
