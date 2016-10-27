@@ -39,6 +39,16 @@
     }
   }
 
+  .pending {
+    display: flex;
+    align-items: center;
+    color: $secondary-color;
+
+    > svg {
+      margin: 0 ($inline-space / 2) 0 0;
+    }
+  }
+
   &.-projects {
     h3.-underlined:after {
       border-bottom-color: $primary-color;

@@ -1,6 +1,8 @@
 select
 events.id as event,
 events.title as title,
+events.start_date as start_date,
+events.end_date as end_date,
 countries.country_name as location_name,
 '{"type":"Point","coordinates":[' || events.latitude || ',' || events.longitude || ']}' as centroid,
 countries.country_iso_3 as iso,
@@ -24,4 +26,4 @@ where 1=1
 <% if @params[:user] %>
   and events.user_id = <%= quote @params[:user] %>
 <% end %>
-group by event, title, location_name, location_id, centroid, iso
+group by event, title, location_name, location_id, centroid, iso, start_date, end_date

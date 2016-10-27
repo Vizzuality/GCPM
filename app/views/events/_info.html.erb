@@ -5,6 +5,11 @@
       <article class="l-content-article">
         <%= @event.description.html_safe %>
       </article>
+      <div class="row -no-mrg align-right wrapper">
+        <% if current_user.events.include?(@event) %>
+          <%= link_to (t 'edit'), edit_user_event_path(current_user.id), class: "c-btn -secondary -inverse" %>
+        <% end %>
+      </div>
     </div>
   </div>
 

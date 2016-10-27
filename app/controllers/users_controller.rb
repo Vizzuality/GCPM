@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 
     limit = 12 + (@page * 9)
 
-    @projects = Project.fetch_all(user: params[:id]).uniq.order('created_at DESC')
+    @projects = @user.projects.order('created_at DESC')
     @people = Investigator.fetch_all(user: params[:id]).uniq.order('created_at DESC')
     @posts = Post.where(user_id: current_user.id)
     @events = Event.fetch_all(user: params[:id]).uniq.order('created_at DESC')
@@ -38,14 +38,13 @@ class UsersController < ApplicationController
       @more = (@events.size > @items.size)
       @items_total = @events.size
     else
-      @items = projects.limit(limit)
-      @more = (projects.size > @items.size)
-      @items_total = projects.size
+      @items = @projects.limit(limit)
+      @more = (@projects.size > @items.size)
+      @items_total = @projects.size
     end
 
     @following = @user.follow_count || 0
-    # @followers = @user.investigator.present? ? @investigator.followers_count : 0
-    @followers = 0
+    @followers = @user.investigator.present? ? @user.investigator.followers_count : 0
 
     respond_with(@items)
   end

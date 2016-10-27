@@ -21,6 +21,7 @@
       new App.Presenter.TabNav(newParams);
       new App.Presenter.FollowButton(newParams);
       new App.View.DatesTimeline();
+      new App.Presenter.Notice();
     }
 
   });
