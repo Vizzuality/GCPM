@@ -18,10 +18,10 @@ class UsersController < ApplicationController
 
     limit = 12 + (@page * 9)
 
-    @projects = @user.projects
-    @people = @user.investigator
+    @projects = @user.projects.order('created_at DESC')
+    @people = @user.investigator.order('created_at DESC')
     @posts = @user.posts
-    @events = @user.events
+    @events = @user.events.order('created_at DESC')
     @conversations = Mailboxer::Conversation.joins(:receipts).where(mailboxer_receipts: {receiver_id: current_user.id, deleted: false}).uniq.page(params[:page])
 
     if params.key?(:data) && params[:data] == 'network'
@@ -49,8 +49,7 @@ class UsersController < ApplicationController
     end
 
     @following = @user.follow_count || 0
-    # @followers = @user.investigator.present? ? @investigator.followers_count : 0
-    @followers = 0
+    @followers = @user.investigator.present? ? @user.investigator.followers_count : 0
 
     respond_with(@items)
   end

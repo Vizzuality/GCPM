@@ -1,4 +1,5 @@
 <% if items && items.size() > 0 %>
+<% controller_name = controller.controller_name %>
   <div class="row collapse">
     <% items.each do |p| %>
       <div class="column small-12 medium-4">
@@ -20,6 +21,14 @@
               </span>
             <% end %>
           </p>
+          <% if controller_name === 'users' && !p.project_users.first.is_approved %>
+            <span class="pending">
+              <svg class="c-icon -medium icon-Pending_icon -mg-right">
+                <use xlink:href="#icon-Pending_icon"></use>
+              </svg>
+              Pending of Confirmation
+            </span>
+          <% end %>
         </div>
       </div>
     <% end %>
