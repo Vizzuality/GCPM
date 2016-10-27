@@ -10,10 +10,11 @@
     },
 
     show: function(params) {
-      new App.Presenter.MapVis(params);
       new App.Presenter.TabNav(params);
       new App.Presenter.FollowButton(params);
       new App.Presenter.ShowMore(params);
+      new App.Presenter.Notice();
+      new App.Presenter.MapVis(params);
     }
 
   });

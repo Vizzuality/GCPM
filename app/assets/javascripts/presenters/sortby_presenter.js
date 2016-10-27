@@ -5,7 +5,9 @@
   var StateModel = Backbone.Model.extend({
 
     defaults: {
-      sortby: 'title_asc'
+      sortby: 'title_asc',
+      type: 'title',
+      direction: 'asc'
     }
 
   });
@@ -15,17 +17,18 @@
   };
 
   _.extend(App.Presenter.SortBy.prototype, {
-
     initialize: function(params, viewSettings) {
-      this.state = new StateModel(_.pick(params, 'sortby'));
+      var sortby = _.pick(params, 'sortby');
+      var specs = sortby.sortby && _.extend(this.splitSortby(sortby.sortby)) || {};
+      this.state = new StateModel(_.extend(specs, sortby, _.pick(params, 'data')));
+
+      // this.setState(_.extend(specs, sortby));
 
       var dropdownOptions = _.map([
-        { name: 'Title asc', value: 'title_asc' },
-        { name: 'Title desc', value: 'title_desc'},
-        { name: 'Created asc', value: 'created_asc'},
-        { name: 'Created desc', value: 'created_desc'}
+        { name: 'Title', value: 'title' },
+        { name: 'Created', value: 'created'}
       ], function(opt) {
-        opt.selected = this.state.get('sortby') === opt.value;
+        opt.selected = this.state.get('sortby').split('_')[0] === opt.value;
         return opt;
       }, this);
 
@@ -36,6 +39,8 @@
           label: 'Sort by',
           className: '-sortby',
           options: dropdownOptions,
+          arrows: true,
+          direction: specs.direction,
         }, viewSettings||{})
       });
 
@@ -52,10 +57,30 @@
       }, this);
     },
 
+    setSubscriptions: function() {
+      var eventsNames = [
+        'Router:change', 'Map:change', 'TabNav:change',
+        'FilterForm:change', 'Breadcrumbs:change'
+      ].join(' ');
+      App.on(eventsNames, this.setState, this);
+    },
+
     onDropdownChange: function(current) {
-      var newState = {
-        sortby: current.value
-      };
+      var newState = {};
+      var sortby = '';
+
+      if (current.arrows) {
+        var direction = this.state.get('direction') === 'asc' ? 'desc' : 'asc';
+        sortby = this.state.get('type') + '_' + direction ;
+
+        newState = { direction: direction, sortby: sortby };
+      } else {
+        var type = current.value;
+        sortby =  type + '_' + this.state.get('direction') ;
+
+        newState = { type: type, sortby: sortby };
+      }
+
       this.setState(newState);
     },
 
@@ -64,12 +89,19 @@
      * @param {Object} state
      */
     setState: function(state) {
-      var newState = _.pick(state, 'sortby');
-      this.state.set(newState);
+      this.state.set(state);
     },
 
     getState: function() {
       return this.state.attributes;
+    },
+
+    splitSortby: function(newSortby) {
+      var sortby = newSortby.split('_');
+      return {
+        type: sortby[0],
+        direction: sortby[1]
+      }
     }
 
   });

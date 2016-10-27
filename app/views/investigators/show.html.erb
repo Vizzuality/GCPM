@@ -1,10 +1,5 @@
 <% title @investigator.name %>
-
-<% if user_signed_in? && current_user.investigator == @investigator %>
-  <%= link_to 'Remove relation', remove_relation_investigator_path(@investigator), method: :patch %>
-<% elsif user_signed_in? && current_user.investigator.blank? && @investigator.user.blank? %>
-  <%= link_to 'Relation request', relation_request_investigator_path(@investigator), method: :patch %>
-<% end %>
+<% inv_user = @investigator.user %>
 
 <section class="l-app -full">
   <div class="l-app-map">
@@ -21,16 +16,69 @@
       </div>
       <div class="row collapse">
         <div class="column small-8">
-          <h1><%= @investigator.name %></h1>
+          <div class="c-title-btn">
+            <h1><%= @investigator.name %></h1>
+            <% if user_signed_in? && current_user.investigator == @investigator %>
+              <%= link_to 'Not me', remove_relation_investigator_path(@investigator), method: :patch, class: 'c-btn -transparent' %>
+            <% elsif user_signed_in? && current_user.investigator.blank? && @investigator.user.blank? %>
+              <%= link_to 'This is me', relation_request_investigator_path(@investigator), method: :patch, class: 'c-btn -transparent' %>
+            <% elsif !user_signed_in? %>
+              <%= link_to 'This is me', user_session_path, class: 'c-btn -transparent' %>
+            <% end %>
+          </div>
+
+          <div class="row">
+            <div class="column small-12 medium-6">
+              <ul class="c-pipe-list">
+                <li><%= @investigator.organizations.size > 0 ? @investigator.organizations.first.name : '' %></li>
+                <% if inv_user %>
+                  <li><%= inv_user.position ? inv_user.position : '' %></li>
+                <% end %>
+              </ul>
+              <ul class="c-pipe-list">
+                <li><%= @following %> Following</li>
+                <li><%= @followers %> Followers</li>
+              </ul>
+            </div>
+            <div class="column small-12 medium-6">
+              <ul class="c-pipe-list">
+                <% if inv_user %>
+                  <li>
+                    <% if inv_user.twitter_account %>
+                      <a href="https://twitter.com/<%= inv_user.twitter_account %>" class="-clickable -hv" target="_blank">
+                        @<%= inv_user.twitter_account %>
+                      </a>
+                    <% end %>
+                  </li>
+                  <li>
+                    <% if inv_user.linkedin_account %>
+                      <a href="https://www.linkedin.com/in/<%= inv_user.linkedin_account %>" class="-clickable -hv" target="_blank">
+                        <%= inv_user.linkedin_account %>
+                      </a>
+                    <% end %>
+                  </li>
+                <% end %>
+                <li>
+                  <a href="http://www.ncbi.nlm.nih.gov/pubmed?term=<%= @investigator.name %>%5BAuthor%5D" class="-clickable -hv" target="_blank">
+                    Pubmed
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
           <table class="c-numbers-list">
             <thead>
               <tr>
                 <th><%= t 'projects' %></th>
+                <th><%= t 'posts' %></th>
+                <th><%= t 'events' %></th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td><%= @projects.size %></td>
+                <td><%= @posts.size %></td>
+                <td><%= @events.size %></td>
               </tr>
             </tbody>
           </table>
@@ -70,6 +118,10 @@
 <div class="l-grid" id="content">
   <% if @current_type === 'posts' %>
     <%= render 'posts/list', items: @items, more: @more %>
+  <% elsif @current_type === 'network' %>
+    <%= render 'users/network' %>
+  <% elsif @current_type === 'events' %>
+    <%= render 'events/list', items: @items, more: @more %>
   <% else %>
     <%= render 'projects/list', items: @items, more: @more %>
   <% end %>

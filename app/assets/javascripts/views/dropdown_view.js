@@ -13,7 +13,8 @@
 
     events: {
       'click .js-open': 'toggleDropdown',
-      'click .js-option': 'selectOption'
+      'click .js-option': 'selectOption',
+      'click .js-arrows-action': 'toggleDirection'
     },
 
     template: HandlebarsTemplates['dropdown'],
@@ -33,6 +34,9 @@
         selected: true
       });
       this.$el.html(this.template(this.options));
+      if (this.options.direction && this.options.direction !== 'asc') {
+        this.switchActiveArrow();
+      }
       return this;
     },
 
@@ -71,6 +75,17 @@
     toggleDropdown: function() {
       this.options.open = !this.options.open;
       this.$el.find('.dropdown-content').toggleClass('-open');
+    },
+
+    toggleDirection: function() {
+      this.trigger('change', { arrows: true });
+      this.switchActiveArrow();
+    },
+
+    switchActiveArrow: function() {
+      var toActive = $('.arrows .c-icon:not(.-active)');
+      $('.arrows .c-icon.-active').removeClass('-active');
+      toActive.addClass('-active');
     }
 
   });

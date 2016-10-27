@@ -1,3 +1,7 @@
-<script> var AUTH_TOKEN = "<%= @user.authentication_token %>"</script>
+<script>
+var AUTH_TOKEN = "<%= @user.authentication_token %>"
+var USER_ID = "<%= @user.id %>"
+var INVESTIGATOR_PRESENT = "<%= @user.investigator.present? %>"
+</script>
 
 <div id="project_form" class="c-project-form"></div>

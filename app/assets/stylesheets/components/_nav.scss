@@ -16,6 +16,7 @@
     display: flex;
     align-items: center;
     margin-right: $base-space;
+    white-space: nowrap;
 
     &:last-child {
       margin-right: 0;

@@ -22,15 +22,17 @@
     },
 
     parse: function(response) {
-      var data = response.rows[0];
+      var data = response.rows[0] || {};
       // Exceptions:
       // Parse screening programs
-      data.screening_programs = !!_.filter(_.pick(data,
-        'breast_cancer_screening_programscountries_with_organized_or_uno',
-        'cervical_cancer_screening_programscountries_with_organized_or_u',
-        'colorectal_cancer_screening_programscountries_with_organized_or'), function(param){
-          return param === 'Has screening program'
-        }).length;
+      if (data) {
+        data.screening_programs = !!_.filter(_.pick(data,
+          'breast_cancer_screening_programscountries_with_organized_or_uno',
+          'cervical_cancer_screening_programscountries_with_organized_or_u',
+          'colorectal_cancer_screening_programscountries_with_organized_or'), function(param){
+            return param === 'Has screening program'
+          }).length;
+      }
 
       return data;
     }

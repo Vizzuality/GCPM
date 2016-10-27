@@ -8,7 +8,7 @@ class OrganizationsController < ApplicationController
 
   def show
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
-    @filters = %w(projects)
+    @filters = %w(projects people)
     @current_type = params.key?(:data) ? params[:data] : 'projects'
 
     gon.server_params = { 'organizations[]': params[:id] }

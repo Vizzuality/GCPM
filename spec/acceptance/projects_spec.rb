@@ -214,12 +214,16 @@ module Api::V1
           post "/api/projects?token=#{user.authentication_token}", params: full_params
 
           expect(status).to eq(201)
-          expect(json['title']).to                                   eq('Project updated')
-          expect(json['id']).to                                      be_present
-          expect(json['cancer_types']).to                            be_present
-          expect(json['project_types']).to                           be_present
-          expect(json['funding_sources'].length).to                  eq(3)
-          expect(Project.find_by(title: 'Project updated').users).to be_any
+          expect(json['title']).to                                    eq('Project updated')
+          expect(json['id']).to                                       be_present
+          expect(json['cancer_types']).to                             be_present
+          expect(json['project_types']).to                            be_present
+          expect(json['funding_sources'].length).to                   eq(3)
+          expect(json['memberships'][0]['organization']['id']).not_to be_present
+          expect(json['memberships'][1]['organization']['id']).not_to be_nil
+          expect(json['memberships'][2]['organization']['id']).not_to be_nil
+          expect(json['memberships'][3]['organization']['id']).not_to be_nil
+          expect(Project.find_by(title: 'Project updated').users).to  be_any
         end
 
         it 'Allows to create project with funder' do

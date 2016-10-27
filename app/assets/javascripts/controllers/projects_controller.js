@@ -20,7 +20,8 @@
       new App.Presenter.MapVis(newParams);
       new App.Presenter.TabNav(newParams);
       new App.Presenter.FollowButton(newParams);
-      new App.View.DatesTimeline();
+      new App.Presenter.DatesTimeline(newParams);
+      new App.Presenter.Notice();
     }
 
   });
