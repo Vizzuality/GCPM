@@ -68,6 +68,10 @@
 
     background-image: linear-gradient(to top, #68299b, rgba(103, 40, 155, 0));
     pointer-events: none;
+
+    .c-btn {
+      pointer-events: all;
+    }
   }
 
   .l-app-bottombar {
