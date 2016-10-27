@@ -1,52 +1,25 @@
 <% controller_name = controller && controller.controller_name %>
 <div>
-  <ul class="c-btn-container">
-    <li id="followButton">
-      <% if user_signed_in? %>
-        <% if controller.controller_name == 'users' %>
-        <% else %>
+  <% if controller_name != 'users' && controller_name != 'organizations' && (user_signed_in? && current_user.investigator != @investigator) || !user_signed_in? %>
+    <ul class="c-btn-container">
+      <li id="followButton">
+        <% if user_signed_in? %>
           <button class="c-btn -secondary -inverse js-btn-follow"
             data-followed="<%= @followed %>"
             data-id="<%= @followed_id %>"
             data-resource="<%= @followed_resource %>">
               <%= (@followed) ? 'Unfollow' : 'Follow' %>
           </button>
-        <% end %>
-      <% else %>
-        <%= link_to (t 'follow'), user_session_path, class: 'c-btn -secondary -inverse' %>
-      <% end %>
-    </li>
-  </ul>
-  <ul class="c-btn-container">
-    <% if controller_name == 'projects' || controller_name == 'users' %>
-      <li><%= link_to '+ Project', (user_signed_in?) ? new_user_project_path(user_id: current_user.id) : user_session_path, class: 'c-btn -transparent -extra-thin' %></li>
-    <% end %>
-    <% if controller_name != 'investigators' %>
-      <li><%= link_to '+ Post', (user_signed_in?) ? new_post_path : user_session_path, class: 'c-btn -transparent -extra-thin' %></li>
-    <% end %>
-    <% if controller_name == 'events' || controller_name == 'users' %>
-      <li><%= link_to '+ Event', (user_signed_in?) ? new_user_event_path(user_id: current_user.id) : user_session_path, class: 'c-btn -transparent -extra-thin' %></li>
-    <% end %>
-    <% if controller_name == 'projects' %>
-      <li>
-        <% if user_signed_in? && current_user.projects.include?(@project) %>
-          <%= link_to 'Not mine', remove_relation_project_path(@project), method: :patch, class: 'c-btn -transparent -extra-thin' %>
         <% else %>
-          <%= link_to 'Is mine', (user_signed_in?) ? relation_request_project_path(@project) : user_session_path, method: (user_signed_in?) ? :patch : :post, class: 'c-btn -transparent -extra-thin' %>
+          <%= link_to (t 'follow'), user_session_path, class: 'c-btn -secondary -inverse' %>
         <% end %>
       </li>
-    <% end %>
-    <% if controller_name == 'investigators' %>
-      <li>
-        <% if user_signed_in? && current_user.investigator == @investigator %>
-          <%= link_to 'Not me', remove_relation_investigator_path(@investigator), method: :patch, class: 'c-btn -transparent -extra-thin' %>
-        <% elsif user_signed_in? && current_user.investigator.blank? && @investigator.user.blank? %>
-          <%= link_to 'This is me', relation_request_investigator_path(@investigator), method: :patch, class: 'c-btn -transparent -extra-thin' %>
-        <% elsif !user_signed_in? %>
-          <%= link_to 'This is me', user_session_path, class: 'c-btn -transparent -extra-thin' %>
-        <% end %>
-      </li>
-    <% end %>
+    </ul>
+  <% end %>
+  <ul class="c-btn-container">
+    <li><%= link_to '+ Project', (user_signed_in?) ? new_user_project_path(user_id: current_user.id) : user_session_path, class: 'c-btn -transparent -extra-thin' %></li>
+    <li><%= link_to '+ Post', (user_signed_in?) ? new_post_path : user_session_path, class: 'c-btn -transparent -extra-thin' %></li>
+    <li><%= link_to '+ Event', (user_signed_in?) ? new_user_event_path(user_id: current_user.id) : user_session_path, class: 'c-btn -transparent -extra-thin' %></li>
   </ul>
 </div>
 
