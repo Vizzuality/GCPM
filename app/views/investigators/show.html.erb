@@ -71,12 +71,14 @@
               <tr>
                 <th><%= t 'projects' %></th>
                 <th><%= t 'posts' %></th>
+                <th><%= t 'events' %></th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td><%= @projects.size %></td>
                 <td><%= @posts.size %></td>
+                <td><%= @events.size %></td>
               </tr>
             </tbody>
           </table>
@@ -118,6 +120,8 @@
     <%= render 'posts/list', items: @items, more: @more %>
   <% elsif @current_type === 'network' %>
     <%= render 'users/network' %>
+  <% elsif @current_type === 'events' %>
+    <%= render 'events/list', items: @items, more: @more %>
   <% else %>
     <%= render 'projects/list', items: @items, more: @more %>
   <% end %>
