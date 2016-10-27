@@ -9,7 +9,7 @@ class InvestigatorsController < ApplicationController
 
   def show
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
-    @filters = (@investigator.user) ? %w(projects posts network) : %w(projects posts)
+    @filters = (@investigator.user) ? %w(projects posts events network) : %w(projects posts events)
     @current_type = params.key?(:data) ? params[:data] : 'projects'
 
     gon.server_params = { 'investigators[]': params[:id] }
@@ -22,6 +22,7 @@ class InvestigatorsController < ApplicationController
 
     @projects = Project.fetch_all(investigators: @investigator.id).order('created_at DESC')
     @posts = Post.where(user_id: @investigator.id)
+    @events = Event.fetch_all(user: @investigator.user && @investigator.user.id || -1).order('created_at DESC')
 
     if params.key?(:data) && params[:data] == 'posts'
       @items = @posts.first(limit)
@@ -33,6 +34,10 @@ class InvestigatorsController < ApplicationController
       @followPeople = @investigator.user.following_by_type('Investigator')
       @followCancerTypes = @investigator.user.following_by_type('CancerType')
       @followCountries = @investigator.user.following_by_type('Country')
+    elsif params.key?(:data) && params[:data] == 'events'
+      @items = @events.limit(limit)
+      @more = (@events.size > @items.size)
+      @items_total = @events.size
     else
       @items = @projects.limit(limit)
       @more = (@projects.size > @items.size)
