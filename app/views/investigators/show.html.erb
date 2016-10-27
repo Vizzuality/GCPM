@@ -79,6 +79,8 @@
 <div class="l-grid" id="content">
   <% if @current_type === 'posts' %>
     <%= render 'posts/list', items: @items, more: @more %>
+  <% elsif @current_type === 'network' %>
+    <%= render 'users/network' %>
   <% else %>
     <%= render 'projects/list', items: @items, more: @more %>
   <% end %>
