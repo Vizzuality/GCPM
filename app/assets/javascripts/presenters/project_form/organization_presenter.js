@@ -36,6 +36,11 @@
         options: _.extend({}, this.defaults, viewSettings || {}),
         state: this.state
       });
+      this.DOMelementId = viewSettings.DOMelement.split("-")[1];
+
+      this.organizationForm = new App.Presenter.OrganizationForm({
+        DOMelementId: this.DOMelementId
+      });
 
       this.setEvents();
       this.setSubscriptions();
@@ -46,7 +51,7 @@
      */
     setEvents: function() {
       this.select.on('new', function(){
-        App.trigger('Organization:new');
+        this.organizationForm.openForm();
       }, this);
 
       this.select.on('change', function(newState){
@@ -57,7 +62,7 @@
     },
 
     setSubscriptions: function(){
-      App.on('OrganizationForm:submit', function(newOrganization){
+      App.on('OrganizationForm:submit'+this.DOMelementId, function(newOrganization){
         var newOption = {
           value: JSON.stringify(newOrganization)
         };

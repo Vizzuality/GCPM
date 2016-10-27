@@ -41,9 +41,6 @@
         label: false
       });
 
-      this.investigatorForm = new App.Presenter.InvestigatorForm();
-      this.organizationForm = new App.Presenter.OrganizationForm();
-
       this.investigatorOrganization = new App.View.InvestigatorOrganization({
         el: '#investigatororganization'
       });
@@ -83,14 +80,6 @@
      * Subscribing to global events
      */
     setSubscriptions: function() {
-      App.on('Investigator:new', function(){
-        this.investigatorForm.openForm();
-      }, this);
-
-      App.on('Organization:new', function(){
-        this.organizationForm.openForm();
-      }, this);
-
       App.on('ProjectForm:newInvestigator', function(){
         this.createElement();
       }, this);

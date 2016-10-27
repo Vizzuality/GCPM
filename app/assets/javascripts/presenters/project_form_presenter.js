@@ -92,6 +92,7 @@
      */
     handleSubmit: function() {
       this.buildRequest();
+      debugger
       new Promise(function(resolve, reject){
         var url = "/api/projects?token="+window.AUTH_TOKEN;
         var q = new XMLHttpRequest();
@@ -183,12 +184,14 @@
               obj.membership_type = "secondary";
             }
 
-            // USER
-            if(investigator.investigatorUser){
-              investigator.investigatorUser = window.USER_ID;
-            }
-            else{
-              investigator.investigatorUser = undefined;
+            // NEW INVESTIGATOR RELATIONSHIP
+            if(isNaN(parseInt(investigator))){
+              if(investigator.investigatorUser){
+                investigator.investigatorUser = window.USER_ID;
+              }
+              else{
+                investigator.investigatorUser = undefined;
+              }
             }
 
             // EE
@@ -216,7 +219,7 @@
                 investigator_attributes: {
                   user_id: investigator.investigatorUser,
                   name: investigator.investigatorName,
-                  email: investigator.investigatorName,
+                  email: investigator.investigatorEmail,
                   website: investigator.investigatorWebsite
                 }
               };
@@ -226,7 +229,7 @@
                 investigator_attributes: {
                   user_id: investigator.investigatorUser,
                   name: investigator.investigatorName,
-                  email: investigator.investigatorName,
+                  email: investigator.investigatorEmail,
                   website: investigator.investigatorWebsite,
                   addresses_attributes: [
                     {
