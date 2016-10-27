@@ -14,6 +14,10 @@ class InvestigatorsController < ApplicationController
 
     gon.server_params = { 'investigators[]': params[:id] }
 
+    if notice
+      gon.notice = notice
+    end
+
     limit = 12 + (@page * 9)
 
     @projects = Project.fetch_all(investigators: @investigator.id).order('created_at DESC')
@@ -40,17 +44,17 @@ class InvestigatorsController < ApplicationController
 
   def remove_relation
     if @investigator.remove_relation(@user.id)
-      redirect_to investigator_path(@investigator), notice: 'Relation removed'
+      redirect_to investigator_path(@investigator), notice: { text: 'Relation removed.', show: true }
     else
-      redirect_to investigator_path(@investigator), notice: "Can't remove relation"
+      redirect_to investigator_path(@investigator), notice: { text: "Can't remove relation.", show: true }
     end
   end
 
   def relation_request
     if @investigator.relation_request(@user.id)
-      redirect_to investigator_path(@investigator), notice: 'Relation requested'
+      redirect_to investigator_path(@investigator), notice: { text: 'Your request is being revised, please, check your dashboard for updates.', show: true }
     else
-      redirect_to investigator_path(@investigator), notice: "Can't request relation"
+      redirect_to investigator_path(@investigator), notice: { text: "Can't request relation.", show: true }
     end
   end
 

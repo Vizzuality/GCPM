@@ -2,8 +2,8 @@
 
   'use strict'
 
-  <% template = @current_type %>
-  var htmlContent = "<%= escape_javascript render(partial: template) %>";
+  <% template = @current_type === 'info' ? @current_type : 'investigators/list' %>
+  var htmlContent = "<%= escape_javascript render(partial: template, locals: { items: @items, more: @more }) %>";
 
   document.getElementById('content').innerHTML = htmlContent;
 

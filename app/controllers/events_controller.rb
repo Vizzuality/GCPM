@@ -52,14 +52,14 @@ class EventsController < ApplicationController
     if @event.destroy
       redirect_to user_path(@user), notice: 'Event succesfully deleted.'
     else
-      redirect_to user_path(@user), notice: "There was an error and event can't be deleted."
+      redirect_to edit_user_event_path(@user), notice: "There was an error and event can't be deleted."
     end
   end
 
   private
 
   def set_user
-    @user = User.find(current_user.id)
+    @user = User.find(current_user.id) if current_user
   end
 
   def set_current_user
@@ -67,7 +67,7 @@ class EventsController < ApplicationController
   end
 
   def set_event
-    @event = @user.events.find_by_id(params[:id])
+    @event = Event.find(params[:id])
   end
 
   def event_params

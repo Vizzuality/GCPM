@@ -1,11 +1,16 @@
 .c-counters {
   padding-top: $box-space;
   padding-bottom: $box-space;
+  text-align: center;
 
   @media screen and (max-height: 900px) {
     padding-top: $base-space;
     padding-bottom: $base-space;
   }
+
+  &.-projects { background: rgba($primary-color, .1); }
+  &.-people { background: rgba($secondary-color, .1); }
+  &.-events { background: rgba($alternative-color, .1); }
 
   .amount {
     display: block;

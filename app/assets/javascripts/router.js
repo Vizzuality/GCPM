@@ -11,21 +11,22 @@
      * @type {Object}
      */
     routes: {
-      '(/)':                         'Home#index',
-      'map(?*query)(/)':             'Map#index',
-      'projects/:id(/)':             'Project#show',
-      'events/:id(/)':               'Events#show',
-      'network/:id/projects/new(/)': 'Project#new',
+      '(/)':                           'Home#index',
+      'map(?*query)(/)':               'Map#index',
+      'projects/:id(/)':               'Project#show',
+      'events/:id(/)':                 'Events#show',
+      'network/:id/projects/new(/)':   'Project#new',
       'network/:network_id/projects/:id/edit(/)':'Project#edit',
-      'countries(/)':                'Countries#index',
-      'countries/:iso(/)':           'Countries#show',
-      'investigators/:id(/)':        'Investigators#show',
-      'organizations/:id(/)':        'Organizations#show',
-      'cancer-types(/)':             'CancerTypes#index',
-      'cancer-types/:id(/)':         'CancerTypes#show',
-      'network/:id(/)':              'Users#show',
-      'posts/:id(/)':                'Posts#show',
-      'network/:id/events/:id(/)':   'Events#new'
+      'countries(/)':                  'Countries#index',
+      'countries/:iso(/)':             'Countries#show',
+      'investigators/:id(/)':          'Investigators#show',
+      'organizations/:id(/)':          'Organizations#show',
+      'cancer-types(/)':               'CancerTypes#index',
+      'cancer-types/:id(/)':           'CancerTypes#show',
+      'network/:id(/)':                'Users#show',
+      'posts/:id(/)':                  'Posts#show',
+      'network/:id/events/:id/new(/)': 'Events#new',
+      'network/:id/events/:id/edit(/)':'Events#edit'
     },
 
     initialize: function() {
@@ -108,7 +109,7 @@
      */
     updateUrl: function() {
       var uri = new URI();
-      var params = _.omit(this.getParams(), 'vars', 'dataSingular', 'userId', 'group');
+      var params = _.omit(this.getParams(), 'vars', 'dataSingular', 'userId', 'group', 'dataType');
       uri.query(this._serializeParams(params));
       this.navigate(uri.path().slice(1) + uri.search(), { trigger: false });
     },
