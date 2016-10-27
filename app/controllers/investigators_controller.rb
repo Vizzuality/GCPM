@@ -9,7 +9,7 @@ class InvestigatorsController < ApplicationController
 
   def show
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
-    @filters = (@investigator.user) ? %w(projects posts events network) : %w(projects posts events)
+    @filters = @investigator.user ? %w(projects posts events network) : %w(projects posts events)
     @current_type = params.key?(:data) ? params[:data] : 'projects'
 
     gon.server_params = { 'investigators[]': params[:id] }
