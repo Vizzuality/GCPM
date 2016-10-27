@@ -24,6 +24,10 @@
             <% elsif !user_signed_in? %>
               <%= link_to 'This is me', user_session_path, class: 'c-btn -transparent' %>
             <% end %>
+
+            <a href="http://www.ncbi.nlm.nih.gov/pubmed?term=<%= @investigator.name %>%5BAuthor%5D" class="c-btn -transparent" target="_blank">
+              <%= t 'publications' %>
+            </a>
           </p>
           <table class="c-numbers-list">
             <thead>
