@@ -63,7 +63,7 @@ class NetworkEventsController < ApplicationController
     end
 
     def set_event
-      @event = Event.find_by_id(params[:id])
+      @event = Event.find(params[:id])
     end
 
     def event_params
