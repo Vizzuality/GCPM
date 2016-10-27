@@ -21,17 +21,6 @@ $dropdown-width: 182px;
     margin: 0 0 0 ($button-x-padding / 2);
     font-weight: $base-font-weight;
     cursor: pointer;
-
-    &:after {
-      content: '';
-      margin-left: $inline-space / 2;
-      width: 0;
-      height: 0;
-      border-left: transparent 5px solid;
-      border-right: transparent 5px solid;
-      border-top: $body-bg-color 5px solid;
-
-    }
   }
 
   .dropdown-content {
@@ -61,6 +50,23 @@ $dropdown-width: 182px;
 
     &.-open {
       display: block;
+    }
+  }
+
+  .arrows {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: $inline-space;
+    cursor: pointer;
+
+    .c-icon {
+      fill: white;
+
+      &.-active {
+        opacity: .5;
+      }
     }
   }
 }
