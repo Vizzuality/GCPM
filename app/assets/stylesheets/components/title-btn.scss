@@ -1,0 +1,9 @@
+.c-title-btn {
+  display: flex;
+  margin-bottom: $box-space / 2;
+  max-height: 50px;
+
+  .c-btn {
+    margin-left: $inline-space;
+  }
+}
