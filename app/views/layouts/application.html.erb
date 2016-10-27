@@ -7,6 +7,11 @@
     <meta name="viewport" content="width=1024">
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= Gon::Base.render_data %>
+    <%= javascript_include_tag 'lazy_load' %>
+    <%# Lazy load: include here async libs like google analytics %>
+    <%= javascript_include_tag 'https://www.google-analytics.com/analytics.js', async: true %>
+    <%= javascript_include_tag 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInitGFW', async: true %>
   </head>
   <body>
     <%= render "shared/icons" %>
@@ -15,9 +20,10 @@
       <%= yield %>
     </section>
     <%= render "shared/footer" %>
+    <%# CND Libs %>
     <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.16.0/polyfill.min.js' %>
-    <%= Gon::Base.render_data %>
     <%= javascript_include_tag 'https://d3js.org/d3.v3.min.js' %>
+    <%# Application %>
     <%= javascript_include_tag 'application' %>
   </body>
 </html>
