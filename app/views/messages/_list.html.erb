@@ -1,19 +1,10 @@
 <% if items && items.size() > 0 %>
   <div class="row collapse">
     <% items.each do |e| %>
-      <div class="column small-12 medium-4">
+      <div class="column small-12">
         <div class="c-card -events">
-          <% if e.country? %>
-            <h3 class="-underlined -alternative">
-              <% country = Country.find_by( country_name: e.country ) %>
-              <!-- TODO: In case country dosen't exist -->
-              <a href="/countries/<%= country && country.country_iso_3 %>">
-                <%= e.city %>, <%= e.country %>
-              </a>
-            </h3>
-          <% end %>
-          <h2><%= link_to e.title, event_path(e.id) %></h2>
-          <p><%= truncate(e.description.html_safe, :length => 300) %></p>
+          <h2><%= e.subject %></h2>
+          <!-- <p><%#= conversation_person(e) %></p> -->
         </div>
       </div>
     <% end %>
