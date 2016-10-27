@@ -4,20 +4,16 @@
 
   App.View.DatesTimeline = Backbone.View.extend({
 
-    el: '.c-dates-timeline',
-
     initialize: function() {
-      this.cache();
-      this.$timeline.length > 0 && this.setTimelineLineWidth();
-    },
-
-    cache: function() {
-      this.$timeline = this.$el.find('.timeline-line');
+      this.setTimelineLineWidth();
     },
 
     setTimelineLineWidth: function() {
-      var width = this.getTimelineWith();
-      this.$timeline.width(width + '%');
+      var $timeline = this.$el.find('.timeline-line');
+      if($timeline && !!$timeline.length) {
+        var width = this.getTimelineWith();
+        $timeline.width(width + '%');
+      }
     },
 
     getTimelineWith: function() {

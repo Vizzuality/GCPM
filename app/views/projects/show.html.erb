@@ -13,14 +13,21 @@
         <div class="column small-8">
           <h1><%= @project.title %></h1>
 
+          <% if user_signed_in? && current_user.projects.include?(@project) %>
+            <%= link_to 'Not mine', remove_relation_project_path(@project), method: :patch, class: 'c-btn -transparent' %>
+          <% else %>
+            <%= link_to 'This is mine', (user_signed_in?) ? relation_request_project_path(@project) : user_session_path, method: (user_signed_in?) ? :patch : :post, class: 'c-btn -transparent' %>
+          <% end %>
+
           <div class="c-summary-info row -collapse">
 
             <div class="column small-12 large-4 align-middle">
-                <% #if @project.project_lead && @project.project_lead.img %>
-                  <!-- <img src="<%# @project.project_lead.img %>" class="c-avatar -small" /> -->
-                <% #else %>
-                  <div class="c-avatar -small -ph"></div>
-                <% #end %>
+              <% #if @project.project_lead && @project.project_lead.img %>
+                <!-- <img src="<%# @project.project_lead.img %>" class="c-avatar -small" /> -->
+              <% #else %>
+                <div class="c-avatar -small -ph"></div>
+              <% #end %>
+
               <h3>
                 <%= @project.project_lead && @project.project_lead.name %>
               </h3>
@@ -32,7 +39,7 @@
                   <use xlink:href="#icon-colaborators"></use>
                 </svg>
               </div>
-              <h3><%= @project.investigators.count %> <%= t 'collaborator'%>(s)</h3>
+              <h3><%= @project.investigators.count - 1 %> <%= t 'collaborator'%>(s)</h3>
             </div>
 
             <% if @project.funding_sources && @project.funding_sources.size > 0 %>

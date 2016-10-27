@@ -1,6 +1,6 @@
-require 'entities/project_importer'
-require 'entities/research_unit_importer'
-require 'entities/funding_source_importer'
+# require 'entities/project_importer'
+# require 'entities/research_unit_importer'
+# require 'entities/funding_source_importer'
 class DataExtractor
 
   def initialize(row)
