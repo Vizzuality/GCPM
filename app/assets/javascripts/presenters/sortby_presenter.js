@@ -59,15 +59,16 @@
 
     onDropdownChange: function(current) {
       var newState = {};
+      var sortby = '';
 
       if (current.arrows) {
         var direction = this.state.get('direction') === 'asc' ? 'desc' : 'asc';
-        var sortby = this.state.get('type') + '_' + direction ;
+        sortby = this.state.get('type') + '_' + direction ;
 
         newState = { direction: direction, sortby: sortby };
       } else {
         var type = current.value;
-        var sortby =  type + '_' + this.state.get('direction') ;
+        sortby =  type + '_' + this.state.get('direction') ;
 
         newState = { type: type, sortby: sortby };
       }
