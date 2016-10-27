@@ -38,8 +38,7 @@
         DOMelement: "#lead-1",
         name: "lead",
         value: "lead-1",
-        label: false,
-        firstRadio: true
+        label: false
       });
 
       this.investigatorForm = new App.Presenter.InvestigatorForm();

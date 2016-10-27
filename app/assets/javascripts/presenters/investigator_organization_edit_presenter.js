@@ -27,8 +27,9 @@
     setEvents: function() {
       this.investigatorOrganizationEdit.on('deleteElement', function(elementId){
 
+        debugger
         _.each(this.elements, function(element) {
-          if(element.id === parseInt(elementId)){
+          if(element && element.id === parseInt(elementId)){
             var index = this.elements.indexOf(element);
             this.elements.splice(index, 1);
             this.investigatorOrganizationEdit.elements = this.elements;
@@ -94,11 +95,14 @@
     setValue: function(memberships){
 
       App.on('InvestigatorOrganizationEdit:complete', function(){
-        memberships.forEach(function(membership, index){
-          var element = this.elements[index];
-          element.children[0].setValue(membership.investigator.name);
-          element.children[1].setValue(membership.organization.name);
-          element.children[2].setValue(membership.membership_type);
+        _.each(memberships, function(membership, index){
+          _.each(this.elements, function(element) {
+            if(element && element.id === index+1){
+              element.children[0].setValue(membership.investigator.name);
+              element.children[1].setValue(membership.organization.name);
+              element.children[2].setValue(membership.membership_type);
+            }
+          });
         }, this);
       }, this);
 
@@ -127,7 +131,7 @@
       });
       var lead = new App.Presenter.OrganizationLead({
         DOMelement: "#leadedit-"+this.investigatorOrganizationEdit.elementId,
-        name: "leadedit",
+        name: "lead",
         value: "leadedit-"+this.investigatorOrganizationEdit.elementId,
         label: false,
       });

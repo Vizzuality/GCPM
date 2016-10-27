@@ -177,7 +177,7 @@
             var obj = {};
 
             // LEAD
-            if(lead.split("-")[1] == id){
+            if(lead == "lead-"+id){
               obj.membership_type = "main";
             }
             else{
@@ -371,35 +371,43 @@
     },
 
     buildInvestigatorsEdit: function(){
-      if(!this.investigatorOrganizationEdit.elements && !this.request.memberships){
+      debugger
+      if(!this.investigatorOrganizationEdit.elements && !this.project.memberships){
         return false;
       }
       if(!this.request.project.memberships){
         this.request.project["memberships"] = [];
       }
-      var id;
-      for(id = 1; id < this.investigatorOrganizationEdit.elements.length+1; id++){
-        var research_unit_id;
-        var membership_type = "secondary";
-        var investigator = this.state.attributes["investigatoredit-"+id];
-        var organization = this.state.attributes["organizationedit-"+id];
-        var lead = this.state.attributes["leadedit"];
-        _.each(this.project.memberships, function(membership){
+      _.each(this.project.memberships, function(membership){
+        var membership_req;
+        _.each(this.investigatorOrganizationEdit.elements, function(element){
+          var investigator = this.state.attributes["investigatoredit-"+element.id];
+          var organization = this.state.attributes["organizationedit-"+element.id];
+          var lead = this.state.attributes["lead"];
+          var membershipId;
+          var membership_type = "secondary";
           if(investigator == membership.investigator.name && organization == membership.organization.name){
-            research_unit_id = membership.id;
+            membershipId = membership.id;
           }
-        });
-        if(lead.split("-")[1] == id){
-          membership_type = "main";
-        }
-        if(research_unit_id){
-          var membership = {
-            id: research_unit_id,
-            membership_type: membership_type
+          if(lead === "leadedit-"+element.id){
+            membership_type = "main";
+          }
+          if(membershipId){
+            membership_req = {
+              id: membershipId,
+              membership_type: membership_type
+            };
+          }
+        }, this);
+
+        if(!membership_req){
+          membership_req = {
+            id: membership.id,
+            _destroy: true
           };
-          this.request.project.memberships.push(membership);
         }
-      }
+        this.request.project.memberships.push(membership_req);
+      }, this);
     },
 
     buildRequest: function(){
