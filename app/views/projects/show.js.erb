@@ -6,8 +6,6 @@
   var htmlContent = "<%= escape_javascript render(partial: template, locals: { items: @items, more: @more }) %>";
 
   document.getElementById('content').innerHTML = htmlContent;
-  if ('<%= template %>' === 'info') {
-      new App.View.DatesTimeline();
-  }
 
+  App.trigger('Remote:load');
 })();
