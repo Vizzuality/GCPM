@@ -35,6 +35,8 @@ module Gcpm
 
     #config.web_console.whitelisted_ips = '172.19.0.1'
 
+    config.active_record.schema_format = :sql
+
     config.generators do |g|
       g.test_framework  :rspec
       g.view_specs      false

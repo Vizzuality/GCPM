@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161021080737) do
+ActiveRecord::Schema.define(version: 20161026160423) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 20161021080737) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index "to_tsvector('english'::regconfig, (name)::text)", name: "index_cancer_types_on_name", using: :gin
   end
 
   create_table "cancer_types_projects", id: false, force: :cascade do |t|
@@ -146,6 +147,8 @@ ActiveRecord::Schema.define(version: 20161021080737) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "user_id"
+    t.index "to_tsvector('english'::regconfig, (title)::text)", name: "index_events_on_title", using: :gin
+    t.index "to_tsvector('english'::regconfig, description)", name: "index_events_on_description", using: :gin
     t.index ["user_id"], name: "index_events_on_user_id", using: :btree
   end
 
@@ -187,6 +190,7 @@ ActiveRecord::Schema.define(version: 20161021080737) do
     t.datetime "updated_at",                  null: false
     t.integer  "user_id"
     t.boolean  "is_approved", default: false
+    t.index "to_tsvector('english'::regconfig, (name)::text)", name: "index_investigators_on_name", using: :gin
     t.index ["user_id"], name: "index_investigators_on_user_id", using: :btree
   end
 
@@ -306,6 +310,8 @@ ActiveRecord::Schema.define(version: 20161021080737) do
     t.integer  "status"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.index "to_tsvector('english'::regconfig, (title)::text)", name: "index_projects_on_title", using: :gin
+    t.index "to_tsvector('english'::regconfig, summary)", name: "index_projects_on_summary", using: :gin
   end
 
   create_table "research_units", force: :cascade do |t|
