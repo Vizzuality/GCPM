@@ -23,7 +23,7 @@ $dropdown-width: 182px;
     cursor: pointer;
 
     &:after {
-      content: '';
+      // content: '';
       margin-left: $inline-space / 2;
       width: 0;
       height: 0;
@@ -61,6 +61,23 @@ $dropdown-width: 182px;
 
     &.-open {
       display: block;
+    }
+  }
+
+  .arrows {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: $inline-space;
+    cursor: pointer;
+
+    .c-icon {
+      fill: white;
+
+      &.-active {
+        opacity: .5;
+      }
     }
   }
 }
