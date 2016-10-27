@@ -32,7 +32,7 @@
                   <use xlink:href="#icon-colaborators"></use>
                 </svg>
               </div>
-              <h3><%= @project.investigators.count %> <%= t 'collaborator'%>(s)</h3>
+              <h3><%= @project.investigators.count - 1 %> <%= t 'collaborator'%>(s)</h3>
             </div>
 
             <% if @project.funding_sources && @project.funding_sources.size > 0 %>
