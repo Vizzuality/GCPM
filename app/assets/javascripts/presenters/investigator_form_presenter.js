@@ -12,12 +12,18 @@
 
     initialize: function(params) {
       this.state = new StateModel(params);
+      this.DOMelementId = params.DOMelementId;
 
       var investigatorName = new App.Presenter.InvestigatorName();
       var investigatorEmail = new App.Presenter.InvestigatorEmail();
       var investigatorWebsite = new App.Presenter.InvestigatorWebsite();
 
       this.children = [investigatorName, investigatorEmail, investigatorWebsite];
+
+      if(window.INVESTIGATOR_PRESENT == "false"){
+        var investigatorUser = new App.Presenter.InvestigatorUser();
+        this.children.push(investigatorUser);
+      }
 
       this.modal = new App.View.Modal();
       this.investigatorForm = new App.View.InvestigatorForm({
@@ -35,7 +41,7 @@
       this.investigatorForm.on('cancel', this.closeForm, this);
       this.investigatorForm.on('submit', function(newState) {
         this.setState(newState);
-        App.trigger('InvestigatorForm:submit', this.state.attributes);
+        App.trigger('InvestigatorForm:submit-'+this.DOMelementId, this.state.attributes);
         this.closeForm();
       }, this);
 
