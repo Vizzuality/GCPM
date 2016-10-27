@@ -92,7 +92,6 @@
      */
     handleSubmit: function() {
       this.buildRequest();
-      debugger
       new Promise(function(resolve, reject){
         var url = "/api/projects?token="+window.AUTH_TOKEN;
         var q = new XMLHttpRequest();
