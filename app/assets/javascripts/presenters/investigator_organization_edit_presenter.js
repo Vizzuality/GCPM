@@ -27,7 +27,6 @@
     setEvents: function() {
       this.investigatorOrganizationEdit.on('deleteElement', function(elementId){
 
-        debugger
         _.each(this.elements, function(element) {
           if(element && element.id === parseInt(elementId)){
             var index = this.elements.indexOf(element);

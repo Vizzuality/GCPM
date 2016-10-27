@@ -19,6 +19,11 @@
 
       this.children = [investigatorName, investigatorEmail, investigatorWebsite];
 
+      if(window.INVESTIGATOR_PRESENT == "false"){
+        var investigatorUser = new App.Presenter.InvestigatorUser();
+        this.children.push(investigatorUser);
+      }
+
       this.modal = new App.View.Modal();
       this.investigatorForm = new App.View.InvestigatorForm({
         children: this.children

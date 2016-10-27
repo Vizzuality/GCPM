@@ -92,7 +92,8 @@
      */
     handleSubmit: function() {
       this.buildRequest();
-
+      debugger
+      console.log("a");
       new Promise(function(resolve, reject){
         var url = "/api/projects?token="+window.AUTH_TOKEN;
         var q = new XMLHttpRequest();
@@ -184,6 +185,14 @@
               obj.membership_type = "secondary";
             }
 
+            // USER
+            if(investigator.investigatorUser){
+              investigator.investigatorUser = window.USER_ID;
+            }
+            else{
+              investigator.investigatorUser = undefined;
+            }
+
             // EE
             if(!isNaN(parseInt(investigator)) && !isNaN(parseInt(organization))){
               obj.research_unit_attributes = {
@@ -207,6 +216,7 @@
               obj.research_unit_attributes = {
                 address_id: address,
                 investigator_attributes: {
+                  user_id: investigator.investigatorUser,
                   name: investigator.investigatorName,
                   email: investigator.investigatorName,
                   website: investigator.investigatorWebsite
@@ -216,6 +226,7 @@
             else{
               obj.research_unit_attributes = {
                 investigator_attributes: {
+                  user_id: investigator.investigatorUser,
                   name: investigator.investigatorName,
                   email: investigator.investigatorName,
                   website: investigator.investigatorWebsite,
@@ -371,7 +382,6 @@
     },
 
     buildInvestigatorsEdit: function(){
-      debugger
       if(!this.investigatorOrganizationEdit.elements && !this.project.memberships){
         return false;
       }
@@ -427,8 +437,6 @@
 
     handleSubmit: function() {
       this.buildRequest();
-      console.log(this.request);
-      debugger
       new Promise(function(resolve, reject){
         var url = "/api/projects/"+this.projectId+"?token="+window.AUTH_TOKEN;
         var q = new XMLHttpRequest();
