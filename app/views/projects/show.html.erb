@@ -1,11 +1,5 @@
 <% title @project.title %>
 
-<% if user_signed_in? && current_user.projects.include?(@project) %>
-  <%= link_to 'Remove relation', remove_relation_project_path(@project), method: :patch %>
-<% elsif user_signed_in? %>
-  <%= link_to 'Relation request', relation_request_project_path(@project), method: :patch %>
-<% end %>
-
 <section class="l-app -full">
   <div class="l-app-map">
     <div id="map" class="c-map"></div>
@@ -34,8 +28,8 @@
 
             <div class="column small-12 large-4 align-middle">
               <div class="c-avatar -small">
-                <svg class="c-icon icon-colab_icon">
-                  <use xlink:href="#icon-colab_icon"></use>
+                <svg class="c-icon icon-colaborators -inverse">
+                  <use xlink:href="#icon-colaborators"></use>
                 </svg>
               </div>
               <h3><%= @project.investigators.count %> <%= t 'collaborator'%>(s)</h3>
@@ -44,7 +38,7 @@
             <% if @project.funding_sources && @project.funding_sources.size > 0 %>
               <div class="column small-12 large-4 align-middle">
                 <div class="c-avatar -small">
-                  <svg class="c-icon icon-funding">
+                  <svg class="c-icon icon-funding -inverse">
                     <use xlink:href="#icon-funding"></use>
                   </svg>
                 </div>
@@ -61,8 +55,6 @@
           <%= render "shared/user_actions" %>
         </div>
       </div>
-
-
     </div>
   </div>
 
@@ -92,9 +84,9 @@
 </section>
 
 <div class="l-grid" id="content">
-  <% if @current_type == 'info' %>
+  <% if @current_type == 'people' %>
+    <%= render 'investigators/list', items: @items, more: @more  %>
+  <%else %>
     <%= render 'projects/info' %>
-  <%else%>
-    <%= render 'projects/list' %>
   <% end %>
 </div>
