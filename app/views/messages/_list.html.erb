@@ -1,10 +1,23 @@
 <% if items && items.size() > 0 %>
   <div class="row collapse">
-    <% items.each do |e| %>
+    <% items.each do |c| %>
       <div class="column small-12">
         <div class="c-card -events">
-          <h2><%= e.subject %></h2>
-          <p><%= conversation_person(e) %></p>
+          <% conversation_person = conversation_person(c) %>
+          <h2><%= c.subject %></h2>
+          <ul>
+            <% c.messages.each do |m| %>
+              <li>
+                <%= m.body %>
+              </li>
+            <% end %>
+          </ul>
+
+          <div class="details">
+            <span><%= conversation_person.name %></span>
+            <span><%= c.created_at.strftime("%d.%m.%Y") %> <%= c.created_at.strftime("%H:%M") %></span>
+          </div>
+          <p></p>
         </div>
       </div>
     <% end %>
