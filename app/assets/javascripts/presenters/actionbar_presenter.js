@@ -2,13 +2,7 @@
 
   'use strict';
 
-  var StateModel = Backbone.Model.extend({
-
-    defaults: {
-
-    }
-
-  });
+  var StateModel = Backbone.Model.extend();
 
   App.Presenter.Actionbar = function() {
     this.initialize.apply(this, arguments);
@@ -23,7 +17,6 @@
       this.setEvents();
       this.setSubscriptions();
       this.setState(params);
-      this.actionbar.render(this.state.attributes);
     },
 
     setEvents: function() {
@@ -31,6 +24,7 @@
     },
 
     setSubscriptions: function() {
+      App.on('TabNav:change', this.setState, this)
     },
 
     setState: function(state) {
@@ -38,10 +32,34 @@
     },
 
     render: function() {
-      var data = this.state.attributes;
-
+      var data = _.extend({}, this.state.attributes, this.setData());
       this.actionbar.render(data);
       App.trigger('Actionbar:change', this.state.attributes);
+    },
+
+    setData: function() {
+      var data = this.state.attributes;
+      var user = gon.server_params.user || null;
+      switch(data.data) {
+        case 'projects':
+          return {
+            visible: true,
+            name: 'Project',
+            link: (user) ? '/network/'+ user + '/projects/new' : '/users/sign_in'
+          }
+
+        case 'people':
+          return {
+            visible: false
+          }
+
+        case 'events':
+          return {
+            visible: true,
+            name: 'Event',
+            link: (user) ? '/network/'+ user + '/events/new' : '/users/sign_in'
+          }
+      }
     }
 
   });
