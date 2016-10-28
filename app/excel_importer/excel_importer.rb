@@ -64,7 +64,7 @@ class ExcelImporter
       message = ''
       message += "missing fields: #{missing_fields}" if missing_fields != []
       message += " | unknown fields: #{unknown_fields}" if unknown_fields !=[]
-      @errors = [[{ project: 0, errors: [{format: "bad header #{message}"}]}]]
+      @errors = [[{ project: 0, errors: [{ format: "bad header #{message}" }] }]]
       return false
     end
   end
