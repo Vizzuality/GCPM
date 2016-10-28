@@ -12,7 +12,7 @@
               </div>
             </div>
 
-            <%#= f.input :type, as: :select, collection: @sections, label: false, selected: @search_type %>
+            <%#= f.input :type, as: :select, collection: @sections, label: false, selected: @search_type, input_html: { class: '' } %>
             <%= f.input :type, as: :hidden, label: false, input_html: { value: 'All sections' } %>
             <button type="submit" class="c-btn -secondary"><%= t 'search' %></button>
           <% end %>
@@ -27,12 +27,12 @@
       <div class="row collapse">
         <div class="column small-12">
           <% if params[:search].present? && params[:search][:item].present? %>
-            <span>Results for <%= params[:search][:item] %></span>
+            <span>Search results for "<%= params[:search][:item] %>"</span>
             <% if params[:search].present? && params[:search][:type].present? %>
               <span> in <%= params[:search][:type].to_s.downcase %></span>
             <% end %>
+            <span> (<%= @search_results.size %>)</span>
           <% end %>
-          <span>(<%= @search_results.size %>)</span>
         </div>
         <div class="column small-12">
           <ul class="c-list row">
