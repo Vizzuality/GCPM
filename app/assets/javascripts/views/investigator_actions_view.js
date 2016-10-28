@@ -15,7 +15,6 @@
     cache: function() {
       this.$buttons = this.$el.find('.js-btn-toggle-message');
       this.$forms = this.$el.find('.js-form-message');
-
     },
 
     triggerToggle: function(e) {
@@ -32,7 +31,7 @@
     toggleForm: function(user) {
       var $currentBtn = this.$buttons.filter('[data-user='+ user +']');
       var $currentForm = this.$el.find('#form-message-'+ user);
-      
+
       this.$buttons.toggleClass('-active', false);
       this.$forms.toggleClass('-active', false);
 

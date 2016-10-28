@@ -2,11 +2,17 @@
 -- PostgreSQL database dump
 --
 
+<<<<<<< Updated upstream
 -- Dumped from database version 9.5.3
 -- Dumped by pg_dump version 9.5.3
+=======
+-- Dumped from database version 9.6.0
+-- Dumped by pg_dump version 9.6.0
+>>>>>>> Stashed changes
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -618,6 +624,151 @@ ALTER SEQUENCE layers_id_seq OWNED BY layers.id;
 
 
 --
+-- Name: mailboxer_conversation_opt_outs; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE mailboxer_conversation_opt_outs (
+    id integer NOT NULL,
+    unsubscriber_type character varying,
+    unsubscriber_id integer,
+    conversation_id integer
+);
+
+
+--
+-- Name: mailboxer_conversation_opt_outs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE mailboxer_conversation_opt_outs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: mailboxer_conversation_opt_outs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE mailboxer_conversation_opt_outs_id_seq OWNED BY mailboxer_conversation_opt_outs.id;
+
+
+--
+-- Name: mailboxer_conversations; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE mailboxer_conversations (
+    id integer NOT NULL,
+    subject character varying DEFAULT ''::character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: mailboxer_conversations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE mailboxer_conversations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: mailboxer_conversations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE mailboxer_conversations_id_seq OWNED BY mailboxer_conversations.id;
+
+
+--
+-- Name: mailboxer_notifications; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE mailboxer_notifications (
+    id integer NOT NULL,
+    type character varying,
+    body text,
+    subject character varying DEFAULT ''::character varying,
+    sender_type character varying,
+    sender_id integer,
+    conversation_id integer,
+    draft boolean DEFAULT false,
+    notification_code character varying,
+    notified_object_type character varying,
+    notified_object_id integer,
+    attachment character varying,
+    updated_at timestamp without time zone NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    global boolean DEFAULT false,
+    expires timestamp without time zone
+);
+
+
+--
+-- Name: mailboxer_notifications_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE mailboxer_notifications_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: mailboxer_notifications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE mailboxer_notifications_id_seq OWNED BY mailboxer_notifications.id;
+
+
+--
+-- Name: mailboxer_receipts; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE mailboxer_receipts (
+    id integer NOT NULL,
+    receiver_type character varying,
+    receiver_id integer,
+    notification_id integer NOT NULL,
+    is_read boolean DEFAULT false,
+    trashed boolean DEFAULT false,
+    deleted boolean DEFAULT false,
+    mailbox_type character varying(25),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    is_delivered boolean DEFAULT false,
+    delivery_method character varying,
+    message_id character varying
+);
+
+
+--
+-- Name: mailboxer_receipts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE mailboxer_receipts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: mailboxer_receipts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE mailboxer_receipts_id_seq OWNED BY mailboxer_receipts.id;
+
+
+--
 -- Name: memberships; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1029,182 +1180,210 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: active_admin_comments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY active_admin_comments ALTER COLUMN id SET DEFAULT nextval('active_admin_comments_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: addresses id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY addresses ALTER COLUMN id SET DEFAULT nextval('addresses_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: admin_users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY admin_users ALTER COLUMN id SET DEFAULT nextval('admin_users_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: agrupations id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY agrupations ALTER COLUMN id SET DEFAULT nextval('agrupations_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: cancer_types id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY cancer_types ALTER COLUMN id SET DEFAULT nextval('cancer_types_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: ckeditor_assets id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY ckeditor_assets ALTER COLUMN id SET DEFAULT nextval('ckeditor_assets_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: countries id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY countries ALTER COLUMN id SET DEFAULT nextval('countries_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: db_backups id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY db_backups ALTER COLUMN id SET DEFAULT nextval('db_backups_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: events id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY events ALTER COLUMN id SET DEFAULT nextval('events_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: follows id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY follows ALTER COLUMN id SET DEFAULT nextval('follows_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: funders id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY funders ALTER COLUMN id SET DEFAULT nextval('funders_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: identities id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY identities ALTER COLUMN id SET DEFAULT nextval('identities_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: investigators id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY investigators ALTER COLUMN id SET DEFAULT nextval('investigators_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: layer_groups id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY layer_groups ALTER COLUMN id SET DEFAULT nextval('layer_groups_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: layers id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY layers ALTER COLUMN id SET DEFAULT nextval('layers_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: mailboxer_conversation_opt_outs id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY mailboxer_conversation_opt_outs ALTER COLUMN id SET DEFAULT nextval('mailboxer_conversation_opt_outs_id_seq'::regclass);
+
+
+--
+-- Name: mailboxer_conversations id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY mailboxer_conversations ALTER COLUMN id SET DEFAULT nextval('mailboxer_conversations_id_seq'::regclass);
+
+
+--
+-- Name: mailboxer_notifications id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY mailboxer_notifications ALTER COLUMN id SET DEFAULT nextval('mailboxer_notifications_id_seq'::regclass);
+
+
+--
+-- Name: mailboxer_receipts id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY mailboxer_receipts ALTER COLUMN id SET DEFAULT nextval('mailboxer_receipts_id_seq'::regclass);
+
+
+--
+-- Name: memberships id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY memberships ALTER COLUMN id SET DEFAULT nextval('memberships_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: organization_types id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY organization_types ALTER COLUMN id SET DEFAULT nextval('organization_types_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: organizations id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY organizations ALTER COLUMN id SET DEFAULT nextval('organizations_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: posts id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY posts ALTER COLUMN id SET DEFAULT nextval('posts_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: project_types id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY project_types ALTER COLUMN id SET DEFAULT nextval('project_types_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: project_updates id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY project_updates ALTER COLUMN id SET DEFAULT nextval('project_updates_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: project_users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY project_users ALTER COLUMN id SET DEFAULT nextval('project_users_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: projects id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY projects ALTER COLUMN id SET DEFAULT nextval('projects_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: research_units id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY research_units ALTER COLUMN id SET DEFAULT nextval('research_units_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
 --
--- Name: active_admin_comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: active_admin_comments active_admin_comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY active_admin_comments
@@ -1212,7 +1391,7 @@ ALTER TABLE ONLY active_admin_comments
 
 
 --
--- Name: addresses_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: addresses addresses_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY addresses
@@ -1220,7 +1399,7 @@ ALTER TABLE ONLY addresses
 
 
 --
--- Name: admin_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: admin_users admin_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY admin_users
@@ -1228,7 +1407,7 @@ ALTER TABLE ONLY admin_users
 
 
 --
--- Name: agrupations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: agrupations agrupations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY agrupations
@@ -1236,7 +1415,7 @@ ALTER TABLE ONLY agrupations
 
 
 --
--- Name: ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY ar_internal_metadata
@@ -1244,7 +1423,7 @@ ALTER TABLE ONLY ar_internal_metadata
 
 
 --
--- Name: cancer_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: cancer_types cancer_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY cancer_types
@@ -1252,7 +1431,7 @@ ALTER TABLE ONLY cancer_types
 
 
 --
--- Name: ckeditor_assets_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: ckeditor_assets ckeditor_assets_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY ckeditor_assets
@@ -1260,7 +1439,7 @@ ALTER TABLE ONLY ckeditor_assets
 
 
 --
--- Name: countries_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: countries countries_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY countries
@@ -1268,7 +1447,7 @@ ALTER TABLE ONLY countries
 
 
 --
--- Name: db_backups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: db_backups db_backups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY db_backups
@@ -1276,7 +1455,7 @@ ALTER TABLE ONLY db_backups
 
 
 --
--- Name: events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: events events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY events
@@ -1284,7 +1463,7 @@ ALTER TABLE ONLY events
 
 
 --
--- Name: follows_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: follows follows_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY follows
@@ -1292,7 +1471,7 @@ ALTER TABLE ONLY follows
 
 
 --
--- Name: funders_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: funders funders_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY funders
@@ -1300,7 +1479,7 @@ ALTER TABLE ONLY funders
 
 
 --
--- Name: identities_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: identities identities_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY identities
@@ -1308,7 +1487,7 @@ ALTER TABLE ONLY identities
 
 
 --
--- Name: investigators_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: investigators investigators_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY investigators
@@ -1316,7 +1495,7 @@ ALTER TABLE ONLY investigators
 
 
 --
--- Name: layer_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: layer_groups layer_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY layer_groups
@@ -1324,7 +1503,7 @@ ALTER TABLE ONLY layer_groups
 
 
 --
--- Name: layers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: layers layers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY layers
@@ -1332,7 +1511,39 @@ ALTER TABLE ONLY layers
 
 
 --
--- Name: memberships_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: mailboxer_conversation_opt_outs mailboxer_conversation_opt_outs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY mailboxer_conversation_opt_outs
+    ADD CONSTRAINT mailboxer_conversation_opt_outs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: mailboxer_conversations mailboxer_conversations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY mailboxer_conversations
+    ADD CONSTRAINT mailboxer_conversations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: mailboxer_notifications mailboxer_notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY mailboxer_notifications
+    ADD CONSTRAINT mailboxer_notifications_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: mailboxer_receipts mailboxer_receipts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY mailboxer_receipts
+    ADD CONSTRAINT mailboxer_receipts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: memberships memberships_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY memberships
@@ -1340,7 +1551,7 @@ ALTER TABLE ONLY memberships
 
 
 --
--- Name: organization_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: organization_types organization_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY organization_types
@@ -1348,7 +1559,7 @@ ALTER TABLE ONLY organization_types
 
 
 --
--- Name: organizations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: organizations organizations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY organizations
@@ -1356,7 +1567,7 @@ ALTER TABLE ONLY organizations
 
 
 --
--- Name: posts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: posts posts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY posts
@@ -1364,7 +1575,7 @@ ALTER TABLE ONLY posts
 
 
 --
--- Name: project_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: project_types project_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY project_types
@@ -1372,7 +1583,7 @@ ALTER TABLE ONLY project_types
 
 
 --
--- Name: project_updates_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: project_updates project_updates_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY project_updates
@@ -1380,7 +1591,7 @@ ALTER TABLE ONLY project_updates
 
 
 --
--- Name: project_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: project_users project_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY project_users
@@ -1388,7 +1599,7 @@ ALTER TABLE ONLY project_users
 
 
 --
--- Name: projects_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: projects projects_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY projects
@@ -1396,7 +1607,7 @@ ALTER TABLE ONLY projects
 
 
 --
--- Name: research_units_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: research_units research_units_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY research_units
@@ -1404,7 +1615,7 @@ ALTER TABLE ONLY research_units
 
 
 --
--- Name: schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY schema_migrations
@@ -1412,7 +1623,7 @@ ALTER TABLE ONLY schema_migrations
 
 
 --
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users
@@ -1588,6 +1799,62 @@ CREATE INDEX index_investigators_on_user_id ON investigators USING btree (user_i
 
 
 --
+-- Name: index_mailboxer_conversation_opt_outs_on_conversation_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_mailboxer_conversation_opt_outs_on_conversation_id ON mailboxer_conversation_opt_outs USING btree (conversation_id);
+
+
+--
+-- Name: index_mailboxer_conversation_opt_outs_on_unsubscriber_id_type; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_mailboxer_conversation_opt_outs_on_unsubscriber_id_type ON mailboxer_conversation_opt_outs USING btree (unsubscriber_id, unsubscriber_type);
+
+
+--
+-- Name: index_mailboxer_notifications_on_conversation_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_mailboxer_notifications_on_conversation_id ON mailboxer_notifications USING btree (conversation_id);
+
+
+--
+-- Name: index_mailboxer_notifications_on_notified_object_id_and_type; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_mailboxer_notifications_on_notified_object_id_and_type ON mailboxer_notifications USING btree (notified_object_id, notified_object_type);
+
+
+--
+-- Name: index_mailboxer_notifications_on_sender_id_and_sender_type; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_mailboxer_notifications_on_sender_id_and_sender_type ON mailboxer_notifications USING btree (sender_id, sender_type);
+
+
+--
+-- Name: index_mailboxer_notifications_on_type; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_mailboxer_notifications_on_type ON mailboxer_notifications USING btree (type);
+
+
+--
+-- Name: index_mailboxer_receipts_on_notification_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_mailboxer_receipts_on_notification_id ON mailboxer_receipts USING btree (notification_id);
+
+
+--
+-- Name: index_mailboxer_receipts_on_receiver_id_and_receiver_type; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_mailboxer_receipts_on_receiver_id_and_receiver_type ON mailboxer_receipts USING btree (receiver_id, receiver_type);
+
+
+--
 -- Name: index_memberships_on_membership_type; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1749,7 +2016,7 @@ CREATE UNIQUE INDEX index_users_on_unlock_token ON users USING btree (unlock_tok
 
 
 --
--- Name: fk_rails_5373344100; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: identities fk_rails_5373344100; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY identities
@@ -1757,11 +2024,35 @@ ALTER TABLE ONLY identities
 
 
 --
--- Name: fk_rails_b1fd6cb9ed; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: investigators fk_rails_b1fd6cb9ed; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY investigators
     ADD CONSTRAINT fk_rails_b1fd6cb9ed FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
+-- Name: mailboxer_conversation_opt_outs mb_opt_outs_on_conversations_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY mailboxer_conversation_opt_outs
+    ADD CONSTRAINT mb_opt_outs_on_conversations_id FOREIGN KEY (conversation_id) REFERENCES mailboxer_conversations(id);
+
+
+--
+-- Name: mailboxer_notifications notifications_on_conversation_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY mailboxer_notifications
+    ADD CONSTRAINT notifications_on_conversation_id FOREIGN KEY (conversation_id) REFERENCES mailboxer_conversations(id);
+
+
+--
+-- Name: mailboxer_receipts receipts_on_notification_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY mailboxer_receipts
+    ADD CONSTRAINT receipts_on_notification_id FOREIGN KEY (notification_id) REFERENCES mailboxer_notifications(id);
 
 
 --
@@ -1770,6 +2061,6 @@ ALTER TABLE ONLY investigators
 
 SET search_path TO "$user", public;
 
-INSERT INTO schema_migrations (version) VALUES ('20160623091908'), ('20160623092157'), ('20160623093250'), ('20160629161033'), ('20160629161041'), ('20160707072908'), ('20160707073642'), ('20160708083044'), ('20160711105858'), ('20160711114901'), ('20160718224524'), ('20160718225032'), ('20160718232806'), ('20160720162924'), ('20160721141137'), ('20160725182233'), ('20160726110350'), ('20160729093255'), ('20160729125019'), ('20160729151912'), ('20160801160550'), ('20160801165924'), ('20160801171206'), ('20160802121917'), ('20160802174327'), ('20160803012223'), ('20160803012429'), ('20160803012636'), ('20160803014813'), ('20160803143833'), ('20160804100620'), ('20160804113911'), ('20161004100702'), ('20161018055907'), ('20161018091446'), ('20161018104312'), ('20161018111559'), ('20161018125246'), ('20161020122456'), ('20161020163951'), ('20161021073852'), ('20161021080737'), ('20161026160423'), ('20161027160501');
+INSERT INTO schema_migrations (version) VALUES ('20160623091908'), ('20160623092157'), ('20160623093250'), ('20160629161033'), ('20160629161041'), ('20160707072908'), ('20160707073642'), ('20160708083044'), ('20160711105858'), ('20160711114901'), ('20160718224524'), ('20160718225032'), ('20160718232806'), ('20160720162924'), ('20160721141137'), ('20160725182233'), ('20160726110350'), ('20160729093255'), ('20160729125019'), ('20160729151912'), ('20160801160550'), ('20160801165924'), ('20160801171206'), ('20160802121917'), ('20160802174327'), ('20160803012223'), ('20160803012429'), ('20160803012636'), ('20160803014813'), ('20160803143833'), ('20160804100620'), ('20160804113911'), ('20161004100702'), ('20161018055907'), ('20161018091446'), ('20161018104312'), ('20161018111559'), ('20161018125246'), ('20161020122456'), ('20161020163951'), ('20161021073852'), ('20161021080737'), ('20161021110751'), ('20161021110752'), ('20161021110753'), ('20161021110754'), ('20161026160423'), ('20161027160501');
 
 

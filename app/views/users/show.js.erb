@@ -6,4 +6,6 @@
   var htmlContent = "<%= escape_javascript render(partial: template, locals: { items: @items, more: @more }) %>";
 
   document.getElementById('content').innerHTML = htmlContent;
+
+  App.trigger('Remote:load');
 })();
