@@ -19,11 +19,11 @@ class UsersController < ApplicationController
     @filters = %w(network projects posts)
     @current_type = params.key?(:data) ? params[:data] : 'projects'
 
-    gon.server_params = { 'investigators[]': @investigator.size.positive? ? @investigator.first.id : '0' }
+    # gon.server_params = { 'investigators[]': @investigator.size.positive? ? @investigator.first.id : '0' }
 
     limit = 12 + (@page * 9)
 
-    @projects = Project.fetch_all(user: params[:id]).uniq.order('created_at DESC')
+    @projects = @user.projects
     @people = Investigator.fetch_all(user: params[:id]).uniq.order('created_at DESC')
     @posts = Post.where(user_id: current_user.id)
 
