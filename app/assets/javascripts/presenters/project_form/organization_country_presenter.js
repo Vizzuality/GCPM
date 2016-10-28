@@ -14,6 +14,7 @@
       multiple: false,
       name: 'organizationCountry',
       label: 'Organization Country',
+      required: true,
       placeholder: 'All Countries',
       blank: null,
       addNew: false,

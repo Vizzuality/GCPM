@@ -26,6 +26,15 @@
     <div class="wrapper">
       <div class="row collapse">
         <div class="column small-12">
+          <% if params[:search].present? && params[:search][:item].present? %>
+            <span>Results for <%= params[:search][:item] %></span>
+            <% if params[:search].present? && params[:search][:type].present? %>
+              <span> in <%= params[:search][:type].to_s.downcase %></span>
+            <% end %>
+          <% end %>
+          <span>(<%= @search_results.size %>)</span>
+        </div>
+        <div class="column small-12">
           <ul class="c-list row">
             <% @search_results.each do |search| %>
               <li class="column small-12">

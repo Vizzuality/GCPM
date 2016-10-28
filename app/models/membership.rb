@@ -17,6 +17,7 @@ class Membership < ApplicationRecord
   belongs_to :research_unit
 
   has_one :investigator, through: :research_unit
+  has_one :address,      through: :research_unit
   has_one :organization, through: :research_unit
 
   validates :project_id, uniqueness: { scope: :research_unit_id }
