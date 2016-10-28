@@ -9,6 +9,8 @@ class MapController < ApplicationController
     @filters = %w(projects people events)
     @current_type = params.key?(:data) ? params[:data] : 'projects'
 
+    gon.server_params = { 'user': current_user ? current_user.id : '' }
+
     limit = 12 + (@page * 9)
 
     if params.key?(:data) && params[:data] == 'events'
