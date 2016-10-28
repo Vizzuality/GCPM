@@ -16,7 +16,6 @@
           </div>
         </div>
         <div class="column small-12 medium-4 -align-right">
-          <%= link_to 'Add Post', (user_signed_in?) ? new_post_path : user_session_path, class: 'c-btn -secondary -inverse' %>
           <button class="c-btn -secondary -inverse -mg-left js-share-button" data-actiona="save"><%= t 'share' %></button>
         </div>
       </div>

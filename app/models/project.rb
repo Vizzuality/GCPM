@@ -111,10 +111,11 @@ class Project < ApplicationRecord
       options            = options.except(:new_funders, :memberships)
       project.attributes = options if project.present?
       validate_project   = project.present? ? project.valid? : Project.new(options).valid?
+      project_id         = project.id if project.present?
 
       if validate_project
         build_funding_sources(funders, options) if funders.present?
-        build_memberships(memberships, options) if memberships.present?
+        build_memberships(memberships, options, project_id) if memberships.present?
       end
       options
     end
@@ -129,13 +130,42 @@ class Project < ApplicationRecord
       options
     end
 
-    def build_memberships(memberships, options)
+    def build_memberships(memberships, options, project_id=nil)
       memberships_attributes = []
       memberships.each do |membership_params|
-        memberships_attributes << membership_params
+        if membership_params[:research_unit_attributes].present?
+          investigator_params = membership_params[:research_unit_attributes][:investigator_id] if membership_params[:research_unit_attributes][:investigator_id].present?
+          address_params      = membership_params[:research_unit_attributes][:address_id]      if membership_params[:research_unit_attributes][:address_id].present?
+          if investigator_params.present? && address_params.present?
+            memberships_attributes << check_existing_research_units_and_build_params(membership_params, investigator_params, address_params, project_id)
+          else
+            memberships_attributes << membership_params
+          end
+        else
+          memberships_attributes << membership_params
+        end
       end
       options['memberships_attributes'] = memberships_attributes
       options
+    end
+
+    def check_existing_research_units_and_build_params(membership_params, investigator_params, address_params, project_id)
+      existing_ru = ResearchUnit.find_by(investigator_id: investigator_params, address_id: address_params)
+      if existing_ru.present?
+        ru_id = existing_ru.id
+        if project_id.present?
+          membership = Membership.find_by(project_id: project_id, research_unit_id: ru_id)
+          if membership.present?
+            membership_params = { id: membership.id, membership_type: membership_params[:membership_type] }
+          else
+            membership_params = { research_unit_id: ru_id, membership_type: membership_params[:membership_type] }
+          end
+        else
+          membership_params = { research_unit_id: ru_id, membership_type: membership_params[:membership_type] }
+        end
+      else
+        membership_params
+      end
     end
   end
 

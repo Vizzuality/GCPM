@@ -21,21 +21,21 @@ RSpec.describe SearchController, type: :controller do
       get :index, params: { search: { item: 'breast', type: 'All sections' } }
       expect(response).to be_success
       expect(response).to have_http_status(200)
-      expect(response.body).to match('Results: 3')
+      expect(response.body).to match('(3)')
     end
 
     it 'Search in projects results only for projects with status published' do
       get :index, params: { search: { item: 'breast', type: 'CancerType' } }
       expect(response).to be_success
       expect(response).to have_http_status(200)
-      expect(response.body).to match('Results: 1')
+      expect(response.body).to match('(1)')
     end
 
     it 'Search in organizations' do
       get :index, params: { search: { item: 'breast', type: 'Organization' } }
       expect(response).to be_success
       expect(response).to have_http_status(200)
-      expect(response.body).to match('Results: 1')
+      expect(response.body).to match('(1)')
     end
   end
 end

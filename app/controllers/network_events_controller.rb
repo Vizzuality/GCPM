@@ -38,7 +38,7 @@ class NetworkEventsController < ApplicationController
 
     @event = @user.events.build(event_params)
     if @event.save
-      redirect_to event_path
+      redirect_to event_path(@event.id)
     else
       render :new, notice: @project.errors.full_messages
     end
