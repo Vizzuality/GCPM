@@ -14,9 +14,9 @@
           <h1><%= @project.title %></h1>
 
           <% if user_signed_in? && current_user.projects.include?(@project) %>
-            <%= link_to 'Not mine', remove_relation_project_path(@project), method: :patch, class: 'c-btn -transparent' %>
-          <% else %>
-            <%= link_to 'This is mine', (user_signed_in?) ? relation_request_project_path(@project) : user_session_path, method: (user_signed_in?) ? :patch : :post, class: 'c-btn -transparent' %>
+            <%= link_to (t 'not_me'), remove_relation_project_path(@project), method: :patch, class: 'c-btn -transparent' %>
+          <% elsif user_signed_in? %>
+            <%= link_to (t 'this_is_me'), relation_request_project_path(@project), method: :patch, class: 'c-btn -transparent' %>
           <% end %>
 
           <div class="c-summary-info row -collapse">
@@ -35,8 +35,8 @@
 
             <div class="column small-12 large-4 align-middle">
               <div class="c-avatar -small">
-                <svg class="c-icon icon-colaborators -inverse">
-                  <use xlink:href="#icon-colaborators"></use>
+                <svg class="c-icon icon-collaborators -inverse">
+                  <use xlink:href="#icon-collaborators"></use>
                 </svg>
               </div>
               <h3><%= @project.investigators.count - 1 %> <%= t 'collaborator'%>(s)</h3>

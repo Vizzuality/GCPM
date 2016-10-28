@@ -13,7 +13,7 @@ class ExcelImporter
   def import!
     @projects_excel_book.default_sheet = @projects_excel_book.sheets.first
     header = @projects_excel_book.first
-
+    return unless valid_header?(header)
     blank_row = Hash[header.map{|column_name| [column_name, nil]}]
     previous_row = nil
 
@@ -51,6 +51,21 @@ class ExcelImporter
           Rails.logger.debug e.backtrace.join("\n")
         end
       end
+    end
+  end
+
+  def valid_header?(header)
+    valid_header = %w{id project_title project_funding_source project_website project_summary project_cancer_types project_types project_start_date project_end_date investigator_name investigator_email_address investigator_website investigator_position_title investigator_organization_name investigator_organization_type investigator_organization_address investigator_organization_city investigator_organization_country investigator_organization_country_iso_code investigator_organization_latitude investigator_organization_longitude collaborator_name collaborator_email_address collaborator_website collaborator_position_title collaborator_organization_name collaborator_organization_type collaborator_organization_address collaborator_organization_city collaborator_organization_country collaborator_organization_country_iso_code collaborator_organization_latitude collaborator_organization_longitude}
+    missing_fields = valid_header - header
+    unknown_fields = header - valid_header
+    if missing_fields == [] && unknown_fields == []
+      return true
+    else
+      message = ''
+      message += "missing fields: #{missing_fields}" if missing_fields != []
+      message += " | unknown fields: #{unknown_fields}" if unknown_fields !=[]
+      @errors = [[{ project: 0, errors: [{ format: "bad header #{message}" }] }]]
+      return false
     end
   end
 

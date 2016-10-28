@@ -1,12 +1,17 @@
 <li class="<%= active_page?(map_path) ? '-active' : '' %>">
-  <%= link_to (t 'map'), map_path %></a>
+  <%= link_to (t 'map'), map_path %>
 </li>
 <li class="<%= active_page?(countries_path) ? '-active' : '' %>">
-  <%= link_to (t 'countries'), countries_path %></a>
+  <%= link_to (t 'countries'), countries_path %>
 </li>
 <li class="<%= active_page?(cancers_path) ? '-active' : '' %>">
-  <%= link_to (t 'cancer_types'), cancers_path %></a>
+  <%= link_to (t 'cancer_types'), cancers_path %>
 </li>
 <li class="<%= active_page?(about_path) ? '-active' : '' %>">
-  <%= link_to (t 'about'), about_path %></a>
+  <%= link_to (t 'about'), about_path %>
+</li>
+<li>
+  <a href="/search">
+    <svg class="c-icon -medium -primary"><use xlink:href="#icon-search"></use></svg>
+  </a>
 </li>

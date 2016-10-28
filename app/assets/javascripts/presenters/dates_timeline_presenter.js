@@ -17,10 +17,7 @@
         el: '#datesTimeline'
       });
 
-      this.setEvents();
       this.setSubscriptions();
-
-
       this.setState(params);
     },
 
@@ -32,9 +29,6 @@
 
     getState: function() {
       return this.state.attributes;
-    },
-
-    setEvents: function() {
     },
 
     setSubscriptions: function() {

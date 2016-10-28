@@ -16,13 +16,17 @@
       margin-bottom: 2px;
     }
 
-    & a.-uppercase {
-      font-weight: bold;
-      text-transform: uppercase;
-      color: $secondary-color;
+    & a {
+      word-wrap: break-word;
 
-      &:hover {
-        opacity: .6;
+      &.-uppercase {
+        font-weight: bold;
+        text-transform: uppercase;
+        color: $secondary-color;
+
+        &:hover {
+          opacity: .6;
+        }
       }
     }
   }

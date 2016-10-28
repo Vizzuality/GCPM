@@ -16,7 +16,9 @@
 
     initialize: function (params) {
       this.state = new StateModel();
-      this.layersView = new App.View.Layers({ el: '#layers' });
+      this.layersView = new App.View.Layers({
+        el: '#layers'
+      });
       this.fc = App.facade.cartoLayer;
       this.layersCollection = new App.Collection.Layers();
 
@@ -37,6 +39,10 @@
 
     setSubscriptions: function () {
       App.on('Actionbar:layers', this.toggleActive, this);
+      App.on('Actionbar:change', function(){
+        this.layersView.trigger('close');
+        this.render();
+      }, this);
       App.on('Map:change Router:change Timeline:change', this.setState, this);
       App.on('Router:change Timeline:change', function(params) {
         if (params.cartoLayer) {
@@ -93,6 +99,8 @@
 
     render: function () {
       var data = this.state.attributes;
+
+      this.layersView.setElement('#layers');
       this.layersView.updateData(data);
     },
 

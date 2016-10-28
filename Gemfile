@@ -49,6 +49,7 @@ gem 'cartomodel', git: 'https://github.com/Vizzuality/cartomodel'
 
 # SQL.erb
 gem 'sql_query'
+gem 'textacular'
 
 # Follows
 gem "acts_as_follower", git: 'https://github.com/tcocca/acts_as_follower'

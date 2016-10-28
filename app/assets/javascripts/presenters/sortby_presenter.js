@@ -20,7 +20,7 @@
     initialize: function(params, viewSettings) {
       var sortby = _.pick(params, 'sortby');
       var specs = sortby.sortby && _.extend(this.splitSortby(sortby.sortby)) || {};
-      this.state = new StateModel(_.extend(specs, sortby));
+      this.state = new StateModel(_.extend(specs, sortby, _.pick(params, 'data')));
 
       // this.setState(_.extend(specs, sortby));
 
@@ -55,6 +55,14 @@
       this.state.on('change', function() {
         App.trigger('SortBy:change', this.getState());
       }, this);
+    },
+
+    setSubscriptions: function() {
+      var eventsNames = [
+        'Router:change', 'Map:change', 'TabNav:change',
+        'FilterForm:change', 'Breadcrumbs:change'
+      ].join(' ');
+      App.on(eventsNames, this.setState, this);
     },
 
     onDropdownChange: function(current) {

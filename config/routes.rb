@@ -47,6 +47,8 @@ Rails.application.routes.draw do
   post 'block/:user_id', to: 'follows#block', as: :blocks
   delete 'block/:user_id', to: 'follows#unblock', as: :block
 
+  resources :searches, path: 'search', controller: 'search', only: :index
+
   # Admin
   #get 'admin/excel-uploader', to: 'admin/excel_uploader#new', as: :admin_excel_uploader
 

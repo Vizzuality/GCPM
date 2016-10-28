@@ -1,0 +1,19 @@
+.c-search-item {
+  padding: 25px 0px;
+  border-bottom: 1px solid $border-color-1;
+
+  a {
+    font-size: $medium-font-size;
+    color: $primary-color;
+
+    &:hover {
+      color: darken($primary-color, 5%);
+    }
+  }
+
+  p {
+    padding: 5px 0 0 10px;
+    margin: 0;
+    line-height: 1.25;
+  }
+}
