@@ -14,9 +14,9 @@
           <h1><%= @project.title %></h1>
 
           <% if user_signed_in? && current_user.projects.include?(@project) %>
-            <%= link_to 'Not mine', remove_relation_project_path(@project), method: :patch, class: 'c-btn -transparent' %>
-          <% else %>
-            <%= link_to 'This is mine', (user_signed_in?) ? relation_request_project_path(@project) : user_session_path, method: (user_signed_in?) ? :patch : :post, class: 'c-btn -transparent' %>
+            <%= link_to (t 'not_me'), remove_relation_project_path(@project), method: :patch, class: 'c-btn -transparent' %>
+          <% elsif user_signed_in? %>
+            <%= link_to (t 'this_is_me'), relation_request_project_path(@project), method: :patch, class: 'c-btn -transparent' %>
           <% end %>
 
           <div class="c-summary-info row -collapse">
