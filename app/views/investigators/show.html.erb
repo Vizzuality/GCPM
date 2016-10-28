@@ -30,9 +30,13 @@
           <div class="row">
             <div class="column small-12 medium-6">
               <ul class="c-pipe-list">
-                <li><%= @investigator.organizations.size > 0 ? @investigator.organizations.first.name : '' %></li>
-                <% if inv_user %>
-                  <li><%= inv_user.position ? inv_user.position : '' %></li>
+                <% if @investigator.organizations.size > 0 %>
+                  <li>
+                    <%= link_to @investigator.organizations.first.name, organization_path(@investigator.organizations.first.id), class: '-clickable -hv' %>
+                  </li>
+                <% end %>
+                <% if inv_user && inv_user.position %>
+                  <li><%= inv_user.position %></li>
                 <% end %>
               </ul>
               <ul class="c-pipe-list">
@@ -43,20 +47,20 @@
             <div class="column small-12 medium-6">
               <ul class="c-pipe-list">
                 <% if inv_user %>
-                  <li>
-                    <% if inv_user.twitter_account %>
+                  <% if inv_user.twitter_account %>
+                    <li>
                       <a href="https://twitter.com/<%= inv_user.twitter_account %>" class="-clickable -hv" target="_blank">
                         @<%= inv_user.twitter_account %>
                       </a>
-                    <% end %>
-                  </li>
-                  <li>
-                    <% if inv_user.linkedin_account %>
+                    </li>
+                  <% end %>
+                  <% if inv_user.linkedin_account %>
+                    <li>
                       <a href="https://www.linkedin.com/in/<%= inv_user.linkedin_account %>" class="-clickable -hv" target="_blank">
                         <%= inv_user.linkedin_account %>
                       </a>
-                    <% end %>
-                  </li>
+                    </li>
+                  <% end %>
                 <% end %>
                 <li>
                   <a href="http://www.ncbi.nlm.nih.gov/pubmed?term=<%= @investigator.name %>%5BAuthor%5D" class="-clickable -hv" target="_blank">
@@ -71,14 +75,12 @@
               <tr>
                 <th><%= t 'projects' %></th>
                 <th><%= t 'posts' %></th>
-                <th><%= t 'events' %></th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td><%= @projects.size %></td>
                 <td><%= @posts.size %></td>
-                <td><%= @events.size %></td>
               </tr>
             </tbody>
           </table>
