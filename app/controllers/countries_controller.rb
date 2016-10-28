@@ -12,8 +12,8 @@ class CountriesController < ApplicationController
     @current_type = params.key?(:data) ? params[:data] : 'data'
 
     gon.server_params = { 'countries[]': params[:iso] }
-    gon.carto_account = ENV["CARTO_ACCOUNT"]
-    gon.carto_key = ENV["CARTO_KEY"]
+    gon.carto_account = ENV["CARTODB_ACCOUNT"]
+    gon.carto_key = ENV["CARTODB_KEY"]
 
     limit = 12 + (@page * 9)
 

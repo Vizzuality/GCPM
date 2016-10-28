@@ -71,7 +71,7 @@ class Project < ApplicationRecord
   scope :by_regions,            -> regions             { joins(:countries).where(countries: { region_iso: regions }) }
   scope :by_start_date,         -> start_date          { where('projects.start_date > ?', start_date ) }
   scope :by_end_date,           -> end_date            { where('projects.end_date < ?', end_date ) }
-  scope :by_user,               -> user                { where('projects.user_id = ?', user ) }
+  scope :by_user,               -> user                { joins(:project_users).where('project_users.user_id = ? AND project_users.is_approved = ?', user, true ) }
 
   class << self
     def fetch_all(options={})

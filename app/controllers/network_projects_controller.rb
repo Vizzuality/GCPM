@@ -5,6 +5,7 @@ class NetworkProjectsController < ApplicationController
   before_action :set_current_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_project,      only: [:show, :edit, :update, :destroy]
   before_action :set_selection,    only: [:new, :create, :edit, :update]
+  before_action :set_owner,        only: :show
 
   def show
   end
@@ -45,6 +46,10 @@ class NetworkProjectsController < ApplicationController
 
     def set_user
       @user = User.find(params[:user_id])
+    end
+
+    def set_owner
+      @owner = user_signed_in? && current_user.projects.include?(@project)
     end
 
     def set_current_user

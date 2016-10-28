@@ -45,6 +45,7 @@ gem 'sendgrid-ruby'
 gem 'cartomodel', git: 'https://github.com/Vizzuality/cartomodel'
 # gem 'rack-cors', require: 'rack/cors'
 gem 'sql_query'
+gem 'textacular'
 
 gem "acts_as_follower", git: 'https://github.com/tcocca/acts_as_follower'
 

@@ -17,8 +17,8 @@
           <div class="c-summary-info row -collapse">
             <div class="column small-12 medium-4 align-middle">
               <div class="c-avatar -small">
-                <svg class="c-icon icon-colab_icon">
-                  <use xlink:href="#icon-colab_icon"></use>
+                <svg class="c-icon icon-colaborators -inverse">
+                  <use xlink:href="#icon-colaborators -inverse"></use>
                 </svg>
               </div>
               <h3><%= @event.participants != nil ? @event.participants.split(',').length : 0 %>
@@ -44,7 +44,7 @@
             <li class="tabnav-item">
               <%= link_to t(filter),
                 project_path(request.query_parameters.merge({ data: filter })),
-                class: "js-btn-mapmenu-type",
+                class: "-secondary js-btn-mapmenu-type",
                 remote: true,
                 data: { datatype: filter }
               %>

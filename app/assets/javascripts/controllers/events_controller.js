@@ -6,16 +6,21 @@
 
   _.extend(App.Controller.Events.prototype, {
 
-    new: function() {
-      // new App.Presenter.EventForm();
-    },
-
     show: function(params) {
       var newParams = _.extend({}, params, {dataType: 'info'});
 
-      new App.Presenter.MapVis(params);
+      new App.Presenter.MapVis(newParams);
       new App.Presenter.TabNav(newParams);
-      new App.Presenter.ShowMore(params);
+      new App.Presenter.FollowButton(newParams);
+      new App.Presenter.ShowMore(newParams);
+    },
+
+    new: function() {
+      new App.Presenter.EventForm();
+    },
+
+    edit: function() {
+      new App.Presenter.EventForm();
     }
 
   });

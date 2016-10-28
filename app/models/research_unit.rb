@@ -41,5 +41,6 @@ class ResearchUnit < ApplicationRecord
       if double_rus.size == 2
         double_rus[1].delete
       end
+      ResearchUnit.where(address_id: nil).delete_all
     end
 end

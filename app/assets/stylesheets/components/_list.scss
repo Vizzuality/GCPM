@@ -3,6 +3,10 @@
   padding: 0;
   margin: 0;
 
+  &.-mg-bottom {
+    margin-bottom: $box-space;
+  }
+
   .list-item {
     display: block;
     font-family: $base-font-family-light;
@@ -12,8 +16,14 @@
       margin-bottom: 2px;
     }
 
-    &:hover {
-      color: $primary-color;
+    & a.-uppercase {
+      font-weight: bold;
+      text-transform: uppercase;
+      color: $secondary-color;
+
+      &:hover {
+        opacity: .6;
+      }
     }
   }
 }

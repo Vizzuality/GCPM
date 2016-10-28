@@ -17,6 +17,13 @@
 
       background-color: $app-bg-color;
 
+      &:hover {
+        background-color: darken($primary-color, 5%);
+        &:after{
+          background-color: darken($primary-color, 5%);
+        }
+      }
+
       &:after {
         display: block;
         position: absolute;
@@ -38,6 +45,7 @@
     }
 
     > li:last-child a {
+      cursor: default;
       color: $base-font-color;
       background-color: $body-bg-color;
 

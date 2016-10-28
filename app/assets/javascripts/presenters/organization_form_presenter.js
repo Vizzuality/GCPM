@@ -12,6 +12,7 @@
 
     initialize: function(params) {
       this.state = new StateModel(params);
+      this.DOMelementId = params.DOMelementId;
 
       var organizationName = new App.Presenter.OrganizationName();
       var organizationCountry = new App.Presenter.OrganizationCountry();
@@ -38,7 +39,7 @@
       this.organizationForm.on('cancel', this.closeForm, this);
       this.organizationForm.on('submit', function(newState) {
         this.setState(newState);
-        App.trigger('OrganizationForm:submit', this.state.attributes);
+        App.trigger('OrganizationForm:submit'+this.DOMelementId, this.state.attributes);
         this.closeForm();
       }, this);
     },

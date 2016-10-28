@@ -38,12 +38,8 @@
         DOMelement: "#lead-1",
         name: "lead",
         value: "lead-1",
-        label: false,
-        firstRadio: true
+        label: false
       });
-
-      this.investigatorForm = new App.Presenter.InvestigatorForm();
-      this.organizationForm = new App.Presenter.OrganizationForm();
 
       this.investigatorOrganization = new App.View.InvestigatorOrganization({
         el: '#investigatororganization'
@@ -84,14 +80,6 @@
      * Subscribing to global events
      */
     setSubscriptions: function() {
-      App.on('Investigator:new', function(){
-        this.investigatorForm.openForm();
-      }, this);
-
-      App.on('Organization:new', function(){
-        this.organizationForm.openForm();
-      }, this);
-
       App.on('ProjectForm:newInvestigator', function(){
         this.createElement();
       }, this);
@@ -132,7 +120,6 @@
 
               // Render the child
               child.render();
-              App.trigger('InvestigatorOrganization:complete');
             }.bind(this));
 
           }, this);
@@ -157,30 +144,6 @@
      */
     getElement: function() {
       return this.investigatorOrganization.$el;
-    },
-
-    setValue: function(memberships){
-      var i;
-      for(i=1; i < memberships.length; i++){
-        this.createElement();
-      }
-
-      App.on('InvestigatorOrganization:complete', function(){
-
-        memberships.forEach(function(membership, index){
-          var elementChildren;
-          this.elements.forEach(function(element){
-            if(element.id == index+1){
-              elementChildren = element.children;
-            }
-          });
-
-          elementChildren[0].setValue(membership.research_unit_attributes.investigator_id);
-          elementChildren[1].setValue(membership.research_unit_attributes.organization_id);
-          elementChildren[2].setValue(membership.research_unit_attributes.address_id);
-          elementChildren[3].setValue(membership.membership_type);
-        }, this);
-      }, this);
     },
 
     createElement: function(){
