@@ -66,8 +66,8 @@ class Investigator < ApplicationRecord
     investigators = investigators.by_user(options[:user])                             if options[:user]
     investigators = investigators.order('investigators.created_at ASC')               if options[:sortby] && options[:sortby] == 'created_asc'
     investigators = investigators.order('investigators.created_at DESC')              if options[:sortby] && options[:sortby] == 'created_desc'
-    investigators = investigators.order('investigators.title ASC')                    if options[:sortby] && options[:sortby] == 'title_asc'
-    investigators = investigators.order('investigators.title DESC')                   if options[:sortby] && options[:sortby] == 'title_desc'
+    investigators = investigators.order('investigators.name ASC')                    if options[:sortby] && options[:sortby] == 'title_asc'
+    investigators = investigators.order('investigators.name DESC')                   if options[:sortby] && options[:sortby] == 'title_desc'
     investigators = investigators.limit(options[:limit])                              if options[:limit]
     investigators = investigators.offset(options[:offset])                            if options[:offset]
     investigators.uniq
