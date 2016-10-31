@@ -41,6 +41,7 @@ class ResearchUnit < ApplicationRecord
       if double_rus.size == 2
         double_rus[1].delete
       end
-      ResearchUnit.where(address_id: nil).delete_all
+      invalid_ru = ResearchUnit.where(address_id: nil)
+      invalid_ru.delete_all if invalid_ru.any?
     end
 end
