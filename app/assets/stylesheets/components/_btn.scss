@@ -156,6 +156,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    svg {
+      display: block;
+      &.-hidden {
+        display: none;
+      }
+    }
+
+    &.-active {
+      svg {
+        display: none;
+        &.-hidden {
+          display: block;
+        }
+      }
+    }
   }
 
   .notification-bubble {

@@ -16,6 +16,10 @@
       this.investigatorActions = new App.View.InvestigatorActions({
         el: '#investigatorsActionsView'
       });
+      this.modal = new App.View.Modal({
+        className: '-tiny'
+      });
+
 
       this.setEvents();
       this.setSubscriptions();
@@ -46,6 +50,7 @@
       App.on('Remote:load', this.rebindElement, this)
       App.on('Messages:created', function(){
         this.state.set('user', null);
+        this.openNotice('<h2>Message sent!</h2><p>Check your messages tab to see your conversations</p>');
       }, this)
     },
 
@@ -56,7 +61,12 @@
     rebindElement: function() {
       this.investigatorActions.setElement('#investigatorsActionsView');
       this.investigatorActions.cache();
+    },
+
+    openNotice: function(text) {
+      this.modal.open(text);
     }
+
 
   });
 

@@ -7,7 +7,9 @@
           <h2><a href="/investigators/<%= e.id %>"><%= e.name %></a></h2>
           <% if e.user %>
             <button class="c-btn -icon -secondary js-btn-toggle-message" data-user="<%= e.user.id %>" type="button" name="button">
-              <svg class="c-icon -medium -inverse"><use xlink:href="#icon-edit"></use></svg>
+              <svg class="c-icon -normal -inverse"><use xlink:href="#icon-edit"></use></svg>
+              <svg class="c-icon -normal -inverse -hidden"><use xlink:href="#icon-close"></use></svg>
+
             </button>
 
             <div id="form-message-<%= e.user.id %>" class="form-message js-form-message">
