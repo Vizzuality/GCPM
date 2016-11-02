@@ -11,7 +11,7 @@ ActiveAdmin.register ProjectUser do
     def destroy
       @project_user = ProjectUser.find(params[:id])
       if @project_user.destroy
-        UserMailer.user_relation_email(@project_user.user.name, @project_user.user.email, @project_user.project.title, 'removed').deliver
+        UserMailer.user_relation_email(@project_user.user.name, @project_user.user.email, @project_user.project.title, 'removed').deliver_later
         redirect_to admin_project_users_path, notice: 'The relation have been removed.'
       end
     end
@@ -19,13 +19,13 @@ ActiveAdmin.register ProjectUser do
 
   member_action :approve, method: :patch do
     resource.update(is_approved: true)
-    UserMailer.user_relation_email(resource.user.name, resource.user.email, resource.project.title, 'approved').deliver
+    UserMailer.user_relation_email(resource.user.name, resource.user.email, resource.project.title, 'approved').deliver_later
     redirect_to admin_project_users_path, notice: 'The relation have been approved.'
   end
 
   member_action :unapprove, method: :patch do
     resource.update(is_approved: false)
-    UserMailer.user_relation_email(resource.user.name, resource.user.email, resource.project.title, 'unapproved').deliver
+    UserMailer.user_relation_email(resource.user.name, resource.user.email, resource.project.title, 'unapproved').deliver_later
     redirect_to admin_project_users_path, notice: 'The relation have been unapproved.'
   end
 
