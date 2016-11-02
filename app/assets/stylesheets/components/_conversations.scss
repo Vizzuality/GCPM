@@ -1,0 +1,43 @@
+.c-conversations {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: rgba(0,0,0,.05);
+
+  > li {
+    padding: 16px;
+    border-top: 1px solid $border-color-1;
+    &:first-child {
+      margin: 0;
+      border-top: none;
+    }
+  }
+}
+
+.c-conversations-item {
+  list-style: none;
+
+  .sender {
+    display: flex;
+    align-items: center;
+    > * {
+      margin: 0 $inline-space 0 0;
+      &:last-child { margin: 0; }
+    }
+  }
+
+  .message {
+    margin: 0 0 0 10px;
+  }
+
+  &.-mine {
+    // text-align: right;
+    // .sender {
+    //   justify-content: flex-end;
+    // }
+  }
+
+  &.-theirs {
+    background: rgba(0,0,0,.05);
+  }
+}

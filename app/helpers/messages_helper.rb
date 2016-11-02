@@ -5,4 +5,8 @@ module MessagesHelper
       receiver.receiver
     end
   end
+
+  def sender(id)
+    sender = User.find(id)
+  end
 end

@@ -1,0 +1,15 @@
+(function() {
+  'use strict'
+  console.log('<%= @items %>');
+  <% if @items %>
+    <% template = "messages/list" %>
+
+    var htmlContent = "<%= escape_javascript render(partial: template, locals: { items: @items, more: @more }) %>";
+
+    document.getElementById('content').innerHTML = htmlContent;
+
+    App.trigger('Remote:load');
+  <% end %>
+
+  App.trigger('Messages:created');
+})();

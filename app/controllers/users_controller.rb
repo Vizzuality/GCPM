@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     @people = @user.investigator
     @posts = @user.posts
     @events = @user.events.order('created_at DESC')
-    @conversations = Mailboxer::Conversation.joins(:receipts).where(mailboxer_receipts: {receiver_id: current_user.id, deleted: false}).uniq.page(params[:page])
+    @conversations = Mailboxer::Conversation.joins(:receipts).where(mailboxer_receipts: {receiver_id: current_user.id, deleted: false}).uniq.page(params[:page]).order('created_at DESC')
 
     if params.key?(:data) && params[:data] == 'network'
       @followProjects = @user.following_by_type('Project')

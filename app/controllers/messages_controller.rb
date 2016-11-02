@@ -1,4 +1,6 @@
 class MessagesController < ApplicationController
+  respond_to :html, :js
+
   def index
     @user = current_user
     @conversations = Mailboxer::Conversation.joins(:receipts).where(mailboxer_receipts: {receiver_id: current_user.id, deleted: false}).uniq.page(params[:page]).per(20)
@@ -14,12 +16,13 @@ class MessagesController < ApplicationController
   end
   def create
     sender = current_user
+
     if message_params[:in_response].present?
       message = Mailboxer::Message.find(message_params[:in_response])
       receiver = message.receipts.where.not(receiver_id: current_user.id).first.receiver
       #authorize! :create_message, message
       if current_user.reply_to_conversation(message.conversation, message_params[:body])
-        # Example redirect: redirect_to message_show_path(current_user, message.conversation), flash: { notice: "Message sent." }
+        message_params[:data] == 'messages' ? renderMessages : renderNotice
       end
     else
       receiver = User.find_by(id: message_params[:receiver])
@@ -27,7 +30,7 @@ class MessagesController < ApplicationController
       sender = current_user
       #authorize! :create_message, message
       if message = sender.send_message(receiver, message_params[:body], message_params[:subject])
-        # Example redirect: redirect_to user_path(receiver), flash: { notice: "Mensaje enviado." }
+        message_params[:data] == 'messages' ? renderMessages : renderNotice
       end
     end
   end
@@ -40,8 +43,25 @@ class MessagesController < ApplicationController
     redirect_to messages_path(current_user), flash: { notice: "Conversación eliminada." }
   end
 
-  private
-  def message_params
-    params.require(:message).permit(:body, :subject, :receiver, :in_response)
+  def renderMessages
+    limit = 12;
+    @conversations = Mailboxer::Conversation.joins(:receipts).where(mailboxer_receipts: {receiver_id: current_user.id, deleted: false}).uniq.page(params[:page]).order('created_at DESC')
+
+    @items = @conversations.limit(limit)
+    @more = (@conversations.size > @items.size)
+    @items_total = @conversations.size
+
+    respond_with(@items)
   end
+
+  def renderNotice
+    respond_with(true)
+  end
+
+
+  private
+    def message_params
+      params.require(:message).permit(:body, :subject, :receiver, :in_response, :data)
+    end
+
 end

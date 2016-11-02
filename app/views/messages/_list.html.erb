@@ -2,20 +2,40 @@
   <div class="row collapse">
     <% items.each do |c| %>
       <div class="column small-12">
-        <div class="c-card -events">
+        <div class="c-card -messages">
           <% conversation_person = conversation_person(c) %>
-          <h2><%= c.subject %></h2>
-          <ul>
+          <h2>
+            <span><%= conversation_person.name %></span>
+          </h2>
+          <h3>
+            <%= c.subject %>
+          </h3>
+          <ul class="c-conversations">
             <% c.messages.each do |m| %>
-              <li>
-                <%= m.body %>
+              <% message_person = sender(m.sender_id) %>
+              <li class="c-conversations-item <%= (m.sender_id == current_user.id) ? '-mine' : '-theirs' %>">
+                <div class="sender">
+                  <h3><%= message_person.name %></h3>
+                  <small><%= m.created_at.strftime("%d.%m.%Y") %> <%= m.created_at.strftime("%H:%M")%></small>
+                </div>
+                <div class="message">
+                  <%= m.body %>
+                </div>
               </li>
             <% end %>
           </ul>
+          <div class="message-form">
+            <%= form_for Mailboxer::Message.new, url: :message, remote: true, as: :message do |f| %>
+              <div class="form-row">
+                <%= f.text_area :body, class: '-border -padding', rows: 5, placeholder: 'Text here your response' %>
+                <%= f.hidden_field :in_response, value: c.messages.last.id %>
+                <%= f.hidden_field :data, value: 'messages' %>
+                <%= f.submit 'Send', class: 'c-btn -primary' %>
+              </div>
+            <% end %>
+          </div>
 
           <div class="details">
-            <span><%= conversation_person.name %></span>
-            <span><%= c.created_at.strftime("%d.%m.%Y") %> <%= c.created_at.strftime("%H:%M") %></span>
           </div>
           <p></p>
         </div>

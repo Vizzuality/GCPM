@@ -44,6 +44,9 @@
     setSubscriptions: function() {
       App.on('TabNav:change', this.setState, this)
       App.on('Remote:load', this.rebindElement, this)
+      App.on('Messages:created', function(){
+        this.state.set('user', null);
+      }, this)
     },
 
     changeUser: function() {

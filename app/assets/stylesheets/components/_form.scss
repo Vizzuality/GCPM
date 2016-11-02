@@ -20,6 +20,14 @@ textarea {
   border: 0;
   border-bottom: 1px solid $border-color-1;
 
+  &.-padding {
+    padding: 16px;
+  }
+
+  &.-border {
+    border: 1px solid $border-color-1;
+  }
+
   &.-large {
     color: $base-font-color;
     font-size: $large-font-size;
