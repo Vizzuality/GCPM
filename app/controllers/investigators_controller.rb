@@ -1,6 +1,6 @@
 class InvestigatorsController < ApplicationController
   before_action :set_investigator, except: :index
-  before_action :set_user,          only: [:remove_relation, :relation_request]
+  before_action :set_user,         only: [:remove_relation, :relation_request]
 
   respond_to :html, :js
 
@@ -58,6 +58,7 @@ class InvestigatorsController < ApplicationController
 
   def remove_relation
     if @investigator.remove_relation(@user.id)
+      UserMailer.user_relation_email(@user.name, @user.email, @investigator.name, 'removed').deliver
       redirect_to investigator_path(@investigator), notice: { text: 'Relation removed.', show: true }
     else
       redirect_to investigator_path(@investigator), notice: { text: "Can't remove relation.", show: true }
@@ -66,6 +67,7 @@ class InvestigatorsController < ApplicationController
 
   def relation_request
     if @investigator.relation_request(@user.id)
+      UserMailer.user_relation_email(@user.name, @user.email, @investigator.name, 'request').deliver
       redirect_to investigator_path(@investigator), notice: { text: 'Your request is being revised, please, check your dashboard for updates.', show: true }
     else
       redirect_to investigator_path(@investigator), notice: { text: "Can't request relation.", show: true }
