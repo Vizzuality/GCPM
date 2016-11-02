@@ -49,10 +49,22 @@ class UsersController < ApplicationController
     respond_with(@items)
   end
 
+  def update
+    if @user.update(user_params)
+      redirect_to user_path(current_user.id)
+    else
+      redirect_to edit_user_path(current_user.id)
+    end
+  end
+
   private
 
-    def set_user
-      @user = User.find(params[:id])
-      @investigator = Investigator.fetch_all(user_id: params[:id]);
-    end
+  def set_user
+    @user = User.find(params[:id])
+    @investigator = Investigator.fetch_all(user_id: params[:id]);
+  end
+
+  def user_params
+  params.require(:user).permit(:name, :email, :position, :twitter_account, :linkedin_account)
+  end
 end

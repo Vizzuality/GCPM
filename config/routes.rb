@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   resources :posts
 
   # User profile
-  resources :users, only: :show, path: :network do
+  resources :users, only: [:show, :edit, :update], path: :network do
     resources :projects, controller: 'network_projects', except: :index do
       patch 'remove_relation',  on: :member
     end
