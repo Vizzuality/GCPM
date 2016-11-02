@@ -1,8 +1,8 @@
 ActiveAdmin.register_page "UserInvestigator" do
-  menu label: "User's investigator", parent: 'Network', priority: 1
+  menu label: "Investigators relations", parent: 'Network', priority: 1
 
-  content title: 'Invesigator - user relations' do
-    table do
+  content title: 'Investigators relations' do
+    table class: 'index_table index' do
       thead do
         tr do
           %w[Investigator User Approved Action Remove].each &method(:th)

@@ -1,12 +1,12 @@
 ActiveAdmin.register ProjectUser do
   actions :all, except: [:update, :edit, :show]
 
-  menu label: "User's projects", parent: 'Network', priority: 1
+  menu label: "Projects relations", parent: 'Network', priority: 1
 
   permit_params :project_id, :user_id, :is_approved
 
   controller do
-    before_action { @page_title = "User's projects" }
+    before_action { @page_title = "Projects relations" }
 
     def destroy
       @project_user = ProjectUser.find(params[:id])
