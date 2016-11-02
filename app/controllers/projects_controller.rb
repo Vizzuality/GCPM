@@ -40,6 +40,7 @@ class ProjectsController < ApplicationController
 
   def remove_relation
     if @project.remove_relation(@user.id)
+      UserMailer.user_relation_email(@user.name, @user.email, @project.title, 'removed').deliver_later
       redirect_to project_url(@project), notice: { text: 'Relation removed.', show: true }
     else
       redirect_to project_url(@project), notice: { text: "Can't remove relation.", show: true }
@@ -48,6 +49,7 @@ class ProjectsController < ApplicationController
 
   def relation_request
     if @project.relation_request(@user.id)
+      UserMailer.user_relation_email(@user.name, @user.email, @project.title, 'request').deliver_later
       redirect_to project_url(@project), notice: { text: 'Your request is being revised, please, check your dashboard for updates.', show: true }
     else
       redirect_to project_url(@project), notice: { text: "Can't request relation.", show: true }

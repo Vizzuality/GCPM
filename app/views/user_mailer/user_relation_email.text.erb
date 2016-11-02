@@ -1,0 +1,6 @@
+Dear <%= @name_or_email %>,<%= "\n" %>
+<% if @action.include?('request') %>
+  Your relation request to <%= @relation_name %> is being revised, please, check your dashboard for updates.
+<% else %>
+  Your relation to <%= @relation_name %> was <%= @action %>.
+<% end %>
