@@ -22,8 +22,6 @@
       var specs = sortby.sortby && _.extend(this.splitSortby(sortby.sortby)) || {};
       this.state = new StateModel(_.extend(specs, sortby, _.pick(params, 'data')));
 
-      // this.setState(_.extend(specs, sortby));
-
       var dropdownOptions = _.map([
         { name: 'Title', value: 'title' },
         { name: 'Created', value: 'created'}
@@ -45,6 +43,7 @@
       });
 
       this.setEvents();
+      this.setSubscriptions();
     },
 
     /**

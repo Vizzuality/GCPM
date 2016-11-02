@@ -14,7 +14,7 @@
           <div class="row">
             <div class="column small-12 medium-6">
               <ul class="c-pipe-list">
-                <li><%= @organization.organization_type.name ? @organization.organization_type.name : '' %></li>
+                <li><%= @organization.organization_type.present? ? @organization.organization_type.try(:name) : '' %></li>
               </ul>
             </div>
             <div class="column small-12 medium-6">
