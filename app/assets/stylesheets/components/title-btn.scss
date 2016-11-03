@@ -2,8 +2,17 @@
   display: flex;
   margin-bottom: $box-space / 2;
   max-height: 50px;
+  align-items: center;
+
+  h1, h2, h3 {
+    margin-bottom: 0;
+  }
 
   .c-btn {
     margin-left: $inline-space;
+  }
+
+  & *:first-child {
+    margin-left: 0;
   }
 }
