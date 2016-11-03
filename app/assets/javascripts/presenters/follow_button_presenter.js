@@ -1,3 +1,4 @@
+/* global ga */
 (function(App) {
 
   'use strict';
@@ -61,6 +62,7 @@
     followSuccess: function() {
       var followed = this.follow.get('followed');
       this.follow.set('followed', !followed);
+      ga('send', 'event', 'Subscribe', 'Follow', 'Follow '+ this.follow.get('follow_resource') + ' ' +  this.follow.get('follow_id'));
     },
 
     followError: function() {

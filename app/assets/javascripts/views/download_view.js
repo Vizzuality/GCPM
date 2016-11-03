@@ -1,8 +1,13 @@
+/* global ga */
 (function(App) {
 
   'use strict';
 
   App.View.Download = Backbone.View.extend({
+
+    events: {
+      'click a' : 'onClickDownload'
+    },
 
     initialize: function() {
       this.cache();
@@ -20,6 +25,10 @@
       if (url && typeof url === 'string') {
         this.$link.attr('href', url);
       }
+    },
+
+    onClickDownload: function() {
+      ga('send', 'event', 'Download', 'Projects');
     }
 
   });

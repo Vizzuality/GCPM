@@ -49,7 +49,6 @@
 
         ga('send', 'event', 'Map', 'Share', 'Copy Link');
 
-
       } catch(err) {
         console.error(err);
       }
