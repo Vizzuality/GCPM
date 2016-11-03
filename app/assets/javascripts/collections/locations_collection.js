@@ -17,17 +17,22 @@
     toGeoJSON: function() {
       return {
         type: 'FeatureCollection',
-        features: _.map(this.models, function(m) {
-          var centroid = JSON.parse(m.attributes.centroid);
-          if (centroid.type === 'point') {
-            centroid.type = 'Point';
+        features: _.compact(_.map(this.models, function(m) {
+          try {
+            var centroid = JSON.parse(m.attributes.centroid);
+            if (centroid.type === 'point') {
+              centroid.type = 'Point';
+            }
+            return {
+              type: 'Feature',
+              geometry: centroid,
+              properties: m.attributes
+            };
+          } catch (e) {
+            return null;
           }
-          return {
-            type: 'Feature',
-            geometry: centroid,
-            properties: m.attributes
-          };
-        })
+
+        }))
       };
     }
 
