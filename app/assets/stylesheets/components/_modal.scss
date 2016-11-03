@@ -29,11 +29,12 @@
     display: flex;
     width: 80%;
     max-width: $modal-max-width;
-    max-height: 85%;
     top: 50%;
     left: 50%;
+    bottom: 0;
 
     background: $body-bg-color;
+    padding: $box-space;
 
     transform: translate(-50%, -50%);
     z-index: 1;
@@ -42,8 +43,8 @@
   .modal-content {
     position: relative;
     flex: 1;
-    padding: $box-space;
     overflow: auto;
+    max-height: 85vh;
     -webkit-overflow-scrolling: touch;
   }
 
