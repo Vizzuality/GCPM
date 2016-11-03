@@ -124,9 +124,13 @@
       </div>
     </div>
 
-    <% if params[:error] || f.error_notification %>
-      <p class="error">* Required field missing.</p>
-    <% end %>
+    <div class="form-row row -mg-big">
+      <div class="column small-12 medium-5 medium-offset-1">
+        <% if params[:error] || f.error_notification %>
+          <p class="error">* Required field missing.</p>
+        <% end %>
+      </div>
+    </div>
 
   </div>
 
