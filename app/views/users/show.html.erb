@@ -19,7 +19,7 @@
       <div class="row collapse">
         <div class="column small-8">
           <div class="c-title-btn">
-            <% if user.name && user.name != "" %>
+            <% if user.name && user.name != '' %>
               <h1><%= user.try(:name) %></h1>
             <% end %>
             <%= link_to (t 'edit'), edit_user_path(current_user.id), class: "c-btn -transparent" %>
@@ -32,8 +32,8 @@
                     <%= user.investigator.organizations.first.name %>
                   <% end %>
                 </li>
-                <% if user.position %>
-                  <%= user.position %>
+                <% if user.position && user.position != '' %>
+                  <li><%= user.position %></li>
                 <% end %>
               </ul>
               <ul class="c-pipe-list">
@@ -43,7 +43,7 @@
             </div>
             <div class="column small-12 medium-6">
               <ul class="c-pipe-list">
-                <% if user.twitter_account %>
+                <% if user.twitter_account && user.twitter_account != '' %>
                   <li>
                     <a href="https://twitter.com/<%= user.twitter_account %>" class="-clickable -hv" target="_blank">
                       @<%= user.twitter_account %>
@@ -52,7 +52,7 @@
                 <% else %>
                   <li>Twitter</li>
                 <% end %>
-                <% if user.linkedin_account %>
+                <% if user.linkedin_account && user.linkedin_account != '' %>
                   <li>
                     <a href="https://www.linkedin.com/in/<%= user.linkedin_account %>" class="-clickable -hv" target="_blank">
                       <%= user.linkedin_account %>
@@ -61,9 +61,9 @@
                 <% else %>
                   <li>Linkedin</li>
                 <% end %>
-                <% if user.pubmed || user.name %>
+                <% if user.pubmed && user.pubmed != '' %>
                   <li>
-                    <a href="http://www.ncbi.nlm.nih.gov/pubmed?term=<%= user.pubmed || user.name  %>%5BAuthor%5D" class="-clickable -hv" target="_blank">
+                    <a href="http://www.ncbi.nlm.nih.gov/pubmed?term=<%= user.pubmed %>%5BAuthor%5D" class="-clickable -hv" target="_blank">
                       Pubmed
                     </a>
                   </li>
