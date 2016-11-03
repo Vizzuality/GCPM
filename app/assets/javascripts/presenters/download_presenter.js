@@ -29,8 +29,8 @@
       this.state.on('change', function() {
         var state = this.getState(),
             uri = new URI(),
+            data = state.data || 'projects',
             is_projects = (state.data === 'projects');
-
 
         uri.query(state);
         this.download.toggleBtn(is_projects);
