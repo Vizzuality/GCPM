@@ -44,6 +44,7 @@ class MessagesController < ApplicationController
   end
 
   def renderMessages
+    @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
     limit = 12;
     @conversations = Mailboxer::Conversation.joins(:receipts).where(mailboxer_receipts: {receiver_id: current_user.id, deleted: false}).uniq.page(params[:page]).order('created_at DESC')
 

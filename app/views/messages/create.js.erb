@@ -9,7 +9,9 @@
     document.getElementById('content').innerHTML = htmlContent;
 
     App.trigger('Remote:load');
+  <% else %>
+    App.trigger('Messages:created');
   <% end %>
 
-  App.trigger('Messages:created');
+
 })();

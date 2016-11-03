@@ -1,3 +1,4 @@
+/* global URI */
 (function(App) {
 
   'use strict';
@@ -31,11 +32,6 @@
 
     setSubscriptions: function() {
       App.on('Router:change Breadcrumbs:change FilterForm:change Map:change', this.setState, this);
-
-      App.on('Messages:created', function(){
-        console.log('Message created');
-        // this.setState(_.extend({}, this.getState(), { data: 'messages' }));
-      }, this)
     },
 
     setState: function(newState) {
