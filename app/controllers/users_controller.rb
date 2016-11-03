@@ -1,15 +1,10 @@
 class UsersController < ApplicationController
   before_action :set_user
+  before_action :check_user, only: [:show, :edit, :update]
 
   respond_to :html, :js
 
   def show
-    if !current_user
-      redirect_to new_user_session_path and return
-    elsif current_user != User.find_by(id: params[:id])
-      redirect_to map_path and return
-    end
-
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
     @filters = %w(network projects posts events)
     @current_type = params.key?(:data) ? params[:data] : 'projects'
@@ -65,6 +60,14 @@ class UsersController < ApplicationController
   end
 
   def user_params
-  params.require(:user).permit(:name, :email, :position, :twitter_account, :linkedin_account)
+    params.require(:user).permit(:name, :email, :position, :twitter_account, :linkedin_account)
+  end
+
+  def check_user
+    if !current_user
+      redirect_to new_user_session_path and return
+    elsif current_user != User.find_by(id: params[:id])
+      redirect_to map_path and return
+    end
   end
 end
