@@ -36,19 +36,20 @@ class Investigator < ApplicationRecord
   validates_presence_of   :name
   validates_uniqueness_of :user_id, allow_blank: true
 
-  scope :publihsed,             ->                     { joins(:projects).where(status: :published) }
-  scope :active,                ->                     { joins(:projects).where('projects.end_date >= ? AND projects.start_date <= ?', Time.now, Time.now).or(where('projects.end_date IS NULL')) }
-  scope :inactive,              ->                     { joins(:projects).where('projects.end_date < ?', Time.now).or('projects.start_date > ?', Time.now) }
-  scope :by_project_types,      -> project_types       { joins(projects: :project_types).where(project_types: { id: project_types }) }
-  scope :by_cancer_types,       -> cancer_types        { joins(projects: :cancer_types).where(cancer_types: { id: cancer_types }) }
-  scope :by_investigators,      -> investigators       { joins(:investigators).where(investigators: { id: investigators }) }
-  scope :by_organizations,      -> organizations       { joins(:organizations).where(organizations: { id: organizations }) }
-  scope :by_organization_types, -> organization_types  { joins(organizations: :organization_type).where(organization_types: { id: organization_types }) }
-  scope :by_countries,          -> countries           { joins([research_units: [address: :country]]).where(countries: { country_iso_3: countries }) }
-  scope :by_regions,            -> regions             { joins(projects: :countries).where(countries: { region_iso: regions }) }
-  scope :by_start_date,         -> start_date          { joins(:projects).where('projects.start_date > ?', start_date ) }
-  scope :by_end_date,           -> end_date            { joins(:projects).where('projects.end_date < ?', end_date ) }
-  scope :by_user,               -> user                { where('investigators.user_id = ? AND investigators.is_approved = ?', user, true ) }
+  scope :publihsed,             ->                    { joins(:projects).where(status: :published) }
+  scope :active,                ->                    { joins(:projects).where('projects.end_date >= ? AND projects.start_date <= ?', Time.now, Time.now).or(where('projects.end_date IS NULL')) }
+  scope :inactive,              ->                    { joins(:projects).where('projects.end_date < ?', Time.now).or('projects.start_date > ?', Time.now) }
+  scope :by_project_types,      -> project_types      { joins(projects: :project_types).where(project_types: { id: project_types }) }
+  scope :by_cancer_types,       -> cancer_types       { joins(projects: :cancer_types).where(cancer_types: { id: cancer_types }) }
+  scope :by_investigators,      -> investigators      { joins(:investigators).where(investigators: { id: investigators }) }
+  scope :by_organizations,      -> organizations      { joins(:organizations).where(organizations: { id: organizations }) }
+  scope :by_organization_types, -> organization_types { joins(organizations: :organization_type).where(organization_types: { id: organization_types }) }
+  scope :by_countries,          -> countries          { joins([research_units: [address: :country]]).where(countries: { country_iso_3: countries }) }
+  scope :by_regions,            -> regions            { joins(projects: :countries).where(countries: { region_iso: regions }) }
+  scope :by_start_date,         -> start_date         { joins(:projects).where('projects.start_date > ?', start_date ) }
+  scope :by_end_date,           -> end_date           { joins(:projects).where('projects.end_date < ?', end_date ) }
+  scope :by_user,               -> user               { where('investigators.user_id = ? AND investigators.is_approved = ?', user, true ) }
+  scope :user_present,          ->                    { where.not(investigators: { user_id: nil } ) }
 
   def self.fetch_all(options={})
     investigators = Investigator.all
