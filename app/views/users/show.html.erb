@@ -49,8 +49,6 @@
                       @<%= user.twitter_account %>
                     </a>
                   </li>
-                <% else %>
-                  <li>Twitter</li>
                 <% end %>
                 <% if user.linkedin_account && user.linkedin_account != '' %>
                   <li>
@@ -58,8 +56,6 @@
                       <%= user.linkedin_account %>
                     </a>
                   </li>
-                <% else %>
-                  <li>Linkedin</li>
                 <% end %>
                 <% if user.pubmed && user.pubmed != '' %>
                   <li>
@@ -67,8 +63,6 @@
                       Pubmed
                     </a>
                   </li>
-                <% else %>
-                  <li>Pubmed</li>
                 <% end %>
               </ul>
             </div>
