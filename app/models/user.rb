@@ -38,6 +38,10 @@ class User < ApplicationRecord
          :confirmable, :lockable, :timeoutable,
          :omniauthable, omniauth_providers: [:linkedin, :google_oauth2]
 
+  enum role: { user: 0, admin: 1 }
+
+  include Roleable
+
   TEMP_EMAIL_PREFIX = 'change@tmp'
   TEMP_EMAIL_REGEX = /\Achange@tmp/
 
