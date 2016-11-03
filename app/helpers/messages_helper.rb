@@ -7,6 +7,6 @@ module MessagesHelper
   end
 
   def sender(id)
-    sender = User.find(id)
+    User.find(id)
   end
 end

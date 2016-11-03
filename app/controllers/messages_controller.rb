@@ -19,17 +19,17 @@ class MessagesController < ApplicationController
 
     if message_params[:in_response].present?
       message = Mailboxer::Message.find(message_params[:in_response])
-      receiver = message.receipts.where.not(receiver_id: current_user.id).first.receiver
+      message.receipts.where.not(receiver_id: current_user.id).first.receiver
       #authorize! :create_message, message
       if current_user.reply_to_conversation(message.conversation, message_params[:body])
         message_params[:data] == 'messages' ? renderMessages : renderNotice
       end
     else
       receiver = User.find_by(id: message_params[:receiver])
-      message = Mailboxer::Message.new(receipts: [Mailboxer::Receipt.new(receiver: receiver)])
+      Mailboxer::Message.new(receipts: [Mailboxer::Receipt.new(receiver: receiver)])
       sender = current_user
       #authorize! :create_message, message
-      if message = sender.send_message(receiver, message_params[:body], message_params[:subject])
+      if sender.send_message(receiver, message_params[:body], message_params[:subject])
         message_params[:data] == 'messages' ? renderMessages : renderNotice
       end
     end
@@ -46,7 +46,7 @@ class MessagesController < ApplicationController
   def renderMessages
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
     limit = 12;
-    @conversations = Mailboxer::Conversation.joins(:receipts).where(mailboxer_receipts: {receiver_id: current_user.id, deleted: false}).uniq.page(params[:page]).order('created_at DESC')
+    @conversations = Mailboxer::Conversation.joins(:receipts).where(mailboxer_receipts: { receiver_id: current_user.id, deleted: false }).uniq.page(params[:page]).order('created_at DESC')
 
     @items = @conversations.limit(limit)
     @more = (@conversations.size > @items.size)
