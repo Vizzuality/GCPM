@@ -11,6 +11,7 @@
       new App.Presenter.TabNav(params);
       new App.Presenter.ShowMore(params);
       new App.Presenter.InvestigatorActions(params);
+      new App.Presenter.UserMessages(params);
     }
 
   });

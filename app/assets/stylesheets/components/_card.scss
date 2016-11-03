@@ -13,6 +13,10 @@
     padding: $box-space + 15px;
   }
 
+  &.-thin {
+    padding: $inline-space/2 $box-space;
+  }
+
   h2 {
     margin-top: $inline-space;
     word-wrap: break-word;
