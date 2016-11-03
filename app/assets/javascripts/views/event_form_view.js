@@ -9,13 +9,10 @@
     },
 
     initialize: function() {
-      
+
     },
 
     triggerSubmit: function(e) {
-      if (e) {
-        e.preventDefault();
-      }
       this.trigger('submit', this.serializeForm());
     },
 
