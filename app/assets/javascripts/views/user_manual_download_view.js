@@ -12,7 +12,7 @@
 
     },
 
-    onClickDownloadUserManual: function(e) {
+    onClickDownloadUserManual: function() {
       this.trigger('download')
     }
 

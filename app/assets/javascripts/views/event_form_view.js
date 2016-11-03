@@ -12,7 +12,7 @@
 
     },
 
-    triggerSubmit: function(e) {
+    triggerSubmit: function() {
       this.trigger('submit', this.serializeForm());
     },
 
