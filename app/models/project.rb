@@ -50,6 +50,8 @@ class Project < ApplicationRecord
   validates_presence_of :title, :summary
   validates :title, uniqueness: true
   validates_acceptance_of :terms
+  validates :start_date, date: true
+  validates :end_date, date: true
 
   validate :dates_timeline
 

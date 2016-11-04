@@ -27,20 +27,11 @@ class NetworkEventsController < ApplicationController
   end
 
   def create
-    # @event = Event.new(event_params)
-    # @event.user = current_user
-
-    # if @event.save
-    #   redirect_to event_path(@event.id)
-    # else
-    #   redirect_to new_event_path(error: true)
-    # end
-
     @event = @user.events.build(event_params)
     if @event.save
       redirect_to event_path(@event.id)
     else
-      render :new, notice: @project.errors.full_messages
+      render :new, error: true
     end
   end
 

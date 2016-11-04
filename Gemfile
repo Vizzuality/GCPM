@@ -20,6 +20,7 @@ gem 'simple_form'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'ckeditor'
+gem 'date_validator'
 
 # User login
 gem 'devise'
