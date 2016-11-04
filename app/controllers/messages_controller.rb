@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
 
   def index
     @user = current_user
-    @conversations = Mailboxer::Conversation.joins(:receipts).where(mailboxer_receipts: {receiver_id: current_user.id, deleted: false}).uniq.page(params[:page]).per(20)
+    @conversations = Mailboxer::Conversation.joins(:receipts).where(mailboxer_receipts: { receiver_id: current_user.id, deleted: false }).uniq.page(params[:page]).per(20)
     # render :whatever
   end
   def show
@@ -15,8 +15,6 @@ class MessagesController < ApplicationController
     # render :whatever
   end
   def create
-    sender = current_user
-
     if message_params[:in_response].present?
       message = Mailboxer::Message.find(message_params[:in_response])
       message.receipts.where.not(receiver_id: current_user.id).first.receiver
