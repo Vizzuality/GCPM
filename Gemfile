@@ -24,7 +24,8 @@ gem 'date_validator'
 
 # User login
 gem 'devise'
-## Omniauth
+
+# Omniauth
 gem 'omniauth'
 gem 'omniauth-linkedin'
 gem 'omniauth-google-oauth2'
@@ -46,11 +47,18 @@ gem 'sendgrid-ruby'
 
 # Api engine
 gem 'cartomodel', git: 'https://github.com/Vizzuality/cartomodel'
+
 # gem 'rack-cors', require: 'rack/cors'
+
+# SQL.erb
 gem 'sql_query'
 gem 'textacular'
 
+# Follows
 gem "acts_as_follower", git: 'https://github.com/tcocca/acts_as_follower'
+
+# Messages
+gem 'mailboxer'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-normalize-css'

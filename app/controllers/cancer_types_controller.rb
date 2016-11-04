@@ -1,6 +1,5 @@
 class CancerTypesController < ApplicationController
   before_action :set_cancer_type, only: :show
-
   respond_to :html, :js
 
   def index

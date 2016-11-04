@@ -6,17 +6,19 @@ class UsersController < ApplicationController
 
   def show
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
-    @filters = %w(network projects posts events)
+    @filters = %w(network projects posts events messages)
     @current_type = params.key?(:data) ? params[:data] : 'projects'
 
     gon.server_params = { 'user': @investigator.size.positive? ? @investigator.first.id : '0' }
+    gon.userId = current_user.id
 
     limit = 12 + (@page * 9)
 
     @projects = @user.projects.order('created_at DESC')
-    @people = Investigator.fetch_all(user: params[:id]).uniq.order('created_at DESC')
-    @posts = Post.where(user_id: current_user.id)
-    @events = Event.fetch_all(user: params[:id]).uniq.order('created_at DESC')
+    @people = @user.investigator
+    @posts = @user.posts
+    @events = @user.events.order('created_at DESC')
+    @conversations = Mailboxer::Conversation.joins(:receipts).where(mailboxer_receipts: { receiver_id: current_user.id, deleted: false }).uniq.page(params[:page]).order('created_at DESC')
 
     if params.key?(:data) && params[:data] == 'network'
       @followProjects = @user.following_by_type('Project')
@@ -32,6 +34,10 @@ class UsersController < ApplicationController
       @items = @events.limit(limit)
       @more = (@events.size > @items.size)
       @items_total = @events.size
+    elsif params.key?(:data) && params[:data] == 'messages'
+      @items = @conversations.limit(limit)
+      @more = (@conversations.size > @items.size)
+      @items_total = @conversations.size
     else
       @items = @projects.limit(limit)
       @more = (@projects.size > @items.size)

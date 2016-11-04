@@ -148,6 +148,34 @@
     margin: ($button-y-padding / 2) ($button-x-padding / 2);
   }
 
+  &.-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 100%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      display: block;
+      margin: auto;
+
+      &.-hidden {
+        display: none;
+      }
+    }
+
+    &.-active {
+      svg {
+        display: none;
+        &.-hidden {
+          display: block;
+        }
+      }
+    }
+  }
+
   .notification-bubble {
     font-size: 9px;
     color: #5aade4;

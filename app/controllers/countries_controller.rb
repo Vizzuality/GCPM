@@ -1,6 +1,5 @@
 class CountriesController < ApplicationController
   before_action :set_country, only: :show
-
   respond_to :html, :js
 
   def index

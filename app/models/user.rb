@@ -49,6 +49,7 @@ class User < ApplicationRecord
   has_many :identities, dependent: :destroy
 
   acts_as_follower
+  acts_as_messageable
 
   has_one  :investigator, inverse_of: :user
   has_many :project_users
@@ -63,6 +64,10 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :projects
 
+  def mailboxer_email(object)
+    nil
+  end
+
   def published_projects
     projects.published.includes(:cancer_types)
   end
@@ -73,6 +78,10 @@ class User < ApplicationRecord
 
   def email_verified?
     email && email !~ TEMP_EMAIL_REGEX
+  end
+
+  def unread_messages
+    Mailboxer::Receipt.recipient(self).is_unread.not_trash.count
   end
 
   class << self
