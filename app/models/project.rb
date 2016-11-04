@@ -40,20 +40,19 @@ class Project < ApplicationRecord
   has_and_belongs_to_many :project_types
   has_and_belongs_to_many :cancer_types
 
-  accepts_nested_attributes_for :memberships,     allow_destroy: true
-  accepts_nested_attributes_for :investigators,   update_only:   true
-  accepts_nested_attributes_for :organizations,   update_only:   true
-  accepts_nested_attributes_for :addresses,       update_only:   true
+  accepts_nested_attributes_for :memberships,   allow_destroy: true
+  accepts_nested_attributes_for :investigators, update_only:   true
+  accepts_nested_attributes_for :organizations, update_only:   true
+  accepts_nested_attributes_for :addresses,     update_only:   true
   accepts_nested_attributes_for :funding_sources
   accepts_nested_attributes_for :users
 
-  validates_presence_of :title, :summary
-  validates :title, uniqueness: true
+  validates_presence_of   :title, :summary
+  validates               :title, uniqueness: true
+  validate                :dates_timeline
+  validates               :start_date, date: true, allow_blank: true
+  validates               :end_date,   date: true, allow_blank: true
   validates_acceptance_of :terms
-  validates :start_date, date: true
-  validates :end_date, date: true
-
-  validate :dates_timeline
 
   def dates_timeline
     if self.start_date.present? && self.end_date.present?
