@@ -16,5 +16,15 @@
 require 'rails_helper'
 
 RSpec.describe Organization, type: :model do
-  # pending "add some examples to (or delete) #{__FILE__}"
+  before :each do
+    @organization = create(:organization, name: 'Test organization')
+  end
+
+  context "Valid investigator" do
+    it 'Slug presentation' do
+      expect(@organization).to      be_valid
+      expect(@organization.slug).to be_present
+      expect(@organization.slug).to eq('test-organization')
+    end
+  end
 end

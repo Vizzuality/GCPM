@@ -23,6 +23,7 @@ module Api::V1
       let!(:organization_type) { FactoryGirl.create(:organization_type)                                               }
 
       let(:project_id)   { project.id   }
+      let(:project_slug) { project.slug }
       let(:project_2_id) { project_2.id }
 
       let(:params)     { { "project": { "title": "Project updated" } } }
@@ -112,7 +113,7 @@ module Api::V1
 
       context 'Update Project' do
         it 'Allows to update project' do
-          put "/api/projects/#{project_id}?token=#{user.authentication_token}", params: params
+          put "/api/projects/#{project_slug}?token=#{user.authentication_token}", params: params
 
           expect(status).to eq(200)
           expect(json['title']).to eq('Project updated')
@@ -153,7 +154,7 @@ module Api::V1
 
         # Memeberships
         it 'Allows to update project without existing funders and all cases for memberships' do
-          patch "/api/projects/#{project_id}?token=#{user.authentication_token}", params: full_params
+          patch "/api/projects/#{project_slug}?token=#{user.authentication_token}", params: full_params
 
           expect(status).to eq(200)
           expect(json['funding_sources'].length).to eq(3)
@@ -169,7 +170,7 @@ module Api::V1
                                   } }
 
           it 'Allows to update projects memberships' do
-            post "/api/projects/#{project_id}/memberships/#{membership.id}?token=#{user.authentication_token}", params: { "membership": {
+            post "/api/projects/#{project_slug}/memberships/#{membership.id}?token=#{user.authentication_token}", params: { "membership": {
                                                                                                                           "membership_type": "main"
                                                                                                                         }}
 
@@ -245,7 +246,7 @@ module Api::V1
                                                                                           ] } }
 
           expect(status).to eq(422)
-          expect(json['message']).to eq(["Title can't be blank", "Summary can't be blank"])
+          expect(json['message']).to eq(["Title can't be blank", "Summary can't be blank", "Slug can't be blank"])
           expect(Organization.find_by(name: "Second project funder")).to be_nil
         end
       end
@@ -259,7 +260,7 @@ module Api::V1
         end
 
         it 'Get project memberships' do
-          get "/api/projects/#{project_id}/memberships?token=#{user.authentication_token}"
+          get "/api/projects/#{project_slug}/memberships?token=#{user.authentication_token}"
 
           expect(status).to eq(200)
           expect(json[0]['membership_type']).to      eq ('secondary')

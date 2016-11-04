@@ -28,5 +28,15 @@
 require 'rails_helper'
 
 RSpec.describe Event, type: :model do
-  # pending "add some examples to (or delete) #{__FILE__}"
+  before :each do
+    @event = create(:event, title: 'Test event')
+  end
+
+  context "Valid investigator" do
+    it 'Slug presentation' do
+      expect(@event).to      be_valid
+      expect(@event.slug).to be_present
+      expect(@event.slug).to eq('test-event')
+    end
+  end
 end

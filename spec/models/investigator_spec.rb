@@ -25,6 +25,13 @@ RSpec.describe Investigator, type: :model do
     expect(Investigator.all.size).to eq(2)
   end
 
+  context "Valid investigator" do
+    it 'Slug presentation' do
+      expect(@investigator_1.slug).to be_present
+      expect(@investigator_1.slug).to eq('first-investigator')
+    end
+  end
+
   context 'For approvable methods' do
     let(:approvable_1) { @investigator_1 }
     let(:approvable_2) {

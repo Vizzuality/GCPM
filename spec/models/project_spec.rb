@@ -28,6 +28,7 @@ RSpec.describe Project, type: :model do
     it 'Projects count' do
       expect(Project.count).to  eq(1)
       expect(@project.users).to be_any
+      expect(@project.slug).to  be_present
     end
   end
 
@@ -40,7 +41,7 @@ RSpec.describe Project, type: :model do
       @project_reject = build(:project, title: '', users: [@user])
 
       @project_reject.valid?
-      expect {@project_reject.save!}.to raise_error(ActiveRecord::RecordInvalid, "Validation failed: Title can't be blank")
+      expect {@project_reject.save!}.to raise_error(ActiveRecord::RecordInvalid, "Validation failed: Title can't be blank, Slug can't be blank")
     end
 
     it 'Project summary validation' do
@@ -61,7 +62,7 @@ RSpec.describe Project, type: :model do
       @project_reject = Project.new(title: 'Project one', summary: 'Lorem ipsum..')
 
       @project_reject.valid?
-      expect {@project_reject.save!}.to raise_error(ActiveRecord::RecordInvalid, "Validation failed: Title has already been taken")
+      expect {@project_reject.save!}.to raise_error(ActiveRecord::RecordInvalid, "Validation failed: Title has already been taken, Slug has already been taken")
     end
   end
 end

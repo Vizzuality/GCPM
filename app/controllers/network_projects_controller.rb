@@ -1,6 +1,6 @@
 class NetworkProjectsController < ApplicationController
   before_action :authenticate_user!, except: :show
-  load_and_authorize_resource class: 'Project'
+  load_and_authorize_resource class: 'Project', only: [:new, :create]
 
   before_action :set_user,         only: :show
   before_action :set_current_user, only: [:new, :create, :edit, :update, :destroy]
@@ -9,9 +9,11 @@ class NetworkProjectsController < ApplicationController
   before_action :set_owner,        only: :show
 
   def show
+    authorize! :show, @project
   end
 
   def edit
+    authorize! :edit, @project
   end
 
   def new
@@ -19,6 +21,7 @@ class NetworkProjectsController < ApplicationController
   end
 
   def update
+    authorize! :update, @project
     if @project.update(project_params)
       redirect_to project_path(@project), notice: 'Project succesfully updated.'
     else
@@ -36,6 +39,7 @@ class NetworkProjectsController < ApplicationController
   end
 
   def destroy
+    authorize! :destroy, @project
     if @project.destroy
       redirect_to user_path(@user), notice: 'Project succesfully deleted.'
     else
@@ -62,7 +66,7 @@ class NetworkProjectsController < ApplicationController
     end
 
     def set_project
-      @project = Project.find(params[:id])
+      @project = Project.set_by_id_or_slug(params[:id])
     end
 
     def set_selection
