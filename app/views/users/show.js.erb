@@ -8,18 +8,16 @@
 
   document.getElementById('content').innerHTML = htmlContent;
 
-  if (true) {
-    //TODO: ask back-ends
-    <% unreadNum = 0 %>
-    <% @conversations.each do |c| %>
-      <% unread = c.receipts_for(current_user).map{|m| m.is_unread?}.include? true %>
-      <% if unread %>
-        <% unreadNum = unreadNum + 1 %>
-      <% end %>
+  //TODO: ask back-ends
+  <% unreadNum = 0 %>
+  <% @conversations.each do |c| %>
+    <% unread = c.receipts_for(current_user).map{|m| m.is_unread?}.include? true %>
+    <% if unread %>
+      <% unreadNum = unreadNum + 1 %>
     <% end %>
+  <% end %>
 
-    document.getElementById('messages-badge').innerHTML = '<%= unreadNum %>';
-  }
+  document.getElementById('messages-badge').innerHTML = '<%= unreadNum %>';
 
   App.trigger('Remote:load', { data: '<%= @current_type %>' });
 
