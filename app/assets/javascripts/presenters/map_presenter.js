@@ -134,6 +134,9 @@
       }
       this.cartoLayer = layerOptions.layer;
       this.map.addLayer(this.cartoLayer);
+      this.setState({
+        cartoLayer: layerOptions.name
+      }, true);
       App.trigger('Map:change', _.extend({}, this.getState(), {
         cartoLayer: layerOptions.name
       }));
@@ -145,6 +148,10 @@
     removeCartoLayer: function() {
       this.map.removeLayer(this.cartoLayer);
       this.cartoLayer = null;
+      this.setState({
+        cartoLayer: null
+      }, true);
+
       App.trigger('Map:change', _.extend({}, this.getState(), {
         cartoLayer: null
       }));

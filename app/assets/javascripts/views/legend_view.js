@@ -22,12 +22,19 @@
       if (this.data.length) {
         this.$el.html(this.template({
           items: this.data,
-          layer: this.layer
+          layer: this.formatLayer(this.layer)
         }));
         return this;
       }
-    }
+    },
 
+    // HELPER
+    formatLayer: function(layer) {
+      if (layer && layer.layer_group) {
+        layer.name = layer.layer_group.name + ' ' + layer.name
+      }
+      return layer;
+    }
   });
 
 })(this.App);
