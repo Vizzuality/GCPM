@@ -10,6 +10,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'dotenv-rails', '2.1.0'
 gem 's3'
 gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
+gem 'cancancan'
 gem 'inherited_resources', git: 'https://github.com/activeadmin/inherited_resources'
 gem 'active_admin_theme'
 gem 'active_model_serializers', '~> 0.10.0'
@@ -19,6 +20,7 @@ gem 'simple_form'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'ckeditor'
+gem 'date_validator'
 
 # User login
 gem 'devise'
@@ -27,6 +29,7 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-linkedin'
 gem 'omniauth-google-oauth2'
+gem 'bcrypt'
 
 # Assets pipeline
 gem 'uglifier', '>= 1.3.0'

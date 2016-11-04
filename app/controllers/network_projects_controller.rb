@@ -1,5 +1,6 @@
 class NetworkProjectsController < ApplicationController
   before_action :authenticate_user!, except: :show
+  load_and_authorize_resource class: 'Project'
 
   before_action :set_user,         only: :show
   before_action :set_current_user, only: [:new, :create, :edit, :update, :destroy]
@@ -49,15 +50,19 @@ class NetworkProjectsController < ApplicationController
     end
 
     def set_owner
-      @owner = user_signed_in? && current_user.projects.include?(@project)
+      @owner = user_signed_in? && @user.projects.include?(@project)
     end
 
     def set_current_user
-      @user = current_user
+      @user = if current_user.admin?
+                User.find(params[:user_id])
+              else
+                current_user
+              end
     end
 
     def set_project
-      @project = @user.projects.find(params[:id])
+      @project = Project.find(params[:id])
     end
 
     def set_selection

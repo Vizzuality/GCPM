@@ -1,3 +1,4 @@
+/* global ga */
 (function(App) {
 
   'use strict';
@@ -38,7 +39,7 @@
           className: '-sortby',
           options: dropdownOptions,
           arrows: true,
-          direction: specs.direction,
+          direction: specs.direction
         }, viewSettings||{})
       });
 
@@ -59,9 +60,13 @@
     setSubscriptions: function() {
       var eventsNames = [
         'Router:change', 'Map:change', 'TabNav:change',
-        'FilterForm:change', 'Breadcrumbs:change'
+        'FilterForm:change', 'Breadcrumbs:change', 'Legends:change'
       ].join(' ');
-      App.on(eventsNames, this.setState, this);
+
+      App.on(eventsNames, function(newState) {
+        var localState = _.pick(this.getState(), 'type', 'direction', 'sortby');
+        this.setState(_.extend({}, this.getState(), localState, newState), { silent: true })
+      }, this);
     },
 
     onDropdownChange: function(current) {
@@ -72,23 +77,29 @@
         var direction = this.state.get('direction') === 'asc' ? 'desc' : 'asc';
         sortby = this.state.get('type') + '_' + direction ;
 
-        newState = { direction: direction, sortby: sortby };
+        newState = { type: this.state.get('type'), direction: direction, sortby: sortby };
+
       } else {
         var type = current.value;
         sortby =  type + '_' + this.state.get('direction') ;
 
-        newState = { type: type, sortby: sortby };
+        newState = { type: type, sortby: sortby, direction: this.state.get('direction') };
+
       }
 
-      this.setState(newState);
+      var localState = _.pick(this.getState(), 'type', 'direction', 'sortby');
+      this.setState(_.extend({}, this.getState(), localState, newState))
+      ga('send', 'event', 'Map', 'Sort by', this.state.get('sortby'));
     },
 
     /**
      * Method to set a new state
      * @param {Object} state
      */
-    setState: function(state) {
-      this.state.set(state);
+    setState: function(state, options) {
+      this.state
+        .clear({ silent: true })
+        .set(state, options);
     },
 
     getState: function() {

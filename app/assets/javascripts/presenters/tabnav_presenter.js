@@ -1,4 +1,4 @@
-/* global URI */
+/* global ga */
 (function(App) {
 
   'use strict';
@@ -27,6 +27,7 @@
       this.tabnav.on('change', function(value) {
         this.setState(_.extend({}, this.getState(), { data: value }));
         App.trigger('TabNav:change', this.getState());
+        ga('send', 'event', 'Tab', 'Switch view', value);
       }, this);
     },
 

@@ -65,6 +65,7 @@
     commonActions: function() {
       new App.View.MobileHeader();
       new App.Presenter.UserMenu();
+      new App.Presenter.Footer();
     }
 
   });

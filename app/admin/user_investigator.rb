@@ -23,14 +23,14 @@ ActiveAdmin.register_page "UserInvestigator" do
             end
             td do
               if investigator.is_approved?
-                link_to 'Unpprove', unapprove_admin_investigator_path(investigator), method: :patch
+                link_to 'Unpprove', unapprove_admin_investigator_path(investigator.id), method: :patch
               else
-                link_to 'Approve', approve_admin_investigator_path(investigator), method: :patch
+                link_to 'Approve', approve_admin_investigator_path(investigator.id), method: :patch
               end
             end
             td do
               if investigator.user_id.present?
-                link_to 'Remove user from investigator', delete_relation_admin_investigator_path(investigator), method: :patch
+                link_to 'Remove user from investigator', delete_relation_admin_investigator_path(investigator.id), method: :patch
               end
             end
           end

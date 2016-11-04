@@ -40,24 +40,19 @@ class Project < ApplicationRecord
   has_and_belongs_to_many :project_types
   has_and_belongs_to_many :cancer_types
 
-  accepts_nested_attributes_for :memberships,     allow_destroy: true
-  accepts_nested_attributes_for :investigators,   update_only:   true
-  accepts_nested_attributes_for :organizations,   update_only:   true
-  accepts_nested_attributes_for :addresses,       update_only:   true
+  accepts_nested_attributes_for :memberships,   allow_destroy: true
+  accepts_nested_attributes_for :investigators, update_only:   true
+  accepts_nested_attributes_for :organizations, update_only:   true
+  accepts_nested_attributes_for :addresses,     update_only:   true
   accepts_nested_attributes_for :funding_sources
   accepts_nested_attributes_for :users
 
-  validates_presence_of :title, :summary
-  validates :title, uniqueness: true
+  validates_presence_of   :title, :summary
+  validates               :title, uniqueness: true
+  validate                :dates_timeline
+  validates               :start_date, date: true, allow_blank: true
+  validates               :end_date,   date: true, allow_blank: true
   validates_acceptance_of :terms
-
-  validate :dates_timeline
-
-  def dates_timeline
-    if self.start_date.present? && self.end_date.present?
-      errors.add(:end_date, 'must be after start date') if self.start_date > self.end_date
-    end
-  end
 
   scope :publihsed,             ->                     { where(status: :published) }
   scope :active,                ->                     { where('projects.end_date >= ? AND projects.start_date <= ?', Time.now, Time.now).or(where('projects.end_date IS NULL')) }
@@ -219,4 +214,12 @@ class Project < ApplicationRecord
       ResearchUnit.includes(:address).all.map { |ru| [ru.address.country_name, ru.id] }
     end
   end
+
+  private
+
+    def dates_timeline
+      if self.start_date.present? && self.end_date.present?
+        errors.add(:end_date, 'must be after start date') if self.start_date > self.end_date
+      end
+    end
 end

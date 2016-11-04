@@ -1,4 +1,6 @@
 class PostsController < InheritedResources::Base
+  load_and_authorize_resource
+
   before_action :check_user, only: [:new, :create, :index]
 
   def index

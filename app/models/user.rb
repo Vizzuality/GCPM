@@ -28,6 +28,7 @@
 #  pubmed                 :string
 #  authentication_token   :string
 #  token_expires_at       :datetime
+#  role                   :integer          default("user"), not null
 #
 
 class User < ApplicationRecord
@@ -37,6 +38,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :lockable, :timeoutable,
          :omniauthable, omniauth_providers: [:linkedin, :google_oauth2]
+
+  enum role: { user: 0, admin: 1 }
+
+  include Roleable
 
   TEMP_EMAIL_PREFIX = 'change@tmp'
   TEMP_EMAIL_REGEX = /\Achange@tmp/
