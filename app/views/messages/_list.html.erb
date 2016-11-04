@@ -2,7 +2,8 @@
   <div class="row collapse">
     <% items.each do |c| %>
       <div class="column small-12">
-        <div class="c-card -messages -thin c-conversation">
+        <% unread = c.receipts_for(current_user).map{|m| m.is_unread?}.include? true %>
+        <div class="c-card -messages -thin c-conversation<%= unread ? ' -unread' : '' %>" data-conver-id="<%= c.id %>">
           <div class="conversation-subject js-subject-action">
             <% conversation_person = conversation_person(c) %>
             <h2><%= c.subject %></h2>
@@ -14,7 +15,7 @@
                 <% message_person = sender(m.sender_id) %>
                 <li class="c-conversations-item <%= (m.sender_id == current_user.id) ? '-mine' : '-theirs' %>">
                   <div class="sender">
-                    <h3><%= message_person.investigator.try(:name) %></h3>
+                    <h3><%= message_person.investigator.user === current_user ? 'You' : message_person.investigator.try(:name) %></h3>
                     <small><%= m.created_at.strftime("%d.%m.%Y") %> <%= m.created_at.strftime("%H:%M")%></small>
                   </div>
                   <div class="message">

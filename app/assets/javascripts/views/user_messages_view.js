@@ -12,8 +12,16 @@
     },
 
     toggleConversation: function(e) {
-      var element = $(e.target).closest('.c-conversation')[0];
-      this.trigger('click', { conversation: element });
+      var conversation = $(e.target).closest('.c-conversation');
+
+      if (conversation.hasClass('-unread')) {
+        conversation.removeClass('-unread');
+      }
+
+      this.trigger('click', {
+        conversation: conversation[0],
+        converId: conversation.data().converId
+      });
     }
 
   });
