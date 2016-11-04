@@ -6,5 +6,5 @@
 
   document.getElementById('content').innerHTML = htmlContent;
 
-  App.trigger('Remote:load');
+  App.trigger('Remote:load', { data: '<%= @current_type %>' });
 })();

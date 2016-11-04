@@ -11,19 +11,14 @@
   _.extend(App.Presenter.UserMessages.prototype, {
 
     initialize: function(params) {
-      this.state = new StateModel();
+      this.state = new StateModel(params);
 
       this.userMessages = new App.View.UserMessages({
         el: '.c-conversation'
       });
 
-      this.cache();
       this.setEvents();
       this.setSubscriptions();
-    },
-
-    cache: function() {
-      this.conversations = $('.c-conversation .conversation-body');
     },
 
     setState: function(newState) {
@@ -38,6 +33,12 @@
 
     setSubscriptions: function() {
       this.userMessages.on('click', this.setConversation.bind(this));
+
+      App.on('Remote:load', function(params){
+        if (params.data === 'messages') {
+          this.userMessages.setElement('.c-conversation');
+        }
+      }.bind(this));
     },
 
     setConversation: function(data) {
@@ -52,14 +53,14 @@
 
     toggleConversation: function() {
       var conversation = this.state.get('conversation');
+
       if (conversation) {
-        this.conversations.hide();
+        $('.c-conversation .conversation-body').hide();
         $(conversation).find('.conversation-body').show();
       } else {
-        this.conversations.hide();
+        $('.c-conversation .conversation-body').hide();
       }
     }
-
 
   });
 
