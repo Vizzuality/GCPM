@@ -1,5 +1,5 @@
-
 <% user = current_user %>
+<% title current_user.name %>
 
 <section class="l-app -full">
 
@@ -18,15 +18,23 @@
       </div>
       <div class="row collapse">
         <div class="column small-8">
-          <h1><%= user.try(:name) %></h1>
-
+          <div class="c-title-btn">
+            <% if user.name && user.name != '' %>
+              <h1><%= user.try(:name) %></h1>
+            <% end %>
+            <%= link_to (t 'edit'), edit_user_path(current_user.id), class: "c-btn -transparent" %>
+          </div>
           <div class="row">
             <div class="column small-12 medium-6">
               <ul class="c-pipe-list">
-                <% if user.investigator && user.investigator.organizations.size > 0 %>
-                  <li><%= user.investigator.organizations.first.name %></li>
+                <li>
+                  <% if user.investigator && user.investigator.organizations.size > 0 %>
+                    <%= user.investigator.organizations.first.name %>
+                  <% end %>
+                </li>
+                <% if user.position && user.position != '' %>
+                  <li><%= user.position %></li>
                 <% end %>
-                <li><%= user.position ? user.position : '' %></li>
               </ul>
               <ul class="c-pipe-list">
                 <li><%= @following %> Following</li>
@@ -35,32 +43,26 @@
             </div>
             <div class="column small-12 medium-6">
               <ul class="c-pipe-list">
-                <% if user.twitter_account %>
+                <% if user.twitter_account && user.twitter_account != '' %>
                   <li>
                     <a href="https://twitter.com/<%= user.twitter_account %>" class="-clickable -hv" target="_blank">
                       @<%= user.twitter_account %>
                     </a>
                   </li>
-                <% else %>
-                  <li>Twitter</li>
                 <% end %>
-                <% if user.linkedin_account %>
+                <% if user.linkedin_account && user.linkedin_account != '' %>
                   <li>
                     <a href="https://www.linkedin.com/in/<%= user.linkedin_account %>" class="-clickable -hv" target="_blank">
                       <%= user.linkedin_account %>
                     </a>
                   </li>
-                <% else %>
-                  <li>Linkedin</li>
                 <% end %>
-                <% if user.pubmed %>
+                <% if user.pubmed && user.pubmed != '' %>
                   <li>
                     <a href="http://www.ncbi.nlm.nih.gov/pubmed?term=<%= user.pubmed %>%5BAuthor%5D" class="-clickable -hv" target="_blank">
                       Pubmed
                     </a>
                   </li>
-                <% else %>
-                  <li>Pubmed</li>
                 <% end %>
               </ul>
             </div>
@@ -75,6 +77,15 @@
     </div>
   </div>
 
+  <!-- TODO: ask back-ends -->
+  <% unreadNum = 0 %>
+  <% @conversations.each do |c| %>
+    <% unread = c.receipts_for(current_user).map{|m| m.is_unread?}.include? true %>
+    <% if unread %>
+      <% unreadNum = unreadNum + 1 %>
+    <% end %>
+  <% end %>
+
   <div class="l-app-navbar">
     <div class="wrapper">
       <div class="row collapse">
@@ -88,6 +99,9 @@
                   remote: true,
                   data: { datatype: filter }
                 %>
+                <% if filter === 'messages' %>
+                  <div id="<%= filter + '-badge' %>" class="c-badge"><%= unreadNum %></div>
+                <% end %>
               </li>
             <% end %>
           </ul>
@@ -107,6 +121,8 @@
     <%= render 'events/list', items: @items, more: @more %>
   <% elsif @current_type === 'posts' %>
     <%= render 'posts/list', items: @items, more: @more %>
+  <% elsif @current_type === 'messages' %>
+    <%= render 'messages/list', items: @items, more: @more %>
   <% elsif @current_type === 'network' %>
     <%= render 'network' %>
   <% end %>

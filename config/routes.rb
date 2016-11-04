@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { sessions: 'users/sessions', omniauth_callbacks: 'users/omniauth_callbacks' }
-  devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
   get '/',                      to: 'home#index',         as: 'home'
@@ -30,7 +29,7 @@ Rails.application.routes.draw do
   resources :posts
 
   # User profile
-  resources :users, only: :show, path: :network do
+  resources :users, only: [:show, :edit, :update], path: :network do
     resources :projects, controller: 'network_projects', except: :index do
       patch 'remove_relation',  on: :member
     end
@@ -52,6 +51,13 @@ Rails.application.routes.draw do
   # Admin
   #get 'admin/excel-uploader', to: 'admin/excel_uploader#new', as: :admin_excel_uploader
 
+  # Mensajes
+  post "/message", to: 'messages#create', as: :message
+  get "/network/:user_id/messages", to: 'messages#index', as: :messages
+  get "/network/:user_id/messages/:id", to: 'messages#show', as: :message_show
+  delete "/messages/:id", to: 'messages#destroy', as: :delete_message
+
+  # API
   namespace :api, defaults: { format: 'json' } do
     scope module: :v1 do
       resources :regions,            only: [:index, :show]

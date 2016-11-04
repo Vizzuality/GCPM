@@ -1,3 +1,4 @@
+/* global ga */
 (function(App) {
 
   'use strict';
@@ -18,7 +19,13 @@
       });
 
       this.countries = new App.Collection.Countries();
+
+      this.eventsForm = new App.View.EventForm({
+        el: '#newEventView'
+      });
       this.render();
+
+      this.setEvents();
     },
 
     render: function() {
@@ -42,6 +49,12 @@
 
         countries.render();
       }.bind(this));
+    },
+
+    setEvents: function() {
+      this.eventsForm.on('submit', function() {
+        ga('send', 'event', 'Users', 'Add data', 'Add event');
+      });
     }
 
   });

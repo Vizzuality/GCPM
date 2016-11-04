@@ -1,3 +1,4 @@
+/* global ga */
 (function(App) {
 
   'use strict';
@@ -66,6 +67,7 @@
       this.projectForm.on('submit', function(newState) {
         this.setState(newState);
         this.handleSubmit();
+        ga('send', 'event', 'Users', 'Add data', 'Add Project');
       }, this);
 
       this.projectForm.on('newInvestigator', function() {

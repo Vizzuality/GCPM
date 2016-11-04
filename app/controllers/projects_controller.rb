@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  load_and_authorize_resource
+
   before_action :set_project
   before_action :set_user, only: [:remove_relation, :relation_request]
 

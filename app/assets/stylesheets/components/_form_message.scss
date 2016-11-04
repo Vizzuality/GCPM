@@ -1,0 +1,65 @@
+.c-form-message {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%,-70px);
+  transition: all 0.2s $easeInOutCubic;
+  z-index: 2;
+  background: white;
+  padding: 20px;
+  width: 100%;
+  border: 1px solid $border-color-1;
+  box-shadow: $box-shadow;
+
+
+  & > form .form-row {
+    label,
+    input:not(.c-btn),
+    select, textarea {
+      color: $base-font-color;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%,-50%) rotate(45deg);
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-left: 1px solid $border-color-1;
+    border-top: 1px solid $border-color-1;
+
+  }
+
+  &.-arr-right {
+    width: calc(100% - 10px);
+
+    &:before {
+      left: 75%;
+    }
+
+    &.-active {
+      transform: translate(-50%, 14px);
+    }
+  }
+
+
+  &.-active {
+    visibility: visible;
+    opacity: 1;
+    transform: translate(-50%,-60px);
+  }
+}
+
+#investigatorsActionsView {
+  position: relative;
+}

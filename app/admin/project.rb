@@ -19,7 +19,6 @@ ActiveAdmin.register Project do
     column :id
     column :title
     column :status
-    column :user
     actions
   end
 
@@ -32,7 +31,6 @@ ActiveAdmin.register Project do
       f.input :start_date, as: :date_picker
       f.input :end_date, as: :date_picker
       f.input :status
-      f.input :user
     end
     f.actions
   end
