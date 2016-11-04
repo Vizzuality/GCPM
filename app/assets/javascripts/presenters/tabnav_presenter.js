@@ -33,6 +33,7 @@
 
     setSubscriptions: function() {
       App.on('Router:change Breadcrumbs:change FilterForm:change Map:change', this.setState, this);
+      App.on('MessagesBadge:change', this.setBadges, this);
     },
 
     setState: function(newState) {
@@ -58,6 +59,10 @@
       var params = this.getState();
       var newUrl = uri.query(_.omit(params, 'dataSingular', 'vars')).toString();
       this.tabnav.updateUrl(newUrl);
+    },
+
+    setBadges: function() {
+      this.tabnav.setMessagesBadge();
     }
 
   });

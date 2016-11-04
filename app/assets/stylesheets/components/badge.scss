@@ -1,0 +1,16 @@
+.c-badge {
+  position: absolute;
+  top: 9px;
+  right: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid $inverse-font-color;
+
+  background: $secondary-color;
+  color: $inverse-font-color;
+  font-size: 10px;
+}

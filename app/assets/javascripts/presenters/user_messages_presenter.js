@@ -67,8 +67,13 @@
         url: '/network/'+ gon.userId + '/messages/' + converId,
         type: 'GET',
         dataType: 'json',
+        success: this.messageSuccess.bind(this),
         error: this.messageError.bind(this)
       });
+    },
+
+    messageSuccess: function() {
+      App.trigger('MessagesBadge:change');
     },
 
     messageError: function() {

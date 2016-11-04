@@ -30,6 +30,15 @@
         }));
         el.setAttribute('href', uri.toString());
       });
+    },
+
+    setMessagesBadge: function() {
+      var $messagesBadge = this.$el.find('#messages-badge');
+      var unreadCount = Number($messagesBadge.text());
+
+      if (unreadCount > 0) {
+        $messagesBadge.text(unreadCount - 1);
+      }
     }
 
   });
