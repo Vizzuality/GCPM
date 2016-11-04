@@ -1,7 +1,42 @@
 .c-conversation {
+  &.-unread {
+    background-color: $base-bg-color;
+  }
+
+  &.-active {
+    .conversation-subject {
+
+      &:after {
+        transform: translate(0, -50%) rotate(-135deg);
+      }
+    }
+
+    .conversation-body {
+      display: block;
+    }
+
+  }
 
   .conversation-subject {
     cursor: pointer;
+    position: relative;
+
+    &:hover {
+      color: $secondary-color;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      top: 50%;
+      right: $inline-space;
+      transition: all .2s $easeInOutSine;
+      transform: translate(0, -50%) rotate(45deg);
+      border-bottom: 2px solid $secondary-color;
+      border-right: 2px solid $secondary-color;
+    }
   }
 
   .conversation-body {
@@ -17,6 +52,7 @@
       > li {
         padding: 16px;
         border-top: 1px solid $border-color-1;
+
         &:first-child {
           margin: 0;
           border-top: none;
@@ -32,6 +68,7 @@
   .sender {
     display: flex;
     align-items: center;
+
     > * {
       margin: 0 $inline-space 0 0;
       &:last-child { margin: 0; }

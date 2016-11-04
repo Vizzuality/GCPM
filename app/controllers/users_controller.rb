@@ -10,6 +10,7 @@ class UsersController < ApplicationController
     @current_type = params.key?(:data) ? params[:data] : 'projects'
 
     gon.server_params = { 'user': @investigator.size.positive? ? @investigator.first.id : '0' }
+    gon.userId = current_user.id
 
     limit = 12 + (@page * 9)
 

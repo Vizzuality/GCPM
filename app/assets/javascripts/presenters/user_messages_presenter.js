@@ -46,20 +46,33 @@
 
       if (data.conversation !== this.state.get('conversation')) {
         newConversation = data.conversation;
+        this.messageRequest(data.converId);
       }
 
       this.setState({ conversation: newConversation });
     },
 
     toggleConversation: function() {
-      var conversation = this.state.get('conversation');
+      var $currentConversation = $(this.state.get('conversation'));
+      var $conversations = $('.c-conversation');
 
-      if (conversation) {
-        $('.c-conversation .conversation-body').hide();
-        $(conversation).find('.conversation-body').show();
-      } else {
-        $('.c-conversation .conversation-body').hide();
+      $conversations.toggleClass('-active', false);
+      if ($currentConversation) {
+        $currentConversation.toggleClass('-active', true);
       }
+    },
+
+    messageRequest: function(converId) {
+      $.ajax({
+        url: '/network/'+ gon.userId + '/messages/' + converId,
+        type: 'GET',
+        dataType: 'json',
+        error: this.messageError.bind(this)
+      });
+    },
+
+    messageError: function() {
+      console.error('Error doing query');
     }
 
   });

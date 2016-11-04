@@ -2,7 +2,8 @@
   <div class="row collapse">
     <% items.each do |c| %>
       <div class="column small-12">
-        <div class="c-card -messages -thin c-conversation">
+        <% unread = c.receipts_for(current_user).map{|m| m.is_unread?}.include? true %>
+        <div class="c-card -messages -thin c-conversation<%= unread ? ' -unread' : '' %>" data-conver-id="<%= c.id %>">
           <div class="conversation-subject js-subject-action">
             <% conversation_person = conversation_person(c) %>
             <h2><%= c.subject %></h2>
