@@ -1,3 +1,4 @@
+/* global ga */
 (function(App) {
 
   'use strict';
@@ -38,7 +39,7 @@
           className: '-sortby',
           options: dropdownOptions,
           arrows: true,
-          direction: specs.direction,
+          direction: specs.direction
         }, viewSettings||{})
       });
 
@@ -79,6 +80,9 @@
 
         newState = { type: type, sortby: sortby };
       }
+
+      ga('send', 'event', 'Map', 'Sort by', newState.sortby);
+
 
       this.setState(newState);
     },

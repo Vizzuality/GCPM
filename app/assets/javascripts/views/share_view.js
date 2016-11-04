@@ -1,3 +1,4 @@
+/* global ga*/
 (function(App) {
 
   'use strict';
@@ -46,6 +47,8 @@
         this.$btnShare
           .html('copied');
 
+        ga('send', 'event', 'Map', 'Share', 'Copy Link');
+
       } catch(err) {
         console.error(err);
       }
@@ -65,6 +68,8 @@
                    ',left='   + left;
 
       window.open(url, 'Share this analysis', opts);
+
+      ga('send', 'event', 'Map', 'Share', e.currentTarget.dataset.social);
     }
 
   });
