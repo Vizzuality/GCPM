@@ -18,15 +18,17 @@ ActiveAdmin.register ProjectUser do
   end
 
   member_action :approve, method: :patch do
-    resource.update(is_approved: true)
-    UserMailer.user_relation_email(resource.user.name, resource.user.email, resource.project.title, 'approved').deliver_later
-    redirect_to admin_project_users_path, notice: 'The relation have been approved.'
+    if resource.update(is_approved: true)
+      UserMailer.user_relation_email(resource.user.name, resource.user.email, resource.project.title, 'approved').deliver_later
+      redirect_to admin_project_users_path, notice: 'The relation have been approved.'
+    end
   end
 
   member_action :unapprove, method: :patch do
-    resource.update(is_approved: false)
-    UserMailer.user_relation_email(resource.user.name, resource.user.email, resource.project.title, 'unapproved').deliver_later
-    redirect_to admin_project_users_path, notice: 'The relation have been unapproved.'
+    if resource.update(is_approved: false)
+      UserMailer.user_relation_email(resource.user.name, resource.user.email, resource.project.title, 'unapproved').deliver_later
+      redirect_to admin_project_users_path, notice: 'The relation have been unapproved.'
+    end
   end
 
   batch_action :unapprove do |ids|

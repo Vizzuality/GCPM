@@ -35,7 +35,7 @@ class Investigator < ApplicationRecord
 
   validates_presence_of   :name
   validates_uniqueness_of :user_id, allow_blank: true
-  validates               :email, format: { with: Devise.email_regexp }, allow_blank: true
+  validates               :email, format: { with: Devise.email_regexp }, allow_blank: true, on: :create
 
   scope :publihsed,             ->                    { joins(:projects).where(status: :published) }
   scope :active,                ->                    { joins(:projects).where('projects.end_date >= ? AND projects.start_date <= ?', Time.now, Time.now).or(where('projects.end_date IS NULL')) }
