@@ -88,7 +88,9 @@ label {
     display: flex;
   }
 
-  input:focus {
+  input:focus,
+  select:focus,
+  textarea:focus {
     outline: none;
   }
 }

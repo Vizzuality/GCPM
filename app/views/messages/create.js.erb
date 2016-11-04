@@ -1,6 +1,7 @@
 (function() {
   'use strict'
-  console.log('<%= @items %>');
+
+
   <% if @items %>
     <% template = "messages/list" %>
 
@@ -8,10 +9,9 @@
 
     document.getElementById('content').innerHTML = htmlContent;
 
-    App.trigger('Remote:load');
+    App.trigger('Remote:load', { data: 'messages' });
   <% else %>
     App.trigger('Messages:created');
   <% end %>
-
 
 })();

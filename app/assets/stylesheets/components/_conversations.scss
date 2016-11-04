@@ -6,6 +6,7 @@
 
   .conversation-body {
     display: none;
+    margin-top: $inline-space;
 
     .messages {
       list-style: none;

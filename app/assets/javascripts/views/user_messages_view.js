@@ -11,10 +11,6 @@
     initialize: function() {
     },
 
-    setEvents: function() {
-      this.$el.find('.js-subject-action').on('click', this.toggleConversation.bind(this));
-    },
-
     toggleConversation: function(e) {
       var element = $(e.target).closest('.c-conversation')[0];
       this.trigger('click', { conversation: element });
