@@ -55,6 +55,7 @@
 
     handleRadio: function(e) {
       var radio = e.target;
+
       if(this.current && radio.getAttribute('id') === this.current.getAttribute('id')) {
         radio.checked = false;
         this.current = null;

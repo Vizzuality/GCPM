@@ -1,3 +1,4 @@
+/* global ga */
 (function(App) {
 
   'use strict';
@@ -74,11 +75,15 @@
           case 'regions[]':
             if (value) {
               string = _.findWhere(regions, { region_iso: value }).region_name;
+              if (!state['countries']) {
+                ga('send', 'event', 'Map', 'Zoom to Region', string);
+              }
             }
           break;
           case 'countries[]':
             if (value) {
               string = _.findWhere(countries, { country_iso_3: value }).name;
+              ga('send', 'event', 'Map', 'Zoom to Country', string);
             }
           break;
         }

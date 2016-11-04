@@ -1,3 +1,4 @@
+/* global ga */
 (function(App) {
 
   'use strict';
@@ -88,6 +89,7 @@
 
       var localState = _.pick(this.getState(), 'type', 'direction', 'sortby');
       this.setState(_.extend({}, this.getState(), localState, newState))
+      ga('send', 'event', 'Map', 'Sort by', this.state.get('sortby'));
     },
 
     /**

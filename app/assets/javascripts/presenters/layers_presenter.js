@@ -1,3 +1,4 @@
+/* global ga*/
 (function (App) {
 
   'use strict';
@@ -111,6 +112,7 @@
           element.id = element.id + '-' + this.state.get('year');
         }
         var layer = this.layersCollection.getLayer(element.id);
+        ga('send', 'event', 'Map', 'Toggle', this.getLayerName(layer));
 
         var options = {
           sql: layer.query,
@@ -120,8 +122,10 @@
         /* Create layer */
         this.fc.getLayer(options).done(function(layer) {
           App.trigger('Layer:change', {layer: layer, name: element.id});
-        });
-      } else App.trigger('Layer:remove', null);
+        }.bind(this));
+      } else {
+        App.trigger('Layer:remove', null);
+      }
     },
 
     closeLayer: function() {
@@ -135,6 +139,14 @@
       active ? layerBtn.addClass('-active') : layerBtn.removeClass('-active') ;
 
       this.setState({active: active});
+    },
+
+    // HELPER
+    getLayerName: function(layer) {
+      if (layer.layer_group) {
+        return layer.layer_group.name + ' ' + layer.name
+      }
+      return layer.name
     }
 
   });

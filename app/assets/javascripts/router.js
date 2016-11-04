@@ -25,7 +25,7 @@
       'cancer-types/:id(/)':           'CancerTypes#show',
       'network/:id(/)':                'Users#show',
       'posts/:id(/)':                  'Posts#show',
-      'network/:id/events/:id/new(/)': 'Events#new',
+      'network/:id/events/new(/)':     'Events#new',
       'network/:id/events/:id/edit(/)':'Events#edit'
     },
 
