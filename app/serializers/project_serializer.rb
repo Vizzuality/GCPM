@@ -11,6 +11,7 @@
 #  status          :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  slug            :string
 #
 
 class ProjectSerializer < ActiveModel::Serializer
