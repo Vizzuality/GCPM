@@ -1,27 +1,30 @@
 ActiveAdmin.register Investigator do
   menu parent: "Entities"
 
-  permit_params :name, :email, :website
+  permit_params :name, :email, :website, :user_id, :is_approved
 
   filter :name
   filter :position_title
 
   member_action :approve, method: :patch do
-    resource.update(is_approved: true)
-    UserMailer.user_relation_email(resource.user.name, resource.user.email, resource.name, 'approved').deliver_later
-    redirect_to :back, notice: 'The relation have been approved.'
+    if resource.update(is_approved: true)
+      UserMailer.user_relation_email(resource.user.name, resource.user.email, resource.name, 'approved').deliver_later
+      redirect_back fallback_location: admin_root_path, notice: 'The relation have been approved.'
+    end
   end
 
   member_action :unapprove, method: :patch do
-    resource.update(is_approved: false)
-    UserMailer.user_relation_email(resource.user.name, resource.user.email, resource.name, 'unapproved').deliver_later
-    redirect_to :back, notice: 'The relation have been unapproved.'
+    if resource.update(is_approved: false)
+      UserMailer.user_relation_email(resource.user.name, resource.user.email, resource.name, 'unapproved').deliver_later
+      redirect_back fallback_location: admin_root_path, notice: 'The relation have been unapproved.'
+    end
   end
 
   member_action :delete_relation, method: :patch do
     UserMailer.user_relation_email(resource.user.name, resource.user.email, resource.name, 'removed').deliver_later
-    resource.update(user_id: nil)
-    redirect_to :back, notice: 'The relation have been removed.'
+    if resource.update(user_id: nil)
+      redirect_back fallback_location: admin_root_path, notice: 'The relation have been removed.'
+    end
   end
 
   index do
