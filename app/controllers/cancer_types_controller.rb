@@ -1,6 +1,6 @@
 class CancerTypesController < ApplicationController
+  set caches_page :index
   before_action :set_cancer_type, only: :show
-
   respond_to :html, :js
 
   def index
