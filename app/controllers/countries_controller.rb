@@ -1,6 +1,6 @@
 class CountriesController < ApplicationController
+  set caches_page :index
   before_action :set_country, only: :show
-
   respond_to :html, :js
 
   def index
