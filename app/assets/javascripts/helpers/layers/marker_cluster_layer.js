@@ -4,9 +4,9 @@
   'use strict';
 
   var blubbleSizes = {
-    big: 90,
-    medium: 70,
-    small: 50
+    big: 70,
+    medium: 55,
+    small: 40
   };
 
   /**
