@@ -20,7 +20,7 @@ module Api::V1
     private
 
       def set_organization
-        @organization = Organization.find(params[:id])
+        @organization = Organization.set_by_id_or_slug(params[:id])
       end
 
       def organization_params

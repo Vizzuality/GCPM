@@ -35,11 +35,11 @@ module Api::V1
     private
 
       def set_investigator
-        @investigator = Investigator.find(params[:id])
+        @investigator = Investigator.set_by_id_or_slug(params[:id])
       end
 
       def check_permissions
-        if @user != Investigator.find(params[:id]).user
+        if @user != Investigator.set_by_id_or_slug(params[:id]).user
           render json: { success: false, message: 'Permission denied!' }, status: 422
         end
       end

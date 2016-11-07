@@ -48,7 +48,7 @@ module Api::V1
     private
 
       def set_user_project
-        @project = @user.projects.find(params[:project_id])
+        @project = @user.projects.set_by_id_or_slug(params[:project_id])
       end
 
       def set_project_membership

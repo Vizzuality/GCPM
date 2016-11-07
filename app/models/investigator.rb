@@ -10,6 +10,7 @@
 #  updated_at  :datetime         not null
 #  user_id     :integer
 #  is_approved :boolean          default(FALSE)
+#  slug        :string
 #
 
 class Investigator < ApplicationRecord
@@ -34,8 +35,11 @@ class Investigator < ApplicationRecord
   attr_accessor :assign_to_user
 
   validates_presence_of   :name
+  validates_uniqueness_of :name
   validates_uniqueness_of :user_id, allow_blank: true
   validates               :email, format: { with: Devise.email_regexp }, allow_blank: true, on: :create
+
+  include Sluggable
 
   scope :publihsed,             ->                    { joins(:projects).where(status: :published) }
   scope :active,                ->                    { joins(:projects).where('projects.end_date >= ? AND projects.start_date <= ?', Time.now, Time.now).or(where('projects.end_date IS NULL')) }
@@ -52,26 +56,28 @@ class Investigator < ApplicationRecord
   scope :by_user,               -> user               { where('investigators.user_id = ? AND investigators.is_approved = ?', user, true ) }
   scope :user_present,          ->                    { where.not(investigators: { user_id: nil } ) }
 
-  def self.fetch_all(options={})
-    investigators = Investigator.all
-    investigators = investigators.by_countries(options[:countries])                   if options[:countries]
-    investigators = investigators.by_regions(options[:regions])                       if options[:regions]
-    investigators = investigators.by_investigators(options[:investigators])           if options[:investigators]
-    investigators = investigators.by_project_types(options[:project_types])           if options[:project_types]
-    investigators = investigators.by_cancer_types(options[:cancer_types])             if options[:cancer_types]
-    investigators = investigators.by_countries(options[:countries])                   if options[:countries]
-    investigators = investigators.by_regions(options[:regions])                       if options[:regions]
-    investigators = investigators.by_organizations(options[:organizations])           if options[:organizations]
-    investigators = investigators.by_organization_types(options[:organization_types]) if options[:organization_types]
-    investigators = investigators.by_start_date(options[:start_date])                 if options[:start_date]
-    investigators = investigators.by_end_date(options[:end_date])                     if options[:end_date]
-    investigators = investigators.by_user(options[:user])                             if options[:user]
-    investigators = investigators.order('investigators.created_at ASC')               if options[:sortby] && options[:sortby] == 'created_asc'
-    investigators = investigators.order('investigators.created_at DESC')              if options[:sortby] && options[:sortby] == 'created_desc'
-    investigators = investigators.order('investigators.name ASC')                    if options[:sortby] && options[:sortby] == 'title_asc'
-    investigators = investigators.order('investigators.name DESC')                   if options[:sortby] && options[:sortby] == 'title_desc'
-    investigators = investigators.limit(options[:limit])                              if options[:limit]
-    investigators = investigators.offset(options[:offset])                            if options[:offset]
-    investigators.uniq
+  class << self
+    def fetch_all(options={})
+      investigators = Investigator.all
+      investigators = investigators.by_countries(options[:countries])                   if options[:countries]
+      investigators = investigators.by_regions(options[:regions])                       if options[:regions]
+      investigators = investigators.by_investigators(options[:investigators])           if options[:investigators]
+      investigators = investigators.by_project_types(options[:project_types])           if options[:project_types]
+      investigators = investigators.by_cancer_types(options[:cancer_types])             if options[:cancer_types]
+      investigators = investigators.by_countries(options[:countries])                   if options[:countries]
+      investigators = investigators.by_regions(options[:regions])                       if options[:regions]
+      investigators = investigators.by_organizations(options[:organizations])           if options[:organizations]
+      investigators = investigators.by_organization_types(options[:organization_types]) if options[:organization_types]
+      investigators = investigators.by_start_date(options[:start_date])                 if options[:start_date]
+      investigators = investigators.by_end_date(options[:end_date])                     if options[:end_date]
+      investigators = investigators.by_user(options[:user])                             if options[:user]
+      investigators = investigators.order('investigators.created_at ASC')               if options[:sortby] && options[:sortby] == 'created_asc'
+      investigators = investigators.order('investigators.created_at DESC')              if options[:sortby] && options[:sortby] == 'created_desc'
+      investigators = investigators.order('investigators.name ASC')                    if options[:sortby] && options[:sortby] == 'title_asc'
+      investigators = investigators.order('investigators.name DESC')                   if options[:sortby] && options[:sortby] == 'title_desc'
+      investigators = investigators.limit(options[:limit])                              if options[:limit]
+      investigators = investigators.offset(options[:offset])                            if options[:offset]
+      investigators.uniq
+    end
   end
 end
