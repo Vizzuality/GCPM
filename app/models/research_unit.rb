@@ -32,7 +32,7 @@ class ResearchUnit < ApplicationRecord
   private
 
     def check_address
-      i_address_id    = Investigator.find(self.investigator_id).addresses.first.id
+      i_address_id    = Investigator.set_by_id_or_slug(self.investigator_id).addresses.first.id
       self.address_id = i_address_id if i_address_id.present?
     end
 

@@ -73,6 +73,6 @@ class ProjectUpdatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def set_project
-      @project = Project.find(params[:project_id])
+      @project = Project.set_by_id_or_slug(params[:project_id])
     end
 end

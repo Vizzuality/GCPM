@@ -10,6 +10,7 @@
 #  updated_at  :datetime         not null
 #  user_id     :integer
 #  is_approved :boolean          default(FALSE)
+#  slug        :string
 #
 
 require 'rails_helper'
@@ -23,6 +24,13 @@ RSpec.describe Investigator, type: :model do
 
   it 'Project user relations size' do
     expect(Investigator.all.size).to eq(2)
+  end
+
+  context "Valid investigator" do
+    it 'Slug presentation' do
+      expect(@investigator_1.slug).to be_present
+      expect(@investigator_1.slug).to eq('first-investigator')
+    end
   end
 
   context 'For approvable methods' do

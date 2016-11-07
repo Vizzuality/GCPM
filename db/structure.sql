@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.4
--- Dumped by pg_dump version 9.5.4
+-- Dumped from database version 9.5.5
+-- Dumped by pg_dump version 9.5.5
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -207,7 +207,8 @@ CREATE TABLE cancer_types (
     name character varying,
     description text,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    slug character varying
 );
 
 
@@ -372,7 +373,8 @@ CREATE TABLE events (
     postcode character varying,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    user_id integer
+    user_id integer,
+    slug character varying
 );
 
 
@@ -507,7 +509,8 @@ CREATE TABLE investigators (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     user_id integer,
-    is_approved boolean DEFAULT false
+    is_approved boolean DEFAULT false,
+    slug character varying
 );
 
 
@@ -594,7 +597,8 @@ CREATE TABLE layers (
     locate_layer boolean DEFAULT false,
     icon_class character varying,
     published boolean DEFAULT true,
-    legend text
+    legend text,
+    source text
 );
 
 
@@ -837,7 +841,8 @@ CREATE TABLE organizations (
     established integer,
     organization_type_id integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    slug character varying
 );
 
 
@@ -1013,7 +1018,8 @@ CREATE TABLE projects (
     end_date date,
     status integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    slug character varying
 );
 
 
@@ -1731,6 +1737,13 @@ CREATE INDEX index_cancer_types_on_name ON cancer_types USING gin (to_tsvector('
 
 
 --
+-- Name: index_cancer_types_on_slug; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_cancer_types_on_slug ON cancer_types USING btree (slug);
+
+
+--
 -- Name: index_cancer_types_projects_on_cancer_type_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1749,6 +1762,13 @@ CREATE INDEX index_cancer_types_projects_on_project_id ON cancer_types_projects 
 --
 
 CREATE INDEX index_events_on_description ON events USING gin (to_tsvector('english'::regconfig, description));
+
+
+--
+-- Name: index_events_on_slug; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_events_on_slug ON events USING btree (slug);
 
 
 --
@@ -1791,6 +1811,13 @@ CREATE INDEX index_identities_on_user_id ON identities USING btree (user_id);
 --
 
 CREATE INDEX index_investigators_on_name ON investigators USING gin (to_tsvector('english'::regconfig, (name)::text));
+
+
+--
+-- Name: index_investigators_on_slug; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_investigators_on_slug ON investigators USING btree (slug);
 
 
 --
@@ -1906,6 +1933,13 @@ CREATE INDEX index_organizations_on_organization_type_id ON organizations USING 
 
 
 --
+-- Name: index_organizations_on_slug; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_organizations_on_slug ON organizations USING btree (slug);
+
+
+--
 -- Name: index_posts_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1952,6 +1986,13 @@ CREATE UNIQUE INDEX index_project_users_on_project_id_and_user_id ON project_use
 --
 
 CREATE INDEX index_project_users_on_user_id ON project_users USING btree (user_id);
+
+
+--
+-- Name: index_projects_on_slug; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_projects_on_slug ON projects USING btree (slug);
 
 
 --
@@ -2063,6 +2104,6 @@ ALTER TABLE ONLY mailboxer_receipts
 
 SET search_path TO "$user", public;
 
-INSERT INTO schema_migrations (version) VALUES ('20160623091908'), ('20160623092157'), ('20160623093250'), ('20160629161033'), ('20160629161041'), ('20160707072908'), ('20160707073642'), ('20160708083044'), ('20160711105858'), ('20160711114901'), ('20160718224524'), ('20160718225032'), ('20160718232806'), ('20160720162924'), ('20160721141137'), ('20160725182233'), ('20160726110350'), ('20160729093255'), ('20160729125019'), ('20160729151912'), ('20160801160550'), ('20160801165924'), ('20160801171206'), ('20160802121917'), ('20160802174327'), ('20160803012223'), ('20160803012429'), ('20160803012636'), ('20160803014813'), ('20160803143833'), ('20160804100620'), ('20160804113911'), ('20161004100702'), ('20161018055907'), ('20161018091446'), ('20161018104312'), ('20161018111559'), ('20161018125246'), ('20161020122456'), ('20161020163951'), ('20161021073852'), ('20161021080737'), ('20161021110751'), ('20161021110752'), ('20161021110753'), ('20161021110754'), ('20161026160423'), ('20161027160501'), ('20161103101432'), ('20161103101657');
+INSERT INTO schema_migrations (version) VALUES ('20160623091908'), ('20160623092157'), ('20160623093250'), ('20160629161033'), ('20160629161041'), ('20160707072908'), ('20160707073642'), ('20160708083044'), ('20160711105858'), ('20160711114901'), ('20160718224524'), ('20160718225032'), ('20160718232806'), ('20160720162924'), ('20160721141137'), ('20160725182233'), ('20160726110350'), ('20160729093255'), ('20160729125019'), ('20160729151912'), ('20160801160550'), ('20160801165924'), ('20160801171206'), ('20160802121917'), ('20160802174327'), ('20160803012223'), ('20160803012429'), ('20160803012636'), ('20160803014813'), ('20160803143833'), ('20160804100620'), ('20160804113911'), ('20161004100702'), ('20161018055907'), ('20161018091446'), ('20161018104312'), ('20161018111559'), ('20161018125246'), ('20161020122456'), ('20161020163951'), ('20161021073852'), ('20161021080737'), ('20161021110751'), ('20161021110752'), ('20161021110753'), ('20161021110754'), ('20161026160423'), ('20161027160501'), ('20161103101432'), ('20161103101657'), ('20161104114309'), ('20161107103717');
 
 

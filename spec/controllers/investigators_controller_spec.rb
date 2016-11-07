@@ -29,7 +29,7 @@ RSpec.describe InvestigatorsController, type: :controller do
       process :relation_request, method: :patch, params: { id: @investigator_2.id }
       expect(response).to be_redirect
       expect(response).to have_http_status(302)
-      expect(Investigator.find(@investigator_2.id).user_id).to be_nil
+      expect(Investigator.set_by_id_or_slug(@investigator_2.slug).user_id).to be_nil
     end
   end
 

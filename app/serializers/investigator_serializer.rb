@@ -10,6 +10,7 @@
 #  updated_at  :datetime         not null
 #  user_id     :integer
 #  is_approved :boolean          default(FALSE)
+#  slug        :string
 #
 
 class InvestigatorSerializer < ActiveModel::Serializer
