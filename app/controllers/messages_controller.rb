@@ -9,10 +9,8 @@ class MessagesController < ApplicationController
   def show
     @user = current_user
     conversation = Mailboxer::Conversation.find(params[:id])
-    #authorize! :show_conversation, conversation
     conversation.receipts_for(current_user).map{|m| m.message.mark_as_read(current_user) if m.message.is_unread?(current_user)}
     @conversation = conversation.messages
-    # render :whatever
   end
   def create
     if message_params[:in_response].present?
