@@ -30,7 +30,7 @@ module Sluggable
                                else
                                  'LOWER(title) LIKE LOWER(?)'
                                end
-          check_duplications = eval(self.class.name).where(find_name_or_title, self_name).where.not(id: self.id)
+          check_duplications = self.class.name.safe_constantize.where(find_name_or_title, self_name).where.not(id: self.id)
 
           self.slug = self_name.downcase.parameterize
           if check_duplications.any?
