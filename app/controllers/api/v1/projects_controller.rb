@@ -49,7 +49,7 @@ module Api::V1
     private
 
       def set_user_project
-        @project = Project.find(params[:id])
+        @project = Project.set_by_id_or_slug(params[:id])
 
         if @user.projects.include?(@project)
           return

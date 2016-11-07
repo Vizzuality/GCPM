@@ -10,12 +10,12 @@ module Api
       end
 
       def show_project
-        project = Project.find(params[:id])
+        project = Project.set_by_id_or_slug(params[:id])
         render json: project.addresses.uniq, each_serializer: MapProjectSerializer, project: project
       end
 
       def show_event
-        @event = Event.find(params[:id])
+        @event = Event.set_by_id_or_slug(params[:id])
         render json: [@event], each_serializer: MapEventSerializer
       end
 

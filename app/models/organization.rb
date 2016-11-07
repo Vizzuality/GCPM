@@ -11,6 +11,7 @@
 #  organization_type_id :integer
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
+#  slug                 :string
 #
 
 class Organization < ApplicationRecord
@@ -27,6 +28,9 @@ class Organization < ApplicationRecord
 
   accepts_nested_attributes_for :addresses, allow_destroy: true
 
-  validates_presence_of :name
-  validates             :email_address, format: { with: Devise.email_regexp }, allow_blank: true, on: :create
+  validates_presence_of   :name
+  validates_uniqueness_of :name
+  validates               :email_address, format: { with: Devise.email_regexp }, allow_blank: true, on: :create
+
+  include Sluggable
 end
