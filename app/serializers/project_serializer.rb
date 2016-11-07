@@ -11,10 +11,11 @@
 #  status          :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  slug            :string
 #
 
 class ProjectSerializer < ActiveModel::Serializer
-  attributes :id, :title, :title, :summary, :project_website, :start_date, :end_date, :status
+  attributes :id, :slug, :title, :title, :summary, :project_website, :start_date, :end_date, :status
 
   has_many :funding_sources
   has_many :cancer_types

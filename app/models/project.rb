@@ -11,6 +11,7 @@
 #  status          :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  slug            :string
 #
 
 class Project < ApplicationRecord
@@ -48,11 +49,13 @@ class Project < ApplicationRecord
   accepts_nested_attributes_for :users
 
   validates_presence_of   :title, :summary
-  validates               :title, uniqueness: true
+  validates_uniqueness_of :title
   validate                :dates_timeline
   validates               :start_date, date: true, allow_blank: true
   validates               :end_date,   date: true, allow_blank: true
   validates_acceptance_of :terms
+
+  include Sluggable
 
   scope :publihsed,             ->                     { where(status: :published) }
   scope :active,                ->                     { where('projects.end_date >= ? AND projects.start_date <= ?', Time.now, Time.now).or(where('projects.end_date IS NULL')) }
