@@ -62,7 +62,7 @@
 
         if ($currentConversation.hasClass('-unread')) {
           this.userMessages.removeUnreadClass($currentConversation);
-          App.trigger('MessagesBadge:change');
+          App.trigger('MessagesBadge:change', { unreadCount: gon.unreadCount });
         }
 
         this.messageRequest($currentConversation.data().converId);

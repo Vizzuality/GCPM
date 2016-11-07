@@ -32,13 +32,25 @@
       });
     },
 
-    setMessagesBadge: function() {
-      var $messagesBadge = this.$el.find('#messages-badge');
-      var unreadCount = Number($messagesBadge.text());
+    setMessagesBadge: function(unreadCount) {
+      var $messagesBadge = $('.messages-badge');
 
       if (unreadCount > 0) {
-        $messagesBadge.text(unreadCount - 1);
+        gon.unreadCount = unreadCount - 1;
+        $messagesBadge.toggleClass('-hidden', false);
+
+        if (gon.unreadCount <= 9) {
+          $messagesBadge.text(gon.unreadCount);
+        } else {
+          $messagesBadge.text('9+');
+        }
+      } else {
+        gon.unreadCount = 0;
       }
+
+      gon.unreadCount === 0 ?
+        $messagesBadge.toggleClass('-hidden', true) :
+        $messagesBadge.toggleClass('-hidden', false);
     }
 
   });

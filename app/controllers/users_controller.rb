@@ -11,6 +11,7 @@ class UsersController < ApplicationController
 
     gon.server_params = { 'user': @investigator.size.positive? ? @investigator.first.id : '0' }
     gon.userId = current_user.id
+    gon.unreadCount = current_user.unread_inbox_count
 
     limit = 12 + (@page * 9)
 

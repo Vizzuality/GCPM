@@ -12,6 +12,10 @@
     <li class="<%= active_page?(user_session_path) ? '-active' : '' %>">
       <%= link_to (t 'events'), user_path(:data => 'events', :id => current_user.id) %></a>
     </li>
+    <li class="<%= active_page?(user_session_path) ? '-active' : '' %>">
+      <%= link_to (t 'messages'), user_path(:data => 'messages', :id => current_user.id) %></a>
+      <div class="c-badge messages-badge <%= current_user.unread_inbox_count ? ' -hidden' : ''%>"><%= current_user.unread_inbox_count %></div>
+    </li>
   </ul>
   <ul>
     <li class="logout">
