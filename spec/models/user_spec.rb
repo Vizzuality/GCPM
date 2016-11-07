@@ -28,7 +28,6 @@
 #  pubmed                 :string
 #  authentication_token   :string
 #  token_expires_at       :datetime
-#  role                   :integer          default("user"), not null
 #
 
 require 'rails_helper'
