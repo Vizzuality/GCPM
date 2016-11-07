@@ -3,13 +3,13 @@ require 'acceptance_helper'
 module Api::V1
   describe 'Investigators', type: :request do
     context 'For investigators list' do
-      let!(:user)           { FactoryGirl.create(:user, authentication_token: '7Nw1A13xrHrZDHj631MA')           }
-      let!(:user_2)         { FactoryGirl.create(:user, authentication_token: '7Nw1A13xrHrZDHj631MB')           }
-      let!(:country)        { FactoryGirl.create(:country)                                                      }
-      let!(:organization)   { FactoryGirl.create(:organization, name: 'Test orga 3', address_ids: [address.id]) }
-      let!(:address)        { FactoryGirl.create(:address, country_id: country.id)                              }
-      let!(:investigator)   { FactoryGirl.create(:investigator, address_ids: [address.id])                      }
-      let!(:investigator_2) { FactoryGirl.create(:investigator, address_ids: [address.id], user: user)          }
+      let!(:user)           { FactoryGirl.create(:user, authentication_token: '7Nw1A13xrHrZDHj631MA')                          }
+      let!(:user_2)         { FactoryGirl.create(:user, authentication_token: '7Nw1A13xrHrZDHj631MB')                          }
+      let!(:country)        { FactoryGirl.create(:country)                                                                     }
+      let!(:organization)   { FactoryGirl.create(:organization, name: 'Test orga 3', address_ids: [address.id])                }
+      let!(:address)        { FactoryGirl.create(:address, country_id: country.id)                                             }
+      let!(:investigator)   { FactoryGirl.create(:investigator, address_ids: [address.id])                                     }
+      let!(:investigator_2) { FactoryGirl.create(:investigator, name: 'Investigator 2', address_ids: [address.id], user: user) }
 
       let(:params) {{"investigator": { "name": "Test investigator User", "email": "testuser@sample.com", "website": "http://www.testwebsite.com", "address_ids": ["#{address.id}"],
                                        "addresses_attributes": [
@@ -40,6 +40,7 @@ module Api::V1
                              }}
 
       let(:investigator_id)   { investigator.id   }
+      let(:investigator_slug) { investigator.slug }
       let(:investigator_2_id) { investigator_2.id }
 
       it 'Allows to access investigators list' do
@@ -54,6 +55,14 @@ module Api::V1
 
       it 'Allows to access investigator by id' do
         get "/api/investigators/#{investigator_id}?token=#{user.authentication_token}"
+
+        expect(status).to eq(200)
+        expect(json['organizations'].size).to eq(1)
+        expect(json['addresses'].size).to     eq(1)
+      end
+
+      it 'Allows to access investigator by slug' do
+        get "/api/investigators/#{investigator_slug}?token=#{user.authentication_token}"
 
         expect(status).to eq(200)
         expect(json['organizations'].size).to eq(1)

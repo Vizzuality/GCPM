@@ -1,6 +1,4 @@
 class InvestigatorsController < ApplicationController
-  load_and_authorize_resource
-
   before_action :set_investigator, except: :index
   before_action :set_user,         only: [:remove_relation, :relation_request]
 
@@ -10,6 +8,7 @@ class InvestigatorsController < ApplicationController
   end
 
   def show
+    authorize! :show, @investigator
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
     @filters = @investigator.user ? %w(projects posts network) : %w(projects posts)
     @current_type = params.key?(:data) ? params[:data] : 'projects'
@@ -59,6 +58,7 @@ class InvestigatorsController < ApplicationController
   end
 
   def remove_relation
+    authorize! :remove_relation, @investigator
     if @investigator.remove_relation(@user.id)
       UserMailer.user_relation_email(@user.name, @user.email, @investigator.name, 'removed').deliver_later
       redirect_to investigator_path(@investigator), notice: { text: 'Relation removed.', show: true }
@@ -68,6 +68,7 @@ class InvestigatorsController < ApplicationController
   end
 
   def relation_request
+    authorize! :relation_request, @investigator
     if @investigator.relation_request(@user.id)
       UserMailer.user_relation_email(@user.name, @user.email, @investigator.name, 'request').deliver_later
       redirect_to investigator_path(@investigator), notice: { text: 'Your request is being revised, please, check your dashboard for updates.', show: true }
@@ -79,7 +80,7 @@ class InvestigatorsController < ApplicationController
   private
 
     def set_investigator
-      @investigator = Investigator.find(params[:id])
+      @investigator = Investigator.set_by_id_or_slug(params[:id])
     end
 
     def set_user

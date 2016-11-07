@@ -86,6 +86,7 @@ Rails.application.routes.draw do
       get 'map/events/:id',      to: 'map#show_event'
       get 'layer-groups',        to: 'layer_groups#index',          as: 'layer_groups'
       get '/layers',             to: 'layers#index',                as: 'layers'
+      get '/widgets',             to: 'widgets#index',                as: 'widgets'
     end
   end
 

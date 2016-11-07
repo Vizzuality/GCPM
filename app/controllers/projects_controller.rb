@@ -1,12 +1,11 @@
 class ProjectsController < ApplicationController
-  load_and_authorize_resource
-
   before_action :set_project
   before_action :set_user, only: [:remove_relation, :relation_request]
 
   respond_to :html, :js
 
   def show
+    authorize! :show, @project
     gon.server_params = {}
     gon.api_location_path = "/api/map/projects/#{params[:id]}"
     gon.start_date = @project.start_date || 0
@@ -41,6 +40,7 @@ class ProjectsController < ApplicationController
   end
 
   def remove_relation
+    authorize! :remove_relation, @project
     if @project.remove_relation(@user.id)
       UserMailer.user_relation_email(@user.name, @user.email, @project.title, 'removed').deliver_later
       redirect_to project_url(@project), notice: { text: 'Relation removed.', show: true }
@@ -50,6 +50,7 @@ class ProjectsController < ApplicationController
   end
 
   def relation_request
+    authorize! :relation_request, @project
     if @project.relation_request(@user.id)
       UserMailer.user_relation_email(@user.name, @user.email, @project.title, 'request').deliver_later
       redirect_to project_url(@project), notice: { text: 'Your request is being revised, please, check your dashboard for updates.', show: true }
@@ -61,7 +62,7 @@ class ProjectsController < ApplicationController
   private
 
     def set_project
-      @project = Project.find(params[:id])
+      @project = Project.set_by_id_or_slug(params[:id])
     end
 
     def set_user
