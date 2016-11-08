@@ -75,6 +75,7 @@ Rails.application.routes.draw do
       end
 
       resources :investigators,  only: [:index, :show, :update, :create]
+      get '/investigators/:id/graph', to: 'investigators#graph'
       resources :organizations,  only: [:index, :show]
 
       get 'funding-sources',     to: 'organizations#index'
