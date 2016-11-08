@@ -23,7 +23,8 @@ module Gcpm
     # -- all .rb files in that directory are automatically loaded.
     config.assets.enabled = true
     config.assets.paths << "#{Rails.root}/app/assets/fonts"
-    config.autoload_paths += %W(#{Rails.root}/app/excel_importer)
+    config.autoload_paths += %W(#{Rails.root}/app/excel_importer #{Rails.root}/app/excel_importer/entities)
+    config.app_generators.scaffold_controller = :scaffold_controller
 
     # config.middleware.use Rack::Cors do
     #   allow do
@@ -33,6 +34,8 @@ module Gcpm
     # end
 
     #config.web_console.whitelisted_ips = '172.19.0.1'
+
+    config.active_record.schema_format = :sql
 
     config.generators do |g|
       g.test_framework  :rspec

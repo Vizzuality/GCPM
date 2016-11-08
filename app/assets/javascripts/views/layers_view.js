@@ -33,8 +33,13 @@
       this.$el.html(this.template(this.data));
 
       if (this.data.cartoLayer) {
-        var current = $('.c-layers .layers-content')
-        .find('input[value=' + this.data.cartoLayer + ']');
+        // Handle human develpment index
+        if (this.data.cartoLayer.indexOf('human-development-index') !== -1) {
+          this.data.cartoLayer = 'human-development-index';
+        }
+
+        var current = $('.c-layers .layers-content').find('input[value=' + this.data.cartoLayer + ']');
+
         if (current && current.length > 0) {
           this.current = current[0];
           this.current.checked = true;
@@ -50,6 +55,7 @@
 
     handleRadio: function(e) {
       var radio = e.target;
+
       if(this.current && radio.getAttribute('id') === this.current.getAttribute('id')) {
         radio.checked = false;
         this.current = null;
@@ -58,7 +64,6 @@
       }
 
       this.triggerChange();
-      setTimeout(function () { this.hideLayersWindow(); }.bind(this), 300);
     },
 
     collapseLayer: function(e) {

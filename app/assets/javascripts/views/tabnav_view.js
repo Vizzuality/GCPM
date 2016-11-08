@@ -30,6 +30,27 @@
         }));
         el.setAttribute('href', uri.toString());
       });
+    },
+
+    setMessagesBadge: function(unreadCount) {
+      var $messagesBadge = $('.messages-badge');
+
+      if (unreadCount > 0) {
+        gon.unreadCount = unreadCount - 1;
+        $messagesBadge.toggleClass('-hidden', false);
+
+        if (gon.unreadCount <= 9) {
+          $messagesBadge.text(gon.unreadCount);
+        } else {
+          $messagesBadge.text('9+');
+        }
+      } else {
+        gon.unreadCount = 0;
+      }
+
+      gon.unreadCount === 0 ?
+        $messagesBadge.toggleClass('-hidden', true) :
+        $messagesBadge.toggleClass('-hidden', false);
     }
 
   });

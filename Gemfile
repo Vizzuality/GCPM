@@ -10,6 +10,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'dotenv-rails', '2.1.0'
 gem 's3'
 gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
+gem 'cancancan'
 gem 'inherited_resources', git: 'https://github.com/activeadmin/inherited_resources'
 gem 'active_admin_theme'
 gem 'active_model_serializers', '~> 0.10.0'
@@ -19,13 +20,16 @@ gem 'simple_form'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'ckeditor'
+gem 'date_validator'
 
 # User login
 gem 'devise'
-## Omniauth
+
+# Omniauth
 gem 'omniauth'
 gem 'omniauth-linkedin'
 gem 'omniauth-google-oauth2'
+gem 'bcrypt'
 
 # Assets pipeline
 gem 'uglifier', '>= 1.3.0'
@@ -43,10 +47,18 @@ gem 'sendgrid-ruby'
 
 # Api engine
 gem 'cartomodel', git: 'https://github.com/Vizzuality/cartomodel'
-# gem 'rack-cors', require: 'rack/cors'
-gem 'sql_query'
 
+# gem 'rack-cors', require: 'rack/cors'
+
+# SQL.erb
+gem 'sql_query'
+gem 'textacular'
+
+# Follows
 gem "acts_as_follower", git: 'https://github.com/tcocca/acts_as_follower'
+
+# Messages
+gem 'mailboxer'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-normalize-css'

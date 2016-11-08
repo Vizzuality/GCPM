@@ -37,6 +37,11 @@
 
           select {
             min-width: 0;
+
+            //IE: hide select arrows
+            &::-ms-expand {
+              display: none;
+            }
           }
 
           .picker__select--year,

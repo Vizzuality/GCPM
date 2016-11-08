@@ -1,7 +1,17 @@
 <ul class="c-actionbar">
+  {{#if visible}}
+    <li class="actionbar-item">
+      <a href="{{link}}" class="c-btn -action -thin">
+        <svg class="c-icon -small -inverse">
+          <use xlink:href="#icon-add"></use>
+        </svg>
+        {{name}}
+      </a>
+    </li>
+  {{/if}}
 
   <li class="actionbar-item">
-    <button class="c-btn -thin js-actionbar-action" data-action="layers">
+    <button class="c-btn -action -thin js-actionbar-action" data-action="layers">
       <svg class="c-icon -small -inverse">
         <use xlink:href="#icon-layers"></use>
       </svg>
@@ -11,7 +21,7 @@
   </li>
 
   <li class="actionbar-item">
-    <button class="c-btn -thin js-actionbar-action" data-action="save">
+    <button class="c-btn -action -thin js-actionbar-action" data-action="save">
       <svg class="c-icon -small -inverse">
         <use xlink:href="#icon-share"></use>
       </svg>

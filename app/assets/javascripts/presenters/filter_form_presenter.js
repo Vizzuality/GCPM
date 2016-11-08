@@ -1,3 +1,4 @@
+/* global ga */
 (function(App) {
 
   'use strict';
@@ -73,16 +74,19 @@
           newState['regions[]'] = _.findWhere(this.countries.toJSON(), { country_iso_3: newState['countries[]'] }).region_iso;
         }
         this.setState(newState);
+        this.setAnalyticsEvents();
         this.closeForm();
       }, this);
 
       this.filterForm.on('reset', function() {
         this.setState(this.defaults);
         this.closeForm();
+        App.trigger('FilterForm:reset');
+        ga('send', 'event', 'Map', 'Clear Filters');
       }, this)
 
       this.state.on('change', function() {
-        App.trigger('FilterForm:change', this.state.attributes);
+        App.trigger('FilterForm:change', this.getState());
       }, this);
 
       App.on('TabNav:change Breadcrumbs:change Map:change', function(newState){
@@ -114,6 +118,10 @@
       this.state
         .clear({ silent: true })
         .set(newState, options);
+    },
+
+    getState: function() {
+      return this.state.attributes
     },
 
     /**
@@ -171,6 +179,49 @@
         // Render the child
         child.render();
       }.bind(this));
+    },
+
+    setAnalyticsEvents: function() {
+      var state = this.state.toJSON();
+      for (var value in state) {
+        switch(value) {
+          case 'cancer_types[]':
+            if (state[value].length) {
+              ga('send', 'event', 'Filter', 'Cancer Types', state[value]);
+            }
+          break;
+          case 'countries[]':
+            if (state[value].length) {
+              ga('send', 'event', 'Filter', 'Countries', state[value]);
+            }
+          break;
+          case 'organization_types[]':
+            if (state[value].length) {
+              ga('send', 'event', 'Filter', 'Organization Types', state[value]);
+            }
+          break;
+          case 'organizations[]':
+            if (state[value].length) {
+              ga('send', 'event', 'Filter', 'Organizations', state[value]);
+            }
+          break;
+          case 'project_types[]':
+            if (state[value].length) {
+              ga('send', 'event', 'Filter', 'Project Types', state[value]);
+            }
+          break;
+          case 'start_date':
+            if (state[value]) {
+              ga('send', 'event', 'Filter', 'Start Date', state[value]);
+            }
+          break;
+          case 'end_date':
+            if (state[value]) {
+              ga('send', 'event', 'Filter', 'End Date', state[value]);
+            }
+          break;
+        }
+      }
     }
   });
 

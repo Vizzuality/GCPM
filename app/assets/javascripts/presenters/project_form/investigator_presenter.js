@@ -36,6 +36,11 @@
         options: _.extend({}, this.defaults, viewSettings || {}),
         state: this.state
       });
+      this.DOMelementId = viewSettings.DOMelement.split("-")[1];
+
+      this.investigatorForm = new App.Presenter.InvestigatorForm({
+        DOMelementId: this.DOMelementId
+      });
 
       this.setEvents();
       this.setSubscriptions();
@@ -46,7 +51,7 @@
      */
     setEvents: function() {
       this.select.on('new', function(){
-        App.trigger('Investigator:new');
+        this.investigatorForm.openForm();
       }, this);
 
       this.select.on('change', function(newState){
@@ -57,21 +62,15 @@
     },
 
     setSubscriptions: function(){
-      App.on('InvestigatorForm:submit', function(newInvestigator){
+      App.on('InvestigatorForm:submit-'+this.DOMelementId, function(newInvestigator){
         var newOption = {
           value: JSON.stringify(newInvestigator)
         };
         newOption.name = newInvestigator.investigatorName;
         this.select.options.options.unshift(newOption);
         this.select.render();
-        $(this.select.$el[0].children[this.select.options.name]).val(newOption.value).trigger("change");
+        this.setValue(newOption.value);
       }, this);
-
-      // App.on('InvestigatorForm:submit', function(newState){
-      //   newState.name = newState.investigatorName;
-      //   this.investigators.push(newState);
-      //   this.select.addNew(this.investigators.at(this.investigators.length-1));
-      // }, this);
     },
 
     /**
@@ -105,6 +104,15 @@
      */
     setState: function(state, options) {
       this.state.set(state, options);
+    },
+
+    setValue: function(value){
+      this.select.$el.find("select").val(value).trigger("change");
+    },
+
+    setFetchedValues: function(value){
+      this.select.$el.find("select").val(value).trigger("change");
+      this.select.$el.find("select").attr("disabled", true);
     },
 
     /**

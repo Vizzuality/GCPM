@@ -11,7 +11,7 @@
 #  status          :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  user_id         :integer
+#  slug            :string
 #
 
 class Project < ApplicationRecord
@@ -19,7 +19,7 @@ class Project < ApplicationRecord
 
   acts_as_followable
 
-  belongs_to :user, inverse_of: :projects, optional: true
+  include UserRelationable
 
   has_many :memberships
   has_many :research_units,  through: :memberships
@@ -33,26 +33,29 @@ class Project < ApplicationRecord
   has_many :project_leads,           -> { where(memberships: { membership_type: 0 }) }, through: :research_units, source: :investigator
   has_many :secondary_investigators, -> { where(memberships: { membership_type: 1 }) }, through: :research_units, source: :investigator
 
+  has_many :project_users
+  has_many :users, through: :project_users
+
+  has_many :project_updates
+
   has_and_belongs_to_many :project_types
   has_and_belongs_to_many :cancer_types
 
-  accepts_nested_attributes_for :memberships,     allow_destroy: true
-  accepts_nested_attributes_for :investigators,   update_only:   true
-  accepts_nested_attributes_for :organizations,   update_only:   true
-  accepts_nested_attributes_for :addresses,       update_only:   true
-  accepts_nested_attributes_for :funding_sources, allow_destroy: true
+  accepts_nested_attributes_for :memberships,   allow_destroy: true
+  accepts_nested_attributes_for :investigators, update_only:   true
+  accepts_nested_attributes_for :organizations, update_only:   true
+  accepts_nested_attributes_for :addresses,     update_only:   true
+  accepts_nested_attributes_for :funding_sources
+  accepts_nested_attributes_for :users
 
-  validates_presence_of :title, :summary
-  validates :title, uniqueness: true
+  validates_presence_of   :title, :summary
+  validates_uniqueness_of :title
+  validate                :dates_timeline
+  validates               :start_date, date: true, allow_blank: true
+  validates               :end_date,   date: true, allow_blank: true
   validates_acceptance_of :terms
 
-  validate :dates_timeline
-
-  def dates_timeline
-    if self.start_date.present? && self.end_date.present?
-      errors.add(:end_date, 'must be after start date') if self.start_date > self.end_date
-    end
-  end
+  include Sluggable
 
   scope :publihsed,             ->                     { where(status: :published) }
   scope :active,                ->                     { where('projects.end_date >= ? AND projects.start_date <= ?', Time.now, Time.now).or(where('projects.end_date IS NULL')) }
@@ -66,7 +69,7 @@ class Project < ApplicationRecord
   scope :by_regions,            -> regions             { joins(:countries).where(countries: { region_iso: regions }) }
   scope :by_start_date,         -> start_date          { where('projects.start_date > ?', start_date ) }
   scope :by_end_date,           -> end_date            { where('projects.end_date < ?', end_date ) }
-  scope :by_user,               -> user                { where('projects.user_id = ?', user ) }
+  scope :by_user,               -> user                { joins(:project_users).where('project_users.user_id = ? AND project_users.is_approved = ?', user, true ) }
 
   class << self
     def fetch_all(options={})
@@ -87,7 +90,7 @@ class Project < ApplicationRecord
       projects = projects.order('projects.title DESC')                        if options[:sortby] && options[:sortby] == 'title_desc'
       projects = projects.limit(options[:limit])                              if options[:limit]
       projects = projects.offset(options[:offset])                            if options[:offset]
-      projects.uniq
+      projects.distinct
     end
 
     def build_project(options)
@@ -106,10 +109,11 @@ class Project < ApplicationRecord
       options            = options.except(:new_funders, :memberships)
       project.attributes = options if project.present?
       validate_project   = project.present? ? project.valid? : Project.new(options).valid?
+      project_id         = project.id if project.present?
 
       if validate_project
         build_funding_sources(funders, options) if funders.present?
-        build_memberships(memberships, options) if memberships.present?
+        build_memberships(memberships, options, project_id) if memberships.present?
       end
       options
     end
@@ -124,13 +128,42 @@ class Project < ApplicationRecord
       options
     end
 
-    def build_memberships(memberships, options)
+    def build_memberships(memberships, options, project_id=nil)
       memberships_attributes = []
       memberships.each do |membership_params|
-        memberships_attributes << membership_params
+        if membership_params[:research_unit_attributes].present?
+          investigator_params = membership_params[:research_unit_attributes][:investigator_id] if membership_params[:research_unit_attributes][:investigator_id].present?
+          address_params      = membership_params[:research_unit_attributes][:address_id]      if membership_params[:research_unit_attributes][:address_id].present?
+          if investigator_params.present? && address_params.present?
+            memberships_attributes << check_existing_research_units_and_build_params(membership_params, investigator_params, address_params, project_id)
+          else
+            memberships_attributes << membership_params
+          end
+        else
+          memberships_attributes << membership_params
+        end
       end
       options['memberships_attributes'] = memberships_attributes
       options
+    end
+
+    def check_existing_research_units_and_build_params(membership_params, investigator_params, address_params, project_id)
+      existing_ru = ResearchUnit.find_by(investigator_id: investigator_params, address_id: address_params)
+      if existing_ru.present?
+        ru_id = existing_ru.id
+        if project_id.present?
+          membership = Membership.find_by(project_id: project_id, research_unit_id: ru_id)
+          if membership.present?
+            membership_params = { id: membership.id, membership_type: membership_params[:membership_type] }
+          else
+            membership_params = { research_unit_id: ru_id, membership_type: membership_params[:membership_type] }
+          end
+        else
+          membership_params = { research_unit_id: ru_id, membership_type: membership_params[:membership_type] }
+        end
+      else
+        membership_params
+      end
     end
   end
 
@@ -184,4 +217,12 @@ class Project < ApplicationRecord
       ResearchUnit.includes(:address).all.map { |ru| [ru.address.country_name, ru.id] }
     end
   end
+
+  private
+
+    def dates_timeline
+      if self.start_date.present? && self.end_date.present?
+        errors.add(:end_date, 'must be after start date') if self.start_date > self.end_date
+      end
+    end
 end

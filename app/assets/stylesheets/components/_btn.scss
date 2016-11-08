@@ -1,7 +1,7 @@
 .c-btn {
   @extend %reset-btn;
   padding: $button-y-padding $button-x-padding;
-
+  color: white;
   display: inline-block;
 
   font-size: $small-font-size;
@@ -19,6 +19,7 @@
     padding: 0;
     width: 140px;
     height: 140px;
+    color: $base-font-color;
     text-align: center;
     border: 1px solid $border-color-1;
     border-radius: 100%;
@@ -30,6 +31,10 @@
 
   &.-extra-thin {
     padding: $button-y-padding 0;
+  }
+
+  &.-mg-left {
+    margin-left: $inline-space / 2;
   }
 
   &.-primary {
@@ -51,6 +56,7 @@
   &.-secondary {
     color: $inverse-font-color;
     background-color: $secondary-color;
+    border: 1px solid $secondary-color;
 
     &.-inverse {
       background-color: $inverse-font-color;
@@ -86,6 +92,12 @@
 
     &:hover {
       box-shadow: $box-shadow-2;
+    }
+  }
+
+  &.-action {
+    &:hover {
+      background-color: darken($primary-color, 5%);
     }
   }
 
@@ -134,6 +146,34 @@
     display: flex;
     align-items: center;
     margin: ($button-y-padding / 2) ($button-x-padding / 2);
+  }
+
+  &.-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 100%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      display: block;
+      margin: auto;
+
+      &.-hidden {
+        display: none;
+      }
+    }
+
+    &.-active {
+      svg {
+        display: none;
+        &.-hidden {
+          display: block;
+        }
+      }
+    }
   }
 
   .notification-bubble {

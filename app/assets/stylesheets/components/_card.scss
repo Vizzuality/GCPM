@@ -1,11 +1,25 @@
 .c-card {
+  position: relative;
   width: 100%;
   padding: $box-space;
   background-color: $body-bg-color;
   box-shadow: 0 0 0 1px $border-color-1;
 
+  &.-no-shadow {
+    box-shadow: none;
+  }
+
+  &.-pad-bigger {
+    padding: $box-space + 15px;
+  }
+
+  &.-thin {
+    padding: $inline-space/2 $box-space;
+  }
+
   h2 {
     margin-top: $inline-space;
+    word-wrap: break-word;
   }
 
   .tag {
@@ -22,12 +36,27 @@
       text-align: center;
       margin: 4px 0 0;
     }
+
     h3 {
       width: 100%;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       text-transform: none;
+    }
+
+    button {
+      margin: 15px 0 0;
+    }
+  }
+
+  .pending {
+    display: flex;
+    align-items: center;
+    color: $secondary-color;
+
+    > svg {
+      margin: 0 ($inline-space / 2) 0 0;
     }
   }
 

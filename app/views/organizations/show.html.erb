@@ -10,22 +10,39 @@
       <div class="row collapse">
         <div class="column small-8">
           <h1><%= @organization.name %></h1>
+
+          <div class="row">
+            <div class="column small-12 medium-6">
+              <ul class="c-pipe-list">
+                <li><%= @organization.organization_type.present? ? @organization.organization_type.try(:name) : '' %></li>
+              </ul>
+            </div>
+            <div class="column small-12 medium-6">
+              <ul class="c-pipe-list">
+                <li>
+                  <%= @organization.email_address ? @organization.email_address : '' %>
+                </li>
+              </ul>
+            </div>
+          </div>
+
           <table class="c-numbers-list">
             <thead>
               <tr>
                 <th><%= t 'projects' %></th>
                 <th><%= t 'people' %></th>
-                <th><%= t 'events' %></th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td><%= @projects.size %></td>
                 <td><%= @people.size %></td>
-                <td><%= @events.size %></td>
               </tr>
             </tbody>
           </table>
+        </div>
+        <div class="column small-4">
+          <%= render "shared/user_actions" %>
         </div>
       </div>
     </div>
@@ -40,7 +57,7 @@
               <li class="tabnav-item">
                 <%= link_to t(filter),
                   map_path(request.query_parameters.merge({ data: filter })),
-                  class: "js-btn-mapmenu-type",
+                  class: "-secondary js-btn-mapmenu-type",
                   remote: true,
                   data: { datatype: filter }
                 %>

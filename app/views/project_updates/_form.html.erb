@@ -1,0 +1,38 @@
+
+<%= simple_form_for @project_update,
+  url: action === 'new' ?
+    project_project_updates_path(@project.id) :
+    project_project_update_path(@project.id, @project_update.id),
+  method: action === 'new' ?
+    :post :
+    :patch do |f| %>
+  <p class="required">* Required fields</p>
+
+  <div class="form-row">
+    <div class="column small-12">
+      <div id="title">
+      <%= f.input :title, placeholder: 'Title', label: false, input_html: { class: "c-title -bigger -bold"} %>
+      <p class="required">* Required field</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row row">
+    <div class="column small-12 medium-10 medium-offset-1">
+      <h3 class="c-title">Description</h3>
+      <%= f.cktext_area :body %>
+      <p class="required">* Required field</p>
+    </div>
+  </div>
+
+  <% if params[:error] || f.error_notification %>
+    <p class="error">* Required field missing.</p>
+  <% end %>
+
+  <div class="form-row row">
+    <div class="column small-12 medium-5 medium-offset-1">
+      <%= f.button :submit, "Submit", class: 'c-btn -primary' %>
+
+<% end %>
+
+<%= javascript_include_tag Ckeditor.cdn_url %>

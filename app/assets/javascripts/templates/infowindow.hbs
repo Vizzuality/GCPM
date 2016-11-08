@@ -2,16 +2,46 @@
   {{#if project}}
     <h3><a href="/projects/{{project}}">{{title}}</a></h3>
     {{#if investigator}}
-      <a href="/investigators/{{investigator}}">{{investigator_name}}</a>
-      {{#if is_project_lead}}
-        <span class="c-tag">Project lead</span>
-      {{/if}}
+      <div class="investigator">
+        <a href="/investigators/{{investigator}}">{{investigator_name}}</a>
+        <span class="c-tag">{{#if is_project_lead}}Project lead{{else}}Collaborator{{/if}}</span>
+      </div>
+      <div class="organization">
+        {{#if organization}}
+          <a href="/organizations/{{organization}}">{{organization_name}}</a>
+        {{/if}}
+        {{#if location_city}}
+          <p>{{location_city}}, {{location_country_name}}</p>
+        {{/if}}
+      </div>
     {{/if}}
   {{/if}}
   {{#if event}}
     <h3><a href="/events/{{event}}">{{title}}</a></h3>
+    {{#if start_date}}
+      {{#if end_date}}
+        <p>{{#if start_date}}{{start_date}}{{else}}-{{/if}} / {{#if end_date}}{{end_date}}{{else}}-{{/if}}</p>
+      {{/if}}
+    {{/if}}
   {{/if}}
   {{#if resource_id}}
     <h3><a href="/investigators/{{resource_id}}">{{resource_name}}</a></h3>
+    {{#if organization}}
+      <div class="organization">
+        {{#if organization}}
+          <a href="/organizations/{{organization}}">{{organization_name}}</a>
+        {{/if}}
+        {{#if location_city}}
+          <p>{{location_city}}, {{location_country_name}}</p>
+        {{/if}}
+      </div>
+    {{/if}}
   {{/if}}
+  {{#if investigations}}
+    <h3>{{investigations}} investigations</h3>
+  {{/if}}
+  {{#if events}}
+    <h3>{{events}} events</h3>
+  {{/if}}
+
 </div>

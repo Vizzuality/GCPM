@@ -5,6 +5,7 @@ input[type="number"],
 input[type="password"],
 input[type="email"],
 input[type="url"],
+textarea,
 select {
   min-height: $input-height;
   width: 100%;
@@ -13,10 +14,19 @@ select {
 input[type="text"],
 input[type="number"],
 input[type="password"],
+input[type="email"],
 input[type="url"],
-input[type="email"] {
+textarea {
   border: 0;
   border-bottom: 1px solid $border-color-1;
+
+  &.-padding {
+    padding: 16px;
+  }
+
+  &.-border {
+    border: 1px solid $border-color-1;
+  }
 
   &.-large {
     color: $base-font-color;
@@ -70,7 +80,17 @@ label {
     margin-bottom: 0;
   }
 
-  input:focus {
+  &.-mg-big {
+    margin-bottom: $box-space;
+  }
+
+  .column.-flex {
+    display: flex;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
     outline: none;
   }
 }
@@ -79,6 +99,7 @@ label {
   display: block;
   font-size: $small-font-size;
   margin-top: 5px;
+  font-style: italic;
 }
 
 .form-actions .column {

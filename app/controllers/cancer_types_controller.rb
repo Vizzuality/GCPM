@@ -1,6 +1,5 @@
 class CancerTypesController < ApplicationController
   before_action :set_cancer_type, only: :show
-
   respond_to :html, :js
 
   def index
@@ -9,7 +8,7 @@ class CancerTypesController < ApplicationController
   def show
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
     @title = t 'map'
-    @filters = %w(projects)
+    @filters = %w(projects people)
     @current_type = params.key?(:data) ? params[:data] : 'projects'
     gon.server_params = { 'cancer_types[]': params[:id] }
 
@@ -39,7 +38,7 @@ class CancerTypesController < ApplicationController
 
   private
 
-  def set_cancer_type
-    @cancer_type = CancerType.find_by(id: params['id'])
-  end
+    def set_cancer_type
+      @cancer_type = CancerType.set_by_id_or_slug(params['id'])
+    end
 end

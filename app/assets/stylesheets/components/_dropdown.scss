@@ -5,28 +5,22 @@ $dropdown-width: 182px;
   display: inline-flex;
   justify-content: flex-end;
   align-items: center;
-  padding-right: $button-x-padding / 2;
+  padding: 0 $button-x-padding;
   height: 100%;
+
+  > span {
+    display: inline-block;
+    line-height: 52px;
+  }
 
   .dropdown-value {
     display: flex;
     align-items: center;
 
     border-bottom: $body-bg-color 1px solid;
-    margin: 0 ($button-x-padding / 2);
+    margin: 0 0 0 ($button-x-padding / 2);
     font-weight: $base-font-weight;
     cursor: pointer;
-
-    &:after {
-      content: '';
-      margin-left: $inline-space / 2;
-      width: 0;
-      height: 0;
-      border-left: transparent 5px solid;
-      border-right: transparent 5px solid;
-      border-top: $body-bg-color 5px solid;
-
-    }
   }
 
   .dropdown-content {
@@ -39,6 +33,7 @@ $dropdown-width: 182px;
 
     //TODO: Set this by JS
     top: 52px;
+    right: 0;
 
     .dropdown-item {
       padding: ($button-y-padding / 2) $button-x-padding;
@@ -55,6 +50,23 @@ $dropdown-width: 182px;
 
     &.-open {
       display: block;
+    }
+  }
+
+  .arrows {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: $inline-space;
+    cursor: pointer;
+
+    .c-icon {
+      fill: white;
+
+      &.-active {
+        opacity: .5;
+      }
     }
   }
 }

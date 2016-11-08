@@ -24,25 +24,17 @@
           basemap: 'secondary'
         }
       });
-      this.datasWithLayer = ['projects', 'events', 'people'];
 
       this.setEvents();
       this.setSubscriptions();
 
-      if (this.datasWithLayer.indexOf(params.data) > -1) {
-        this.addPoints();
-      }
+      this.addPoints();
       // this.addCountries();
     },
 
     setEvents: function() {
-      this.state.on('change', function(newState) {
-        if (this.datasWithLayer.indexOf(newState.get('data')) > -1) {
-          this.addPoints();
-        } else if (this.currentLayer) {
-          this.view.map.removeLayer(this.currentLayer);
-          this.showWholeMap();
-        }
+      this.state.on('change', function() {
+        this.addPoints();
       }, this);
     },
 
@@ -57,16 +49,33 @@
       this.state.set(newState);
     },
 
+    getData: function(data) {
+      switch (data) {
+        case 'projects':
+          return 'projects';
+        case 'events':
+          return 'events';
+        case 'people':
+          return 'people'
+        default:
+          return 'projects'
+      }
+    },
+
     /**
      * Render layer
      * @param {params} Object
      */
     addPoints: function() {
       var map = this.view.map;
+      var attributtes = _.extend({}, this.state.attributes, {
+        data: this.getData(this.state.attributes.data)
+      });
+
       if (this.currentLayer) {
         map.removeLayer(this.currentLayer);
       }
-      this.fc.getPointLayer(this.state.attributes).done(function(layer) {
+      this.fc.getPointLayer(attributtes).done(function(layer) {
         this.currentLayer = layer;
         map.addLayer(layer);
         setTimeout(function() {
@@ -88,11 +97,6 @@
       App.helper.countriesLayer().done(function(layer) {
         layer.addTo(map, 1);
       });
-    },
-
-    showWholeMap: function() {
-      var center = L.latLng(20, 0);
-      this.view.map.setView(center, 2);
     }
 
   });

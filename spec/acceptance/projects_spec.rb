@@ -5,12 +5,14 @@ module Api::V1
     context 'For projects' do
       let!(:organization)      { FactoryGirl.create(:organization, name: 'Test orga 1', address_ids: [address.id])    }
       let!(:address)           { FactoryGirl.create(:address, country_id: country.id, line_1: 'Paris, France')        }
+      let!(:address_2)         { FactoryGirl.create(:address, country_id: country.id, line_1: 'Paris, France')      }
       let!(:investigator)      { FactoryGirl.create(:investigator, name: 'Investigator', address_ids: [address.id])   }
       let!(:investigator_2)    { FactoryGirl.create(:investigator, name: 'Investigator 2', address_ids: [address.id]) }
       let!(:investigator_3)    { FactoryGirl.create(:investigator, name: 'Investigator 3')                            }
       let!(:user)              { FactoryGirl.create(:user, authentication_token: '7Nw1A13xrHrZDHj631MA')              }
       let!(:country)           { FactoryGirl.create(:country)                                                         }
-      let!(:project)           { FactoryGirl.create(:project, title: 'Project title', user_id: user.id)               }
+      let!(:project)           { FactoryGirl.create(:project, title: 'Project title', users: [user])                  }
+      let!(:project_2)         { FactoryGirl.create(:project, title: 'Project not owned')                             }
       let(:r_u_id)             { investigator.research_units.first.id                                                 }
       let(:r_u_id_2)           { investigator_2.research_units.first.id                                               }
       let!(:membership)        { Membership.create(project_id: project.id,
@@ -20,7 +22,10 @@ module Api::V1
       let!(:project_type)      { FactoryGirl.create(:project_type)                                                    }
       let!(:organization_type) { FactoryGirl.create(:organization_type)                                               }
 
-      let(:project_id) { project.id }
+      let(:project_id)   { project.id   }
+      let(:project_slug) { project.slug }
+      let(:project_2_id) { project_2.id }
+
       let(:params)     { { "project": { "title": "Project updated" } } }
 
       let(:full_params) { { "project": {
@@ -45,10 +50,10 @@ module Api::V1
                                                                           "longitude": "",
                                                                           "primary": false
                                                                         }] }],
-                            "memberships": [{ "research_unit_attributes": { "investigator_attributes": { "name": "Test investigator 3", "email": "testuser@sample.com", "website": "http://www.testwebsite.com", "addresses_attributes": [{ "country_id": "#{country.id}", "organization_attributes": { "name": "Test orga 5", "organization_type_id": "#{organization_type.id}" }}]}}, "membership_type": "main" },
-                                                             { "research_unit_attributes": { "investigator_attributes": { "name": "Test investigator 7000000000", "email": "testuser@sample.com", "website": "http://www.testwebsite.com"}, "address_id": "#{address.id}" }, "membership_type": "secondary" },
-                                                             { "research_unit_attributes": { "investigator_id": "#{investigator.id}", "address_attributes": { "country_id": "#{country.id}", "organization_attributes": { "name": "Test orga 1000000", "organization_type_id": "#{organization_type.id}" }}}, "membership_type": "secondary" },
-                                                             { "research_unit_attributes": { "investigator_id": "#{investigator_3.id}", "address_id": "#{address.id}" }, "membership_type": "secondary" }]
+                            "memberships": [{ "research_unit_attributes": { "investigator_attributes": { "name": "Test investigator NEW", "email": "testuser@sample.com", "website": "http://www.testwebsite.com", "addresses_attributes": [{ "country_id": "#{country.id}", "organization_attributes": { "name": "Test orga NEW", "organization_type_id": "#{organization_type.id}" }}]}}, "membership_type": "main" },
+                                            { "research_unit_attributes": { "investigator_attributes": { "name": "Test investigator 7000000000", "email": "testuser@sample.com", "website": "http://www.testwebsite.com"}, "address_id": "#{address.id}" }, "membership_type": "secondary" },
+                                            { "research_unit_attributes": { "investigator_id": "#{investigator_2.id}", "address_attributes": { "country_id": "#{country.id}", "organization_attributes": { "name": "Test orga 1000000", "organization_type_id": "#{organization_type.id}" }}}, "membership_type": "secondary" },
+                                            { "research_unit_attributes": { "investigator_id": "#{investigator_3.id}", "address_id": "#{address_2.id}" }, "membership_type": "secondary" }]
                                            }
                         } }
 
@@ -77,12 +82,38 @@ module Api::V1
                                                                                          "primary": true
                                                                                        }] }],
                                             "memberships": [{ "research_unit_id": "#{r_u_id_2}", "membership_type": "main" }]
-                                            }
-                                         } }
+                                            }}}
+
+      let(:update_memberships) { { "project": {
+                                  "memberships": [{ "id": membership.id, "membership_type": "main" }]
+                                  }}}
+
+
+      context 'Users projects' do
+        it 'Allows to view project owned by user' do
+          get "/api/projects/#{project_id}?token=#{user.authentication_token}"
+
+          expect(status).to eq(200)
+          expect(json['title']).to                             eq('Project title')
+          expect(json['id']).to                                be_present
+          expect(json['users'][0]['id']).to                    be(user.id)
+          expect(json['memberships'][0]['membership_type']).to be_present
+          expect(json['memberships'][0]['investigator']).to    be_present
+          expect(json['memberships'][0]['organization']).to    be_present
+          expect(json['memberships'][0]['address']).to         be_present
+        end
+
+        it 'Not allow to access not owned project' do
+          get "/api/projects/#{project_2_id}?token=#{user.authentication_token}"
+
+          expect(status).to eq(401)
+          expect(json['message']).to eq("You don't have permission to access this project")
+        end
+      end
 
       context 'Update Project' do
         it 'Allows to update project' do
-          put "/api/projects/#{project_id}?token=#{user.authentication_token}", params: params
+          put "/api/projects/#{project_slug}?token=#{user.authentication_token}", params: params
 
           expect(status).to eq(200)
           expect(json['title']).to eq('Project updated')
@@ -109,16 +140,25 @@ module Api::V1
           expect(json['cancer_types']).to           be_present
           expect(json['project_types']).to          be_present
           expect(json['funding_sources'].length).to eq(2)
+          expect(json['memberships'].length).to     eq(2)
           expect(Membership.find_by(research_unit_id: r_u_id_2).project_id).to eq(json['id'])
+        end
+
+        it 'Allows to update project with funding_sources_ids and new funders' do
+          patch "/api/projects/#{project_id}?token=#{user.authentication_token}", params: update_memberships
+
+          expect(status).to eq(200)
+          expect(json['memberships'].length).to                eq(1)
+          expect(json['memberships'][0]['membership_type']).to eq('main')
         end
 
         # Memeberships
         it 'Allows to update project without existing funders and all cases for memberships' do
-          put "/api/projects/#{project_id}?token=#{user.authentication_token}", params: full_params
+          patch "/api/projects/#{project_slug}?token=#{user.authentication_token}", params: full_params
 
           expect(status).to eq(200)
           expect(json['funding_sources'].length).to eq(3)
-          expect(Project.find(project_id).memberships.map(&:membership_type)).to eq(['secondary', 'main', 'secondary', 'secondary', 'secondary'])
+          expect(Project.find(project_id).memberships.map(&:membership_type)).to eq(['secondary', 'main', 'secondary', 'secondary'])
         end
 
         context 'For project memberships' do
@@ -130,7 +170,7 @@ module Api::V1
                                   } }
 
           it 'Allows to update projects memberships' do
-            post "/api/projects/#{project_id}/memberships/#{membership.id}?token=#{user.authentication_token}", params: { "membership": {
+            post "/api/projects/#{project_slug}/memberships/#{membership.id}?token=#{user.authentication_token}", params: { "membership": {
                                                                                                                           "membership_type": "main"
                                                                                                                         }}
 
@@ -164,24 +204,25 @@ module Api::V1
           post "/api/projects?token=#{user.authentication_token}", params: create_params
 
           expect(status).to eq(201)
-          expect(json['title']).to                                  eq('Project updated')
-          expect(json['id']).to                                     be_present
-          expect(json['cancer_types']).not_to                       be_present
-          expect(json['project_types']).not_to                      be_present
-          expect(json['funding_sources']).not_to                    be_present
-          expect(Project.find_by(title: 'Project updated').user).to be_present
+          expect(json['title']).to                                   eq('Project updated')
+          expect(json['id']).to                                      be_present
+          expect(json['cancer_types']).not_to                        be_present
+          expect(json['project_types']).not_to                       be_present
+          expect(json['funding_sources']).not_to                     be_present
+          expect(Project.find_by(title: 'Project updated').users).to be_any
         end
 
         it 'Allows to create project with funder and memberships' do
           post "/api/projects?token=#{user.authentication_token}", params: full_params
 
           expect(status).to eq(201)
-          expect(json['title']).to                                  eq('Project updated')
-          expect(json['id']).to                                     be_present
-          expect(json['cancer_types']).to                           be_present
-          expect(json['project_types']).to                          be_present
-          expect(json['funding_sources'].length).to                 eq(3)
-          expect(Project.find_by(title: 'Project updated').user).to be_present
+          expect(json['title']).to                                   eq('Project updated')
+          expect(json['id']).to                                      be_present
+          expect(json['cancer_types']).to                            be_present
+          expect(json['project_types']).to                           be_present
+          expect(json['funding_sources'].length).to                  eq(3)
+          expect(json['memberships'].length).to                      eq(4)
+          expect(Project.find_by(title: 'Project updated').users).to be_any
         end
 
         it 'Allows to create project with funder' do
@@ -205,7 +246,7 @@ module Api::V1
                                                                                           ] } }
 
           expect(status).to eq(422)
-          expect(json['message']).to eq(["Title can't be blank", "Summary can't be blank"])
+          expect(json['message']).to eq(["Title can't be blank", "Summary can't be blank", "Slug can't be blank"])
           expect(Organization.find_by(name: "Second project funder")).to be_nil
         end
       end
@@ -219,7 +260,7 @@ module Api::V1
         end
 
         it 'Get project memberships' do
-          get "/api/projects/#{project_id}/memberships?token=#{user.authentication_token}"
+          get "/api/projects/#{project_slug}/memberships?token=#{user.authentication_token}"
 
           expect(status).to eq(200)
           expect(json[0]['membership_type']).to      eq ('secondary')

@@ -1,3 +1,4 @@
+/* global ga */
 (function(App) {
 
   'use strict';
@@ -13,36 +14,36 @@
     initialize: function(params) {
       this.state = new StateModel(params);
 
-      var titleInput = new App.Presenter.Input();
-      var descTextarea = new App.Presenter.Textarea();
-      var startPickadate = new App.Presenter.PickadateStart({
+      this.titleInput = new App.Presenter.Input();
+      this.descTextarea = new App.Presenter.Textarea();
+      this.startPickadate = new App.Presenter.PickadateStart({
         label: null,
       });
-      var endPickadate = new App.Presenter.PickadateEnd({
+      this.endPickadate = new App.Presenter.PickadateEnd({
         label: null,
       });
-      var websiteInput = new App.Presenter.WebsiteInput();
-      var projectTypes = new App.Presenter.ProjectTypes({
-        label: null,
-        addNew: false
-      });
-      var cancerTypes = new App.Presenter.CancerTypes({
+      this.websiteInput = new App.Presenter.WebsiteInput();
+      this.projectTypes = new App.Presenter.ProjectTypes({
         label: null,
         addNew: false
       });
-      var fundingSources = new App.Presenter.FundingSources({
+      this.cancerTypes = new App.Presenter.CancerTypes({
+        label: null,
+        addNew: false
+      });
+      this.fundingSources = new App.Presenter.FundingSources({
         label: null,
         addNew: true
       });
-      var policy = new App.Presenter.Policy();
-      var messagesList = new App.Presenter.MessagesList();
-
+      this.policy = new App.Presenter.Policy();
+      this.messagesList = new App.Presenter.MessagesList();
 
       this.investigatorOrganization = new App.Presenter.InvestigatorOrganization();
       this.fundingSourcesForm = new App.Presenter.FundingSourcesForm();
 
-      this.children = [titleInput, descTextarea, startPickadate, endPickadate,
-         websiteInput, projectTypes, cancerTypes, fundingSources, policy, messagesList, this.investigatorOrganization];
+      this.children = [this.titleInput, this.descTextarea, this.startPickadate,
+         this.endPickadate, this.websiteInput, this.projectTypes, this.cancerTypes,
+         this.fundingSources, this.policy, this.messagesList, this.investigatorOrganization];
 
       this.projectForm = new App.View.ProjectForm({
         children: this.children,
@@ -66,6 +67,7 @@
       this.projectForm.on('submit', function(newState) {
         this.setState(newState);
         this.handleSubmit();
+        ga('send', 'event', 'Users', 'Add data', 'Add Project');
       }, this);
 
       this.projectForm.on('newInvestigator', function() {
@@ -92,7 +94,6 @@
      */
     handleSubmit: function() {
       this.buildRequest();
-
       new Promise(function(resolve, reject){
         var url = "/api/projects?token="+window.AUTH_TOKEN;
         var q = new XMLHttpRequest();
@@ -177,11 +178,21 @@
             var obj = {};
 
             // LEAD
-            if(lead.split("-")[1] == id){
+            if(lead == "lead-"+id){
               obj.membership_type = "main";
             }
             else{
               obj.membership_type = "secondary";
+            }
+
+            // NEW INVESTIGATOR RELATIONSHIP
+            if(isNaN(parseInt(investigator))){
+              if(investigator.investigatorUser){
+                investigator.investigatorUser = window.USER_ID;
+              }
+              else{
+                investigator.investigatorUser = undefined;
+              }
             }
 
             // EE
@@ -207,8 +218,9 @@
               obj.research_unit_attributes = {
                 address_id: address,
                 investigator_attributes: {
+                  user_id: investigator.investigatorUser,
                   name: investigator.investigatorName,
-                  email: investigator.investigatorName,
+                  email: investigator.investigatorEmail,
                   website: investigator.investigatorWebsite
                 }
               };
@@ -216,8 +228,9 @@
             else{
               obj.research_unit_attributes = {
                 investigator_attributes: {
+                  user_id: investigator.investigatorUser,
                   name: investigator.investigatorName,
-                  email: investigator.investigatorName,
+                  email: investigator.investigatorEmail,
                   website: investigator.investigatorWebsite,
                   addresses_attributes: [
                     {
@@ -262,5 +275,209 @@
     }
 
   });
+
+  // Create
+  App.Presenter.CreateProjectForm = function() {
+    this.initialize.apply(this, arguments);
+  };
+  _.extend(App.Presenter.CreateProjectForm.prototype, App.Presenter.ProjectForm.prototype);
+
+  // Edit
+  App.Presenter.EditProjectForm = function() {
+    this.initialize.apply(this, arguments);
+    this.getProject.apply(this, arguments);
+  };
+
+  _.extend(App.Presenter.EditProjectForm.prototype, App.Presenter.ProjectForm.prototype);
+  _.extend(App.Presenter.EditProjectForm.prototype, {
+
+    initialize: function(params) {
+      this.state = new StateModel(params);
+
+      this.titleInput = new App.Presenter.Input();
+      this.descTextarea = new App.Presenter.Textarea();
+      this.startPickadate = new App.Presenter.PickadateStart({
+        label: null,
+      });
+      this.endPickadate = new App.Presenter.PickadateEnd({
+        label: null,
+      });
+      this.websiteInput = new App.Presenter.WebsiteInput();
+      this.projectTypes = new App.Presenter.ProjectTypes({
+        label: null,
+        addNew: false
+      });
+      this.cancerTypes = new App.Presenter.CancerTypes({
+        label: null,
+        addNew: false
+      });
+      this.fundingSources = new App.Presenter.FundingSources({
+        label: null,
+        addNew: true
+      });
+      this.policy = new App.Presenter.Policy();
+      this.messagesList = new App.Presenter.MessagesList();
+
+      this.investigatorOrganization = new App.Presenter.InvestigatorOrganization();
+      this.investigatorOrganizationEdit = new App.Presenter.InvestigatorOrganizationEdit();
+
+      this.fundingSourcesForm = new App.Presenter.FundingSourcesForm();
+
+      this.children = [this.titleInput, this.descTextarea, this.startPickadate,
+         this.endPickadate, this.websiteInput, this.projectTypes, this.cancerTypes,
+         this.fundingSources, this.policy, this.messagesList, this.investigatorOrganization,
+         this.investigatorOrganizationEdit];
+
+      this.projectForm = new App.View.ProjectForm({
+        children: this.children,
+        el: '#project_form'
+      });
+
+      this.request = {};
+      this.setEvents();
+      this.setSubscriptions();
+
+      this.project = this.getProject(params);
+      this.project.then(function(response){
+        this.project = JSON.parse(response);
+        this.renderForm();
+      }.bind(this)).catch(function(response){
+        var messages = JSON.parse(response).message;
+        App.trigger("ProjectForm:errors", messages);
+      });
+
+    },
+
+    getProject: function(params){
+      this.projectId = params.vars[1];
+      return new Promise(function(resolve, reject){
+        var url = "/api/projects/"+this.projectId+"?token="+window.AUTH_TOKEN;
+        var q = new XMLHttpRequest();
+        q.open('GET', url, true);
+        q.onreadystatechange = function(){
+          if(this.readyState === 4){
+            if(this.status.toString()[0] == "2"){
+              resolve(this.response);
+            }
+            else if(this.status.toString()[0] == "4" || this.status.toString()[0] == "5"){
+              reject(this.response);
+            }
+            else{
+              // foo
+            }
+          }
+        }
+        q.send();
+      }.bind(this));
+    },
+
+    loadData: function(){
+      this.titleInput.setValue(this.project.title);
+      this.descTextarea.setValue(this.project.summary);
+      this.startPickadate.setValue(this.project.start_date);
+      this.endPickadate.setValue(this.project.end_date);
+      this.websiteInput.setValue(this.project.project_website);
+      this.projectTypes.setFetchedValues(this.project.project_types);
+      this.cancerTypes.setFetchedValues(this.project.cancer_types);
+      this.fundingSources.setFetchedValues(this.project.funding_sources);
+      this.investigatorOrganizationEdit.setValue(this.project.memberships);
+    },
+
+    buildInvestigatorsEdit: function(){
+      if(!this.investigatorOrganizationEdit.elements && !this.project.memberships){
+        return false;
+      }
+      if(!this.request.project.memberships){
+        this.request.project["memberships"] = [];
+      }
+      _.each(this.project.memberships, function(membership){
+        var membership_req;
+        _.each(this.investigatorOrganizationEdit.elements, function(element){
+          var investigator = this.state.attributes["investigatoredit-"+element.id];
+          var organization = this.state.attributes["organizationedit-"+element.id];
+          var lead = this.state.attributes["lead"];
+          var membershipId;
+          var membership_type = "secondary";
+          if(investigator == membership.investigator.name && organization == membership.organization.name){
+            membershipId = membership.id;
+          }
+          if(lead === "leadedit-"+element.id){
+            membership_type = "main";
+          }
+          if(membershipId){
+            membership_req = {
+              id: membershipId,
+              membership_type: membership_type
+            };
+          }
+        }, this);
+
+        if(!membership_req){
+          membership_req = {
+            id: membership.id,
+            _destroy: true
+          };
+        }
+        this.request.project.memberships.push(membership_req);
+      }, this);
+    },
+
+    buildRequest: function(){
+      this.request.project = {
+        title: this.state.attributes["title"],
+        summary: this.state.attributes["summary"],
+        start_date: this.state.attributes["start_date"],
+        end_date: this.state.attributes["end_date"],
+        project_website: this.state.attributes["project_website"],
+        project_type_ids: this.state.attributes["project_types[]"],
+        cancer_type_ids: this.state.attributes["cancer_types[]"]
+      };
+      this.buildFundingSources();
+      this.buildInvestigators();
+      this.buildInvestigatorsEdit();
+    },
+
+    handleSubmit: function() {
+      this.buildRequest();
+      new Promise(function(resolve, reject){
+        var url = "/api/projects/"+this.projectId+"?token="+window.AUTH_TOKEN;
+        var q = new XMLHttpRequest();
+        q.open('PATCH', url, true);
+        q.setRequestHeader('Content-Type', 'application/json');
+        q.onreadystatechange = function(){
+          if(this.readyState === 4){
+            if(this.status.toString()[0] == "2"){
+              resolve(this.response);
+            }
+            else if(this.status.toString()[0] == "4" || this.status.toString()[0] == "5"){
+              reject(this.response);
+            }
+            else{
+              // foo
+            }
+          }
+        }
+        q.send(JSON.stringify(this.request));
+      }.bind(this)).then(function(response){
+        var pId = JSON.parse(response).id;
+        window.location.href = "/projects/"+pId;
+      }.bind(this)).catch(function(response){
+        var messages = JSON.parse(response).message;
+        App.trigger("ProjectForm:errors", messages);
+      });
+    },
+
+    renderFormElements: function() {
+      this.projectForm.render();
+      _.each(this.children, function(child){
+
+        // Render the child
+        child.render();
+      }.bind(this));
+      this.loadData();
+    }
+
+  });
+
 
 })(this.App);

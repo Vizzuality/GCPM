@@ -13,14 +13,21 @@
         <div class="column small-8">
           <h1><%= @project.title %></h1>
 
+          <% if user_signed_in? && current_user.projects.include?(@project) %>
+            <%= link_to (t 'not_me'), remove_relation_project_path(@project), method: :patch, class: 'c-btn -transparent' %>
+          <% elsif user_signed_in? %>
+            <%= link_to (t 'this_is_me'), relation_request_project_path(@project), method: :patch, class: 'c-btn -transparent' %>
+          <% end %>
+
           <div class="c-summary-info row -collapse">
 
             <div class="column small-12 large-4 align-middle">
-                <% #if @project.project_lead && @project.project_lead.img %>
-                  <!-- <img src="<%# @project.project_lead.img %>" class="c-avatar -small" /> -->
-                <% #else %>
-                  <div class="c-avatar -small -ph"></div>
-                <% #end %>
+              <% #if @project.project_lead && @project.project_lead.img %>
+                <!-- <img src="<%# @project.project_lead.img %>" class="c-avatar -small" /> -->
+              <% #else %>
+                <div class="c-avatar -small -ph"></div>
+              <% #end %>
+
               <h3>
                 <%= @project.project_lead && @project.project_lead.name %>
               </h3>
@@ -28,18 +35,18 @@
 
             <div class="column small-12 large-4 align-middle">
               <div class="c-avatar -small">
-                <svg class="c-icon icon-colab_icon">
-                  <use xlink:href="#icon-colab_icon"></use>
+                <svg class="c-icon icon-collaborators -inverse">
+                  <use xlink:href="#icon-collaborators"></use>
                 </svg>
               </div>
-              <h3><%= @project.investigators.count %> <%= t 'collaborator'%>(s)</h3>
+              <h3><%= @project.investigators.count != 0 ? @project.investigators.count - 1 : 0 %> <%= t 'collaborator'%>(s)</h3>
             </div>
 
             <% if @project.funding_sources && @project.funding_sources.size > 0 %>
               <div class="column small-12 large-4 align-middle">
                 <div class="c-avatar -small">
-                  <svg class="c-icon icon-funding_icon">
-                    <use xlink:href="#icon-funding_icon"></use>
+                  <svg class="c-icon icon-funding -inverse">
+                    <use xlink:href="#icon-funding"></use>
                   </svg>
                 </div>
                 <div>
@@ -55,8 +62,6 @@
           <%= render "shared/user_actions" %>
         </div>
       </div>
-
-
     </div>
   </div>
 
@@ -69,7 +74,7 @@
               <li class="tabnav-item">
                 <%= link_to t(filter),
                   project_path(request.query_parameters.merge({ data: filter })),
-                  class: "js-btn-mapmenu-type",
+                  class: "-secondary js-btn-mapmenu-type",
                   remote: true,
                   data: { datatype: filter }
                 %>
@@ -86,9 +91,9 @@
 </section>
 
 <div class="l-grid" id="content">
-  <% if @current_type == 'info' %>
+  <% if @current_type == 'people' %>
+    <%= render 'investigators/list', items: @items, more: @more  %>
+  <%else %>
     <%= render 'projects/info' %>
-  <%else%>
-    <%= render 'projects/list' %>
   <% end %>
 </div>

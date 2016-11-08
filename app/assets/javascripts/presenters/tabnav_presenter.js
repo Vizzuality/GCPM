@@ -1,3 +1,4 @@
+/* global ga */
 (function(App) {
 
   'use strict';
@@ -24,13 +25,15 @@
     setEvents: function() {
       this.state.on('change', this.activeItem, this);
       this.tabnav.on('change', function(value) {
-        this.setState({ data: value });
+        this.setState(_.extend({}, this.getState(), { data: value }));
         App.trigger('TabNav:change', this.getState());
+        ga('send', 'event', 'Tab', 'Switch view', value);
       }, this);
     },
 
     setSubscriptions: function() {
       App.on('Router:change Breadcrumbs:change FilterForm:change Map:change', this.setState, this);
+      App.on('MessagesBadge:change', this.setBadges, this);
     },
 
     setState: function(newState) {
@@ -56,6 +59,10 @@
       var params = this.getState();
       var newUrl = uri.query(_.omit(params, 'dataSingular', 'vars')).toString();
       this.tabnav.updateUrl(newUrl);
+    },
+
+    setBadges: function(data) {
+      this.tabnav.setMessagesBadge(data.unreadCount);
     }
 
   });

@@ -44,6 +44,10 @@
       this.Input.render();
     },
 
+    setValue: function(value){
+      this.Input.$el.find("input").val(value).trigger("change");
+    },
+
     setState: function(state, options) {
       this.state.set(state, options);
     },

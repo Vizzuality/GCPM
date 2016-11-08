@@ -17,7 +17,10 @@ class Membership < ApplicationRecord
   belongs_to :research_unit
 
   has_one :investigator, through: :research_unit
+  has_one :address,      through: :research_unit
   has_one :organization, through: :research_unit
+
+  after_save :cleanup_memberships
 
   validates :project_id, uniqueness: { scope: :research_unit_id }
 
@@ -30,4 +33,11 @@ class Membership < ApplicationRecord
       {}
     end
   end
+
+  private
+
+    def cleanup_memberships
+      invalid_membership = Membership.where(research_unit_id: nil)
+      invalid_membership.delete_all if invalid_membership.any?
+    end
 end

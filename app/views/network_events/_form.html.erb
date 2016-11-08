@@ -1,0 +1,150 @@
+
+<%= simple_form_for @event,
+  url: action === 'new' ?
+    user_events_path(current_user.id) :
+    user_event_path(current_user.id, @event.id),
+  method: action === 'new' ?
+    :post :
+    :patch do |f| %>
+  <p class="required">* Required fields</p>
+
+  <div class="form-row row">
+    <div class="column small-12">
+      <div id="title">
+      <%= f.input :title, placeholder: 'Event title', label: false, input_html: { class: "c-title -bigger -bold"} %>
+      <p class="required">* Required field</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="">
+    <div class="form-row row">
+      <div class="column small-12 medium-10 medium-offset-1">
+        <h3 class="c-title">Description</h3>
+        <%= f.cktext_area :description %>
+        <p class="required">* Required field</p>
+      </div>
+    </div>
+
+    <div class="form-row row">
+      <div class="column small-12 medium-10 medium-offset-1">
+        <h3 class="c-title">Excerpt</h3>
+        <%= f.cktext_area :excerpt, as: :string %>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="row">
+        <div class="column small-12 medium-5 medium-offset-1">
+          <div id="pickadate-start" class="c-pickadate"></div>
+        </div>
+        <div class="column small-12 medium-5">
+          <div id="pickadate-end" class="c-pickadate"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row row">
+      <div class="column small-12 medium-offset-1">
+        <h3 class="c-title">Event information</h3>
+      </div>
+    </div>
+
+    <div class="form-row row">
+      <div class="column small-12 medium-5 medium-offset-1">
+        <h4 class="c-title">Website</h4>
+        <%= f.input :website, as: :string , placeholder: "http://www.example.org", label: false %>
+      </div>
+
+      <div class="column small-12 medium-5">
+        <h4 class="c-title">Participants</h4>
+        <%= f.input :participants, as: :string, placeholder: "George Weinstock, Coralia Bueno Muino", label: false %>
+      </div>
+    </div>
+
+    <div class="form-row row">
+      <div class="column small-12 medium-5 medium-offset-1">
+        <h4 class="c-title">Address</h4>
+        <%= f.input :address, as: :string, label: false %>
+      </div>
+
+      <div class="column small-12 medium-5">
+        <h4 class="c-title">Address 2</h4>
+        <%= f.input :address2, as: :string, label: false %>
+      </div>
+    </div>
+
+    <div class="form-row"> <div class="form-row row">
+      <div class="column small-12 medium-5 medium-offset-1">
+        <h4 class="c-title">Countries</h4>
+        <% f.input :country, as: :select, collection: Country.all.pluck(:country_name), label: false %>
+        <div id="countries" class="c-select"></div>
+        <p class="required">* Required field</p>
+      </div>
+
+      <div class="column small-12 medium-5">
+        <h4 class="c-title">City</h4>
+        <%= f.input :city, label: false %>
+      </div>
+    </div>
+
+    <div class="form-row row">
+      <div class="column small-12 medium-5 medium-offset-1">
+        <h4 class="c-title">State</h4>
+        <%= f.input :state, label: false %>
+      </div>
+
+      <div class="column small-12 medium-5">
+        <h4 class="c-title">Postcode</h4>
+        <%= f.input :postcode, label: false %>
+      </div>
+    </div>
+
+    <div class="form-row row">
+      <div class="column small-12 medium-5 medium-offset-1">
+        <h4 class="c-title">Latitude</h4>
+        <%= f.input :latitude, label: false %>
+      </div>
+
+      <div class="column small-12 medium-5">
+        <h4 class="c-title">Longitude</h4>
+        <%= f.input :longitude, label: false %>
+      </div>
+    </div>
+
+    <div class="form-row row -mg-big">
+      <div class="column small-12 medium-5 medium-offset-1">
+        <h4 class="c-title">Private</h4>
+        <%= f.input :private, as: :radio_buttons, label: false %>
+      </div>
+
+      <div class="column small-12 medium-5">
+        <h4 class="c-title">Online</h4>
+        <%= f.input :online, as: :radio_buttons, label: false %>
+      </div>
+    </div>
+
+    <div class="form-row row -mg-big">
+      <div class="column small-12 medium-5 medium-offset-1">
+        <% if params[:error] || f.error_notification %>
+          <p class="error">* Required field missing.</p>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="form-row row">
+    <div class="column small-12 medium-5 medium-offset-1">
+      <%= f.button :submit, "Submit", class: 'c-btn -primary' %>
+      <% if action === 'edit' %>
+          <%= link_to (t 'delete'), user_event_path(current_user.id, @event.id),
+            class: 'c-btn -primary -inverse -mg-left',
+            method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
+    </div>
+  </div>
+
+<% end %>
+
+<%= javascript_include_tag Ckeditor.cdn_url %>

@@ -18,12 +18,14 @@
               <tr>
                 <th><%= t 'projects' %></th>
                 <th><%= t 'people' %></th>
+                <th><%= t 'organizations' %></th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td><%= @projects.size %></td>
                 <td><%= @people.size %></td>
+                <td><%= @cancer_type.organizations_count %></td>
               </tr>
             </tbody>
           </table>
@@ -44,7 +46,7 @@
               <li class="tabnav-item">
                 <%= link_to t(filter),
                   map_path(request.query_parameters.merge({ data: filter })),
-                  class: "js-btn-mapmenu-type",
+                  class: "-secondary js-btn-mapmenu-type",
                   remote: true,
                   data: { datatype: filter }
                 %>

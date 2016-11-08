@@ -1,0 +1,58 @@
+
+<%= simple_form_for @user,
+  url: user_path(current_user.id),
+  method: :patch do |f| %>
+
+  <div class="form-row row">
+    <div class="column small-12">
+      <div id="title">
+      <%= f.input :name, placeholder: 'Name', label: false, input_html: { class: "c-title -bigger -bold"} %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row row">
+    <div class="column small-12 medium-5 medium-offset-1">
+      <h4 class="c-title">Position</h4>
+      <%= f.input :position, label: false %>
+    </div>
+
+    <div class="column small-12 medium-5">
+      <h4 class="c-title">Pubmed</h4>
+      <%= f.input :pubmed, placeholder: "", label: false %>
+    </div>
+  </div>
+
+  <div class="form-row row">
+    <div class="column small-12 medium-5 medium-offset-1">
+      <h4 class="c-title">Twitter</h4>
+      <%= f.input :twitter_account, placeholder: "@mbarrenech", label: false %>
+    </div>
+
+    <div class="column small-12 medium-5">
+      <h4 class="c-title">Linkedin</h4>
+      <%= f.input :linkedin_account, placeholder: "miguel-barrenechea-439bab36", label: false %>
+    </div>
+  </div>
+
+  <% if params[:error] || f.error_notification %>
+    <p class="error">* Required field missing.</p>
+  <% end %>
+
+  <div class="form-row row">
+    <div class="column small-12 medium-5 medium-offset-1">
+      <%= f.button :submit, "Submit", class: 'c-btn -primary' %>
+    </div>
+  </div>
+
+<% end %>
+
+<div class="form-row row">
+  <div class="column small-12 medium-5 medium-offset-1">
+    <ul class="c-shared-links">
+      <li><%= link_to "Change password", edit_user_registration_path %></li>
+    </ul>
+  </div>
+</div>
+
+<%= javascript_include_tag Ckeditor.cdn_url %>

@@ -13,10 +13,22 @@ class ApplicationController < ActionController::Base
         user_initial = 'U'
       end
       @user_data = JSON.generate({
-        user_project: Project.where("user_id = #{current_user.id}").count,
+        user_project: current_user.projects.count,
         user_event: Event.where("user_id = #{current_user.id}").count,
         user_initial: user_initial
       })
     end
+  end
+
+  def authenticate_admin_user!
+    authenticate_user!
+    unless current_user.admin?
+      flash[:alert] = 'Unauthorized Access!'
+      redirect_to root_path
+    end
+  end
+
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, alert: exception.message
   end
 end

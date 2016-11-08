@@ -2,7 +2,8 @@ module Api::V1
   class InvestigatorsController < ApiController
     include ApiAuthenticable
 
-    before_action :set_investigator, except: [:index, :create]
+    before_action :set_investigator,  only: [:show, :update]
+    before_action :check_permissions, only: :update
 
     def index
       # ToDo: implementation of investigator search by name
@@ -16,9 +17,9 @@ module Api::V1
 
     def update
       if @investigator.update(investigator_params)
-        render json: { success: true, message: 'Investigator updated!' }, status: 200
+        render json: @investigator, serializer: InvestigatorSerializer, status: 200
       else
-        render json: { success: false, message: 'Error updating investigator' }, status: 422
+        render json: { success: false, message: @investigator.errors.full_messages.join(', ') }, status: 422
       end
     end
 
@@ -27,18 +28,26 @@ module Api::V1
       if @investigator.save
         render json: @investigator, serializer: InvestigatorSerializer, status: 201
       else
-        render json: { success: false, message: 'Error creating investigator' }, status: 422
+        render json: { success: false, message: @investigator.errors.full_messages.join(', ') }, status: 422
       end
     end
 
     private
 
       def set_investigator
-        @investigator = Investigator.find(params[:id])
+        @investigator = Investigator.set_by_id_or_slug(params[:id])
+      end
+
+      def check_permissions
+        if @user != Investigator.set_by_id_or_slug(params[:id]).user
+          render json: { success: false, message: 'Permission denied!' }, status: 422
+        end
       end
 
       def investigator_params
-        params.require(:investigator).permit!
+        params.require(:investigator).permit!.tap do |investigator_params|
+          investigator_params[:user_id] = @user.id if params.require(:investigator)[:assign_to_user].present?
+        end
       end
   end
 end

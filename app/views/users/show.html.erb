@@ -1,5 +1,5 @@
-
 <% user = current_user %>
+<% title current_user.name %>
 
 <section class="l-app -full">
 
@@ -18,32 +18,55 @@
       </div>
       <div class="row collapse">
         <div class="column small-8">
-            <h1><%= user.try(:name) %></h1>
-
-            <div class="row">
-              <div class="column small-12 medium-6">
-                <ul class="c-pipe-list">
-                  <li><%= user.position ? user.position : '' %></li>
-                </ul>
-                <ul class="c-pipe-list">
-                  <li><%= @following ? @following : 0 %> Following</li>
-                  <li><%= @followers ? @followers : 0 %> Followers</li>
-                </ul>
-              </div>
-              <div class="column small-12 medium-6">
-                <ul class="c-pipe-list">
-                  <li>
-                    <%= user.twitter_account ? user.twitter_account : 'Twitter account' %>
-                  </li>
-                  <li>
-                    <%= user.linkedin_account ? user.linkedin_account : 'Linkedin account' %>
-                  </li>
-                  <li>
-                    <%= user.pubmed ? user.pubmed : 'Pumbed account' %>
-                  </li>
-                </ul>
-              </div>
+          <div class="c-title-btn">
+            <% if user.name && user.name != '' %>
+              <h1><%= user.try(:name) %></h1>
+            <% end %>
+            <%= link_to (t 'edit'), edit_user_path(current_user.id), class: "c-btn -transparent" %>
+          </div>
+          <div class="row">
+            <div class="column small-12 medium-6">
+              <ul class="c-pipe-list">
+                <li>
+                  <% if user.investigator && user.investigator.organizations.size > 0 %>
+                    <%= user.investigator.organizations.first.name %>
+                  <% end %>
+                </li>
+                <% if user.position && user.position != '' %>
+                  <li><%= user.position %></li>
+                <% end %>
+              </ul>
+              <ul class="c-pipe-list">
+                <li><%= @following %> Following</li>
+                <li><%= @followers %> Followers</li>
+              </ul>
             </div>
+            <div class="column small-12 medium-6">
+              <ul class="c-pipe-list">
+                <% if user.twitter_account && user.twitter_account != '' %>
+                  <li>
+                    <a href="https://twitter.com/<%= user.twitter_account %>" class="-clickable -hv" target="_blank">
+                      Twitter
+                    </a>
+                  </li>
+                <% end %>
+                <% if user.linkedin_account && user.linkedin_account != '' %>
+                  <li>
+                    <a href="https://www.linkedin.com/in/<%= user.linkedin_account %>" class="-clickable -hv" target="_blank">
+                      Linkedin
+                    </a>
+                  </li>
+                <% end %>
+                <% if user.pubmed && user.pubmed != '' %>
+                  <li>
+                    <a href="http://www.ncbi.nlm.nih.gov/pubmed?term=<%= user.pubmed %>%5BAuthor%5D" class="-clickable -hv" target="_blank">
+                      Pubmed
+                    </a>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
         </div>
         <div class="column small-4">
            <% if (current_user) %>
@@ -63,10 +86,13 @@
               <li class="tabnav-item">
                 <%= link_to t(filter),
                   map_path(request.query_parameters.merge({ data: filter })),
-                  class: "js-btn-mapmenu-type",
+                  class: "-secondary js-btn-mapmenu-type",
                   remote: true,
                   data: { datatype: filter }
                 %>
+                <% if filter === 'messages' %>
+                  <div class="c-badge <%= filter + '-badge' %><%= current_user.unread_inbox_count === 0 ? ' -hidden' : '' %>"><%= current_user.unread_inbox_count %></div>
+                <% end %>
               </li>
             <% end %>
           </ul>
@@ -82,11 +108,13 @@
 <div class="l-grid" id="content">
   <% if @current_type === 'projects' %>
     <%= render 'projects/list', items: @items, more: @more %>
-  <% #else @current_type %>
-    <% #render 'investigators/list', items: @items, more: @more %>
+  <% elsif @current_type === 'events' %>
+    <%= render 'events/list', items: @items, more: @more %>
   <% elsif @current_type === 'posts' %>
     <%= render 'posts/list', items: @items, more: @more %>
+  <% elsif @current_type === 'messages' %>
+    <%= render 'messages/list', items: @items, more: @more %>
   <% elsif @current_type === 'network' %>
-    <%= render 'investigators/list', items: @items, more: @more %>
+    <%= render 'network' %>
   <% end %>
 </div>

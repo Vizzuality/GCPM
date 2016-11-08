@@ -4,9 +4,9 @@
   'use strict';
 
   var blubbleSizes = {
-    big: 90,
-    medium: 70,
-    small: 50
+    big: 70,
+    medium: 55,
+    small: 40
   };
 
   /**
@@ -52,6 +52,60 @@
     pruneCluster.originalIcon = pruneCluster.BuildLeafletClusterIcon;
 
     pruneCluster.Cluster.Size = 20;
+
+    pruneCluster.BuildLeafletCluster = function(cluster, position) {
+      var data = cluster.lastMarker.data.feature.properties.event ?
+        { events: cluster.population } :
+        { investigations: cluster.population }
+      var htmlContent = infowindowTemplate(data);
+
+      var m = new L.Marker(position, {
+        icon: pruneCluster.BuildLeafletClusterIcon(cluster)
+      });
+      m.bindPopup(htmlContent);
+
+      m.on('click', function() {
+        // Compute the  cluster bounds (it's slow : O(n))
+        var markersArea = pruneCluster.Cluster.FindMarkersInArea(cluster.bounds);
+        var b = pruneCluster.Cluster.ComputeBounds(markersArea);
+
+        if (b) {
+          var bounds = new L.LatLngBounds(
+            new L.LatLng(b.minLat, b.maxLng),
+            new L.LatLng(b.maxLat, b.minLng));
+
+          var zoomLevelBefore = pruneCluster._map.getZoom();
+          var zoomLevelAfter = pruneCluster._map.getBoundsZoom(bounds, false, new L.Point(20, 20, null));
+
+          // If the zoom level doesn't change
+          if (zoomLevelAfter === zoomLevelBefore) {
+            // Send an event for the LeafletSpiderfier
+            pruneCluster._map.fire('overlappingmarkers', {
+              cluster: pruneCluster,
+              markers: markersArea,
+              center: m.getLatLng(),
+              marker: m
+            });
+
+            pruneCluster._map.setView(position, zoomLevelAfter);
+          }
+          else {
+            pruneCluster._map.fitBounds(bounds, {
+              paddingTopLeft: [40, 25],
+              paddingBottomRight: [60, 25]
+            });
+          }
+        }
+      });
+      m.on('mouseover', function() {
+        this.openPopup();
+      });
+      m.on('mouseout', function() {
+        this.closePopup();
+      });
+
+      return m;
+    };
 
     pruneCluster.BuildLeafletClusterIcon = function(cluster) {
       var icon = pruneCluster.originalIcon(cluster);

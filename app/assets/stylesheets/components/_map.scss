@@ -49,6 +49,12 @@
     margin-top: $base-space + 35px;
   }
 
+  .l-app.-home & .prunecluster,
+  .l-app.-home & .bubble-icon {
+    pointer-events: none;
+  }
+
+
   .leaflet-top,
   .leaflet-bottom,
   .leaflet-left,

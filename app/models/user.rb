@@ -28,6 +28,7 @@
 #  pubmed                 :string
 #  authentication_token   :string
 #  token_expires_at       :datetime
+#  role                   :integer          default("user"), not null
 #
 
 class User < ApplicationRecord
@@ -38,21 +39,34 @@ class User < ApplicationRecord
          :confirmable, :lockable, :timeoutable,
          :omniauthable, omniauth_providers: [:linkedin, :google_oauth2]
 
+  enum role: { user: 0, admin: 1 }
+
+  include Roleable
+
   TEMP_EMAIL_PREFIX = 'change@tmp'
   TEMP_EMAIL_REGEX = /\Achange@tmp/
 
   has_many :identities, dependent: :destroy
 
-  validates_uniqueness_of :email
-  validates_format_of     :email, without: TEMP_EMAIL_REGEX, on: :update
-
   acts_as_follower
+  acts_as_messageable
 
-  has_many :projects, inverse_of: :user
+  has_one  :investigator, inverse_of: :user
+  has_many :project_users
+  has_many :projects, through: :project_users
   has_many :events, inverse_of: :user
   has_many :posts
 
   before_save :check_authentication_token
+
+  validates_uniqueness_of :email
+  validates_format_of     :email, without: TEMP_EMAIL_REGEX, on: :update
+
+  accepts_nested_attributes_for :projects
+
+  def mailboxer_email(object)
+    nil
+  end
 
   def published_projects
     projects.published.includes(:cancer_types)
@@ -64,6 +78,10 @@ class User < ApplicationRecord
 
   def email_verified?
     email && email !~ TEMP_EMAIL_REGEX
+  end
+
+  def unread_messages
+    Mailboxer::Receipt.recipient(self).is_unread.not_trash.count
   end
 
   class << self
