@@ -71,7 +71,7 @@ class EventsController < ApplicationController
 
     def set_event
       @event = Event.set_by_id_or_slug(params[:slug])
-      @participants = @event.participants.split(',').map { |p| {name: p, investigator: Investigator.find_by(name: p.strip)} }
+      @participants = @event.participants.split(',').map { |p| { name: p, investigator: Investigator.find_by(name: p.strip) } }
       @country = Country.find_by(country_name: @event.country)
     end
 
