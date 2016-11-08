@@ -22,6 +22,10 @@
 
     > li {
 
+      &.-separator {
+        border-top: 1px solid $border-color-1;
+      }
+
       > a {
         cursor: pointer;
         font-size: $small-font-size;
