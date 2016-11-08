@@ -2,9 +2,9 @@ module Api::V1
   class InvestigatorsController < ApiController
     include ApiAuthenticable
 
-    before_action :set_investigator,  only: [:show, :update, :graph]
-    before_action :check_permissions, only: :update
-    skip_before_action :set_user_by_token, on: :graph
+    before_action :set_investigator,       only: [:show, :update, :graph]
+    before_action :check_permissions,      only: :update
+    skip_before_action :set_user_by_token, only: :graph
 
     def index
       # ToDo: implementation of investigator search by name
