@@ -23,7 +23,12 @@
     },
 
     render: function() {
-      this.$el.html(this.template(this.widgetConf || {}));
+      if (this.widgetConf) {
+        this.$el.html(this.template({
+          info: this.widgetConf.config || {}
+        }));
+        console.log(this.widgetConf.data);
+      }
       // var emissions_by_source = this.model.get('analysis').emissions_by_source;
       // var chartDiv = this.$el.find('.c-graph').attr('id');
 
@@ -95,7 +100,6 @@
 
     updateGraph: function(widgetConf) {
       this.widgetConf = widgetConf;
-      console.log(this.widgetConf);
       this.render();
     }
   });

@@ -122,20 +122,24 @@
     },
 
     fetchWidget: function(widget) {
-      // GET the Widget config
-      var widgetConf = this.widgets.findWhere({
-        slug: widget
-      });
+      if (widget) {
+        // GET the Widget config
+        var widgetConf = this.widgets.findWhere({
+          slug: widget
+        });
 
-      // FETCH the CARTO 'query'
-      // before upgrading the view
-      this.widgetModel.setUrl(gon.server_params['countries[]'], widgetConf.get('query'));
-      this.widgetModel
-        .clear({ silent: true })
-        .fetch().done(function() {
-          this.widgetModel.set('config', widgetConf.toJSON());
-          this.graph.updateGraph(this.widgetModel.toJSON());
-        }.bind(this));
+        // FETCH the CARTO 'query'
+        // before upgrading the view
+        this.widgetModel.setUrl(gon.server_params['countries[]'], widgetConf.get('query'))
+        this.widgetModel
+          .clear({ silent: true })
+          .fetch().done(function() {
+            this.widgetModel.set('config', widgetConf.toJSON());
+            this.graph.updateGraph(this.widgetModel.toJSON());
+          }.bind(this));
+      } else {
+        console.log('Widget is null');
+      }
     },
 
     render: function() {
