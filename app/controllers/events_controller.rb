@@ -9,7 +9,7 @@ class EventsController < ApplicationController
   def show
     authorize! :show, @event
     gon.server_params = {}
-    gon.api_location_path = "/api/map/events/#{params[:id]}"
+    gon.api_location_path = "/api/map/events/#{@event.id}"
     gon.start_date = @event.start_date || 0
     gon.end_date = @event.end_date || 0
 
@@ -70,7 +70,7 @@ class EventsController < ApplicationController
     end
 
     def set_event
-      @event = Event.set_by_id_or_slug(params[:id])
+      @event = Event.set_by_id_or_slug(params[:slug])
       @participants = @event.participants.split(',').map { |p| {name: p, investigator: Investigator.find_by(name: p.strip)} }
       @country = Country.find_by(country_name: @event.country)
     end

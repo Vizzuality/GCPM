@@ -7,7 +7,7 @@
       </article>
       <div class="row -no-mrg align-right wrapper">
         <% if current_user && current_user.events.include?(@event) %>
-          <%= link_to (t 'edit'), edit_user_event_path(current_user.id), class: "c-btn -secondary -inverse" %>
+          <%= link_to (t 'edit'), edit_user_event_path(current_user.id, @event.id), class: "c-btn -secondary -inverse" %>
         <% end %>
       </div>
     </div>

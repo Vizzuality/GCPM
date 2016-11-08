@@ -12,7 +12,7 @@
               </a>
             </h3>
           <% end %>
-          <h2><%= link_to e.title, event_path(e.id) %></h2>
+          <h2><%= link_to e.title, event_path(e.slug ? e.slug : e.id) %></h2>
           <p><%= truncate(e.description.html_safe, :length => 300) %></p>
         </div>
       </div>

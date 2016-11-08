@@ -7,7 +7,7 @@ class ProjectsController < ApplicationController
   def show
     authorize! :show, @project
     gon.server_params = {}
-    gon.api_location_path = "/api/map/projects/#{params[:id]}"
+    gon.api_location_path = "/api/map/projects/#{@project.id}"
     gon.start_date = @project.start_date || 0
     gon.end_date = @project.end_date || 0
 
@@ -62,7 +62,7 @@ class ProjectsController < ApplicationController
   private
 
     def set_project
-      @project = Project.set_by_id_or_slug(params[:id])
+      @project = Project.set_by_id_or_slug(params[:slug])
       @addresses = @project.addresses.map { |ad| { country_iso_3: Country.find(ad.country_id).try(:country_iso_3), address: ad} }
     end
 
