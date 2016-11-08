@@ -15,13 +15,13 @@
           <p>
             <% p.cancer_types.each do |t| %>
               <span class="c-tag -mg">
-                <a href="/cancer-types/<%= t.id %>">
+                <a href="/cancer-types/<%= t.slug %>">
                   <%= t.name %>
                 </a>
               </span>
             <% end %>
           </p>
-          
+
           <% if controller_name === 'users' %>
             <% if p.project_users.first.is_approved %>
               <a href="/network/<%= current_user.id %>/projects/<%= p.id %>/edit" class="c-btn -primary">

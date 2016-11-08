@@ -12,7 +12,7 @@
           <p>
             <% p.cancer_types.each do |t| %>
               <span class="c-tag -mg">
-                <a href="/cancer-types/<%= t.id %>">
+                <a href="/cancer-types/<%= t.slug %>">
                   <%= t.name %>
                 </a>
               </span>

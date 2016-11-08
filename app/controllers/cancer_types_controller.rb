@@ -10,7 +10,7 @@ class CancerTypesController < ApplicationController
     @title = t 'map'
     @filters = %w(projects people)
     @current_type = params.key?(:data) ? params[:data] : 'projects'
-    gon.server_params = { 'cancer_types[]': params[:id] }
+    gon.server_params = { 'cancer_types[]': @cancer_type.id }
 
     limit = 12 + (@page * 9)
 
@@ -39,6 +39,6 @@ class CancerTypesController < ApplicationController
   private
 
     def set_cancer_type
-      @cancer_type = CancerType.set_by_id_or_slug(params['id'])
+      @cancer_type = CancerType.set_by_id_or_slug(params['slug'])
     end
 end

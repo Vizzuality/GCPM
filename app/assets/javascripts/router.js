@@ -22,7 +22,7 @@
       'investigators/:id(/)':          'Investigators#show',
       'organizations/:id(/)':          'Organizations#show',
       'cancer-types(/)':               'CancerTypes#index',
-      'cancer-types/:id(/)':           'CancerTypes#show',
+      'cancer-types/:slug(/)':         'CancerTypes#show',
       'network/:id(/)':                'Users#show',
       'posts/:id(/)':                  'Posts#show',
       'network/:id/events/new(/)':     'Events#new',

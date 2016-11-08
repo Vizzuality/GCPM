@@ -65,7 +65,7 @@
           <h3><%= t 'cancer_types' %></h3>
           <ul class="c-list">
             <% @project.cancer_types.each do |ct| %>
-              <li class="list-item -mg-less"><%= link_to ct.name, "/cancer-types/#{ct.id}" %></li>
+              <li class="list-item -mg-less"><%= link_to ct.name, "/cancer-types/#{ct.slug}" %></li>
             <% end %>
           </ul>
         </div>
