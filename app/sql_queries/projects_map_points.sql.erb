@@ -2,6 +2,7 @@ select
 projects.id as project,
 projects.title as title,
 investigators.name as investigator_name,
+investigators.slug as investigator_slug,
 investigators.id as investigator,
 countries.country_name as location_name,
 addresses.country_name as location_country_name,
@@ -13,6 +14,7 @@ addresses.postcode as location_postcode,
 addresses.state as location_state,
 organizations.id as organization,
 organizations.name as organization_name,
+organizations.slug as organization_slug,
 '{"type":"Point","coordinates":[' || addresses.latitude || ',' || addresses.longitude || ']}' as centroid,
 countries.country_iso_3 as iso,
 'point' as type,
@@ -69,4 +71,4 @@ from projects
     <% if @params[:user] %>
       and project_users.user_id = <%= quote @params[:user] %> and project_users.is_approved = true
     <% end %>
-group by project, title, location_name, location_country_name, location_city, location_line_1, location_line_2, location_line_3, location_postcode, location_state, centroid, iso, investigator_name, investigator, is_project_lead, organization_name, organization
+group by project, title, location_name, location_country_name, location_city, location_line_1, location_line_2, location_line_3, location_postcode, location_state, centroid, iso, investigator_name, investigator_slug, investigator, is_project_lead, organization_name, organization_slug, organization

@@ -18,7 +18,7 @@
         return marker;
       },
       onEachFeature: function (feature, layer) {
-        var htmlContent = '<a href="/investigators/' + feature.properties.investigator + '">'
+        var htmlContent = '<a href="/investigators/' + feature.properties.investigator_slug + '">'
           + feature.properties.investigator_name + '</a>';
         layer.bindPopup(htmlContent);
       }

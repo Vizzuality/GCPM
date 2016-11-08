@@ -63,6 +63,7 @@ class ProjectsController < ApplicationController
 
     def set_project
       @project = Project.set_by_id_or_slug(params[:id])
+      @addresses = @project.addresses.map { |ad| { country_iso_3: Country.find(ad.country_id).try(:country_iso_3), address: ad} }
     end
 
     def set_user

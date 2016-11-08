@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get '/countries/:iso',        to: 'countries#show',     as: 'country'
   get '/cancer-types',          to: 'cancer_types#index', as: 'cancers'
   get '/cancer-types/:slug',    to: 'cancer_types#show',  as: 'cancer'
-  get '/organizations/:id',     to: 'organizations#show', as: 'organization'
+  get '/organizations/:slug',   to: 'organizations#show', as: 'organization'
   get '/about',                 to: 'about#index',        as: 'about'
   get '/downloads/user-manual', to: 'downloads#show',     as: 'download_user_manual'
   get '/network/:id',           to: 'users#show',         as: 'user'
