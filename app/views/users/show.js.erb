@@ -1,26 +1,20 @@
 (function() {
   'use strict'
   <% template = @current_type == 'network' ? "network" : "#{@current_type}/list" %>
-
-
-
   var htmlContent = "<%= escape_javascript render(partial: template, locals: { items: @items, more: @more }) %>";
+  $('#content').html(htmlContent);
 
-  document.getElementById('content').innerHTML = htmlContent;
+  var $messagesBadge = $('.messages-badge');
+  var unreadCount = '<%= current_user.unread_inbox_count %>';
 
-  if (true) {
-    //TODO: ask back-ends
-    <% unreadNum = 0 %>
-    <% @conversations.each do |c| %>
-      <% unread = c.receipts_for(current_user).map{|m| m.is_unread?}.include? true %>
-      <% if unread %>
-        <% unreadNum = unreadNum + 1 %>
-      <% end %>
-    <% end %>
+  $messagesBadge.toggleClass('-hidden', !gon.unreadCount);
 
-    document.getElementById('messages-badge').innerHTML = '<%= unreadNum %>';
-  }
 
-  App.trigger('Remote:load', { data: '<%= @current_type %>' });
+  App.trigger('Remote:load', {
+    data: '<%= @current_type %>',
+    messages: {
+      count: '<%= current_user.unread_inbox_count %>'
+    }
+  });
 
 })();

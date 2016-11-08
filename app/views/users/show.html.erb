@@ -46,14 +46,14 @@
                 <% if user.twitter_account && user.twitter_account != '' %>
                   <li>
                     <a href="https://twitter.com/<%= user.twitter_account %>" class="-clickable -hv" target="_blank">
-                      @<%= user.twitter_account %>
+                      Twitter
                     </a>
                   </li>
                 <% end %>
                 <% if user.linkedin_account && user.linkedin_account != '' %>
                   <li>
                     <a href="https://www.linkedin.com/in/<%= user.linkedin_account %>" class="-clickable -hv" target="_blank">
-                      <%= user.linkedin_account %>
+                      Linkedin
                     </a>
                   </li>
                 <% end %>
@@ -77,15 +77,6 @@
     </div>
   </div>
 
-  <!-- TODO: ask back-ends -->
-  <% unreadNum = 0 %>
-  <% @conversations.each do |c| %>
-    <% unread = c.receipts_for(current_user).map{|m| m.is_unread?}.include? true %>
-    <% if unread %>
-      <% unreadNum = unreadNum + 1 %>
-    <% end %>
-  <% end %>
-
   <div class="l-app-navbar">
     <div class="wrapper">
       <div class="row collapse">
@@ -100,7 +91,7 @@
                   data: { datatype: filter }
                 %>
                 <% if filter === 'messages' %>
-                  <div id="<%= filter + '-badge' %>" class="c-badge"><%= unreadNum %></div>
+                  <div class="c-badge <%= filter + '-badge' %><%= current_user.unread_inbox_count === 0 ? ' -hidden' : '' %>"><%= current_user.unread_inbox_count %></div>
                 <% end %>
               </li>
             <% end %>
