@@ -35,7 +35,6 @@ class Investigator < ApplicationRecord
   attr_accessor :assign_to_user
 
   validates_presence_of   :name
-  validates_uniqueness_of :name
   validates_uniqueness_of :user_id, allow_blank: true
   validates               :email, format: { with: Devise.email_regexp }, allow_blank: true, on: :create
 
