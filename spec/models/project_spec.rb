@@ -63,7 +63,7 @@ RSpec.describe Project, type: :model do
       @project_reject = Project.new(title: 'Project one', summary: 'Lorem ipsum..')
 
       @project_reject.valid?
-      expect {@project_reject.save!}.to raise_error(ActiveRecord::RecordInvalid, "Validation failed: Title has already been taken, Slug has already been taken")
+      expect {@project_reject.save!}.to raise_error(ActiveRecord::RecordInvalid, "Validation failed: Title has already been taken")
     end
   end
 end

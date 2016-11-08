@@ -1,6 +1,6 @@
 <% controller_name = controller && controller.controller_name %>
 <div>
-  <% if controller_name != 'users' && controller_name != 'organizations' && (user_signed_in? && current_user.investigator != @investigator) || !user_signed_in? %>
+  <% if controller_name != 'users' && controller_name != 'organizations' %>
     <ul id="investigatorsActionsView" class="c-btn-container">
       <li id="followButton">
         <% if user_signed_in? %>
@@ -14,6 +14,7 @@
           <%= link_to (t 'follow'), user_session_path, class: 'c-btn -secondary -inverse' %>
         <% end %>
       </li>
+
       <% if controller_name === 'investigators' && @investigator.user %>
         <li>
           <button class="c-btn -secondary -inverse js-btn-toggle-message" data-user="<%= @investigator.user.id %>" type="button" name="button">Message</button>
@@ -35,6 +36,7 @@
           </div>
         </li>
       <% end %>
+
     </ul>
   <% end %>
   <ul class="c-btn-container">

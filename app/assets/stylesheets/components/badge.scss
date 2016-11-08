@@ -17,4 +17,11 @@
   &.-hidden {
     display: none;
   }
+
+  &.-relative {
+    position: relative;
+    top: -2px;
+    right: 0;
+    display: inline-flex;
+  }
 }

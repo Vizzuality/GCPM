@@ -5,19 +5,16 @@
   $('#content').html(htmlContent);
 
   var $messagesBadge = $('.messages-badge');
-  gon.unreadCount = '<%= current_user.unread_inbox_count %>';
+  var unreadCount = '<%= current_user.unread_inbox_count %>';
 
-  if (gon.unreadCount === 0) {
-    $messagesBadge.toggleClass('-hidden', true);
-  } else {
-    $messagesBadge.toggleClass('-hidden', false);
-
-    gon.unreadCount <= 9 ?
-      $messagesBadge.text(gon.unreadCount) :
-      $messagesBadge.text('9+');
-  }
+  $messagesBadge.toggleClass('-hidden', !gon.unreadCount);
 
 
-  App.trigger('Remote:load', { data: '<%= @current_type %>' });
+  App.trigger('Remote:load', {
+    data: '<%= @current_type %>',
+    messages: {
+      count: '<%= current_user.unread_inbox_count %>'
+    }
+  });
 
 })();

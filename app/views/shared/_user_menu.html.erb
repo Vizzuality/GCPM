@@ -1,25 +1,34 @@
 <div class="c-user-menu">
   <ul>
     <li class="<%= active_page?(user_session_path) ? '-active' : '' %>">
-      <%= link_to (t 'network'), user_path(:data => 'network', :id => current_user.id) %></a>
+      <%= link_to (t 'network'), user_path(:data => 'network', :id => current_user.id) %>
     </li>
     <li class="<%= active_page?(user_session_path) ? '-active' : '' %>">
-      <%= link_to (t 'projects'), user_path(:data => 'projects', :id => current_user.id) %></a>
+      <%= link_to (t 'projects'), user_path(:data => 'projects', :id => current_user.id) %>
     </li>
     <li class="<%= active_page?(user_session_path) ? '-active' : '' %>">
-      <%= link_to (t 'posts'), user_path(:data => 'posts', :id => current_user.id) %></a>
+      <%= link_to (t 'posts'), user_path(:data => 'posts', :id => current_user.id) %>
     </li>
     <li class="<%= active_page?(user_session_path) ? '-active' : '' %>">
-      <%= link_to (t 'events'), user_path(:data => 'events', :id => current_user.id) %></a>
+      <%= link_to (t 'events'), user_path(:data => 'events', :id => current_user.id) %>
     </li>
     <li class="<%= active_page?(user_session_path) ? '-active' : '' %>">
-      <%= link_to (t 'messages'), user_path(:data => 'messages', :id => current_user.id) %></a>
-      <div class="c-badge messages-badge <%= current_user.unread_inbox_count ? ' -hidden' : ''%>"><%= current_user.unread_inbox_count %></div>
+      <%= link_to user_path(:data => 'messages', :id => current_user.id) do %>
+        <span>
+          <%= t 'messages' %>
+          <div class="c-badge -relative messages-badge <%= current_user.unread_inbox_count > 0 ? '' : '-hidden' %>"><%= current_user.unread_inbox_count %></div>
+        </span>
+      <% end %>
+    </li>
+  </ul>
+  <ul class="-separator">
+    <li class="<%= active_page?(user_session_path) ? ' -active' : '' %>">
+      <%= link_to (t 'edit_profile'), edit_user_path(current_user.id) %>
     </li>
   </ul>
   <ul>
     <li class="logout">
-      <%= link_to (t 'logout'), destroy_user_session_path, :method => 'delete' %></a>
+      <%= link_to (t 'logout'), destroy_user_session_path, :method => 'delete' %>
     </li>
   </ul>
 </div>

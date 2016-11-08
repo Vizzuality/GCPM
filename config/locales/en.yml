@@ -39,6 +39,7 @@ en:
   description: "Description"
   download: "User Manual"
   edit: "Edit"
+  edit_profile: "Edit Profile"
   delete: "Delete"
   ends: "Ends"
   event: "Event"
