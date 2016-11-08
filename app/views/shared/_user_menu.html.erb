@@ -12,6 +12,9 @@
     <li class="<%= active_page?(user_session_path) ? '-active' : '' %>">
       <%= link_to (t 'events'), user_path(:data => 'events', :id => current_user.id) %></a>
     </li>
+    <li class="-separator<%= active_page?(user_session_path) ? ' -active' : '' %>">
+      <%= link_to (t 'edit_profile'), edit_user_path(current_user.id) %>
+    </li>
   </ul>
   <ul>
     <li class="logout">
