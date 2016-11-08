@@ -13,4 +13,15 @@
   background: $secondary-color;
   color: $inverse-font-color;
   font-size: 10px;
+
+  &.-hidden {
+    display: none;
+  }
+
+  &.-relative {
+    position: relative;
+    top: -2px;
+    right: 0;
+    display: inline-flex;
+  }
 }

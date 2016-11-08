@@ -15,16 +15,17 @@
     padding-top: $base-space/4;
     padding-bottom: $base-space/4;
 
+    &.-separator {
+      border-top: 1px solid $border-color-1;
+    }
+
     &:last-child {
       padding-top: 0;
       padding-bottom: 0;
     }
 
     > li {
-
-      &.-separator {
-        border-top: 1px solid $border-color-1;
-      }
+      position: relative;
 
       > a {
         cursor: pointer;
