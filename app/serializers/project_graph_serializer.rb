@@ -14,12 +14,8 @@
 #  slug            :string
 #
 
-class ProjectSerializer < ActiveModel::Serializer
-  attributes :id, :slug, :title, :summary, :project_website, :start_date, :end_date, :status
+class ProjectGraphSerializer < ActiveModel::Serializer
+  attributes :id, :slug, :title
 
-  has_many :funding_sources
-  has_many :cancer_types
-  has_many :project_types
-  has_many :users
-  has_many :memberships, serializer: MembershipSerializer
+  has_many :investigators, serializer: InvestigatorGraphSerializer
 end

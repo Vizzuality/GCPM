@@ -2,8 +2,9 @@ module Api::V1
   class InvestigatorsController < ApiController
     include ApiAuthenticable
 
-    before_action :set_investigator,  only: [:show, :update]
+    before_action :set_investigator,  only: [:show, :update, :graph]
     before_action :check_permissions, only: :update
+    skip_before_action :set_user_by_token, on: :graph
 
     def index
       # ToDo: implementation of investigator search by name
@@ -13,6 +14,10 @@ module Api::V1
 
     def show
       render json: @investigator, serializer: InvestigatorSerializer
+    end
+
+    def graph
+      render json: @investigator.graph, each_serializer: ProjectGraphSerializer
     end
 
     def update
