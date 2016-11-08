@@ -62,7 +62,7 @@
     },
 
     setBadges: function(data) {
-      this.tabnav.setMessagesBadge(data.unreadCount);
+      this.tabnav.setMessagesBadge(data);
     }
 
   });
