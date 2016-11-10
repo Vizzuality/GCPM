@@ -32,25 +32,20 @@
       });
     },
 
-    setMessagesBadge: function(unreadCount) {
+    setMessagesBadge: function(data) {
       var $messagesBadge = $('.messages-badge');
+      var unreadCount = data.unreadCount;
 
       if (unreadCount > 0) {
-        gon.unreadCount = unreadCount - 1;
+        gon.unreadCount = data.equal ? unreadCount : unreadCount - 1;
         $messagesBadge.toggleClass('-hidden', false);
 
-        if (gon.unreadCount <= 9) {
-          $messagesBadge.text(gon.unreadCount);
-        } else {
-          $messagesBadge.text('9+');
-        }
+        $messagesBadge.text(gon.unreadCount <= 9 ? gon.unreadCount : '9+');
       } else {
         gon.unreadCount = 0;
       }
 
-      gon.unreadCount === 0 ?
-        $messagesBadge.toggleClass('-hidden', true) :
-        $messagesBadge.toggleClass('-hidden', false);
+      $messagesBadge.toggleClass('-hidden', gon.unreadCount === 0);
     }
 
   });
