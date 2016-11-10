@@ -68,14 +68,14 @@
      */
     addPoints: function() {
       var map = this.view.map;
-      var attributtes = _.extend({}, this.state.attributes, {
+      var attributes = _.extend({}, this.state.attributes, {
         data: this.getData(this.state.attributes.data)
       });
 
       if (this.currentLayer) {
         map.removeLayer(this.currentLayer);
       }
-      this.fc.getPointLayer(attributtes).done(function(layer) {
+      this.fc.getPointLayer(attributes).done(function(layer) {
         this.currentLayer = layer;
         map.addLayer(layer);
         setTimeout(function() {

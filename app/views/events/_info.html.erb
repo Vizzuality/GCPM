@@ -7,7 +7,7 @@
       </article>
       <div class="row -no-mrg align-right wrapper">
         <% if current_user && current_user.events.include?(@event) %>
-          <%= link_to (t 'edit'), edit_user_event_path(current_user.id), class: "c-btn -secondary -inverse" %>
+          <%= link_to (t 'edit'), edit_user_event_path(current_user.id, @event.id), class: "c-btn -secondary -inverse" %>
         <% end %>
       </div>
     </div>
@@ -41,12 +41,16 @@
       <% end %>
 
       <% if @event.country && @event.country.size > 0 %>
-        <% country = Country.find_by(country_name: @event.country) %>
         <div class="sidebar-item">
           <h3><%= t 'location' %>(s)</h3>
           <ul class="c-list">
-          <% iso = country.country_iso_3 %>
-            <li class="list-item -mg-less"><%= link_to "#{@event.city} , #{@event.country}", "/countries/#{iso}" %></li>
+            <li class="list-item -mg-less">
+              <% if @country %>
+                <%= link_to "#{@event.city} , #{@event.country}", "/countries/#{@country.country_iso_3}" %>
+              <% else %>
+                <%= @event.city %>, <%= @event.country %>
+              <% end %>
+            </li>
           </ul>
         </div>
       <% end %>
@@ -54,14 +58,12 @@
         <div class="sidebar-item">
           <h3><%= t 'participants' %>(s)</h3>
           <ul class="c-list">
-            <% @event.participants.split(',').each do |p| %>
-              <% participant = p[0] === ' ' ? p.slice(1, p.length-1) : p %>
-              <% id = Investigator.find_by(name: participant).try(:id) %>
+            <% @participants.each do |p| %>
               <li class="list-item -mg-less">
-                <% if id %>
-                  <%= link_to "#{participant}", "/investigators/#{id}" %>
+                <% if p[:investigator] %>
+                  <%= link_to "#{p[:name]}", "/investigators/#{p[:investigator].slug ? p[:investigator].slug : p[:investigator].id }" %>
                 <% else %>
-                  <%= participant %>
+                  <%= p[:name] %>
                 <% end %>
               </li>
             <% end %>

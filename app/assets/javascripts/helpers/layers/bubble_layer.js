@@ -77,6 +77,7 @@
         var marker = L.marker(location, {
           icon: bubbleIcon
         });
+
         marker.bindPopup(infowindowTemplate(feature.properties));
 
         return marker;

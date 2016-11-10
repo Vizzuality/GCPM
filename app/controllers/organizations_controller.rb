@@ -11,7 +11,7 @@ class OrganizationsController < ApplicationController
     @filters = %w(projects people)
     @current_type = params.key?(:data) ? params[:data] : 'projects'
 
-    gon.server_params = { 'organizations[]': params[:id] }
+    gon.server_params = { 'organizations[]': @organization.id }
 
     limit = 12 + (@page * 9)
 
@@ -39,6 +39,6 @@ class OrganizationsController < ApplicationController
   private
 
     def set_organization
-      @organization = Organization.set_by_id_or_slug(params[:id])
+      @organization = Organization.set_by_id_or_slug(params[:slug])
     end
 end
