@@ -14,6 +14,9 @@ from projects
     <% if @params[:organizations] || @params[:organization_types] %>
       inner join organizations on addresses.organization_id = organizations.id
     <% end %>
+    <% if @params[:funding_sources] %>
+      inner join funders on funders.project_id = projects.id
+    <% end %>
     <% if @params[:organization_types] %>
       inner join organization_types on organization_types.id = organizations.organization_type_id
     <% end %>
@@ -44,9 +47,6 @@ from projects
     <% end %>
     <% if @params[:funding_sources] %>
       and funders.organization_id in <%= "#{'(' + @params[:funding_sources].join(',') + ')'}" %>
-    <% end %>
-    <% if @params[:funding_sources] %>
-      inner join funders on funders.project_id = projects.id
     <% end %>
     <% if @params[:organization_types] %>
       and organization_types.id in <%= "#{'(' + @params[:organization_types].join(',') + ')'}" %>

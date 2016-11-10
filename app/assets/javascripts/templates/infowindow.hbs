@@ -23,6 +23,11 @@
         <p>{{#if start_date}}{{start_date}}{{else}}-{{/if}} / {{#if end_date}}{{end_date}}{{else}}-{{/if}}</p>
       {{/if}}
     {{/if}}
+    <div class="organization">
+      {{#if city}}
+        <p>{{city}}, {{location_name}}</p>
+      {{/if}}
+    </div>
   {{/if}}
   {{#if resource_id}}
     <h3><a href="/investigators/{{#if resource_slug}}{{resource_slug}}{{else}}{{resource_id}}{{/if}}">{{resource_name}}</a></h3>
