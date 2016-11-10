@@ -16,6 +16,9 @@ from investigators
     <% if @params[:organization_types] %>
       inner join organization_types on organization_types.id = organizations.organization_type_id
     <% end %>
+    <% if @params[:funding_sources] %>
+      inner join funders on funders.project_id = projects.id
+    <% end %>
     <% if @params[:investigators] %>
       inner join investigators on research_units.investigator_id = investigators.id
     <% end %>
@@ -27,6 +30,10 @@ from investigators
       inner join cancer_types_projects on cancer_types_projects.project_id = projects.id
       inner join cancer_types on cancer_types_projects.cancer_type_id = cancer_types.id
     <% end %>
+    <% if @params[:specialities] %>
+      inner join projects_pecialities on projects_pecialities.project_id = projects.id
+      inner join specialities on projects_specialities.speciality_id = specialities.id
+    <% end %>
     <% if @params[:user] %>
       inner join project_users on projects.id = project_users.project_id
     <% end %>
@@ -36,6 +43,9 @@ from investigators
     <% end %>
     <% if @params[:organizations] %>
       and organizations.id in <%= "#{'(' + @params[:organizations].join(',') + ')'}" %>
+    <% end %>
+    <% if @params[:funding_sources] %>
+      and funders.organization_id in <%= "#{'(' + @params[:funding_sources].join(',') + ')'}" %>
     <% end %>
     <% if @params[:organization_types] %>
       and organization_types.id in <%= "#{'(' + @params[:organization_types].join(',') + ')'}" %>
@@ -48,6 +58,9 @@ from investigators
     <% end %>
     <% if @params[:cancer_types] %>
       and cancer_types.id in <%= "#{'(' + @params[:cancer_types].join(',') + ')'}" %>
+    <% end %>
+    <% if @params[:specialities] %>
+      and specialities.id in <%= "#{'(' + @params[:cancer_types].join(',') + ')'}" %>
     <% end %>
     <% if @params[:regions] %>
       and countries.region_iso in <%= @params[:regions].to_s.gsub('[', '(').gsub(']',')').gsub('"',"'") %>

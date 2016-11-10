@@ -5,23 +5,23 @@
       <div class="column small-12 medium-4">
         <div class="c-card -projects">
           <h3 class="-underlined">
-            <a href="/investigators/<%= p.project_leads.first.try(:id) %>">
+            <a href="/investigators/<%= p.project_leads.first.try(:slug) ? p.project_leads.first.try(:slug) : p.project_leads.first.try(:id) %>">
               <%= p.project_leads.first.try(:name) %>
             </a>
           </h3>
 
-          <h2><%= link_to p.title, project_path(p.id) %></h2>
+          <h2><%= link_to p.title, project_path(p.slug ? p.slug : p.id) %></h2>
 
           <p>
             <% p.cancer_types.each do |t| %>
               <span class="c-tag -mg">
-                <a href="/cancer-types/<%= t.id %>">
+                <a href="/cancer-types/<%= t.slug %>">
                   <%= t.name %>
                 </a>
               </span>
             <% end %>
           </p>
-          
+
           <% if controller_name === 'users' %>
             <% if p.project_users.first.is_approved %>
               <a href="/network/<%= current_user.id %>/projects/<%= p.id %>/edit" class="c-btn -primary">

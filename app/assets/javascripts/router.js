@@ -11,22 +11,22 @@
      * @type {Object}
      */
     routes: {
-      '(/)':                           'Home#index',
-      'map(?*query)(/)':               'Map#index',
-      'projects/:id(/)':               'Project#show',
-      'events/:id(/)':                 'Events#show',
-      'network/:id/projects/new(/)':   'Project#new',
-      'network/:network_id/projects/:id/edit(/)':'Project#edit',
-      'countries(/)':                  'Countries#index',
-      'countries/:iso(/)':             'Countries#show',
-      'investigators/:id(/)':          'Investigators#show',
-      'organizations/:id(/)':          'Organizations#show',
-      'cancer-types(/)':               'CancerTypes#index',
-      'cancer-types/:id(/)':           'CancerTypes#show',
-      'network/:id(/)':                'Users#show',
-      'posts/:id(/)':                  'Posts#show',
-      'network/:id/events/new(/)':     'Events#new',
-      'network/:id/events/:id/edit(/)':'Events#edit'
+      '(/)':                                       'Home#index',
+      'map(?*query)(/)':                           'Map#index',
+      'projects/:slug(/)':                         'Project#show',
+      'events/:slug(/)':                           'Events#show',
+      'network/:id/projects/new(/)':               'Project#new',
+      'network/:network_id/projects/:id/edit(/)':  'Project#edit',
+      'countries(/)':                              'Countries#index',
+      'countries/:iso(/)':                         'Countries#show',
+      'investigators/:slug(/)':                    'Investigators#show',
+      'organizations/:slug(/)':                    'Organizations#show',
+      'cancer-types(/)':                           'CancerTypes#index',
+      'cancer-types/:slug(/)':                     'CancerTypes#show',
+      'network/:id(/)':                            'Users#show',
+      'posts/:id(/)':                              'Posts#show',
+      'network/:id/events/new(/)':                 'Events#new',
+      'network/:id/events/:id/edit(/)':            'Events#edit'
     },
 
     initialize: function() {

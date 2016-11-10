@@ -33,4 +33,14 @@ class Organization < ApplicationRecord
   validates               :email_address, format: { with: Devise.email_regexp }, allow_blank: true, on: :create
 
   include Sluggable
+
+  def self.are_funding_sources
+    Organization.joins(:funders)
+  end
+
+  def self.fetch_all(options)
+    organizations = Organization.all
+    organizations = organizations.are_funding_sources if options[:funding_source]
+    organizations.distinct
+  end
 end

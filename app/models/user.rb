@@ -41,6 +41,8 @@ class User < ApplicationRecord
 
   enum role: { user: 0, admin: 1 }
 
+  mount_uploader :avatar, AvatarUploader
+
   include Roleable
 
   TEMP_EMAIL_PREFIX = 'change@tmp'

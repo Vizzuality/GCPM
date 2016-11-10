@@ -14,6 +14,13 @@ if ProjectType.all.size == 0
     ProjectType.create(name: p)
   end
 end
+if Speciality.all.size == 0
+  sp = ["Pediatric oncology or childhood cancer", "Surgery / Surgical oncology", "Radiation Oncology", "Pathology", "Hematology and hematologic malignancies"]
+  sp.each do |s|
+    Speciality.create(name: s)
+  end
+end
+
 #
 # if Organization.all.size == 0
 #   pt = ["Research, Basic", "Research, Clinical", "Research, Population-Based", "Training", "Capacity Building", "Cancer Prevention", "Cancer Screening", "Cancer Detection", "Cancer Treatment", "Cancer Surveillance, Cancer Registries", "Palliative Care"]

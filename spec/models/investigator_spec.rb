@@ -19,9 +19,9 @@ RSpec.describe Investigator, type: :model do
   before :each do
     @user           = create(:user)
     @investigator_1 = create(:investigator, name: 'First investigator', user: @user)
-    @investigator_2 = create(:investigator, name: 'Second investigator')
+    @investigator_2 = create(:investigator, name: 'Second investigatör')
     @investigator_3 = create(:investigator, name: 'Second investigator')
-    @investigator_4 = create(:investigator, name: 'second investigator')
+    @investigator_4 = create(:investigator, name: 'secönd investigator')
   end
 
   it 'Project user relations size' do
