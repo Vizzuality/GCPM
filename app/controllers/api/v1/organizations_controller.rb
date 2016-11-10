@@ -4,7 +4,7 @@ module Api::V1
 
     def index
       # ToDo: implementation of organization search by name
-      organizations = Organization.all
+      organizations = Organization.fetch_all(organizations_params)
       render json: organizations, each_serializer: OrganizationArraySerializer
     end
 
@@ -25,6 +25,10 @@ module Api::V1
 
       def organization_params
         params.require(:organization).permit!
+      end
+
+      def organizations_params
+        params.permit(:funding_source)
       end
   end
 end

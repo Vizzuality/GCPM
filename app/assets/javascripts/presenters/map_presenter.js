@@ -74,7 +74,7 @@
       var newState = merge ? _.extend({}, this.getState(), params) : params;
 
       newState = _.pick(newState, 'data', 'regions[]', 'countries[]', 'cancer_types[]',
-        'organization_types[]', 'organizations[]', 'project_types[]',
+        'organization_types[]', 'organizations[]', 'project_types[]', 'funding_sources[]',
         'start_date', 'end_date', 'cartoLayer');
 
       if (!newState.data) {
