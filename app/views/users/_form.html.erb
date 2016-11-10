@@ -1,7 +1,15 @@
 
 <%= simple_form_for @user,
   url: user_path(current_user.id),
-  method: :patch do |f| %>
+  method: :patch, html: { multipart: true } do |f| %>
+
+  <div class="form-row row">
+    <div class="column small-12 medium-5">
+      <label>Profile picture url:</label>
+      <%= image_tag(@user.avatar_url) if @user.avatar? %>
+      <%= f.file_field :avatar, label: false %>
+    </div>
+  </div>
 
   <div class="form-row row">
     <div class="column small-12">
