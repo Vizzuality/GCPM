@@ -10,7 +10,7 @@
 
     defaults: {
       color: {
-        pattern: ['#c1de11', '#8ac230']
+        pattern: ['#68299b', '#5aade4', '#f57823']
       }
     },
 
@@ -21,7 +21,7 @@
 
       var opts = settings && settings.options ? settings.options : {};
       this.options = _.extend({
-        bindto: this.$el.find('.graph')[0]
+        bindto: this.el
       }, this.defaults, opts);
 
       this.render();

@@ -4,8 +4,12 @@
 
   App.Collection.Widgets = Backbone.Collection.extend({
 
-    url: '/api/widgets'
-    
+    url: '/api/widgets',
+
+    comparator: function(item) {
+      return item.get('name');
+    }
+
   });
 
 })(this.App);

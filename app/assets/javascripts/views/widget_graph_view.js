@@ -1,3 +1,4 @@
+/* global d3 */
 (function(App) {
 
   'use strict';
@@ -27,80 +28,88 @@
         this.$el.html(this.template({
           info: this.widgetConf.config || {}
         }));
-        console.log(this.widgetConf.data);
+        this.renderGraph();
       }
-      // var emissions_by_source = this.model.get('analysis').emissions_by_source;
-      // var chartDiv = this.$el.find('.c-graph').attr('id');
-
-      // this.chart1 = new App.View.Chart({
-      //   el: '#' + chartDiv,
-      //   options: {
-      //     data: {
-      //       json: {
-      //         'Current practices': _.pluck(emissions_by_source, this.model.get('type'))
-      //       },
-      //       labels: {
-      //         format: function (v, id, i, j) {
-      //           if (v > 1000 || v < -1000) {
-      //             return d3.format('.3s')(v);
-      //           } else {
-      //             return d3.round(v, 2);
-      //           }
-      //         }
-      //       },
-      //       type: 'bar',
-      //       order: null
-      //     },
-      //     size: {
-      //       width: this.$el.find('.graph').width()
-      //     },
-      //     bar: {
-      //       width: {
-      //         ratio: 0.75 // this makes bar width 50% of length between ticks
-      //       }
-      //     },
-      //     axis: {
-      //       x: {
-      //         type: 'category',
-      //         categories: _.pluck(emissions_by_source, 'name'),
-      //         tick: {
-      //           rotate: chartDiv === 'chart-print' && 45
-      //         }
-      //       },
-      //       y: {
-      //         label: {
-      //           text: 't of CO₂e',
-      //           position: 'outer-middle'
-      //         },
-      //         tick: {
-      //           format: function (v, id, i, j) {
-      //             if (v > 1000 || v < -1000) {
-      //               return d3.format('.3s')(v);
-      //             } else {
-      //               return d3.round(v, 2);
-      //             }
-      //           }
-      //         }
-      //       }
-      //     },
-      //     grid: {
-      //       y: {
-      //         lines: [
-      //           {value: 0}
-      //         ]
-      //       }
-      //     }
-      //   }
-      // });
     },
 
     renderGraph: function() {
+      var config = this.widgetConf.config;
+      var data = this.widgetConf.data;
 
+      // Let's get the correct data to render
+      // { 'name_to_render': [1,5,7,9] }
+      //
+      var json = this.parseData();
+
+      this.chart1 = new App.View.Chart({
+        el: '#graph-box',
+        options: {
+          data: {
+            json: json,
+            labels: {
+              format: function (v) {
+                if (v > 1000 || v < -1000) {
+                  return d3.format('.3s')(v);
+                } else {
+                  return d3.round(v, 2);
+                }
+              }
+            },
+            type: 'bar'
+          },
+          size: {
+            width: this.$el.width()
+          },
+          bar: {
+            width: {
+              ratio: 0.75 // this makes bar width 50% of length between ticks
+            }
+          },
+          legend: {
+            show: false
+          },
+          axis: {
+            x: {
+              type: 'category',
+              categories: _.pluck(data, 'year')
+            },
+            y: {
+              label: {
+                text: config.yaxis.name,
+                position: 'outer-middle'
+              },
+              tick: {
+                format: function (v) {
+                  if (v > 1000 || v < -1000) {
+                    return d3.format('.3s')(v);
+                  } else {
+                    return d3.round(v, 2);
+                  }
+                }
+              }
+            }
+          }
+        }
+      });
     },
 
     updateGraph: function(widgetConf) {
       this.widgetConf = widgetConf;
       this.render();
+    },
+
+    parseData: function() {
+      var config = this.widgetConf.config;
+      var data = this.widgetConf.data;
+      var json = {};
+
+      // We should now the columns to iterate them,
+      // I mean to know which value should we get
+      var data1 = _.pluck(data, 'valuey1');
+
+      json[config.yaxis.name] = data1;
+
+      return json;
     }
   });
 

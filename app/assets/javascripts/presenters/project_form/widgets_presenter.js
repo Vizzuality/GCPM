@@ -6,17 +6,20 @@
 
   var WidgetModel = Backbone.Model.extend({
     setUrl: function(iso, sql) {
+      var sql = 'SELECT year, prevalence_of_smoking_any_tobacco_product_male as valuey1 FROM prevalence_tobacco_male WHERE iso = \'{{COUNTRY_ISO}}\' ORDER BY year ASC';
+
       _.templateSettings = {
         interpolate: /\{\{(.+?)\}\}/g
       };
 
       var urlTemplate = _.template(sql);
       var sql_parsed = urlTemplate({COUNTRY_ISO: iso });
+
       this.url = 'https://' + gon.carto_account + '.carto.com/api/v2/sql/?q=' + sql_parsed + '&api_key=' + gon.carto_key;
     },
 
     parse: function(response) {
-      var data = response.rows[0] || {};
+      var data = response.rows || [];
       return {
         data: data
       };
@@ -36,25 +39,10 @@
       name: 'widgets[]',
       label: 'Widgets',
       placeholder: 'All widgets',
-      blank: null,
+      blank: true,
       addNew: false,
       select2Options: {
-        // closeOnSelect: false
-        // It solves the closing of the dropdown menu
-        // It adds a lot of UX issues
-        // - Scroll: On select, scroll will go to first highlighted choice => How to resolve the scroll issue https://github.com/select2/select2/issues/1672#issuecomment-240411031
-        // - Click: On each click dropdown will appear and dissapear
-
-        // Use this if you want a single select
-        allowClear: true,
-        templateSelection: function (data) {
-          // Return the placeholder
-          if (!data.id) {
-            return data.text;
-          }
-          // Return the selected option
-          return $('<span class="select2-selection__choice">' + data.text + '<span class="select2-selection__clear">×</span></span>');
-        }
+        allowClear: false
       }
     },
 
@@ -94,9 +82,12 @@
       }, this);
 
       this.state.on('change:widget', this.changeWidget.bind(this));
+      this.state.on('change:data', this.changeData, this);
     },
 
     setSubscriptions: function(){
+      App.on('TabNav:change', this.setState, this);
+      App.on('Remote:load', this.remoteLoad, this);
     },
 
     changeWidget: function() {
@@ -116,6 +107,8 @@
             value: widget.attributes.slug
           };
         });
+
+        this.select.setElement('#widgets-select');
         this.select.setOptions(options);
         this.select.render();
       }.bind(this));
@@ -135,15 +128,13 @@
           .clear({ silent: true })
           .fetch().done(function() {
             this.widgetModel.set('config', widgetConf.toJSON());
+
+            this.graph.setElement('#widgets-graph');
             this.graph.updateGraph(this.widgetModel.toJSON());
           }.bind(this));
       } else {
-        console.log('Widget is null');
+        console.info('Widget is null');
       }
-    },
-
-    render: function() {
-      this.select.render();
     },
 
     /**
@@ -151,7 +142,8 @@
      * @param {Object} state
      */
     setState: function(state, options) {
-      this.state.set(state, options);
+      this.state
+        .set(state, options);
     },
 
     setValue: function(values){
@@ -166,12 +158,10 @@
       this.select.setElement(el);
     },
 
-    /**
-     * Exposing DOM element
-     * @return {DOM}
-     */
-    getElement: function() {
-      return this.select.$el;
+    remoteLoad: function() {
+      if (this.state.get('data') === 'data') {
+        this.fetchWidgets();
+      }
     }
 
   });
