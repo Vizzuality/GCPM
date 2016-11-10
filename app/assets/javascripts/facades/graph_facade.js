@@ -11,17 +11,27 @@
 
       this.svg = d3.select(el)
         .classed("svg-container", true)
-          .append("svg:svg")
+        .append("svg:svg")
           .attr("preserveAspectRatio", "xMinYMin meet")
-          .attr("viewBox", "0 0 " + this.width + " 500")
-          //class to make it responsive
-          .classed("svg-content-responsive", true)
-          .append("svg:g")
+          //Class to make it responsive
+          .classed("svg-content-responsive", true);
+
+      this.g = this.svg
+        .append("svg:g")
           .attr("transform", "translate(100, 0)");
     },
 
     setStructure: function(utilData) {
-      var layout = d3.layout.tree().size([500, this.maxWidth]);
+      var investigatorsCount = 0;
+      _.each(utilData.children, function(project) {
+        if (project.children) {
+          investigatorsCount = investigatorsCount + project.children.length;
+        }
+      });
+
+      this.height = investigatorsCount * 45;
+
+      var layout = d3.layout.tree().size([this.height, this.maxWidth]);
 
       var diagonal = d3.svg.diagonal()
         // change x and y (for the left to right tree)
@@ -32,13 +42,13 @@
 
       // Create an array with all the links
       var links = layout.links(nodes);
-      var link = this.svg.selectAll("pathlink")
+      var link = this.g.selectAll("pathlink")
         .data(links)
         .enter().append("svg:path")
         .attr("class", "link")
         .attr("d", diagonal);
 
-      this.node = this.svg.selectAll("g.node")
+      this.node = this.g.selectAll("g.node")
         .data(nodes)
         .enter().append("svg:g")
         .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
@@ -51,12 +61,17 @@
             return "investigators";
           }
         });
+
+      this.setNodes();
+
+      // Set graph height depending on the number of investigators
+      this.svg.attr("viewBox", "0 0 " + this.width + " " + this.height );
     },
 
     setNodes: function() {
-      this.nodeProjects = this.svg.selectAll('.projects');
-      this.nodeInvestigators = this.svg.selectAll('.investigators');
-      this.nodeInvestigator = this.svg.selectAll('.investigator');
+      this.nodeProjects = this.g.selectAll('.projects');
+      this.nodeInvestigators = this.g.selectAll('.investigators');
+      this.nodeInvestigator = this.g.selectAll('.investigator');
     },
 
     setShapes: function() {

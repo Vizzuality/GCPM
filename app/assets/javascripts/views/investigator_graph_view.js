@@ -21,7 +21,6 @@
     createSvg: function() {
       this.fc.setSvg(this.el);
       this.fc.setStructure(this.data);
-      this.fc.setNodes();
       this.fc.setShapes();
 
       this.fc.setText(this.fc.setLink(this.fc.nodeProjects, 'projects'));
