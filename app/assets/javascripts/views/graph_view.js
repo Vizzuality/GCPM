@@ -1,3 +1,4 @@
+/* global c3 */
 (function(App) {
 
   'use strict';
