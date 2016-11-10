@@ -6,8 +6,6 @@
 
   var WidgetModel = Backbone.Model.extend({
     setUrl: function(iso, sql) {
-      var sql = 'SELECT year, prevalence_of_smoking_any_tobacco_product_male as valuey1 FROM prevalence_tobacco_male WHERE iso = \'{{COUNTRY_ISO}}\' ORDER BY year ASC';
-
       _.templateSettings = {
         interpolate: /\{\{(.+?)\}\}/g
       };
@@ -42,7 +40,8 @@
       blank: true,
       addNew: false,
       select2Options: {
-        allowClear: false
+        allowClear: false,
+        minimumResultsForSearch: -1
       }
     },
 
