@@ -11,7 +11,7 @@
 
     defaults: {
       color: {
-        pattern: ['#68299b', '#5aade4', '#f57823']
+        pattern: ['#68299b', '#5aade4', '#f57823', '#ef3434', '#34ef4e', '#3a34ef']
       }
     },
 
