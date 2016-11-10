@@ -1,0 +1,53 @@
+
+.c-graph-investigator {
+  svg {
+    font: 10px sans-serif;
+
+    .link {
+      fill: none;
+      stroke: $secondary-color;
+      stroke-width: 1px;
+    }
+
+    circle {
+      fill: white;
+      stroke: $secondary-color;
+
+      &.dot {
+        stroke-width: 2
+      }
+    }
+
+    rect {
+      fill: $secondary-color;
+      stroke: $secondary-color;
+    }
+
+    .data-link {
+      &:hover {
+        fill: $secondary-color;
+      }
+    }
+
+    .investigator {
+      fill: $secondary-color;
+
+      circle {
+        fill: rgba(183, 95, 255, 0.80);
+
+        &.dot { opacity: 1; }
+      }
+    }
+
+    .projects {
+      text {
+        fill: $inverse-font-color;
+      }
+
+      & .data-link:hover {
+        opacity: .6;
+      }
+    }
+
+  }
+}
