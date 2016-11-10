@@ -3,12 +3,12 @@
     <h3><a href="/projects/{{project}}">{{title}}</a></h3>
     {{#if investigator}}
       <div class="investigator">
-        <a href="/investigators/{{investigator}}">{{investigator_name}}</a>
+        <a href="/investigators/{{#if investigator_slug}}{{investigator_slug}}{{else}}{{investigator}}{{/if}}">{{investigator_name}}</a>
         <span class="c-tag">{{#if is_project_lead}}Project lead{{else}}Collaborator{{/if}}</span>
       </div>
       <div class="organization">
         {{#if organization}}
-          <a href="/organizations/{{organization}}">{{organization_name}}</a>
+          <a href="/organizations/{{#if organization_slug}}{{organization_slug}}{{else}}{{organization}}{{/if}}">{{organization_name}}</a>
         {{/if}}
         {{#if location_city}}
           <p>{{location_city}}, {{location_country_name}}</p>
@@ -25,11 +25,11 @@
     {{/if}}
   {{/if}}
   {{#if resource_id}}
-    <h3><a href="/investigators/{{resource_id}}">{{resource_name}}</a></h3>
+    <h3><a href="/investigators/{{#if resource_slug}}{{resource_slug}}{{else}}{{resource_id}}{{/if}}">{{resource_name}}</a></h3>
     {{#if organization}}
       <div class="organization">
         {{#if organization}}
-          <a href="/organizations/{{organization}}">{{organization_name}}</a>
+          <a href="/organizations/{{#if organization_slug}}{{organization_slug}}{{else}}{{organization}}{{/if}}">{{organization_name}}</a>
         {{/if}}
         {{#if location_city}}
           <p>{{location_city}}, {{location_country_name}}</p>
