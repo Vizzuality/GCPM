@@ -37,8 +37,14 @@
       var data = this.widgetConf.data;
 
       // Let's get the correct data to render
-      // { 'name_to_render': [1,5,7,9] }
-      //
+      // json = { 'name_to_render': [1,5,7,9] }
+      /**
+       * Let's get the correct data to render
+       * json = {
+       *   'name_to_render': [1,5,7,9],
+       *   'name_to_render_2': [1,6,7,5],
+       * }
+       */
       var json = this.parseData();
 
       this.chart1 = new App.View.Chart({
@@ -70,6 +76,11 @@
           },
           axis: {
             x: {
+              // I think that it's unnecessary to show the Years label
+              // label: {
+              //   text: config.xaxis.name,
+              //   position: 'outer-center'
+              // },
               type: 'category',
               categories: _.pluck(data, 'year')
             },

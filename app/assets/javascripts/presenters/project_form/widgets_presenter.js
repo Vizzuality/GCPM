@@ -37,7 +37,7 @@
     defaults: {
       multiple: false,
       name: 'widgets[]',
-      label: 'Widgets',
+      label: 'Select a graph',
       placeholder: 'All widgets',
       blank: true,
       addNew: false,
@@ -111,6 +111,9 @@
         this.select.setElement('#widgets-select');
         this.select.setOptions(options);
         this.select.render();
+        // Initiate the first graph
+        this.select.setValue(this.widgets.at(0).get('slug'));
+
       }.bind(this));
     },
 
