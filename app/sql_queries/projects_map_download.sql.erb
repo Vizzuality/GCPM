@@ -24,7 +24,10 @@ from projects
   inner join project_types on project_types_projects.project_type_id = project_types.id
   inner join cancer_types_projects on cancer_types_projects.project_id = projects.id
   inner join cancer_types on cancer_types_projects.cancer_type_id = cancer_types.id
-
+  <% if @params[:specialities] %>
+      inner join projects_pecialities on projects_pecialities.project_id = projects.id
+      inner join specialities on projects_specialities.speciality_id = specialities.id
+  <% end %>
 where projects.status = 1
   <% if @params[:countries] %>
     and countries.country_iso_3 in <%= @params[:countries].to_s.gsub('[', '(').gsub(']',')').gsub('"',"'") %>
@@ -44,6 +47,9 @@ where projects.status = 1
   <% if @params[:cancer_types] %>
     and cancer_types.id in <%= "#{'(' + @params[:cancer_types].join(',') + ')'}" %>
   <% end %>
+  <% if @params[:specialities] %>
+      and specialities.id in <%= "#{'(' + @params[:cancer_types].join(',') + ')'}" %>
+    <% end %>
   <% if @params[:regions] %>
     and countries.region_iso in <%= @params[:regions].to_s.gsub('[', '(').gsub(']',')').gsub('"',"'") %>
   <% end %>
