@@ -1,3 +1,8 @@
 .c-data {
   padding: 60px 0;
+
+
+  &.-border {
+    border-top: 1px solid $border-color-1;
+  }
 }
