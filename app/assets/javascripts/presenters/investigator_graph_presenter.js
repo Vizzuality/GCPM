@@ -13,22 +13,22 @@
     initialize: function(params) {
       this.state = new StateModel();
 
-      // this.investigatorGraph = new App.View.InvestigatorGraph({
-      //   el: '#graph'
-      // });
-
       this.setState(params);
       this.getGraphData();
     },
 
+    setSubscriptions: function() {
+      App.on('Remote:load', function(params) {
+        if (params.data === 'data') {
+          this.investigatorGraph.setElement('#graph');
+          this.investigatorGraph.render();
+        }
+      }.bind(this));
+    },
 
     setState: function(newState) {
       this.state
         .set(newState, { silent: true });
-    },
-
-    getState: function() {
-      return this.state.attributes;
     },
 
     getGraphData: function() {
@@ -42,7 +42,12 @@
     },
 
     dataSuccess: function(data) {
-      this.createSvg(data);
+      this.investigatorGraph = new App.View.InvestigatorGraph({
+        el: '#graph',
+        data: this.setData(data)
+      });
+
+      this.setSubscriptions();
     },
 
     dataError: function() {
@@ -61,27 +66,6 @@
         children: renamedData,
         projects: renamedData
       };
-    },
-
-    createSvg: function(data) {
-      var utilData = this.setData(data);
-
-      this.fc = App.facade.GraphFacade;
-
-      d3.select("svg")
-      .remove();
-
-      this.fc.setSvg();
-      this.fc.setStructure(utilData);
-      this.fc.setNodes();
-      this.fc.setShapes();
-
-      this.fc.setText(this.fc.setLink(this.fc.nodeProjects, 'projects'));
-      this.fc.setText(this.fc.setLink(this.fc.nodeInvestigators, 'investigators'));
-      this.fc.setText(this.fc.nodeInvestigator);
-
-      this.fc.setTitle();
-
     }
 
   });

@@ -4,16 +4,24 @@
 
   var graphFacade = {
 
-    setSvg: function() {
-      this.svg = d3.select("#graph").append("svg:svg")
-        .attr("width", '100%')
-        .attr("height", 600)
-        .append("svg:g")
-        .attr("transform", "translate(100, 0)");
+    setSvg: function(el) {
+      this.width = $(el).width();
+      this.rest = this.width * .5;
+      this.maxWidth = this.width - this.rest;
+
+      this.svg = d3.select(el)
+        .classed("svg-container", true)
+          .append("svg:svg")
+          .attr("preserveAspectRatio", "xMinYMin meet")
+          .attr("viewBox", "0 0 " + this.width + " 500")
+          //class to make it responsive
+          .classed("svg-content-responsive", true)
+          .append("svg:g")
+          .attr("transform", "translate(100, 0)");
     },
 
     setStructure: function(utilData) {
-      var layout = d3.layout.tree().size([500, 600]);
+      var layout = d3.layout.tree().size([500, this.maxWidth]);
 
       var diagonal = d3.svg.diagonal()
         // change x and y (for the left to right tree)
@@ -21,6 +29,7 @@
 
       // Preparing the data for the tree layout, convert data into an array of nodes
       var nodes = layout.nodes(utilData);
+
       // Create an array with all the links
       var links = layout.links(nodes);
       var link = this.svg.selectAll("pathlink")
