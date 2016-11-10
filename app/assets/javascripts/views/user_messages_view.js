@@ -14,14 +14,11 @@
     toggleConversation: function(e) {
       var conversation = $(e.target).closest('.c-conversation');
 
-      if (conversation.hasClass('-unread')) {
-        conversation.removeClass('-unread');
-      }
+      this.trigger('click', { conversation: conversation[0] });
+    },
 
-      this.trigger('click', {
-        conversation: conversation[0],
-        converId: conversation.data().converId
-      });
+    removeUnreadClass: function(conversation) {
+      conversation.removeClass('-unread');
     }
 
   });

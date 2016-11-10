@@ -8,6 +8,9 @@ INNER JOIN countries ON countries.id = addresses.country_id
  <% if @params[:organizations] || @params[:organization_types] %>
   inner join organizations on addresses.organization_id = organizations.id
 <% end %>
+<% if @params[:funding_sources] %>
+  inner join funders on funders.project_id = projects.id
+<% end %>
 <% if @params[:organization_types] %>
   inner join organization_types on organization_types.id = organizations.organization_type_id
 <% end %>
@@ -19,6 +22,10 @@ INNER JOIN countries ON countries.id = addresses.country_id
   inner join cancer_types_projects on cancer_types_projects.project_id = projects.id
   inner join cancer_types on cancer_types_projects.cancer_type_id = cancer_types.id
 <% end %>
+<% if @params[:specialities] %>
+  inner join projects_pecialities on projects_pecialities.project_id = projects.id
+  inner join specialities on projects_specialities.speciality_id = specialities.id
+<% end %>
 <% if @params[:user] %>
   inner join project_users on projects.id = project_users.project_id
 <% end %>
@@ -29,6 +36,9 @@ WHERE memberships.membership_type = <%= @params[:membership_type].to_i %>
 <% if @params[:organizations] %>
   and organizations.id in <%= "#{'(' + @params[:organizations].join(',') + ')'}" %>
 <% end %>
+<% if @params[:funding_sources] %>
+  and funders.organization_id in <%= "#{'(' + @params[:funding_sources].join(',') + ')'}" %>
+<% end %>
 <% if @params[:organization_types] %>
   and organization_types.id in <%= "#{'(' + @params[:organization_types].join(',') + ')'}" %>
 <% end %>
@@ -37,6 +47,9 @@ WHERE memberships.membership_type = <%= @params[:membership_type].to_i %>
 <% end %>
 <% if @params[:cancer_types] %>
   and cancer_types.id in <%= "#{'(' + @params[:cancer_types].join(',') + ')'}" %>
+<% end %>
+<% if @params[:specialities] %>
+  and specialities.id in <%= "#{'(' + @params[:cancer_types].join(',') + ')'}" %>
 <% end %>
 <% if @params[:regions] %>
   and countries.region_iso in <%= @params[:regions].to_s.gsub('[', '(').gsub(']',')').gsub('"',"'") %>
