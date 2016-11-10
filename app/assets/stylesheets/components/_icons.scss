@@ -18,6 +18,11 @@
     height: 20px;
   }
 
+  &.-big {
+    width: 24px;
+    height: 24px;
+  }
+
   &.-primary { fill: $dark-sky-blue; }
 
   &.-inverse { fill: $body-bg-color; }
