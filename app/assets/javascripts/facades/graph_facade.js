@@ -1,3 +1,5 @@
+/* global d3 */
+
 (function(App) {
 
   'use strict';
