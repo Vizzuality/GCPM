@@ -122,6 +122,8 @@
     <%= render 'users/network' %>
   <% elsif @current_type === 'events' %>
     <%= render 'events/list', items: @items, more: @more %>
+  <% elsif @current_type === 'data' %>
+    <%= render 'data/list' %>
   <% else %>
     <%= render 'projects/list', items: @items, more: @more %>
   <% end %>

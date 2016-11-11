@@ -1,0 +1,35 @@
+<%= form_for @contact_form, url: send_contact_form_path do |f| %>
+  <% if @contact_form.errors.full_messages.any? %>
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+            <%= @contact_form.errors.full_messages.map { |msg| content_tag(:p, msg) }.join.html_safe %>
+        </div>
+      <% end %>
+      <% if current_user %>
+      <%= f.hidden_field :name, value: current_user.name if current_user.name %>
+      <%= f.hidden_field :email, value: current_user.email %>
+      <% else %>
+      <div class="form-group">
+        <%= f.label :name, "Your name" %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :email, "Your email" %>
+        <%= f.text_field :email, class: 'form-control' %>
+      </div>
+  <% end %>
+  <div class="form-group hiddeable">
+    <%= f.label :nickname, "Tu nickname" %>
+    <%= f.text_field :nickname, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :subject, "Subject" %>
+    <%= f.text_field :subject, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :message, "Message" %>
+    <%= f.text_area :message, class: 'form-control', rows: 5 %>
+  </div>
+  <%= f.submit 'Send', class: 'btn btn-primary', data: {disable_with: "Sending..."} %>
+  <%= link_to 'Back', :back, class: 'btn btn-default' %>
+<% end %>
