@@ -7,5 +7,10 @@ class HomeController < ApplicationController
     @projects_total = Project.all.count()
     @events_total = Event.all.count()
     @people_total = Investigator.all.count()
+
+    if notice
+      gon.notice = notice
+    end
+
   end
 end
