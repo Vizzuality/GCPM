@@ -10,12 +10,15 @@
     },
 
     show: function(params) {
-      new App.Presenter.TabNav(params);
-      new App.Presenter.FollowButton(params);
-      new App.Presenter.ShowMore(params);
+      var newParams = _.extend({}, { data: 'data' }, params);
+
+      new App.Presenter.TabNav(newParams);
+      new App.Presenter.FollowButton(newParams);
+      new App.Presenter.ShowMore(newParams);
       new App.Presenter.Notice();
-      new App.Presenter.MapVis(params);
-      new App.Presenter.InvestigatorActions(params);
+      new App.Presenter.MapVis(newParams);
+      new App.Presenter.InvestigatorActions(newParams);
+      new App.Presenter.InvestigatorData(newParams);
     }
 
   });
