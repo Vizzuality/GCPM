@@ -39,7 +39,7 @@
       this.$el.html(this.template({
         current: 'Current investigator',
         rects: 'Project',
-        others: 'Investigators / Colaborators'
+        others: 'Investigator / Colaborator'
       }));
     }
 

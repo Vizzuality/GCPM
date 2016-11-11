@@ -60,6 +60,10 @@ Rails.application.routes.draw do
   get "/network/:user_id/messages/:id", to: 'messages#show', as: :message_show
   delete "/messages/:id", to: 'messages#destroy', as: :delete_message
 
+  # Contact form
+  get 'contact', to: 'contact_forms#new', as: :new_contact_form
+  post 'send-message', to: 'contact_forms#create', as: :send_contact_form
+
   # API
   namespace :api, defaults: { format: 'json' } do
     scope module: :v1 do
