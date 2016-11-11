@@ -1,6 +1,14 @@
 (function() {
-
-  <% template = @current_type == 'people' ? "investigators/list" : "#{@current_type}/list" %>
+  <%
+    case @current_type
+      when 'people'
+        template = "investigators/list"
+      when 'data'
+        template = "data/countries"
+      else
+        template = "#{@current_type}/list"
+    end
+  %>
 
   var $content = $('#content');
   var htmlContent = "<%= escape_javascript render(partial: template, locals: { items: @items, more: @more }) %>";

@@ -49,7 +49,7 @@
       this.country = new CountryModel();
 
       this.countryData = new App.View.CountryData({
-        el: '#entityData'
+        el: '#countryData'
       })
 
       this.setEvents();
@@ -84,7 +84,7 @@
           .done(function(){
             var country = this.country.toJSON();
 
-            this.countryData.setElement('#entityData');
+            this.countryData.setElement('#countryData');
             this.countryData.setOptions(country);
             this.countryData.render();
           }.bind(this));
