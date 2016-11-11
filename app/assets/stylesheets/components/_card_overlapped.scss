@@ -1,0 +1,37 @@
+
+.c-card-overlapped {
+  position: relative;
+  width: 100%;
+  top: -$box-space;
+
+  .overlapped-content {
+    padding: $box-space;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+
+    h2 {
+      margin-bottom: $box-space;
+    }
+
+    .column {
+      margin-bottom: $box-space;
+    }
+
+    .form-group {
+      margin-right: 5%;
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: center;
+
+      .c-btn {
+        margin-right: $inline-space;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
