@@ -15,7 +15,7 @@
 #
 
 class ProjectSerializer < ActiveModel::Serializer
-  attributes :id, :slug, :title, :title, :summary, :project_website, :start_date, :end_date, :status
+  attributes :id, :slug, :title, :summary, :project_website, :start_date, :end_date, :status
 
   has_many :funding_sources
   has_many :cancer_types

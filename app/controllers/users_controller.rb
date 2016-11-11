@@ -11,6 +11,7 @@ class UsersController < ApplicationController
 
     gon.server_params = { 'user': @investigator.size.positive? ? @investigator.first.id : '0' }
     gon.userId = current_user.id
+    gon.unreadCount = current_user.unread_inbox_count
 
     limit = 12 + (@page * 9)
 
@@ -66,7 +67,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :email, :position, :twitter_account, :linkedin_account, :pubmed)
+    params.require(:user).permit(:name, :email, :position, :twitter_account, :linkedin_account, :pubmed, :avatar)
   end
 
   def check_user

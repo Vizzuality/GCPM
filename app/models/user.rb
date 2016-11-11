@@ -29,6 +29,7 @@
 #  authentication_token   :string
 #  token_expires_at       :datetime
 #  role                   :integer          default("user"), not null
+#  avatar                 :string
 #
 
 class User < ApplicationRecord
@@ -40,6 +41,8 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:linkedin, :google_oauth2]
 
   enum role: { user: 0, admin: 1 }
+
+  mount_uploader :avatar, AvatarUploader
 
   include Roleable
 

@@ -7,8 +7,11 @@ Rails.application.routes.draw do
   get '/countries',             to: 'countries#index',    as: 'countries'
   get '/countries/:iso',        to: 'countries#show',     as: 'country'
   get '/cancer-types',          to: 'cancer_types#index', as: 'cancers'
-  get '/cancer-types/:id',      to: 'cancer_types#show',  as: 'cancer'
-  get '/organizations/:id',     to: 'organizations#show', as: 'organization'
+  get '/cancer-types/:slug',    to: 'cancer_types#show',  as: 'cancer'
+  get '/projects/:slug',        to: 'projects#show',      as: 'project'
+  get '/events/:slug',          to: 'events#show',        as: 'event'
+  get '/organizations/:slug',   to: 'organizations#show', as: 'organization'
+  get '/investigators/:slug',   to: 'investigators#show', as: 'investigator'
   get '/about',                 to: 'about#index',        as: 'about'
   get '/downloads/user-manual', to: 'downloads#show',     as: 'download_user_manual'
   get '/network/:id',           to: 'users#show',         as: 'user'
@@ -75,6 +78,7 @@ Rails.application.routes.draw do
       end
 
       resources :investigators,  only: [:index, :show, :update, :create]
+      get '/investigators/:id/graph', to: 'investigators#graph'
       resources :organizations,  only: [:index, :show]
 
       get 'funding-sources',     to: 'organizations#index'

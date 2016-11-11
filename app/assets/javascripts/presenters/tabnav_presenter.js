@@ -61,8 +61,8 @@
       this.tabnav.updateUrl(newUrl);
     },
 
-    setBadges: function() {
-      this.tabnav.setMessagesBadge();
+    setBadges: function(data) {
+      this.tabnav.setMessagesBadge(data);
     }
 
   });

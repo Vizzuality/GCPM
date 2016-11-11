@@ -24,7 +24,18 @@ module Sluggable
 
       def check_slug
         self_name = self.try(:name) || self.try(:title)
-        self.slug = self_name.downcase.parameterize if self_name.present? && self.slug.blank?
+        if self_name.present? && self.slug.blank?
+          find_slug               = 'LOWER(slug) LIKE LOWER(?)'
+          check_slug_duplications = self.class.name.safe_constantize
+                                                   .where(find_slug, "#{self_name.downcase.parameterize}%")
+                                                   .where.not(id: self.id)
+
+          self.slug = self_name.downcase.parameterize
+          if check_slug_duplications.any?
+            n = check_slug_duplications.size
+            self.slug += "-#{n+1}"
+          end
+        end
       end
 
       def assign_slug
