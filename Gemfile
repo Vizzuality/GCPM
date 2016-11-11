@@ -44,6 +44,7 @@ gem 'gon'
 
 # Email service integration
 gem 'sendgrid-ruby'
+gem 'mail_form'
 
 # Api engine
 gem 'cartomodel', git: 'https://github.com/Vizzuality/cartomodel'
