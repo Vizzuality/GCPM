@@ -13,7 +13,7 @@ class InvestigatorsController < ApplicationController
     @filters = @investigator.user ? %w(data projects posts network) : %w(data projects posts)
     @current_type = params.key?(:data) ? params[:data] : 'data'
 
-    gon.server_params = { 'investigators[]': params[:id], name: @investigator.name }
+    gon.server_params = { 'investigators[]': @investigator.id, name: @investigator.name }
 
     if notice
       gon.notice = notice
@@ -80,7 +80,7 @@ class InvestigatorsController < ApplicationController
   private
 
     def set_investigator
-      @investigator = Investigator.set_by_id_or_slug(params[:id])
+      @investigator = Investigator.set_by_id_or_slug(params[:slug])
     end
 
     def set_user

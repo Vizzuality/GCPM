@@ -42,7 +42,8 @@
 
       // Create an array with all the links
       var links = layout.links(nodes);
-      var link = this.g.selectAll("pathlink")
+
+      this.g.selectAll("pathlink")
         .data(links)
         .enter().append("svg:path")
         .attr("class", "link")

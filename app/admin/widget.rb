@@ -15,7 +15,7 @@ ActiveAdmin.register Widget do
       f.input :legend
       f.input :source
       f.input :query
-      f.input :graphic_type, as: :select, collection: ['line', 'map', 'pie']
+      f.input :graphic_type, as: :select, collection: ['line', 'map', 'pie', 'bar']
     end
     f.actions
   end
