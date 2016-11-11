@@ -24,8 +24,8 @@
   }
 
   &.-primary { fill: $dark-sky-blue; }
-
   &.-inverse { fill: $body-bg-color; }
+  &.-inverse-stroke { stroke: rgba($body-bg-color, .5); }
 
   &.-hv-opac {
     &:hover {
