@@ -21,13 +21,19 @@
     createSvg: function() {
       this.fc.setSvg(this.el);
       this.fc.setStructure(this.data);
-      this.fc.setShapes();
+      this.fc.addShapes();
 
-      this.fc.setText(this.fc.setLink(this.fc.nodeProjects, 'projects'));
-      this.fc.setText(this.fc.setLink(this.fc.nodeInvestigators, 'investigators'));
-      this.fc.setText(this.fc.nodeInvestigator);
+      this.fc.addText(this.fc.addLink(this.fc.nodeProjects, 'projects'));
+      this.fc.addText(this.fc.addLink(this.fc.nodeInvestigators, 'investigators'));
+      this.fc.addText(this.fc.nodeInvestigator);
 
-      this.fc.setTitle();
+      this.fc.addTitle();
+
+      this.fc.addLegend({
+        current: 'Current investigator',
+        rect: 'Project',
+        others: 'Investigator/Colaborator'
+      });
     }
 
   });

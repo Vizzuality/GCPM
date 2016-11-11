@@ -54,11 +54,11 @@
         .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
         .attr("class", function(d) {
           if (d.projects) {
-            return "investigator";
+            return "current";
           } else if (d.investigators) {
-            return "projects";
+            return "rects";
           } else {
-            return "investigators";
+            return "others";
           }
         });
 
@@ -69,18 +69,18 @@
     },
 
     setNodes: function() {
-      this.nodeProjects = this.g.selectAll('.projects');
-      this.nodeInvestigators = this.g.selectAll('.investigators');
-      this.nodeInvestigator = this.g.selectAll('.investigator');
+      this.nodeProjects = this.g.selectAll('.rects');
+      this.nodeInvestigators = this.g.selectAll('.others');
+      this.nodeInvestigator = this.g.selectAll('.current');
     },
 
-    setShapes: function() {
-      this.insertRect(this.nodeProjects);
-      this.insertDots(this.nodeInvestigators);
-      this.insertDots(this.nodeInvestigator);
+    addShapes: function() {
+      this.addRect(this.nodeProjects);
+      this.addDots(this.nodeInvestigators);
+      this.addDots(this.nodeInvestigator);
     },
 
-    insertDots: function(nodes) {
+    addDots: function(nodes) {
       nodes.append("svg:circle")
         .attr("r", 8);
 
@@ -89,7 +89,7 @@
         .attr("class", "dot");
     },
 
-    insertRect: function(nodes) {
+    addRect: function(nodes) {
       nodes.append("svg:rect")
         .attr("width", 100)
         .attr("height", 20)
@@ -97,7 +97,7 @@
         .attr("y", -10);
     },
 
-    setLink: function(node, name) {
+    addLink: function(node, name) {
       return node.append("svg:a")
         .attr("xlink:href", function(d){
           return '/' + name + '/' + d.slug;
@@ -105,7 +105,7 @@
         .attr("class", "data-link")
     },
 
-    setText: function(nodes) {
+    addText: function(nodes) {
       nodes.append("svg:text")
         .attr("x", function(d) {
           if (d.projects) {
@@ -138,7 +138,7 @@
 
     },
 
-    setTitle: function() {
+    addTitle: function() {
       this.node.append("svg:title").text(function(d) {
         if (d.title) {
           return d.title;
@@ -146,6 +146,64 @@
           return d.name;
         }
       });
+    },
+
+    addLegend: function(text) {
+      this.legend = this.g.append("svg:g")
+         .attr("transform", "translate(-80, 100)");
+
+      this.addLegendCurrent(text.current);
+      this.addLegendRect(text.rect);
+      this.addLegendOthers(text.others);
+    },
+
+    addLegendCurrent: function(text) {
+      this.current = this.legend.append("svg:g")
+        .attr("y", 5)
+        .attr("class", "current");
+
+      this.current.append("svg:circle")
+          .attr("r", 8);
+
+      this.current.append("svg:circle")
+        .attr("r", .5)
+        .attr("class", "dot");
+
+      this.current.append("svg:text")
+        .attr("x", 16)
+        .attr("y", 4)
+        .text(text);
+    },
+
+    addLegendRect: function(text) {
+      this.rect = this.legend.append("svg:g")
+        .attr("transform", "translate(-8, 22)");
+
+      this.rect.append("svg:rect")
+          .attr("width", 16)
+          .attr("height", 16);
+
+      this.rect.append("svg:text")
+        .attr("x", 25)
+        .attr("y", 12)
+        .text(text);
+    },
+
+    addLegendOthers: function(text) {
+      this.others = this.legend.append("svg:g")
+        .attr("transform", "translate(0, 60)");
+
+      this.others.append("svg:circle")
+          .attr("r", 8);
+
+      this.others.append("svg:circle")
+        .attr("r", .5)
+        .attr("class", "dot");
+
+      this.others.append("svg:text")
+        .attr("x", 16)
+        .attr("y", 4)
+        .text(text);
     }
 
   };
