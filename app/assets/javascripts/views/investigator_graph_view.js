@@ -6,6 +6,8 @@
 
   App.View.InvestigatorGraph = Backbone.View.extend({
 
+    template: HandlebarsTemplates['graph_legend'],
+
     initialize: function(settings) {
       this.data = settings.data;
       this.fc = App.facade.GraphFacade;
@@ -16,11 +18,12 @@
       d3.select("svg")
       .remove();
 
-      this.createSvg();
+      this.addLegend();
+      this.addGraph();
       return this;
     },
 
-    createSvg: function() {
+    addGraph: function() {
       this.fc.setSvg(this.el);
       this.fc.setStructure(this.data);
       this.fc.addShapes();
@@ -30,12 +33,14 @@
       this.fc.addText(this.fc.nodeInvestigator);
 
       this.fc.addTitle();
+    },
 
-      this.fc.addLegend({
+    addLegend: function() {
+      this.$el.html(this.template({
         current: 'Current investigator',
-        rect: 'Project',
-        others: 'Investigator/Colaborator'
-      });
+        rects: 'Project',
+        others: 'Investigators / Colaborators'
+      }));
     }
 
   });

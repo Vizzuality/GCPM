@@ -149,64 +149,6 @@
           return d.name;
         }
       });
-    },
-
-    addLegend: function(text) {
-      this.legend = this.g.append("svg:g")
-         .attr("transform", "translate(-80, 100)");
-
-      this.addLegendCurrent(text.current);
-      this.addLegendRect(text.rect);
-      this.addLegendOthers(text.others);
-    },
-
-    addLegendCurrent: function(text) {
-      this.current = this.legend.append("svg:g")
-        .attr("y", 5)
-        .attr("class", "current");
-
-      this.current.append("svg:circle")
-          .attr("r", 8);
-
-      this.current.append("svg:circle")
-        .attr("r", .5)
-        .attr("class", "dot");
-
-      this.current.append("svg:text")
-        .attr("x", 16)
-        .attr("y", 4)
-        .text(text);
-    },
-
-    addLegendRect: function(text) {
-      this.rect = this.legend.append("svg:g")
-        .attr("transform", "translate(-8, 22)");
-
-      this.rect.append("svg:rect")
-          .attr("width", 16)
-          .attr("height", 16);
-
-      this.rect.append("svg:text")
-        .attr("x", 25)
-        .attr("y", 12)
-        .text(text);
-    },
-
-    addLegendOthers: function(text) {
-      this.others = this.legend.append("svg:g")
-        .attr("transform", "translate(0, 60)");
-
-      this.others.append("svg:circle")
-          .attr("r", 8);
-
-      this.others.append("svg:circle")
-        .attr("r", .5)
-        .attr("class", "dot");
-
-      this.others.append("svg:text")
-        .attr("x", 16)
-        .attr("y", 4)
-        .text(text);
     }
 
   };
