@@ -182,8 +182,10 @@
       padding: ($base-space/2) 0;
 
       .name {
+        display: block;
         font-size: $small-font-size;
         font-weight: $bold-font-weight;
+        line-height: 1.25;
       }
 
       .legend {

@@ -6,6 +6,10 @@
 
     template: HandlebarsTemplates['legend'],
 
+    events: {
+      'click .js-btn-info': 'onClickInfo'
+    },
+
     initialize: function(settings) {
       this.data = (settings && settings.data) ? settings.data : [];
       this.render();
@@ -26,6 +30,10 @@
         }));
         return this;
       }
+    },
+
+    onClickInfo: function() {
+      this.trigger('info', this.layer.info);
     },
 
     // HELPER
