@@ -39,7 +39,7 @@
       ]
     },
 
-    initialize: function(params) {
+    initialize: function() {
       this.state = new StateModel({ value: gon.type });
 
       this.searchTypes = new App.View.Select({
