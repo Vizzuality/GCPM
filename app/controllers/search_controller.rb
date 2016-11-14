@@ -7,7 +7,8 @@ class SearchController < ApplicationController
                         []
                       end
     @search_item = params[:search][:item] if params[:search].present?
-    @search_type = params[:search][:type] if params[:search].present?
-    @sections    = ['All sections', 'Project', 'Investigator', 'Organization', 'CancerType', 'Event']
+    @search_type = params[:search].present? ? params[:search][:type] : 'All sections'
+
+    gon.type = @search_type
   end
 end
