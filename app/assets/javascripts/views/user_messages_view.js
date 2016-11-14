@@ -9,6 +9,7 @@
     },
 
     initialize: function() {
+      debugger;
     },
 
     toggleConversation: function(e) {

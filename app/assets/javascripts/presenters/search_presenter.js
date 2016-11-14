@@ -49,7 +49,7 @@
           multiple: false,
           name: 'search[type]',
           label: null,
-          placeholder: '',
+          placeholder: 'Search by type',
           blank: null,
           addNew: false,
           select2Options: {
