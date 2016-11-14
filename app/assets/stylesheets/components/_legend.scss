@@ -186,6 +186,10 @@
         font-size: $small-font-size;
         font-weight: $bold-font-weight;
         line-height: 1.25;
+
+        & button {
+          margin-left: 8px;
+        }
       }
 
       .legend {

@@ -47,7 +47,11 @@
       }, this);
 
       this.legend.on('info', function(info){
-        this.modal.open(info);
+        var data = info;
+        if (!info || info === '') {
+          data = 'No info available.';
+        }
+        this.modal.open(data);
       }, this);
 
       this.state.on('change', function () {
