@@ -15,6 +15,7 @@
       height: 100%;
       background-color: $secondary-color;
     }
+
   }
 
   &.-main {
@@ -79,5 +80,20 @@
   }
 
   .l-app-bottombar {
+  }
+}
+
+
+.l-app-intro {
+  position: relative;
+  flex: 1;
+  z-index: 0;
+  background-color: $secondary-color;
+  padding-top: $box-space;
+  padding-bottom: $box-space*2;
+
+  h1 {
+    font-size: $large-font-size;
+    color: $inverse-font-color;
   }
 }
