@@ -33,7 +33,9 @@
     },
 
     onClickInfo: function() {
-      this.trigger('info', this.layer.info);
+      // We will probably need to check if there is layer_group info before
+      var info = this.layer.info;
+      this.trigger('info', info);
     },
 
     // HELPER
