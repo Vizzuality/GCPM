@@ -14,7 +14,9 @@
   <div class="form-row row">
     <div class="column small-12 medium-5 medium-offset-1">
       <h4 class="c-title">Profile picture url:</h4>
-      <%= image_tag(@user.avatar_url) if @user.avatar? %>
+      <div class="c-avatar">
+        <%= image_tag(@user.avatar_url) if @user.avatar? %>
+      </div>
       <%= f.file_field :avatar, label: false %>
     </div>
   </div>
