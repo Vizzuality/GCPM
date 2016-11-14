@@ -52,8 +52,9 @@
      * @example
      * [{ name: 'Title', value: 1 }]
      */
-    setValue: function() {
-      $(this.select.selector).val(this.state.get('value')).trigger("change");
+    setValue: function(value) {
+      var val = value || this.state.get('value');
+      $(this.select.selector).val(val).trigger("change");
     },
 
     addNew: function(option){

@@ -123,7 +123,7 @@
   <% elsif @current_type === 'events' %>
     <%= render 'events/list', items: @items, more: @more %>
   <% elsif @current_type === 'data' %>
-    <%= render 'data/list' %>
+    <%= render 'data/investigators' %>
   <% else %>
     <%= render 'projects/list', items: @items, more: @more %>
   <% end %>
