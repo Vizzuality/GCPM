@@ -69,6 +69,7 @@ Rails.application.routes.draw do
     scope module: :v1 do
       resources :regions,            only: [:index, :show]
       resources :cancer_types,       only: [:index, :show], path: '/cancer-types'
+      resources :specialities,       only: [:index], path: '/specialities'
       resources :project_types,      only: [:index],        path: 'project-types'
       resources :organization_types, only: [:index],        path: 'organization-types'
       resources :map,                only: [:index]
