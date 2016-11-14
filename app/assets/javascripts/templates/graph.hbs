@@ -1,5 +1,10 @@
 <div class="graph-header">
-  <h2>{{this.info.name}}</h2>
+  <h2>
+    <button type="button" name="button" class="c-btn -secondary -icon js-btn-info">
+      <svg class="c-icon -small -inverse"><use xlink:href="#icon-info"></use></svg>
+    </button>
+    {{this.info.name}}
+  </h2>
   <!-- <div class="legend">
     <ul>
       <li class="text -graph-legend -current"><span></span> Current practices</li>

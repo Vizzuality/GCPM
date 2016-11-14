@@ -55,7 +55,7 @@
         <ul class="c-list -mg-bottom">
           <% if @followCancerTypes.size > 0 %>
             <% @followCancerTypes.each do |ct| %>
-              <li class="list-item -uppercase"><%= link_to ct.name, cancer_path(id: ct.id), class: '-uppercase' %></li>
+              <li class="list-item -uppercase"><%= link_to ct.name, cancer_path(slug: ct.slug), class: '-uppercase' %></li>
             <% end %>
           <% else %>
             <p>No cancer types</p>

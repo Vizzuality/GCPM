@@ -10,7 +10,7 @@
     },
 
     events: {
-
+      'click .js-btn-info': 'onClickInfo'
     },
 
     template: HandlebarsTemplates['graph'],
@@ -116,6 +116,10 @@
       });
 
       return json;
+    },
+
+    onClickInfo: function(e) {
+      this.trigger('info', this.widgetConf.config.source);
     }
   });
 

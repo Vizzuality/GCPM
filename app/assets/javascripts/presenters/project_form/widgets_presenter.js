@@ -64,6 +64,8 @@
         state: this.state
       });
 
+      this.modal = new App.View.Modal();
+
 
       this.setEvents();
       this.setSubscriptions();
@@ -79,6 +81,10 @@
           widget: newState.value[0]
         });
       }, this);
+
+      this.graph.on('info', function(source){
+        this.modal.open(source);
+      }, this)
 
       this.state.on('change:widget', this.changeWidget.bind(this));
       this.state.on('change:data', this.changeData, this);
