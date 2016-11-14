@@ -1,7 +1,7 @@
 class SearchController < ApplicationController
   def index
     @search_results = if params[:search].present?
-                        type_params = params[:search][:type] unless params[:search][:type].include?('All sections')
+                        type_params = params[:search][:type] unless params[:search][:type] && params[:search][:type].include?('All sections')
                         Search.new(params[:search][:item], type_params).results
                       else
                         []
