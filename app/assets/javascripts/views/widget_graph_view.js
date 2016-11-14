@@ -118,7 +118,7 @@
       return json;
     },
 
-    onClickInfo: function(e) {
+    onClickInfo: function() {
       this.trigger('info', this.widgetConf.config.source);
     }
   });
