@@ -6,7 +6,7 @@
 
   _.extend(App.Controller.Search.prototype, {
 
-    index: function(params) {
+    index: function() {
       new App.Presenter.Search();
     }
 
