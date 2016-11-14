@@ -6,6 +6,10 @@
 
     template: HandlebarsTemplates['legend'],
 
+    events: {
+      'click .js-btn-info': 'onClickInfo'
+    },
+
     initialize: function(settings) {
       this.data = (settings && settings.data) ? settings.data : [];
       this.render();
@@ -26,6 +30,12 @@
         }));
         return this;
       }
+    },
+
+    onClickInfo: function() {
+      // We will probably need to check if there is layer_group info before
+      var info = this.layer.info;
+      this.trigger('info', info);
     },
 
     // HELPER

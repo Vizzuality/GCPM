@@ -156,6 +156,10 @@
     align-items: center;
     padding: 5px;
 
+    &.-tiny {
+      padding: 2px;
+    }
+
     svg {
       display: block;
       margin: auto;

@@ -23,6 +23,8 @@
         data: null
       });
 
+      this.modal = new App.View.Modal();
+
       this.setEvents();
       this.setSubscriptions();
 
@@ -42,6 +44,14 @@
     setEvents: function () {
       this.layersCollection.on('reset sync change', function(){
         this.renderLegends();
+      }, this);
+
+      this.legend.on('info', function(info){
+        var data = info;
+        if (!info || info === '') {
+          data = 'No info available.';
+        }
+        this.modal.open(data);
       }, this);
 
       this.state.on('change', function () {
