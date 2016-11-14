@@ -31,6 +31,10 @@
         label: null,
         addNew: false
       });
+      this.specialities = new App.Presenter.Specialities({
+        label: null,
+        addNew: false
+      });
       this.fundingSources = new App.Presenter.FundingSources({
         label: null,
         addNew: true
@@ -42,7 +46,7 @@
       this.fundingSourcesForm = new App.Presenter.FundingSourcesForm();
 
       this.children = [this.titleInput, this.descTextarea, this.startPickadate,
-         this.endPickadate, this.websiteInput, this.projectTypes, this.cancerTypes,
+         this.endPickadate, this.websiteInput, this.projectTypes, this.cancerTypes, this.specialities,
          this.fundingSources, this.policy, this.messagesList, this.investigatorOrganization];
 
       this.projectForm = new App.View.ProjectForm({
@@ -130,7 +134,8 @@
         end_date: this.state.attributes["end_date"],
         project_website: this.state.attributes["project_website"],
         project_type_ids: this.state.attributes["project_types[]"],
-        cancer_type_ids: this.state.attributes["cancer_types[]"]
+        cancer_type_ids: this.state.attributes["cancer_types[]"],
+        specialities_ids: this.state.attributes["specialities[]"]
       };
       this.buildFundingSources();
       this.buildInvestigators();
@@ -311,6 +316,10 @@
         label: null,
         addNew: false
       });
+      this.specialities = new App.Presenter.Specialities({
+        label: null,
+        addNew: false
+      });
       this.fundingSources = new App.Presenter.FundingSources({
         label: null,
         addNew: true
@@ -379,6 +388,7 @@
       this.websiteInput.setValue(this.project.project_website);
       this.projectTypes.setFetchedValues(this.project.project_types);
       this.cancerTypes.setFetchedValues(this.project.cancer_types);
+      this.specialties.setFetchedValues(this.project.specialties);
       this.fundingSources.setFetchedValues(this.project.funding_sources);
       this.investigatorOrganizationEdit.setValue(this.project.memberships);
     },
@@ -430,7 +440,8 @@
         end_date: this.state.attributes["end_date"],
         project_website: this.state.attributes["project_website"],
         project_type_ids: this.state.attributes["project_types[]"],
-        cancer_type_ids: this.state.attributes["cancer_types[]"]
+        cancer_type_ids: this.state.attributes["cancer_types[]"],
+        specialities_ids: this.state.attributes["specialities[]"]
       };
       this.buildFundingSources();
       this.buildInvestigators();
