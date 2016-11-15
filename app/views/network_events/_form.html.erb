@@ -138,7 +138,7 @@
     <div class="column small-12 medium-5 medium-offset-1">
       <%= f.button :submit, "Submit", class: 'c-btn -primary' %>
       <% if action === 'edit' %>
-          <%= link_to (t 'delete'), user_event_path(current_user.id, @event.id),
+          <%= link_to (t 'delete'), user_event_path(current_user.id, @event.slug_or_id),
             class: 'c-btn -primary -inverse -mg-left',
             method: :delete, data: { confirm: 'Are you sure?' } %>
       <% end %>

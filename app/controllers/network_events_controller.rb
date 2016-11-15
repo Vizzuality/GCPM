@@ -20,7 +20,7 @@ class NetworkEventsController < ApplicationController
 
   def update
     if @event.update(event_params)
-      redirect_to event_path(RoutesHelper.by_slug_or_id(@event)), notice: 'Event succesfully updated.'
+      redirect_to event_path(@event.slug_or_id), notice: 'Event succesfully updated.'
     else
       render :edit, notice: "Event can't be updated."
     end
@@ -29,7 +29,7 @@ class NetworkEventsController < ApplicationController
   def create
     @event = @user.events.build(event_params)
     if @event.save
-      redirect_to event_path(RoutesHelper.by_slug_or_id(@event))
+      redirect_to event_path(@event.slug_or_id)
     else
       render :new, error: true
     end
@@ -54,7 +54,7 @@ class NetworkEventsController < ApplicationController
     end
 
     def set_event
-      @event = Event.find(params[:id])
+      @event = Event.set_by_id_or_slug(params[:id])
     end
 
     def event_params

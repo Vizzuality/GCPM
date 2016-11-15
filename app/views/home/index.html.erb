@@ -7,7 +7,7 @@
       <h1>Join the network</h1>
       <ul class="claim-list">
         <li>
-          <%= link_to (user_signed_in?) ? new_user_project_path(user_id: current_user.id) : user_session_path, class: 'claim-link' do %>
+          <%= link_to (user_signed_in?) ? new_user_project_path(current_user.id) : user_session_path, class: 'claim-link' do %>
             <div class="icon">
               <svg style="width: 30px;" class="c-icon -big -inverse-stroke"><use xlink:href="#icon-upload"></use></svg>
             </div>
@@ -23,7 +23,7 @@
           <% end %>
         </li>
         <li>
-          <%= link_to (user_signed_in?) ? new_user_event_path(user_id: current_user.id) : user_session_path, class: 'claim-link' do %>
+          <%= link_to (user_signed_in?) ? new_user_event_path(current_user.id) : user_session_path, class: 'claim-link' do %>
             <div class="icon">
               <svg class="c-icon -big -inverse-stroke"><use xlink:href="#icon-submit"></use></svg>
             </div>
