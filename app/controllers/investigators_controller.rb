@@ -10,7 +10,7 @@ class InvestigatorsController < ApplicationController
   def show
     authorize! :show, @investigator
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
-    @filters = @investigator.user ? %w(data projects posts network) : %w(data projects posts)
+    @filters = @investigator.user.present? ? %w(data projects posts network) : %w(data projects posts)
     @current_type = params.key?(:data) ? params[:data] : 'data'
 
     gon.server_params = { 'investigators[]': @investigator.id, name: @investigator.name }
@@ -80,7 +80,7 @@ class InvestigatorsController < ApplicationController
   private
 
     def set_investigator
-      @investigator = Investigator.set_by_id_or_slug(params[:slug])
+      @investigator = Investigator.set_by_id_or_slug(params[:id])
     end
 
     def set_user
