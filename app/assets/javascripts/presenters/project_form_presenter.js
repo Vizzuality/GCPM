@@ -118,8 +118,8 @@
         }
         q.send(JSON.stringify(this.request));
       }.bind(this)).then(function(response){
-        var pId = JSON.parse(response).id;
-        window.location.href = "/projects/"+pId;
+        var pSlug = JSON.parse(response).slug;
+        window.location.href = "/projects/"+pSlug;
       }.bind(this)).catch(function(response){
         var messages = JSON.parse(response).message;
         App.trigger("ProjectForm:errors", messages);
@@ -470,8 +470,8 @@
         }
         q.send(JSON.stringify(this.request));
       }.bind(this)).then(function(response){
-        var pId = JSON.parse(response).id;
-        window.location.href = "/projects/"+pId;
+        var pSlug = JSON.parse(response).slug;
+        window.location.href = "/projects/"+pSlug;
       }.bind(this)).catch(function(response){
         var messages = JSON.parse(response).message;
         App.trigger("ProjectForm:errors", messages);
