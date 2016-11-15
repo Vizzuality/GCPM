@@ -4,7 +4,7 @@
       <div class="column small-12 medium-4">
         <div class="c-card -projects">
           <h3 class="-underlined">
-            <a href="/investigators/<%= p.project_leads.first.try(:id) %>">
+            <a href="/investigators/<%= by_slug_or_id(p.project_leads.first) %>">
               <%= p.project_leads.first.try(:name) %>
             </a>
           </h3>
@@ -14,7 +14,7 @@
           <p>
             <% p.cancer_types.each do |t| %>
               <span class="c-tag -mg">
-                <a href="/cancer-types/<%= t.slug %>">
+                <a href="/cancer-types/<%= by_slug_or_id(t) %>">
                   <%= t.name %>
                 </a>
               </span>
@@ -40,7 +40,7 @@
               <% end %>
             </h3>
           <% end %>
-          <h2><%= link_to e.title, event_path(e.id) %></h2>
+          <h2><%= link_to e.title, event_path(by_slug_or_id(e)) %></h2>
           <p><%= truncate(e.description.html_safe, :length => 300) %></p>
         </div>
       </div>
@@ -54,7 +54,7 @@
           <h3 class="-underlined">
             Organization
           </h3>
-          <h2><%= link_to o.name, organization_path(o.id) %></h2>
+          <h2><%= link_to o.name, organization_path(by_slug_or_id(o)) %></h2>
         </div>
       </div>
     <% end %>

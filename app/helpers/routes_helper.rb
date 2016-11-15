@@ -13,7 +13,7 @@ module RoutesHelper
   end
 
   def self.by_slug_or_id(object)
-    object.try(:slug) || object.id
+    object.try(:slug) || object.try(:id)
   end
 
   def by_slug_or_id(object)
