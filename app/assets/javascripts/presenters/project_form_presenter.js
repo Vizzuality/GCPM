@@ -135,7 +135,7 @@
         project_website: this.state.attributes["project_website"],
         project_type_ids: this.state.attributes["project_types[]"],
         cancer_type_ids: this.state.attributes["cancer_types[]"],
-        specialities_ids: this.state.attributes["specialities[]"]
+        speciality_ids: this.state.attributes["specialities[]"]
       };
       this.buildFundingSources();
       this.buildInvestigators();
@@ -441,7 +441,7 @@
         project_website: this.state.attributes["project_website"],
         project_type_ids: this.state.attributes["project_types[]"],
         cancer_type_ids: this.state.attributes["cancer_types[]"],
-        specialities_ids: this.state.attributes["specialities[]"]
+        speciality_ids: this.state.attributes["specialities[]"]
       };
       this.buildFundingSources();
       this.buildInvestigators();
