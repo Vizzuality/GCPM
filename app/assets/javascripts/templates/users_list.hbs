@@ -2,10 +2,12 @@
 <ul class="c-list -row-items">
   {{#each items as |item|}}
     <li class="list-item">
-      <div class="c-avatar -small -ph">
-        <img src="{{item.photo}}">
-      </div>
-      <a href="/network/{{item.id}}">{{item.name}}</a>
+      <a href="/network/{{item.id}}">
+        <div class="c-avatar -small -ph">
+          <img src="{{item.photo}}">
+        </div>
+        <span>{{item.name}}</span>
+      </a>
     </li>
   {{/each}}
 </ul>

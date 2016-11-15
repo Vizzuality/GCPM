@@ -34,18 +34,13 @@
         }
       });
 
-      this.cache();
       this.setSubscriptions();
       this.setEvents();
     },
 
-    cache: function() {
-      this.$searchIcon = $('.icon-search');
-      this.$closeIcon = $('.icon-close');
-      this.$searchList = $('#search-list');
-    },
-
     setEvents: function() {
+      this.$closeIcon = $('.icon-close');
+
       this.$closeIcon.on('click', function() {
         this.searchInput.clear();
       }.bind(this));
@@ -56,6 +51,14 @@
 
       this.state.on('change', function() {
         App.trigger('SearchList:change', this.state.get('filteredUsers'));
+      }.bind(this));
+
+      App.on('Remote:load', function(params) {
+        if (params.data === 'network') {
+          this.searchInput.setElement('#search-input');
+          this.searchInput.clear();
+          this.searchInput.render();
+        }
       }.bind(this));
 
     },
@@ -87,6 +90,10 @@
     },
 
     handleEmpty: function(value) {
+      this.$searchIcon = $('.icon-search');
+      this.$closeIcon = $('.icon-close');
+      this.$searchList = $('#search-list');
+
       this.$searchIcon.toggleClass('-hidden', !value);
       this.$closeIcon.toggleClass('-hidden', value);
       this.$searchList.toggleClass('-hidden', value);
