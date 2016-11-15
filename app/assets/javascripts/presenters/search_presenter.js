@@ -35,6 +35,10 @@
         {
           name: 'Event',
           value: 'Event'
+        },
+        {
+          name: 'User',
+          value: 'User'
         }
       ]
     },
@@ -53,6 +57,7 @@
           blank: null,
           addNew: false,
           select2Options: {
+            minimumResultsForSearch: -1
             // closeOnSelect: false
             // It solves the closing of the dropdown menu
             // It adds a lot of UX issues
