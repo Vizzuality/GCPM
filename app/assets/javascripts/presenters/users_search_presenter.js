@@ -17,7 +17,7 @@
       this.searchInput = new App.View.Input({
         el: '#search-input',
         options: {
-          name: 'title',
+          name: 'name',
           class: 'js-search-list',
           inputClass: '-no-bd',
           type: 'text',
@@ -34,14 +34,21 @@
         }
       });
 
-      this.setSubscriptions();
       this.cache();
+      this.setSubscriptions();
+      this.setEvents();
     },
 
     cache: function() {
       this.$searchIcon = $('.icon-search');
       this.$closeIcon = $('.icon-close');
       this.$searchList = $('#search-list');
+    },
+
+    setEvents: function() {
+      this.$closeIcon.on('click', function() {
+        this.searchInput.clear();
+      }.bind(this));
     },
 
     setSubscriptions: function() {
