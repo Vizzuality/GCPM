@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.2
--- Dumped by pg_dump version 9.5.2
+-- Dumped from database version 9.5.4
+-- Dumped by pg_dump version 9.5.4
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -1116,80 +1116,6 @@ CREATE TABLE schema_migrations (
 
 
 --
--- Name: searches; Type: VIEW; Schema: public; Owner: -
---
-
-CREATE VIEW searches AS
- SELECT cancer_types.id AS searchable_id,
-    'CancerType'::text AS searchable_type,
-    cancer_types.name AS term
-   FROM cancer_types
-UNION
- SELECT events.id AS searchable_id,
-    'Event'::text AS searchable_type,
-    events.title AS term
-   FROM events
-UNION
- SELECT investigators.id AS searchable_id,
-    'Investigator'::text AS searchable_type,
-    investigators.name AS term
-   FROM investigators
-UNION
- SELECT projects.id AS searchable_id,
-    'Project'::text AS searchable_type,
-    projects.title AS term
-   FROM projects
-  WHERE (projects.status = 1)
-UNION
- SELECT projects.id AS searchable_id,
-    'Project'::text AS searchable_type,
-    projects.summary AS term
-   FROM projects
-  WHERE (projects.status = 1)
-UNION
- SELECT organizations.id AS searchable_id,
-    'Organization'::text AS searchable_type,
-    organizations.name AS term
-   FROM organizations
-UNION
- SELECT organizations.id AS searchable_id,
-    'Organization'::text AS searchable_type,
-    organizations.acronym AS term
-   FROM organizations;
-
-
---
--- Name: specialities; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE specialities (
-    id integer NOT NULL,
-    name character varying,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: specialities_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE specialities_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: specialities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE specialities_id_seq OWNED BY specialities.id;
-
-
---
 -- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1230,6 +1156,90 @@ CREATE TABLE users (
 --
 
 COMMENT ON COLUMN users.role IS 'User role { user: 0, admin: 1 }';
+
+
+--
+-- Name: searches; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW searches AS
+ SELECT cancer_types.id AS searchable_id,
+    'CancerType'::text AS searchable_type,
+    cancer_types.name AS term
+   FROM cancer_types
+UNION
+ SELECT events.id AS searchable_id,
+    'Event'::text AS searchable_type,
+    events.title AS term
+   FROM events
+UNION
+ SELECT investigators.id AS searchable_id,
+    'Investigator'::text AS searchable_type,
+    investigators.name AS term
+   FROM investigators
+UNION
+ SELECT projects.id AS searchable_id,
+    'Project'::text AS searchable_type,
+    projects.title AS term
+   FROM projects
+  WHERE (projects.status = 1)
+UNION
+ SELECT projects.id AS searchable_id,
+    'Project'::text AS searchable_type,
+    projects.summary AS term
+   FROM projects
+  WHERE (projects.status = 1)
+UNION
+ SELECT organizations.id AS searchable_id,
+    'Organization'::text AS searchable_type,
+    organizations.name AS term
+   FROM organizations
+UNION
+ SELECT organizations.id AS searchable_id,
+    'Organization'::text AS searchable_type,
+    organizations.acronym AS term
+   FROM organizations
+UNION
+ SELECT users.id AS searchable_id,
+    'User'::text AS searchable_type,
+    users.name AS term
+   FROM users
+UNION
+ SELECT users.id AS searchable_id,
+    'User'::text AS searchable_type,
+    users."position" AS term
+   FROM users;
+
+
+--
+-- Name: specialities; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE specialities (
+    id integer NOT NULL,
+    name character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: specialities_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE specialities_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: specialities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE specialities_id_seq OWNED BY specialities.id;
 
 
 --
@@ -2206,6 +2216,20 @@ CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
 
 
 --
+-- Name: index_users_on_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_users_on_name ON users USING gin (to_tsvector('english'::regconfig, (name)::text));
+
+
+--
+-- Name: index_users_on_position; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_users_on_position ON users USING gin (to_tsvector('english'::regconfig, ("position")::text));
+
+
+--
 -- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -2265,6 +2289,6 @@ ALTER TABLE ONLY mailboxer_receipts
 
 SET search_path TO "$user", public;
 
-INSERT INTO schema_migrations (version) VALUES ('20160623091908'), ('20160623092157'), ('20160623093250'), ('20160629161033'), ('20160629161041'), ('20160707072908'), ('20160707073642'), ('20160708083044'), ('20160711105858'), ('20160711114901'), ('20160718224524'), ('20160718225032'), ('20160718232806'), ('20160720162924'), ('20160721141137'), ('20160725182233'), ('20160726110350'), ('20160729093255'), ('20160729125019'), ('20160729151912'), ('20160801160550'), ('20160801165924'), ('20160801171206'), ('20160802121917'), ('20160802174327'), ('20160803012223'), ('20160803012429'), ('20160803012636'), ('20160803014813'), ('20160803143833'), ('20160804100620'), ('20160804113911'), ('20161004100702'), ('20161018055907'), ('20161018091446'), ('20161018104312'), ('20161018111559'), ('20161018125246'), ('20161020122456'), ('20161020163951'), ('20161021073852'), ('20161021080737'), ('20161021110751'), ('20161021110752'), ('20161021110753'), ('20161021110754'), ('20161026160423'), ('20161027160501'), ('20161103101432'), ('20161103101657'), ('20161104114309'), ('20161107103717'), ('20161107110201'), ('20161110093643'), ('20161110111725'), ('20161110111836'), ('20161111100700');
+INSERT INTO schema_migrations (version) VALUES ('20160623091908'), ('20160623092157'), ('20160623093250'), ('20160629161033'), ('20160629161041'), ('20160707072908'), ('20160707073642'), ('20160708083044'), ('20160711105858'), ('20160711114901'), ('20160718224524'), ('20160718225032'), ('20160718232806'), ('20160720162924'), ('20160721141137'), ('20160725182233'), ('20160726110350'), ('20160729093255'), ('20160729125019'), ('20160729151912'), ('20160801160550'), ('20160801165924'), ('20160801171206'), ('20160802121917'), ('20160802174327'), ('20160803012223'), ('20160803012429'), ('20160803012636'), ('20160803014813'), ('20160803143833'), ('20160804100620'), ('20160804113911'), ('20161004100702'), ('20161018055907'), ('20161018091446'), ('20161018104312'), ('20161018111559'), ('20161018125246'), ('20161020122456'), ('20161020163951'), ('20161021073852'), ('20161021080737'), ('20161021110751'), ('20161021110752'), ('20161021110753'), ('20161021110754'), ('20161026160423'), ('20161027160501'), ('20161103101432'), ('20161103101657'), ('20161104114309'), ('20161107103717'), ('20161107110201'), ('20161110093643'), ('20161110111725'), ('20161110111836'), ('20161111100700'), ('20161115090954');
 
 

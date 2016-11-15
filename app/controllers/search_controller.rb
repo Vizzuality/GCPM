@@ -8,6 +8,6 @@ class SearchController < ApplicationController
                       end
     @search_item = params[:search][:item] if params[:search].present?
     @search_type = params[:search][:type] if params[:search].present?
-    @sections    = ['All sections', 'Project', 'Investigator', 'Organization', 'CancerType', 'Event']
+    @sections    = ['All sections', 'Project', 'Investigator', 'Organization', 'CancerType', 'Event', 'User']
   end
 end
