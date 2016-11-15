@@ -41,6 +41,7 @@
     cache: function() {
       this.$searchIcon = $('.icon-search');
       this.$closeIcon = $('.icon-close');
+      this.$searchList = $('#search-list');
     },
 
     setSubscriptions: function() {
@@ -81,6 +82,7 @@
     handleEmpty: function(value) {
       this.$searchIcon.toggleClass('-hidden', !value);
       this.$closeIcon.toggleClass('-hidden', value);
+      this.$searchList.toggleClass('-hidden', value);
     }
 
   });
