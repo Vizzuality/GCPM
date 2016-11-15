@@ -11,12 +11,4 @@ module RoutesHelper
       '#'
     end
   end
-
-  def self.by_slug_or_id(object)
-    object.try(:slug) || object.id
-  end
-
-  def by_slug_or_id(object)
-    RoutesHelper.by_slug_or_id(object)
-  end
 end
