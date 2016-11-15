@@ -2,6 +2,10 @@
   padding: 25px 0px;
   border-bottom: 1px solid $border-color-1;
 
+  .column:last-child > & {
+    border: 0;
+  }
+
   a {
     font-size: $medium-font-size;
     color: $primary-color;
