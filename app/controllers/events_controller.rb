@@ -16,6 +16,9 @@ class EventsController < ApplicationController
     @filters = %w(info)
     @current_type = params.key?(:data) ? params[:data] : 'info'
 
+    @participants = @event.participants.split(',').map { |p| { name: p, investigator: Investigator.find_by(name: p.strip) } }
+    @country = Country.find_by(country_name: @event.country)
+
     if current_user
       @followed = current_user.following?(@event)
       @followed_id = @event.id
@@ -70,9 +73,7 @@ class EventsController < ApplicationController
     end
 
     def set_event
-      @event = Event.set_by_id_or_slug(params[:slug])
-      @participants = @event.participants.split(',').map { |p| { name: p, investigator: Investigator.find_by(name: p.strip) } }
-      @country = Country.find_by(country_name: @event.country)
+      @event = Event.set_by_id_or_slug(params[:id])
     end
 
     def event_params

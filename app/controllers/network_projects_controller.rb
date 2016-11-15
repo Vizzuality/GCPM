@@ -23,7 +23,7 @@ class NetworkProjectsController < ApplicationController
   def update
     authorize! :update, @project
     if @project.update(project_params)
-      redirect_to project_path(@project), notice: 'Project succesfully updated.'
+      redirect_to project_path(RoutesHelper.by_slug_or_id(@project)), notice: 'Project succesfully updated.'
     else
       render :edit, notice: "Project can't be updated."
     end
@@ -32,7 +32,7 @@ class NetworkProjectsController < ApplicationController
   def create
     @project = @user.projects.build(project_params)
     if @project.save
-      redirect_to edit_user_project_path(@user, @project, anchor: 'relations', relations: true), notice: 'Project succesfully created.'
+      redirect_to project_path(RoutesHelper.by_slug_or_id(@project)), notice: 'Project succesfully created.'
     else
       render :new, notice: @project.errors.full_messages
     end
