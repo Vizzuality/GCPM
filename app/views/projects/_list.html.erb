@@ -15,18 +15,14 @@
           <p>
             <% p.cancer_types.each do |t| %>
               <span class="c-tag -mg">
-                <a href="/cancer-types/<%= t.slug %>">
-                  <%= t.name %>
-                </a>
+                <%= link_to t.name, cancer_path(t.slug_or_id) %>
               </span>
             <% end %>
           </p>
 
           <% if controller_name === 'users' %>
-            <% if p.project_users.first.is_approved %>
-              <a href="/network/<%= current_user.id %>/projects/<%= p.id %>/edit" class="c-btn -primary">
-                Edit
-              </a>
+            <% if can? :update, p %>
+              <%= link_to 'Edit', edit_user_project_path(current_user.id, p.slug_or_id), class: 'c-btn -primary' %>
             <% else %>
               <span class="pending">
                 <svg class="c-icon icon-pending -medium"><use xlink:href="#icon-pending"></use></svg>

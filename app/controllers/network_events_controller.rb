@@ -54,7 +54,7 @@ class NetworkEventsController < ApplicationController
     end
 
     def set_event
-      @event = Event.find(params[:id])
+      @event = Event.set_by_id_or_slug(params[:id])
     end
 
     def event_params

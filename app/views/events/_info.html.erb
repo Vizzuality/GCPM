@@ -7,7 +7,7 @@
       </article>
       <div class="row -no-mrg align-right wrapper">
         <% if current_user && current_user.events.include?(@event) %>
-          <%= link_to (t 'edit'), edit_user_event_path(current_user.id, @event.id), class: "c-btn -secondary -inverse" %>
+          <%= link_to (t 'edit'), edit_user_event_path(current_user.id, @event.slug_or_id), class: "c-btn -secondary -inverse" %>
         <% end %>
       </div>
     </div>
@@ -40,7 +40,7 @@
         </div>
       <% end %>
 
-      <% if @event.country && @event.country.size > 0 %>
+      <% if @event.country.present? %>
         <div class="sidebar-item">
           <h3><%= t 'location' %>(s)</h3>
           <ul class="c-list">
@@ -54,7 +54,7 @@
           </ul>
         </div>
       <% end %>
-      <% if @event.participants %>
+      <% if @event.participants.present? %>
         <div class="sidebar-item">
           <h3><%= t 'participants' %>(s)</h3>
           <ul class="c-list">
@@ -71,7 +71,7 @@
         </div>
       <% end %>
 
-      <% if @event.website %>
+      <% if @event.website.present? %>
         <div class="sidebar-item">
           <h3><%= t 'website' %></h3>
           <ul class="c-list">

@@ -34,7 +34,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.user = current_user
     if @event.save
-      redirect_to event_path(@event.id)
+      redirect_to event_path(@event.slug_or_id)
     else
       render :new, error: true
     end
@@ -47,7 +47,7 @@ class EventsController < ApplicationController
   def update
     authorize! :update, @event
     if @event.update(event_params)
-      redirect_to event_path(@event)
+      redirect_to event_path(@event.slug_or_id)
     else
       render :edit, notice: @event.errors.full_messages
     end
