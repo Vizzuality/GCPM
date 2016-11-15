@@ -1,0 +1,11 @@
+
+<ul class="c-list">
+  {{#each items as |item|}}
+    <li class="list-item">
+      <div class="c-avatar -small -ph">
+        <img src="{{item.avatar.url}}">
+      </div>
+      {{item.name}}
+    </li>
+  {{/each}}
+</ul>

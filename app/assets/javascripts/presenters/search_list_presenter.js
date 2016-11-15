@@ -14,7 +14,8 @@
         list: params.list instanceof Array ?
           { '': params.list } :
           params.list,
-        type: params.type
+        type: params.type,
+        options: params.options
       });
 
       this.setSubscriptions();

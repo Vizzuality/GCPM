@@ -29,6 +29,7 @@
   }
 
   &.-primary { fill: $dark-sky-blue; }
+  &.-secondary { fill: $secondary-color; }
   &.-inverse { fill: $body-bg-color; }
   &.-inverse-stroke { stroke: rgba($body-bg-color, .5); }
 
@@ -36,5 +37,9 @@
     &:hover {
       opacity: .5;
     }
+  }
+
+  &.-hidden {
+    display: none;
   }
 }
