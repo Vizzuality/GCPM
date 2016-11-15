@@ -9,7 +9,7 @@
             </a>
           </h3>
 
-          <h2><%= link_to p.title, project_path(p.id) %></h2>
+          <h2><%= link_to p.title, project_path(by_slug_or_id(p)) %></h2>
 
           <p>
             <% p.cancer_types.each do |t| %>

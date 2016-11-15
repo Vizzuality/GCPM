@@ -11,4 +11,8 @@ module RoutesHelper
       '#'
     end
   end
+
+  def by_slug_or_id(object)
+    object.try(:slug) || object.id
+  end
 end
