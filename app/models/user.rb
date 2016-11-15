@@ -63,6 +63,7 @@ class User < ApplicationRecord
   before_save :check_authentication_token
 
   validates_uniqueness_of :email
+  validates_presence_of   :name
   validates_format_of     :email, without: TEMP_EMAIL_REGEX, on: :update
 
   accepts_nested_attributes_for :projects
