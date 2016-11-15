@@ -14,6 +14,8 @@
     initialize: function() {
       this.state = new StateModel();
 
+      this.$el = $('#userSearch');
+
       this.searchInput = new App.View.Input({
         el: '#search-input',
         options: {
@@ -39,7 +41,8 @@
     },
 
     setEvents: function() {
-      this.$closeIcon = $('.icon-close');
+      this.$el = $('#userSearch');
+      this.$closeIcon = this.$el.find('.icon-close');
 
       this.$closeIcon.on('click', function() {
         this.searchInput.clear();
@@ -55,6 +58,8 @@
 
       App.on('Remote:load', function(params) {
         if (params.data === 'network') {
+          this.setEvents();
+
           this.searchInput.setElement('#search-input');
           this.searchInput.clear();
           this.searchInput.render();
@@ -65,7 +70,6 @@
 
     handleKeyup: function(ev) {
       var searchValue = ev.value;
-
       if (searchValue === '') {
         this.handleEmpty(true);
       } else if (searchValue.length === 1) {
@@ -90,8 +94,8 @@
     },
 
     handleEmpty: function(value) {
-      this.$searchIcon = $('.icon-search');
-      this.$closeIcon = $('.icon-close');
+      this.$searchIcon = this.$el.find('.icon-search');
+      this.$closeIcon = this.$el.find('.icon-close');
       this.$searchList = $('#search-list');
 
       this.$searchIcon.toggleClass('-hidden', !value);
