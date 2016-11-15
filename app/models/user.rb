@@ -89,6 +89,9 @@ class User < ApplicationRecord
   end
 
   class << self
+    def fetch_all(options)
+      where("email ilike ? or name ilike ?", "%#{options}%","%#{options}%").where.not('confirmed_at is null')
+    end
     def for_oauth(auth, signed_in_resource = nil)
       identity = Identity.for_oauth(auth)
       user     = signed_in_resource ? signed_in_resource : identity.user
