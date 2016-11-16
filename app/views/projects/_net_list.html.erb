@@ -18,6 +18,14 @@
               </span>
             <% end %>
           </p>
+
+          <p>
+            <% p.specialities.each do |sp| %>
+              <span class="c-tag -mg -darker">
+                <%= sp.name %>
+              </span>
+            <% end %>
+          </p>
         </div>
       </div>
     <% end %>
