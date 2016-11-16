@@ -333,7 +333,7 @@
       this.fundingSourcesForm = new App.Presenter.FundingSourcesForm();
 
       this.children = [this.titleInput, this.descTextarea, this.startPickadate,
-         this.endPickadate, this.websiteInput, this.projectTypes, this.cancerTypes,
+         this.endPickadate, this.websiteInput, this.projectTypes, this.cancerTypes, this.specialities,
          this.fundingSources, this.policy, this.messagesList, this.investigatorOrganization,
          this.investigatorOrganizationEdit];
 
@@ -381,6 +381,7 @@
     },
 
     loadData: function(){
+      console.log(this.project);
       this.titleInput.setValue(this.project.title);
       this.descTextarea.setValue(this.project.summary);
       this.startPickadate.setValue(this.project.start_date);
@@ -388,7 +389,7 @@
       this.websiteInput.setValue(this.project.project_website);
       this.projectTypes.setFetchedValues(this.project.project_types);
       this.cancerTypes.setFetchedValues(this.project.cancer_types);
-      this.specialties.setFetchedValues(this.project.specialties);
+      this.specialities.setFetchedValues(this.project.specialities);
       this.fundingSources.setFetchedValues(this.project.funding_sources);
       this.investigatorOrganizationEdit.setValue(this.project.memberships);
     },
