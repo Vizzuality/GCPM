@@ -13,14 +13,21 @@
     initialize: function() {
       this.state = new StateModel();
 
+      this.cache();
       this.renderComponents();
       this.setSubscriptions();
+    },
+
+    cache: function() {
+      this.$spinner = $('.c-spinner');
     },
 
     renderComponents: function() {
       this.countriesList = new App.Collection.Countries();
       this.countriesList.fetch()
         .done(function() {
+          this.$spinner.hide();
+
           this.countries = _.groupBy(
             _.sortBy(this.countriesList.toJSON(), 'region_name'),
             'region_name');
