@@ -12,8 +12,14 @@
               </div>
             </div>
 
-            <%#= f.input :type, as: :select, collection: @sections, label: false, selected: @search_type, input_html: { class: '' } %>
-            <%= f.input :type, as: :hidden, label: false, input_html: { value: 'All sections' } %>
+            <div class="form-row">
+              <div class="row">
+                <div class="column small-12 medium-4">
+                  <div id="search-type" class="c-select"></div>
+                </div>
+              </div>
+            </div>
+
             <button type="submit" class="c-btn -secondary"><%= t 'search' %></button>
           <% end %>
       </div>

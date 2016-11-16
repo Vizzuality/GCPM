@@ -8,7 +8,10 @@ Rails.application.routes.draw do
   get '/countries/:iso',        to: 'countries#show',     as: 'country'
   get '/cancer-types',          to: 'cancer_types#index', as: 'cancers'
   get '/cancer-types/:id',      to: 'cancer_types#show',  as: 'cancer'
+  get '/projects/:id',          to: 'projects#show',      as: 'project'
+  get '/events/:id',            to: 'events#show',        as: 'event'
   get '/organizations/:id',     to: 'organizations#show', as: 'organization'
+  get '/investigators/:id',     to: 'investigators#show', as: 'investigator'
   get '/about',                 to: 'about#index',        as: 'about'
   get '/downloads/user-manual', to: 'downloads#show',     as: 'download_user_manual'
   get '/network/:id',           to: 'users#show',         as: 'user'
@@ -57,14 +60,20 @@ Rails.application.routes.draw do
   get "/network/:user_id/messages/:id", to: 'messages#show', as: :message_show
   delete "/messages/:id", to: 'messages#destroy', as: :delete_message
 
+  # Contact form
+  get 'contact', to: 'contact_forms#new', as: :new_contact_form
+  post 'send-message', to: 'contact_forms#create', as: :send_contact_form
+
   # API
   namespace :api, defaults: { format: 'json' } do
     scope module: :v1 do
       resources :regions,            only: [:index, :show]
       resources :cancer_types,       only: [:index, :show], path: '/cancer-types'
+      resources :specialities,       only: [:index], path: '/specialities'
       resources :project_types,      only: [:index],        path: 'project-types'
       resources :organization_types, only: [:index],        path: 'organization-types'
       resources :map,                only: [:index]
+      resources :users,              only: [:index]
 
       get '/map/projects/:id', to: 'map#show_project'
       get '/map/download',     to: 'map#csv_download'
@@ -75,6 +84,7 @@ Rails.application.routes.draw do
       end
 
       resources :investigators,  only: [:index, :show, :update, :create]
+      get '/investigators/:id/graph', to: 'investigators#graph'
       resources :organizations,  only: [:index, :show]
 
       get 'funding-sources',     to: 'organizations#index'
@@ -84,9 +94,9 @@ Rails.application.routes.draw do
       get 'lists/cancer-types',  to: 'lists#cancer_types'
       get 'map/projects/:id',    to: 'map#show_project'
       get 'map/events/:id',      to: 'map#show_event'
-      get 'layer-groups',        to: 'layer_groups#index',          as: 'layer_groups'
-      get '/layers',             to: 'layers#index',                as: 'layers'
-      get '/widgets',             to: 'widgets#index',                as: 'widgets'
+      get 'layer-groups',        to: 'layer_groups#index', as: 'layer_groups'
+      get '/layers',             to: 'layers#index',       as: 'layers'
+      get '/widgets',            to: 'widgets#index',      as: 'widgets'
     end
   end
 

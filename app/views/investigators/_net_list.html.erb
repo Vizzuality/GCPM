@@ -1,11 +1,16 @@
-<% if items && items.size() > 0 %>
+<% if items.any? %>
   <div id="investigatorsActionsView" class="row collapse -no-mrg">
     <% items.each do |e| %>
       <div class="column small-12 medium-6">
-        <div class="c-card -pad-bigger -no-shadow -person">
-          <div class="c-avatar -medium -ph -mg-bt"></div>
-          <h2><a href="/investigators/<%= e.id %>"><%= e.name %></a></h2>
-          <% if e.user %>
+        <div class="c-card -pad-bigger -no-shadow -br-bottom -person">
+          <div class="c-avatar -medium -ph -mg-bt"
+               style="<% if e.user.present? %>
+                            background-image: url(<%= e.user.avatar_url(:thumb) %>)
+                          <% end %>">
+          </div>
+
+          <h2><%= link_to e.name, investigator_path(e.slug_or_id) %></h2>
+          <% if e.user.present? && is_owner?(@user, current_user) %>
             <button class="c-btn -icon -secondary js-btn-toggle-message" data-user="<%= e.user.id %>" type="button" name="button">
               <svg class="c-icon -normal -inverse"><use xlink:href="#icon-message"></use></svg>
               <svg class="c-icon -normal -inverse -hidden"><use xlink:href="#icon-close"></use></svg>

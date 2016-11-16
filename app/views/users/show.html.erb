@@ -1,5 +1,6 @@
-<% user = current_user %>
-<% title current_user.name %>
+<% user = @user %>
+<% owner = is_owner?(user, current_user) %>
+<% title user.name %>
 
 <section class="l-app -full">
 
@@ -13,26 +14,30 @@
     <div class="wrapper">
       <div class="row collapse">
         <div class="column small-8">
-          <div class="c-avatar -big -ph -mg-bt"></div>
+          <div class="c-avatar -big -mg-bt"
+               style="background-image: url(<%= user.avatar_url(:thumb) %>)">
+          </div>
         </div>
       </div>
       <div class="row collapse">
         <div class="column small-8">
           <div class="c-title-btn">
-            <% if user.name && user.name != '' %>
-              <h1><%= user.try(:name) %></h1>
+            <% if not_blank?(user.name) %>
+              <h1><%= user.name %></h1>
             <% end %>
-            <%= link_to (t 'edit'), edit_user_path(current_user.id), class: "c-btn -transparent" %>
+            <% if owner %>
+              <%= link_to (t 'edit'), edit_user_path(current_user.id), class: "c-btn -transparent" %>
+            <% end %>
           </div>
           <div class="row">
             <div class="column small-12 medium-6">
               <ul class="c-pipe-list">
                 <li>
-                  <% if user.investigator && user.investigator.organizations.size > 0 %>
-                    <%= user.investigator.organizations.first.name %>
+                  <% if user.investigator.present? && user.investigator.organizations.any? %>
+                    <%= user.investigator.organizations.first.try(:name) %>
                   <% end %>
                 </li>
-                <% if user.position && user.position != '' %>
+                <% if user.position.present? && user.position != '' %>
                   <li><%= user.position %></li>
                 <% end %>
               </ul>
@@ -43,21 +48,21 @@
             </div>
             <div class="column small-12 medium-6">
               <ul class="c-pipe-list">
-                <% if user.twitter_account && user.twitter_account != '' %>
+                <% if not_blank?(user.twitter_account) %>
                   <li>
                     <a href="https://twitter.com/<%= user.twitter_account %>" class="-clickable -hv" target="_blank">
-                      @<%= user.twitter_account %>
+                      Twitter
                     </a>
                   </li>
                 <% end %>
-                <% if user.linkedin_account && user.linkedin_account != '' %>
+                <% if not_blank?(user.linkedin_account) %>
                   <li>
                     <a href="https://www.linkedin.com/in/<%= user.linkedin_account %>" class="-clickable -hv" target="_blank">
-                      <%= user.linkedin_account %>
+                      Linkedin
                     </a>
                   </li>
                 <% end %>
-                <% if user.pubmed && user.pubmed != '' %>
+                <% if not_blank?(user.pubmed) %>
                   <li>
                     <a href="http://www.ncbi.nlm.nih.gov/pubmed?term=<%= user.pubmed %>%5BAuthor%5D" class="-clickable -hv" target="_blank">
                       Pubmed
@@ -77,15 +82,6 @@
     </div>
   </div>
 
-  <!-- TODO: ask back-ends -->
-  <% unreadNum = 0 %>
-  <% @conversations.each do |c| %>
-    <% unread = c.receipts_for(current_user).map{|m| m.is_unread?}.include? true %>
-    <% if unread %>
-      <% unreadNum = unreadNum + 1 %>
-    <% end %>
-  <% end %>
-
   <div class="l-app-navbar">
     <div class="wrapper">
       <div class="row collapse">
@@ -100,7 +96,7 @@
                   data: { datatype: filter }
                 %>
                 <% if filter === 'messages' %>
-                  <div id="<%= filter + '-badge' %>" class="c-badge"><%= unreadNum %></div>
+                  <div class="c-badge <%= filter + '-badge' %><%= current_user.unread_inbox_count === 0 ? ' -hidden' : '' %>"><%= current_user.unread_inbox_count %></div>
                 <% end %>
               </li>
             <% end %>
@@ -122,7 +118,9 @@
   <% elsif @current_type === 'posts' %>
     <%= render 'posts/list', items: @items, more: @more %>
   <% elsif @current_type === 'messages' %>
-    <%= render 'messages/list', items: @items, more: @more %>
+      <% if owner %>
+        <%= render 'messages/list', items: @items, more: @more %>
+      <% end %>
   <% elsif @current_type === 'network' %>
     <%= render 'network' %>
   <% end %>

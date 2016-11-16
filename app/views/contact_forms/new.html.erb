@@ -1,0 +1,80 @@
+
+<div class="l-app-intro wrapper">
+  <h1>Contact</h1>
+</div>
+
+<div class="c-card-overlapped wrapper">
+  <div class="overlapped-content wrapper">
+    <h2 class="-underlined">Send us a Message</h2>
+
+    <%= form_for @contact_form, url: send_contact_form_path do |f| %>
+
+      <p class="required">* Required fields</p>
+
+      <% if current_user %>
+        <%= f.hidden_field :name, value: current_user.name if current_user.name %>
+        <%= f.hidden_field :email, value: current_user.email %>
+      <% else %>
+        <div class="form-row row collapse">
+          <div class="column small-12 medium-6">
+            <div class="form-group">
+              <h3 class="c-title">* Your name</h3>
+              <%= f.text_field :name, class: 'form-control', placeholder: 'Write your name here...' %>
+            </div>
+          </div>
+
+          <div class="column small-12 medium-6">
+            <div class="form-group">
+              <h3 class="c-title">* Your e-mail</h3>
+              <%= f.text_field :email, class: 'form-control', placeholder: 'Write your email adress here...' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="form-group hiddeable">
+        <h3 class="c-title">Your nickname</h3>
+        <%= f.text_field :nickname, class: 'form-control' %>
+      </div>
+
+      <div class="form-row row collapse">
+        <div class="column small-12">
+          <div class="form-group">
+            <h3 class="c-title">* Subject</h3>
+            <%= f.text_field :subject, class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row row collapse">
+        <div class="column small-12">
+          <div class="form-group">
+            <h3 class="c-title">Message</h3>
+            <%= f.text_area :message, class: 'form-control', rows: 5 %>
+          </div>
+        </div>
+      </div>
+
+      <% if @contact_form.errors.full_messages.any? %>
+        <div class="form-row row collapse">
+          <div class="column small-12">
+            <p class="error">* Required field missing.</p>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="form-actions">
+        <div class="form-row row collapse">
+          <div class="column small-12">
+            <%= link_to 'Cancel', home_path, class: 'c-btn -secondary -inverse' %>
+            <%= f.submit 'Send', class: 'c-btn -secondary', data: { disable_with: "Sending..." } %>
+          </div>
+        </div>
+      </div>
+
+
+    <% end %>
+
+  </div>
+</div>
+

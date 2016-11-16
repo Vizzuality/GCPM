@@ -28,7 +28,7 @@
 
     initialize: function(viewSettings) {
       this.state = new StateModel();
-      this.organizations = new App.Collection.Organizations();
+      this.fundingSources = new App.Collection.FundingSources();
 
       // Creating view
       this.select = new App.View.Select({
@@ -76,8 +76,8 @@
      * @return {Promise}
      */
     fetchData: function() {
-      return this.organizations.fetch({add: true}).done(function() {
-        var options = this.organizations.map(function(type) {
+      return this.fundingSources.fetch({add: true}).done(function() {
+        var options = this.fundingSources.map(function(type) {
           return {
             name: type.attributes.name,
             value: type.attributes.id

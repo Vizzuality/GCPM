@@ -28,13 +28,15 @@
     },
 
     setEvents: function() {
-      this.state.on('change', this.toggleConversation.bind(this));
+      this.state.on('change', this.handleConversation.bind(this));
     },
 
     setSubscriptions: function() {
       this.userMessages.on('click', this.setConversation.bind(this));
 
       App.on('Remote:load', function(params){
+        App.trigger('MessagesBadge:change', { unreadCount: params.messages.count, equal: true });
+
         if (params.data === 'messages') {
           this.userMessages.setElement('.c-conversation');
         }
@@ -46,19 +48,26 @@
 
       if (data.conversation !== this.state.get('conversation')) {
         newConversation = data.conversation;
-        this.messageRequest(data.converId);
       }
 
       this.setState({ conversation: newConversation });
     },
 
-    toggleConversation: function() {
+    handleConversation: function() {
       var $currentConversation = $(this.state.get('conversation'));
       var $conversations = $('.c-conversation');
 
       $conversations.toggleClass('-active', false);
-      if ($currentConversation) {
+
+      if (this.state.get('conversation')) {
         $currentConversation.toggleClass('-active', true);
+
+        if ($currentConversation.hasClass('-unread')) {
+          this.userMessages.removeUnreadClass($currentConversation);
+          App.trigger('MessagesBadge:change', { unreadCount: gon.unreadCount });
+        }
+
+        this.messageRequest($currentConversation.data().converId);
       }
     },
 
@@ -67,13 +76,8 @@
         url: '/network/'+ gon.userId + '/messages/' + converId,
         type: 'GET',
         dataType: 'json',
-        success: this.messageSuccess.bind(this),
         error: this.messageError.bind(this)
       });
-    },
-
-    messageSuccess: function() {
-      App.trigger('MessagesBadge:change');
     },
 
     messageError: function() {

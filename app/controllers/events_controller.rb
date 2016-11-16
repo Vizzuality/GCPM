@@ -9,12 +9,15 @@ class EventsController < ApplicationController
   def show
     authorize! :show, @event
     gon.server_params = {}
-    gon.api_location_path = "/api/map/events/#{params[:id]}"
+    gon.api_location_path = "/api/map/events/#{@event.id}"
     gon.start_date = @event.start_date || 0
     gon.end_date = @event.end_date || 0
 
     @filters = %w(info)
     @current_type = params.key?(:data) ? params[:data] : 'info'
+
+    @participants = @event.participants.present? && @event.participants.split(',').map { |p| { name: p, investigator: Investigator.find_by(name: p.strip) } }
+    @country = Country.find_by(country_name: @event.country)
 
     if current_user
       @followed = current_user.following?(@event)
@@ -31,7 +34,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.user = current_user
     if @event.save
-      redirect_to event_path(@event.id)
+      redirect_to event_path(@event.slug_or_id)
     else
       render :new, error: true
     end
@@ -44,7 +47,7 @@ class EventsController < ApplicationController
   def update
     authorize! :update, @event
     if @event.update(event_params)
-      redirect_to event_path(@event)
+      redirect_to event_path(@event.slug_or_id)
     else
       render :edit, notice: @event.errors.full_messages
     end

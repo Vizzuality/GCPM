@@ -99,6 +99,7 @@ label {
   display: block;
   font-size: $small-font-size;
   margin-top: 5px;
+  font-style: italic;
 }
 
 .form-actions .column {
@@ -113,6 +114,12 @@ label {
   }
 }
 
+.hiddeable {
+  visibility: none;
+  position: absolute;
+  top: -1000px;
+}
+
 .required {
   font-size: $small-font-size;
   margin-top: 0;
@@ -124,4 +131,14 @@ label {
   margin-top: 0;
   padding-top: 0;
   color: red;
+}
+
+.alert {
+  ul {
+    @extend %clearlist;
+
+    font-size: $small-font-size;
+    color: red;
+    margin-bottom: $inline-space;
+  }
 }

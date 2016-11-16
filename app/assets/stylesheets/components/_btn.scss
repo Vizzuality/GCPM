@@ -149,13 +149,16 @@
   }
 
   &.-icon {
-    width: 34px;
-    height: 34px;
     border-radius: 100%;
     padding: 0;
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
+    padding: 5px;
+
+    &.-tiny {
+      padding: 2px;
+    }
 
     svg {
       display: block;

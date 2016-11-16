@@ -5,26 +5,17 @@
 #  id           :integer          not null, primary key
 #  name         :string
 #  slug         :string
-#  xname        :string
-#  xunit        :string
-#  yname        :string
-#  yunit        :string
 #  graphic_type :string
 #  legend       :text
 #  source       :text
 #  query        :text
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  x_axis       :text
+#  y_axis       :text
 #
 
 class WidgetSerializer < ActiveModel::Serializer
   cache key: "widget"
-  attributes :name, :slug, :graphic_type, :xaxis, :yaxis, :query, :legend, :source
-
-  def xaxis
-    {name: object.xname, source: object.xunit}
-  end
-  def yaxis
-    {name: object.yname, source: object.yunit}
-  end
+  attributes :name, :slug, :graphic_type, :x_axis, :y_axis, :query, :legend, :source
 end

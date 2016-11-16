@@ -1039,6 +1039,38 @@ ALTER SEQUENCE projects_id_seq OWNED BY projects.id;
 
 
 --
+-- Name: projects_specialities; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE projects_specialities (
+    id integer NOT NULL,
+    project_id integer,
+    speciality_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: projects_specialities_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE projects_specialities_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: projects_specialities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE projects_specialities_id_seq OWNED BY projects_specialities.id;
+
+
+--
 -- Name: research_units; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1077,6 +1109,49 @@ ALTER SEQUENCE research_units_id_seq OWNED BY research_units.id;
 CREATE TABLE schema_migrations (
     version character varying NOT NULL
 );
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE users (
+    id integer NOT NULL,
+    email character varying DEFAULT ''::character varying NOT NULL,
+    encrypted_password character varying DEFAULT ''::character varying NOT NULL,
+    reset_password_token character varying,
+    reset_password_sent_at timestamp without time zone,
+    remember_created_at timestamp without time zone,
+    sign_in_count integer DEFAULT 0 NOT NULL,
+    current_sign_in_at timestamp without time zone,
+    last_sign_in_at timestamp without time zone,
+    current_sign_in_ip inet,
+    last_sign_in_ip inet,
+    confirmation_token character varying,
+    confirmed_at timestamp without time zone,
+    confirmation_sent_at timestamp without time zone,
+    failed_attempts integer DEFAULT 0 NOT NULL,
+    unlock_token character varying,
+    locked_at timestamp without time zone,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    name character varying,
+    "position" character varying,
+    twitter_account character varying,
+    linkedin_account character varying,
+    pubmed character varying,
+    authentication_token character varying,
+    token_expires_at timestamp without time zone,
+    role integer DEFAULT 0 NOT NULL,
+    avatar character varying
+);
+
+
+--
+-- Name: COLUMN users.role; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN users.role IS 'User role { user: 0, admin: 1 }';
 
 
 --
@@ -1119,49 +1194,48 @@ UNION
  SELECT organizations.id AS searchable_id,
     'Organization'::text AS searchable_type,
     organizations.acronym AS term
-   FROM organizations;
+   FROM organizations
+UNION
+ SELECT users.id AS searchable_id,
+    'User'::text AS searchable_type,
+    users.name AS term
+   FROM users
+UNION
+ SELECT users.id AS searchable_id,
+    'User'::text AS searchable_type,
+    users."position" AS term
+   FROM users;
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: specialities; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE users (
+CREATE TABLE specialities (
     id integer NOT NULL,
-    email character varying DEFAULT ''::character varying NOT NULL,
-    encrypted_password character varying DEFAULT ''::character varying NOT NULL,
-    reset_password_token character varying,
-    reset_password_sent_at timestamp without time zone,
-    remember_created_at timestamp without time zone,
-    sign_in_count integer DEFAULT 0 NOT NULL,
-    current_sign_in_at timestamp without time zone,
-    last_sign_in_at timestamp without time zone,
-    current_sign_in_ip inet,
-    last_sign_in_ip inet,
-    confirmation_token character varying,
-    confirmed_at timestamp without time zone,
-    confirmation_sent_at timestamp without time zone,
-    failed_attempts integer DEFAULT 0 NOT NULL,
-    unlock_token character varying,
-    locked_at timestamp without time zone,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
     name character varying,
-    "position" character varying,
-    twitter_account character varying,
-    linkedin_account character varying,
-    pubmed character varying,
-    authentication_token character varying,
-    token_expires_at timestamp without time zone,
-    role integer DEFAULT 0 NOT NULL
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
 );
 
 
 --
--- Name: COLUMN users.role; Type: COMMENT; Schema: public; Owner: -
+-- Name: specialities_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-COMMENT ON COLUMN users.role IS 'User role { user: 0, admin: 1 }';
+CREATE SEQUENCE specialities_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: specialities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE specialities_id_seq OWNED BY specialities.id;
 
 
 --
@@ -1191,16 +1265,14 @@ CREATE TABLE widgets (
     id integer NOT NULL,
     name character varying,
     slug character varying,
-    xname character varying,
-    xunit character varying,
-    yname character varying,
-    yunit character varying,
     graphic_type character varying,
     legend text,
     source text,
     query text,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    x_axis text,
+    y_axis text
 );
 
 
@@ -1416,7 +1488,21 @@ ALTER TABLE ONLY projects ALTER COLUMN id SET DEFAULT nextval('projects_id_seq':
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY projects_specialities ALTER COLUMN id SET DEFAULT nextval('projects_specialities_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY research_units ALTER COLUMN id SET DEFAULT nextval('research_units_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY specialities ALTER COLUMN id SET DEFAULT nextval('specialities_id_seq'::regclass);
 
 
 --
@@ -1658,6 +1744,14 @@ ALTER TABLE ONLY projects
 
 
 --
+-- Name: projects_specialities_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY projects_specialities
+    ADD CONSTRAINT projects_specialities_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: research_units_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1671,6 +1765,14 @@ ALTER TABLE ONLY research_units
 
 ALTER TABLE ONLY schema_migrations
     ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: specialities_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY specialities
+    ADD CONSTRAINT specialities_pkey PRIMARY KEY (id);
 
 
 --
@@ -2061,6 +2163,20 @@ CREATE INDEX index_projects_on_title ON projects USING gin (to_tsvector('english
 
 
 --
+-- Name: index_projects_specialities_on_project_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_projects_specialities_on_project_id ON projects_specialities USING btree (project_id);
+
+
+--
+-- Name: index_projects_specialities_on_speciality_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_projects_specialities_on_speciality_id ON projects_specialities USING btree (speciality_id);
+
+
+--
 -- Name: index_research_units_on_address_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2093,6 +2209,20 @@ CREATE UNIQUE INDEX index_users_on_confirmation_token ON users USING btree (conf
 --
 
 CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
+
+
+--
+-- Name: index_users_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_name ON users USING gin (to_tsvector('english'::regconfig, (name)::text));
+
+
+--
+-- Name: index_users_on_position; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_position ON users USING gin (to_tsvector('english'::regconfig, ("position")::text));
 
 
 --
@@ -2155,6 +2285,6 @@ ALTER TABLE ONLY mailboxer_receipts
 
 SET search_path TO "$user",public;
 
-INSERT INTO schema_migrations (version) VALUES ('20160623091908'), ('20160623092157'), ('20160623093250'), ('20160629161033'), ('20160629161041'), ('20160707072908'), ('20160707073642'), ('20160708083044'), ('20160711105858'), ('20160711114901'), ('20160718224524'), ('20160718225032'), ('20160718232806'), ('20160720162924'), ('20160721141137'), ('20160725182233'), ('20160726110350'), ('20160729093255'), ('20160729125019'), ('20160729151912'), ('20160801160550'), ('20160801165924'), ('20160801171206'), ('20160802121917'), ('20160802174327'), ('20160803012223'), ('20160803012429'), ('20160803012636'), ('20160803014813'), ('20160803143833'), ('20160804100620'), ('20160804113911'), ('20161004100702'), ('20161018055907'), ('20161018091446'), ('20161018104312'), ('20161018111559'), ('20161018125246'), ('20161020122456'), ('20161020163951'), ('20161021073852'), ('20161021080737'), ('20161021110751'), ('20161021110752'), ('20161021110753'), ('20161021110754'), ('20161026160423'), ('20161027160501'), ('20161103101432'), ('20161103101657'), ('20161104114309'), ('20161107103717'), ('20161107110201');
+INSERT INTO schema_migrations (version) VALUES ('20160623091908'), ('20160623092157'), ('20160623093250'), ('20160629161033'), ('20160629161041'), ('20160707072908'), ('20160707073642'), ('20160708083044'), ('20160711105858'), ('20160711114901'), ('20160718224524'), ('20160718225032'), ('20160718232806'), ('20160720162924'), ('20160721141137'), ('20160725182233'), ('20160726110350'), ('20160729093255'), ('20160729125019'), ('20160729151912'), ('20160801160550'), ('20160801165924'), ('20160801171206'), ('20160802121917'), ('20160802174327'), ('20160803012223'), ('20160803012429'), ('20160803012636'), ('20160803014813'), ('20160803143833'), ('20160804100620'), ('20160804113911'), ('20161004100702'), ('20161018055907'), ('20161018091446'), ('20161018104312'), ('20161018111559'), ('20161018125246'), ('20161020122456'), ('20161020163951'), ('20161021073852'), ('20161021080737'), ('20161021110751'), ('20161021110752'), ('20161021110753'), ('20161021110754'), ('20161026160423'), ('20161027160501'), ('20161103101432'), ('20161103101657'), ('20161104114309'), ('20161107103717'), ('20161107110201'), ('20161110093643'), ('20161110111725'), ('20161110111836'), ('20161111100700'), ('20161115090954');
 
 

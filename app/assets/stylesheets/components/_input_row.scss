@@ -1,0 +1,24 @@
+
+.c-input-row {
+  display: flex;
+  align-items: center;
+
+  & *:first-child {
+    flex-grow: 1;
+    margin-right: $inline-space/2;
+  }
+
+  input {
+    font-family: $base-font-family-light;
+    font-size: 18px;
+
+    &.-no-bd {
+      border: 0;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+  }
+}

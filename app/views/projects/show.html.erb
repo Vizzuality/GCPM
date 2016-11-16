@@ -22,14 +22,18 @@
           <div class="c-summary-info row -collapse">
 
             <div class="column small-12 large-4 align-middle">
-              <% #if @project.project_lead && @project.project_lead.img %>
-                <!-- <img src="<%# @project.project_lead.img %>" class="c-avatar -small" /> -->
-              <% #else %>
-                <div class="c-avatar -small -ph"></div>
-              <% #end %>
+              <div class="c-avatar -small -ph"
+                   style="<% if @project.project_lead.present? && @project.project_lead.user.present? %>
+                            background-image: url(<%= @project.project_lead.user.avatar_url(:thumb) %>)
+                          <% end %>">
+              </div>
 
               <h3>
-                <%= @project.project_lead && @project.project_lead.name %>
+                <% if @project.project_lead.present? && @project.project_lead.name != '' %>
+                  <%= @project.project_lead.name %>
+                <% else %>
+                  No project lead
+                <% end %>
               </h3>
             </div>
 
@@ -39,7 +43,7 @@
                   <use xlink:href="#icon-collaborators"></use>
                 </svg>
               </div>
-              <h3><%= @project.investigators.count != 0 ? @project.investigators.count - 1 : 0 %> <%= t 'collaborator'%>(s)</h3>
+              <h3><%= @project.investigators.any? ? @project.investigators.count - 1 : 0 %> <%= t 'collaborator'%>(s)</h3>
             </div>
 
             <% if @project.funding_sources && @project.funding_sources.size > 0 %>

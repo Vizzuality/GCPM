@@ -4,17 +4,23 @@
       <div class="column small-12 medium-6">
         <div class="c-card -pad-bigger -projects">
           <h3 class="-underlined">
-            <a href="/investigators/<%= p.project_leads.first.try(:id) %>">
+            <a href="/investigators/<%= p.project_leads.first.try(:slug) ? p.project_leads.first.try(:slug) : p.project_leads.first.try(:id) %>">
               <%= p.project_leads.first.try(:name) %>
             </a>
           </h3>
-          <h2><%= link_to p.title, project_path(p.id) %></h2>
+          <h2><%= link_to p.title, project_path(p.slug_or_id) %></h2>
           <p>
             <% p.cancer_types.each do |t| %>
               <span class="c-tag -mg">
-                <a href="/cancer-types/<%= t.id %>">
-                  <%= t.name %>
-                </a>
+                <%= link_to t.name, cancer_path(t.slug_or_id) %>
+              </span>
+            <% end %>
+          </p>
+
+          <p>
+            <% p.specialities.each do |sp| %>
+              <span class="c-tag -mg -darker">
+                <%= sp.name %>
               </span>
             <% end %>
           </p>

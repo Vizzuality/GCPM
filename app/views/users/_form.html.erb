@@ -1,13 +1,25 @@
 
 <%= simple_form_for @user,
   url: user_path(current_user.id),
-  method: :patch do |f| %>
+  method: :patch, html: { multipart: true } do |f| %>
 
   <div class="form-row row">
     <div class="column small-12">
       <div id="title">
       <%= f.input :name, placeholder: 'Name', label: false, input_html: { class: "c-title -bigger -bold"} %>
       </div>
+    </div>
+  </div>
+
+  <div class="form-row row">
+    <div class="column small-12 medium-5 medium-offset-1">
+      <h4 class="c-title">Profile picture url:</h4>
+      <div class="c-avatar"
+           style="<% if @user.avatar? %>
+                    background-image: url(<%= @user.avatar_url(:thumb) %>)
+                  <% end %>">
+      </div>
+      <%= f.file_field :avatar, label: false %>
     </div>
   </div>
 
@@ -46,5 +58,13 @@
   </div>
 
 <% end %>
+
+<div class="form-row row">
+  <div class="column small-12 medium-5 medium-offset-1">
+    <ul class="c-shared-links">
+      <li><%= link_to "Change password", edit_user_registration_path %></li>
+    </ul>
+  </div>
+</div>
 
 <%= javascript_include_tag Ckeditor.cdn_url %>

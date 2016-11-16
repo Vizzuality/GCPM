@@ -14,7 +14,8 @@
         list: params.list instanceof Array ?
           { '': params.list } :
           params.list,
-        type: params.type
+        type: params.type,
+        options: params.options
       });
 
       this.setSubscriptions();
@@ -22,6 +23,13 @@
 
     setSubscriptions: function() {
       App.on('SearchList:change', this.handleChangeList.bind(this));
+
+      App.on('Remote:load', function(params) {
+        if (params.data === 'network') {
+          this.searchList.setElement('#search-list');
+          this.searchList.render(true);
+        }
+      }.bind(this));
     },
 
     handleChangeList: function(filteredList) {

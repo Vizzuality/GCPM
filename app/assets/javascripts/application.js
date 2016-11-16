@@ -10,6 +10,8 @@
 //= require pickadate/picker
 //= require pickadate/picker.date
 //= require PruneCluster/PruneCluster
+//= require d3
+//= require c3
 
 //= require_self
 

@@ -8,6 +8,8 @@
   border-radius: 50%;
   background-color: $primary-color;
   color: $inverse-font-color;
+  background-position: center;
+  background-size: cover;
 
   &.-ph {
     background-image: asset-url('placeholder.png');
@@ -35,4 +37,7 @@
     margin-bottom: $base-space;
   }
 
+  img {
+    border-radius: 50%;
+  }
 }

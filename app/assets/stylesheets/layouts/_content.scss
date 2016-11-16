@@ -1,4 +1,5 @@
 .l-content {
+  position: relative;
   width: 100%;
   padding-top: $box-space;
   padding-bottom: $box-space;
@@ -11,6 +12,7 @@
 
   &.-no-br { border: 0; }
   &.-br-bottom { border-bottom: 1px solid $border-color-1; }
+  &.-no-top-padd { padding-top: 0; }
 
   .l-content-article {
     font-family: $base-font-family-light;
@@ -19,6 +21,10 @@
     &:last-child {
       padding-bottom: 0;
     }
+  }
+
+  &.-hidden {
+    display: none;
   }
 
 }

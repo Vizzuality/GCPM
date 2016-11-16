@@ -44,6 +44,7 @@ gem 'gon'
 
 # Email service integration
 gem 'sendgrid-ruby'
+gem 'mail_form'
 
 # Api engine
 gem 'cartomodel', git: 'https://github.com/Vizzuality/cartomodel'
@@ -65,6 +66,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-underscore'
   gem 'rails-assets-backbone'
   gem 'rails-assets-d3', '~> 3.5.17'
+  gem 'rails-assets-c3', '0.4.11'
   gem 'rails-assets-moment'
   gem 'rails-assets-leaflet'
   gem 'rails-assets-fuse'

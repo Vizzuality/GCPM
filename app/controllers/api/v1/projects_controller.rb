@@ -7,6 +7,7 @@ module Api::V1
     def show
       render json: @project, include: ['funding_sources',
                                        'cancer_types',
+                                       'specialities',
                                        'project_types',
                                        'users',
                                        'memberships',
@@ -19,6 +20,7 @@ module Api::V1
       if Project.update_project(project_params, @project)
         render json: @project, include: ['funding_sources',
                                          'cancer_types',
+                                         'specialities',
                                          'project_types',
                                          'users',
                                          'memberships',
@@ -35,6 +37,7 @@ module Api::V1
       if @project.save
         render json: @project, include: ['funding_sources',
                                          'cancer_types',
+                                         'specialities',
                                          'project_types',
                                          'users',
                                          'memberships',

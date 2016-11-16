@@ -1,0 +1,83 @@
+.c-graph {
+  width: 100%;
+  min-height: 320px;
+  padding: 0 50px 0 0;
+  position: relative;
+
+  .graph-header {
+    h2 {
+      margin: 0 0 20px;
+    }
+  }
+
+  .graph-box {
+
+  }
+
+  .c3 {
+    line {
+      fill: none;
+      stroke: #a3b0b8;
+    }
+
+    path {
+      fill: none;
+      stroke: #a3b0b8;
+    }
+
+    // g {
+    //   &.tick {
+    //     fill: #a3b0b8;
+    //   }
+    // }
+
+    // TOOLTIP
+    .c3-tooltip {
+      box-shadow: $box-shadow-2;
+
+      th {
+        padding: 10px 8px 5px;
+        color: $base-font-color;
+        background-color: white;
+        font-weight: 500;
+        // text-transform: capitalize;
+      }
+
+      tr {
+        border: none;
+      }
+
+      td {
+        padding: 5px 10px;
+        border: none;
+      }
+    }
+  }
+}
+
+
+// .c3 text {
+//   fill: $black;
+//   fill-opacity: .8;
+// }
+//
+// .c3-legend-background {
+//   stroke: transparent;
+//   fill: transparent;
+// }
+//
+// .c3-legend-item {
+//   fill-opacity: .8;
+//   font-family: $font-family-1;
+//   font-weight: 400;
+//   transform: translatey(-20px);
+// }
+//
+// .c3-text {
+//   fill: $black !important;
+//   opacity: .3 !important;
+// }
+//
+// .c3-legend-item {
+//   display: none;
+// }

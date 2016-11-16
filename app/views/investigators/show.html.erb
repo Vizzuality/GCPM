@@ -11,7 +11,11 @@
     <div class="wrapper">
       <div class="row collapse">
         <div class="column small-8">
-          <div class="c-avatar -big -ph -mg-bt"></div>
+          <div class="c-avatar -big -ph -mg-bt"
+               style="<% if inv_user.present? %>
+                        background-image: url(<%= inv_user.avatar_url(:thumb) %>)
+                      <% end %>">
+          </div>
         </div>
       </div>
       <div class="row collapse">
@@ -30,7 +34,7 @@
               <ul class="c-pipe-list">
                 <% if @investigator.organizations.size > 0 %>
                   <li>
-                    <%= link_to @investigator.organizations.first.name, organization_path(@investigator.organizations.first.id), class: '-clickable -hv' %>
+                    <%= link_to @investigator.organizations.first.name, organization_path(@investigator.organizations.first.slug_or_id), class: '-clickable -hv' %>
                   </li>
                 <% end %>
                 <% if inv_user && inv_user.position %>
@@ -122,6 +126,8 @@
     <%= render 'users/network' %>
   <% elsif @current_type === 'events' %>
     <%= render 'events/list', items: @items, more: @more %>
+  <% elsif @current_type === 'data' %>
+    <%= render 'data/investigators' %>
   <% else %>
     <%= render 'projects/list', items: @items, more: @more %>
   <% end %>

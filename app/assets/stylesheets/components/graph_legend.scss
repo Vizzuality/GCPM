@@ -1,0 +1,45 @@
+
+.c-graph-legend {
+  display: flex;
+  margin-bottom: $inline-space;
+
+  > div {
+    display: flex;
+    align-items: center;
+    margin-right: $box-space;
+  }
+
+  .circle {
+    display: inline-block;
+    position: relative;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1px solid $secondary-color;
+    margin-right: $inline-space/2;
+
+    & .dot {
+      display: inline-block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      border: 2px solid $secondary-color;
+    }
+  }
+
+  .current {
+    .circle {
+      background-color: rgba(183, 95, 255, 0.80);
+    }
+  }
+
+  .rect {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-color: $secondary-color;
+    margin-right: $inline-space/2;
+  }
+}

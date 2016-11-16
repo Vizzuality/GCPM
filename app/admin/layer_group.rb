@@ -25,9 +25,6 @@ ActiveAdmin.register LayerGroup do
     column :id
     column :name
     column :layer_group_type
-    column :site_scope do |lg|
-      SiteScope.find(lg.site_scope_id).name if lg.site_scope_id.present?
-    end
     column :layers do |lg|
       lg.layers.map{|l| l.name}.join(", ")
     end

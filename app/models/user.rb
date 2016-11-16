@@ -29,6 +29,7 @@
 #  authentication_token   :string
 #  token_expires_at       :datetime
 #  role                   :integer          default("user"), not null
+#  avatar                 :string
 #
 
 class User < ApplicationRecord
@@ -40,6 +41,8 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:linkedin, :google_oauth2]
 
   enum role: { user: 0, admin: 1 }
+
+  mount_uploader :avatar, AvatarUploader
 
   include Roleable
 
@@ -60,6 +63,7 @@ class User < ApplicationRecord
   before_save :check_authentication_token
 
   validates_uniqueness_of :email
+  validates_presence_of   :name
   validates_format_of     :email, without: TEMP_EMAIL_REGEX, on: :update
 
   accepts_nested_attributes_for :projects
@@ -85,6 +89,9 @@ class User < ApplicationRecord
   end
 
   class << self
+    def fetch_all(options)
+      where("email ilike ? or name ilike ?", "%#{options}%","%#{options}%").where.not('confirmed_at is null')
+    end
     def for_oauth(auth, signed_in_resource = nil)
       identity = Identity.for_oauth(auth)
       user     = signed_in_resource ? signed_in_resource : identity.user

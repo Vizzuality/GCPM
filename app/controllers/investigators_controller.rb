@@ -10,10 +10,10 @@ class InvestigatorsController < ApplicationController
   def show
     authorize! :show, @investigator
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
-    @filters = @investigator.user ? %w(projects posts network) : %w(projects posts)
-    @current_type = params.key?(:data) ? params[:data] : 'projects'
+    @filters = @investigator.user.present? ? %w(data projects posts network) : %w(data projects posts)
+    @current_type = params.key?(:data) ? params[:data] : 'data'
 
-    gon.server_params = { 'investigators[]': params[:id] }
+    gon.server_params = { 'investigators[]': @investigator.id, name: @investigator.name }
 
     if notice
       gon.notice = notice

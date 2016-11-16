@@ -1,4 +1,5 @@
 <% if items && items.size() > 0 %>
+  <% controller_name = controller.controller_name %>
   <div class="row collapse">
     <% items.each do |p| %>
       <div class="column small-12">
@@ -6,6 +7,9 @@
           <div class="wrapper">
             <h3 class="-underlined"><%= link_to p.title, p %></h3>
             <p><%= p.body && p.body.truncate(300).html_safe %></p>
+            <% if controller_name === 'users' && is_owner?(@user, current_user) %>
+              <%= link_to 'Edit', edit_post_path(p.id), class: "c-btn -secondary" %>
+            <% end %>
           </div>
         </div>
       </div>

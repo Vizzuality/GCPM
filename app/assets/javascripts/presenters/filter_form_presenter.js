@@ -18,6 +18,7 @@
       'organization_types[]': undefined,
       'organizations[]': undefined,
       'project_types[]': undefined,
+      'funding_sources[]': undefined,
       start_date: null,
       end_date: null
     },
@@ -45,11 +46,16 @@
         label: null,
         addNew: false
       });
+      var fundingSources = new App.Presenter.FundingSources({
+        label: null,
+        addNew: false,
+        placeholder: 'All funding sources'
+      });
 
       var pickadateStart = new App.Presenter.PickadateStart();
       var pickadateEnd = new App.Presenter.PickadateEnd();
 
-      this.children = [countries, organizations, cancerTypes, projectTypes, organizationsTypes, pickadateStart, pickadateEnd];
+      this.children = [countries, organizations, cancerTypes, projectTypes, organizationsTypes, fundingSources, pickadateStart, pickadateEnd];
 
       this.countries = new App.Collection.Countries();
       this.countries.fetch();
@@ -208,6 +214,11 @@
           case 'project_types[]':
             if (state[value].length) {
               ga('send', 'event', 'Filter', 'Project Types', state[value]);
+            }
+          break;
+          case 'funding_sources[]':
+            if (state[value].length) {
+              ga('send', 'event', 'Filter', 'Funding Sources', state[value]);
             }
           break;
           case 'start_date':
