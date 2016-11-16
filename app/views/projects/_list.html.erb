@@ -30,7 +30,7 @@
 
           <% if controller_name === 'users' %>
             <% if can? :update, p %>
-              <%= link_to 'Edit', edit_user_project_path(current_user.id, p.slug_or_id), class: 'c-btn -primary' %>
+              <%= link_to 'Edit', edit_user_project_path(current_user.id, p.slug_or_id), class: 'c-btn -secondary' %>
             <% else %>
               <span class="pending">
                 <svg class="c-icon icon-pending -medium"><use xlink:href="#icon-pending"></use></svg>

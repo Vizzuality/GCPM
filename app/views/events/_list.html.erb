@@ -20,7 +20,7 @@
 
           <% if controller_name === 'users' %>
             <% if can? :update, e %>
-              <%= link_to 'Edit', edit_user_event_path(current_user.id, e.slug_or_id), class: 'c-btn -primary' %>
+              <%= link_to 'Edit', edit_user_event_path(current_user.id, e.slug_or_id), class: 'c-btn -secondary' %>
             <% end %>
           <% end %>
         </div>

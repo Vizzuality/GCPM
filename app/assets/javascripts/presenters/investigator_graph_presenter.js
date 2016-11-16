@@ -42,6 +42,9 @@
     },
 
     dataSuccess: function(data) {
+      this.$spinner = $('.c-spinner');
+      this.$spinner.hide();
+
       this.investigatorGraph = new App.View.InvestigatorGraph({
         el: '#graph',
         data: this.setData(data)
