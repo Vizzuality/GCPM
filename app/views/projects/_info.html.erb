@@ -65,7 +65,7 @@
           <h3><%= t 'cancer_types' %></h3>
           <ul class="c-list">
             <% @project.cancer_types.each do |ct| %>
-              <li class="list-item -mg-less"><%= link_to ct.name, cancer_path(ct.slug_or_id) %></li>
+              <li class="list-item -mg-less"><%= link_to ct.try(:name), cancer_path(ct.slug_or_id) %></li>
             <% end %>
           </ul>
         </div>
@@ -76,7 +76,18 @@
           <h3><%= t 'project_types' %></h3>
           <ul class="c-list">
             <% @project.project_types.each do |pt| %>
-              <li class="list-item -mg-less"><%= link_to pt.name, "/map?data=projects&project_types[]=#{pt.id}" %></li>
+              <li class="list-item -mg-less"><%= link_to pt.try(:name), "/map?data=projects&project_types[]=#{pt.id}" %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <% if @project.specialities && @project.specialities.size > 0 %>
+        <div class="sidebar-item">
+          <h3><%= t 'specialities' %></h3>
+          <ul class="c-list">
+            <% @project.specialities.each do |sp| %>
+              <li class="list-item -mg-less"><%= sp.try(:name) %></li>
             <% end %>
           </ul>
         </div>
