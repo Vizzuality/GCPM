@@ -20,6 +20,14 @@
             <% end %>
           </p>
 
+          <p>
+            <% p.specialities.each do |sp| %>
+              <span class="c-tag -mg -darker">
+                <%= sp.name %>
+              </span>
+            <% end %>
+          </p>
+
           <% if controller_name === 'users' %>
             <% if can? :update, p %>
               <%= link_to 'Edit', edit_user_project_path(current_user.id, p.slug_or_id), class: 'c-btn -primary' %>
