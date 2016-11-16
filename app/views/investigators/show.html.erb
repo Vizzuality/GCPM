@@ -11,13 +11,17 @@
     <div class="wrapper">
       <div class="row collapse">
         <div class="column small-8">
-          <div class="c-avatar -big -ph -mg-bt"></div>
+          <div class="c-avatar -big -ph -mg-bt"
+               style="<% if inv_user.present? %>
+                        background-image: url(<%= inv_user.avatar_url(:thumb) %>)
+                      <% end %>">
+          </div>
         </div>
       </div>
       <div class="row collapse">
         <div class="column small-8">
           <div class="c-title-btn">
-            <h1><%= @investigator.name %></h1>
+            <h1><%= @investigator.try(:name) %></h1>
             <% if user_signed_in? && current_user.investigator == @investigator %>
               <%= link_to (t 'not_me'), remove_relation_investigator_path(@investigator), method: :patch, class: 'c-btn -transparent' %>
             <% elsif user_signed_in? && current_user.investigator.blank? && @investigator.user.blank? %>
@@ -28,12 +32,12 @@
           <div class="row">
             <div class="column small-12 medium-6">
               <ul class="c-pipe-list">
-                <% if @investigator.organizations.size > 0 %>
+                <% if @investigator.organizations.any? %>
                   <li>
-                    <%= link_to @investigator.organizations.first.name, organization_path(@investigator.organizations.first.id), class: '-clickable -hv' %>
+                    <%= link_to @investigator.organizations.first.try(:name), organization_path(@investigator.organizations.first.slug_or_id), class: '-clickable -hv' %>
                   </li>
                 <% end %>
-                <% if inv_user && inv_user.position %>
+                <% if inv_user.present? && inv_user.position.present? %>
                   <li><%= inv_user.position %></li>
                 <% end %>
               </ul>
@@ -44,18 +48,18 @@
             </div>
             <div class="column small-12 medium-6">
               <ul class="c-pipe-list">
-                <% if inv_user %>
-                  <% if inv_user.twitter_account %>
+                <% if inv_user.present? %>
+                  <% if not_blank?(inv_user.twitter_account) %>
                     <li>
                       <a href="https://twitter.com/<%= inv_user.twitter_account %>" class="-clickable -hv" target="_blank">
-                        @<%= inv_user.twitter_account %>
+                        Twitter
                       </a>
                     </li>
                   <% end %>
-                  <% if inv_user.linkedin_account %>
+                  <% if not_blank?(inv_user.linkedin_account) %>
                     <li>
                       <a href="https://www.linkedin.com/in/<%= inv_user.linkedin_account %>" class="-clickable -hv" target="_blank">
-                        <%= inv_user.linkedin_account %>
+                        Linkedin
                       </a>
                     </li>
                   <% end %>

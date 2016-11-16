@@ -21,6 +21,7 @@ module Api::V1
       let!(:cancer_type)       { FactoryGirl.create(:cancer_type)                                                     }
       let!(:project_type)      { FactoryGirl.create(:project_type)                                                    }
       let!(:organization_type) { FactoryGirl.create(:organization_type)                                               }
+      let!(:speciality)        { FactoryGirl.create(:speciality)                                                      }
 
       let(:project_id)   { project.id   }
       let(:project_slug) { project.slug }
@@ -38,6 +39,7 @@ module Api::V1
                             "funding_source_ids": ["#{funder.id}"],
                             "project_type_ids": ["#{project_type.id}"],
                             "cancer_type_ids": ["#{cancer_type.id}"],
+                            "speciality_ids": ["#{speciality.id}"],
                             "new_funders": [{ "name": "Test funder 1", "email_address": "", "organization_type_id": 1,
                                               "addresses_attributes": [{"country_id": "#{country.id}",
                                                                         "latitude": "",
@@ -157,7 +159,8 @@ module Api::V1
           patch "/api/projects/#{project_slug}?token=#{user.authentication_token}", params: full_params
 
           expect(status).to eq(200)
-          expect(json['funding_sources'].length).to eq(3)
+          expect(json['funding_sources'].length).to  eq(3)
+          expect(json['specialities'][0]['name']).to eq('Speciality one')
           expect(Project.find(project_id).memberships.map(&:membership_type)).to eq(['secondary', 'main', 'secondary', 'secondary'])
         end
 

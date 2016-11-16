@@ -11,8 +11,12 @@
       <div class="row">
         <div class="column small-12 medium-8 align-middle">
           <div class="investigator">
-            <div class="c-avatar -ph -small"></div>
-            <p><%= investigator && investigator.name && investigator.name %></p>
+            <div class="c-avatar -ph -small"
+                 style="<% if investigator.present? %>
+                        background-image: url(<%= investigator.avatar_url(:thumb) %>)
+                      <% end %>">
+            </div>
+            <p><%= investigator.present? && investigator.try(:name) %></p>
           </div>
         </div>
         <div class="column small-12 medium-4 -align-right">

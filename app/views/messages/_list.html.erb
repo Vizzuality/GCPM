@@ -30,7 +30,7 @@
                   <%= f.text_area :body, class: '-border -padding', rows: 5, placeholder: 'Text here your response' %>
                   <%= f.hidden_field :in_response, value: c.messages.last.id %>
                   <%= f.hidden_field :data, value: 'messages' %>
-                  <%= f.submit 'Send', class: 'c-btn -primary' %>
+                  <%= f.submit 'Send', class: 'c-btn -secondary' %>
                 </div>
               <% end %>
             </div>

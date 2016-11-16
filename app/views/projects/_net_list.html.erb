@@ -8,13 +8,19 @@
               <%= p.project_leads.first.try(:name) %>
             </a>
           </h3>
-          <h2><%= link_to p.title, project_path(p.slug ? p.slug : p.id) %></h2>
+          <h2><%= link_to p.title, project_path(p.slug_or_id) %></h2>
           <p>
             <% p.cancer_types.each do |t| %>
               <span class="c-tag -mg">
-                <a href="/cancer-types/<%= t.slug %>">
-                  <%= t.name %>
-                </a>
+                <%= link_to t.name, cancer_path(t.slug_or_id) %>
+              </span>
+            <% end %>
+          </p>
+
+          <p>
+            <% p.specialities.each do |sp| %>
+              <span class="c-tag -mg -darker">
+                <%= sp.name %>
               </span>
             <% end %>
           </p>

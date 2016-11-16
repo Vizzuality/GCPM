@@ -6,7 +6,12 @@ class UsersController < ApplicationController
 
   def show
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
-    @filters = %w(network projects posts events messages)
+    @filters = %w(network projects posts events)
+
+    if current_user == @user
+      @filters.push('messages')
+    end
+
     @current_type = params.key?(:data) ? params[:data] : 'projects'
 
     gon.server_params = { 'user': @investigator.size.positive? ? @investigator.first.id : '0' }
@@ -73,7 +78,7 @@ class UsersController < ApplicationController
   def check_user
     if !current_user
       redirect_to new_user_session_path and return
-    elsif current_user != User.find_by(id: params[:id])
+    elsif action_name != 'show' && current_user != @user
       redirect_to map_path and return
     end
   end
