@@ -6,7 +6,7 @@
           <h3 class="-underlined">
             Organization
           </h3>
-          <h2><%= link_to o.name, organization_path(o.id) %></h2>
+          <h2><%= link_to o.name, organization_path(o.slug_or_id) %></h2>
         </div>
       </div>
     <% end %>

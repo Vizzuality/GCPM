@@ -39,6 +39,6 @@ class CancerTypesController < ApplicationController
   private
 
     def set_cancer_type
-      @cancer_type = CancerType.set_by_id_or_slug(params['slug'])
+      @cancer_type = CancerType.set_by_id_or_slug(params[:id])
     end
 end
