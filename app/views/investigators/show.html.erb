@@ -30,7 +30,7 @@
               <ul class="c-pipe-list">
                 <% if @investigator.organizations.size > 0 %>
                   <li>
-                    <%= link_to @investigator.organizations.first.name, organization_path(@investigator.organizations.first.id), class: '-clickable -hv' %>
+                    <%= link_to @investigator.organizations.first.name, organization_path(@investigator.organizations.first.slug_or_id), class: '-clickable -hv' %>
                   </li>
                 <% end %>
                 <% if inv_user && inv_user.position %>

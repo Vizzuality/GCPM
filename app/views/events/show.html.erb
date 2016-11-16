@@ -21,7 +21,7 @@
                   <use xlink:href="#icon-collaborators"></use>
                 </svg>
               </div>
-              <h3><%= @event.participants != nil ? @event.participants.split(',').length : 0 %>
+              <h3><%= @event.participants.present? ? @event.participants.split(',').length : 0 %>
                 Participants</h3>
             </div>
           </div>

@@ -1,22 +1,20 @@
 <div class="row collapse">
-  <% if @projects && @projects.size() > 0 %>
+  <% if @projects.any? %>
     <% @projects.each do |p| %>
       <div class="column small-12 medium-4">
         <div class="c-card -projects">
           <h3 class="-underlined">
-            <a href="/investigators/<%= p.project_leads.first.try(:id) %>">
-              <%= p.project_leads.first.try(:name) %>
-            </a>
+            <% if p.project_leads.first.present? %>
+              <%= link_to p.project_leads.first.try(:name), investigator_path(p.project_leads.first.slug_or_id) %>
+            <% end %>
           </h3>
 
-          <h2><%= link_to p.title, project_path(p.id) %></h2>
+          <h2><%= link_to p.title, project_path(p.slug_or_id) %></h2>
 
           <p>
             <% p.cancer_types.each do |t| %>
               <span class="c-tag -mg">
-                <a href="/cancer-types/<%= t.slug %>">
-                  <%= t.name %>
-                </a>
+                <%= link_to t.name, cancer_path(t.slug_or_id) %>
               </span>
             <% end %>
           </p>
@@ -25,7 +23,7 @@
     <% end %>
   <% end %>
 
-  <% if @events && @events.size() > 0 %>
+  <% if @events.any? %>
     <% @events.each_with_index do |e, index| %>
       <div class="column small-12 medium-4">
         <div class="c-card -events <% if index == 0 %>-inverse<% end %>">
@@ -34,27 +32,25 @@
               <% country = Country.find_by( country_name: e.country ) %>
               <!-- TODO: In case country dosen't exist -->
               <% if country %>
-                <a href="/countries/<%= country.country_iso_3 %>">
-                  <%= e.city %>, <%= e.country %>
-                </a>
+                <%= link_to e.city + ', ' + e.country, country_path(country.country_iso_3) %>
               <% end %>
             </h3>
           <% end %>
-          <h2><%= link_to e.title, event_path(e.id) %></h2>
+          <h2><%= link_to e.title, event_path(e.slug_or_id) %></h2>
           <p><%= truncate(e.description.html_safe, :length => 300) %></p>
         </div>
       </div>
     <% end %>
   <% end %>
 
-  <% if @organizations && @organizations.size() > 0 %>
+  <% if @organizations.any? %>
     <% @organizations.each_with_index do |o, index| %>
       <div class="column small-12 medium-4">
         <div class="c-card <% if index == 0 %>-inverse<% end %>">
           <h3 class="-underlined">
             Organization
           </h3>
-          <h2><%= link_to o.name, organization_path(o.id) %></h2>
+          <h2><%= link_to o.name, organization_path(o.slug_or_id) %></h2>
         </div>
       </div>
     <% end %>
