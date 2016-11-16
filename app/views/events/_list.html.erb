@@ -17,7 +17,7 @@
           <p><%= truncate(e.description.html_safe, :length => 300) %></p>
 
           <% if controller_name === 'users' %>
-            <a href="/network/<%= current_user.id %>/events/<%= e.id %>/edit" class="c-btn -primary">
+            <a href="/network/<%= current_user.id %>/events/<%= e.id %>/edit" class="c-btn -secondary">
               Edit
             </a>
           <% end %>

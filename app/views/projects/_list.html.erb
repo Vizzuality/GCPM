@@ -24,7 +24,7 @@
 
           <% if controller_name === 'users' %>
             <% if p.project_users.first.is_approved %>
-              <a href="/network/<%= current_user.id %>/projects/<%= p.id %>/edit" class="c-btn -primary">
+              <a href="/network/<%= current_user.id %>/projects/<%= p.id %>/edit" class="c-btn -secondary">
                 Edit
               </a>
             <% else %>
