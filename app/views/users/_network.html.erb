@@ -21,9 +21,9 @@
     </article>
 
     <article>
-      <div class="l-content -no-br -br-bottom wrapper">
+      <div class="l-content -no-br <%= @followEvents.any? && '-br-bottom' %> wrapper">
         <h2><%= t 'events' %></h2>
-        <% if @followEvents.size <= 0 %>
+        <% if !@followEvents.any? %>
           <p>No events</p>
         <% end %>
       </div>
@@ -33,12 +33,27 @@
 
   <div class="column row small-12 medium-4">
     <aside class="l-sidebar -no-pad">
-      <div class="l-content -no-br wrapper">
+
+      <div id="userSearch" class="l-content -no-br wrapper">
+        <div class="c-input-row">
+          <div id="search-input"></div>
+          <svg class="c-icon icon-search -medium -secondary">
+            <use xlink:href="#icon-search"></use>
+          </svg>
+          <svg class="c-icon icon-close -medium -secondary -hidden js-clear-search">
+            <use xlink:href="#icon-close"></use>
+          </svg>
+        </div>
+      </div>
+
+      <div id="search-list" class="l-content -no-br -no-top-padd wrapper -hidden"></div>
+
+      <div class="l-content wrapper">
         <h2><%= t 'countries' %></h2>
       </div>
       <div class="wrapper">
         <ul class="c-list -mg-bottom">
-          <% if @followCountries.size > 0 %>
+          <% if @followCountries.any? %>
             <% @followCountries.each do |c| %>
               <li class="list-item"><%= link_to c.country_name, country_path(iso: c.country_iso_3), class: '-uppercase' %></li>
             <% end %>
@@ -53,7 +68,7 @@
       </div>
       <div class="wrapper">
         <ul class="c-list -mg-bottom">
-          <% if @followCancerTypes.size > 0 %>
+          <% if @followCancerTypes.any? %>
             <% @followCancerTypes.each do |ct| %>
               <li class="list-item -uppercase"><%= link_to ct.name, cancer_path(slug: ct.slug), class: '-uppercase' %></li>
             <% end %>

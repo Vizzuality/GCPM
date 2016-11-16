@@ -29,8 +29,10 @@
           </p>
 
           <% if controller_name === 'users' %>
-            <% if can? :update, p %>
-              <%= link_to 'Edit', edit_user_project_path(current_user.id, p.slug_or_id), class: 'c-btn -secondary' %>
+            <% if p.project_users.first.is_approved %>
+              <% if is_owner?(@user, current_user) %>
+                <%= link_to 'Edit', edit_user_project_path(current_user.id, p.slug_or_id), class: 'c-btn -secondary' %>
+              <% end %>
             <% else %>
               <span class="pending">
                 <svg class="c-icon icon-pending -medium"><use xlink:href="#icon-pending"></use></svg>

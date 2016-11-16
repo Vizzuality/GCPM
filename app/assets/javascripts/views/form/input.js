@@ -42,6 +42,18 @@
       this.$el.html(this.template(this.options));
     },
 
+    clear: function() {
+      var e = {
+        currentTarget: {
+          name: this.$el.find('input').attr('name'),
+          value: ''
+        }
+      }
+
+      this.$el.find('input').val('');
+      this.triggerKeyup(e);
+    },
+
     triggerChange: function(e) {
       if (!e.currentTarget.value) return;
       this.trigger('change', {
@@ -51,6 +63,7 @@
     },
 
     triggerKeyup: function(e) {
+      this.value = e.currentTarget.value;
       this.trigger('keyup', {
         name: e.currentTarget.name,
         value: e.currentTarget.value

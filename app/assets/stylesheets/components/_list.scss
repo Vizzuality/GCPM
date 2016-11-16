@@ -7,6 +7,24 @@
     margin-bottom: $box-space;
   }
 
+  &.-row-items {
+    height: 300px;
+    overflow: auto;
+
+    .list-item a {
+      display: flex;
+      align-items: center;
+
+      & *:first-child {
+        margin-right: $inline-space/2;
+      }
+
+      & *:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
   .list-item {
     display: block;
     font-family: $base-font-family-light;

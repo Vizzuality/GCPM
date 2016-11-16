@@ -8,7 +8,7 @@
               <% country = Country.find_by( country_name: e.country ) %>
               <!-- TODO: In case country dosen't exist -->
               <% if country %>
-                <%= link_to e.title, country_path(country_country_iso_3) %>
+                <%= link_to e.title, country_path(country.country_iso_3) %>
               <% else %>
                 e.country
               <% end %>
