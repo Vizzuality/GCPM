@@ -1,8 +1,8 @@
 
 <%= simple_form_for @project_update,
   url: action === 'new' ?
-    project_project_updates_path(@project.id) :
-    project_project_update_path(@project.id, @project_update.id),
+    project_project_updates_path(@project.slug_or_id) :
+    project_project_update_path(@project.slug_or_id, @project_update.id),
   method: action === 'new' ?
     :post :
     :patch do |f| %>

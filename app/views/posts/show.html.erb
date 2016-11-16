@@ -12,7 +12,7 @@
         <div class="column small-12 medium-8 align-middle">
           <div class="investigator">
             <div class="c-avatar -ph -small"></div>
-            <p><%= investigator && investigator.name && investigator.name %></p>
+            <p><%= investigator.present? && investigator.try(:name) %></p>
           </div>
         </div>
         <div class="column small-12 medium-4 -align-right">
