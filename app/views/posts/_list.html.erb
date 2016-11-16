@@ -8,9 +8,7 @@
             <h3 class="-underlined"><%= link_to p.title, p %></h3>
             <p><%= p.body && p.body.truncate(300).html_safe %></p>
             <% if controller_name === 'users' %>
-              <a href="/posts/<%= p.id %>/edit" class="c-btn -secondary">
-                Edit
-              </a>
+              <%= link_to 'Edit', edit_post_path(p.id), class: "c-btn -secondary" %>
             <% end %>
           </div>
         </div>

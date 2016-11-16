@@ -20,7 +20,7 @@
             <div class="column small-12 medium-6">
               <ul class="c-pipe-list">
                 <li>
-                  <%= @organization.email_address ? @organization.email_address : '' %>
+                  <%= @organization.email_address.present? ? @organization.email_address : '' %>
                 </li>
               </ul>
             </div>

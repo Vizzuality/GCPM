@@ -35,6 +35,7 @@ class ProjectsController < ApplicationController
     end
 
     @updates = ProjectUpdate.where(project_id: @project.id)
+    @addresses = @project.addresses.map { |ad| { country_iso_3: Country.find(ad.country_id).try(:country_iso_3), address: ad } }
 
     respond_with(@items)
   end
@@ -62,8 +63,7 @@ class ProjectsController < ApplicationController
   private
 
     def set_project
-      @project = Project.set_by_id_or_slug(params[:slug])
-      @addresses = @project.addresses.map { |ad| { country_iso_3: Country.find(ad.country_id).try(:country_iso_3), address: ad } }
+      @project = Project.set_by_id_or_slug(params[:id])
     end
 
     def set_user
