@@ -3,6 +3,9 @@
     <div class="row">
       <div class="column small-12 medium-8 large-6">
         <h2>Log in</h2>
+        <% if flash[:alert] %>
+           <span class='flash_error'> <%= flash[:alert] %></span>
+         <% end %>
 
         <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div class="form-row">

@@ -73,6 +73,7 @@ Rails.application.routes.draw do
       resources :project_types,      only: [:index],        path: 'project-types'
       resources :organization_types, only: [:index],        path: 'organization-types'
       resources :map,                only: [:index]
+      resources :users,              only: [:index]
 
       get '/map/projects/:id', to: 'map#show_project'
       get '/map/download',     to: 'map#csv_download'
