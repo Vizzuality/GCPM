@@ -3,8 +3,7 @@
   {{#each items as |item|}}
     <li class="list-item">
       <a href="/network/{{item.id}}">
-        <div class="c-avatar -small -ph">
-          <img src="{{item.photo}}">
+        <div class="c-avatar -small -ph" style="background-image: url({{item.photo}})">
         </div>
         <span>{{item.name}}</span>
       </a>

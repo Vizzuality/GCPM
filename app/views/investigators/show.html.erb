@@ -11,7 +11,11 @@
     <div class="wrapper">
       <div class="row collapse">
         <div class="column small-8">
-          <div class="c-avatar -big -ph -mg-bt"></div>
+          <div class="c-avatar -big -ph -mg-bt"
+               style="<% if inv_user.present? %>
+                        background-image: url(<%= inv_user.avatar_url(:thumb) %>)
+                      <% end %>">
+          </div>
         </div>
       </div>
       <div class="row collapse">
