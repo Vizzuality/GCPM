@@ -3,7 +3,11 @@
     <% items.each do |e| %>
       <div class="column small-12 medium-4">
         <div class="c-card -person">
-          <div class="c-avatar -ph -mg-bt"></div>
+          <div class="c-avatar -ph -mg-bt"
+               style="<% if e.user.present? %>
+                        background-image: url(<%= e.user.avatar_url(:thumb) %>)
+                      <% end %>">
+          </div>
           <h2><%= link_to e.name, investigator_path(e.slug_or_id) %></h2>
         </div>
       </div>

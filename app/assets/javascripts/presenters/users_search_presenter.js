@@ -36,8 +36,14 @@
         }
       });
 
+      this.hideSpinner();
       this.setSubscriptions();
       this.setEvents();
+    },
+
+    hideSpinner: function() {
+      this.$spinner = $('.c-spinner');
+      this.$spinner.hide();
     },
 
     setEvents: function() {
@@ -58,6 +64,7 @@
 
       App.on('Remote:load', function(params) {
         if (params.data === 'network') {
+          this.hideSpinner();
           this.setEvents();
 
           this.searchInput.setElement('#search-input');

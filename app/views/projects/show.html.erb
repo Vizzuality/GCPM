@@ -22,10 +22,10 @@
           <div class="c-summary-info row -collapse">
 
             <div class="column small-12 large-4 align-middle">
-              <div class="c-avatar -small -ph">
-                <% if @project.project_lead.present? && @project.project_lead.user.present? %>
-                  <%= image_tag(@project.project_lead.user.avatar_url(:thumb)) %>
-                <% end %>
+              <div class="c-avatar -small -ph"
+                   style="<% if @project.project_lead.present? && @project.project_lead.user.present? %>
+                            background-image: url(<%= @project.project_lead.user.avatar_url(:thumb) %>)
+                          <% end %>">
               </div>
 
               <h3>
