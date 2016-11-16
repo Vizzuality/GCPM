@@ -45,6 +45,9 @@
 
     renderSubviews: function(params) {
       if (params.data === 'data') {
+        this.$spinner = $('.c-spinner');
+        this.$spinner.hide();
+
         this.investigatorData.setElement('#entityData');
         this.investigatorData.render();
       }

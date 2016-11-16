@@ -13,14 +13,21 @@
     initialize: function() {
       this.state = new StateModel();
 
+      this.cache();
       this.renderComponents();
       this.setSubscriptions();
+    },
+
+    cache: function() {
+      this.$spinner = $('.c-spinner');
     },
 
     renderComponents: function() {
       this.cancerTypesList = new App.Collection.CancerTypes();
       this.cancerTypesList.fetch()
         .done(function() {
+          this.$spinner.hide();
+
           this.cancerTypes = _.sortBy(this.cancerTypesList.toJSON(), 'name');
           this.state.set({ 'cancerTypes': this.cancerTypes });
 
