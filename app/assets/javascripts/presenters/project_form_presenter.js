@@ -381,7 +381,6 @@
     },
 
     loadData: function(){
-      console.log(this.project);
       this.titleInput.setValue(this.project.title);
       this.descTextarea.setValue(this.project.summary);
       this.startPickadate.setValue(this.project.start_date);
