@@ -114,7 +114,7 @@
           if (d.projects) {
             return -16;
           } else if (d.investigators) {
-            return 34;
+            return 30;
           } else {
             return 16;
           }
@@ -133,7 +133,9 @@
         .attr("font-weight", function(d) { return d.investigators ? "bold" : "normal" })
         .text(function(d) {
           if (d.title) {
-            return d.title.length > 14 ? d.title.substring(0, 12) + '...' : d.title;
+            return d.title.length > 11 ? d.title.substring(0, 10) + '...' : d.title;
+          } else if (d.projects) {
+            return d.name.length > 14 ? d.name.substring(0, 12) + '...' : d.name ;
           } else {
             return d.name;
           }
