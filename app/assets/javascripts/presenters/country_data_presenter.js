@@ -82,17 +82,16 @@
         this.country.setUrl(this.state.attributes.vars[0]);
         this.country.fetch()
           .done(function(){
-            this.$spinner = $('.c-spinner');
-            this.$spinner.hide();
-
             var country = this.country.toJSON();
 
             this.countryData.setElement('#countryData');
+            this.countryData.cache();
             this.countryData.setOptions(country);
             this.countryData.render();
           }.bind(this));
       }
     }
+
   });
 
 })(this.App);

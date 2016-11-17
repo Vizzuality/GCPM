@@ -20,7 +20,12 @@
       opts = opts || new Object();
       this.options = _.extend({}, this.defaults, opts);
 
+      this.cache();
       this.render();
+    },
+
+    cache: function() {
+      this.$spinner = this.$el.closest('.l-content').find('.c-spinner');
     },
 
     render: function() {
@@ -102,6 +107,8 @@
     },
 
     updateGraph: function(widgetConf) {
+      this.hideSpinner();
+
       this.widgetConf = widgetConf;
       this.render();
     },
@@ -120,7 +127,13 @@
 
     onClickInfo: function() {
       this.trigger('info', this.widgetConf.config.source);
+    },
+
+    hideSpinner: function() {
+      this.$spinner && this.$spinner.hasClass('-start') &&
+        this.$spinner.toggleClass('-start', false);
     }
+
   });
 
 })(this.App);

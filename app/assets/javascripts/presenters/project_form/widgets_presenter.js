@@ -168,6 +168,8 @@
 
     remoteLoad: function() {
       if (this.state.get('data') === 'data') {
+        this.graph.setElement('#widgets-graph');
+        this.graph.cache();
         this.fetchWidgets();
       }
     }
