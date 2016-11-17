@@ -33,7 +33,7 @@ RSpec.describe Search, type: :model do
 
   it 'Search indexed items count' do
     # Search in projects and organizations, users in two columns
-    expect(Search.all.count).to eq(10)
+    expect(Search.all.count).to eq(11)
   end
 
   it 'Search count' do
