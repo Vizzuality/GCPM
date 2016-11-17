@@ -4,22 +4,21 @@
 
   var StateModel = Backbone.Model.extend();
 
-  App.Presenter.InvestigatorActions = function() {
+  App.Presenter.MessagesActions = function() {
     this.initialize.apply(this, arguments);
   };
 
-  _.extend(App.Presenter.InvestigatorActions.prototype, {
+  _.extend(App.Presenter.MessagesActions.prototype, {
 
     initialize: function(params) {
       this.state = new StateModel();
 
-      this.investigatorActions = new App.View.InvestigatorActions({
-        el: '#investigatorsActionsView'
+      this.messagesActions = new App.View.MessagesActions({
+        el: '.js-messages-actions-view'
       });
       this.modal = new App.View.Modal({
         className: '-tiny'
       });
-
 
       this.setEvents();
       this.setSubscriptions();
@@ -40,7 +39,7 @@
     setEvents: function() {
       this.state.on('change:user', this.changeUser.bind(this));
 
-      this.investigatorActions.on('toggle', function(user) {
+      this.messagesActions.on('toggle', function(user) {
         this.state.set('user', user);
       }.bind(this));
     },
@@ -55,18 +54,17 @@
     },
 
     changeUser: function() {
-      this.investigatorActions.toggleForm(this.state.get('user'));
+      this.messagesActions.toggleForm(this.state.get('user'));
     },
 
     rebindElement: function() {
-      this.investigatorActions.setElement('#investigatorsActionsView');
-      this.investigatorActions.cache();
+      this.messagesActions.setElement('.js-messages-actions-view');
+      this.messagesActions.cache();
     },
 
     openNotice: function(text) {
       this.modal.open(text);
     }
-
 
   });
 

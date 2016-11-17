@@ -31,6 +31,10 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   config.include Devise::Test::ControllerHelpers, type: :controller
 
+  config.expect_with :rspec do |c|
+    c.syntax = [:should, :expect]
+  end
+
   Capybara.register_server :puma do |app, port|
     require 'rack/handler/puma'
     Rack::Handler::Puma.run(app, Port: port)

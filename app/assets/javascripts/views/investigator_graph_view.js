@@ -18,8 +18,12 @@
       d3.select("svg")
       .remove();
 
-      this.addLegend();
-      this.addGraph();
+      if (this.data.children && this.data.children.length > 0) {
+        this.addLegend();
+        this.addGraph();
+      } else {
+        this.addMesage();
+      }
       return this;
     },
 
@@ -41,6 +45,10 @@
         rects: 'Project',
         others: 'Investigator / Colaborator'
       }));
+    },
+
+    addMesage: function() {
+      this.$el.html('<p>No data</p>');
     }
 
   });

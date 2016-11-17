@@ -40,6 +40,8 @@ class User < ApplicationRecord
          :confirmable, :lockable, :timeoutable,
          :omniauthable, omniauth_providers: [:linkedin, :google_oauth2]
 
+  acts_as_followable
+
   enum role: { user: 0, admin: 1 }
 
   mount_uploader :avatar, AvatarUploader

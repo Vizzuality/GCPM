@@ -1,4 +1,6 @@
 class FollowsController < ApplicationController
+  before_action :authenticate_user!
+
   before_action :find_resource, only: [:create, :destroy]
   before_action :find_user, only: [:block, :unblock]
 

@@ -2,7 +2,7 @@
 
   'use strict';
 
-  App.View.InvestigatorActions = Backbone.View.extend({
+  App.View.MessagesActions = Backbone.View.extend({
 
     events: {
       'click .js-btn-toggle-message': 'triggerToggle'
