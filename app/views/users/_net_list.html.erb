@@ -4,33 +4,33 @@
       <div class="column small-12 medium-6">
         <div class="c-card -pad-bigger -no-shadow -person">
           <div class="c-avatar -medium -ph -mg-bt"
-               style="<% if e.user.present? %>
-                        background-image: url(<%= e.user.avatar_url(:thumb) %>)
+               style="<% if e.present? %>
+                        background-image: url(<%= e.avatar_url(:thumb) %>)
                       <% end %>">
           </div>
 
-          <h2><%= link_to e.name, investigator_path(e.slug_or_id) %></h2>
-          <% if e.user.present? && is_owner?(@user, current_user) %>
-            <button class="c-btn -icon -secondary js-btn-toggle-message" data-user="<%= e.user.id %>-i" type="button" name="button">
+          <h2><%= link_to e.name, user_path(e.slug_or_id) %></h2>
+          <% if e.present? && is_owner?(@user, current_user) %>
+            <button class="c-btn -icon -secondary js-btn-toggle-message" data-user="<%= e.id %>-u" type="button" name="button">
               <svg class="c-icon -normal -inverse"><use xlink:href="#icon-message"></use></svg>
               <svg class="c-icon -normal -inverse -hidden"><use xlink:href="#icon-close"></use></svg>
             </button>
 
-            <div id="form-message-<%= e.user.id %>-i" class="c-form-message js-form-message">
+            <div id="form-message-<%= e.id %>-u" class="c-form-message js-form-message">
               <%= form_for Mailboxer::Message.new, remote: true, url: :message, as: :message do |f| %>
-        				<div class="form-row">
-        					<%= f.label :subject, 'Subject' %>
-        					<%= f.text_field :subject %>
-        				</div>
-        				<div class="form-row">
-        					<%= f.label :body, 'Message' %>
-        					<%= f.text_area :body %>
-        					<%= f.hidden_field :receiver, value: e.user.id %>
-        				</div>
+                <div class="form-row">
+                  <%= f.label :subject, 'Subject' %>
+                  <%= f.text_field :subject %>
+                </div>
+                <div class="form-row">
+                  <%= f.label :body, 'Message' %>
+                  <%= f.text_area :body %>
+                  <%= f.hidden_field :receiver, value: e.id %>
+                </div>
                 <div class="form-row">
                   <%= f.submit 'Enviar', class: 'c-btn -secondary' %>
                 </div>
-        			<% end %>
+              <% end %>
             </div>
           <% end %>
         </div>
