@@ -2,9 +2,10 @@ require 'rails_helper'
 
 RSpec.describe NetworkProjectsController, type: :controller do
   before :each do
-    @user      = create(:user)
-    @adminuser = create(:admin_user)
-    @project_2 = create(:project, title: 'Second project', users: [@user])
+    @user       = create(:user)
+    @user_first = create(:user)
+    @adminuser  = create(:admin_user)
+    @project_2  = create(:project, title: 'Second project', users: [@user])
   end
 
   let!(:approve_relation) {
@@ -13,7 +14,8 @@ RSpec.describe NetworkProjectsController, type: :controller do
 
   context 'For authenticated user' do
     before :each do
-      @project_1 = create(:project, title: 'First project', users: [@user])
+      @project_1 = create(:project, title: 'First project', users: [@user_first, @user])
+      @project_3 = create(:project, title: 'Third project', users: [@user])
       sign_in @user
     end
 
@@ -34,7 +36,14 @@ RSpec.describe NetworkProjectsController, type: :controller do
       expect(@project_2.reload.title).to eq('Updated project')
     end
 
-    it 'Do not allows user to update owned project if relation not approved' do
+    it 'Allows user to update owned project if relation not approved and user is unique owner' do
+      process :update, method: :patch, params: { user_id: @user.id, id: @project_3.id, project: { id: @project_3.id, title: 'Updated project' } }
+      expect(response).to be_redirect
+      expect(response).to have_http_status(302)
+      expect(@project_3.reload.title).to eq('Updated project')
+    end
+
+    it 'Do not allows user to update owned project if relation not approved and user is not creator of project' do
       process :update, method: :patch, params: { user_id: @user.id, id: @project_1.id, project: { id: @project_1.id, title: 'Updated project' } }
       expect(response).to be_redirect
       expect(response).to have_http_status(302)

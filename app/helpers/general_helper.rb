@@ -6,5 +6,4 @@ module GeneralHelper
   def not_blank?(str)
     str.present? && str != ''
   end
-
 end
