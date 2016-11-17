@@ -1,43 +1,45 @@
 <% controller_name = controller && controller.controller_name %>
 <div>
-  <% if controller_name != 'users' && controller_name != 'organizations' %>
-    <ul id="investigatorsActionsView" class="c-btn-container">
-      <li id="followButton">
-        <% if user_signed_in? %>
-          <button class="c-btn -secondary -inverse js-btn-follow"
-            data-followed="<%= @followed %>"
-            data-id="<%= @followed_id %>"
-            data-resource="<%= @followed_resource %>">
-              <%= (@followed) ? 'Unfollow' : 'Follow' %>
-          </button>
-        <% else %>
-          <%= link_to (t 'follow'), user_session_path, class: 'c-btn -secondary -inverse' %>
-        <% end %>
-      </li>
-
-      <% if controller_name === 'investigators' && @investigator.user %>
-        <li>
-          <button class="c-btn -secondary -inverse js-btn-toggle-message" data-user="<%= @investigator.user.id %>" type="button" name="button">Message</button>
-          <div id="form-message-<%= @investigator.user.id %>" class="c-form-message -arr-right js-form-message">
-            <%= form_for Mailboxer::Message.new, remote: true, url: :message, as: :message do |f| %>
-              <div class="form-row">
-                <%= f.label :subject, 'Subject' %>
-                <%= f.text_field :subject %>
-              </div>
-              <div class="form-row">
-                <%= f.label :body, 'Message' %>
-                <%= f.text_area :body %>
-                <%= f.hidden_field :receiver, value: @investigator.user.id %>
-              </div>
-              <div class="form-row">
-                <%= f.submit 'Enviar', class: 'c-btn -secondary' %>
-              </div>
-            <% end %>
-          </div>
+  <% if controller_name != 'organizations' %>
+    <% if not_me_and_section?(controller_name, @user.present? && @user, get_not_null_user(@investigator)) %>
+      <ul class="c-btn-container js-messages-actions-view">
+        <li id="followButton">
+          <% if user_signed_in? %>
+            <button class="c-btn -secondary -inverse js-btn-follow"
+              data-followed="<%= @followed %>"
+              data-id="<%= @followed_id %>"
+              data-resource="<%= @followed_resource %>">
+                <%= (@followed) ? 'Unfollow' : 'Follow' %>
+            </button>
+          <% else %>
+            <%= link_to (t 'follow'), user_session_path, class: 'c-btn -secondary -inverse' %>
+          <% end %>
         </li>
-      <% end %>
 
-    </ul>
+        <% if ( controller_name === 'investigators' && @investigator.user.present? ) || controller_name === 'users'%>
+          <li>
+            <button class="c-btn -secondary -inverse js-btn-toggle-message" data-user="<%= @investigator.user.id %>" type="button" name="button">Message</button>
+            <div id="form-message-<%= @investigator.user.id %>" class="c-form-message -arr-right js-form-message">
+              <%= form_for Mailboxer::Message.new, remote: true, url: :message, as: :message do |f| %>
+                <div class="form-row">
+                  <%= f.label :subject, 'Subject' %>
+                  <%= f.text_field :subject %>
+                </div>
+                <div class="form-row">
+                  <%= f.label :body, 'Message' %>
+                  <%= f.text_area :body %>
+                  <%= f.hidden_field :receiver, value: @investigator.user.id %>
+                </div>
+                <div class="form-row">
+                  <%= f.submit 'Enviar', class: 'c-btn -secondary' %>
+                </div>
+              <% end %>
+            </div>
+          </li>
+        <% end %>
+
+      </ul>
+    <% end %>
   <% end %>
   <ul class="c-btn-container">
     <li><%= link_to '+ Project', (user_signed_in?) ? new_user_project_path(user_id: current_user.id) : user_session_path, class: 'c-btn -transparent -extra-thin' %></li>
