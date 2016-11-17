@@ -4,16 +4,16 @@
 
   var mapGraphFacade = {
     _parseMapData: function(data) {
-      var parseData = _.map(data, function(p) {
+      var parseData = _.map(data, function(point) {
         return {
           geometry: {
             coordinates: {
-              0: p.latitude,
-              1: p.longitude
+              0: point.latitude,
+              1: point.longitude
             },
             type: "Point"
           },
-          properties: p,
+          properties: point,
           type: "Feature"
 
         };

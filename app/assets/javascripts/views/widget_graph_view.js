@@ -115,7 +115,6 @@
     },
 
     renderMap: function() {
-      var config = this.widgetConf.config;
       var data = this.widgetConf.data;
       this.mapFc = App.facade.mapGraph;
 
