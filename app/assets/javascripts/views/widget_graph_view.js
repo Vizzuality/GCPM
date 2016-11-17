@@ -30,10 +30,18 @@
 
     render: function() {
       if (this.widgetConf) {
-        this.$el.html(this.template({
-          info: this.widgetConf.config || {}
-        }));
-        this.renderGraph();
+        var graphicType = this.widgetConf.config.graphic_type;
+        var params = _.extend({}, {
+            info: this.widgetConf.config || {}
+          },
+          graphicType && { type: this.widgetConf.config.graphic_type }
+        );
+
+        this.$el.html(this.template(params));
+
+        graphicType === 'map' ?
+          this.renderMap() :
+          this.renderGraph();
       }
     },
 
@@ -105,6 +113,26 @@
         }
       });
     },
+
+    renderMap: function() {
+      var config = this.widgetConf.config;
+      var data = this.widgetConf.data;
+      this.mapFc = App.facade.mapGraph;
+
+      this.view = new App.View.Map({
+        el: '#graph-box',
+        options: {
+          zoom: 2,
+          minZoom: 1,
+          maxZoom: 10,
+          center: [20, 0],
+          basemap: 'secondary'
+        }
+      });
+
+      this.mapFc.addPointLayer(data, this.view.map);
+    },
+
 
     updateGraph: function(widgetConf) {
       this.hideSpinner();

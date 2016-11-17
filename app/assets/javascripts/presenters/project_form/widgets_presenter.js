@@ -25,7 +25,6 @@
   });
 
 
-
   App.Presenter.Widgets = function() {
     this.initialize.apply(this, arguments);
   };
@@ -131,7 +130,8 @@
 
         // FETCH the CARTO 'query'
         // before upgrading the view
-        this.widgetModel.setUrl(gon.server_params['countries[]'], widgetConf.get('query'))
+        this.widgetModel.setUrl(gon.server_params['countries[]'], widgetConf.get('query'));
+
         this.widgetModel
           .clear({ silent: true })
           .fetch().done(function() {

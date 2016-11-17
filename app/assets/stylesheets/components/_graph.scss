@@ -53,6 +53,19 @@
       }
     }
   }
+
+  &.-map {
+    .point-icon {
+      background: white;
+      border: 0;
+      border-radius: 100%;
+      box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.2);
+
+      &.-alternative {
+        background-color: #f57823;
+      }
+    }
+  }
 }
 
 
