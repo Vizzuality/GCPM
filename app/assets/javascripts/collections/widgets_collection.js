@@ -12,8 +12,8 @@
 
     parse: function(response) {
       response.map(function(item){
-        item.x_axis = JSON.parse(item.x_axis);
-        item.y_axis = JSON.parse(item.y_axis);
+        item.x_axis = (item.x_axis) ? JSON.parse(item.x_axis) : null;
+        item.y_axis = (item.y_axis) ? JSON.parse(item.y_axis) : null;
       })
       return response;
     }
