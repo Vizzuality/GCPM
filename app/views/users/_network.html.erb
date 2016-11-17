@@ -12,6 +12,16 @@
 
     <article>
       <div class="l-content -br-bottom wrapper">
+        <h2 class=""><%= t 'users' %></h2>
+        <% if @followUser.size <= 0 %>
+          <p>No Users</p>
+        <% end %>
+      </div>
+      <%= render 'users/net_list', items: @followUser %>
+    </article>
+
+    <article>
+      <div class="l-content -br-bottom wrapper">
         <h2><%= t 'projects' %></h2>
         <% if @followProjects.size <= 0 %>
           <p>No projects</p>

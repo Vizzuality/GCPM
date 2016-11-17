@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
     @current_type = params.key?(:data) ? params[:data] : 'projects'
 
-    gon.server_params = { 'user': @investigator.size.positive? ? @investigator.first.id : '0' }
+    gon.server_params = { 'user': @investigator.present? ? @investigator.id : '0' }
     gon.userId = current_user.id
     gon.unreadCount = current_user.unread_inbox_count
 
@@ -30,6 +30,7 @@ class UsersController < ApplicationController
       @followProjects = @user.following_by_type('Project')
       @followEvents = @user.following_by_type('Event')
       @followPeople = @user.following_by_type('Investigator')
+      @followUser = @user.following_by_type('User')
       @followCancerTypes = @user.following_by_type('CancerType')
       @followCountries = @user.following_by_type('Country')
     elsif params.key?(:data) && params[:data] == 'posts'
@@ -50,6 +51,12 @@ class UsersController < ApplicationController
       @items_total = @projects.size
     end
 
+    if current_user
+      @followed = current_user.following?(@user)
+      @followed_id = @user.id
+      @followed_resource = 'User'
+    end
+
     @following = @user.follow_count || 0
     @followers = @user.investigator.present? ? @user.investigator.followers_count : 0
 
@@ -68,7 +75,7 @@ class UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
-    @investigator = Investigator.fetch_all(user_id: params[:id]);
+    @investigator = Investigator.find_by(user_id: params[:id]);
   end
 
   def user_params
