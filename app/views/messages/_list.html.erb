@@ -7,7 +7,7 @@
           <div class="conversation-subject js-subject-action">
             <% conversation_person = conversation_person(c) %>
             <h2><%= c.subject %></h2>
-            <h3><%= conversation_person.investigator.try(:name) %></h3>
+            <h3><%= conversation_person.investigator.try(:name) %> (<%= get_user(conversation_person.investigator.try(:user_id)).try(:name) %>)</h3>
           </div>
           <div class="conversation-body">
             <ul class="messages">
