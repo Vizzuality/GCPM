@@ -9,8 +9,9 @@ class InvestigatorsController < ApplicationController
 
   def show
     authorize! :show, @investigator
+    @investigator_user = @investigator.user
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
-    @filters = @investigator.user.present? ? %w(data projects posts network) : %w(data projects posts)
+    @filters = @investigator_user.present? ? %w(data projects posts network) : %w(data projects posts)
     @current_type = params.key?(:data) ? params[:data] : 'data'
 
     gon.server_params = { 'investigators[]': @investigator.id, name: @investigator.name }
@@ -23,18 +24,19 @@ class InvestigatorsController < ApplicationController
 
     @projects = Project.fetch_all(investigators: @investigator.id).order('created_at DESC')
     @posts = Post.where(user_id: @investigator.id)
-    @events = Event.fetch_all(user: @investigator.user && @investigator.user.id || -1).order('created_at DESC')
+    @events = Event.fetch_all(user: @investigator_user && @investigator_user.id || -1).order('created_at DESC')
 
     if params.key?(:data) && params[:data] == 'posts'
       @items = @posts.first(limit)
       @more = (@posts.size > @items.size)
       @items_total = @posts.size
     elsif params.key?(:data) && params[:data] == 'network'
-      @followProjects = @investigator.user.following_by_type('Project')
-      @followEvents = @investigator.user.following_by_type('Event')
-      @followPeople = @investigator.user.following_by_type('Investigator')
-      @followCancerTypes = @investigator.user.following_by_type('CancerType')
-      @followCountries = @investigator.user.following_by_type('Country')
+      @followProjects = @investigator_user.following_by_type('Project')
+      @followEvents = @investigator_user.following_by_type('Event')
+      @followPeople = @investigator_user.following_by_type('Investigator')
+      @followUser = @investigator_user.following_by_type('User')
+      @followCancerTypes = @investigator_user.following_by_type('CancerType')
+      @followCountries = @investigator_user.following_by_type('Country')
     elsif params.key?(:data) && params[:data] == 'events'
       @items = @events.limit(limit)
       @more = (@events.size > @items.size)
@@ -51,8 +53,8 @@ class InvestigatorsController < ApplicationController
       @followed_resource = 'Investigator'
     end
 
-    @following = @investigator.user && @investigator.user.follow_count || 0
-    @followers = @investigator.user && @investigator.followers_count || 0
+    @following = @investigator_user && @investigator_user.follow_count || 0
+    @followers = @investigator_user && @investigator.followers_count || 0
 
     respond_with(@items)
   end

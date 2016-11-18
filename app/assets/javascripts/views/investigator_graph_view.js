@@ -15,14 +15,11 @@
     },
 
     render: function() {
-      d3.select("svg")
-      .remove();
-
       if (this.data.children && this.data.children.length > 0) {
         this.addLegend();
         this.addGraph();
       } else {
-        this.addMesage();
+        this.addMessage();
       }
       return this;
     },
@@ -47,7 +44,7 @@
       }));
     },
 
-    addMesage: function() {
+    addMessage: function() {
       this.$el.html('<p>No data</p>');
     }
 
