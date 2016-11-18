@@ -54,6 +54,7 @@
     display: flex;
     align-items: center;
     color: $secondary-color;
+    margin-bottom: $inline-space - 6px;
 
     > svg {
       margin: 0 ($inline-space / 2) 0 0;
