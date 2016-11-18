@@ -13,7 +13,7 @@
             },
             type: "Point"
           },
-          properties: point,
+          properties: _.extend({}, point, { widget: true }),
           type: "Feature"
 
         };
@@ -27,7 +27,7 @@
 
     _getPointLayer: function() {
       var deferred = new $.Deferred();
-      var layer = App.helper.pointsLayer(this.geoData);
+      var layer = App.helper.pointsClusterLayer(this.geoData);
 
       deferred.resolve(layer);
       return deferred.promise();
