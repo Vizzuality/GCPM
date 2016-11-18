@@ -35,11 +35,14 @@
       this.userMessages.on('click', this.setConversation.bind(this));
 
       App.on('Remote:load', function(params){
-        App.trigger('MessagesBadge:change', { unreadCount: params.messages.count, equal: true });
-
         if (params.data === 'messages') {
           this.userMessages.setElement('.c-conversation');
         }
+
+        if (params.messages) {
+          App.trigger('MessagesBadge:change', { unreadCount: params.messages.count, equal: true });
+        }
+
       }.bind(this));
     },
 
