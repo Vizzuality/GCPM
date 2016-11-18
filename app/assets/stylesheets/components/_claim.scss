@@ -82,8 +82,23 @@
         }
 
         p {
-          text-decoration: underline; 
+          text-decoration: underline;
         }
+      }
+    }
+  }
+
+  &.-smaller {
+    padding-top: $box-space/2;
+    padding-bottom: $box-space/2 + 5px;
+
+    h1 {
+      font-size: $big-font-size;
+    }
+
+    .claim-link {
+      p {
+        line-height: 1.3;
       }
     }
   }
