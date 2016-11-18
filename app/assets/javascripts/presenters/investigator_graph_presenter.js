@@ -42,8 +42,7 @@
     },
 
     dataSuccess: function(data) {
-      this.$spinner = $('.c-spinner');
-      this.$spinner.hide();
+      this.hideSpinner();
 
       this.investigatorGraph = new App.View.InvestigatorGraph({
         el: '#graph',
@@ -69,6 +68,11 @@
         children: renamedData,
         projects: renamedData
       };
+    },
+
+    hideSpinner: function() {
+      this.$spinner = $('.c-spinner');
+      this.$spinner.hide();
     }
 
   });
