@@ -28,35 +28,39 @@
 </section>
 
 <!-- Results: <%#= @search_results.size %> -->
-  <div class="l-content">
-    <div class="wrapper">
-      <div class="row collapse">
-        <div class="column small-12">
-          <% if params[:search].present? && params[:search][:item].present? %>
-            <span>Search results for "<%= params[:search][:item] %>"</span>
-            <% if params[:search].present? && params[:search][:type].present? %>
-              <span> in <%= params[:search][:type].to_s.downcase %></span>
-            <% end %>
-            <span> (<%= @search_results.size %>)</span>
+<div class="l-content">
+  <div class="wrapper">
+    <div class="row collapse">
+      <div class="column small-12">
+        <% if params[:search].present? && params[:search][:item].present? %>
+          <span>Search results for "<%= params[:search][:item] %>"</span>
+          <% if params[:search].present? && params[:search][:type].present? %>
+            <span> in <%= params[:search][:type].to_s.downcase %></span>
           <% end %>
-        </div>
-        <div class="column small-12">
-          <ul class="c-list row">
-            <% @search_results.each do |search| %>
-              <li class="column small-12">
-                <div class="c-search-item">
-                  <%= link_to search.try(:title) || search.try(:name), build_search_link(search.class.name, search.id) %>
-                  <% if search.try(:summary).present? || search.try(:description).present? %>
-                    <p><%= truncate(search.try(:summary) || search.try(:description), length: 150, omission: '...') %></p>
-                  <% end %>
-                </div>
-              </li>
-            <% end %>
-          </ul>
-        </div>
+          <span> (<%= @search_results.size %>)</span>
+        <% end %>
       </div>
     </div>
   </div>
+</div>
+
+<% if @search_results.any? %>
+  <div class="l-grid">
+    <div class="row collapse">
+      <% @search_results.each do |search| %>
+        <div class="column small-12 medium-4">
+          <div class="c-card">
+            <h3 class="-underlined"><%= search.class.name %></h3>
+            <h2><%= link_to search.try(:title) || search.try(:name), build_search_link(search.class.name, search.slug_or_id) %></h2>
+            <% if search.try(:summary).present? || search.try(:description).present? %>
+              <p><%= truncate(search.try(:summary) || search.try(:description), length: 150, omission: '...') %></p>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
 
   <p>
     <%#= link_to search.try(:title) || search.try(:name), build_search_link(search.class.name, search.id) %>

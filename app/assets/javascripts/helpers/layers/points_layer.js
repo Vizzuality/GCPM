@@ -18,8 +18,15 @@
         return marker;
       },
       onEachFeature: function (feature, layer) {
-        var htmlContent = '<a href="/investigators/' + feature.properties.investigator_slug + '">'
-          + feature.properties.investigator_name + '</a>';
+        var htmlContent = '';
+
+        if (feature.properties.province_state || feature.properties.city) {
+          htmlContent = '<p>' + feature.properties.city + ', '
+            + feature.properties.province_state + '</p>';
+        } else {
+          htmlContent = '<a href="/investigators/' + feature.properties.investigator_slug + '">'
+            + feature.properties.investigator_name + '</a>';
+        }
         layer.bindPopup(htmlContent);
       }
     });

@@ -1,3 +1,12 @@
+//TODO: waiting for responsive
+.c-nav {
+  flex-wrap: wrap;
+
+  &.-social {
+    flex-wrap: nowrap;
+  }
+}
+
 .c-nav,
 .c-nav > ul {
   @extend %clearlist;

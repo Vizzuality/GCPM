@@ -32,6 +32,7 @@ module Account
         Abilities::User.any_instance.should_receive(:can).with(:manage, ::Investigator, user_id: @user.id, is_approved: true)
         Abilities::User.any_instance.should_receive(:can).with(:manage, ::Event, user_id: @user.id)
         Abilities::User.any_instance.should_receive(:can).with(:manage, ::Post, user_id: @user.id)
+        Abilities::User.any_instance.should_receive(:can).with(:update, ::Project)
         Abilities::User.any_instance.should_receive(:can).with(:create, :all)
         Abilities::User.any_instance.should_receive(:can).with(:remove_relation,  ::Project, project_users: { user_id: @user.id })
         Abilities::User.any_instance.should_receive(:can).with(:relation_request, ::Project)

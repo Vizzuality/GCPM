@@ -29,15 +29,14 @@
           </p>
 
           <% if controller_name === 'users' %>
-            <% if p.project_users.first.is_approved %>
-              <% if is_owner?(@user, current_user) %>
-                <%= link_to 'Edit', edit_user_project_path(current_user.id, p.slug_or_id), class: 'c-btn -secondary' %>
-              <% end %>
-            <% else %>
+            <% if check_panding_project_user_status(p, current_user.id) %>
               <span class="pending">
                 <svg class="c-icon icon-pending -medium"><use xlink:href="#icon-pending"></use></svg>
                 Pending of Confirmation
               </span>
+            <% end %>
+            <% if can? :update, p %>
+              <%= link_to 'Edit', edit_user_project_path(current_user.id, p.slug_or_id), class: 'c-btn -secondary' %>
             <% end %>
           <% end %>
         </div>
