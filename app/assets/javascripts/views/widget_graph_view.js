@@ -39,9 +39,13 @@
 
         this.$el.html(this.template(params));
 
-        graphicType === 'map' ?
-          this.renderMap() :
-          this.renderGraph();
+        if (this.widgetConf.data.length > 0) {
+          graphicType === 'map' ?
+            this.renderMap() :
+            this.renderGraph();
+        } else {
+          this.$el.find('#graph-box').html('<p>No data</p>');
+        }
       }
     },
 
