@@ -10,16 +10,25 @@
     position: relative;
     color: $inverse-font-color;
     font-weight: bold;
-    font-size: $medium-font-size;
+    font-size: 14px;
     text-align: center;
+    flex-grow: 1;
+
+    @media #{$mq-small} {
+      flex-grow: inherit;
+      font-size: $medium-font-size;
+    }
 
     a {
       display: block;
       position: relative;
       padding: 10px 5px;
-      min-width: 140px;
 
       color: $inverse-font-color;
+
+      @media #{$mq-small} {
+        min-width: 130px;
+      }
 
       &:hover {
         background-color: darken($primary-color, 5%);
