@@ -1,0 +1,75 @@
+
+.c-map-options {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+  display: flex;
+  flex-flow: column;
+
+  @media #{$mq-small} {
+    position: relative;
+  }
+
+  &.-active {
+    > .hidden-options {
+      height: 160px;
+    }
+  }
+
+  .c-toolbar {
+    .c-dropdown {
+      padding: 0 10px;
+    }
+
+    .c-btn {
+      padding: $inline-space 10px;
+    }
+  }
+
+  .hidden-options {
+    order: 2;
+    background-color: $primary-color;
+    height: 0;
+    transition: height .2s $easeOutSine;
+    overflow: auto;
+
+    @media #{$mq-small} {
+      display: none;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      .c-btn {
+        padding: 18px 25px;
+        width: 100%;
+        text-align: start;
+      }
+    }
+
+    .c-actionbar {
+      flex-flow: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      height: auto;
+
+      & .actionbar-item {
+        width: 100%;
+
+        .c-btn {
+          padding: 18px 25px;
+          width: 100%;
+          text-align: start;
+        }
+      }
+    }
+
+    .layers {
+      display: none;
+    }
+  }
+}

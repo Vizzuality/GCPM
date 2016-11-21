@@ -1,15 +1,41 @@
 .c-toolbar {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin: 0;
   padding: 0;
   list-style: none;
+
+  background-color: $primary-color;
+
+  padding: 0 15px;
+
+  @media #{$mq-small} {
+    position: relative;
+    background-color: transparent;
+    justify-content: flex-end;
+    padding: 0;
+
+  }
+
+  #download {
+    display: none;
+
+    @media #{$mq-small} {
+      display: inherit;
+    }
+  }
 
   .toolbar-item {
     color: $inverse-font-color;
     display: flex;
     align-items: center;
     font-weight: $bold-font-weight;
+    white-space: nowrap;
+
+    @media #{$mq-small} {
+      flex-grow: 1;
+      justify-content: center;
+    }
 
     .c-icon, svg {
       vertical-align: -2px;
@@ -22,11 +48,26 @@
     }
 
     &.-highlighted {
-      background-color: $app-bg-color;
+      @media #{$mq-small} {
+        background-color: $app-bg-color;
+      }
     }
 
     &.-hidden {
       display: none;
+    }
+
+    &.options {
+      display: inherit;
+
+      @media #{$mq-small} {
+        display: none;
+      }
+
+      .c-btn {
+        font-size: 25px;
+        line-height: .5;
+      }
     }
   }
 }

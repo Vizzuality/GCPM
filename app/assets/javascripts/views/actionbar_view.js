@@ -12,7 +12,7 @@
 
     render: function(data) {
       if (data) {
-        this.$el.html(this.template(data));
+        this.$el.append(this.template(data));
       }
     },
 
