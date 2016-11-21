@@ -11,6 +11,10 @@ module GeneralHelper
     str.present? && str != ''
   end
 
+  def prop_or_blank(str)
+    str.present? ? str : ''
+  end
+
   def get_not_null_user(entity)
     entity.present? && entity.user.present? && entity.user
   end
