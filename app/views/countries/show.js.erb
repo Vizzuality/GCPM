@@ -10,11 +10,9 @@
     end
   %>
 
-  var $content = $('#content');
   var htmlContent = "<%= escape_javascript render(partial: template, locals: { items: @items, more: @more }) %>";
 
-  // If I use pure javascript, the trigger will never happen
-  $('#content').html(htmlContent);
+  document.getElementById('content').innerHTML = htmlContent;
 
   App.trigger('Remote:load');
 
