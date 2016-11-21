@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
 
     def store_location
       return unless request.get?
-      if (request.path != '/users/sign_in' &&
+      if request.path != '/users/sign_in' &&
           request.path != '/users/password/new' &&
           request.path != '/users/password/edit' &&
           request.path != '/users/sign_up' &&
@@ -51,7 +51,7 @@ class ApplicationController < ActionController::Base
           request.path != '/users/cancel' &&
           request.path != "/users/confirmation" &&
           request.path != "/users/sign_out" &&
-          !request.xhr?) # don't store ajax calls
+          !request.xhr? # don't store ajax calls
         session['user_return_to'] = request.fullpath
       end
     end
