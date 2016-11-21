@@ -1,0 +1,6 @@
+Dear <%= @name %>,<%= "\n" %>
+<% if @action.include?('request') %>
+  A new <%= @class_name %> relation request for <%= @relation_name %> available, check admin dashboard for updates.
+<% else %>
+  A new <%= @class_name %> with the name <%= @relation_name %> was <%= @action %>, check admin dashboard for updates.
+<% end %>

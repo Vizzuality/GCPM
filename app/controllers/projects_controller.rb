@@ -54,6 +54,7 @@ class ProjectsController < ApplicationController
     authorize! :relation_request, @project
     if @project.relation_request(@user.id)
       UserMailer.user_relation_email(@user.name, @user.email, @project.title, 'request').deliver_later
+      AdminMailer.user_relation_email('project', @project.title, 'request').deliver_later
       redirect_to project_url(@project), notice: { text: 'Your request is being revised, please, check your dashboard for updates.', show: true }
     else
       redirect_to project_url(@project), notice: { text: "Can't request relation.", show: true }

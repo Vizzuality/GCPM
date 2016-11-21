@@ -73,6 +73,7 @@ class InvestigatorsController < ApplicationController
     authorize! :relation_request, @investigator
     if @investigator.relation_request(@user.id)
       UserMailer.user_relation_email(@user.name, @user.email, @investigator.name, 'request').deliver_later
+      AdminMailer.user_relation_email('investigator', @investigator.name, 'request').deliver_later
       redirect_to investigator_path(@investigator), notice: { text: 'Your request is being revised, please, check your dashboard for updates.', show: true }
     else
       redirect_to investigator_path(@investigator), notice: { text: "Can't request relation.", show: true }

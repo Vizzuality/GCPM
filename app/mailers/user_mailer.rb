@@ -1,13 +1,13 @@
 class UserMailer < ApplicationMailer
   def user_relation_email(contact_name, contact_email, relation_name, action)
     @date          = DateTime.now.to_date
-    @name          = contact_name
-    @email         = contact_email
-    @action        = action
-    @name_or_email = if contact_name.present?
-                       contact_name
+    @name          = contact_name  if contact_name.present?
+    @email         = contact_email if contact_email.present?
+    @action        = action        if action.present?
+    @name_or_email = if @name.present?
+                       @name
                      else
-                       contact_email
+                       @email
                      end
 
     @subject       = if @action.include?('request')
