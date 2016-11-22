@@ -31,10 +31,11 @@
     align-items: center;
     font-weight: $bold-font-weight;
     white-space: nowrap;
+    justify-content: center;
+    // flex-grow: 1;
 
     @media #{$mq-small} {
-      flex-grow: 1;
-      justify-content: center;
+      // flex-grow: inherit;
     }
 
     .c-icon, svg {

@@ -43,6 +43,14 @@
     #layers {
       position: relative;
     }
+
+    .c-actionbar {
+      display: none;
+
+      @media #{$mq-small} {
+        display: flex;
+      }
+    }
   }
 
   .l-app-claim {

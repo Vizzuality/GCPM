@@ -25,6 +25,11 @@
 
     .c-btn {
       padding: $inline-space 10px;
+
+      @media #{$mq-small} {
+        padding: $inline-space $base-space;
+      }
+
     }
   }
 

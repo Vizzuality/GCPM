@@ -13,7 +13,7 @@
     initialize: function(params) {
       this.state = new StateModel();
       this.toolbar = new App.View.Toolbar({
-        el: '#toolbar'
+        el: '.toolbar'
       });
       this.setEvents();
       this.setSubscriptions();
