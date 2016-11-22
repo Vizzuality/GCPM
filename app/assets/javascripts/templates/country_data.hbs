@@ -3,11 +3,28 @@
     <div class="c-data-item">
       <p class="title">Presence of screening programs</p>
       <h2 class="answer">
-        {{#if screening_programs}}
+        Breast
+        ({{#if breast_cancer_screening_programscountries_with_organized_or_uno}}
           Yes
         {{else}}
           No
-        {{/if}}
+        {{/if}})
+      </h2>
+      <h2 class="answer">
+        Cervical
+        ({{#if cervical_cancer_screening_programscountries_with_organized_or_u}}
+          Yes
+        {{else}}
+          No
+        {{/if}})
+      </h2>
+      <h2 class="answer">
+        Colon
+        ({{#if colorectal_cancer_screening_programscountries_with_organized_or}}
+          Yes
+        {{else}}
+          No
+        {{/if}})
       </h2>
     </div>
   </div>

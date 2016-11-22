@@ -26,12 +26,9 @@
       // Exceptions:
       // Parse screening programs
       if (data) {
-        data.screening_programs = !!_.filter(_.pick(data,
-          'breast_cancer_screening_programscountries_with_organized_or_uno',
-          'cervical_cancer_screening_programscountries_with_organized_or_u',
-          'colorectal_cancer_screening_programscountries_with_organized_or'), function(param){
-            return param === 'Has screening program'
-          }).length;
+        data.breast_cancer_screening_programscountries_with_organized_or_uno = (data.breast_cancer_screening_programscountries_with_organized_or_uno === 'Has screening program') ? true : false;
+        data.cervical_cancer_screening_programscountries_with_organized_or_u = (data.cervical_cancer_screening_programscountries_with_organized_or_u === 'Has screening program') ? true : false;
+        data.colorectal_cancer_screening_programscountries_with_organized_or = (data.colorectal_cancer_screening_programscountries_with_organized_or === 'Has screening program') ? true : false;
       }
 
       return data;
