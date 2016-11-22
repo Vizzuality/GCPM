@@ -10,6 +10,12 @@
     flex: 1;
     z-index: 0;
     overflow: hidden;
+    min-height: 380px;
+
+    @media #{$mq-small} {
+      height: calc(100vh - 94px); // 100vh - header height
+      min-height: initial;
+    }
 
     .c-map {
       height: 100%;
@@ -28,7 +34,11 @@
   }
 
   &.-full {
-    height: calc(100vh - 94px); // 100vh - header height
+    height: auto;
+
+    @media #{$mq-small} {
+      height: calc(100vh - 94px); // 100vh - header height
+    }
   }
 
   .l-app-upperbar {

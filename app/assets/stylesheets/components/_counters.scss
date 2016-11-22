@@ -3,6 +3,11 @@
   padding-bottom: $box-space - 10px;
   text-align: center;
 
+  @media #{$mq-small} {
+    padding-top: $box-space - 20px;
+    padding-bottom: $box-space - 20px;
+  }
+
   @media screen and (max-height: 900px) {
     padding-top: $base-space;
     padding-bottom: $base-space;
