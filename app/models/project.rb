@@ -21,6 +21,8 @@ class Project < ApplicationRecord
 
   include UserRelationable
 
+  after_create :notify_admin
+
   has_many :memberships
   has_many :research_units,  through: :memberships
   has_many :organizations,   through: :memberships
@@ -227,5 +229,9 @@ class Project < ApplicationRecord
       if self.start_date.present? && self.end_date.present?
         errors.add(:end_date, 'must be after start date') if self.start_date > self.end_date
       end
+    end
+
+    def notify_admin
+      AdminMailer.user_relation_email('project', self.title, 'created').deliver_later
     end
 end

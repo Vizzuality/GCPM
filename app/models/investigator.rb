@@ -19,6 +19,8 @@ class Investigator < ApplicationRecord
   include Approvable
   include UserRelationable
 
+  after_create :notify_admin, if: 'user_id.present?'
+
   belongs_to :user, inverse_of: :investigator, optional: true
 
   has_many :research_units
@@ -87,4 +89,10 @@ class Investigator < ApplicationRecord
       investigators.uniq
     end
   end
+
+  private
+
+    def notify_admin
+      AdminMailer.user_relation_email('investigator', self.name, 'created').deliver_later
+    end
 end
