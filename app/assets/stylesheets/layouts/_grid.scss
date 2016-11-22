@@ -2,7 +2,7 @@
   padding-left: 15px;
   padding-right: 15px;
 
-  @media #{$mq-small} {
+  @media #{$mq-medium-map} {
     padding-left: $box-space;
     padding-right: $box-space;
   }

@@ -50,6 +50,7 @@ $box-shadow-2: 0 7px 15px 0 rgba(0, 0, 0, 0.2);
 
 $base-space: 23px;
 $box-space: 60px;
+$mid-space: 30px;
 $inline-space: 18px;
 
 $button-x-padding: 23px;
@@ -66,12 +67,12 @@ $easeInOutSine: cubic-bezier(0.445, 0.050, 0.550, 0.950);
 
 // /* General layout */
 // /* Breakpoints */
-$breakpoint-small:        40em;
-// $breakpoint-medium:   40.063em;
+$breakpoint-small:            40em;
+$breakpoint-medium-map:      1000px;
 
 // /* Media queries */
-$mq-small:   "screen and (min-width: #{$breakpoint-small})";
-// $mq-medium:  "screen and (min-width: #{$breakpoint-medium})";
+$mq-small:       "screen and (min-width: #{$breakpoint-small})";
+$mq-medium-map:  "screen and (min-width: #{$breakpoint-medium-map})";
 
 // $body-max-width:         1404px;
 

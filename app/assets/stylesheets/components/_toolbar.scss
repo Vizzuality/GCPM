@@ -9,7 +9,7 @@
 
   padding: 0 15px;
 
-  @media #{$mq-small} {
+  @media #{$mq-medium-map} {
     position: relative;
     background-color: transparent;
     justify-content: flex-end;
@@ -20,7 +20,7 @@
   #download {
     display: none;
 
-    @media #{$mq-small} {
+    @media #{$mq-medium-map} {
       display: inherit;
     }
   }
@@ -32,11 +32,6 @@
     font-weight: $bold-font-weight;
     white-space: nowrap;
     justify-content: center;
-    // flex-grow: 1;
-
-    @media #{$mq-small} {
-      // flex-grow: inherit;
-    }
 
     .c-icon, svg {
       vertical-align: -2px;
@@ -49,7 +44,7 @@
     }
 
     &.-highlighted {
-      @media #{$mq-small} {
+      @media #{$mq-medium-map} {
         background-color: $app-bg-color;
       }
     }
@@ -61,7 +56,7 @@
     &.options {
       display: inherit;
 
-      @media #{$mq-small} {
+      @media #{$mq-medium-map} {
         display: none;
       }
 

@@ -8,7 +8,7 @@
   display: flex;
   flex-flow: column;
 
-  @media #{$mq-small} {
+  @media #{$mq-medium-map} {
     position: relative;
   }
 
@@ -26,7 +26,7 @@
     .c-btn {
       padding: $inline-space 10px;
 
-      @media #{$mq-small} {
+      @media #{$mq-medium-map} {
         padding: $inline-space $base-space;
       }
 
@@ -40,7 +40,7 @@
     transition: height .2s $easeOutSine;
     overflow: auto;
 
-    @media #{$mq-small} {
+    @media #{$mq-medium-map} {
       display: none;
     }
 
