@@ -13,6 +13,7 @@
       new App.Presenter.TabNav(params);
       new App.Presenter.Actionbar(params);
       new App.Presenter.ActionLayerMobile(params);
+      new App.Presenter.ActionLegendMobile(params);
       new App.Presenter.Toolbar(params);
       new App.Presenter.FilterForm(params);
       new App.Presenter.Breadcrumbs(params);

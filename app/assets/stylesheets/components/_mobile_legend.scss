@@ -1,0 +1,28 @@
+
+.c-mobile-legend {
+
+  .js-action-legend {
+    position: absolute;
+    top: $small-box-space + 35px;
+    right: $small-box-space;
+  }
+
+  .legend-mobile {
+    position: absolute;
+    width: 0;
+    top: 35px;
+    right: 0;
+    bottom: 0;
+    background: $body-bg-color;
+
+    transition: width .2 $easeInCubic;
+
+    &.-main {
+      max-width: 100%;
+    }
+
+    &.-active {
+      width: 100%;
+    }
+  }
+}

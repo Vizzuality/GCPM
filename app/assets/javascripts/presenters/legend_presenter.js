@@ -28,7 +28,7 @@
       this.setEvents();
       this.setSubscriptions();
 
-      this.setState(params);
+      this.setState(_.extend({}, params, { active: false }));
     },
 
     setState: function (newState) {
@@ -61,7 +61,10 @@
     },
 
     setSubscriptions: function () {
+      App.on('Action:legend', this.toggleActive, this);
       App.on('TabNav:change Breadcrumbs:change FilterForm:change Map:change', this.setState, this);
+      this.legend.on('close', this.closeLayer.bind(this));
+
     },
 
     renderLegends: function () {
@@ -134,7 +137,19 @@
         return layer;
       }
       return null;
-    }
+    },
+
+    closeLayer: function() {
+      this.getState().active && this.toggleActive();
+    },
+
+    toggleActive: function(){
+      var active = this.getState().active ? false : true;
+      var legendBtn = $('.js-action-legend[data-action=legend]').next('.legend-mobile');
+      active ? legendBtn.addClass('-active') : legendBtn.removeClass('-active') ;
+
+      this.setState(_.extend({}, this.state.attributes, { active: active }));
+    },
 
   });
 
