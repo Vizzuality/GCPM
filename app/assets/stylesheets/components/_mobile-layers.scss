@@ -1,13 +1,42 @@
 
 .c-mobile-layers {
 
-  .js-action-layers {
+  .map-btns-container {
     position: absolute;
     top: $small-box-space + 35px;
     left: $small-box-space;
 
-    .c-icon {
-      margin-top: 2px;
+    .js-action-layers {
+      margin-bottom: 5px;
+
+      .c-icon {
+        margin-top: 2px;
+      }
+    }
+
+    .timeline-btn {
+      display: none;
+
+      &.-active {
+        display: initial;
+      }
+
+      .timeline-mobile {
+        position: absolute;
+        opacity: 0;
+        z-index: 1;
+      }
+
+      .js-viel-year {
+        position: absolute;
+        font-size: $small-font-size;
+      }
+
+      .c-btn {
+        width: 100%;
+        padding: 9px 0;
+        border: 0;
+      }
     }
   }
 

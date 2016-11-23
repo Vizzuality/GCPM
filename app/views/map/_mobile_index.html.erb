@@ -14,16 +14,24 @@
 
   <div class="l-app-map">
     <div id="map" class="c-map"></div>
-    <div id="timeline" class="c-timeline"></div>
 
     <div class="c-mobile-layers">
-      <button id="layersBtn" class="c-btn -primary -action -thin js-action-layers" data-action="layers" title="Layers">
-        <svg class="c-icon -small -inverse">
-          <use xlink:href="#icon-layers"></use>
-        </svg>
-      </button>
+      <div class="map-btns-container">
+        <button id="layersBtn" class="c-btn -primary -action -thin js-action-layers" data-action="layers" title="Layers">
+          <svg class="c-icon -small -inverse">
+            <use xlink:href="#icon-layers"></use>
+          </svg>
+        </button>
+
+        <div class="timeline-btn">
+          <div id="timeline" class="timeline-mobile"></div>
+          <div class="c-btn -primary -inverse -no-br -thin js-viel-year"></div>
+        </div>
+      </div>
+
       <div id="layers" ></div>
     </div>
+
   </div>
 
   <!-- <div id="legend" class="c-legend -main"></div> -->
