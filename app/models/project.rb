@@ -198,6 +198,10 @@ class Project < ApplicationRecord
     save
   end
 
+  def project_creator(user_id)
+    self.created_by == user_id
+  end
+
   def select_investigators(ru_id=nil)
     if ru_id.present?
       ResearchUnit.includes(:investigator).find(ru_id).investigator.name
