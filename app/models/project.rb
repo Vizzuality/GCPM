@@ -35,7 +35,7 @@ class Project < ApplicationRecord
   has_many :project_leads,           -> { where(memberships: { membership_type: 0 }) }, through: :research_units, source: :investigator
   has_many :secondary_investigators, -> { where(memberships: { membership_type: 1 }) }, through: :research_units, source: :investigator
 
-  has_many :project_users
+  has_many :project_users, dependent: :destroy
   has_many :users, through: :project_users
 
   has_many :project_updates
