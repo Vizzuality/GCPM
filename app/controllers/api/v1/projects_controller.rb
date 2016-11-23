@@ -33,7 +33,7 @@ module Api::V1
     end
 
     def create
-      @project = Project.build_project(project_params.merge(users: [@user]))
+      @project = Project.build_project(project_params.merge(users: [@user], created_by: @user.id))
       if @project.save
         render json: @project, include: ['funding_sources',
                                          'cancer_types',
