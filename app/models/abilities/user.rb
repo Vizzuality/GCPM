@@ -16,6 +16,10 @@ module Abilities
         project.users.include?(user) && project.users.size == 1 ||
         project.users.size > 1 && project.project_users.find_by(user_id: user.id).approved?
       end
+      can :delete, ::Project do |project|
+        project.users.include?(user) && project.users.size == 1 ||
+        project.users.size > 1 && project.project_users.find_by(user_id: user.id).approved?
+      end
 
       can :create, :all
 
