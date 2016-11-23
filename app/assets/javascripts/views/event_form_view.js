@@ -9,8 +9,20 @@
     },
 
     initialize: function() {
-
     },
+
+    getLocation: function() {
+      return {
+        lat: this.$el.find('#event_latitude').val() || 52,
+        lng: this.$el.find('#event_longitude').val() || 7
+      }
+    },
+
+    setLocation: function(center) {
+      this.$el.find('#event_latitude').val(center.lat.toFixed(2));
+      this.$el.find('#event_longitude').val(center.lng.toFixed(2));
+    },
+
 
     triggerSubmit: function() {
       this.trigger('submit', this.serializeForm());
