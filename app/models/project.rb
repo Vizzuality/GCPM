@@ -35,7 +35,7 @@ class Project < ApplicationRecord
   has_many :project_leads,           -> { where(memberships: { membership_type: 0 }) }, through: :research_units, source: :investigator
   has_many :secondary_investigators, -> { where(memberships: { membership_type: 1 }) }, through: :research_units, source: :investigator
 
-  has_many :project_users
+  has_many :project_users, dependent: :destroy
   has_many :users, through: :project_users
 
   has_many :project_updates
@@ -196,6 +196,10 @@ class Project < ApplicationRecord
   def unpublish
     self.status = :unpublished
     save
+  end
+
+  def project_creator(user_id)
+    self.created_by == user_id
   end
 
   def select_investigators(ru_id=nil)
