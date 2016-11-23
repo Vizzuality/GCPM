@@ -1,0 +1,21 @@
+
+.c-mobile-layers {
+
+  .js-action-layers {
+    position: absolute;
+    top: $small-box-space + 35px;
+    left: $small-box-space;
+
+    .c-icon {
+      margin-top: 2px;
+    }
+  }
+
+  .c-layers {
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    margin-top: 35px;
+    padding-bottom: $base-space + 35px;
+  }
+}

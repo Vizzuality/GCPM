@@ -172,4 +172,12 @@
       background-color: #f57823;
     }
   }
+
+  .leaflet-control-zoom {
+    display: none;
+
+    @media screen and (min-width: 450px) {
+      display: inherit;
+    }
+  }
 }

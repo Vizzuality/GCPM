@@ -64,6 +64,13 @@
       }
 
       this.triggerChange();
+
+      // Close layers window when selecting one
+      if (gon.isMobile) {
+        setTimeout(function() {
+          this.hideLayersWindow();
+        }.bind(this), 100);
+      }
     },
 
     collapseLayer: function(e) {
@@ -72,7 +79,9 @@
     },
 
     handleDocumentClick: function(e) {
-      if (this.$el.find('.js-actionbar-action').length > 0) {
+      // Controls whether it's a mobile or not
+      if (gon.isMobile ? this.$el.find('.js-action-layer').length > 0 :
+        this.$el.find('.js-actionbar-action').length > 0) {
         var isContained = this.el.contains(e.target);
         !isContained && this.hideLayersWindow();
       }

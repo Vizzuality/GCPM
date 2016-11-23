@@ -10,6 +10,7 @@ class MapController < ApplicationController
     @current_type = params.key?(:data) ? params[:data] : 'projects'
 
     gon.server_params = { 'user': current_user ? current_user.id : '' }
+    gon.isMobile = browser.device.mobile?
 
     limit = 12 + (@page * 9)
 
