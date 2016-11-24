@@ -13,27 +13,27 @@ class ResearchUnitImporter
 
     entity_name = is_project_lead ? "investigator" : "collaborator"
 
-    investigator = Investigator.find_or_initialize_by(name: data["#{entity_name}_name"].strip)
-    investigator.email = data["#{entity_name}_email_address"].strip
-    investigator.website = data["#{entity_name}_website"].strip
+    investigator = Investigator.find_or_initialize_by(name: data["#{entity_name}_name"]&.strip)
+    investigator.email = data["#{entity_name}_email_address"]
+    investigator.website = data["#{entity_name}_website"]
 
-    organization = Organization.find_or_initialize_by(name: data["#{entity_name}_organization_name"].strip)
-    organization_type = self.validate_organization_type(data["#{entity_name}_organization_type"].strip)
+    organization = Organization.find_or_initialize_by(name: data["#{entity_name}_organization_name"]&.strip)
+    organization_type = self.validate_organization_type(data["#{entity_name}_organization_type"])
 
     address = Address.new
-    address.city = data["#{entity_name}_organization_city"].strip
-    address.country_name = data["#{entity_name}_organization_country"].strip
-    address.country_code = data["#{entity_name}_organization_country_iso_code"].strip
-    address.latitude = data["#{entity_name}_organization_latitude"].strip
-    address.longitude = data["#{entity_name}_organization_longitude"].strip
-    address.line_1 = data["#{entity_name}_organization_address"].strip
-    address.line_2 = data["#{entity_name}_organization_address_ine_2"].strip              if data["#{entity_name}_organization_address_line_2"]
-    address.line_3 = data["#{entity_name}_organization_address_line_3"].strip             if data["#{entity_name}_organization_address_line_3"]
-    address.postcode = data["#{entity_name}_organization_postcode"].strip                 if data["#{entity_name}_organization_postcode"]
-    address.primary = data["#{entity_name}_organization_primary"].strip                  if data["#{entity_name}_organization_primary"]
-    address.state = data["#{entity_name}_organization_state"].strip                       if data["#{entity_name}_organization_state"]
-    address.state_code = data["#{entity_name}_organization_state_code"].strip             if data["#{entity_name}_organization_state_code"]
-    address.geonames_city_id = data["#{entity_name}_organization_geonames_city_id"].strip if data["#{entity_name}_organization_geonames_city_id"]
+    address.city = data["#{entity_name}_organization_city"]
+    address.country_name = data["#{entity_name}_organization_country"]
+    address.country_code = data["#{entity_name}_organization_country_iso_code"]
+    address.latitude = data["#{entity_name}_organization_latitude"]
+    address.longitude = data["#{entity_name}_organization_longitude"]
+    address.line_1 = data["#{entity_name}_organization_address"]
+    address.line_2 = data["#{entity_name}_organization_address_ine_2"]              if data["#{entity_name}_organization_address_line_2"]
+    address.line_3 = data["#{entity_name}_organization_address_line_3"]             if data["#{entity_name}_organization_address_line_3"]
+    address.postcode = data["#{entity_name}_organization_postcode"]                 if data["#{entity_name}_organization_postcode"]
+    address.primary = data["#{entity_name}_organization_primary"]                   if data["#{entity_name}_organization_primary"]
+    address.state = data["#{entity_name}_organization_state"]                       if data["#{entity_name}_organization_state"]
+    address.state_code = data["#{entity_name}_organization_state_code"]             if data["#{entity_name}_organization_state_code"]
+    address.geonames_city_id = data["#{entity_name}_organization_geonames_city_id"] if data["#{entity_name}_organization_geonames_city_id"]
 
     unless organization.valid?
       @errors << { organization: organization.errors.full_messages }
@@ -65,7 +65,7 @@ class ResearchUnitImporter
 
   def validate_organization_type(organization_type)
     return if organization_type.blank?
-    ot = organization_type.split('|').map{|e| e.strip.downcase}
+    ot = organization_type.split('|').map{|e| e.downcase}
     master_ot = OrganizationType.all.pluck(:name).map{|e| e.downcase}
     wrong_types = ot - master_ot
     if wrong_types != []

@@ -3,11 +3,8 @@ module Sluggable
   extend ActiveSupport::Concern
 
   included do
-    before_update :assign_slug
 
-    before_validation(on: [:create, :update]) do
-      check_slug
-    end
+    before_validation :check_slug
 
     validates_uniqueness_of :slug
     validates :slug, presence: true, format: { with: /\A[^\s!#$%^&*()（）=+;:'"\[\]\{\}|\\\/<>?,]+\z/,
@@ -23,24 +20,21 @@ module Sluggable
     private
 
       def check_slug
-        self_name = self.try(:name) || self.try(:title)
-        if self_name.present? && self.slug.blank?
-          find_slug               = 'LOWER(slug) LIKE LOWER(?)'
-          check_slug_duplications = self.class.name.safe_constantize
-                                                   .where(find_slug, "#{self_name.downcase.parameterize}%")
-                                                   .where.not(id: self.id)
-
-          self.slug = self_name.downcase.parameterize
-          if check_slug_duplications.any?
-            n = check_slug_duplications.size
-            self.slug += "-#{n+1}"
-          end
+        unless self.slug.present?
+          self.slug = generate_slug
         end
       end
 
-      def assign_slug
-        self.slug = self.slug.downcase.parameterize
+      def generate_slug
+        self_name = self.try(:name) || self.try(:title)
+        initial_slug = self_name.downcase.parameterize
+        temp_slug = initial_slug
+        loop.with_index do |_,i|
+          break temp_slug unless self.class.name.safe_constantize.exists?(slug: temp_slug)
+          temp_slug = initial_slug + "-" + (i+1).to_s
+        end
       end
+
   end
 
   class_methods do
