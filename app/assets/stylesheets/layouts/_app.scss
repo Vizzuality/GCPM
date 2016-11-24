@@ -56,8 +56,11 @@
 
   .l-app-navbar {
     position: relative;
-    margin-top: -52px;
     background-color: rgba($secondary-color, .7);
+
+    @media #{$mq-small} {
+      margin-top: -52px;
+    }
   }
 
   .l-app-title {

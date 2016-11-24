@@ -35,7 +35,7 @@
   <div class="l-app-navbar">
     <div class="wrapper">
       <div class="row collapse">
-        <div class="column small-6">
+        <div class="column small-12">
           <ul class="c-tabnav" id="dataTabNav">
              <% @filters.each do |filter| %>
               <li class="tabnav-item">
@@ -49,10 +49,15 @@
             <% end %>
           </ul>
         </div>
-        <div class="column small-6">
-          <div id="toolbar"></div>
-        </div>
       </div>
+    </div>
+  </div>
+
+  <div id="tools" class="c-mobile-map-tools">
+    <div id="toolbar" class="toolbar"></div>
+
+    <div class="hidden-tools">
+      <div id="actionbar"></div>
     </div>
   </div>
 

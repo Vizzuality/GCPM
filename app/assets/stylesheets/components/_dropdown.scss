@@ -69,15 +69,4 @@ $dropdown-width: 182px;
       }
     }
   }
-
-  //TODO: hide it until responsive implemented
-  &.-sortby {
-    > span {
-      display: none;
-
-      @media screen and (min-width: 990px) {
-        display: inherit;
-      }
-    }
-  }
 }
