@@ -14,12 +14,31 @@ ActiveAdmin.register Project do
   filter :created_at
   filter :updated_at
 
+  member_action :feature, method: :get do
+    f = Featured.new
+    f.featurable = resource
+    f.save!
+    redirect_to collection_url, notice: "Featured!"
+  end
+
+  member_action :unfeature, method: :get do
+    f = Featured.find_by(featurable: resource)
+    f.destroy
+    redirect_to collection_url, notice: "Unfeatured!"
+  end
+
   index do
     selectable_column
     column :id
     column :title
     column :status
-    actions
+    actions do |obj|
+      if obj.featured?
+        link_to("Unfeature", unfeature_admin_project_path(obj))
+      else
+        link_to("Feature", feature_admin_project_path(obj))
+      end
+    end
   end
 
   form do |f|

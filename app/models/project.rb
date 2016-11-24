@@ -12,6 +12,7 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  slug            :string
+#  created_by      :integer
 #
 
 class Project < ApplicationRecord
@@ -20,6 +21,7 @@ class Project < ApplicationRecord
   acts_as_followable
 
   include UserRelationable
+  include ActAsFeatured
 
   after_create :notify_admin
 

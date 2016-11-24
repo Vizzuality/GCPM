@@ -394,6 +394,39 @@ ALTER SEQUENCE events_id_seq OWNED BY events.id;
 
 
 --
+-- Name: featureds; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE featureds (
+    id integer NOT NULL,
+    featurable_id integer,
+    featurable_type character varying,
+    weight integer DEFAULT 0,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: featureds_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE featureds_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: featureds_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE featureds_id_seq OWNED BY featureds.id;
+
+
+--
 -- Name: follows; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1363,6 +1396,13 @@ ALTER TABLE ONLY events ALTER COLUMN id SET DEFAULT nextval('events_id_seq'::reg
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY featureds ALTER COLUMN id SET DEFAULT nextval('featureds_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY follows ALTER COLUMN id SET DEFAULT nextval('follows_id_seq'::regclass);
 
 
@@ -1598,6 +1638,14 @@ ALTER TABLE ONLY db_backups
 
 ALTER TABLE ONLY events
     ADD CONSTRAINT events_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: featureds_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY featureds
+    ADD CONSTRAINT featureds_pkey PRIMARY KEY (id);
 
 
 --
@@ -1937,6 +1985,13 @@ CREATE INDEX index_events_on_title ON events USING gin (to_tsvector('english'::r
 --
 
 CREATE INDEX index_events_on_user_id ON events USING btree (user_id);
+
+
+--
+-- Name: index_featureds_on_featurable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_featureds_on_featurable_id ON featureds USING btree (featurable_id);
 
 
 --
@@ -2286,6 +2341,6 @@ ALTER TABLE ONLY mailboxer_receipts
 
 SET search_path TO "$user",public;
 
-INSERT INTO schema_migrations (version) VALUES ('20160623091908'), ('20160623092157'), ('20160623093250'), ('20160629161033'), ('20160629161041'), ('20160707072908'), ('20160707073642'), ('20160708083044'), ('20160711105858'), ('20160711114901'), ('20160718224524'), ('20160718225032'), ('20160718232806'), ('20160720162924'), ('20160721141137'), ('20160725182233'), ('20160726110350'), ('20160729093255'), ('20160729125019'), ('20160729151912'), ('20160801160550'), ('20160801165924'), ('20160801171206'), ('20160802121917'), ('20160802174327'), ('20160803012223'), ('20160803012429'), ('20160803012636'), ('20160803014813'), ('20160803143833'), ('20160804100620'), ('20160804113911'), ('20161004100702'), ('20161018055907'), ('20161018091446'), ('20161018104312'), ('20161018111559'), ('20161018125246'), ('20161020122456'), ('20161020163951'), ('20161021073852'), ('20161021080737'), ('20161021110751'), ('20161021110752'), ('20161021110753'), ('20161021110754'), ('20161026160423'), ('20161027160501'), ('20161103101432'), ('20161103101657'), ('20161104114309'), ('20161107103717'), ('20161107110201'), ('20161110093643'), ('20161110111725'), ('20161110111836'), ('20161111100700'), ('20161115090954'), ('20161123114428');
+INSERT INTO schema_migrations (version) VALUES ('20160623091908'), ('20160623092157'), ('20160623093250'), ('20160629161033'), ('20160629161041'), ('20160707072908'), ('20160707073642'), ('20160708083044'), ('20160711105858'), ('20160711114901'), ('20160718224524'), ('20160718225032'), ('20160718232806'), ('20160720162924'), ('20160721141137'), ('20160725182233'), ('20160726110350'), ('20160729093255'), ('20160729125019'), ('20160729151912'), ('20160801160550'), ('20160801165924'), ('20160801171206'), ('20160802121917'), ('20160802174327'), ('20160803012223'), ('20160803012429'), ('20160803012636'), ('20160803014813'), ('20160803143833'), ('20160804100620'), ('20160804113911'), ('20161004100702'), ('20161018055907'), ('20161018091446'), ('20161018104312'), ('20161018111559'), ('20161018125246'), ('20161020122456'), ('20161020163951'), ('20161021073852'), ('20161021080737'), ('20161021110751'), ('20161021110752'), ('20161021110753'), ('20161021110754'), ('20161026160423'), ('20161027160501'), ('20161103101432'), ('20161103101657'), ('20161104114309'), ('20161107103717'), ('20161107110201'), ('20161110093643'), ('20161110111725'), ('20161110111836'), ('20161111100700'), ('20161115090954'), ('20161123114428'), ('20161124170341');
 
 

@@ -12,6 +12,7 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  slug            :string
+#  created_by      :integer
 #
 
 class ProjectSerializer < ActiveModel::Serializer
