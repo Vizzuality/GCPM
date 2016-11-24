@@ -35,6 +35,12 @@ $dropdown-width: 182px;
     top: 52px;
     right: 0;
 
+    &.-top {
+      top: -92px;
+      right: 0;
+      left: 0;
+    }
+
     .dropdown-item {
       padding: ($button-y-padding / 2) $button-x-padding;
       width: 100%;
