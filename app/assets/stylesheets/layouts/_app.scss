@@ -39,6 +39,8 @@
     background-color: rgba($primary-color, .7);
     z-index: 1;
 
+    display: flex;
+    justify-content: space-between;
 
     #layers {
       position: relative;
