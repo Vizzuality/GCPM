@@ -1,4 +1,8 @@
-<button class="c-btn -primary -inverse -thin js-legend-close" data-action="legend" title="Legend">O</button>
+<div class="legend-bar">
+  <button class="js-legend-close arrow-btn" data-action="legend" title="Legend">
+    <span class="arrow -left"></span>
+  </button>
+</div>
 <ul class="marker-legend">
   {{#each items}}
     <li>
@@ -14,7 +18,7 @@
   <li>
     <span class="name">
       {{layer.name}}
-      <button type="button" name="button" class="c-btn -secondary -icon -tiny js-btn-info">
+      <button type="button" name="button" class="c-btn -primary -icon -tiny js-btn-info">
         <svg class="c-icon -tiny -inverse"><use xlink:href="#icon-info"></use></svg>
       </button>
     </span>

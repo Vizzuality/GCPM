@@ -8,6 +8,8 @@
 
     .js-action-layers {
       margin-bottom: 5px;
+      width: 44px;
+      height: 44px;
 
       .c-icon {
         margin-top: 2px;
@@ -16,6 +18,8 @@
 
     .timeline-btn {
       display: none;
+      width: 44px;
+      height: 44px;
 
       &.-active {
         display: initial;
@@ -25,11 +29,16 @@
         position: absolute;
         opacity: 0;
         z-index: 1;
+        height: 100%;
       }
 
       .js-viel-year {
         position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         font-size: $small-font-size;
+        height: 44px;
       }
 
       .c-btn {
