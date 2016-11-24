@@ -13,12 +13,12 @@ class ResearchUnitImporter
 
     entity_name = is_project_lead ? "investigator" : "collaborator"
 
-    investigator = Investigator.find_or_initialize_by(name: data["#{entity_name}_name"])
-    investigator.email = data["#{entity_name}_email_address"]
-    investigator.website = data["#{entity_name}_website"]
+    investigator = Investigator.find_or_initialize_by(name: data["#{entity_name}_name"].strip)
+    investigator.email = data["#{entity_name}_email_address"].strip
+    investigator.website = data["#{entity_name}_website"].strip
 
-    organization = Organization.find_or_initialize_by(name: data["#{entity_name}_organization_name"])
-    organization_type = self.validate_organization_type(data["#{entity_name}_organization_type"])
+    organization = Organization.find_or_initialize_by(name: data["#{entity_name}_organization_name"].strip)
+    organization_type = self.validate_organization_type(data["#{entity_name}_organization_type"].strip)
 
     address = Address.new
     address.city = data["#{entity_name}_organization_city"]

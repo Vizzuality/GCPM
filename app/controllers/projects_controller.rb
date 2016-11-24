@@ -20,7 +20,9 @@ class ProjectsController < ApplicationController
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
     limit = 12 + (@page * 9)
 
-    @people = @project.investigators
+    @people = @project.investigators.distinct
+    @organizations = @project.organizations.distinct
+    @addresses = @project.addresses.distinct.map{|a| [a.city, a.country_name, a.country_code]}.uniq
 
     if params.key?(:data) && params[:data] == 'people'
       @items = @people.first(limit)
@@ -35,7 +37,6 @@ class ProjectsController < ApplicationController
     end
 
     @updates = ProjectUpdate.where(project_id: @project.id)
-    @addresses = @project.addresses.map { |ad| { country_iso_3: Country.find(ad.country_id).try(:country_iso_3), address: ad } }
 
     respond_with(@items)
   end
@@ -64,7 +65,7 @@ class ProjectsController < ApplicationController
   private
 
     def set_project
-      @project = Project.set_by_id_or_slug(params[:id])
+      @project = Project.preload(:organizations).set_by_id_or_slug(params[:id])
     end
 
     def set_user
