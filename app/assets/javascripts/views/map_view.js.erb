@@ -35,6 +35,7 @@
     createMap: function() {
       this.map = L.map(this.el.id, this.options);
       this.setBasemap();
+      this.addListeners();
     },
 
     /**
@@ -65,6 +66,23 @@
         this.basemap = L.tileLayer(basemapConfig.url, basemapConfig.options);
         this.basemap.addTo(this.map);
       }
+    },
+
+    /**
+     * Listeners
+     */
+    addListeners: function() {
+      this.map.on('zoomend', function(e){
+        this.trigger('pan', e);
+      }.bind(this));
+      this.map.on('dragend', function(e){
+        this.trigger('pan', e);
+      }.bind(this));
+    },
+
+    removeListeners: function() {
+      this.map.off('zoomend');
+      this.map.off('dragend');
     },
 
     /**

@@ -101,14 +101,12 @@
     </div>
 
     <div class="form-row row">
-      <div class="column small-12 medium-5 medium-offset-1">
+      <div class="column small-12 medium-10 medium-offset-1">
         <h4 class="c-title">Latitude</h4>
-        <%= f.input :latitude, label: false %>
-      </div>
-
-      <div class="column small-12 medium-5">
-        <h4 class="c-title">Longitude</h4>
-        <%= f.input :longitude, label: false %>
+        <p class="hint">Select the location where you want to show your event on the map</p>
+        <div id="map" class="c-map -relative -target"></div>
+        <%= f.hidden_field :latitude, label: false %>
+        <%= f.hidden_field :longitude, label: false %>
       </div>
     </div>
 
