@@ -1,0 +1,59 @@
+
+.c-mobile-layers {
+
+  .layers-btns-container {
+    position: absolute;
+    top: $small-box-space + 35px;
+    left: $small-box-space;
+
+    .js-action-layers {
+      margin-bottom: 5px;
+      width: 44px;
+      height: 44px;
+
+      .c-icon {
+        margin-top: 2px;
+      }
+    }
+
+    .timeline-btn {
+      display: none;
+      width: 44px;
+      height: 44px;
+
+      &.-active {
+        display: initial;
+      }
+
+      .timeline-mobile {
+        position: absolute;
+        opacity: 0;
+        z-index: 1;
+        height: 100%;
+      }
+
+      .js-viel-year {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: $small-font-size;
+        height: 44px;
+      }
+
+      .c-btn {
+        width: 100%;
+        padding: 9px 0;
+        border: 0;
+      }
+    }
+  }
+
+  .c-layers {
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    margin-top: 35px;
+    padding-bottom: $base-space + 35px;
+  }
+}
