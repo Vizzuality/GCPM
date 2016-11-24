@@ -145,8 +145,7 @@
 
     toggleActive: function(){
       var active = this.getState().active ? false : true;
-      var legendBtn = $('.js-action-legend[data-action=legend]').next('.legend-mobile');
-      active ? legendBtn.addClass('-active') : legendBtn.removeClass('-active') ;
+      this.legend.$el.toggleClass('-active', active);
 
       this.setState(_.extend({}, this.state.attributes, { active: active }));
     },
