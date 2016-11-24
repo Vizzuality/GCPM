@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :null_session, only: Proc.new { |c| c.json_request? }
 
+  before_action :expire_xhr_requests
   before_action :build_user_data
   before_action :configure_permitted_parameters, if: :devise_controller?
   after_action  :set_csrf_cookie, :store_location
@@ -53,6 +54,14 @@ class ApplicationController < ActionController::Base
           request.path != "/users/sign_out" &&
           !request.xhr? # don't store ajax calls
         session['user_return_to'] = request.fullpath
+      end
+    end
+
+    def expire_xhr_requests
+      if request.xhr?
+        response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0, must-revalidate'
+        response.headers['Pragma']        = 'no-cache'
+        response.headers['Expires']       = Time.now
       end
     end
 
