@@ -21,19 +21,19 @@ class ResearchUnitImporter
     organization_type = self.validate_organization_type(data["#{entity_name}_organization_type"].strip)
 
     address = Address.new
-    address.city = data["#{entity_name}_organization_city"]
-    address.country_name = data["#{entity_name}_organization_country"]
-    address.country_code = data["#{entity_name}_organization_country_iso_code"]
-    address.latitude = data["#{entity_name}_organization_latitude"]
-    address.longitude = data["#{entity_name}_organization_longitude"]
-    address.line_1 = data["#{entity_name}_organization_address"]
-    address.line_2 = data["#{entity_name}_organization_address_ine_2"]              if data["#{entity_name}_organization_address_line_2"]
-    address.line_3 = data["#{entity_name}_organization_address_line_3"]             if data["#{entity_name}_organization_address_line_3"]
-    address.postcode = data["#{entity_name}_organization_postcode"]                 if data["#{entity_name}_organization_postcode"]
-    address.primary = data["#{entity_name}_organization_primary"]                   if data["#{entity_name}_organization_primary"]
-    address.state = data["#{entity_name}_organization_state"]                       if data["#{entity_name}_organization_state"]
-    address.state_code = data["#{entity_name}_organization_state_code"]             if data["#{entity_name}_organization_state_code"]
-    address.geonames_city_id = data["#{entity_name}_organization_geonames_city_id"] if data["#{entity_name}_organization_geonames_city_id"]
+    address.city = data["#{entity_name}_organization_city"].strip
+    address.country_name = data["#{entity_name}_organization_country"].strip
+    address.country_code = data["#{entity_name}_organization_country_iso_code"].strip
+    address.latitude = data["#{entity_name}_organization_latitude"].strip
+    address.longitude = data["#{entity_name}_organization_longitude"].strip
+    address.line_1 = data["#{entity_name}_organization_address"].strip
+    address.line_2 = data["#{entity_name}_organization_address_ine_2"].strip              if data["#{entity_name}_organization_address_line_2"]
+    address.line_3 = data["#{entity_name}_organization_address_line_3"].strip             if data["#{entity_name}_organization_address_line_3"]
+    address.postcode = data["#{entity_name}_organization_postcode"].strip                 if data["#{entity_name}_organization_postcode"]
+    address.primary = data["#{entity_name}_organization_primary"].strip                  if data["#{entity_name}_organization_primary"]
+    address.state = data["#{entity_name}_organization_state"].strip                       if data["#{entity_name}_organization_state"]
+    address.state_code = data["#{entity_name}_organization_state_code"].strip             if data["#{entity_name}_organization_state_code"]
+    address.geonames_city_id = data["#{entity_name}_organization_geonames_city_id"].strip if data["#{entity_name}_organization_geonames_city_id"]
 
     unless organization.valid?
       @errors << { organization: organization.errors.full_messages }

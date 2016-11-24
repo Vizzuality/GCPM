@@ -11,13 +11,13 @@ class ProjectImporter
 
   def import!
     project = Project.find_or_initialize_by(id: project_id)
-    project.title = data['project_title']
-    project.project_website = data['project_website']
-    project.summary = data['project_summary']
-    project.start_date = data['project_start_date']
-    project.end_date = data['project_end_date']
-    project_types = self.validate_project_types(data['project_types'])
-    cancer_types = self.validate_cancer_types(data['project_cancer_types'])
+    project.title = data['project_title'].strip
+    project.project_website = data['project_website'].strip
+    project.summary = data['project_summary'].strip
+    project.start_date = data['project_start_date'].strip
+    project.end_date = data['project_end_date'].strip
+    project_types = self.validate_project_types(data['project_types'].strip)
+    cancer_types = self.validate_cancer_types(data['project_cancer_types'].strip)
     if project.valid? && @errors == []
       project.project_types = project_types
       project.cancer_types = cancer_types
