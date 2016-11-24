@@ -64,7 +64,7 @@
         <div class="sidebar-item">
           <h3><%= t 'cancer_types' %></h3>
           <ul class="c-list">
-            <% @project.cancer_types.each do |ct| %>
+            <% @project.cancer_types.distinct.each do |ct| %>
               <li class="list-item -mg-less"><%= link_to ct.try(:name), cancer_path(ct.slug_or_id) %></li>
             <% end %>
           </ul>
@@ -82,7 +82,7 @@
         </div>
       <% end %>
 
-      <% if @project.specialities && @project.specialities.size > 0 %>
+      <% if @project.specialities.any? %>
         <div class="sidebar-item">
           <h3><%= t 'specialities' %></h3>
           <ul class="c-list">
@@ -93,25 +93,25 @@
         </div>
       <% end %>
 
-      <% if @project.addresses && @project.addresses.size > 0 %>
+      <% if @addresses.present? %>
         <div class="sidebar-item">
           <h3><%= t 'location' %>(s)</h3>
           <ul class="c-list">
             <% @addresses.each do |add| %>
-              <% if add[:country_iso_3].present? %>
-                <li class="list-item -mg-less"><%= link_to "#{add[:address].city}, #{add[:address].country_name}", country_path(add[:country_iso_3]) %></li>
+              <% if add[2].present? %>
+                <li class="list-item -mg-less"><%= link_to "#{add[0]}, #{add[1]}", country_path(add[2]) %></li>
               <% else %>
-                <%= add[:address].city %>, <%= add[:address].country_name %>
+                <%= add[0] %>, <%= add[1] %>
               <% end %>
             <% end %>
         </div>
       <% end %>
 
-      <% if @project.organizations.any? %>
+      <% if @organizations.present? %>
         <div class="sidebar-item">
           <h3><%= t 'organization' %>(s)</h3>
           <ul class="c-list">
-            <% @project.organizations.each do |o| %>
+            <% @organizations.each do |o| %>
               <li class="list-item -mg-less"><%= link_to o.name, organization_path(o.slug_or_id) %></li>
             <% end %>
           </ul>
