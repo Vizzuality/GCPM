@@ -21,6 +21,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'ckeditor'
 gem 'date_validator'
+gem 'browser'
 
 # User login
 gem 'devise'
