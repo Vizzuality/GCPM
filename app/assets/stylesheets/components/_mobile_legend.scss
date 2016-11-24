@@ -14,7 +14,7 @@
     &.js-action-legend {
       position: absolute;
       top: $small-box-space + 35px;
-      right: 0;
+      right: 15px;
       border: 0;
     }
 
@@ -26,8 +26,8 @@
 
   .arrow {
     display: inline-block;
-    border-right: 2px solid $primary-color;
-    border-top: 2px solid $primary-color;
+    border-right: 2px solid white;
+    border-top: 2px solid white;
     transform: rotate(45deg);
     width: 12px;
     height: 12px;
