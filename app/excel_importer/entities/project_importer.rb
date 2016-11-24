@@ -11,13 +11,13 @@ class ProjectImporter
 
   def import!
     project = Project.find_or_initialize_by(id: project_id)
-    project.title = data['project_title'].strip
-    project.project_website = data['project_website'].strip
-    project.summary = data['project_summary'].strip
-    project.start_date = data['project_start_date'].strip
-    project.end_date = data['project_end_date'].strip
-    project_types = self.validate_project_types(data['project_types'].strip)
-    cancer_types = self.validate_cancer_types(data['project_cancer_types'].strip)
+    project.title = data['project_title']&.strip
+    project.project_website = data['project_website']
+    project.summary = data['project_summary']
+    project.start_date = data['project_start_date']
+    project.end_date = data['project_end_date']
+    project_types = self.validate_project_types(data['project_types'])
+    cancer_types = self.validate_cancer_types(data['project_cancer_types'])
     if project.valid? && @errors == []
       project.project_types = project_types
       project.cancer_types = cancer_types
@@ -33,7 +33,7 @@ class ProjectImporter
 
   def validate_project_types(project_types)
     return if project_types.blank?
-    pt = project_types.split('|').map{|e| e.strip.downcase}
+    pt = project_types.split('|').map{|e| e.downcase}
     master_pt = ProjectType.all.pluck(:name).map{|e| e.downcase}
     wrong_types = pt - master_pt
     if wrong_types != []
@@ -47,7 +47,7 @@ class ProjectImporter
 
   def validate_cancer_types(cancer_types)
     return if cancer_types.blank?
-    ct = cancer_types.split('|').map{|e| e.strip.downcase}
+    ct = cancer_types.split('|').map{|e| e.downcase}
     master_ct = CancerType.all.pluck(:name).map{|e| e.downcase}
     wrong_types = ct - master_ct
     if wrong_types != []
