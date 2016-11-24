@@ -65,6 +65,14 @@ $easeOutSine: cubic-bezier(0.390, 0.575, 0.565, 1.000);
 $easeInOutSine: cubic-bezier(0.445, 0.050, 0.550, 0.950);
 
 // /* General layout */
+// /* Breakpoints */
+$breakpoint-small:        40em;
+// $breakpoint-medium:   40.063em;
+
+// /* Media queries */
+$mq-small:   "screen and (min-width: #{$breakpoint-small})";
+// $mq-medium:  "screen and (min-width: #{$breakpoint-medium})";
+
 // $body-max-width:         1404px;
 
 // /* Font families */

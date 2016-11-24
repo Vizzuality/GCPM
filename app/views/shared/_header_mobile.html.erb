@@ -1,0 +1,60 @@
+<header class="l-header">
+  <div class="wrapper">
+    <div class="row collapse">
+      <div class="column small-10 align-middle">
+        <%= link_to root_path, id: 'logo' do %>
+          <%= image_tag 'global-oncology-logo.png' %>
+        <% end %>
+      </div>
+      <div class="column small-2 align-middle">
+        <nav class="c-nav -main">
+          <svg class="c-icon icon-menu -primary js-hamburger-menu">
+            <use xlink:href="#icon-menu"></use>
+          </svg>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<div class="c-menu-mobile">
+  <svg class="c-icon icon-close -medium -primary js-menu-close">
+    <use xlink:href="#icon-close"></use>
+  </svg>
+
+  <li class="<%= active_page?(map_path) ? '-active' : '' %>">
+    <%= link_to (t 'map'), map_path %>
+  </li>
+  <li class="<%= active_page?(countries_path) ? '-active' : '' %>">
+    <%= link_to (t 'countries'), countries_path %>
+  </li>
+  <li class="<%= active_page?(cancers_path) ? '-active' : '' %>">
+    <%= link_to (t 'cancer_types'), cancers_path %>
+  </li>
+  <li class="<%= active_page?(about_path) ? '-active' : '' %>">
+    <%= link_to (t 'about'), about_path %>
+  </li>
+  <li>
+    <a href="/search">
+      <svg class="c-icon -medium -primary"><use xlink:href="#icon-search"></use></svg>
+    </a>
+  </li>
+</div>
+
+
+<!--   <ul>
+    <%#= render "shared/nav" %>
+    <% #if user_signed_in? %>
+      <li class="js-user-menu <%#= active_page?(user_session_path) ? '-active' : '' %>">
+        <button class="user-btn">
+          <div class="c-avatar" style="background-image: url(<%#= current_user.avatar_url(:thumb) %>)"></div>
+        </button>
+        <%#= render 'shared/user_menu' %>
+      </li>
+    <%# else %>
+      <li class="<%#= active_page?(user_session_path) ? '-active' : '' %>">
+        <%#= link_to (t 'login'), user_session_path %></a>
+      </li>
+    <% #end %>
+  </ul> -->
