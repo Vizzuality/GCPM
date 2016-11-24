@@ -13,7 +13,7 @@
     initialize: function(params) {
       this.state = new StateModel();
       this.toolbar = new App.View.Toolbar({
-        el: '#toolbar'
+        el: '.toolbar'
       });
       this.setEvents();
       this.setSubscriptions();
@@ -22,7 +22,7 @@
     },
 
     setEvents: function() {
-      this.state.on('change', this.setActiveFilters, this);
+      this.state.on('change', this.handleStateChange, this);
 
       this.toolbar.on('action', function(actionName) {
         App.trigger('Toolbar:action', actionName);
@@ -31,6 +31,7 @@
 
     setSubscriptions: function() {
       App.on('Router:change Breadcrumbs:change FilterForm:change Map:change', this.setState, this);
+      App.on('Toolbar:action', this.toggleOptions.bind(this));
     },
 
     setState: function(newState) {
@@ -41,6 +42,10 @@
 
     getState: function() {
       return this.state.attributes;
+    },
+
+    handleStateChange: function() {
+      this.setActiveFilters();
     },
 
     setActiveFilters: function() {
@@ -59,9 +64,13 @@
       }).length;
 
       this.toolbar.updateActiveFilters(activeFilters);
+    },
+
+    toggleOptions: function(actionName) {
+      if (actionName === 'options') {
+        this.toolbar.toggleOptions();
+      }
     }
-
-
 
   });
 

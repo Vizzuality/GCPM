@@ -12,7 +12,7 @@
 
     initialize: function(params) {
       this.state = new StateModel();
-      this.actionbar = new App.View.Actionbar({ el: '#actionbar' });
+      this.actionbar = new App.View.Actionbar({ el: '.actionbar' });
 
       this.setEvents();
       this.setSubscriptions();

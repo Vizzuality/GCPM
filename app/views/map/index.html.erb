@@ -1,17 +1,9 @@
 <% title "Map" %>
 
 <section class="l-app -main -full">
-  <div class="l-app-upperbar">
-    <div class="wrapper">
-      <div class="row collapse">
-        <div class="column small-6">
-          <div class="c-breadcrumbs" id="breadcrumbs"></div>
-        </div>
-        <div class="column small-6">
-          <div id="actionbar"></div>
-        </div>
-      </div>
-    </div>
+  <div class="l-app-upperbar wrapper">
+    <div class="c-breadcrumbs" id="breadcrumbs"></div>
+    <div id="actionbar" class="actionbar"></div>
   </div>
 
   <div class="l-app-map">
@@ -24,7 +16,7 @@
   <div class="l-app-navbar">
     <div class="wrapper">
       <div class="row collapse">
-        <div class="column small-6">
+        <div class="column small-12 medium-6">
           <ul class="c-tabnav" id="dataTabNav">
              <% @filters.each do |filter| %>
               <li class="tabnav-item">
@@ -38,8 +30,23 @@
             <% end %>
           </ul>
         </div>
-        <div class="column small-6">
-          <div id="toolbar"></div>
+        <div class="column small-12 medium-6">
+          <div id="toolbar" class="toolbar c-map-options">
+            <div class="hidden-options actionbar">
+              <ul>
+                <li id="download" class="toolbar-item -sortby">
+                  <a href="#" class="c-btn -action" target="_blank" download>
+                    <svg class="c-icon -small -inverse">
+                      <use xlink:href="#icon-download"></use>
+                    </svg>
+                    Download
+                  </a>
+                </li>
+              </ul>
+
+            </div>
+
+          </div>
         </div>
       </div>
     </div>

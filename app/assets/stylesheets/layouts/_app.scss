@@ -10,6 +10,12 @@
     flex: 1;
     z-index: 0;
     overflow: hidden;
+    min-height: 380px;
+
+    @media #{$mq-small} {
+      height: calc(100vh - 94px); // 100vh - header height
+      min-height: initial;
+    }
 
     .c-map {
       height: 100%;
@@ -28,7 +34,11 @@
   }
 
   &.-full {
-    height: calc(100vh - 94px); // 100vh - header height
+    height: auto;
+
+    @media #{$mq-small} {
+      height: calc(100vh - 94px); // 100vh - header height
+    }
   }
 
   .l-app-upperbar {
@@ -39,9 +49,19 @@
     background-color: rgba($primary-color, .7);
     z-index: 1;
 
+    display: flex;
+    justify-content: space-between;
 
     #layers {
       position: relative;
+    }
+
+    .c-actionbar {
+      display: none;
+
+      @media #{$mq-medium-map} {
+        display: flex;
+      }
     }
   }
 
@@ -54,8 +74,11 @@
 
   .l-app-navbar {
     position: relative;
-    margin-top: -52px;
     background-color: rgba($secondary-color, .7);
+
+    @media #{$mq-medium-map} {
+      margin-top: -52px;
+    }
   }
 
   .l-app-title {

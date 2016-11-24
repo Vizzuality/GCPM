@@ -21,7 +21,7 @@
     },
 
     render: function() {
-      this.$el.html(this.template());
+      this.$el.append(this.template());
     },
 
     updateActiveFilters: function(activeFilters) {
@@ -38,6 +38,20 @@
       }
       var $currentTarget = $(e.currentTarget);
       this.trigger('action', $currentTarget.data('action'));
+    },
+
+    toggleOptions: function() {
+      this.$el.toggleClass('-active');
+      var $plus = this.$el.find('.icon-plus');
+      var $close = this.$el.find('.icon-close');
+
+      if (this.$el.hasClass('-active')) {
+        $plus.toggleClass('-hidden', true);
+        $close.toggleClass('-hidden', false);
+      } else {
+        $plus.toggleClass('-hidden', false);
+        $close.toggleClass('-hidden', true);
+      }
     }
 
   });

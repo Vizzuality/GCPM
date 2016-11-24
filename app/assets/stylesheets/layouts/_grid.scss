@@ -1,6 +1,11 @@
 .wrapper {
-  padding-left: $box-space;
-  padding-right: $box-space;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  @media #{$mq-medium-map} {
+    padding-left: $box-space;
+    padding-right: $box-space;
+  }
 }
 
 .row {
