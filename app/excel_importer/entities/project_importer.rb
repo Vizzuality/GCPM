@@ -11,7 +11,7 @@ class ProjectImporter
 
   def import!
     project = Project.find_or_initialize_by(id: project_id)
-    project.title = data['project_title']
+    project.title = data['project_title']&.strip
     project.project_website = data['project_website']
     project.summary = data['project_summary']
     project.start_date = data['project_start_date']
@@ -33,7 +33,7 @@ class ProjectImporter
 
   def validate_project_types(project_types)
     return if project_types.blank?
-    pt = project_types.split('|').map{|e| e.strip.downcase}
+    pt = project_types.split('|').map{|e| e.downcase}
     master_pt = ProjectType.all.pluck(:name).map{|e| e.downcase}
     wrong_types = pt - master_pt
     if wrong_types != []
@@ -47,7 +47,7 @@ class ProjectImporter
 
   def validate_cancer_types(cancer_types)
     return if cancer_types.blank?
-    ct = cancer_types.split('|').map{|e| e.strip.downcase}
+    ct = cancer_types.split('|').map{|e| e.downcase}
     master_ct = CancerType.all.pluck(:name).map{|e| e.downcase}
     wrong_types = ct - master_ct
     if wrong_types != []

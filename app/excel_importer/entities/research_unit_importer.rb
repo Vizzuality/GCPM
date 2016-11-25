@@ -13,11 +13,11 @@ class ResearchUnitImporter
 
     entity_name = is_project_lead ? "investigator" : "collaborator"
 
-    investigator = Investigator.find_or_initialize_by(name: data["#{entity_name}_name"])
+    investigator = Investigator.find_or_initialize_by(name: data["#{entity_name}_name"]&.strip)
     investigator.email = data["#{entity_name}_email_address"]
     investigator.website = data["#{entity_name}_website"]
 
-    organization = Organization.find_or_initialize_by(name: data["#{entity_name}_organization_name"])
+    organization = Organization.find_or_initialize_by(name: data["#{entity_name}_organization_name"]&.strip)
     organization_type = self.validate_organization_type(data["#{entity_name}_organization_type"])
 
     address = Address.new
@@ -65,7 +65,7 @@ class ResearchUnitImporter
 
   def validate_organization_type(organization_type)
     return if organization_type.blank?
-    ot = organization_type.split('|').map{|e| e.strip.downcase}
+    ot = organization_type.split('|').map{|e| e.downcase}
     master_ot = OrganizationType.all.pluck(:name).map{|e| e.downcase}
     wrong_types = ot - master_ot
     if wrong_types != []
