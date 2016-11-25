@@ -7,6 +7,8 @@
   width: 0;
   z-index: 3;
   opacity: 0;
+  padding: 40px 0;
+
   transition: all .2s $easeOutCubic;
 
   background-color: white;
@@ -20,11 +22,79 @@
     }
   }
 
+  .back {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+
+    font-size: 18px;
+    color: $primary-color;
+
+    .icon-arrow {
+      transform: rotate(180deg);
+      margin-right: $inline-space;
+    }
+  }
+
   .icon-close {
     position: absolute;
     display: none;
-    top: 15px;
-    right: 15px;
+    top: 20px;
+    right: 20px;
+  }
+
+  .menu-content {
+    opacity: 1;
+    transition: opacity .2s $easeOutCubic;
+
+    &.-hidden {
+      position: absolute;
+      left: -100%;
+      opacity: 0;
+    }
+  }
+
+  .user-btn {
+    padding-left: $box-space - 6px;
+  }
+
+  ul {
+    @extend %clearlist;
+    margin-top: 20px;
+    margin-bottom: $base-space;
+
+
+    li {
+      a {
+        display: inline-block;
+        width: 100%;
+        padding: 11px 0;
+        padding-left: $box-space;
+
+        font-family: $base-font-family-light;
+        font-size: 18px;
+        line-height: 24px;
+        color: $primary-color;
+      }
+    }
+  }
+
+  button {
+    &.button {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+
+      &.-inverse a {
+        color: $primary-color;
+      }
+    }
+
+    a {
+      color: $inverse-font-color;
+    }
   }
 
 }

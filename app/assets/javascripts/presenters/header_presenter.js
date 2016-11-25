@@ -17,6 +17,10 @@
         el: '.l-header'
       });
 
+      this.avatar = new App.View.MobileUserMenu({
+        el: '.c-menu-mobile'
+      });
+
       this.setEvents();
     },
 

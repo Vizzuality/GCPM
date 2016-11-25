@@ -63,7 +63,6 @@
     },
 
     commonActions: function() {
-      // new App.View.MobileHeader();
       new App.Presenter.Header();
       new App.Presenter.UserMenu();
       new App.Presenter.Footer();
