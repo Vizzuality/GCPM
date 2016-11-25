@@ -10,7 +10,7 @@
 
   _.extend(App.Presenter.ToolbarMobile.prototype, {
 
-    initialize: function(params) {
+    initialize: function() {
       this.state = new StateModel({ active: false });
 
       this.toolbarMobile = new App.View.ToolbarMobile({
