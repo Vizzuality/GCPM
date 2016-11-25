@@ -5,11 +5,11 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title><%= yield :title %> - Global Cancer Project Map</title>
 
-    <%# if browser.device.ipad? %>
+    <% if browser.device.ipad? %>
       <meta name="viewport" content="width=1024">
-    <%# else %>
-      <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-    <%# end %>
+    <% else %>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+    <% end %>
 
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag 'application', media: 'all' %>

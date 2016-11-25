@@ -36,7 +36,8 @@ $dropdown-width: 182px;
     right: 0;
 
     &.-top {
-      top: -92px;
+      top: -200%;
+      transform: translateY(12px);
       right: 0;
       left: 0;
     }
