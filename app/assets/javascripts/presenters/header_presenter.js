@@ -21,7 +21,13 @@
         el: '.c-menu-mobile'
       });
 
+      this.cache();
       this.setEvents();
+    },
+
+    cache: function() {
+      this.$body = $('body');
+      this.$html = $('html');
     },
 
     setEvents: function() {
@@ -39,6 +45,11 @@
 
       if (!active) {
         this.avatar.toogleToDefaultContent();
+        this.$body.toggleClass('-no-overflow', false);
+        this.$html.toggleClass('-no-overflow', false);
+      } else {
+        this.$body.toggleClass('-no-overflow', true);
+        this.$html.toggleClass('-no-overflow', true);
       }
     }
 
