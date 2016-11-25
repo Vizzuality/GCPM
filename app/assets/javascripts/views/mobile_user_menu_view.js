@@ -14,10 +14,16 @@
 
     cache: function() {
       this.$mobileContent = this.$el.find('.menu-content');
+      this.$defaultContent = this.$mobileContent.filter('.-default');
     },
 
     toggleMenuContent: function() {
       this.$mobileContent.toggleClass('-hidden');
+    },
+
+    toogleToDefaultContent: function() {
+      this.$mobileContent.toggleClass('-hidden', true);
+      this.$defaultContent.toggleClass('-hidden', false);
     }
 
   });

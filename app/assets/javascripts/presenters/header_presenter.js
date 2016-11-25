@@ -34,7 +34,12 @@
     },
 
     toggleMenu: function() {
-      this.header.toogleMenu(this.state.get('active'));
+      var active = this.state.get('active');
+      this.header.toogleMenu(active);
+
+      if (!active) {
+        this.avatar.toogleToDefaultContent();
+      }
     }
 
   });
