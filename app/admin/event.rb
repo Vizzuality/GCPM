@@ -1,4 +1,5 @@
 ActiveAdmin.register Event do
+  extend Featurable
   menu parent: "Entities", priority: 2
 
   permit_params :title, :description, :website, :excerpt, :participants, :start_date, :end_date, :private, :online, :address, :address2, :city, :country, :state, :latitude, :longitude, :postcode
@@ -9,7 +10,13 @@ ActiveAdmin.register Event do
     column :title
     column :start_date
     column :end_date
-    actions
+    actions do |obj|
+      if obj.featured?
+        link_to("Unfeature", unfeature_admin_event_path(obj))
+      else
+        link_to("Feature", feature_admin_event_path(obj))
+      end
+    end
   end
 
   form do |f|

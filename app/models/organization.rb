@@ -15,6 +15,9 @@
 #
 
 class Organization < ApplicationRecord
+
+  include ActAsFeatured
+
   belongs_to :organization_type
 
   has_many :addresses
