@@ -4,7 +4,7 @@
 
   App.View.Actionbar = Backbone.View.extend({
 
-    template: HandlebarsTemplates['actionbar'],
+    template: HandlebarsTemplates[ gon.isMobile ? 'actionbar_mobile' : 'actionbar'],
 
     events: {
       'click .js-actionbar-action': 'fireAction'

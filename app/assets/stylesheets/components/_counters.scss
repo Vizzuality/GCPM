@@ -1,6 +1,6 @@
 .c-counters {
-  padding-top: $box-space;
-  padding-bottom: $box-space;
+  padding-top: $box-space - 10px;
+  padding-bottom: $box-space - 10px;
   text-align: center;
 
   @media screen and (max-height: 900px) {
@@ -12,12 +12,32 @@
   &.-people { background: rgba($secondary-color, .1); }
   &.-events { background: rgba($alternative-color, .1); }
 
+  .column {
+    margin-bottom: 36px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    @media #{$mq-small} {
+      margin-bottom: 0;
+    }
+
+    h3 {
+      letter-spacing: .9px;
+    }
+  }
+
   .amount {
     display: block;
 
-    font-size: $large-font-size;
+    font-size: $h1-font-size;
     font-weight: bold;
     line-height: 0.8;
+
+    @media #{$mq-small} {
+      font-size: $large-font-size;
+    }
 
     @media screen and (max-height: 900px) {
       font-size: 45px;

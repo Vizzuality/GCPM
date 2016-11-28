@@ -35,6 +35,13 @@ $dropdown-width: 182px;
     top: 52px;
     right: 0;
 
+    &.-top {
+      top: -200%;
+      transform: translateY(12px);
+      right: 0;
+      left: 0;
+    }
+
     .dropdown-item {
       padding: ($button-y-padding / 2) $button-x-padding;
       width: 100%;
@@ -66,17 +73,6 @@ $dropdown-width: 182px;
 
       &.-active {
         opacity: .5;
-      }
-    }
-  }
-
-  //TODO: hide it until responsive implemented
-  &.-sortby {
-    > span {
-      display: none;
-
-      @media screen and (min-width: 990px) {
-        display: inherit;
       }
     }
   }
