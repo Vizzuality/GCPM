@@ -26,8 +26,7 @@
     },
 
     cache: function() {
-      this.$body = $('body');
-      this.$html = $('html');
+      this.$htmlbody = $('html, body');
     },
 
     setEvents: function() {
@@ -45,11 +44,9 @@
 
       if (!active) {
         this.avatar.toogleToDefaultContent();
-        this.$body.toggleClass('-no-overflow', false);
-        this.$html.toggleClass('-no-overflow', false);
+        this.$htmlbody.toggleClass('-no-overflow', false);
       } else {
-        this.$body.toggleClass('-no-overflow', true);
-        this.$html.toggleClass('-no-overflow', true);
+        this.$htmlbody.toggleClass('-no-overflow', true);
       }
     }
 

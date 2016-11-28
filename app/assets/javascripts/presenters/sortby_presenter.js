@@ -37,6 +37,7 @@
         options: _.extend({}, {
           label: 'Sort by',
           className: '-sortby',
+          contentClassName: gon.isMobile && '-top',
           options: dropdownOptions,
           arrows: true,
           direction: specs.direction

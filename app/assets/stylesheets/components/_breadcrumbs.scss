@@ -1,9 +1,11 @@
 .c-breadcrumbs {
+
   > ul {
     display: flex;
     margin: 0;
     padding: 0;
     list-style: none;
+    padding-right: 15px;
 
     > li a {
       display: block;
@@ -14,6 +16,7 @@
       font-size: $small-font-size;
       font-weight: bold;
       text-transform: uppercase;
+      white-space: nowrap;
 
       background-color: $app-bg-color;
 
@@ -41,6 +44,20 @@
 
         transform: rotate(45deg) skew(15deg, 15deg);
         z-index: 1;
+      }
+
+      span {
+        display: block;
+        max-width: 50px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        @media #{$mq-small} {
+          max-width: none;
+          overflow: initial;
+          text-overflow: initial;
+        }
       }
     }
 
