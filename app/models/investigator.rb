@@ -18,6 +18,7 @@ class Investigator < ApplicationRecord
 
   include Approvable
   include UserRelationable
+  include ActAsFeatured
 
   after_create :notify_admin, if: 'user_id.present?'
 

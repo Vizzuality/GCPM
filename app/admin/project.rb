@@ -1,4 +1,5 @@
 ActiveAdmin.register Project do
+  extend Featurable
   menu parent: "Entities", priority: 1
 
   permit_params :title, :summary, :project_website, :start_date, :end_date, :status, :user_id
@@ -19,7 +20,13 @@ ActiveAdmin.register Project do
     column :id
     column :title
     column :status
-    actions
+    actions do |obj|
+      if obj.featured?
+        link_to("Unfeature", unfeature_admin_project_path(obj))
+      else
+        link_to("Feature", feature_admin_project_path(obj))
+      end
+    end
   end
 
   form do |f|

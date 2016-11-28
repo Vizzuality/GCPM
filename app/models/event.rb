@@ -40,6 +40,7 @@ class Event < ApplicationRecord
   validate :dates_timeline
 
   include Sluggable
+  include ActAsFeatured
 
   def country_object
     Country.find_by(country_name: self.country)
