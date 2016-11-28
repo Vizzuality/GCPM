@@ -10,8 +10,15 @@
 <li class="<%= active_page?(about_path) ? '-active' : '' %>">
   <%= link_to (t 'about'), about_path %>
 </li>
-<li>
-  <a href="/search">
-    <svg class="c-icon -medium -primary"><use xlink:href="#icon-search"></use></svg>
-  </a>
-</li>
+
+<% if browser.device.mobile? %>
+  <li class="<%= active_page?(searches_path) ? '-active' : '' %>">
+    <%= link_to (t 'search'), searches_path %>
+  </li>
+<% else %>
+  <li>
+    <a href="/search">
+      <svg class="c-icon -medium -primary"><use xlink:href="#icon-search"></use></svg>
+    </a>
+  </li>
+<% end %>

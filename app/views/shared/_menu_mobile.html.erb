@@ -1,0 +1,69 @@
+
+<div class="c-menu-mobile">
+  <svg class="c-icon icon-close -medium -primary js-menu-close">
+    <use xlink:href="#icon-close"></use>
+  </svg>
+
+  <% if user_signed_in? %>
+    <div class="js-mobile-user-menu menu-content -default <%= active_page?(user_session_path) ? '-active' : '' %>">
+      <button class="user-btn">
+        <div class="c-avatar -normal" style="background-image: url(<%= current_user.avatar_url(:thumb) %>)"></div>
+      </button>
+    </div>
+  <% end %>
+
+  <ul class="menu-content -default">
+    <%= render "shared/nav" %>
+  </ul>
+
+  <% if user_signed_in? %>
+    <button class="c-btn -primary button">
+      <%= link_to (t 'logout'), destroy_user_session_path, :method => 'delete' %>
+    </button>
+  <% else %>
+    <button class="c-btn -primary button">
+      <%= link_to (t 'login'), user_session_path %></a>
+    </button>
+  <% end %>
+
+
+<!-- User menu content -->
+  <% if user_signed_in? %>
+    <div class="back js-mobile-user-menu menu-content -hidden">
+      <svg class="c-icon icon-arrow -medium -primary">
+        <use xlink:href="#icon-arrow"></use>
+      </svg>
+      Back
+    </div>
+
+    <div class="menu-content -hidden">
+      <ul>
+        <li class="<%= active_page?(user_session_path) ? '-active' : '' %>">
+          <%= link_to (t 'network'), user_path(:data => 'network', :id => current_user.id) %>
+        </li>
+        <li class="<%= active_page?(user_session_path) ? '-active' : '' %>">
+          <%= link_to (t 'projects'), user_path(:data => 'projects', :id => current_user.id) %>
+        </li>
+        <li class="<%= active_page?(user_session_path) ? '-active' : '' %>">
+          <%= link_to (t 'posts'), user_path(:data => 'posts', :id => current_user.id) %>
+        </li>
+        <li class="<%= active_page?(user_session_path) ? '-active' : '' %>">
+          <%= link_to (t 'events'), user_path(:data => 'events', :id => current_user.id) %>
+        </li>
+        <li class="<%= active_page?(user_session_path) ? '-active' : '' %>">
+          <%= link_to user_path(:data => 'messages', :id => current_user.id) do %>
+            <span>
+              <%= t 'messages' %>
+              <div class="c-badge -relative messages-badge <%= current_user.unread_inbox_count > 0 ? '' : '-hidden' %>"><%= current_user.unread_inbox_count %></div>
+            </span>
+          <% end %>
+        </li>
+      </ul>
+
+      <button class="c-btn -primary -inverse button">
+        <%= link_to (t 'edit_profile'), edit_user_path(current_user.id) %>
+      </button>
+    </div>
+  <% end %>
+
+</div>

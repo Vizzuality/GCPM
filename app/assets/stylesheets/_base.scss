@@ -1,6 +1,11 @@
 html {
   font-size: 100%;
   background-color: rgba($base-bg-color, .1);
+
+  &.-no-overflow {
+    overflow: hidden;
+    height: 100vh;
+  }
 }
 
 body {
@@ -21,7 +26,14 @@ body {
   &.-modal-open {
     overflow: hidden;
   }
+
+  &.-no-overflow {
+    overflow: hidden;
+    height: 100vh;
+  }
 }
+
+
 
 h1, h2, h3, p {
   &:first-child {
