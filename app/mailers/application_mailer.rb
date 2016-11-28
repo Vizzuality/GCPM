@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'data@gcpm.globalonc.org'
+  default from: ENV.fetch('ADMIN_EMAIL') { 'data@gcpm.globalonc.org' }
   layout 'mailer'
 end

@@ -11,7 +11,11 @@
     },
 
     show: function(params) {
-      var newParams = _.extend({}, { data: 'data' }, params);
+      var newParams = _.extend({}, {
+        data: 'data',
+        iso: params.vars[0]
+      }, params);
+      
       new App.Presenter.MapVis(newParams);
       new App.Presenter.TabNav(newParams);
       new App.Presenter.CountryData(newParams);

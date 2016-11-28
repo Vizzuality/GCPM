@@ -4,6 +4,18 @@
 
   var StateModel = Backbone.Model.extend();
 
+  var CountryModel = Backbone.Model.extend({
+    setUrl: function(iso) {
+      var sql = "SELECT the_geom "+
+                "FROM canceratlas_downloadabledata "+
+                "WHERE iso3='" + iso + "'";
+
+      this.url = 'https://' + gon.carto_account + '.carto.com/api/v2/sql/?q=' + sql + '&api_key=' + gon.carto_key + '&format=GeoJSON';
+    }
+  });
+
+
+
   App.Presenter.MapVis = function() {
     this.initialize.apply(this, arguments);
   };
@@ -14,12 +26,13 @@
       this.fc = App.facade.layer;
 
       this.state = new StateModel(params);
+      this.country = new CountryModel();
+
       this.view = new App.View.Map({
         el: '#map',
         options: {
-          zoom: 2,
-          minZoom: 1,
-          maxZoom: 10,
+          zoom: 3,
+          minZoom: 3,
           center: [20, 0],
           basemap: 'secondary'
         }
@@ -79,13 +92,27 @@
         this.currentLayer = layer;
         map.addLayer(layer);
         setTimeout(function() {
-          if (layer && layer.getBounds()) {
+          if (layer && layer.getBounds() && !this.state.get('iso')) {
             map.fitBounds(layer.getBounds(), {
               paddingTopLeft: [100, 100],
               paddingBottomRight: [100, 200]
             });
           }
-        }, 100);
+
+          if (this.state.get('iso')) {
+            this.country.setUrl(this.state.get('iso'));
+            this.country.fetch()
+              .done(function(){
+                var country = this.country.toJSON();
+                var countryPolygon = L.geoJson(country);
+                map.fitBounds(countryPolygon.getBounds(), {
+                  // paddingTopLeft: [100, 100],
+                  // paddingBottomRight: [100, 200]
+                });
+              }.bind(this));
+          }
+
+        }.bind(this), 100);
       }.bind(this));
     },
 

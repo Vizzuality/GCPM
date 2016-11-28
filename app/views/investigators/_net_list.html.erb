@@ -10,6 +10,11 @@
           </div>
 
           <h2><%= link_to e.name, investigator_path(e.slug_or_id) %></h2>
+          <% e.organizations.each do |o|%>
+            <h3><%= link_to o.name, organization_path(o.slug) %></h3>
+            <h3><%= o.addresses.map{|a| [a.city, a.country_name]}.uniq.join(', ') %></h3>
+          <% end %>
+          
           <% if e.user.present? && is_owner?(@user, current_user) %>
             <button class="c-btn -icon -secondary js-btn-toggle-message" data-user="<%= e.user.id %>-i" type="button" name="button">
               <svg class="c-icon -normal -inverse"><use xlink:href="#icon-message"></use></svg>
@@ -28,7 +33,7 @@
         					<%= f.hidden_field :receiver, value: e.user.id %>
         				</div>
                 <div class="form-row">
-                  <%= f.submit 'Enviar', class: 'c-btn -secondary' %>
+                  <%= f.submit 'Send', class: 'c-btn -secondary' %>
                 </div>
         			<% end %>
             </div>

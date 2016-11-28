@@ -21,6 +21,8 @@ class Project < ApplicationRecord
 
   include UserRelationable
 
+  after_create :notify_admin
+
   has_many :memberships
   has_many :research_units,  through: :memberships
   has_many :organizations,   through: :memberships
@@ -33,7 +35,7 @@ class Project < ApplicationRecord
   has_many :project_leads,           -> { where(memberships: { membership_type: 0 }) }, through: :research_units, source: :investigator
   has_many :secondary_investigators, -> { where(memberships: { membership_type: 1 }) }, through: :research_units, source: :investigator
 
-  has_many :project_users
+  has_many :project_users, dependent: :destroy
   has_many :users, through: :project_users
 
   has_many :project_updates
@@ -196,6 +198,10 @@ class Project < ApplicationRecord
     save
   end
 
+  def project_creator(user_id)
+    self.created_by == user_id
+  end
+
   def select_investigators(ru_id=nil)
     if ru_id.present?
       ResearchUnit.includes(:investigator).find(ru_id).investigator.name
@@ -227,5 +233,9 @@ class Project < ApplicationRecord
       if self.start_date.present? && self.end_date.present?
         errors.add(:end_date, 'must be after start date') if self.start_date > self.end_date
       end
+    end
+
+    def notify_admin
+      AdminMailer.user_relation_email('project', self.title, 'created').deliver_later
     end
 end

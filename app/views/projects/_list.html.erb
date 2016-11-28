@@ -38,6 +38,11 @@
             <% if can? :update, p %>
               <%= link_to 'Edit', edit_user_project_path(current_user.id, p.slug_or_id), class: 'c-btn -secondary' %>
             <% end %>
+            <% if can? :destroy, p %>
+              <%= link_to (t 'delete'), user_project_path(current_user.id, p.slug_or_id),
+                class: 'c-btn -secondary -inverse',
+                method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
           <% end %>
         </div>
       </div>

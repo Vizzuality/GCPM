@@ -1,0 +1,40 @@
+<div class="legend-bar">
+  <button class="js-legend-close arrow-btn" data-action="legend" title="Legend">
+    <span class="arrow -left"></span>
+  </button>
+</div>
+<ul class="marker-legend">
+  {{#each items}}
+    <li>
+      <div class="legend-icon -{{dataType}}">
+        {{{icon}}}
+      </div>
+      <div class="legend-label">{{name}}</div>
+    </li>
+  {{/each}}
+</ul>
+{{#if layer}}
+<ul class="layer-legend">
+  <li>
+    <span class="name">
+      {{layer.name}}
+      <button type="button" name="button" class="c-btn -primary -icon -tiny js-btn-info">
+        <svg class="c-icon -tiny -inverse"><use xlink:href="#icon-info"></use></svg>
+      </button>
+    </span>
+    {{#if layer.legend}}
+      <ul class="legend">
+        {{#each layer.legend.items}}
+          <li>
+            <span class="square" style="background: {{color}}"></span>
+            <span class="value">{{value}}</span>
+          </li>
+        {{/each}}
+      </ul>
+      {{#if layer.legend.Metrics}}
+        <p class="metrics">{{layer.legend.Metrics}}</p>
+      {{/if}}
+    {{/if}}
+  </li>
+</ul>
+{{/if}}

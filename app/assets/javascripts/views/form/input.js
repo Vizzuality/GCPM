@@ -65,6 +65,7 @@
     triggerKeyup: function(e) {
       this.value = e.currentTarget.value;
       this.trigger('keyup', {
+        keyCode: e.keyCode,
         name: e.currentTarget.name,
         value: e.currentTarget.value
       });

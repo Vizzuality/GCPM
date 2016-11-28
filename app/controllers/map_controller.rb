@@ -10,6 +10,7 @@ class MapController < ApplicationController
     @current_type = params.key?(:data) ? params[:data] : 'projects'
 
     gon.server_params = { 'user': current_user ? current_user.id : '' }
+    gon.isMobile = browser.device.mobile?
 
     limit = 12 + (@page * 9)
 
@@ -27,7 +28,7 @@ class MapController < ApplicationController
       @items_private_total = private.size
       @items_total = events.size
     elsif params.key?(:data) && params[:data] == 'people'
-      people = Investigator.fetch_all(people_params).order('created_At DESC')
+      people = Investigator.preload(organizations: :addresses).fetch_all(people_params).order('created_At DESC')
       @items = people.limit(limit)
       @more = (people.size > @items.size)
       @items_total = people.size

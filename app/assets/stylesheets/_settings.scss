@@ -50,6 +50,7 @@ $box-shadow-2: 0 7px 15px 0 rgba(0, 0, 0, 0.2);
 
 $base-space: 23px;
 $box-space: 60px;
+$small-box-space: 15px;
 $inline-space: 18px;
 
 $button-x-padding: 23px;
@@ -65,64 +66,10 @@ $easeOutSine: cubic-bezier(0.390, 0.575, 0.565, 1.000);
 $easeInOutSine: cubic-bezier(0.445, 0.050, 0.550, 0.950);
 
 // /* General layout */
-// $body-max-width:         1404px;
-
-// /* Font families */
-// $font-family-1: "Montserrat", sans-serif;
-
-// /* Font sizes */
-// $font-size-tiny:     11px;
-// $font-size-x-small:  12px;
-// $font-size-small:    13px;
-// $font-size-normal:   15px;
-// $font-size-medium:   20px;
-// $font-size-x-medium: 27px;
-// $font-size-big:      30px;
-// $font-size-x-big:    55px;
-// $font-size-huge:     65px;
-// $font-size-x-huge:   78px;
-
-// /* Font weights */
-// $font-weight-light:  300;
-// $font-weight-normal: 400;
-// $font-weight-bold:   700;
-
-// /* Colors */
-// $color-1:  #5aade4; // blue
-// $color-2:  #0f3046; // dark
-// $color-3:  #fff;    // white
-// $color-4:  #68299b; // purple
-// $color-5:  #fbfbfb; // bone-white
-// $color-6:  #f57823; // orange
-// $color-7:  #000;    // black
-// $color-8:  #deeffa; // lightblue
-
-// /* Shadows */
-// $shadow-1: 0 7px 10px rgba(0, 0, 0, 0.1);
-// $shadow-2: 0 0px 5px rgba(0, 0, 0, 0.15);
-
 // /* Breakpoints */
-// $breakpoint-mobile-small:  320px;
-// $breakpoint-mobile-large:  425px;
-// $breakpoint-tablet:        768px;
-// $breakpoint-laptop:       1024px;
-
-// $breakpoint-small:        40em;
+$breakpoint-small:        40em;
 // $breakpoint-medium:   40.063em;
-// $breakpoint-large:    64.063em;
-// $breakpoint-xLarge:   90.063em;
-// $breakpoint-xxLarge: 120.063em;
 
 // /* Media queries */
-// $mq-mobile-small: "screen and (min-width: #{$breakpoint-mobile-small})";
-// $mq-mobile-large: "screen and (min-width: #{$breakpoint-mobile-large})";
-// $mq-tablet:       "screen and (min-width: #{$breakpoint-tablet})";
-// $mq-laptop:       "screen and (min-width: #{$breakpoint-laptop})";
-
-// $mq-small:   "screen and (min-width: #{$breakpoint-small})";
+$mq-small:   "screen and (min-width: #{$breakpoint-small})";
 // $mq-medium:  "screen and (min-width: #{$breakpoint-medium})";
-// $mq-large:   "screen and (min-width: #{$breakpoint-large})";
-// $mq-xLarge:  "screen and (min-width: #{$breakpoint-xLarge})";
-// $mq-xxLarge: "screen and (min-width: #{$breakpoint-xxLarge})";
-
-// $mq-body-width: "screen and (min-width: #{$body-max-width})";

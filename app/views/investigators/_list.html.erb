@@ -9,6 +9,10 @@
                       <% end %>">
           </div>
           <h2><%= link_to e.name, investigator_path(e.slug_or_id) %></h2>
+          <% e.organizations.each do |o|%>
+            <h3><%= link_to o.name, organization_path(o.slug_or_id) %></h3>
+            <h3><%= o.addresses.map{|a| [a.city, a.country_name]}.uniq.join(', ') %></h3>
+          <% end %>
         </div>
       </div>
     <% end %>

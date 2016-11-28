@@ -13,10 +13,12 @@ module Abilities
 
       can :manage, ::Project,      project_users: { user_id: user.id, is_approved: true }
       can :update, ::Project do |project|
-        project.users.include?(user) && project.users.size == 1 ||
-        project.users.size > 1 && project.project_users.find_by(user_id: user.id).approved?
+        project.project_creator(user.id) ||
+        project.project_users.find_by(user_id: user.id).approved?
       end
-
+      can :destroy, ::Project do |project|
+        project.project_creator(user.id)
+      end
       can :create, :all
 
       can :remove_relation,  ::Project, project_users: { user_id: user.id }

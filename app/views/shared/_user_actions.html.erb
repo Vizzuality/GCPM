@@ -16,11 +16,20 @@
           <% end %>
         </li>
 
-        <% if ( controller_name === 'investigators' && @investigator.user.present? ) || controller_name === 'users'%>
-          <li>
-            <button class="c-btn -secondary -inverse js-btn-toggle-message" data-user="<%= @investigator.user.id %>" type="button" name="button">Message</button>
-            <div id="form-message-<%= @investigator.user.id %>" class="c-form-message -arr-right js-form-message">
-              <%= form_for Mailboxer::Message.new, remote: true, url: :message, as: :message do |f| %>
+        <% if ( controller_name === 'investigators') || controller_name === 'users' %>
+          <%
+            case controller_name
+              when 'investigators'
+                user_id = (@investigator && @investigator.user.present?) ? @investigator.user.id : nil
+              when 'users'
+                user_id = (@user) ? @user.id : nil
+            end
+          %>
+          <% if user_id %>
+            <li>
+              <button class="c-btn -secondary -inverse js-btn-toggle-message" data-user="<%= user_id %>" type="button" name="button">Message</button>
+              <div id="form-message-<%= user_id %>" class="c-form-message -arr-right js-form-message">
+                <%= form_for Mailboxer::Message.new, remote: true, url: :message, as: :message do |f| %>
                 <div class="form-row">
                   <%= f.label :subject, 'Subject' %>
                   <%= f.text_field :subject %>
@@ -28,14 +37,15 @@
                 <div class="form-row">
                   <%= f.label :body, 'Message' %>
                   <%= f.text_area :body %>
-                  <%= f.hidden_field :receiver, value: @investigator.user.id %>
+                  <%= f.hidden_field :receiver, value: user_id %>
                 </div>
                 <div class="form-row">
-                  <%= f.submit 'Enviar', class: 'c-btn -secondary' %>
+                  <%= f.submit 'Send', class: 'c-btn -secondary' %>
                 </div>
-              <% end %>
-            </div>
-          </li>
+                <% end %>
+              </div>
+            </li>
+          <% end %>
         <% end %>
 
       </ul>

@@ -60,9 +60,19 @@
       this.searchInput.$el.find('input').focus();
     },
 
-    handleKeyup: function(ev) {
-      this.searchValue = ev.value;
-      this.getFilteredList();
+    handleKeyup: function(e) {
+      switch(e.keyCode) {
+        case 13:
+          var filteredList = this.state.get('filteredList');
+          if (filteredList.length === 1) {
+            window.location = '/countries/' + filteredList[0].country_iso_3;
+          }
+        break;
+        default:
+          this.searchValue = e.value;
+          this.getFilteredList();
+
+      }
     },
 
     getFilteredList: function() {

@@ -21,6 +21,12 @@
       new App.Presenter.Share(params);
       new App.Presenter.Download(params);
       new App.Presenter.Timeline(params);
+
+      if (gon.isMobile) {
+        new App.Presenter.ActionLayerMobile(params);
+        new App.Presenter.ActionLegendMobile(params);
+        new App.Presenter.ToolbarMobile(params);
+      }
     }
 
   });

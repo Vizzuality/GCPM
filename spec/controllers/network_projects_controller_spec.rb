@@ -15,7 +15,7 @@ RSpec.describe NetworkProjectsController, type: :controller do
   context 'For authenticated user' do
     before :each do
       @project_1 = create(:project, title: 'First project', users: [@user_first, @user])
-      @project_3 = create(:project, title: 'Third project', users: [@user])
+      @project_3 = create(:project, title: 'Third project', users: [@user], created_by: @user.id)
       sign_in @user
     end
 
