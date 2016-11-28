@@ -1,4 +1,5 @@
 ActiveAdmin.register Project do
+  extend Featurable
   menu parent: "Entities", priority: 1
 
   permit_params :title, :summary, :project_website, :start_date, :end_date, :status, :user_id
@@ -13,19 +14,6 @@ ActiveAdmin.register Project do
   filter :status
   filter :created_at
   filter :updated_at
-
-  member_action :feature, method: :get do
-    f = Featured.new
-    f.featurable = resource
-    f.save!
-    redirect_to collection_url, notice: "Featured!"
-  end
-
-  member_action :unfeature, method: :get do
-    f = Featured.find_by(featurable: resource)
-    f.destroy
-    redirect_to collection_url, notice: "Unfeatured!"
-  end
 
   index do
     selectable_column

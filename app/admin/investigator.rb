@@ -1,4 +1,6 @@
 ActiveAdmin.register Investigator do
+  extend Featurable
+
   menu parent: "Entities"
 
   permit_params :name, :email, :website, :user_id, :is_approved
@@ -33,7 +35,13 @@ ActiveAdmin.register Investigator do
     column :name
     column :email
     column :website
-    actions
+    actions do |obj|
+      if obj.featured?
+        link_to("Unfeature", unfeature_admin_investigator_path(obj))
+      else
+        link_to("Feature", feature_admin_investigator_path(obj))
+      end
+    end
   end
 
   form do |f|
