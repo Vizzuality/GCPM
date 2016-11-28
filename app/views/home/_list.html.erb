@@ -1,58 +1,72 @@
 <div class="row collapse">
-  <% if @projects.any? %>
-    <% @projects.each do |p| %>
-      <div class="column small-12 medium-4">
-        <div class="c-card -projects">
-          <h3 class="-underlined">
-            <% if p.project_leads.first.present? %>
-              <%= link_to p.project_leads.first.try(:name), investigator_path(p.project_leads.first.slug_or_id) %>
-            <% end %>
-          </h3>
+  <% if @featureds.any? %>
+    <% @featureds.each_with_index do |featured, index| %>
+      <% case featured.class.to_s.downcase %>
+        <% when 'project' %>
+          <div class="column small-12 medium-4">
+            <div class="c-card -projects">
+              <h3 class="-underlined">
+                <% if featured.project_leads.first.present? %>
+                  <%= link_to featured.project_leads.first.try(:name), investigator_path(featured.project_leads.first.slug_or_id) %>
+                <% end %>
+              </h3>
 
-          <h2><%= link_to p.title, project_path(p.slug_or_id) %></h2>
+              <h2><%= link_to featured.title, project_path(featured.slug_or_id) %></h2>
 
-          <p>
-            <% p.cancer_types.each do |t| %>
-              <span class="c-tag -mg">
-                <%= link_to t.name, cancer_path(t.slug_or_id) %>
-              </span>
-            <% end %>
-          </p>
-        </div>
-      </div>
-    <% end %>
-  <% end %>
+              <p>
+                <% featured.cancer_types.each do |t| %>
+                  <span class="c-tag -mg">
+                    <%= link_to t.name, cancer_path(t.slug_or_id) %>
+                  </span>
+                <% end %>
+              </p>
+            </div>
+          </div>
 
-  <% if @events.any? %>
-    <% @events.each_with_index do |e, index| %>
-      <div class="column small-12 medium-4">
-        <div class="c-card -events <% if index == 0 %>-inverse<% end %>">
-          <% if e.country? %>
-            <h3 class="-underlined -alternative">
-              <% country = Country.find_by( country_name: e.country ) %>
-              <!-- TODO: In case country dosen't exist -->
-              <% if country %>
-                <%= link_to e.city + ', ' + e.country, country_path(country.country_iso_3) %>
+        <% when 'event' %>
+          <div class="column small-12 medium-4">
+            <div class="c-card -events">  <!-- use -inverse if you want to fill the card -->
+              <% if featured.country? %>
+                <h3 class="-underlined -alternative">
+                  <% country = Country.find_by( country_name: featured.country ) %>
+                  <!-- TODO: In case country dosen't exist -->
+                  <% if country %>
+                    <%= link_to featured.city + ', ' + featured.country, country_path(country.country_iso_3) %>
+                  <% end %>
+                </h3>
               <% end %>
-            </h3>
-          <% end %>
-          <h2><%= link_to e.title, event_path(e.slug_or_id) %></h2>
-          <p><%= truncate(e.description.html_safe, :length => 300) %></p>
-        </div>
-      </div>
-    <% end %>
-  <% end %>
+              <h2><%= link_to featured.title, event_path(featured.slug_or_id) %></h2>
+              <p><%= truncate(featured.description.html_safe, :length => 300) %></p>
+            </div>
+          </div>
 
-  <% if @organizations.any? %>
-    <% @organizations.each_with_index do |o, index| %>
-      <div class="column small-12 medium-4">
-        <div class="c-card <% if index == 0 %>-inverse<% end %>">
-          <h3 class="-underlined">
-            Organization
-          </h3>
-          <h2><%= link_to o.name, organization_path(o.slug_or_id) %></h2>
-        </div>
-      </div>
+        <% when 'organization' %>
+          <div class="column small-12 medium-4">
+            <div class="c-card">  <!-- use -inverse if you want to fill the card -->
+              <h3 class="-underlined">
+                Organization
+              </h3>
+              <h2><%= link_to featured.name, organization_path(featured.slug_or_id) %></h2>
+            </div>
+          </div>
+
+        <% when 'investigator' %>
+          <div class="column small-12 medium-4">
+            <div class="c-card -person">
+              <div class="c-avatar -ph -mg-bt"
+                   style="<% if featured.user.present? %>
+                            background-image: url(<%= featured.user.avatar_url(:thumb) %>)
+                          <% end %>">
+              </div>
+              <h2><%= link_to featured.name, investigator_path(featured.slug_or_id) %></h2>
+              <% featured.organizations.each do |o|%>
+                <h3><%= link_to o.name, organization_path(o.slug_or_id) %></h3>
+                <h3><%= o.addresses.map{|a| [a.city, a.country_name]}.uniq.join(', ') %></h3>
+              <% end %>
+            </div>
+          </div>
+
+      <% end %>
     <% end %>
   <% end %>
 </div>
