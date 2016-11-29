@@ -32,7 +32,12 @@
       <%= yield %>
     </section>
 
-    <%= render "shared/footer" %>
+
+    <% if browser.device.mobile? %>
+      <%= render "shared/footer_mobile" %>
+    <% else %>
+      <%= render "shared/footer" %>
+    <% end %>
 
     <%# CND Libs %>
     <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.16.0/polyfill.min.js' %>
