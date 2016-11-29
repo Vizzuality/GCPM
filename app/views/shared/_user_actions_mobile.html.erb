@@ -1,24 +1,37 @@
-<div class="c-user-actions-mobile">
-  <div class="wrapper">
-    <nav>
-    <button class="c-btn -secondary back js-btn-back">
-      <svg class="c-icon icon-arrow -normal -inverse">
-        <use xlink:href="#icon-arrow"></use>
+<div id="userActionsMobile">
+  <%= render 'shared/user_actions_menu_mobile'%>
+
+  <div class="c-mobile-btns-container">
+    <button class="c-btn -secondary -border -thin js-btn-more">
+      <svg class="c-icon -normal -inverse">
+        <use xlink:href="#icon-plus"></use>
       </svg>
     </button>
 
-      <div class="label">
-        <svg class="c-icon -normal -inverse">
-          <use xlink:href="#icon-add"></use>
-        </svg>
-        Add
-      </div>
-    </nav>
 
-    <ul>
-      <li><%= link_to '+ Project', (user_signed_in?) ? new_user_project_path(user_id: current_user.id) : user_session_path, class: 'c-btn -transparent' %></li>
-      <li><%= link_to '+ Post', (user_signed_in?) ? new_post_path : user_session_path, class: 'c-btn -transparent' %></li>
-      <li><%= link_to '+ Event', (user_signed_in?) ? new_user_event_path(user_id: current_user.id) : user_session_path, class: 'c-btn -transparent' %></li>
-    </ul>
+    <div id="followButton">
+      <% if user_signed_in? %>
+        <button class="c-btn -secondary -inverse -thin js-btn-follow"
+          data-followed="<%= @followed %>"
+          data-id="<%= @followed_id %>"
+          data-resource="<%= @followed_resource %>">
+            <% if (@followed) %>
+              <svg class="c-icon -secondary -normal">
+                <use xlink:href="#icon-minus"></use>
+              </svg>
+            <% else %>
+              <svg class="c-icon -secondary -normal">
+                <use xlink:href="#icon-collaborators"></use>
+              </svg>
+            <% end %>
+        </button>
+      <% else %>
+        <a href="/users/sign_in" class="c-btn -secondary -inverse -thin">
+          <svg class="c-icon -normal">
+            <use xlink:href="#icon-collaborators"></use>
+          </svg>
+        </a>
+      <% end %>
+    </div>
   </div>
 </div>

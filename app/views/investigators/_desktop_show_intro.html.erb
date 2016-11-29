@@ -1,0 +1,97 @@
+
+<div class="l-app-map">
+  <div id="map" class="c-map"></div>
+</div>
+
+<%= render "shared/legend_people" %>
+
+<div class="l-app-title">
+  <div class="">
+    <div class="row collapse wrapper">
+      <div class="column small-12 medium-8">
+        <div class="c-avatar -big -ph -mg-bt"
+             style="<% if inv_user.present? %>
+                      background-image: url(<%= inv_user.avatar_url(:thumb) %>)
+                    <% end %>">
+        </div>
+      </div>
+    </div>
+    <div class="row collapse wrapper">
+      <div class="column small-12 medium-8">
+        <div class="c-title-btn">
+          <h1><%= @investigator.try(:name) %></h1>
+          <% if user_signed_in? && current_user.investigator == @investigator %>
+            <%= link_to (t 'not_me'), remove_relation_investigator_path(@investigator), method: :patch, class: 'c-btn -transparent' %>
+          <% elsif user_signed_in? && current_user.investigator.blank? && @investigator.user.blank? %>
+            <%= link_to (t 'this_is_me'), relation_request_investigator_path(@investigator), method: :patch, class: 'c-btn -transparent' %>
+          <% end %>
+        </div>
+
+        <div class="row">
+          <div class="column small-12 medium-6">
+            <ul class="c-pipe-list">
+              <% if @investigator.organizations.any? %>
+                <li>
+                  <%= link_to @investigator.organizations.first.try(:name), organization_path(@investigator.organizations.first.slug_or_id), class: '-clickable -hv' %>
+                </li>
+              <% end %>
+              <% if inv_user.present? && inv_user.position.present? %>
+                <li><%= inv_user.position %></li>
+              <% end %>
+            </ul>
+            <ul class="c-pipe-list">
+              <li><%= @following %> Following</li>
+              <li><%= @followers %> Followers</li>
+            </ul>
+          </div>
+
+          <div class="column small-12 medium-6">
+            <ul class="c-pipe-list">
+              <% if inv_user.present? %>
+                <% if not_blank?(inv_user.twitter_account) %>
+                  <li>
+                    <a href="https://twitter.com/<%= inv_user.twitter_account %>" class="-clickable -hv" target="_blank">
+                      Twitter
+                    </a>
+                  </li>
+                <% end %>
+                <% if not_blank?(inv_user.linkedin_account) %>
+                  <li>
+                    <a href="https://www.linkedin.com/in/<%= inv_user.linkedin_account %>" class="-clickable -hv" target="_blank">
+                      Linkedin
+                    </a>
+                  </li>
+                <% end %>
+              <% end %>
+              <li>
+                <a href="http://www.ncbi.nlm.nih.gov/pubmed?term=<%= @investigator.name %>%5BAuthor%5D" class="-clickable -hv" target="_blank">
+                  Pubmed
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <table class="c-numbers-list">
+          <thead>
+            <tr>
+              <th><%= t 'projects' %></th>
+              <th><%= t 'posts' %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= @projects.size %></td>
+              <td><%= @posts.size %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="column small-12 medium-4">
+        <%= render "shared/user_actions" %>
+      </div>
+    </div>
+
+  </div>
+</div>
