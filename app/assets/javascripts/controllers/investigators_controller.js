@@ -22,6 +22,8 @@
       if (!gon.isMobile) {
         new App.Presenter.MapVis(newParams);
         new App.Presenter.InvestigatorData(newParams);
+      } else {
+        new App.Presenter.UserActionsMobile(newParams);
       }
     }
 

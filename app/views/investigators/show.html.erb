@@ -7,39 +7,41 @@
       <div id="map" class="c-map"></div>
     </div>
   <% else %>
-    <%= render 'shared/user_actions_mobile'%>
+    <div id="userActionsMobile">
+      <%= render 'shared/user_actions_mobile'%>
 
-    <div class="c-mobile-btns-container">
-      <button class="c-btn -secondary -border -thin js-btn-more">
-        <svg class="c-icon -normal -inverse">
-          <use xlink:href="#icon-plus"></use>
-        </svg>
-      </button>
+      <div class="c-mobile-btns-container">
+        <button class="c-btn -secondary -border -thin js-btn-more">
+          <svg class="c-icon -normal -inverse">
+            <use xlink:href="#icon-plus"></use>
+          </svg>
+        </button>
 
 
-      <div id="followButton">
-        <% if user_signed_in? %>
-          <button class="c-btn -secondary -inverse -thin js-btn-follow"
-            data-followed="<%= @followed %>"
-            data-id="<%= @followed_id %>"
-            data-resource="<%= @followed_resource %>">
-              <% if (@followed) %>
-                <svg class="c-icon -secondary -normal">
-                  <use xlink:href="#icon-minus"></use>
-                </svg>
-              <% else %>
-                <svg class="c-icon -secondary -normal">
-                  <use xlink:href="#icon-collaborators"></use>
-                </svg>
-              <% end %>
-          </button>
-        <% else %>
-          <a href="/users/sign_in" class="c-btn -secondary -inverse -thin">
-            <svg class="c-icon -normal">
-              <use xlink:href="#icon-collaborators"></use>
-            </svg>
-          </a>
-        <% end %>
+        <div id="followButton">
+          <% if user_signed_in? %>
+            <button class="c-btn -secondary -inverse -thin js-btn-follow"
+              data-followed="<%= @followed %>"
+              data-id="<%= @followed_id %>"
+              data-resource="<%= @followed_resource %>">
+                <% if (@followed) %>
+                  <svg class="c-icon -secondary -normal">
+                    <use xlink:href="#icon-minus"></use>
+                  </svg>
+                <% else %>
+                  <svg class="c-icon -secondary -normal">
+                    <use xlink:href="#icon-collaborators"></use>
+                  </svg>
+                <% end %>
+            </button>
+          <% else %>
+            <a href="/users/sign_in" class="c-btn -secondary -inverse -thin">
+              <svg class="c-icon -normal">
+                <use xlink:href="#icon-collaborators"></use>
+              </svg>
+            </a>
+          <% end %>
+        </div>
       </div>
     </div>
   <% end %>
