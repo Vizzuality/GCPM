@@ -62,6 +62,10 @@
     background-color: $secondary-color;
     border: 1px solid $secondary-color;
 
+    &.-border {
+      border: 1px solid $inverse-font-color;
+    }
+
     &.-inverse {
       background-color: $inverse-font-color;
       color: $secondary-color;

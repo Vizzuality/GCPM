@@ -1,11 +1,16 @@
 .c-counters {
-  padding-top: $box-space - 10px;
-  padding-bottom: $box-space - 10px;
+  padding-top: $base-space * 2;
+  padding-bottom: $base-space * 2;
   text-align: center;
 
-  @media screen and (max-height: 900px) {
-    padding-top: $base-space;
-    padding-bottom: $base-space;
+  @media #{$mq-small} {
+    padding-top: $box-space - 10px;
+    padding-bottom: $box-space - 10px;
+
+    @media screen and (max-height: 900px) {
+      padding-top: $base-space;
+      padding-bottom: $base-space;
+    }
   }
 
   &.-projects { background: rgba($primary-color, .1); }

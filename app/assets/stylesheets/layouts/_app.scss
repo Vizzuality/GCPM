@@ -41,6 +41,10 @@
     }
   }
 
+  &.-secondary {
+    background-color: $secondary-color;
+  }
+
   .l-app-upperbar {
     position: absolute;
     top: 0;
@@ -74,16 +78,22 @@
   }
 
   .l-app-title {
-    position: absolute;
+    position: relative;
     width: 100%;
     bottom: 0;
     left: 0;
-    padding: ($box-space * 1.5) 0;
-
+    padding-top: $base-space * 3;
+    text-align: center;
     color: $inverse-font-color;
-
     background-image: linear-gradient(to top, #68299b, rgba(103, 40, 155, 0));
-    pointer-events: none;
+
+    @media #{$mq-small} {
+      position: absolute;
+      pointer-events: none;
+      padding: ($box-space * 1.5) 0;
+      text-align: inherit;
+
+    }
 
     .c-btn, .-clickable {
       pointer-events: all;
@@ -91,6 +101,20 @@
 
     * {
       color: $inverse-font-color;
+    }
+
+    & .c-avatar {
+      margin-left: auto;
+      margin-right: auto;
+
+      @media #{$mq-small} {
+        margin-left: inherit;
+        margin-right: inherit;
+      }
+    }
+
+    .c-counters {
+      border-top: 1px solid rgba(255, 255, 255, 0.31);
     }
   }
 

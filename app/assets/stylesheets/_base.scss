@@ -50,11 +50,17 @@ h1, h2 {
 
 h1, h2, h3 {
   margin-bottom: $inline-space;
+  word-break: break-word;
 }
 
 h1 {
-  font-size: $h1-font-size;
-  line-height: 1.4;
+  font-size: $big-font-size;
+  line-height: 1.2;
+
+  @media #{$mq-small} {
+    font-size: $h1-font-size;
+    line-height: 1.4;
+  }
 }
 
 h2 {

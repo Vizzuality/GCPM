@@ -1,0 +1,17 @@
+
+.c-mobile-btns-container {
+  position: absolute;
+  top: $small-box-space;
+  left: $small-box-space;
+  z-index: 2;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .action-btn {
+    width: 44px;
+    height: 44px;
+    margin-bottom: 5px;
+  }
+}
