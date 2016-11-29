@@ -83,15 +83,16 @@
     bottom: 0;
     left: 0;
     padding-top: $base-space * 3;
-
+    text-align: center;
     color: $inverse-font-color;
-
     background-image: linear-gradient(to top, #68299b, rgba(103, 40, 155, 0));
 
     @media #{$mq-small} {
       position: absolute;
       pointer-events: none;
       padding: ($box-space * 1.5) 0;
+      text-align: inherit;
+
     }
 
     .c-btn, .-clickable {
