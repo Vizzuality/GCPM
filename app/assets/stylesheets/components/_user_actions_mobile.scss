@@ -1,0 +1,54 @@
+
+.c-user-actions-mobile {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 4;
+
+  background-color: $secondary-color;
+
+  nav {
+    margin-bottom: $base-space;
+
+    .back {
+      .js-action-back {
+        transform: rotate(180deg);
+      }
+    }
+
+    .label {
+      display: inline-flex;
+      align-items: center;
+      color: $inverse-font-color;
+      font-weight: bold;
+      text-transform: uppercase;
+
+      svg {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  ul {
+    @extend %clearlist;
+
+    width: 100%;
+
+    li {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 15px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      a {
+        width: 50%;
+      }
+    }
+  }
+
+}

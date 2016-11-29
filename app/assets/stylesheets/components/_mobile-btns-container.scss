@@ -4,14 +4,14 @@
   top: $small-box-space;
   left: $small-box-space;
   z-index: 2;
-  margin-bottom: 5px;
 
   &:last-child {
     margin-bottom: 0;
   }
 
-  & * {
+  .c-btn {
     width: 44px;
     height: 44px;
+    margin-bottom: 5px;
   }
 }

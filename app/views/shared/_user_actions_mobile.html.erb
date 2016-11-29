@@ -1,0 +1,22 @@
+<div class="c-user-actions-mobile wrapper">
+  <nav>
+  <button class="c-btn -secondary back">
+    <svg class="c-icon -normal -inverse js-action-back">
+      <use xlink:href="#icon-arrow"></use>
+    </svg>
+  </button>
+
+    <div class="label">
+      <svg class="c-icon -normal -inverse">
+        <use xlink:href="#icon-add"></use>
+      </svg>
+      Add
+    </div>
+  </nav>
+
+  <ul>
+    <li><%= link_to '+ Project', (user_signed_in?) ? new_user_project_path(user_id: current_user.id) : user_session_path, class: 'c-btn -transparent' %></li>
+    <li><%= link_to '+ Post', (user_signed_in?) ? new_post_path : user_session_path, class: 'c-btn -transparent' %></li>
+    <li><%= link_to '+ Event', (user_signed_in?) ? new_user_event_path(user_id: current_user.id) : user_session_path, class: 'c-btn -transparent' %></li>
+  </ul>
+</div>
