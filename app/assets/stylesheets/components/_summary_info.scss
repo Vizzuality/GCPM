@@ -1,8 +1,10 @@
 
 .c-summary-info {
   pointer-events: all;
+  margin-top: $base-space;
 
   @media #{$mq-small} {
+    margin-top: 0;
     padding-top: $base-space;
   }
 

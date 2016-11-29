@@ -3,7 +3,7 @@
 <div id="userActionsMobile" class="js-messages-actions-view">
   <%= render 'shared/user_actions_menu_mobile'%>
 
-  <div class="c-mobile-btns-container<% if direction %> <%= direction %><% end %>">
+  <div class="c-mobile-btns-container<% if defined?direction %> <%= direction %><% end %>">
     <button class="c-btn -secondary -border -thin js-btn-more action-btn">
       <svg class="c-icon -normal -inverse">
         <use xlink:href="#icon-plus"></use>
