@@ -48,23 +48,33 @@
   .modal-content {
     position: relative;
     width: 100%;
-    max-height: 85vh;
-    padding: $box-space;
+    max-height: 95vh;
+    padding: $small-box-space;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
+
+    @media #{$mq-small} {
+      padding: $box-space;
+      max-height: 85vh;
+    }
   }
 
   .modal-close {
     @extend %reset-btn;
     display: block;
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: $small-box-space;
+    right: $small-box-space;
     width: 40px;
     height: 40px;
     padding: 10px;
     cursor: pointer;
     z-index: 2; /* Otherwise, it won't be reachable */
+
+    @media #{$mq-small} {
+      top: 20px;
+      right: 20px;
+    }
   }
 
   .modal-backdrop {
