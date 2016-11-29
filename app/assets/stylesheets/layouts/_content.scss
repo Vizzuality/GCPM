@@ -1,10 +1,15 @@
 .l-content {
   position: relative;
   width: 100%;
-  padding-top: $box-space;
-  padding-bottom: $box-space;
+  padding-top: $inline-space;
+  padding-bottom: $inline-space;
 
   border-top: 1px solid $border-color-1;
+
+  @media #{$mq-small} {
+    padding-top: $box-space;
+    padding-bottom: $box-space;
+  }
 
   &:last-child {
     border-bottom-width: 0;

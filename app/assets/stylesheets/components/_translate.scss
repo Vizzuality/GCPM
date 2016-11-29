@@ -17,8 +17,11 @@
     }
 
     .goog-te-menu-value {
+      margin: 0;
+
       > * {
         display: none;
+
         &:first-child {
           display: inline;
         }

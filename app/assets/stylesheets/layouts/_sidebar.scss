@@ -2,7 +2,12 @@
   width: 100%;
   height: 100%;
   border-left: 1px solid $border-color-1;
-  padding: $box-space;
+  padding: $small-box-space;
+
+  @media #{$mq-small} {
+    padding: $box-space;
+
+  }
 
   &.-no-pad {
     padding: 0;

@@ -1,7 +1,10 @@
 
 .c-summary-info {
-  padding-top: $base-space;
   pointer-events: all;
+
+  @media #{$mq-small} {
+    padding-top: $base-space;
+  }
 
   .column {
     display: flex;

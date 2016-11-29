@@ -13,9 +13,14 @@
 
   background-color: white;
 
+  & * { display: none; }
+
   &.-active {
     opacity: 1;
     width: 100vw;
+
+    & * { display: inherit; }
+
 
     .icon-close {
       display: initial;
