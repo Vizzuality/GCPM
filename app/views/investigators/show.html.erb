@@ -1,31 +1,38 @@
 <% title @investigator.name %>
 <% inv_user = @investigator.user %>
 
-<section class="l-app -full">
-  <div class="l-app-map">
-    <div id="map" class="c-map"></div>
-  </div>
-  <%= render "shared/legend_people" %>
+<section class="l-app -full -secondary">
+  <% if !browser.device.mobile? %>
+    <div class="l-app-map">
+      <div id="map" class="c-map"></div>
+    </div>
+  <% end %>
+
+  <% if !browser.device.mobile? %>
+    <%= render "shared/legend_people" %>
+  <% end %>
 
   <div class="l-app-title">
-    <div class="wrapper">
-      <div class="row collapse">
-        <div class="column small-8">
-          <div class="c-avatar -big -ph -mg-bt"
+    <div class="">
+      <div class="row collapse wrapper">
+        <div class="column small-12 medium-8">
+          <div class="c-avatar <% if !browser.device.mobile? %>-big<% else %>-medium<% end %> -ph -mg-bt"
                style="<% if inv_user.present? %>
                         background-image: url(<%= inv_user.avatar_url(:thumb) %>)
                       <% end %>">
           </div>
         </div>
       </div>
-      <div class="row collapse">
-        <div class="column small-8">
+      <div class="row collapse wrapper">
+        <div class="column small-12 medium-8">
           <div class="c-title-btn">
             <h1><%= @investigator.try(:name) %></h1>
-            <% if user_signed_in? && current_user.investigator == @investigator %>
-              <%= link_to (t 'not_me'), remove_relation_investigator_path(@investigator), method: :patch, class: 'c-btn -transparent' %>
-            <% elsif user_signed_in? && current_user.investigator.blank? && @investigator.user.blank? %>
-              <%= link_to (t 'this_is_me'), relation_request_investigator_path(@investigator), method: :patch, class: 'c-btn -transparent' %>
+            <% if !browser.device.mobile? %>
+              <% if user_signed_in? && current_user.investigator == @investigator %>
+                <%= link_to (t 'not_me'), remove_relation_investigator_path(@investigator), method: :patch, class: 'c-btn -transparent' %>
+              <% elsif user_signed_in? && current_user.investigator.blank? && @investigator.user.blank? %>
+                <%= link_to (t 'this_is_me'), relation_request_investigator_path(@investigator), method: :patch, class: 'c-btn -transparent' %>
+              <% end %>
             <% end %>
           </div>
 
@@ -45,6 +52,16 @@
                 <li><%= @following %> Following</li>
                 <li><%= @followers %> Followers</li>
               </ul>
+
+              <% if browser.device.mobile? %>
+                <div class="c-title-btn">
+                  <% if user_signed_in? && current_user.investigator == @investigator %>
+                    <%= link_to (t 'not_me'), remove_relation_investigator_path(@investigator), method: :patch, class: 'c-btn -transparent' %>
+                  <% elsif user_signed_in? && current_user.investigator.blank? && @investigator.user.blank? %>
+                    <%= link_to (t 'this_is_me'), relation_request_investigator_path(@investigator), method: :patch, class: 'c-btn -transparent' %>
+                  <% end %>
+                </div>
+              <% end %>
             </div>
             <div class="column small-12 medium-6">
               <ul class="c-pipe-list">
@@ -72,24 +89,49 @@
               </ul>
             </div>
           </div>
-          <table class="c-numbers-list">
-            <thead>
-              <tr>
-                <th><%= t 'projects' %></th>
-                <th><%= t 'posts' %></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><%= @projects.size %></td>
-                <td><%= @posts.size %></td>
-              </tr>
-            </tbody>
-          </table>
+
+          <% if !browser.device.mobile? %>
+            <table class="c-numbers-list">
+              <thead>
+                <tr>
+                  <th><%= t 'projects' %></th>
+                  <th><%= t 'posts' %></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><%= @projects.size %></td>
+                  <td><%= @posts.size %></td>
+                </tr>
+              </tbody>
+            </table>
+          <% end %>
+
         </div>
-        <div class="column small-4">
-          <%= render "shared/user_actions" %>
-        </div>
+
+        <% if !browser.device.mobile? %>
+          <div class="column small-12 medium-4">
+            <%= render "shared/user_actions" %>
+          </div>
+        <% end %>
+      </div>
+
+      <% if browser.device.mobile? %>
+        <div class="c-counters">
+          <div class="wrapper">
+            <div class="row">
+              <div class="column small-12">
+                <h3>Projects</h3>
+                <span class="amount"><%= @projects.size %></span>
+              </div>
+              <div class="column small-12">
+                <h3>Posts</h3>
+                <span class="amount"><%= @posts.size %></span>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
       </div>
     </div>
   </div>

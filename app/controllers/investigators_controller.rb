@@ -15,6 +15,7 @@ class InvestigatorsController < ApplicationController
     @current_type = params.key?(:data) ? params[:data] : 'data'
 
     gon.server_params = { 'investigators[]': @investigator.id, name: @investigator.name }
+    gon.isMobile = browser.device.mobile?
 
     if notice
       gon.notice = notice

@@ -16,10 +16,13 @@
       new App.Presenter.FollowButton(newParams);
       new App.Presenter.ShowMore(newParams);
       new App.Presenter.Notice();
-      new App.Presenter.MapVis(newParams);
       new App.Presenter.MessagesActions(newParams);
-      new App.Presenter.InvestigatorData(newParams);
       new App.Presenter.UsersSearch(newParams);
+
+      if (!gon.isMobile) {
+        new App.Presenter.MapVis(newParams);
+        new App.Presenter.InvestigatorData(newParams);
+      }
     }
 
   });
