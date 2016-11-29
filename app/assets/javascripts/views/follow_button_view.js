@@ -10,7 +10,7 @@
       'click .js-btn-follow' : 'onClickToggleFollow'
     },
 
-    initialize: function(params) {
+    initialize: function() {
       this.cache();
     },
 
@@ -18,7 +18,7 @@
       this.$btnFollow = this.$el.find('.js-btn-follow');
     },
 
-    setFollowed: function(follow, mobile) {
+    setFollowed: function(follow) {
       this.$btnFollow
         .html(this.template({ followed: follow.followed, mobile: gon.isMobile }))
         .data('followed', follow.followed);

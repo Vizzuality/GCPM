@@ -36,7 +36,7 @@
     },
 
     toggleActions: function() {
-      this.userActionsMobile.toggleActionsMenu(this.state.get('active'));
+      this.userActionsMobile.toggleActionsMenu();
     }
 
   });

@@ -24,7 +24,7 @@
       this.trigger('click');
     },
 
-    toggleActionsMenu: function(active) {
+    toggleActionsMenu: function() {
       this.$actionMenu.toggleClass('-active');
       this.$html.toggleClass('-no-overflow');
       this.$body.toggleClass('-no-overflow');
