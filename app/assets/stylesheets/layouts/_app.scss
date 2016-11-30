@@ -63,9 +63,17 @@
 
   .l-app-claim {
     position: absolute;
-    top: 37%;
-    left: $box-space;
-    transform: translate(0, -50%);
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    @media #{$mq-small} {
+      top: 37%;
+      left: $box-space;
+      bottom: inherit;
+      right: inherit;
+      transform: translate(0, -50%);
+    }
   }
 
   .l-app-navbar {
