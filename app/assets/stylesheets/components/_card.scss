@@ -57,7 +57,7 @@
       flex-shrink: 0;
       align-items: center;
       margin-right: $base-space;
-      margin-top: 5px;
+      margin-top: -2px;
 
       @media #{$mq-small} {
         margin-right: 0;
@@ -99,7 +99,10 @@
       margin: 10px 0 0;
 
       @media #{$mq-small} {
+        display: flex;
         margin: 15px 0 0;
+        margin-left: auto;
+        margin-right: auto;
       }
     }
   }

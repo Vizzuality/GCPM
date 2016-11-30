@@ -71,10 +71,10 @@
   &.-active {
     visibility: visible;
     opacity: 1;
-    transform: translate(-50%, 0);
+    transform: translate(-50%, -14px);
 
     @media #{$mq-small} {
-      transform: translate(-50%, -60px);
+      transform: translate(-50%, -47px);
     }
   }
 }

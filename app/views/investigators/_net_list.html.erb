@@ -42,10 +42,12 @@
             <% end %>
 
             <% if e.user.present? && is_owner?(@user, current_user) && !browser.device.mobile? %>
-              <button class="c-btn -icon -secondary js-btn-toggle-message" data-user="<%= e.user.id %>-i" type="button" name="button">
-                <svg class="c-icon -normal -inverse"><use xlink:href="#icon-message"></use></svg>
-                <svg class="c-icon -normal -inverse -hidden"><use xlink:href="#icon-close"></use></svg>
-              </button>
+              <div>
+                <button class="c-btn -icon -secondary js-btn-toggle-message" data-user="<%= e.user.id %>-i" type="button" name="button">
+                  <svg class="c-icon -normal -inverse"><use xlink:href="#icon-message"></use></svg>
+                  <svg class="c-icon -normal -inverse -hidden"><use xlink:href="#icon-close"></use></svg>
+                </button>
+              </div>
 
               <div id="form-message-<%= e.user.id %>-i" class="c-form-message js-form-message">
                 <%= form_for Mailboxer::Message.new, remote: true, url: :message, as: :message do |f| %>

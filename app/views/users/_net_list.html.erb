@@ -37,6 +37,13 @@
 
           <div>
             <h2><%= link_to e.name, user_path(e.slug_or_id) %></h2>
+            <% if e.investigator.present? %>
+              <% e.investigator.organizations.each do |o|%>
+                <h3><%= link_to o.name, organization_path(o.slug) %></h3>
+                <h3><%= o.addresses.map{|a| [a.city, a.country_name]}.uniq.join(', ') %></h3>
+              <% end %>
+            <% end %>
+
             <% if e.present? && is_owner?(@user, current_user) && !browser.device.mobile? %>
               <button class="c-btn -icon -secondary js-btn-toggle-message" data-user="<%= e.id %>-u" type="button" name="button">
                 <svg class="c-icon -normal -inverse"><use xlink:href="#icon-message"></use></svg>
