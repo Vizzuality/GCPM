@@ -25,10 +25,10 @@
     </article>
 
     <article class="c-network-list" data-name="investigators">
-      <div class="l-content -br-bottom wrapper<% if !browser.device.mobile? %> -no-br<% end %>">
-        <h2 class="">
+      <div class="l-content -br-bottom wrapper js-toggle-list<% if !browser.device.mobile? %> -no-br<% end %>">
+        <h2>
           <%= t 'investigators' %>
-          <svg class="c-icon icon-arrow -medium -secondary js-toggle-list">
+          <svg class="c-icon icon-arrow -medium -secondary">
             <use xlink:href="#icon-arrow"></use>
           </svg>
         </h2>
@@ -45,10 +45,10 @@
     </article>
 
     <article class="c-network-list" data-name="users">
-      <div class="l-content -br-bottom wrapper">
-        <h2 class="">
+      <div class="l-content -br-bottom wrapper js-toggle-list">
+        <h2>
           <%= t 'users' %>
-          <svg class="c-icon icon-arrow -medium -secondary js-toggle-list">
+          <svg class="c-icon icon-arrow -medium -secondary">
             <use xlink:href="#icon-arrow"></use>
           </svg>
         </h2>
@@ -65,10 +65,10 @@
     </article>
 
     <article class="c-network-list" data-name="projects">
-      <div class="l-content -br-bottom wrapper">
+      <div class="l-content -br-bottom wrapper js-toggle-list">
         <h2>
           <%= t 'projects' %>
-          <svg class="c-icon icon-arrow -medium -secondary js-toggle-list">
+          <svg class="c-icon icon-arrow -medium -secondary">
             <use xlink:href="#icon-arrow"></use>
           </svg>
         </h2>
@@ -85,10 +85,10 @@
     </article>
 
     <article class="c-network-list" data-name="events">
-      <div class="l-content -no-br <%= @followEvents.any? && '-br-bottom' %> wrapper">
+      <div class="l-content -no-br wrapper js-toggle-list<%= @followEvents.any? && ' -br-bottom' %>">
         <h2>
           <%= t 'events' %>
-          <svg class="c-icon icon-arrow -medium -secondary js-toggle-list">
+          <svg class="c-icon icon-arrow -medium -secondary">
             <use xlink:href="#icon-arrow"></use>
           </svg>
         </h2>
@@ -131,10 +131,10 @@
       <% end %>
 
       <article class="c-network-list" data-name="countries">
-        <div class="l-content wrapper">
+        <div class="l-content wrapper js-toggle-list">
           <h2>
             <%= t 'countries' %>
-            <svg class="c-icon icon-arrow -medium -secondary js-toggle-list">
+            <svg class="c-icon icon-arrow -medium -secondary">
               <use xlink:href="#icon-arrow"></use>
             </svg>
           </h2>
@@ -153,10 +153,10 @@
       </article>
 
       <article class="c-network-list" data-name="cancerTypes">
-        <div class="l-content wrapper">
+        <div class="l-content wrapper js-toggle-list">
           <h2>
             <%= t 'cancer_types' %>
-            <svg class="c-icon icon-arrow -medium -secondary js-toggle-list">
+            <svg class="c-icon icon-arrow -medium -secondary">
               <use xlink:href="#icon-arrow"></use>
             </svg>
           </h2>
