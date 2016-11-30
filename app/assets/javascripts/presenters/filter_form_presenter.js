@@ -12,8 +12,8 @@
   _.extend(App.Presenter.FilterForm.prototype, {
 
     defaults: {
-      'countries[]': undefined,
       'regions[]': undefined,
+      'countries[]': undefined,
       'cancer_types[]': undefined,
       'organization_types[]': undefined,
       'organizations[]': undefined,
@@ -25,6 +25,12 @@
 
     initialize: function(params) {
       this.state = new StateModel(params);
+
+
+      var regions = new App.Presenter.Regions({
+        label: null,
+        addNew: false
+      });
 
       var countries = new App.Presenter.Countries({
         label: null,
@@ -55,7 +61,7 @@
       var pickadateStart = new App.Presenter.PickadateStart();
       var pickadateEnd = new App.Presenter.PickadateEnd();
 
-      this.children = [countries, organizations, cancerTypes, projectTypes, organizationsTypes, fundingSources, pickadateStart, pickadateEnd];
+      this.children = [regions, countries, organizations, cancerTypes, projectTypes, organizationsTypes, fundingSources, pickadateStart, pickadateEnd];
 
       this.countries = new App.Collection.Countries();
       this.countries.fetch();
@@ -194,6 +200,11 @@
           case 'cancer_types[]':
             if (state[value].length) {
               ga('send', 'event', 'Filter', 'Cancer Types', state[value]);
+            }
+          break;
+          case 'regions[]':
+            if (state[value].length) {
+              ga('send', 'event', 'Filter', 'Regions', state[value]);
             }
           break;
           case 'countries[]':

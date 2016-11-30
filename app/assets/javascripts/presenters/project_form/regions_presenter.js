@@ -4,17 +4,17 @@
 
   var StateModel = Backbone.Model.extend();
 
-  App.Presenter.Countries = function() {
+  App.Presenter.Regions = function() {
     this.initialize.apply(this, arguments);
   };
 
-  _.extend(App.Presenter.Countries.prototype, {
+  _.extend(App.Presenter.Regions.prototype, {
 
     defaults: {
       multiple: false,
-      name: 'countries[]',
-      label: 'Countries',
-      placeholder: 'All countries',
+      name: 'regions[]',
+      label: 'Regions',
+      placeholder: 'All regions',
       blank: true,
       addNew: true,
       select2Options: {
@@ -43,7 +43,7 @@
 
       // Creating view
       this.select = new App.View.Select({
-        el: '#countries',
+        el: '#regions',
         options: _.extend({}, this.defaults, viewSettings || {}),
         state: this.state
       });
@@ -56,12 +56,12 @@
      */
     setEvents: function() {
       this.state.on('change', function() {
-        App.trigger('Countries:change', this.state.attributes);
+        App.trigger('Regions:change', this.state.attributes);
       }, this);
 
       this.select.on('change', this.setState, this);
 
-      App.on('Regions:change', this.triggerRegionChange, this);
+      App.on('Countries:change', this.triggerCountryChange, this);
       // App.on('MapCountry:change', this.triggerCountryChange, this);
     },
 
@@ -71,10 +71,10 @@
      */
     fetchData: function() {
       return this.countries.fetch().done(function() {
-        var options = this.countries.map(function(country) {
+        var options = this.countries.getRegions().map(function(region) {
           return {
-            name: country.attributes.name,
-            value: country.attributes.country_iso_3
+            name: region.region_name,
+            value: region.region_iso
           };
         });
         this.select.setOptions(options);
@@ -92,19 +92,16 @@
     },
 
     /**
-     * Trigger country change
+     * Trigger region change
      */
-    triggerRegionChange: function(selected) {
-      if (this.state.get('value') && this.state.get('value')[0]) {
+    triggerCountryChange: function(selected) {
+      var country = selected.value[0];
+      if (country) {
         var countrySelected = _.findWhere(this.countries.toJSON(), {
-          country_iso_3: this.state.get('value')[0]
+          country_iso_3: country
         });
-        if (countrySelected.region_iso != selected.value[0]) {
-          this.select.resetValue();
-        }
+        this.select.setValue(countrySelected.region_iso);
       }
-
-      // this.render({value: [value]});
     },
 
     /**
