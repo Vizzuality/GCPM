@@ -12,7 +12,13 @@
   }
 
   h1, h2, h3 {
-    margin-bottom: 0;
+    margin-bottom: $inline-space;
+
+    @media #{$mq-small} {
+      margin-bottom: 0;
+    }
+
+    &.-no-mg { margin: 0; }
   }
 
   .c-btn {
