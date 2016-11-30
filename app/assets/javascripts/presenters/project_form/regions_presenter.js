@@ -62,7 +62,6 @@
       this.select.on('change', this.setState, this);
 
       App.on('Countries:change', this.triggerCountryChange, this);
-      // App.on('MapCountry:change', this.triggerCountryChange, this);
     },
 
     /**
