@@ -11,12 +11,12 @@
     },
 
     getRegions: function() {
-      return _.map(this.toJSON(), function(country){
+      return _.sortBy(_.uniq(_.map(this.toJSON(), function(country){
         return {
           region_iso: country.region_iso,
           region_name: country.region_name
         }
-      }.bind(this));
+      }.bind(this)), 'region_iso'), 'region_name');
     }
 
   });
