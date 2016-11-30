@@ -4,7 +4,7 @@
   current_user.projects.find_by_id(@project.id).project_users.first.is_approved %>
 
 <div class="row collapse">
-  <div class="column row small-8">
+  <div class="column row small-12 medium-8">
     <div class="l-content wrapper">
       <article class="l-content-article">
         <%= @project.summary.html_safe %>
@@ -32,7 +32,7 @@
       </div>
     <% end %>
   </div>
-  <div class="column small-4">
+  <div class="column small-12 medium-4">
     <aside class="l-sidebar">
 
       <% if @project.start_date.present? || @project.end_date.present? %>

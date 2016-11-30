@@ -15,13 +15,18 @@
         data: 'data',
         iso: params.vars[0]
       }, params);
-      
-      new App.Presenter.MapVis(newParams);
+
       new App.Presenter.TabNav(newParams);
       new App.Presenter.CountryData(newParams);
       new App.Presenter.Widgets(newParams);
       new App.Presenter.FollowButton(newParams);
       new App.Presenter.ShowMore(newParams);
+
+      if (gon.isMobile) {
+        new App.Presenter.UserActionsMobile(newParams);
+      } else {
+        new App.Presenter.MapVis(newParams);
+      }
     }
 
   });

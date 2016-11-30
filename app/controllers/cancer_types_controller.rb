@@ -10,7 +10,9 @@ class CancerTypesController < ApplicationController
     @title = t 'map'
     @filters = %w(projects people)
     @current_type = params.key?(:data) ? params[:data] : 'projects'
+
     gon.server_params = { 'cancer_types[]': @cancer_type.id }
+    gon.isMobile = browser.device.mobile?
 
     limit = 12 + (@page * 9)
 

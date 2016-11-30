@@ -17,11 +17,16 @@
     show: function(params) {
       var newParams = _.extend({}, params, {dataType: 'info'});
 
-      new App.Presenter.MapVis(newParams);
       new App.Presenter.TabNav(newParams);
       new App.Presenter.FollowButton(newParams);
       new App.Presenter.DatesTimeline(newParams);
       new App.Presenter.Notice();
+
+      if (!gon.isMobile) {
+        new App.Presenter.MapVis(newParams);
+      } else {
+        new App.Presenter.UserActionsMobile(newParams);
+      }
     }
 
   });
