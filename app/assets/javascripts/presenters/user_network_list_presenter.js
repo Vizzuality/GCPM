@@ -10,7 +10,7 @@
 
   _.extend(App.Presenter.UserNetworkList.prototype, {
 
-    initialize: function(params) {
+    initialize: function() {
       this.state = new StateModel({ list: null });
 
       this.lists = new App.View.UserNetworkLists({
