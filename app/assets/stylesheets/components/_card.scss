@@ -1,7 +1,7 @@
 .c-card {
   position: relative;
   width: 100%;
-  padding: $small-box-space;
+  padding: $box-space/2 $small-box-space;
   background-color: $body-bg-color;
   box-shadow: 0 0 0 1px $border-color-1;
 
@@ -18,7 +18,11 @@
   }
 
   &.-thin {
-    padding: $inline-space/2 $box-space;
+    padding: $inline-space/2 $small-box-space;
+
+    @media #{$mq-small} {
+      padding: $inline-space/2 $box-space;
+    }
   }
 
   h2 {
@@ -34,10 +38,13 @@
   &.-person {
     display: flex;
     align-items: flex-start;
+    padding-top: $small-box-space;
+
 
     @media #{$mq-small} {
       align-items: center;
       flex-flow: column;
+      padding-top: $box-space;
     }
 
     .icons{
