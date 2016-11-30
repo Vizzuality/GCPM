@@ -55,12 +55,24 @@
       <%= link_to 'Explore the map', map_path, class: 'link' %>
     </div>
   </div>
-  <div class="l-app-bottombar">
-    <div id="counters">
-      <%= render 'home/counters' %>
+  <% if !browser.device.mobile? %>
+    <div class="l-app-bottombar">
+      <div id="counters">
+        <%= render 'home/counters' %>
+      </div>
     </div>
-  </div>
+  <% end %>
 </section>
+
+<% if browser.device.mobile? %>
+  <section>
+      <div class="l-app-bottombar">
+        <div id="counters">
+          <%= render 'home/counters' %>
+        </div>
+      </div>
+  </section>
+<% end %>
 
 <section class="l-grid" id="content">
   <%= render 'home/list' %>
