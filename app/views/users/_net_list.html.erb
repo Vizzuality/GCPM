@@ -2,37 +2,65 @@
   <div class="row collapse -no-mrg js-messages-actions-view">
     <% items.each do |e| %>
       <div class="column small-12 medium-6">
-        <div class="c-card -pad-bigger -no-shadow -person">
-          <div class="c-avatar -medium -ph -mg-bt"
-               style="<% if e.present? %>
-                        background-image: url(<%= e.avatar_url(:thumb) %>)
-                      <% end %>">
+        <div class="c-card -person<% !browser.device.mobile? ? ' -pad-bigger -no-shadow' : '' %>">
+          <div class="icons">
+            <div class="c-avatar -ph<% !browser.device.mobile? ? ' -medium -mg-bt' : ' -normal' %>"
+                 style="<% if e.present? %>
+                          background-image: url(<%= e.avatar_url(:thumb) %>)
+                        <% end %>">
+            </div>
+
+            <% if e.present? && is_owner?(@user, current_user) && browser.device.mobile? %>
+              <button class="c-btn -icon -secondary js-btn-toggle-message" data-user="<%= e.id %>-u" type="button" name="button">
+                <svg class="c-icon -normal -inverse"><use xlink:href="#icon-message"></use></svg>
+                <svg class="c-icon -normal -inverse -hidden"><use xlink:href="#icon-close"></use></svg>
+              </button>
+
+              <div id="form-message-<%= e.id %>-u" class="c-form-message js-form-message">
+                <%= form_for Mailboxer::Message.new, remote: true, url: :message, as: :message do |f| %>
+                  <div class="form-row">
+                    <%= f.label :subject, 'Subject' %>
+                    <%= f.text_field :subject %>
+                  </div>
+                  <div class="form-row">
+                    <%= f.label :body, 'Message' %>
+                    <%= f.text_area :body %>
+                    <%= f.hidden_field :receiver, value: e.id %>
+                  </div>
+                  <div class="form-row">
+                    <%= f.submit 'Send', class: 'c-btn -secondary' %>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
           </div>
 
-          <h2><%= link_to e.name, user_path(e.slug_or_id) %></h2>
-          <% if e.present? && is_owner?(@user, current_user) %>
-            <button class="c-btn -icon -secondary js-btn-toggle-message" data-user="<%= e.id %>-u" type="button" name="button">
-              <svg class="c-icon -normal -inverse"><use xlink:href="#icon-message"></use></svg>
-              <svg class="c-icon -normal -inverse -hidden"><use xlink:href="#icon-close"></use></svg>
-            </button>
+          <div>
+            <h2><%= link_to e.name, user_path(e.slug_or_id) %></h2>
+            <% if e.present? && is_owner?(@user, current_user) && !browser.device.mobile? %>
+              <button class="c-btn -icon -secondary js-btn-toggle-message" data-user="<%= e.id %>-u" type="button" name="button">
+                <svg class="c-icon -normal -inverse"><use xlink:href="#icon-message"></use></svg>
+                <svg class="c-icon -normal -inverse -hidden"><use xlink:href="#icon-close"></use></svg>
+              </button>
 
-            <div id="form-message-<%= e.id %>-u" class="c-form-message js-form-message">
-              <%= form_for Mailboxer::Message.new, remote: true, url: :message, as: :message do |f| %>
-                <div class="form-row">
-                  <%= f.label :subject, 'Subject' %>
-                  <%= f.text_field :subject %>
-                </div>
-                <div class="form-row">
-                  <%= f.label :body, 'Message' %>
-                  <%= f.text_area :body %>
-                  <%= f.hidden_field :receiver, value: e.id %>
-                </div>
-                <div class="form-row">
-                  <%= f.submit 'Send', class: 'c-btn -secondary' %>
-                </div>
-              <% end %>
-            </div>
-          <% end %>
+              <div id="form-message-<%= e.id %>-u" class="c-form-message js-form-message">
+                <%= form_for Mailboxer::Message.new, remote: true, url: :message, as: :message do |f| %>
+                  <div class="form-row">
+                    <%= f.label :subject, 'Subject' %>
+                    <%= f.text_field :subject %>
+                  </div>
+                  <div class="form-row">
+                    <%= f.label :body, 'Message' %>
+                    <%= f.text_area :body %>
+                    <%= f.hidden_field :receiver, value: e.id %>
+                  </div>
+                  <div class="form-row">
+                    <%= f.submit 'Send', class: 'c-btn -secondary' %>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
     <% end %>
