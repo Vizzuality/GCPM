@@ -1,0 +1,29 @@
+<%= render 'shared/user_actions_mobile', direction: '-vertical' %>
+
+<div class="l-app-title">
+  <div class="row collapse -centered wrapper">
+    <div class="column small-12 medium-8">
+      <div class="c-title-btn">
+        <h1 class="-no-mg"><%= @cancer_type.name %></h1>
+      </div>
+    </div>
+  </div>
+  <div class="c-counters">
+    <div class="wrapper">
+      <div class="row">
+        <div class="column small-12">
+          <h3>Projects</h3>
+          <span class="amount"><%= @projects.size %></span>
+        </div>
+        <div class="column small-12">
+          <h3>People</h3>
+          <span class="amount"><%= @people.size %></span>
+        </div>
+        <div class="column small-12">
+          <h3>organizations</h3>
+          <span class="amount"><%= @cancer_type.organizations_count %></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -10,6 +10,7 @@ class ProjectsController < ApplicationController
     gon.api_location_path = "/api/map/projects/#{@project.id}"
     gon.start_date = @project.start_date || 0
     gon.end_date = @project.end_date || 0
+    gon.isMobile = browser.device.mobile?
 
     if notice
       gon.notice = notice

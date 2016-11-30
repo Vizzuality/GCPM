@@ -18,10 +18,10 @@
       new App.Presenter.Notice();
       new App.Presenter.MessagesActions(newParams);
       new App.Presenter.UsersSearch(newParams);
+      new App.Presenter.InvestigatorData(newParams);
 
       if (!gon.isMobile) {
         new App.Presenter.MapVis(newParams);
-        new App.Presenter.InvestigatorData(newParams);
       } else {
         new App.Presenter.UserActionsMobile(newParams);
       }

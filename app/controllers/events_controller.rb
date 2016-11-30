@@ -12,6 +12,7 @@ class EventsController < ApplicationController
     gon.api_location_path = "/api/map/events/#{@event.id}"
     gon.start_date = @event.start_date || 0
     gon.end_date = @event.end_date || 0
+    gon.isMobile = browser.device.mobile?
 
     @filters = %w(info)
     @current_type = params.key?(:data) ? params[:data] : 'info'

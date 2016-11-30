@@ -83,7 +83,6 @@
     bottom: 0;
     left: 0;
     padding-top: $base-space * 3;
-    text-align: center;
     color: $inverse-font-color;
     background-image: linear-gradient(to top, #68299b, rgba(103, 40, 155, 0));
 
@@ -92,7 +91,10 @@
       pointer-events: none;
       padding: ($box-space * 1.5) 0;
       text-align: inherit;
+    }
 
+    .-centered {
+      text-align: center;
     }
 
     .c-btn, .-clickable {
@@ -101,16 +103,6 @@
 
     * {
       color: $inverse-font-color;
-    }
-
-    & .c-avatar {
-      margin-left: auto;
-      margin-right: auto;
-
-      @media #{$mq-small} {
-        margin-left: inherit;
-        margin-right: inherit;
-      }
     }
 
     .c-counters {

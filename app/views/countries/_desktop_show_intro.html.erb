@@ -1,0 +1,37 @@
+
+<div class="l-app-map">
+  <div id="map" class="c-map"></div>
+</div>
+
+<%= render "shared/legend_people" %>
+
+<div class="l-app-title">
+  <div class="wrapper">
+    <div class="row collapse">
+      <div class="column small-8">
+        <h1><%= @country.country_name %></h1>
+        <table class="c-numbers-list">
+          <thead>
+            <tr>
+              <th><%= t 'projects' %></th>
+              <th><%= t 'people' %></th>
+              <th><%= t 'events' %></th>
+              <th><%= t 'organizations' %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= @projects.size %></td>
+              <td><%= @people.size %></td>
+              <td><%= @events.size %></td>
+              <td><%= @country.organizations_count %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="column small-4">
+        <%= render "shared/user_actions" %>
+      </div>
+    </div>
+  </div>
+</div>

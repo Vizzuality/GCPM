@@ -1,6 +1,6 @@
 
 <div class="row collapse">
-  <div class="column small-8">
+  <div class="column small-12 medium-8">
     <div class="l-content wrapper">
       <article class="l-content-article">
         <%= @event.description.html_safe %>
@@ -13,7 +13,7 @@
     </div>
   </div>
 
-  <div class="column small-4">
+  <div class="column small-12 medium-4">
     <aside class="l-sidebar">
       <% if @event.start_date.present? || @event.end_date.present? %>
         <div id="datesTimeline" class="sidebar-item c-dates-timeline">
