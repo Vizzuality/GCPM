@@ -62,7 +62,6 @@
       this.select.on('change', this.setState, this);
 
       App.on('Regions:change', this.triggerRegionChange, this);
-      // App.on('MapCountry:change', this.triggerCountryChange, this);
     },
 
     /**
@@ -103,8 +102,6 @@
           this.select.resetValue();
         }
       }
-
-      // this.render({value: [value]});
     },
 
     /**
