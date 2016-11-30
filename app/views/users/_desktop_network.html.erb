@@ -1,0 +1,125 @@
+<div class="row collapse">
+  <div class="column small-12 medium-8 -column">
+    <article>
+      <div class="l-content -br-bottom wrapper -no-br">
+        <h2><%= t 'investigators' %></h2>
+
+        <% if !@followPeople.any? %>
+          <div class="list">
+            <p>No investigators</p>
+          </div>
+        <% end %>
+      </div>
+      <div class="list">
+        <%= render 'investigators/net_list', items: @followPeople %>
+      </div>
+    </article>
+
+    <article>
+      <div class="l-content -br-bottom wrapper">
+        <h2><%= t 'users' %></h2>
+
+        <% if !@followUser.any? %>
+          <div class="list">
+            <p>No Users</p>
+          </div>
+        <% end %>
+      </div>
+      <div class="list">
+        <%= render 'users/net_list', items: @followUser %>
+      </div>
+    </article>
+
+    <article>
+      <div class="l-content -br-bottom wrapper">
+        <h2><%= t 'projects' %></h2>
+
+        <% if @followProjects.size <= 0 %>
+          <div class="list">
+            <p>No projects</p>
+          </div>
+        <% end %>
+      </div>
+      <div class="list">
+        <%= render 'projects/net_list', items: @followProjects %>
+      </div>
+    </article>
+
+    <article>
+      <div class="l-content -no-br wrapper<%= @followEvents.any? ? ' -br-bottom' : '' %>">
+        <h2><%= t 'events' %></h2>
+
+        <% if !@followEvents.any? %>
+          <div class="list">
+            <p>No events</p>
+          </div>
+        <% end %>
+      </div>
+      <div class="list">
+        <%= render 'events/net_list', items: @followEvents %>
+      </div>
+    </article>
+  </div>
+
+  <div class="column row small-12 medium-4">
+    <aside class="l-sidebar -no-pad">
+      <div id="userSearch" class="l-content -no-br wrapper">
+        <div class="c-input-row">
+          <div id="search-input"></div>
+          <svg class="c-icon icon-search -medium -secondary">
+            <use xlink:href="#icon-search"></use>
+          </svg>
+          <svg class="c-icon icon-close -medium -secondary -hidden js-clear-search">
+            <use xlink:href="#icon-close"></use>
+          </svg>
+        </div>
+
+        <div class="c-spinner -start">
+          <div class="spinner-box">
+            <div class="icon"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="search-list" class="l-content -no-br -no-top-padd wrapper -hidden"></div>
+
+      <article>
+        <div class="l-content wrapper">
+          <h2><%= t 'countries' %></h2>
+          <% if !@followCountries.any? %>
+            <p>No countries</p>
+          <% end %>
+        </div>
+
+        <% if @followCountries.any? %>
+          <div class="wrapper list">
+            <ul class="c-list -mg-bottom">
+                <% @followCountries.each do |c| %>
+                  <li class="list-item"><%= link_to c.country_name, country_path(iso: c.country_iso_3), class: '-uppercase' %></li>
+                <% end %>
+            </ul>
+          </div>
+        <% end %>
+      </article>
+
+      <article>
+        <div class="l-content wrapper">
+          <h2><%= t 'cancer_types' %></h2>
+          <% if !@followCancerTypes.any? %>
+            <p>No cancer types</p>
+          <% end %>
+        </div>
+
+        <% if @followCancerTypes.any? %>
+          <div class="wrapper list">
+            <ul class="c-list -mg-bottom">
+              <% @followCancerTypes.each do |ct| %>
+                <li class="list-item -uppercase"><%= link_to ct.name, cancer_path(slug: ct.slug), class: '-uppercase' %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      </article>
+    </aside>
+  </div>
+</div>

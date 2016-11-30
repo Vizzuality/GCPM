@@ -8,8 +8,12 @@
   }
 
   &.-row-items {
-    height: 300px;
+    max-height: 300px;
     overflow: auto;
+
+    @media #{$mq-small} {
+      height: 300px;
+    }
 
     .list-item a {
       display: flex;

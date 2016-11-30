@@ -2,7 +2,7 @@
   <div class="row collapse -no-mrg">
     <% items.each do |p| %>
       <div class="column small-12 medium-6">
-        <div class="c-card -pad-bigger -projects">
+        <div class="c-card -projects<% !browser.device.mobile? ? ' -pad-bigger' : '' %>">
           <h3 class="-underlined">
             <a href="/investigators/<%= p.project_leads.first.try(:slug) ? p.project_leads.first.try(:slug) : p.project_leads.first.try(:id) %>">
               <%= p.project_leads.first.try(:name) %>
