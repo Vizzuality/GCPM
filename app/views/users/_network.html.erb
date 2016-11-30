@@ -22,44 +22,86 @@
 
         <div id="search-list" class="l-content -no-br -no-top-padd wrapper -hidden"></div>
       <% end %>
+    </article>
 
+    <article class="c-network-list" data-name="investigators">
       <div class="l-content -br-bottom wrapper<% if !browser.device.mobile? %> -no-br<% end %>">
-        <h2 class=""><%= t 'investigators' %></h2>
+        <h2 class="">
+          <%= t 'investigators' %>
+          <svg class="c-icon icon-arrow -medium -secondary js-toggle-list">
+            <use xlink:href="#icon-arrow"></use>
+          </svg>
+        </h2>
+
         <% if @followPeople.size <= 0 %>
-          <p>No investigators</p>
+          <div class="list">
+            <p>No investigators</p>
+          </div>
         <% end %>
       </div>
-      <%= render 'investigators/net_list', items: @followPeople %>
+      <div class="list">
+        <%= render 'investigators/net_list', items: @followPeople %>
+      </div>
     </article>
 
-    <article>
+    <article class="c-network-list" data-name="users">
       <div class="l-content -br-bottom wrapper">
-        <h2 class=""><%= t 'users' %></h2>
+        <h2 class="">
+          <%= t 'users' %>
+          <svg class="c-icon icon-arrow -medium -secondary js-toggle-list">
+            <use xlink:href="#icon-arrow"></use>
+          </svg>
+        </h2>
+
         <% if @followUser.size <= 0 %>
-          <p>No Users</p>
+          <div class="list">
+            <p>No Users</p>
+          </div>
         <% end %>
       </div>
-      <%= render 'users/net_list', items: @followUser %>
+      <div class="list">
+        <%= render 'users/net_list', items: @followUser %>
+      </div>
     </article>
 
-    <article>
+    <article class="c-network-list" data-name="projects">
       <div class="l-content -br-bottom wrapper">
-        <h2><%= t 'projects' %></h2>
+        <h2>
+          <%= t 'projects' %>
+          <svg class="c-icon icon-arrow -medium -secondary js-toggle-list">
+            <use xlink:href="#icon-arrow"></use>
+          </svg>
+        </h2>
+
         <% if @followProjects.size <= 0 %>
-          <p>No projects</p>
+          <div class="list">
+            <p>No projects</p>
+          </div>
         <% end %>
       </div>
-      <%= render 'projects/net_list', items: @followProjects %>
+      <div class="list">
+        <%= render 'projects/net_list', items: @followProjects %>
+      </div>
     </article>
 
-    <article>
+    <article class="c-network-list" data-name="events">
       <div class="l-content -no-br <%= @followEvents.any? && '-br-bottom' %> wrapper">
-        <h2><%= t 'events' %></h2>
+        <h2>
+          <%= t 'events' %>
+          <svg class="c-icon icon-arrow -medium -secondary js-toggle-list">
+            <use xlink:href="#icon-arrow"></use>
+          </svg>
+        </h2>
+
         <% if !@followEvents.any? %>
-          <p>No events</p>
+          <div class="list">
+            <p>No events</p>
+          </div>
         <% end %>
       </div>
-      <%= render 'events/net_list', items: @followEvents %>
+      <div class="list">
+        <%= render 'events/net_list', items: @followEvents %>
+      </div>
     </article>
   </div>
 
@@ -88,35 +130,49 @@
         <div id="search-list" class="l-content -no-br -no-top-padd wrapper -hidden"></div>
       <% end %>
 
-      <div class="l-content wrapper">
-        <h2><%= t 'countries' %></h2>
-      </div>
-      <div class="wrapper">
-        <ul class="c-list -mg-bottom">
-          <% if @followCountries.any? %>
-            <% @followCountries.each do |c| %>
-              <li class="list-item"><%= link_to c.country_name, country_path(iso: c.country_iso_3), class: '-uppercase' %></li>
+      <article class="c-network-list" data-name="countries">
+        <div class="l-content wrapper">
+          <h2>
+            <%= t 'countries' %>
+            <svg class="c-icon icon-arrow -medium -secondary js-toggle-list">
+              <use xlink:href="#icon-arrow"></use>
+            </svg>
+          </h2>
+        </div>
+        <div class="wrapper list">
+          <ul class="c-list -mg-bottom">
+            <% if @followCountries.any? %>
+              <% @followCountries.each do |c| %>
+                <li class="list-item"><%= link_to c.country_name, country_path(iso: c.country_iso_3), class: '-uppercase' %></li>
+              <% end %>
+            <% else %>
+              <p>No countries</p>
             <% end %>
-          <% else %>
-            <p>No countries</p>
-          <% end %>
-        </ul>
-      </div>
+          </ul>
+        </div>
+      </article>
 
-      <div class="l-content wrapper">
-        <h2><%= t 'cancer_types' %></h2>
-      </div>
-      <div class="wrapper">
-        <ul class="c-list -mg-bottom">
-          <% if @followCancerTypes.any? %>
-            <% @followCancerTypes.each do |ct| %>
-              <li class="list-item -uppercase"><%= link_to ct.name, cancer_path(slug: ct.slug), class: '-uppercase' %></li>
+      <article class="c-network-list" data-name="cancerTypes">
+        <div class="l-content wrapper">
+          <h2>
+            <%= t 'cancer_types' %>
+            <svg class="c-icon icon-arrow -medium -secondary js-toggle-list">
+              <use xlink:href="#icon-arrow"></use>
+            </svg>
+          </h2>
+        </div>
+        <div class="wrapper list">
+          <ul class="c-list -mg-bottom">
+            <% if @followCancerTypes.any? %>
+              <% @followCancerTypes.each do |ct| %>
+                <li class="list-item -uppercase"><%= link_to ct.name, cancer_path(slug: ct.slug), class: '-uppercase' %></li>
+              <% end %>
+            <% else %>
+              <p>No cancer types</p>
             <% end %>
-          <% else %>
-            <p>No cancer types</p>
-          <% end %>
-        </ul>
-      </div>
+          </ul>
+        </div>
+      </article>
     </aside>
   </div>
 </div>

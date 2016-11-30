@@ -14,7 +14,11 @@
   }
 
   &.-pad-bigger {
-    padding: $box-space + 15px;
+    padding: $base-space + 15px;
+
+    @media #{$mq-small} {
+      padding: $box-space + 15px;
+    }
   }
 
   &.-thin {
