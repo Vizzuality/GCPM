@@ -1,0 +1,27 @@
+<div class="menu">
+  <svg class="c-icon icon-close -medium -primary js-action-close"><use xlink:href="#icon-close"></use></svg>
+
+  <ul class="menu-list">
+    <li>
+      <%= link_to (user_signed_in?) ? new_user_project_path(current_user.id) : user_session_path, class: 'claim-link' do %>
+
+        Upload your projects
+      <% end %>
+    </li>
+    <li>
+      <%= link_to (user_signed_in?) ? new_post_path : user_session_path, class: 'claim-link' do %>
+        Write a post
+      <% end %>
+    </li>
+    <li>
+      <%= link_to (user_signed_in?) ? new_user_event_path(current_user.id) : user_session_path, class: 'claim-link' do %>
+        Submit your events
+      <% end %>
+    </li>
+    <li>
+      <%= link_to (user_signed_in?) ? user_path(:data => 'network', :id => current_user.id) : user_session_path, class: 'claim-link' do %>
+        Contact other users and investigators
+      <% end %>
+    </li>
+  </ul>
+</div>
