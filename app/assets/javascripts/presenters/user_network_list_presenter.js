@@ -29,7 +29,7 @@
     setSubscriptions: function() {
       App.on('Remote:load', function(params) {
         if (params.data === 'network') {
-          this.state.set({ list: null, silent: true });
+          this.state.get('list') && this.state.set({ list: null, silent: true });
           this.lists.setElement('.c-network-list');
         }
       }.bind(this));
