@@ -17,6 +17,11 @@ class InvestigatorsController < ApplicationController
     gon.server_params = { 'investigators[]': @investigator.id, name: @investigator.name }
     gon.isMobile = browser.device.mobile?
 
+    if gon.isMobile
+      @filters.delete('data')
+      @current_type == 'data' && @current_type = 'projects'
+    end
+
     if notice
       gon.notice = notice
     end
