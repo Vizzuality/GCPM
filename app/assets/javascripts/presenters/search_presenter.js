@@ -68,7 +68,13 @@
       });
 
       this.searchTypes.setOptions(this.default.options);
+      this.hideSpinner();
       this.searchTypes.render();
+    },
+
+    hideSpinner: function() {
+      this.$spinner = $('.c-spinner');
+      this.$spinner.hide();
     }
 
   });
