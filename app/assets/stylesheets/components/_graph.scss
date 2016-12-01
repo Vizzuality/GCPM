@@ -4,6 +4,10 @@
   padding: 0 50px 0 0;
   position: relative;
 
+  &.-map {
+    min-height: 500px;
+  }
+
   .graph-header {
     h2 {
       display: flex;
