@@ -49,7 +49,49 @@
     <h3>{{events}} events</h3>
   {{/if}}
   {{#if widget}}
-    <p>{{city}}, {{province_state}}</p>
+    <h3>{{operator_name}}
+      {{#if city}}<span>{{city}}</span>{{/if}}
+    </h3>
+    <div class="row collapse">
+      <div class="column small-12">
+        <table class="c-table">
+          <tbody>
+            <tr>
+              <td>Unit type</td>
+              <td>{{unit_type}}</td>
+            </tr>
+            <tr>
+              <td>Unit type group</td>
+              <td>{{unit_type_group}}</td>
+            </tr>
+            <tr>
+              <td>Radionuclide teletherapy</td>
+              <td>{{unit_use}}</td>
+            </tr>
+            <tr>
+              <td>Particle accelerator</td>
+              <td>{{#if particle_accelerator}}true{{else}}false{{/if}}</td>
+            </tr>
+            <tr>
+              <td>Linear accelerator</td>
+              <td>{{#if linear_accelerator}}true{{else}}false{{/if}}</td>
+            </tr>
+            <tr>
+              <td>Radionuclide teletherapy</td>
+              <td>{{#if radionuclide_teletherapy}}true{{else}}false{{/if}}</td>
+            </tr>
+            <tr>
+              <td>Simulator</td>
+              <td>{{#if simulator}}true{{else}}false{{/if}}</td>
+            </tr>
+            <tr>
+              <td>X Ray generator</td>
+              <td>{{#if x_ray_generator}}true{{else}}false{{/if}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   {{/if}}
 
 </div>
