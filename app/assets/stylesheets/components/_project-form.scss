@@ -10,8 +10,12 @@
   & h3.c-title{
     text-transform: none;
     color: #000;
-    margin: 20px 0;
+    margin-bottom: 0;
     font-size: 25px;
+
+    @media #{$mq-small} {
+      margin: 20px 0;
+    }
   }
 
   & h4.c-title{
