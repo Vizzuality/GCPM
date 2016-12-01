@@ -18,11 +18,21 @@
       });
 
       this.setEvents();
+      this.setSubscriptions();
     },
 
     setEvents: function() {
       this.state.on('change', this.toggleList, this);
       this.lists.on('click', this.handleClick, this);
+    },
+
+    setSubscriptions: function() {
+      App.on('Remote:load', function(params) {
+        if (params.data === 'network') {
+          this.state.set({ list: null, silent: true });
+          this.lists.setElement('.c-network-list');
+        }
+      }.bind(this));
     },
 
     setState: function(newState) {
