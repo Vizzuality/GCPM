@@ -30,12 +30,16 @@ textarea {
 
   &.-large {
     color: $base-font-color;
-    font-size: $large-font-size;
+    font-size: $big-font-size;
     font-weight: $bold-font-weight;
     letter-spacing: -1px;
     line-height: $box-space;
     border: 0;
     outline: none;
+
+    @media #{$mq-small} {
+      font-size: $large-font-size;
+    }
 
     &::-webkit-input-placeholder {
       color: $base-font-color;
