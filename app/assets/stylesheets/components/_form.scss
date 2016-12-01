@@ -30,7 +30,7 @@ textarea {
 
   &.-large {
     color: $base-font-color;
-    font-size: $big-font-size;
+    font-size: $medium-font-size + 4px;
     font-weight: $bold-font-weight;
     letter-spacing: -1px;
     line-height: $box-space;

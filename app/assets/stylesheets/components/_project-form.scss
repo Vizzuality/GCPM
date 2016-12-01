@@ -16,20 +16,33 @@
 
   & h4.c-title{
     text-transform: none;
+    margin-bottom: 0;
     color: #000;
     font-size: 12px;
+
+    @media #{$mq-small} {
+      margin: 16px 0;
+    }
   }
 
   /* Project Title input */
   & #title{
-    margin: 80px 0 40px 0;
+    margin: 10px 0 0 0;
+
+    @media #{$mq-small} {
+      margin: 80px 0 40px 0;
+    }
 
     & .c-title{
 
       &.-bigger.-bold{
         width: 100%;
         font-weight: bold;
-        font-size: 65px;
+        font-size: $medium-font-size;
+
+        @media #{$mq-small} {
+          font-size: $large-font-size;
+        }
 
         &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
           color:#000;
