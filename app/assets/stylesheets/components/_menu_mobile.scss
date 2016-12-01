@@ -20,7 +20,7 @@
     width: 100vw;
 
     & * { display: inherit; }
-
+    & .back { display: flex; }
 
     .icon-close {
       display: initial;
@@ -31,7 +31,6 @@
     position: absolute;
     top: 20px;
     left: 20px;
-    display: flex;
     align-items: center;
 
     font-size: 18px;
