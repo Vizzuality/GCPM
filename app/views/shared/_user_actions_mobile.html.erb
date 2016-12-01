@@ -46,7 +46,7 @@
                 user_id = (@user) ? @user.id : nil
             end
           %>
-          <% if user_id %>
+          <% if current_user.present? && user_id.present? %>
               <button class="c-btn -secondary -inverse -thin js-btn-toggle-message action-btn" data-user="<%= user_id %>" type="button" name="button">
                 <svg class="c-icon -normal -secondary">
                   <use xlink:href="#icon-message"></use>
