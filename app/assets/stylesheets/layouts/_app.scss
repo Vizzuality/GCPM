@@ -63,9 +63,17 @@
 
   .l-app-claim {
     position: absolute;
-    top: 37%;
-    left: $box-space;
-    transform: translate(0, -50%);
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    @media #{$mq-small} {
+      top: 37%;
+      left: $box-space;
+      bottom: inherit;
+      right: inherit;
+      transform: translate(0, -50%);
+    }
   }
 
   .l-app-navbar {
@@ -120,11 +128,20 @@
   flex: 1;
   z-index: 0;
   background-color: $secondary-color;
-  padding-top: $box-space;
-  padding-bottom: $box-space*2;
+  padding-top: $base-space*2;
+  padding-bottom: $base-space*2;
+
+  @media #{$mq-small} {
+    padding-top: $box-space;
+    padding-bottom: $box-space*2;
+  }
 
   h1 {
-    font-size: $large-font-size;
+    font-size: $big-font-size + 10px;
     color: $inverse-font-color;
+
+    @media #{$mq-small} {
+      font-size: $large-font-size;
+    }
   }
 }
