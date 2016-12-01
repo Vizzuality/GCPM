@@ -23,6 +23,8 @@
       });
 
       new App.Presenter.Notice();
+
+      gon.isMobile && new App.Presenter.JoinNetworkMobile();
     }
 
 

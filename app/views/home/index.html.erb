@@ -1,77 +1,10 @@
 <% title 'Welcome' %>
 <%= render "shared/icons_home" %>
 
-<section>
-  <div class="wrapper">
-    <div class="c-claim -primary -smaller">
-      <h1>Join the network</h1>
-      <ul class="claim-list">
-        <li>
-          <%= link_to (user_signed_in?) ? new_user_project_path(current_user.id) : user_session_path, class: 'claim-link' do %>
-            <div class="icon">
-              <svg style="width: 30px;" class="c-icon -big -inverse-stroke"><use xlink:href="#icon-upload"></use></svg>
-            </div>
-            <p>Upload your projects</p>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to (user_signed_in?) ? new_post_path : user_session_path, class: 'claim-link' do %>
-            <div class="icon">
-              <svg class="c-icon -big -inverse-stroke"><use xlink:href="#icon-write"></use></svg>
-            </div>
-            <p>Write a post</p>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to (user_signed_in?) ? new_user_event_path(current_user.id) : user_session_path, class: 'claim-link' do %>
-            <div class="icon">
-              <svg class="c-icon -big -inverse-stroke"><use xlink:href="#icon-submit"></use></svg>
-            </div>
-            <p>Submit your events</p>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to (user_signed_in?) ? user_path(:data => 'network', :id => current_user.id) : user_session_path, class: 'claim-link' do %>
-            <div class="icon">
-              <svg class="c-icon -big -inverse-stroke"><use xlink:href="#icon-contact"></use></svg>
-            </div>
-            <p>Contact other users and investigators</p>
-          <% end %>
-        </li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<section class="l-app -main -home -full">
-  <div class="l-app-map">
-    <%= link_to map_path do %>
-      <div id="map" class="c-map"></div>
-    <% end %>
-  </div>
-  <div class="l-app-claim">
-    <div class="c-claim">
-      <h1>Discover projects <br> and much more</h1>
-      <%= link_to 'Explore the map', map_path, class: 'link' %>
-    </div>
-  </div>
-  <% if !browser.device.mobile? %>
-    <div class="l-app-bottombar">
-      <div id="counters">
-        <%= render 'home/counters' %>
-      </div>
-    </div>
-  <% end %>
-</section>
-
 <% if browser.device.mobile? %>
-  <section>
-      <div class="l-app-bottombar">
-        <div id="counters">
-          <%= render 'home/counters' %>
-        </div>
-      </div>
-  </section>
+  <%= render "mobile_intro" %>
+<% else %>
+  <%= render "desktop_intro" %>
 <% end %>
 
 <section class="l-grid" id="content">

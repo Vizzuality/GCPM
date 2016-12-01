@@ -5,7 +5,7 @@
   background-color: $primary-color;
 
   @media #{$mq-small} {
-    padding: $box-space;
+    padding: $base-space * 2;
   }
 
   &.-primary {
