@@ -20,18 +20,18 @@
               data-resource="<%= @followed_resource %>">
                 <% if (@followed) %>
                   <svg class="c-icon -secondary -normal">
-                    <use xlink:href="#icon-minus"></use>
+                    <use xlink:href="#icon-user-minus"></use>
                   </svg>
                 <% else %>
                   <svg class="c-icon -secondary -normal">
-                    <use xlink:href="#icon-collaborators"></use>
+                    <use xlink:href="#icon-user-plus"></use>
                   </svg>
                 <% end %>
             </button>
           <% else %>
             <a href="/users/sign_in" class="c-btn -secondary -inverse -thin action-btn">
               <svg class="c-icon -normal">
-                <use xlink:href="#icon-collaborators"></use>
+                <use xlink:href="#icon-user-plus"></use>
               </svg>
             </a>
           <% end %>

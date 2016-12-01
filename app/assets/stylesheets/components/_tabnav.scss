@@ -16,6 +16,11 @@
     }
   }
 
+  &.-no-gradient {
+    &:after { display: none; }
+    &:before { display: none; }
+  }
+
   &:after {
     content: '';
     position: absolute;
@@ -36,7 +41,7 @@
     position: absolute;
     left: $small-box-space;
     top: 0;
-    width: 18px;
+    width: 12px;
     height: 100%;
     z-index: 2;
     background: linear-gradient(right, transparent, $secondary-color);
