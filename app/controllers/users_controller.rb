@@ -17,6 +17,7 @@ class UsersController < ApplicationController
     gon.server_params = { 'user': @investigator.present? ? @investigator.id : '0' }
     gon.userId = current_user.id
     gon.unreadCount = current_user.unread_inbox_count
+    gon.isMobile = browser.device.mobile?
 
     limit = 12 + (@page * 9)
 

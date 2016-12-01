@@ -5,6 +5,8 @@ class HomeController < ApplicationController
     @events_total = Event.all.distinct.count()
     @people_total = Investigator.all.distinct.count()
 
+    gon.isMobile = browser.device.mobile?
+
     if notice
       gon.notice = notice
     end

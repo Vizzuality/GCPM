@@ -12,6 +12,7 @@ class OrganizationsController < ApplicationController
     @current_type = params.key?(:data) ? params[:data] : 'projects'
 
     gon.server_params = { 'organizations[]': @organization.id }
+    gon.isMobile = browser.device.mobile?
 
     limit = 12 + (@page * 9)
 

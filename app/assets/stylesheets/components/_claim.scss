@@ -1,8 +1,12 @@
 .c-claim {
   position: relative;
-  padding: $box-space;
+  padding: $base-space $small-box-space;
   color: $inverse-font-color;
   background-color: $primary-color;
+
+  @media #{$mq-small} {
+    padding: $base-space * 2;
+  }
 
   &.-primary {
     background-color: $inverse-font-color;
@@ -10,16 +14,22 @@
   }
 
   h1 {
-    font-size: $large-font-size;
-    line-height: 1.2;
-    margin-bottom: 0;
+    font-size: $big-font-size;
+    line-height: 1.3;
+    margin-bottom: $inline-space;
+
+    @media #{$mq-small} {
+      font-size: $large-font-size;
+      line-height: 1.2;
+      margin-bottom: 0;
+    }
   }
 
   .link {
-    position: absolute;
+    position: relative;
+    display: flex;
+    justify-content: center;
     padding: $button-y-padding $button-x-padding;
-    bottom: 0;
-    left: 0;
 
     background-color: $body-bg-color;
 
@@ -27,7 +37,14 @@
     color: $primary-color;
     letter-spacing: 1px;
 
-    transform: translateY(100%);
+
+    @media #{$mq-small} {
+      position: absolute;
+      display: inherit;
+      bottom: 0;
+      left: 0;
+      transform: translateY(100%);
+    }
   }
 
   ul {

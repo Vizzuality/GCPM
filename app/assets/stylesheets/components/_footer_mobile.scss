@@ -1,0 +1,33 @@
+.l-footer-mobile {
+  padding-top: $base-space;
+  padding-bottom: $base-space * 2;
+  border-top: 1px solid $border-color-1;
+
+  @media #{$mq-small} {
+    padding-bottom: $box-space;
+    padding-top: $box-space;
+  }
+
+  .follow {
+    margin-bottom: $base-space;
+  }
+
+  .list {
+    margin-bottom: $base-space + 2px;
+
+    > .row {
+      margin-bottom: $inline-space - 3px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    &.-primary {
+      &  * {
+       color: $primary-color;
+      }
+    }
+  }
+
+}

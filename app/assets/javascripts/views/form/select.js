@@ -57,6 +57,10 @@
       $(this.select.selector).val(val).trigger("change");
     },
 
+    resetValue: function() {
+      $(this.select.selector).val(null).trigger("change");
+    },
+
     addNew: function(option){
       var obj = {
         id: option.cid,

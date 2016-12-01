@@ -1,15 +1,30 @@
 .c-title-btn {
   display: flex;
   margin-bottom: $box-space / 2;
-  max-height: 50px;
+  flex-flow: column;
+  justify-content: center;
   align-items: center;
 
+  @media #{$mq-small} {
+    flex-flow: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
   h1, h2, h3 {
-    margin-bottom: 0;
+    margin-bottom: $inline-space;
+
+    @media #{$mq-small} {
+      margin-bottom: 0;
+    }
+
+    &.-no-mg { margin: 0; }
   }
 
   .c-btn {
-    margin-left: $inline-space;
+    @media #{$mq-small} {
+      margin-left: $inline-space;
+    }
   }
 
   & *:first-child {

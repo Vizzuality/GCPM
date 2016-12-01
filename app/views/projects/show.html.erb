@@ -1,78 +1,16 @@
 <% title @project.title %>
 
-<section class="l-app -full">
-  <div class="l-app-map">
-    <div id="map" class="c-map"></div>
-  </div>
-
-  <%= render "shared/legend_projects" %>
-
-  <div class="l-app-title">
-    <div class="wrapper">
-      <div class="row collapse">
-        <div class="column small-8">
-          <h1><%= @project.title %></h1>
-
-          <% if user_signed_in? && current_user.projects.include?(@project) %>
-            <%= link_to (t 'not_me'), remove_relation_project_path(@project), method: :patch, class: 'c-btn -transparent' %>
-          <% elsif user_signed_in? %>
-            <%= link_to (t 'this_is_me'), relation_request_project_path(@project), method: :patch, class: 'c-btn -transparent' %>
-          <% end %>
-
-          <div class="c-summary-info row -collapse">
-
-            <div class="column small-12 large-4 align-middle">
-              <div class="c-avatar -small -ph"
-                   style="<% if @project.project_lead.present? && @project.project_lead.user.present? %>
-                            background-image: url(<%= @project.project_lead.user.avatar_url(:thumb) %>)
-                          <% end %>">
-              </div>
-
-              <h3>
-                <% if @project.project_lead.present? && @project.project_lead.name != '' %>
-                  <%= @project.project_lead.name %>
-                <% else %>
-                  No project lead
-                <% end %>
-              </h3>
-            </div>
-
-            <div class="column small-12 large-4 align-middle">
-              <div class="c-avatar -small">
-                <svg class="c-icon icon-collaborators -inverse">
-                  <use xlink:href="#icon-collaborators"></use>
-                </svg>
-              </div>
-              <h3><%= @project.investigators.any? ? @project.investigators.count - 1 : 0 %> <%= t 'collaborator'%>(s)</h3>
-            </div>
-
-            <% if @project.funding_sources && @project.funding_sources.size > 0 %>
-              <div class="column small-12 large-4 align-middle">
-                <div class="c-avatar -small">
-                  <svg class="c-icon icon-funding -inverse">
-                    <use xlink:href="#icon-funding"></use>
-                  </svg>
-                </div>
-                <div>
-                  <h3><%= t 'funding_source' %></h3>
-                  <span><%= @project.funding_sources.first.name %></span>
-                </div>
-              </div>
-            <% end %>
-
-          </div>
-        </div>
-        <div class="column small-4">
-          <%= render "shared/user_actions" %>
-        </div>
-      </div>
-    </div>
-  </div>
+<section class="l-app -full -secondary">
+  <% if !browser.device.mobile? %>
+    <%= render "desktop_show_intro" %>
+  <% else %>
+    <%= render "mobile_show_intro" %>
+  <% end %>
 
   <div class="l-app-navbar">
     <div class="wrapper">
       <div class="row collapse">
-        <div class="column small-6">
+        <div class="column small-12">
           <ul class="c-tabnav" id="dataTabNav">
              <% @filters.each do |filter| %>
               <li class="tabnav-item">
@@ -85,9 +23,6 @@
               </li>
             <% end %>
           </ul>
-        </div>
-        <div class="column small-6">
-          <div id="toolbar"></div>
         </div>
       </div>
     </div>

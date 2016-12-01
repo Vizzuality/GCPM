@@ -45,6 +45,12 @@
         opacity: .7;
       }
     }
+
+    > span {
+      display: block;
+      text-transform: none;
+      margin: 5px 0 0;
+    }
   }
 
   > p {

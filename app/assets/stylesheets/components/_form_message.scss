@@ -6,13 +6,12 @@
   left: 50%;
   transform: translate(-50%,-70px);
   transition: all 0.2s $easeInOutCubic;
-  z-index: 2;
+  z-index: 5;
   background: white;
   padding: 20px;
   width: 100%;
   border: 1px solid $border-color-1;
   box-shadow: $box-shadow;
-
 
   & > form .form-row {
     label,
@@ -30,7 +29,7 @@
     content: "";
     position: absolute;
     top: 0;
-    left: 50%;
+    left: 42px;
     transform: translate(-50%,-50%) rotate(45deg);
     width: 16px;
     height: 16px;
@@ -38,6 +37,22 @@
     border-left: 1px solid $border-color-1;
     border-top: 1px solid $border-color-1;
 
+    @media #{$mq-small} {
+      left: 50%;
+    }
+  }
+
+  &.-mobile {
+    left: 0;
+    width: calc(100vw - 30px);
+
+    &:before {
+      left: 20px;
+    }
+
+    &.-active {
+      transform: translate(0, 14px);
+    }
   }
 
   &.-arr-right {
@@ -56,7 +71,11 @@
   &.-active {
     visibility: visible;
     opacity: 1;
-    transform: translate(-50%,-60px);
+    transform: translate(-50%, -14px);
+
+    @media #{$mq-small} {
+      transform: translate(-50%, -47px);
+    }
   }
 }
 

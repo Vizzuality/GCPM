@@ -16,6 +16,11 @@
     background-size: cover;
   }
 
+  &.-align-center {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   &.-small {
     width: 38px;
     height: 38px;

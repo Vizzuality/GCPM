@@ -4,6 +4,8 @@
 
   App.View.FollowButton = Backbone.View.extend({
 
+    template: HandlebarsTemplates['follow'],
+
     events: {
       'click .js-btn-follow' : 'onClickToggleFollow'
     },
@@ -18,7 +20,7 @@
 
     setFollowed: function(follow) {
       this.$btnFollow
-        .text((follow.followed) ? 'Unfollow' : 'Follow')
+        .html(this.template({ followed: follow.followed, mobile: gon.isMobile }))
         .data('followed', follow.followed);
     },
 

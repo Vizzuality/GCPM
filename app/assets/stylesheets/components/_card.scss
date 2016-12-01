@@ -1,20 +1,32 @@
 .c-card {
   position: relative;
   width: 100%;
-  padding: $box-space;
+  padding: $box-space/2 $small-box-space;
   background-color: $body-bg-color;
   box-shadow: 0 0 0 1px $border-color-1;
+
+  @media #{$mq-small} {
+    padding: $box-space;
+  }
 
   &.-no-shadow {
     box-shadow: none;
   }
 
   &.-pad-bigger {
-    padding: $box-space + 15px;
+    padding: $base-space + 15px;
+
+    @media #{$mq-small} {
+      padding: $box-space + 15px;
+    }
   }
 
   &.-thin {
-    padding: $inline-space/2 $box-space;
+    padding: $inline-space/2 $small-box-space;
+
+    @media #{$mq-small} {
+      padding: $inline-space/2 $box-space;
+    }
   }
 
   h2 {
@@ -29,24 +41,69 @@
 
   &.-person {
     display: flex;
-    flex-flow: column;
-    align-items: center;
+    align-items: flex-start;
+    padding-top: $small-box-space;
+
+
+    @media #{$mq-small} {
+      align-items: center;
+      flex-flow: column;
+      padding-top: $box-space;
+    }
+
+    .icons{
+      display: flex;
+      flex-flow: column;
+      flex-shrink: 0;
+      align-items: center;
+      margin-right: $base-space;
+      margin-top: -2px;
+
+      @media #{$mq-small} {
+        margin-right: 0;
+      }
+    }
+
 
     h2, h3 {
-      text-align: center;
+      text-align: left;
       margin: 4px 0 0;
+
+      @media #{$mq-small} {
+        text-align: center;
+      }
+    }
+
+    h2 {
+      font-size: $medium-font-size;
+
+      @media #{$mq-small} {
+        font-size: $h2-font-size;
+      }
     }
 
     h3 {
-      width: 100%;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
       text-transform: none;
+      font-family: $base-font-family-light;
+
+      @media #{$mq-small} {
+        font-family: $base-font-family;
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
 
     button {
-      margin: 15px 0 0;
+      margin: 10px 0 0;
+
+      @media #{$mq-small} {
+        display: flex;
+        margin: 15px 0 0;
+        margin-left: auto;
+        margin-right: auto;
+      }
     }
   }
 

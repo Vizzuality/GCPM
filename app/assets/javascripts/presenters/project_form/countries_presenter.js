@@ -61,7 +61,7 @@
 
       this.select.on('change', this.setState, this);
 
-      App.on('MapCountry:change', this.triggerCountryChange, this);
+      App.on('Regions:change', this.triggerRegionChange, this);
     },
 
     /**
@@ -93,8 +93,15 @@
     /**
      * Trigger country change
      */
-    triggerCountryChange: function(value) {
-      this.render({value: [value]});
+    triggerRegionChange: function(selected) {
+      if (this.state.get('value') && this.state.get('value')[0]) {
+        var countrySelected = _.findWhere(this.countries.toJSON(), {
+          country_iso_3: this.state.get('value')[0]
+        });
+        if (countrySelected.region_iso != selected.value[0]) {
+          this.select.resetValue();
+        }
+      }
     },
 
     /**

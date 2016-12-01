@@ -1,57 +1,16 @@
 <% title @organization.name %>
 
-<section class="l-app -full">
-  <div class="l-app-map">
-    <div id="map" class="c-map"></div>
-  </div>
-  <%= render "shared/legend_people" %>
-  <div class="l-app-title">
-    <div class="wrapper">
-      <div class="row collapse">
-        <div class="column small-8">
-          <h1><%= @organization.name %></h1>
-
-          <div class="row">
-            <div class="column small-12 medium-6">
-              <ul class="c-pipe-list">
-                <li><%= @organization.organization_type.present? ? @organization.organization_type.try(:name) : '' %></li>
-              </ul>
-            </div>
-            <div class="column small-12 medium-6">
-              <ul class="c-pipe-list">
-                <li>
-                  <%= @organization.email_address.present? ? @organization.email_address : '' %>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <table class="c-numbers-list">
-            <thead>
-              <tr>
-                <th><%= t 'projects' %></th>
-                <th><%= t 'people' %></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><%= @projects.size %></td>
-                <td><%= @people.size %></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="column small-4">
-          <%= render "shared/user_actions" %>
-        </div>
-      </div>
-    </div>
-  </div>
+<section class="l-app -full -secondary">
+  <% if !browser.device.mobile? %>
+    <%= render "desktop_show_intro" %>
+  <% else %>
+    <%= render "mobile_show_intro" %>
+  <% end %>
 
   <div class="l-app-navbar">
     <div class="wrapper">
       <div class="row collapse">
-        <div class="column small-6">
+        <div class="column small-12">
           <ul class="c-tabnav" id="dataTabNav">
              <% @filters.each do |filter| %>
               <li class="tabnav-item">
@@ -64,9 +23,6 @@
               </li>
             <% end %>
           </ul>
-        </div>
-        <div class="column small-6">
-          <div id="toolbar"></div>
         </div>
       </div>
     </div>

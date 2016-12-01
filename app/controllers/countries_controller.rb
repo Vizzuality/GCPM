@@ -13,6 +13,7 @@ class CountriesController < ApplicationController
     gon.server_params = { 'countries[]': params[:iso] }
     gon.carto_account = ENV["CARTODB_ACCOUNT"]
     gon.carto_key = ENV["CARTODB_KEY"]
+    gon.isMobile = browser.device.mobile?
 
     limit = 12 + (@page * 9)
 

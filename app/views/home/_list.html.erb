@@ -53,16 +53,20 @@
         <% when 'investigator' %>
           <div class="column small-12 medium-4">
             <div class="c-card -person">
-              <div class="c-avatar -ph -mg-bt"
-                   style="<% if featured.user.present? %>
-                            background-image: url(<%= featured.user.avatar_url(:thumb) %>)
-                          <% end %>">
+              <div class="icons">
+                <div class="c-avatar -ph -mg-bt"
+                     style="<% if featured.user.present? %>
+                              background-image: url(<%= featured.user.avatar_url(:thumb) %>)
+                            <% end %>">
+                </div>
               </div>
-              <h2><%= link_to featured.name, investigator_path(featured.slug_or_id) %></h2>
-              <% featured.organizations.each do |o|%>
-                <h3><%= link_to o.name, organization_path(o.slug_or_id) %></h3>
-                <h3><%= o.addresses.map{|a| [a.city, a.country_name]}.uniq.join(', ') %></h3>
-              <% end %>
+              <div>
+                <h2><%= link_to featured.name, investigator_path(featured.slug_or_id) %></h2>
+                <% featured.organizations.each do |o|%>
+                  <h3><%= link_to o.name, organization_path(o.slug_or_id) %></h3>
+                  <h3><%= o.addresses.map{|a| [a.city, a.country_name]}.uniq.join(', ') %></h3>
+                <% end %>
+              </div>
             </div>
           </div>
 
