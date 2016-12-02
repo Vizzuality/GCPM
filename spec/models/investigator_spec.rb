@@ -33,8 +33,8 @@ RSpec.describe Investigator, type: :model do
       expect(@investigator_1.slug).to be_present
       expect(@investigator_1.slug).to eq('first-investigator')
       expect(@investigator_2.slug).to eq('second-investigator')
-      expect(@investigator_3.slug).to eq('second-investigator-2')
-      expect(@investigator_4.slug).to eq('second-investigator-3')
+      expect(@investigator_3.slug).to eq('second-investigator-1')
+      expect(@investigator_4.slug).to eq('second-investigator-2')
     end
   end
 
