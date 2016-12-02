@@ -9,13 +9,9 @@
   background-color: $secondary-color;
   transition: all .2s $easeOutCubic;
 
-  // & * { display: none; }
-
   &.-active {
     left: 0;
     width: 100%;
-
-    // & * { display: inherit; }
   }
 
   nav {
