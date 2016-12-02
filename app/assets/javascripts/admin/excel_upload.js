@@ -23,7 +23,11 @@ $(document).ready(function(){
             var specification = '';
 
             error[0].errors.map(function(error_type) {
-              specification += Object.keys(error_type) + ': ' + error_type[Object.keys(error_type)] + '; ';
+              if (typeof error_type === 'object') {
+                specification += Object.keys(error_type) + ': ' + error_type[Object.keys(error_type)] + '; ';
+              } else {
+                specification += error_type;
+              }
             });
 
             result += '<tr><th>' + error[0].project + '</th><td>' + specification + '</td></tr>';
