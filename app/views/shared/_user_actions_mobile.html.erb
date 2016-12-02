@@ -19,18 +19,18 @@
               data-id="<%= @followed_id %>"
               data-resource="<%= @followed_resource %>">
                 <% if (@followed) %>
-                  <svg class="c-icon -secondary -normal">
+                  <svg class="c-icon -secondary -normal -secondary">
                     <use xlink:href="#icon-user-minus"></use>
                   </svg>
                 <% else %>
-                  <svg class="c-icon -secondary -normal">
+                  <svg class="c-icon -secondary -normal -secondary">
                     <use xlink:href="#icon-user-plus"></use>
                   </svg>
                 <% end %>
             </button>
           <% else %>
             <a href="/users/sign_in" class="c-btn -secondary -inverse -thin action-btn">
-              <svg class="c-icon -normal">
+              <svg class="c-icon -normal -secondary">
                 <use xlink:href="#icon-user-plus"></use>
               </svg>
             </a>
@@ -46,7 +46,8 @@
                 user_id = (@user) ? @user.id : nil
             end
           %>
-          <% if current_user.present? && user_id.present? %>
+          <% if user_id.present? %>
+            <% if user_signed_in? %>
               <button class="c-btn -secondary -inverse -thin js-btn-toggle-message action-btn" data-user="<%= user_id %>" type="button" name="button">
                 <svg class="c-icon -normal -secondary">
                   <use xlink:href="#icon-message"></use>
@@ -68,7 +69,13 @@
                 </div>
                 <% end %>
               </div>
-
+            <% else %>
+              <%= link_to user_session_path, class: 'c-btn -secondary -inverse -thin action-btn' do %>
+                <svg class="c-icon -normal -secondary">
+                  <use xlink:href="#icon-message"></use>
+                </svg>
+              <% end %>
+            <% end %>
           <% end %>
         <% end %>
 
