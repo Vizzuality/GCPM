@@ -6,19 +6,18 @@ module Abilities
     def initialize(user)
       can :read, :all
 
-      can :update, ::User,         id: user.id
-      can :manage, ::Investigator, user_id: user.id, is_approved: true
-      can :manage, ::Post,         user_id: user.id
-      can :manage, ::Event,        user_id: user.id
+      can :update,  ::User,         id: user.id
+      can :manage,  ::Investigator, user_id: user.id, is_approved: true
+      can :manage,  ::Post,         user_id: user.id
+      can :manage,  ::Event,        user_id: user.id
+      can :manage,  ::Project,      project_users: { user_id: user.id, is_approved: true }
+      can :destroy, ::Project,      created_by: user.id
 
-      can :manage, ::Project,      project_users: { user_id: user.id, is_approved: true }
       can :update, ::Project do |project|
         project.project_creator(user.id) ||
         project.project_users.find_by(user_id: user.id).approved?
       end
-      can :destroy, ::Project do |project|
-        project.project_creator(user.id)
-      end
+
       can :create, :all
 
       can :remove_relation,  ::Project, project_users: { user_id: user.id }
