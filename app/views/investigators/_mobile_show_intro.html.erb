@@ -6,7 +6,7 @@
     <div class="column small-12 medium-8">
       <div class="c-avatar -medium -ph -mg-bt -align-center"
            style="<% if inv_user.present? %>
-                    background-image: url(<%= inv_user.avatar_url(:thumb) %>)
+                    background-image: asset-url(<%= inv_user.avatar_url(:thumb) %>)
                   <% end %>">
       </div>
     </div>

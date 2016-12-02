@@ -13,7 +13,7 @@
           <div class="investigator">
             <div class="c-avatar -ph -small"
                  style="<% if investigator.present? %>
-                        background-image: url(<%= investigator.avatar_url(:thumb) %>)
+                        background-image: asset-url(<%= investigator.avatar_url(:thumb) %>)
                       <% end %>">
             </div>
             <p><%= investigator.present? && investigator.try(:name) %></p>

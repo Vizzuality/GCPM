@@ -10,6 +10,7 @@
       new App.Presenter.Map(params, {
         noInteractivity: true,
         noAnimateBounds: true,
+        disable: true
       }, {
         zoom: 3,
         center: [25, -15],
