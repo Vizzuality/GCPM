@@ -37,9 +37,11 @@
   <% end %>
 </div>
 
-<div>
+<div class="l-grid">
   <% if @related_projects.any? %>
-    <h2>Related projects</h2>
+    <div class="l-content wrapper">
+      <h2>Related projects</h2>
+    </div>
     <%= render 'projects/list', items: @related_projects, more: @more  %>
   <% end %>
 </div>
