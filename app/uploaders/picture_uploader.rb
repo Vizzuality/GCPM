@@ -34,8 +34,12 @@ class PictureUploader < CarrierWave::Uploader::Base
     process resize_to_fill: [120,120, gravity = 'Center']
   end
 
-  version :home do
-    process resize_to_fill: [500, 500, gravity = 'Center']
+  version :square do
+    process resize_to_fill: [600, 600, gravity = 'Center']
+  end
+
+  version :half do
+    process resize_to_fill: [600, 600]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.
