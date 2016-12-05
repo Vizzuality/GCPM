@@ -36,7 +36,12 @@ RSpec.describe Project, type: :model do
 
   context "Projects validation" do
     before :each do
-      @project = create(:project, title: 'Project one', summary: 'Lorem ipsum..')
+      @cancer_type = create(:cancer_type)
+      @project     = create(:project, title: 'Project one', summary: 'Lorem ipsum..', cancer_type_ids: [@cancer_type.id], status: 'published')
+
+      create(:project, title: 'Project 2', summary: 'Lorem ipsum..', cancer_type_ids: [@cancer_type.id], status: 'published')
+      create(:project, title: 'Project 3', summary: 'Lorem ipsum..', cancer_type_ids: [@cancer_type.id], status: 'published')
+      create(:project, title: 'Project 4', summary: 'Lorem ipsum..', status: 'published')
     end
 
     it 'Project title validation' do
@@ -65,6 +70,18 @@ RSpec.describe Project, type: :model do
 
       @project_reject.valid?
       expect {@project_reject.save!}.to raise_error(ActiveRecord::RecordInvalid, "Validation failed: Title has already been taken")
+    end
+
+    context 'Related projects' do
+      it 'Get relataded projects by default params' do
+        related_projects = @project.related
+        expect(related_projects.size).to eq(2)
+      end
+
+      it 'Get relataded projects for size param' do
+        related_projects = @project.related(size: 1)
+        expect(related_projects.size).to eq(1)
+      end
     end
   end
 end
