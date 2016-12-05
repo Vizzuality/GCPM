@@ -71,10 +71,7 @@
           </div>
 
         <% when 'picture' %>
-          <div class="column small-12 medium-4">
-            <div class="-inverse">  <!-- use -inverse if you want to fill the card -->
-              <%= image_tag featured.image_url(:square) %>
-            </div>
+          <div class="c-picture column small-12 medium-4" style="background-image: url(<%= featured.image_url(:square) %>)">
           </div>
       <% end %>
     <% end %>
