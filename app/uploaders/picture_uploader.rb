@@ -31,7 +31,7 @@ class PictureUploader < CarrierWave::Uploader::Base
   process resize_to_fit: [1200, 1200]
 
   version :thumb do
-    process resize_to_fill: [120,120]
+    process resize_to_fill: [120,120, gravity = 'Center']
   end
 
   version :home do
