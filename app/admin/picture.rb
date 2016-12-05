@@ -41,6 +41,32 @@ ActiveAdmin.register Picture do
     end
   end
 
+  show do
+    attributes_table do
+      row :title
+      row :description
+    end
+    active_admin_comments
+  end
+
+  sidebar 'Picture', only: :show do
+    attributes_table_for picture do
+      row('Published?') { |p| status_tag p.published? }
+      if picture.featured?
+        row 'Featured' do
+          link_to('Unfeature', unfeature_admin_picture_path(picture))
+        end
+      else
+        row 'Unfeatured' do
+          link_to('Feature', feature_admin_picture_path(picture))
+        end
+      end
+      row :image do
+        image_tag picture.image_url(:thumb)
+      end
+    end
+  end
+
   form do |f|
     semantic_errors
     f.inputs do
