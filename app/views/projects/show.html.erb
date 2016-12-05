@@ -36,3 +36,10 @@
     <%= render 'projects/info' %>
   <% end %>
 </div>
+
+<div>
+  <% if @related_projects.any? %>
+    <h2>Related projects</h2>
+    <%= render 'projects/list', items: @related_projects, more: @more  %>
+  <% end %>
+</div>
