@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class AvatarUploader < CarrierWave::Uploader::Base
+class PictureUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
@@ -28,10 +28,18 @@ class AvatarUploader < CarrierWave::Uploader::Base
     '/assets/' + [version_name, 'placeholder.png'].compact.join('_')
   end
 
-  process resize_to_fit: [400, 400]
+  process resize_to_fit: [1200, 1200]
 
   version :thumb do
-    process resize_to_fill: [120,120]
+    process resize_to_fill: [120,120, gravity = 'Center']
+  end
+
+  version :square do
+    process resize_to_fill: [600, 600, gravity = 'Center']
+  end
+
+  version :medium do
+    process resize_to_fill: [600, 600]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.

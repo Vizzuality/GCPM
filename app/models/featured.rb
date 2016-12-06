@@ -16,4 +16,3 @@ class Featured < ApplicationRecord
     unscoped.order('weight DESC').map { |f| f.featurable }
   end
 end
-
