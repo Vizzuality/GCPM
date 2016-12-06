@@ -39,6 +39,13 @@ class ProjectsController < ApplicationController
 
     @updates = ProjectUpdate.where(project_id: @project.id)
 
+    # size: Results size (standard 12),
+    # level: Level to search for related projects:
+    # standard [1,2,3,4]: cancer_types = 1 + project_types = 2 + specialities = 3 + countries = 4
+    # strict true - false
+    # @project.related(size: 9, level: [1,2,3], strict: true)
+    @related_projects = @project.related(size: 9, level: [1,2,3,4], strict: false)
+
     respond_with(@items)
   end
 

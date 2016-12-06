@@ -25,7 +25,7 @@
 
       var dropdownOptions = _.map([
         { name: 'Title', value: 'title' },
-        { name: 'Created', value: 'created'}
+        { name: 'Submitted Date', value: 'created'}
       ], function(opt) {
         opt.selected = this.state.get('sortby').split('_')[0] === opt.value;
         return opt;
