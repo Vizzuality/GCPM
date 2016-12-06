@@ -23,20 +23,20 @@
       var countries = new App.Presenter.Countries({
         multiple: true,
         select2Options: {},
-        label: null,
+        label: 'Countries',
         blank: null,
         addNew: false
       });
       var organizations = new App.Presenter.Organizations({
-        label: null,
+        label: 'Organizations',
         addNew: false
       });
       var cancerTypes = new App.Presenter.CancerTypes({
-        label: null,
+        label: 'Cancer types',
         addNew: false
       });
       var projects = new App.Presenter.Projects({
-        label: null,
+        label: 'Projects',
         addNew: false
       });
 
