@@ -168,7 +168,7 @@
       map.scrollWheelZoom.disable();
       map.boxZoom.disable();
       map.keyboard.disable();
-      map.tap.disable();
+      (map.tap) ? map.tap.disable() : null;
     }
 
   });
