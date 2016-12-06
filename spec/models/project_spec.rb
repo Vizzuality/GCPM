@@ -25,12 +25,17 @@ RSpec.describe Project, type: :model do
   context "Valid project" do
     before :each do
       @project = create(:project, users: [@user])
+      @pin     = create(:pin, pinable: @project)
     end
 
     it 'Projects count' do
       expect(Project.count).to  eq(1)
       expect(@project.users).to be_any
       expect(@project.slug).to  be_present
+    end
+
+    it 'Pins of project' do
+      expect(@project.pins).to be_any
     end
   end
 

@@ -1,19 +1,12 @@
-# == Schema Information
-#
-# Table name: posts
-#
-#  id         :integer          not null, primary key
-#  title      :string
-#  body       :text
-#  user_id    :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#
-
 require 'rails_helper'
 
-RSpec.describe Post, type: :model do
+RSpec.describe Pin, type: :model do
   before :each do
+    @user = create(:user)
+  end
+
+  context "Valid project" do
+    before :each do
       @post         = create(:post, user: @user)
       @project      = create(:project)
       @organization = create(:organization)
@@ -30,4 +23,5 @@ RSpec.describe Post, type: :model do
       expect(@post.pins.size).to             eq(2)
       expect(@post.pins.on_projects.size).to eq(1)
     end
+  end
 end
