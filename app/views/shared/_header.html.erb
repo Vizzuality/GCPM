@@ -13,7 +13,7 @@
             <% if user_signed_in? %>
               <li class="js-user-menu <%= active_page?(user_session_path) ? '-active' : '' %>">
                 <button class="user-btn">
-                  <div class="c-avatar" style="background-image: asset-url(<%= current_user.avatar_url(:thumb) %>)"></div>
+                  <div class="c-avatar" style="background-image: url(<%= current_user.avatar_url(:thumb) %>)"></div>
                 </button>
                 <%= render 'shared/user_menu' %>
               </li>

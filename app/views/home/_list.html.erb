@@ -56,7 +56,7 @@
               <div class="icons">
                 <div class="c-avatar -ph -mg-bt"
                      style="<% if featured.user.present? %>
-                              background-image: asset-url(<%= featured.user.avatar_url(:thumb) %>)
+                              background-image: url(<%= featured.user.avatar_url(:thumb) %>)
                             <% end %>">
                 </div>
               </div>
@@ -70,6 +70,9 @@
             </div>
           </div>
 
+        <% when 'picture' %>
+          <div class="c-picture column small-12 medium-4" style="background-image: url(<%= featured.image_url(:square) %>)">
+          </div>
       <% end %>
     <% end %>
   <% end %>
