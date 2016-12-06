@@ -59,7 +59,7 @@
       return this.projects.fetch().done(function() {
         var options = this.projects.map(function(type) {
           return {
-            name: type.attributes.name,
+            name: type.attributes.title,
             value: type.attributes.id
           };
         });

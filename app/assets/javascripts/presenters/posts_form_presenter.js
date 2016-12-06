@@ -12,21 +12,19 @@
   _.extend(App.Presenter.PostFormPresenter.prototype, {
 
     defaults: {
-      'regions[]': undefined,
       'countries[]': undefined,
       'cancer_types[]': undefined,
-      'organization_types[]': undefined,
       'organizations[]': undefined,
-      'project_types[]': undefined,
-      'funding_sources[]': undefined,
-      start_date: null,
-      end_date: null
+      'projects[]': undefined
     },
 
     initialize: function(params) {
       this.state = new StateModel(params);
       var countries = new App.Presenter.Countries({
+        multiple: true,
+        select2Options: {},
         label: null,
+        blank: null,
         addNew: false
       });
       var organizations = new App.Presenter.Organizations({
@@ -114,7 +112,7 @@
 
     renderFormElements: function() {
       this.postForm.render();
-      
+
       _.each(this.children, function(child){
         // Get && set the value from the state thanks to the name
         // I need to pass the rest of the params because there are some presenters that need other params
