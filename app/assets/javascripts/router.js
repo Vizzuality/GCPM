@@ -24,6 +24,7 @@
       'cancer-types(/)':                           'CancerTypes#index',
       'cancer-types/:slug(/)':                     'CancerTypes#show',
       'network/:id(/)':                            'Users#show',
+      'posts/new(/)':                              'Posts#new',
       'posts/:id(/)':                              'Posts#show',
       'search(/)':                                 'Search#index',
       'network/:id/events/new(/)':                 'Events#new',
