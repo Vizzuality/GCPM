@@ -1,4 +1,30 @@
 .c-ranking {
   position: relative;
   width: 100%;
+
+  table {
+    width: 100%;
+
+    th, td {
+      color: $base-font-color;
+      padding: 5px;
+
+      &.-right {
+        text-align: right;
+      }
+    }
+
+    th {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-align: left;
+      padding-bottom: 15px;
+    }
+
+    td {
+      font-size: 15px;
+      font-family: $base-font-family-light;
+    }
+  }
 }

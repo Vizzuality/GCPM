@@ -5,8 +5,8 @@
   var StateModel = Backbone.Model.extend();
 
   var IncidenceModel = Backbone.Model.extend({
-    setUrl: function(cancer_type) {
-      var cancer_type = cancer_type.replace(/-/g, '_');
+    setUrl: function(id) {
+      var cancer_type = id.replace(/-/g, '_');
       var sql = "SELECT "+ cancer_type +"_incidence as value, iso3, country FROM ranking_cancer_avg WHERE "+ cancer_type +"_incidence IS NOT NULL ORDER BY "+ cancer_type +"_incidence DESC LIMIT 10";
       this.url = 'https://' + gon.carto_account + '.carto.com/api/v2/sql/?q=' + sql + '&api_key=' + gon.carto_key;
     },
@@ -18,9 +18,23 @@
   });
 
   var MortalityModel = Backbone.Model.extend({
-    setUrl: function(cancer_type) {
-      var cancer_type = cancer_type.replace(/-/g, '_');
+    setUrl: function(id) {
+      var cancer_type = id.replace(/-/g, '_');
       var sql = "SELECT "+ cancer_type +"_mortality as value, iso3, country FROM ranking_cancer_avg WHERE "+ cancer_type +"_mortality IS NOT NULL ORDER BY "+ cancer_type +"_mortality DESC LIMIT 10";
+
+      this.url = 'https://' + gon.carto_account + '.carto.com/api/v2/sql/?q=' + sql + '&api_key=' + gon.carto_key;
+    },
+
+    parse: function(response) {
+      var data = response.rows || {};
+      return data;
+    }
+  });
+
+  var SurvivorsModel = Backbone.Model.extend({
+    setUrl: function(id) {
+      var cancer_type = id.replace(/-/g, '_');
+      var sql = "SELECT "+ cancer_type +"_surv as value, iso3, country FROM ranking_cancer_avg WHERE "+ cancer_type +"_surv IS NOT NULL ORDER BY "+ cancer_type +"_surv DESC LIMIT 10";
 
       this.url = 'https://' + gon.carto_account + '.carto.com/api/v2/sql/?q=' + sql + '&api_key=' + gon.carto_key;
     },
@@ -41,12 +55,17 @@
       this.state = new StateModel();
       this.incidence = new IncidenceModel();
       this.mortality = new MortalityModel();
+      this.survivors = new SurvivorsModel();
+
 
       this.incidenceRanking = new App.View.Ranking({
         el: '#incidenceRanking'
       })
       this.mortalityRanking = new App.View.Ranking({
         el: '#mortalityRanking'
+      })
+      this.survivorsRanking = new App.View.Ranking({
+        el: '#survivorsRanking'
       })
 
       this.setEvents();
@@ -98,6 +117,19 @@
 
           .fail(function(){
             this.renderRanking(this.mortalityRanking, '#mortalityRanking', 'Top 10 mortality', null);
+          }.bind(this))
+
+
+        // Survivors
+        this.survivors.setUrl(this.state.attributes.cancer_type);
+        this.survivors.fetch()
+          .done(function(){
+            var survivors = this.survivors.toJSON();
+            this.renderRanking(this.survivorsRanking, '#survivorsRanking', 'Top 10 survivors', survivors);
+          }.bind(this))
+
+          .fail(function(){
+            this.renderRanking(this.survivorsRanking, '#survivorsRanking', 'Top 10 survivors', null);
           }.bind(this))
 
       }

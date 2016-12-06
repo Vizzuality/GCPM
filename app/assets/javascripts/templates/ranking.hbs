@@ -1,15 +1,25 @@
 <h2>{{name}}</h2>
 {{#if data}}
-  <table class="c-table">
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Country
+        </th>
+        <th class="-right">
+          Value
+        </th>
+      </tr>
+    </thead>
     <tbody>
       {{#each data}}
       <tr>
         <td><a href="/countries/{{this.iso3}}">{{this.country}}</a></td>
-        <td>{{this.value}}</td>
+        <td class="-right">{{this.value}}</td>
       </li>
       {{/each}}
     </tbody>
   </table>
 {{else}}
-  No data available
+  <p>No data available</p>
 {{/if}}
