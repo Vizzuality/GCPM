@@ -16,7 +16,7 @@
       <h4 class="c-title">Profile picture url:</h4>
       <div class="c-avatar"
            style="<% if @user.avatar? %>
-                    background-image: asset-url(<%= @user.avatar_url(:thumb) %>)
+                    background-image: url(<%= @user.avatar_url(:thumb) %>)
                   <% end %>">
       </div>
       <%= f.file_field :avatar, label: false %>

@@ -7,7 +7,7 @@
   <% if user_signed_in? %>
     <div class="js-mobile-user-menu menu-content -default <%= active_page?(user_session_path) ? '-active' : '' %>">
       <button class="user-btn">
-        <div class="c-avatar -normal" style="background-image: asset-url(<%= current_user.avatar_url(:thumb) %>)"></div>
+        <div class="c-avatar -normal" style="background-image: url(<%= current_user.avatar_url(:thumb) %>)"></div>
       </button>
     </div>
   <% end %>

@@ -22,7 +22,7 @@
           <div class="column small-12 large-4 align-middle">
             <div class="c-avatar -small -ph"
                  style="<% if @project.project_lead.present? && @project.project_lead.user.present? %>
-                          background-image: asset-url(<%= @project.project_lead.user.avatar_url(:thumb) %>)
+                          background-image: url(<%= @project.project_lead.user.avatar_url(:thumb) %>)
                         <% end %>">
             </div>
 

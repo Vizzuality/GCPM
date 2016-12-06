@@ -6,7 +6,7 @@
           <div class="icons">
             <div class="c-avatar -ph<% if !browser.device.mobile? %> -mg-bt<% end %>"
                  style="<% if e.user.present? %>
-                          background-image: asset-url(<%= e.user.avatar_url(:thumb) %>)
+                          background-image: url(<%= e.user.avatar_url(:thumb) %>)
                         <% end %>">
             </div>
           </div>
