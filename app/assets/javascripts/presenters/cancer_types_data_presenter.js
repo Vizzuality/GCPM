@@ -34,7 +34,8 @@
   var SurvivorsModel = Backbone.Model.extend({
     setUrl: function(id) {
       var cancer_type = id.replace(/-/g, '_');
-      var sql = "SELECT "+ cancer_type +"_surv as value, iso3, country FROM ranking_cancer_avg WHERE "+ cancer_type +"_surv IS NOT NULL ORDER BY "+ cancer_type +"_surv DESC LIMIT 10";
+      // round( CAST(c as numeric), 2 )
+      var sql = "SELECT round( CAST("+ cancer_type +"_surv as numeric), 2 ) as value, iso3, country FROM ranking_cancer_avg WHERE "+ cancer_type +"_surv IS NOT NULL ORDER BY "+ cancer_type +"_surv DESC LIMIT 10";
 
       this.url = 'https://' + gon.carto_account + '.carto.com/api/v2/sql/?q=' + sql + '&api_key=' + gon.carto_key;
     },

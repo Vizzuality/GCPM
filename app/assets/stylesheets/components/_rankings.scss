@@ -2,6 +2,11 @@
   position: relative;
   width: 100%;
 
+  .hint {
+    margin-top: 0;
+    font-size: $small-font-size;
+  }
+
   table {
     width: 100%;
 

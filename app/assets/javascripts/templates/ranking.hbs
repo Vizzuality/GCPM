@@ -1,5 +1,6 @@
 <h2>{{name}}</h2>
 {{#if data}}
+  <p class="hint">*Estimated age-standardized rate per 100,000 adults</p>
   <table>
     <thead>
       <tr>
@@ -7,7 +8,7 @@
           Country
         </th>
         <th class="-right">
-          Value
+          Percentage
         </th>
       </tr>
     </thead>
@@ -15,7 +16,7 @@
       {{#each data}}
       <tr>
         <td><a href="/countries/{{this.iso3}}">{{this.country}}</a></td>
-        <td class="-right">{{this.value}}</td>
+        <td class="-right">{{this.value}}%</td>
       </li>
       {{/each}}
     </tbody>
