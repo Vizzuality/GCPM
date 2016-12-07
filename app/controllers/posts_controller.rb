@@ -40,18 +40,13 @@ class PostsController < InheritedResources::Base
   private
 
     def post_params
-      params.require(:post).permit(:title, :body, :user_id, :organizations, :cancer_types, :projects, :countries).tap do |post_params|
-        post_params.except(:organizations, :cancer_types, :projects, :countries)
-      end
+      params.require(:post).permit(:title, :body, :user_id, { organizations: [] }, { cancer_types: [] }, { projects: [] }, { countries: [] })
+                           .except(:organizations, :cancer_types, :projects, :countries)
     end
 
     def pins_params
-      options = {}
-      options['cancer_types']  = params[:post][:cancer_types]  if params[:post][:cancer_types].present?
-      options['organizations'] = params[:post][:organizations] if params[:post][:organizations].present?
-      options['projects']      = params[:post][:projects]      if params[:post][:projects].present?
-      options['countries']     = params[:post][:countries]     if params[:post][:countries].present?
-      options
+      params.require(:post).permit(:title, :body, :user_id, { organizations: [] }, { cancer_types: [] }, { projects: [] }, { countries: [] })
+                           .except(:title, :body, :user_id)
     end
 
     def check_user
