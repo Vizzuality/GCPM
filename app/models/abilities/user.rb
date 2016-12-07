@@ -14,8 +14,9 @@ module Abilities
       can :destroy, ::Project,      created_by: user.id
 
       can :update, ::Project do |project|
-        project.project_creator(user.id) ||
-        project.project_users.find_by(user_id: user.id).approved?
+        user_project = project.project_users.find_by(user_id: user.id)
+        user_project_approved = user_project.approved? if user_project.present?
+        project.project_creator(user.id) || user_project_approved
       end
 
       can :create, :all
