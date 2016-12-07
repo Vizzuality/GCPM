@@ -4,7 +4,11 @@
 
   App.Collection.Projects = Backbone.Collection.extend({
 
-    url: '/api/projects'
+    url: '/api/projects',
+
+    comparator: function(item) {
+      return item.get('title');
+    }
 
   });
 

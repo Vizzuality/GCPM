@@ -8,7 +8,7 @@
 
     comparator: function(item) {
       return item.get('name');
-    },
+    }
 
   });
 
