@@ -54,15 +54,9 @@
     pruneCluster.Cluster.Size = 20;
 
     pruneCluster.BuildLeafletCluster = function(cluster, position) {
-      var data = cluster.lastMarker.data.feature.properties.event ?
-        { events: cluster.population } :
-        { investigations: cluster.population }
-      var htmlContent = infowindowTemplate(data);
-
       var m = new L.Marker(position, {
         icon: pruneCluster.BuildLeafletClusterIcon(cluster)
       });
-      m.bindPopup(htmlContent);
 
       m.on('click', function() {
         // Compute the  cluster bounds (it's slow : O(n))
