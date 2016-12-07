@@ -12,10 +12,10 @@
   _.extend(App.Presenter.PostFormPresenter.prototype, {
 
     defaults: {
-      'countries[]': undefined,
-      'cancer_types[]': undefined,
-      'organizations[]': undefined,
-      'projects[]': undefined
+      'post[countries][]': undefined,
+      'post[cancer_types][]': undefined,
+      'post[organizations][]': undefined,
+      'post[projects][]': undefined
     },
 
     initialize: function(params) {
@@ -25,19 +25,24 @@
         select2Options: {},
         label: 'Countries',
         blank: null,
-        addNew: false
+        addNew: false,
+        name: 'post[countries][]',
+        valueName: 'id'
       });
       var organizations = new App.Presenter.Organizations({
         label: 'Organizations',
-        addNew: false
+        addNew: false,
+        name: 'post[organizations][]'
       });
       var cancerTypes = new App.Presenter.CancerTypes({
         label: 'Cancer types',
-        addNew: false
+        addNew: false,
+        name: 'post[cancer_types][]'
       });
       var projects = new App.Presenter.Projects({
         label: 'Projects',
-        addNew: false
+        addNew: false,
+        name: 'post[projects][]'
       });
 
       this.children = [countries, organizations, cancerTypes, projects];
