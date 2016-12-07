@@ -8,10 +8,13 @@ class CancerTypesController < ApplicationController
   def show
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
     @title = t 'map'
-    @filters = %w(projects people posts)
-    @current_type = params.key?(:data) ? params[:data] : 'projects'
+
+    @filters = %w(data projects people posts)
+    @current_type = params.key?(:data) ? params[:data] : 'data'
 
     gon.server_params = { 'cancer_types[]': @cancer_type.id }
+    gon.carto_account = ENV["CARTODB_ACCOUNT"]
+    gon.carto_key = ENV["CARTODB_KEY"]
     gon.isMobile = browser.device.mobile?
 
     limit = 12 + (@page * 9)

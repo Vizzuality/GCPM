@@ -1,12 +1,20 @@
 (function() {
 
-  'use strict'
-  <% template = @current_type == 'people' ? "investigators/list" : "#{@current_type}/list" %>
+  <%
+    case @current_type
+      when 'people'
+        template = "investigators/list"
+      when 'data'
+        template = "data/cancer_types"
+      else
+        template = "#{@current_type}/list"
+    end
+  %>
 
   var htmlContent = "<%= escape_javascript render(partial: template, locals: { items: @items, more: @more }) %>";
-  var htmlCounters = "<%= escape_javascript render(partial: 'map/counters') %>"
 
   document.getElementById('content').innerHTML = htmlContent;
-  document.getElementById('counters').innerHTML = htmlCounters;
+
+  App.trigger('Remote:load');
 
 })();
