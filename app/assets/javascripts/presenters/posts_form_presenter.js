@@ -1,4 +1,3 @@
-/* global ga */
 (function(App) {
 
   'use strict';
@@ -66,7 +65,7 @@
     setEvents: function() {
       this.postForm.on('cancel', this.closeForm, this);
       this.postForm.on('submit', function(newState) {
-        console.log(newState);
+        console.info(newState);
       }, this);
 
       this.state.on('change', function() {
