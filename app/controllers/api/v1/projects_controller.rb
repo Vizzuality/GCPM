@@ -1,8 +1,14 @@
 module Api::V1
   class ProjectsController < ApiController
     include ApiAuthenticable
+    skip_before_action :set_user_by_token, only: :index
 
     before_action :set_user_project, only: [:show, :update]
+
+    def index
+      @projects = Project.fetch_all(filter_params)
+      render json: @projects, each_serializer: ProjectArraySerializer
+    end
 
     def show
       render json: @project, include: ['funding_sources',
@@ -50,6 +56,13 @@ module Api::V1
     end
 
     private
+
+      def filter_params
+        params.permit(:countries, :regions, :investigators, :project_types,
+                      :cancer_types, :specialities, :organizations,
+                      :organization_types, :start_date, :end_date,
+                      :user, :limit, :offset)
+      end
 
       def set_user_project
         @project = Project.set_by_id_or_slug(params[:id])
