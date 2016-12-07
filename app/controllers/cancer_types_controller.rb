@@ -8,7 +8,8 @@ class CancerTypesController < ApplicationController
   def show
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
     @title = t 'map'
-    @filters = %w(data projects people)
+
+    @filters = %w(data projects people posts)
     @current_type = params.key?(:data) ? params[:data] : 'data'
 
     gon.server_params = { 'cancer_types[]': @cancer_type.id }
@@ -20,10 +21,16 @@ class CancerTypesController < ApplicationController
 
     @projects = Project.fetch_all(cancer_types: @cancer_type.id).order('created_at DESC')
     @people = Investigator.fetch_all(cancer_types: @cancer_type.id).order('created_at DESC')
+    @posts = @cancer_type.posts
+
     if params.key?(:data) && params[:data] == 'people'
       @items = @people.limit(limit)
       @more = (@people.size > @items.size)
       @items_total = @people.size
+    elsif params.key?(:data) && params[:data] == 'posts'
+      @items = @posts.limit(limit)
+      @more = (@posts.size > @items.size)
+      @items_total = @posts.size
     else
       # projects by default
       @items = @projects.limit(limit)

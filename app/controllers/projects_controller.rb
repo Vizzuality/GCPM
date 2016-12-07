@@ -16,7 +16,7 @@ class ProjectsController < ApplicationController
       gon.notice = notice
     end
 
-    @filters = %w(info people)
+    @filters = %w(info people posts)
     @current_type = params.key?(:data) ? params[:data] : 'info'
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
     limit = 12 + (@page * 9)
@@ -24,11 +24,16 @@ class ProjectsController < ApplicationController
     @people = @project.investigators.distinct
     @organizations = @project.organizations.distinct
     @addresses = @project.addresses.distinct.map{|a| [a.city, a.country_name, a.country_code]}.uniq
+    @posts = @project.posts
 
     if params.key?(:data) && params[:data] == 'people'
       @items = @people.first(limit)
       @more = (@people.size > @items.size)
       @items_total = @people.size
+    elsif params.key?(:data) && params[:data] == 'posts'
+      @items = @posts.first(limit)
+      @more = (@posts.size > @items.size)
+      @items_total = @posts.size
     end
 
     if current_user
@@ -64,7 +69,7 @@ class ProjectsController < ApplicationController
     if @project.relation_request(@user.id)
       UserMailer.user_relation_email(@user.name, @user.email, @project.title, 'request').deliver_later
       AdminMailer.user_relation_email('project', @project.title, 'request').deliver_later
-      redirect_to project_url(@project), notice: { text: 'Your request is being revised, please, check your dashboard for updates.', show: true }
+      redirect_to project_url(@project), notice: { text: 'Your request is being reviewed, please, check your dashboard for updates.', show: true }
     else
       redirect_to project_url(@project), notice: { text: "Can't request relation.", show: true }
     end

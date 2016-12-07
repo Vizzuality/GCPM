@@ -14,8 +14,8 @@ ActiveAdmin.register Featured do
   form do |f|
     f.semantic_errors
     f.inputs do
-      f.input :featurable_type, input_html: {disabled: 'disabled'}
-      f.input :featurable_id, input_html: {disabled: 'disabled'}
+      f.input :featurable_type, input_html: { disabled: 'disabled' }
+      f.input :featurable_id, input_html: { disabled: 'disabled' }
       f.input :weight
     end
     f.actions

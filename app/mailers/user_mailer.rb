@@ -11,7 +11,7 @@ class UserMailer < ApplicationMailer
                      end
 
     @subject       = if @action.include?('request')
-                       'Your request is being revised, please, check your dashboard for updates.'
+                       'Your request is being reviewed, please, check your dashboard for updates.'
                      else
                        "The relation was #{@action}."
                      end

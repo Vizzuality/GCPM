@@ -17,5 +17,22 @@
 require 'rails_helper'
 
 RSpec.describe Country, type: :model do
-  # pending "add some examples to (or delete) #{__FILE__}"
+  context 'For post relations' do
+    before :each do
+      @post         = create(:post, user: @user)
+      @project      = create(:project)
+      @organization = create(:organization)
+      @cancer_type  = create(:cancer_type)
+      @country      = create(:country)
+      create(:pin, pinable: @project, post: @post)
+      create(:pin, pinable: @organization, post: @post)
+      create(:pin, pinable: @cancer_type, post: @post)
+      create(:pin, pinable: @country, post: @post)
+    end
+
+    it 'Pins count' do
+      expect(@project.pins.size).to  eq(1)
+      expect(@country.posts.size).to eq(1)
+    end
+  end
 end

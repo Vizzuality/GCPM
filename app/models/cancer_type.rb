@@ -13,6 +13,9 @@
 class CancerType < ApplicationRecord
   acts_as_followable
 
+  has_many :pins,  as: :pinable
+  has_many :posts, through: :pins
+
   has_and_belongs_to_many :projects
 
   validates_presence_of   :name

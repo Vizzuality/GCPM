@@ -7,7 +7,7 @@ class CountriesController < ApplicationController
 
   def show
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
-    @filters = %w(data projects people events)
+    @filters = %w(data projects people events posts)
     @current_type = params.key?(:data) ? params[:data] : 'data'
 
     gon.server_params = { 'countries[]': params[:iso] }
@@ -17,9 +17,10 @@ class CountriesController < ApplicationController
 
     limit = 12 + (@page * 9)
 
-    @events = Event.fetch_all(countries: params[:iso]).uniq.order('created_at DESC')
-    @projects = Project.fetch_all(countries: params[:iso]).uniq.order('created_at DESC')
-    @people = Investigator.fetch_all(countries: params[:iso]).uniq.order('created_at DESC')
+    @events = Event.fetch_all(countries: params[:iso]).distinct.order('created_at DESC')
+    @projects = Project.fetch_all(countries: params[:iso]).distinct.order('created_at DESC')
+    @people = Investigator.fetch_all(countries: params[:iso]).distinct.order('created_at DESC')
+    @posts = @country.posts
 
     if params.key?(:data) && params[:data] == 'events'
       @items = @events.limit(limit)
@@ -29,6 +30,10 @@ class CountriesController < ApplicationController
       @items = @people.limit(limit)
       @more = (@people.size > @items.size)
       @items_total = @people.size
+    elsif params.key?(:data) && params[:data] == 'posts'
+      @items = @posts.limit(limit)
+      @more = (@posts.size > @items.size)
+      @items_total = @posts.size
     else
       @items = @projects.limit(limit)
       @more = (@projects.size > @items.size)

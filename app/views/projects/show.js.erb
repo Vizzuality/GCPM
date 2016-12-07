@@ -3,6 +3,17 @@
   'use strict'
 
   <% template = @current_type === 'info' ? @current_type : 'investigators/list' %>
+  <%
+    case @current_type
+      when 'info'
+        template = "info"
+      when 'people'
+        template = "investigators/list"
+      else
+        template = "#{@current_type}/list"
+    end
+  %>
+
   var htmlContent = "<%= escape_javascript render(partial: template, locals: { items: @items, more: @more }) %>";
 
   document.getElementById('content').innerHTML = htmlContent;
