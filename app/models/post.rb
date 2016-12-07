@@ -12,10 +12,15 @@
 
 class Post < ApplicationRecord
   include ActAsFeatured
+  belongs_to :user
+
+  has_many :pins
+  has_many :countries,     through: :pins, source: :pinable, source_type: 'Country'
+  has_many :projects,      through: :pins, source: :pinable, source_type: 'Project'
+  has_many :organizations, through: :pins, source: :pinable, source_type: 'Organization'
+  has_many :cancer_types,  through: :pins, source: :pinable, source_type: 'CancerType'
 
   validates_presence_of :title, :body
-  belongs_to :user
-  has_many :pins
 
   def build_pins(options)
     options.each do |pinable_type, pinable_ids|

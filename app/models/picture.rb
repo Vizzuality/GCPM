@@ -6,6 +6,7 @@
 #  title       :string
 #  description :text
 #  url         :string
+#  published   :boolean
 #  image       :string           not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

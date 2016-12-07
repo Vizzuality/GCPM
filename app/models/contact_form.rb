@@ -12,7 +12,7 @@ class ContactForm < MailForm::Base
   def headers
     {
       subject: "#{subject}",
-      to: ENV.fetch('ADMIN_EMAIL') { 'data@gcpm.globalonc.org' },
+      to: ENV.fetch('ADMIN_EMAIL') { 'data@globalonc.org' },
       from: %("#{name}" <#{email}>)
     }
   end
