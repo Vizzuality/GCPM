@@ -25,7 +25,7 @@ module Api
         file_name = "projects-#{Date.today}.csv"
         if json_list.any?
           @data_to_export = ExcelExporter.new(json_list)
-          send_data @data_to_export.to_csv, type: 'text/csv; charset=iso-8859-1; header=present', disposition: "attachment; filename=#{file_name}"
+          send_data @data_to_export.to_csv, type: 'text/csv; charset=utf-8; header=present', disposition: "attachment; filename=#{file_name}"
         else
           render json: { success: true, message: 'No data to download' }, status: 200
         end
