@@ -1,6 +1,6 @@
 class Pin < ApplicationRecord
   belongs_to :post
-  belongs_to :pinable, -> { with_hidden }, polymorphic: true
+  belongs_to :pinable, polymorphic: true
 
   scope :on_projects,      -> { where(pinable_type: 'Project')      }
   scope :on_organizations, -> { where(pinable_type: 'Organization') }
