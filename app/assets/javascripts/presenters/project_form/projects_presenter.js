@@ -4,19 +4,19 @@
 
   var StateModel = Backbone.Model.extend();
 
-  App.Presenter.CancerTypes = function() {
+  App.Presenter.Projects = function() {
     this.initialize.apply(this, arguments);
   };
 
-  _.extend(App.Presenter.CancerTypes.prototype, {
+  _.extend(App.Presenter.Projects.prototype, {
 
     defaults: {
       multiple: true,
-      name: 'cancer_types[]',
-      label: 'Cancer types',
-      placeholder: 'All cancer types',
+      name: 'projects[]',
+      label: 'Projects',
+      placeholder: 'All projects',
       blank: null,
-      addNew: false,
+      addNew: true,
       select2Options: {
         // closeOnSelect: false
         // It solves the closing of the dropdown menu
@@ -28,12 +28,12 @@
 
     initialize: function(viewSettings) {
       this.state = new StateModel();
-      this.cancerTypes = new App.Collection.CancerTypes();
+      this.projects = new App.Collection.Projects();
       this.options = _.extend({}, this.defaults, viewSettings || {});
 
       // Creating view
       this.select = new App.View.Select({
-        el: '#cancer-types',
+        el: '#projects',
         options: this.options,
         state: this.state
       });
@@ -46,7 +46,7 @@
      */
     setEvents: function() {
       this.state.on('change', function() {
-        App.trigger('CancerTypes:change', this.state.attributes);
+        App.trigger('Projects:change', this.state.attributes);
       }, this);
 
       this.select.on('change', this.setState, this);
@@ -57,10 +57,10 @@
      * @return {Promise}
      */
     fetchData: function() {
-      return this.cancerTypes.fetch().done(function() {
-        var options = this.cancerTypes.map(function(type) {
+      return this.projects.fetch().done(function() {
+        var options = this.projects.map(function(type) {
           return {
-            name: type.attributes.name,
+            name: type.attributes.title,
             value: type.attributes.id
           };
         });
@@ -80,23 +80,13 @@
       this.state.set(state, options);
     },
 
-    setValue: function(values){
-      this.select.$el.find("select").val(values).trigger("change");
-    },
-
-    setFetchedValues: function(values){
-      var vals = values.map(function(elem){
-        return elem.id;
-      });
-      this.select.$el.find("select").val(vals).trigger("change");
-    },
-
     /**
      * Rebinding element, events and render again
      * @param {DOM|String} el
      */
     setElement: function(el) {
       this.select.setElement(el);
+      this.select.render();
     },
 
     /**

@@ -25,6 +25,8 @@ class Organization < ApplicationRecord
   has_many :investigators,  through: :research_units, foreign_key: 'investigator_id'
   has_many :memberships,    through: :research_units
   has_many :projects,       through: :memberships
+  has_many :pins,           as: :pinable
+  has_many :posts,          through: :pins
 
   has_many :funders
   has_many :funded_projects, through: :funders, source: :project

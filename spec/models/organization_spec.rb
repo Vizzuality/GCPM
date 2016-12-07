@@ -28,4 +28,19 @@ RSpec.describe Organization, type: :model do
       expect(@organization.slug).to eq('test-organization')
     end
   end
+
+  context 'For post relations' do
+    before :each do
+      @post         = create(:post, user: @user)
+      @project      = create(:project)
+      @organization = create(:organization)
+      create(:pin, pinable: @project, post: @post)
+      create(:pin, pinable: @organization, post: @post)
+    end
+
+    it 'Pins count' do
+      expect(@project.pins.size).to       eq(1)
+      expect(@organization.posts.size).to eq(1)
+    end
+  end
 end

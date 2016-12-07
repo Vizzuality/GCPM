@@ -6,7 +6,7 @@ module ActAsFeatured
     has_one :featured, as: :featurable
 
     def featured?
-      self.featured == nil ? false : true
+      self.featured.nil? ? false : true
     end
 
   end
