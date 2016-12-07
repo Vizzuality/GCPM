@@ -13,6 +13,11 @@
 
     new: function(params) {
       new App.Presenter.PostFormPresenter(params);
+    },
+
+    edit: function(params) {
+      var newParams = _.extend({}, params, gon.server_params);
+      new App.Presenter.PostFormPresenter(newParams);
     }
 
   });
