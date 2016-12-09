@@ -1,0 +1,11 @@
+<div class="c-card notification">
+  <%= link_to notification do %>
+    <p class="group">
+      <strong><%= notification.notificable_group %></strong>
+      <span class="time"><%= notification.timestamp %></span>
+    </p>
+    <p>
+      <strong><%= notification.notificable_title %></strong>
+    </p>
+  <% end %>
+</div>

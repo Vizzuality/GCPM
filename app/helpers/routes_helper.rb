@@ -11,4 +11,12 @@ module RoutesHelper
       '#'
     end
   end
+
+  def cancer_path(options)
+    cancer_type_path(options)
+  end
+
+  def cancer_url(options)
+    cancer_type_url(options)
+  end
 end

@@ -15,8 +15,9 @@
 #
 
 class Country < ApplicationRecord
-
   acts_as_followable
+
+  after_update :notify_users_for_update
 
   has_many :addresses
   has_many :research_units, through: :addresses
@@ -39,4 +40,11 @@ class Country < ApplicationRecord
   def self.names
     Country.all.order(:country_name).pluck(:country_name)
   end
+
+  private
+
+    def notify_users_for_update
+      users = ActivityFeed.where(actionable_type: 'Country', actionable_id: self.id, action: 'following').pluck(:user_id)
+      Notification.build(users, self, 'was updated')
+    end
 end

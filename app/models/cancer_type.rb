@@ -13,6 +13,8 @@
 class CancerType < ApplicationRecord
   acts_as_followable
 
+  after_update :notify_users_for_update
+
   has_many :pins,  as: :pinable
   has_many :posts, through: :pins
 
@@ -34,4 +36,11 @@ class CancerType < ApplicationRecord
   def countries_count
     self.projects.joins(:countries).count('distinct(countries.id)')
   end
+
+  private
+
+    def notify_users_for_update
+      users = ActivityFeed.where(actionable_type: 'CancerType', actionable_id: self.id, action: 'following').pluck(:user_id)
+      Notification.build(users, self, 'updated')
+    end
 end

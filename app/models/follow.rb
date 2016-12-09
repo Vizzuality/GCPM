@@ -11,11 +11,14 @@
 #  created_at      :datetime
 #  updated_at      :datetime
 #
-
 class Follow < ActiveRecord::Base
-
   extend ActsAsFollower::FollowerLib
   extend ActsAsFollower::FollowScopes
+
+  after_create   :update_activity_feed
+  after_update   :update_activity_feed,  if: 'blocked_changed? && blocked.blank?'
+  after_update   :destroy_activity_feed, if: 'blocked_changed? && blocked.present?'
+  before_destroy :destroy_activity_feed
 
   # NOTE: Follows belong to the "followable" interface, and also to followers
   belongs_to :followable, polymorphic: true
@@ -25,4 +28,13 @@ class Follow < ActiveRecord::Base
     self.update_attribute(:blocked, true)
   end
 
+  private
+
+    def update_activity_feed
+      ActivityFeed.build(follower.id, 'following', followable_id, followable_type)
+    end
+
+    def destroy_activity_feed
+      ActivityFeed.remove(follower.id, 'following', followable_id, followable_type)
+    end
 end

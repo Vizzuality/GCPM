@@ -29,6 +29,8 @@
 class Event < ApplicationRecord
   acts_as_followable
 
+  after_update :notify_users_for_update
+
   belongs_to :user, inverse_of: :events
 
   validates_presence_of :title, :description
@@ -87,5 +89,10 @@ class Event < ApplicationRecord
 
     def assign_slug
       self.slug = self.slug.downcase.parameterize
+    end
+
+    def notify_users_for_update
+      users = ActivityFeed.where(actionable_type: 'Event', actionable_id: self.id, action: 'following').pluck(:user_id)
+      Notification.build(users, self, 'was updated')
     end
 end

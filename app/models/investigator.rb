@@ -21,6 +21,7 @@ class Investigator < ApplicationRecord
   include ActAsFeatured
 
   after_create :notify_admin, if: 'user_id.present?'
+  after_update :notify_users_for_update
 
   belongs_to :user, inverse_of: :investigator, optional: true
 
@@ -95,5 +96,10 @@ class Investigator < ApplicationRecord
 
     def notify_admin
       AdminMailer.user_relation_email('investigator', self.name, 'created').deliver_later
+    end
+
+    def notify_users_for_update
+      users = ActivityFeed.where(actionable_type: 'Investigator', actionable_id: self.id, action: 'following').pluck(:user_id)
+      Notification.build(users, self, 'was updated')
     end
 end

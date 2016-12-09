@@ -30,6 +30,8 @@
 #  token_expires_at       :datetime
 #  role                   :integer          default("user"), not null
 #  avatar                 :string
+#  notifications_count    :integer          default(0)
+#  notifications_mailer   :boolean          default(TRUE)
 #
 
 require 'rails_helper'

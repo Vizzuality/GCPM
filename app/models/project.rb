@@ -24,6 +24,7 @@ class Project < ApplicationRecord
   include ActAsFeatured
 
   after_create :notify_admin
+  after_update :notify_users_for_update
 
   has_many :memberships
   has_many :research_units,  through: :memberships
@@ -246,5 +247,10 @@ class Project < ApplicationRecord
 
     def notify_admin
       AdminMailer.user_relation_email('project', self.title, 'created').deliver_later
+    end
+
+    def notify_users_for_update
+      users = ActivityFeed.where(actionable_type: 'Project', actionable_id: self.id, action: 'following').pluck(:user_id)
+      Notification.build(users, self, 'was updated')
     end
 end
