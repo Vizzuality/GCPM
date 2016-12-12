@@ -21,6 +21,8 @@ class ApplicationController < ActionController::Base
         user_event: Event.where("user_id = #{current_user.id}").count,
         user_initial: user_initial
       })
+
+      @notifications = current_user.notifications.unread.recent.for_render
     end
   end
 

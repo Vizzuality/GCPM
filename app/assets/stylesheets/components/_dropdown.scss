@@ -42,6 +42,29 @@ $dropdown-width: 182px;
       left: 0;
     }
 
+    &.notifications {
+      width: auto;
+      max-height: 300px;
+      overflow-x: auto;
+
+      .list {
+        text-align: left;
+
+        li {
+          padding: 7px $base-space;
+          color: $base-font-color;
+
+          &:hover {
+            color: $primary-color;
+          }
+
+          p {
+            margin: 0;
+          }
+        }
+      }
+    }
+
     ul {
       @extend %clearlist;
     }

@@ -20,14 +20,6 @@
         </span>
       <% end %>
     </li>
-    <li class="<%= active_page?(user_session_path) ? '-active' : '' %>">
-      <%= link_to notifications_url do %>
-        <span>
-          <%= t 'notifications' %>
-          <div class="c-badge -relative messages-badge <%= current_user.notifications_count %>"><%= current_user.notifications_count %></div>
-        </span>
-      <% end %>
-    </li>
   </ul>
   <ul class="-separator">
     <li class="<%= active_page?(user_session_path) ? ' -active' : '' %>">
