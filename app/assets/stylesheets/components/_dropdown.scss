@@ -42,6 +42,10 @@ $dropdown-width: 182px;
       left: 0;
     }
 
+    ul {
+      @extend %clearlist;
+    }
+
     .dropdown-item {
       padding: ($button-y-padding / 2) $button-x-padding;
       width: 100%;
