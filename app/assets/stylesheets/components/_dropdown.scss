@@ -1,4 +1,5 @@
 $dropdown-width: 182px;
+$dropdown-max-height: 300px;
 
 .c-dropdown {
   position: relative;
@@ -45,10 +46,25 @@ $dropdown-width: 182px;
     &.notifications {
       width: auto;
       max-height: 300px;
-      overflow-x: auto;
+      top: 77px;
+      box-shadow: 0px 0px 4px 0 rgba(0, 0, 0, 0.2);
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: -8px;
+        right: 26px;
+        width: 16px;
+        height: 16px;
+        transform: rotate(45deg);
+        box-shadow: -1px -1px 1px 0 rgba(0, 0, 0, 0.2);
+        background-color: $body-bg-color;
+      }
 
       .list {
         text-align: left;
+        max-height: $dropdown-max-height - $button-y-padding;
+        overflow-x: auto;
 
         li {
           padding: 7px $base-space;
