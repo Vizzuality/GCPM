@@ -16,7 +16,7 @@
       <h4 class="c-title">Profile picture url:</h4>
       <div class="c-avatar"
            style="<% if @user.avatar? %>
-                    background-image: url(<%= @user.avatar_url(:thumb) %>)
+                    background-image: asset-url(<%= @user.avatar_url(:thumb) %>)
                   <% end %>">
       </div>
       <%= f.file_field :avatar, label: false %>
@@ -26,24 +26,24 @@
   <div class="form-row row">
     <div class="column small-12 medium-5 medium-offset-1">
       <h4 class="c-title">Position</h4>
-      <%= f.input :position, label: false %>
+      <%= f.input :position, placeholder: "e.g., Director", label: false %>
     </div>
 
     <div class="column small-12 medium-5">
       <h4 class="c-title">Pubmed</h4>
-      <%= f.input :pubmed, placeholder: "", label: false %>
+      <%= f.input :pubmed, placeholder: "Name Last Name", label: false %>
     </div>
   </div>
 
   <div class="form-row row">
     <div class="column small-12 medium-5 medium-offset-1">
       <h4 class="c-title">Twitter</h4>
-      <%= f.input :twitter_account, placeholder: "@mbarrenech", label: false %>
+      <%= f.input :twitter_account, placeholder: "User name", label: false %>
     </div>
 
     <div class="column small-12 medium-5">
       <h4 class="c-title">Linkedin</h4>
-      <%= f.input :linkedin_account, placeholder: "miguel-barrenechea-439bab36", label: false %>
+      <%= f.input :linkedin_account, placeholder: "Account url", label: false %>
     </div>
   </div>
 
