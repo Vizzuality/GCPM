@@ -1,4 +1,3 @@
-/* global ga */
 (function(App) {
 
   'use strict';
