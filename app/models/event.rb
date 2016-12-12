@@ -30,6 +30,7 @@ class Event < ApplicationRecord
   acts_as_followable
 
   after_update :notify_users_for_update
+  after_create :notify_users_for_create, if: 'user_id.present?'
 
   belongs_to :user, inverse_of: :events
 
@@ -94,5 +95,11 @@ class Event < ApplicationRecord
     def notify_users_for_update
       users = ActivityFeed.where(actionable_type: 'Event', actionable_id: self.id, action: 'following').pluck(:user_id)
       Notification.build(users, self, 'was updated')
+    end
+
+    def notify_users_for_create
+      users   = ActivityFeed.where(actionable_type: 'User', actionable_id: user_id, action: 'following').pluck(:user_id)
+      creator = User.find(user_id).try(:name)
+      Notification.build(users, self, "was created by #{creator}")
     end
 end

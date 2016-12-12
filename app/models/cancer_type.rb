@@ -13,12 +13,13 @@
 class CancerType < ApplicationRecord
   acts_as_followable
 
-  after_update :notify_users_for_update
+  after_update :notify_users_for_update, if: 'name_changed? || description_changed?'
 
   has_many :pins,  as: :pinable
   has_many :posts, through: :pins
 
-  has_and_belongs_to_many :projects
+  has_many :cancer_type_projects
+  has_many :projects, through: :cancer_type_projects
 
   validates_presence_of   :name
   validates_uniqueness_of :name

@@ -55,7 +55,7 @@ class User < ApplicationRecord
   include Roleable
 
   before_save  :check_authentication_token
-  after_update :notify_users_for_update
+  after_update :notify_users_for_update, if: 'name_changed? ||  position_changed? || pubmed_changed? || avatar_changed?'
 
   has_one  :investigator, inverse_of: :user
   has_many :project_users

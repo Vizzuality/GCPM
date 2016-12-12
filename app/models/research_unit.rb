@@ -19,6 +19,7 @@ class ResearchUnit < ApplicationRecord
 
   before_create :check_address, if: 'address_id.blank?'
   after_save    :cleanup_research_units
+  after_create  :notify_users_for_update, if: 'organization.present? && investigator.present?'
 
   validates :investigator_id, uniqueness: { scope: :address_id }
 
@@ -43,5 +44,12 @@ class ResearchUnit < ApplicationRecord
       end
       invalid_ru = ResearchUnit.where(address_id: nil)
       invalid_ru.delete_all if invalid_ru.any?
+    end
+
+    def notify_users_for_update
+      users_organization = ActivityFeed.where(actionable_type: 'Organization', actionable_id: organization.id, action: 'following').pluck(:user_id)
+      users_investigator = ActivityFeed.where(actionable_type: 'Investigator', actionable_id: investigator.id, action: 'following').pluck(:user_id)
+      Notification.build(users_organization, investigator, "was added to organization #{organization.name}")
+      Notification.build(users_investigator, organization, "was added to investigator #{investigator.name}")
     end
 end
