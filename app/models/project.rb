@@ -82,11 +82,11 @@ class Project < ApplicationRecord
   scope :by_end_date,           -> end_date            { where('projects.end_date < ?', end_date ) }
   scope :by_user,               -> user                { joins(:project_users).where('project_users.user_id = ? AND project_users.is_approved = ?', user, true ) }
   scope :by_funding_sources,    -> funding_sources     { joins(:funders).where(funders: { organization_id: funding_sources }) }
-  scope :for_render,            ->                     { includes(:cancer_types, :project_types, :specialities, :countries, :organizations, :funding_sources) }
+  scope :for_render,            ->                     { includes(:cancer_types, :project_types, :specialities, :countries, :organizations) }
 
   class << self
     def fetch_all(options={})
-      projects = self.published.for_render
+      projects = self.published
       projects = projects.by_countries(options[:countries])                   if options[:countries]
       projects = projects.by_regions(options[:regions])                       if options[:regions]
       projects = projects.by_investigators(options[:investigators])           if options[:investigators]
