@@ -20,9 +20,11 @@ class Country < ApplicationRecord
 
   has_many :addresses
   has_many :research_units, through: :addresses
-  has_many :memberships, through: :research_units
-  has_many :projects, through: :memberships
-  has_many :organizations, through: :addresses
+  has_many :memberships,    through: :research_units
+  has_many :projects,       through: :memberships
+  has_many :organizations,  through: :addresses
+  has_many :pins,           as: :pinable
+  has_many :posts,          through: :pins
 
   def projects_count
     self.projects.uniq.size

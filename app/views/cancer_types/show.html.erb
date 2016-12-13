@@ -30,5 +30,13 @@
 </section>
 
 <div class="l-grid" id="content">
-  <%= render 'projects/list', items: @items, more: @more %>
+  <% if @current_type == 'projects' %>
+    <%= render 'projects/list', items: @items, more: @more %>
+  <% elsif @current_type == 'data' %>
+    <%= render 'data/cancer_types'%>
+  <% elsif @current_type == 'posts' %>
+    <%= render 'posts/list', items: @items, more: @more %>
+  <% else @current_type %>
+    <%= render 'investigators/list', items: @items, more: @more %>
+  <% end %>
 </div>

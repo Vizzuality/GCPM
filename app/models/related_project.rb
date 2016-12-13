@@ -20,7 +20,7 @@ class RelatedProject
                elsif projects.size > @size
                  projects.sample(@size)
                end
-    projects ||= []
+    projects || []
   end
 
   private

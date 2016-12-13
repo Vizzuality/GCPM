@@ -5,12 +5,12 @@ select distinct
   coalesce(projects.project_website, '') as web_site,
   coalesce(projects.start_date::text, '') as start_date,
   coalesce(projects.end_date::text, '') as end_date,
-  string_agg(distinct coalesce(investigators.name, ''), ', ') as investigator_names,
-  string_agg(distinct coalesce(organizations.name, ''), ', ') as organization_names,
-  string_agg(distinct coalesce(organization_types.name, ''), ', ') as organization_type_names,
-  string_agg(distinct coalesce(countries.country_name, ''), ', ') as country_names,
-  string_agg(distinct coalesce(project_types.name, ''), ', ') as project_type_names,
-  string_agg(distinct coalesce(cancer_types.name, ''), ', ') as cancer_type_names
+  string_agg(distinct coalesce(investigators.name, ''), ' | ') as investigator_names,
+  string_agg(distinct coalesce(organizations.name, ''), ' | ') as organization_names,
+  string_agg(distinct coalesce(organization_types.name, ''), ' | ') as organization_type_names,
+  string_agg(distinct coalesce(countries.country_name, ''), ' | ') as country_names,
+  string_agg(distinct coalesce(project_types.name, ''), ' | ') as project_type_names,
+  string_agg(distinct coalesce(cancer_types.name, ''), ' | ') as cancer_type_names
 
 from projects
   inner join memberships on memberships.project_id = projects.id

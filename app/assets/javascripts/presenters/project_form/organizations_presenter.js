@@ -29,11 +29,12 @@
     initialize: function(viewSettings) {
       this.state = new StateModel();
       this.organizations = new App.Collection.Organizations();
+      this.options = _.extend({}, this.defaults, viewSettings || {});
 
       // Creating view
       this.select = new App.View.Select({
         el: '#organizations',
-        options: _.extend({}, this.defaults, viewSettings || {}),
+        options: this.options,
         state: this.state
       });
 

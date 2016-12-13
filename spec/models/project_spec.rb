@@ -25,12 +25,17 @@ RSpec.describe Project, type: :model do
   context "Valid project" do
     before :each do
       @project = create(:project, users: [@user])
+      @pin     = create(:pin, pinable: @project)
     end
 
     it 'Projects count' do
       expect(Project.count).to  eq(1)
       expect(@project.users).to be_any
       expect(@project.slug).to  be_present
+    end
+
+    it 'Pins of project' do
+      expect(@project.pins).to be_any
     end
   end
 
@@ -82,6 +87,21 @@ RSpec.describe Project, type: :model do
         related_projects = @project.related(size: 1)
         expect(related_projects.size).to eq(1)
       end
+    end
+  end
+
+  context 'For post relations' do
+    before :each do
+      @post         = create(:post, user: @user)
+      @project      = create(:project)
+      @organization = create(:organization)
+      create(:pin, pinable: @project, post: @post)
+      create(:pin, pinable: @organization, post: @post)
+    end
+
+    it 'Pins count' do
+      expect(@project.pins.size).to  eq(1)
+      expect(@project.posts.size).to eq(1)
     end
   end
 end

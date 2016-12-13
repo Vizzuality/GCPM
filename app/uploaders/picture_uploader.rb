@@ -24,18 +24,18 @@ class PictureUploader < CarrierWave::Uploader::Base
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
-  def default_url
-    '/assets/' + [version_name, 'placeholder.png'].compact.join('_')
+  def default_url(*args)
+    ActionController::Base.helpers.asset_path('' + [version_name, 'placeholder.png'].compact.join('_'))
   end
 
   process resize_to_fit: [1200, 1200]
 
   version :thumb do
-    process resize_to_fill: [120,120, gravity = 'Center']
+    process resize_to_fill: [120, 120, 'Center']
   end
 
   version :square do
-    process resize_to_fill: [600, 600, gravity = 'Center']
+    process resize_to_fill: [600, 600, 'Center']
   end
 
   version :medium do
