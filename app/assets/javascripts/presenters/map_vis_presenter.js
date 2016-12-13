@@ -22,20 +22,21 @@
 
   _.extend(App.Presenter.MapVis.prototype, {
 
-    initialize: function(params) {
+    initialize: function(params, options) {
       this.fc = App.facade.layer;
+      this.options = _.extend({}, options || {});
 
       this.state = new StateModel(params);
       this.country = new CountryModel();
 
       this.view = new App.View.Map({
         el: '#map',
-        options: {
+        options: _.extend({}, {
           zoom: 3,
           minZoom: 3,
           center: [20, 0],
           basemap: 'secondary'
-        }
+        }, this.options.map)
       });
 
       this.setEvents();

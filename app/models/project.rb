@@ -24,6 +24,8 @@ class Project < ApplicationRecord
   include ActAsFeatured
 
   after_create :notify_admin
+  after_update :notify_users_for_update, if: "status == 'published'"
+  after_create :notify_users_for_create, if: 'created_by.present?'
 
   has_many :memberships
   has_many :research_units,  through: :memberships
@@ -41,9 +43,12 @@ class Project < ApplicationRecord
   has_many :users, through: :project_users
 
   has_many :project_updates
+  has_many :pins, as: :pinable
+  has_many :posts, through: :pins
 
   has_and_belongs_to_many :project_types
-  has_and_belongs_to_many :cancer_types
+  has_many :cancer_type_projects
+  has_many :cancer_types, through: :cancer_type_projects
   has_and_belongs_to_many :specialities
 
   accepts_nested_attributes_for :memberships,   allow_destroy: true
@@ -67,7 +72,7 @@ class Project < ApplicationRecord
   scope :inactive,              ->                     { where('projects.end_date < ?', Time.now).or('projects.start_date > ?', Time.now) }
   scope :by_project_types,      -> project_types       { joins(:project_types).where(project_types: { id: project_types }) }
   scope :by_cancer_types,       -> cancer_types        { joins(:cancer_types).where(cancer_types: { id: cancer_types }) }
-  scope :by_specialities,       -> specialities        { joins(:specialities).where(specialities: { id: cancer_types }) }
+  scope :by_specialities,       -> specialities        { joins(:specialities).where(specialities: { id: specialities }) }
   scope :by_investigators,      -> investigators       { joins(:investigators).where(investigators: { id: investigators }) }
   scope :by_organizations,      -> organizations       { joins(:organizations).where(organizations: { id: organizations }) }
   scope :by_organization_types, -> organization_types  { joins(organizations: :organization_type).where(organization_types: { id: organization_types }) }
@@ -174,6 +179,11 @@ class Project < ApplicationRecord
     end
   end
 
+  def related(options={})
+    related_projects = RelatedProject.new(self, options)
+    related_projects.related
+  end
+
   def project_lead
     investigators.where(memberships: { membership_type: 0 }).first
   end
@@ -239,5 +249,18 @@ class Project < ApplicationRecord
 
     def notify_admin
       AdminMailer.user_relation_email('project', self.title, 'created').deliver_later
+    end
+
+    def notify_users_for_update
+      users = ActivityFeed.where(actionable_type: 'Project', actionable_id: self.id, action: 'following').pluck(:user_id)
+      Notification.build(users, self, 'was updated') if users.any?
+    end
+
+    def notify_users_for_create
+      users   = ActivityFeed.where(actionable_type: 'User', actionable_id: created_by, action: 'following').pluck(:user_id)
+      if users.any?
+        creator = User.find(created_by).try(:name)
+        Notification.build(users, self, "was created by #{creator}")
+      end
     end
 end

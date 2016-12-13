@@ -46,6 +46,10 @@ h1, h2, h3, p {
 
 h1, h2 {
   margin-top: $inline-space * 2;
+
+  &.-mg-top {
+    margin-top: $inline-space * 2;
+  }
 }
 
 h1, h2, h3 {

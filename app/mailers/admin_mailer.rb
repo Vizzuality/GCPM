@@ -2,7 +2,7 @@ class AdminMailer < ApplicationMailer
   def user_relation_email(class_name, relation_name, action)
     @date          = DateTime.now.to_date
     @name          = 'Administrator'
-    @email         = ENV.fetch('ADMIN_EMAIL') { 'data@gcpm.globalonc.org' }
+    @email         = ENV.fetch('ADMIN_EMAIL') { 'data@globalonc.org' }
     @action        = action        if action.present?
     @relation_name = relation_name if relation_name.present?
     @class_name    = class_name    if class_name.present?

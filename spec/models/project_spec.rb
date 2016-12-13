@@ -25,6 +25,7 @@ RSpec.describe Project, type: :model do
   context "Valid project" do
     before :each do
       @project = create(:project, users: [@user])
+      @pin     = create(:pin, pinable: @project)
     end
 
     it 'Projects count' do
@@ -32,11 +33,20 @@ RSpec.describe Project, type: :model do
       expect(@project.users).to be_any
       expect(@project.slug).to  be_present
     end
+
+    it 'Pins of project' do
+      expect(@project.pins).to be_any
+    end
   end
 
   context "Projects validation" do
     before :each do
-      @project = create(:project, title: 'Project one', summary: 'Lorem ipsum..')
+      @cancer_type = create(:cancer_type)
+      @project     = create(:project, title: 'Project one', summary: 'Lorem ipsum..', cancer_type_ids: [@cancer_type.id], status: 'published')
+
+      create(:project, title: 'Project 2', summary: 'Lorem ipsum..', cancer_type_ids: [@cancer_type.id], status: 'published')
+      create(:project, title: 'Project 3', summary: 'Lorem ipsum..', cancer_type_ids: [@cancer_type.id], status: 'published')
+      create(:project, title: 'Project 4', summary: 'Lorem ipsum..', status: 'published')
     end
 
     it 'Project title validation' do
@@ -65,6 +75,33 @@ RSpec.describe Project, type: :model do
 
       @project_reject.valid?
       expect {@project_reject.save!}.to raise_error(ActiveRecord::RecordInvalid, "Validation failed: Title has already been taken")
+    end
+
+    context 'Related projects' do
+      it 'Get relataded projects by default params' do
+        related_projects = @project.related
+        expect(related_projects.size).to eq(2)
+      end
+
+      it 'Get relataded projects for size param' do
+        related_projects = @project.related(size: 1)
+        expect(related_projects.size).to eq(1)
+      end
+    end
+  end
+
+  context 'For post relations' do
+    before :each do
+      @post         = create(:post, user: @user)
+      @project      = create(:project)
+      @organization = create(:organization)
+      create(:pin, pinable: @project, post: @post)
+      create(:pin, pinable: @organization, post: @post)
+    end
+
+    it 'Pins count' do
+      expect(@project.pins.size).to  eq(1)
+      expect(@project.posts.size).to eq(1)
     end
   end
 end

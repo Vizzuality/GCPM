@@ -52,7 +52,7 @@
               <% end %>
               <% if not_blank?(user.linkedin_account) %>
                 <li>
-                  <a href="https://www.linkedin.com/in/<%= user.linkedin_account %>" class="-clickable -hv" target="_blank">
+                  <a href="<%= user.linkedin_account %>" class="-clickable -hv" target="_blank">
                     Linkedin
                   </a>
                 </li>

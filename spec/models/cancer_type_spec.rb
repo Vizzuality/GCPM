@@ -24,4 +24,21 @@ RSpec.describe CancerType, type: :model do
       expect(@cancer_type.slug).to eq('test-type')
     end
   end
+
+  context 'For post relations' do
+    before :each do
+      @post         = create(:post, user: @user)
+      @project      = create(:project)
+      @organization = create(:organization)
+      @cancer_type  = create(:cancer_type)
+      create(:pin, pinable: @project, post: @post)
+      create(:pin, pinable: @organization, post: @post)
+      create(:pin, pinable: @cancer_type, post: @post)
+    end
+
+    it 'Pins count' do
+      expect(@project.pins.size).to  eq(1)
+      expect(@cancer_type.posts.size).to eq(1)
+    end
+  end
 end

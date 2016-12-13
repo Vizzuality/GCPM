@@ -68,7 +68,7 @@ class InvestigatorsController < ApplicationController
   def remove_relation
     authorize! :remove_relation, @investigator
     if @investigator.remove_relation(@user.id)
-      UserMailer.user_relation_email(@user.name, @user.email, @investigator.name, 'removed').deliver_later
+      UserMailer.user_relation_email(@user.name, @user.email, @investigator.name, 'removed', 'Investigator').deliver_later
       redirect_to investigator_path(@investigator), notice: { text: 'Relation removed.', show: true }
     else
       redirect_to investigator_path(@investigator), notice: { text: "Can't remove relation.", show: true }
@@ -78,9 +78,9 @@ class InvestigatorsController < ApplicationController
   def relation_request
     authorize! :relation_request, @investigator
     if @investigator.relation_request(@user.id)
-      UserMailer.user_relation_email(@user.name, @user.email, @investigator.name, 'request').deliver_later
+      UserMailer.user_relation_email(@user.name, @user.email, @investigator.name, 'request', 'Investigator').deliver_later
       AdminMailer.user_relation_email('investigator', @investigator.name, 'request').deliver_later
-      redirect_to investigator_path(@investigator), notice: { text: 'Your request is being revised, please, check your dashboard for updates.', show: true }
+      redirect_to investigator_path(@investigator), notice: { text: 'Your request is being reviewed, please, check your dashboard for updates.', show: true }
     else
       redirect_to investigator_path(@investigator), notice: { text: "Can't request relation.", show: true }
     end

@@ -1,5 +1,3 @@
-<% title @project.title %>
-
 <section class="l-app -full -secondary">
   <% if !browser.device.mobile? %>
     <%= render "desktop_show_intro" %>
@@ -32,7 +30,18 @@
 <div class="l-grid" id="content">
   <% if @current_type == 'people' %>
     <%= render 'investigators/list', items: @items, more: @more  %>
-  <%else %>
+  <% elsif @current_type == 'posts' %>
+    <%= render 'posts/list', items: @items, more: @more  %>
+  <% else %>
     <%= render 'projects/info' %>
+  <% end %>
+</div>
+
+<div class="l-grid">
+  <% if @related_projects.any? %>
+    <div class="l-content wrapper">
+      <h2>Related projects</h2>
+    </div>
+    <%= render 'projects/list', items: @related_projects, more: @more  %>
   <% end %>
 </div>

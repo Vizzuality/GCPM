@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :null_session, only: Proc.new { |c| c.json_request? }
 
-  # before_action :expire_xhr_requests
+  before_action :expire_xhr_requests
   before_action :build_user_data
   before_action :configure_permitted_parameters, if: :devise_controller?
   after_action  :set_csrf_cookie, :store_location
@@ -21,6 +21,8 @@ class ApplicationController < ActionController::Base
         user_event: Event.where("user_id = #{current_user.id}").count,
         user_initial: user_initial
       })
+
+      @notifications = current_user.notifications.unread.recent.for_render
     end
   end
 
@@ -59,9 +61,7 @@ class ApplicationController < ActionController::Base
 
     def expire_xhr_requests
       if request.xhr?
-        response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0, must-revalidate'
-        response.headers['Pragma']        = 'no-cache'
-        response.headers['Expires']       = Time.now
+        response.headers['Cache-Control'] = 'no-cache, no-store'
       end
     end
 

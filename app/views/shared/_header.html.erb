@@ -3,7 +3,7 @@
     <div class="row collapse">
       <div class="column small-6 align-middle">
         <%= link_to root_path, id: 'logo' do %>
-          <%= image_tag 'global-oncology-logo.png' %>
+          <%= image_tag 'global-oncology-logo.svg' %>
         <% end %>
       </div>
       <div class="column small-6 align-middle">
@@ -11,6 +11,29 @@
           <ul>
             <%= render "shared/nav" %>
             <% if user_signed_in? %>
+              <li id="notifications">
+                <button class="c-dropdown js-action-notifications">
+                  <svg class="c-icon -medium -primary"><use xlink:href="#icon-bell"></use></svg>
+                  <% if current_user.notifications_count > 0 %>
+                    <div class="c-badge -notifications messages-badge <%= current_user.notifications_count %>">
+                      <%= current_user.notifications_count > 9 ? '9+' : current_user.notifications_count %>
+                    </div>
+                  <% end %>
+                  <div class="dropdown-content notifications">
+                    <% if @notifications.empty? %>
+                      <ul class="list">
+                        <li class="-empty">No notifications</li>
+                      </ul>
+                    <% else %>
+                      <div class="container">
+                        <ul class="list -filled">
+                          <%= render @notifications %>
+                        </ul>
+                      </div>
+                    <% end %>
+                  </div>
+                </button>
+              </li>
               <li class="js-user-menu <%= active_page?(user_session_path) ? '-active' : '' %>">
                 <button class="user-btn">
                   <div class="c-avatar" style="background-image: url(<%= current_user.avatar_url(:thumb) %>)"></div>

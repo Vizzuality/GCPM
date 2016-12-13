@@ -30,6 +30,8 @@
 #  token_expires_at       :datetime
 #  role                   :integer          default("user"), not null
 #  avatar                 :string
+#  notifications_count    :integer          default(0)
+#  notifications_mailer   :boolean          default(TRUE)
 #
 
 class User < ApplicationRecord
@@ -40,29 +42,29 @@ class User < ApplicationRecord
          :confirmable, :lockable, :timeoutable,
          :omniauthable, omniauth_providers: [:linkedin, :google_oauth2]
 
-  acts_as_followable
-
   enum role: { user: 0, admin: 1 }
-
-  mount_uploader :avatar, AvatarUploader
-
-  include Roleable
-
   TEMP_EMAIL_PREFIX = 'change@tmp'
   TEMP_EMAIL_REGEX = /\Achange@tmp/
 
-  has_many :identities, dependent: :destroy
+  mount_uploader :avatar, AvatarUploader
 
+  acts_as_followable
   acts_as_follower
   acts_as_messageable
+
+  include Roleable
+
+  before_save  :check_authentication_token
+  after_update :notify_users_for_update, if: 'name_changed? ||  position_changed? || pubmed_changed? || avatar_changed?'
 
   has_one  :investigator, inverse_of: :user
   has_many :project_users
   has_many :projects, through: :project_users
   has_many :events, inverse_of: :user
   has_many :posts
-
-  before_save :check_authentication_token
+  has_many :identities, dependent: :destroy
+  has_many :activity_feeds
+  has_many :notifications
 
   validates_uniqueness_of :email
   validates_presence_of   :name
@@ -163,5 +165,10 @@ class User < ApplicationRecord
 
     def set_token_expiration
       self.token_expires_at = DateTime.now + timeout_in
+    end
+
+    def notify_users_for_update
+      users = ActivityFeed.where(actionable_type: 'User', actionable_id: self.id, action: 'following').pluck(:user_id)
+      Notification.build(users, self, 'was updated') if users.any?
     end
 end

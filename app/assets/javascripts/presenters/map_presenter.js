@@ -29,6 +29,8 @@
 
       // Setting first state
       this.setState(params);
+
+      this.options.disable && this.disableMap();
     },
 
     setEvents: function() {
@@ -155,6 +157,18 @@
       App.trigger('Map:change', _.extend({}, this.getState(), {
         cartoLayer: null
       }));
+    },
+
+    disableMap: function() {
+      var map = this.map.map;
+
+      map.dragging.disable();
+      map.touchZoom.disable();
+      map.doubleClickZoom.disable();
+      map.scrollWheelZoom.disable();
+      map.boxZoom.disable();
+      map.keyboard.disable();
+      (map.tap) ? map.tap.disable() : null;
     }
 
   });

@@ -15,11 +15,11 @@ set :deploy_to, '~/gcpm'
 set :keep_releases, 5
 
 set :linked_files, %w{.env}
-set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system db_backups public/downloads}
+set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system db_backups public/downloads public/uploads}
 
 set :rvm_map_bins, fetch(:rvm_map_bins, []).push('rvmsudo')
 
 namespace :deploy do
   after :finishing, 'deploy:cleanup'
-  after 'deploy:publishing', 'deploy:restart'
+  after 'deploy:publishing', 'deploy:symlink:linked_files', 'deploy:symlink:linked_dirs', 'deploy:restart'
 end

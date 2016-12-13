@@ -1,21 +1,21 @@
 <% if items && items.size() > 0 %>
   <div class="row collapse">
-    <% items.each do |c| %>
+    <% items.each do |conv| %>
       <div class="column small-12">
-        <% unread = c.receipts_for(current_user).map{|m| m.is_unread?}.include? true %>
-        <div class="c-card -messages -thin c-conversation<%= unread ? ' -unread' : '' %>" data-conver-id="<%= c.id %>">
+        <% unread = conv.receipts_for(current_user).map{|m| m.is_unread?}.include? true %>
+        <div class="c-card -messages -thin c-conversation<%= unread ? ' -unread' : '' %>" data-conver-id="<%= conv.id %>">
           <div class="conversation-subject js-subject-action">
-            <% conversation_person = conversation_person(c) %>
-            <h2><%= c.subject %></h2>
-            <h3><%= conversation_person.investigator.try(:name) %> (<%= get_user(conversation_person.investigator.try(:user_id)).try(:name) %>)</h3>
+            <% conversation_person = conversation_person(conv) %>
+            <h2><%= conv.subject %></h2>
+            <h3><%= conversation_person.investigator.try(:name) %> (<%= conversation_person.try(:name) %>)</h3>
           </div>
           <div class="conversation-body">
             <ul class="messages">
-              <% c.messages.each do |m| %>
+              <% conv.messages.each do |m| %>
                 <% message_person = sender(m.sender_id) %>
                 <li class="c-conversations-item <%= (m.sender_id == current_user.id) ? '-mine' : '-theirs' %>">
                   <div class="sender">
-                    <h3><%= message_person.investigator.user === current_user ? 'You' : message_person.investigator.try(:name) %></h3>
+                    <h3><%= message_person === current_user ? 'You' : message_person.investigator.try(:name) ||  '(' + message_person.try(:name) + ')' %></h3>
                     <small><%= m.created_at.strftime("%d.%m.%Y") %> <%= m.created_at.strftime("%H:%M")%></small>
                   </div>
                   <div class="message">
@@ -28,7 +28,7 @@
               <%= form_for Mailboxer::Message.new, url: :message, remote: true, as: :message do |f| %>
                 <div class="form-row">
                   <%= f.text_area :body, class: '-border -padding', rows: 5, placeholder: 'Text here your response' %>
-                  <%= f.hidden_field :in_response, value: c.messages.last.id %>
+                  <%= f.hidden_field :in_response, value: conv.messages.last.id %>
                   <%= f.hidden_field :data, value: 'messages' %>
                   <%= f.submit 'Send', class: 'c-btn -secondary' %>
                 </div>

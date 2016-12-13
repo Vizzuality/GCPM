@@ -17,6 +17,7 @@
       placeholder: 'All countries',
       blank: true,
       addNew: true,
+      valueName: 'country_iso_3',
       select2Options: {
         // closeOnSelect: false
         // It solves the closing of the dropdown menu
@@ -40,11 +41,11 @@
     initialize: function(viewSettings) {
       this.state = new StateModel();
       this.countries = new App.Collection.Countries();
-
+      this.options = _.extend({}, this.defaults, viewSettings || {});
       // Creating view
       this.select = new App.View.Select({
         el: '#countries',
-        options: _.extend({}, this.defaults, viewSettings || {}),
+        options: this.options,
         state: this.state
       });
 
@@ -73,9 +74,9 @@
         var options = this.countries.map(function(country) {
           return {
             name: country.attributes.name,
-            value: country.attributes.country_iso_3
+            value: country.attributes[this.options.valueName]
           };
-        });
+        }.bind(this));
         this.select.setOptions(options);
       }.bind(this));
     },

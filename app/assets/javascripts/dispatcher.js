@@ -65,6 +65,7 @@
     commonActions: function() {
       new App.Presenter.Header();
       new App.Presenter.UserMenu();
+      new App.Presenter.Notifications();
       new App.Presenter.Footer();
     }
 

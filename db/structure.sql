@@ -70,6 +70,40 @@ ALTER SEQUENCE active_admin_comments_id_seq OWNED BY active_admin_comments.id;
 
 
 --
+-- Name: activity_feeds; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE activity_feeds (
+    id integer NOT NULL,
+    user_id integer,
+    action character varying,
+    actionable_type character varying,
+    actionable_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: activity_feeds_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE activity_feeds_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: activity_feeds_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE activity_feeds_id_seq OWNED BY activity_feeds.id;
+
+
+--
 -- Name: addresses; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -833,6 +867,42 @@ ALTER SEQUENCE memberships_id_seq OWNED BY memberships.id;
 
 
 --
+-- Name: notifications; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE notifications (
+    id integer NOT NULL,
+    user_id integer,
+    notificable_type character varying,
+    notificable_id integer,
+    summary text,
+    counter integer DEFAULT 1,
+    emailed_at timestamp without time zone,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: notifications_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE notifications_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: notifications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE notifications_id_seq OWNED BY notifications.id;
+
+
+--
 -- Name: organization_types; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -896,6 +966,74 @@ CREATE SEQUENCE organizations_id_seq
 --
 
 ALTER SEQUENCE organizations_id_seq OWNED BY organizations.id;
+
+
+--
+-- Name: pictures; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE pictures (
+    id integer NOT NULL,
+    title character varying,
+    description text,
+    url character varying,
+    published boolean,
+    image character varying NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: pictures_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE pictures_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: pictures_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE pictures_id_seq OWNED BY pictures.id;
+
+
+--
+-- Name: pins; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE pins (
+    id integer NOT NULL,
+    post_id integer,
+    pinable_type character varying,
+    pinable_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: pins_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE pins_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: pins_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE pins_id_seq OWNED BY pins.id;
 
 
 --
@@ -1181,7 +1319,9 @@ CREATE TABLE users (
     authentication_token character varying,
     token_expires_at timestamp without time zone,
     role integer DEFAULT 0 NOT NULL,
-    avatar character varying
+    avatar character varying,
+    notifications_count integer DEFAULT 0,
+    notifications_mailer boolean DEFAULT true
 );
 
 
@@ -1344,6 +1484,13 @@ ALTER TABLE ONLY active_admin_comments ALTER COLUMN id SET DEFAULT nextval('acti
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY activity_feeds ALTER COLUMN id SET DEFAULT nextval('activity_feeds_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY addresses ALTER COLUMN id SET DEFAULT nextval('addresses_id_seq'::regclass);
 
 
@@ -1484,6 +1631,13 @@ ALTER TABLE ONLY memberships ALTER COLUMN id SET DEFAULT nextval('memberships_id
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY notifications ALTER COLUMN id SET DEFAULT nextval('notifications_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY organization_types ALTER COLUMN id SET DEFAULT nextval('organization_types_id_seq'::regclass);
 
 
@@ -1492,6 +1646,20 @@ ALTER TABLE ONLY organization_types ALTER COLUMN id SET DEFAULT nextval('organiz
 --
 
 ALTER TABLE ONLY organizations ALTER COLUMN id SET DEFAULT nextval('organizations_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY pictures ALTER COLUMN id SET DEFAULT nextval('pictures_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY pins ALTER COLUMN id SET DEFAULT nextval('pins_id_seq'::regclass);
 
 
 --
@@ -1570,6 +1738,14 @@ ALTER TABLE ONLY widgets ALTER COLUMN id SET DEFAULT nextval('widgets_id_seq'::r
 
 ALTER TABLE ONLY active_admin_comments
     ADD CONSTRAINT active_admin_comments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: activity_feeds_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY activity_feeds
+    ADD CONSTRAINT activity_feeds_pkey PRIMARY KEY (id);
 
 
 --
@@ -1741,6 +1917,14 @@ ALTER TABLE ONLY memberships
 
 
 --
+-- Name: notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY notifications
+    ADD CONSTRAINT notifications_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: organization_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1754,6 +1938,22 @@ ALTER TABLE ONLY organization_types
 
 ALTER TABLE ONLY organizations
     ADD CONSTRAINT organizations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: pictures_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY pictures
+    ADD CONSTRAINT pictures_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: pins_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY pins
+    ADD CONSTRAINT pins_pkey PRIMARY KEY (id);
 
 
 --
@@ -1845,6 +2045,13 @@ ALTER TABLE ONLY widgets
 
 
 --
+-- Name: act_id_type_action_user_on_activity; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX act_id_type_action_user_on_activity ON activity_feeds USING btree (actionable_id, actionable_type, action, user_id);
+
+
+--
 -- Name: fk_followables; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1891,6 +2098,20 @@ CREATE INDEX index_active_admin_comments_on_namespace ON active_admin_comments U
 --
 
 CREATE INDEX index_active_admin_comments_on_resource_type_and_resource_id ON active_admin_comments USING btree (resource_type, resource_id);
+
+
+--
+-- Name: index_activity_feeds_on_actionable_type_and_actionable_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_activity_feeds_on_actionable_type_and_actionable_id ON activity_feeds USING btree (actionable_type, actionable_id);
+
+
+--
+-- Name: index_activity_feeds_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_activity_feeds_on_user_id ON activity_feeds USING btree (user_id);
 
 
 --
@@ -2118,6 +2339,20 @@ CREATE INDEX index_memberships_on_research_unit_id ON memberships USING btree (r
 
 
 --
+-- Name: index_notifications_on_notificable_type_and_notificable_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_notifications_on_notificable_type_and_notificable_id ON notifications USING btree (notificable_type, notificable_id);
+
+
+--
+-- Name: index_notifications_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_notifications_on_user_id ON notifications USING btree (user_id);
+
+
+--
 -- Name: index_organizations_on_acronym; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -2150,6 +2385,20 @@ CREATE INDEX index_organizations_on_organization_type_id ON organizations USING 
 --
 
 CREATE UNIQUE INDEX index_organizations_on_slug ON organizations USING btree (slug);
+
+
+--
+-- Name: index_pins_on_pinable_id_and_pinable_type; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_pins_on_pinable_id_and_pinable_type ON pins USING btree (pinable_id, pinable_type);
+
+
+--
+-- Name: index_pins_on_pinable_type_and_pinable_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_pins_on_pinable_type_and_pinable_id ON pins USING btree (pinable_type, pinable_id);
 
 
 --
@@ -2308,6 +2557,14 @@ ALTER TABLE ONLY identities
 
 
 --
+-- Name: fk_rails_b080fb4855; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY notifications
+    ADD CONSTRAINT fk_rails_b080fb4855 FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
 -- Name: fk_rails_b1fd6cb9ed; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2345,6 +2602,6 @@ ALTER TABLE ONLY mailboxer_receipts
 
 SET search_path TO "$user", public;
 
-INSERT INTO schema_migrations (version) VALUES ('20160623091908'), ('20160623092157'), ('20160623093250'), ('20160629161033'), ('20160629161041'), ('20160707072908'), ('20160707073642'), ('20160708083044'), ('20160711105858'), ('20160711114901'), ('20160718224524'), ('20160718225032'), ('20160718232806'), ('20160720162924'), ('20160721141137'), ('20160725182233'), ('20160726110350'), ('20160729093255'), ('20160729125019'), ('20160729151912'), ('20160801160550'), ('20160801165924'), ('20160801171206'), ('20160802121917'), ('20160802174327'), ('20160803012223'), ('20160803012429'), ('20160803012636'), ('20160803014813'), ('20160803143833'), ('20160804100620'), ('20160804113911'), ('20161004100702'), ('20161018055907'), ('20161018091446'), ('20161018104312'), ('20161018111559'), ('20161018125246'), ('20161020122456'), ('20161020163951'), ('20161021073852'), ('20161021080737'), ('20161021110751'), ('20161021110752'), ('20161021110753'), ('20161021110754'), ('20161026160423'), ('20161027160501'), ('20161103101432'), ('20161103101657'), ('20161104114309'), ('20161107103717'), ('20161107110201'), ('20161110093643'), ('20161110111725'), ('20161110111836'), ('20161111100700'), ('20161115090954'), ('20161123114428'), ('20161124170341');
+INSERT INTO schema_migrations (version) VALUES ('20160623091908'), ('20160623092157'), ('20160623093250'), ('20160629161033'), ('20160629161041'), ('20160707072908'), ('20160707073642'), ('20160708083044'), ('20160711105858'), ('20160711114901'), ('20160718224524'), ('20160718225032'), ('20160718232806'), ('20160720162924'), ('20160721141137'), ('20160725182233'), ('20160726110350'), ('20160729093255'), ('20160729125019'), ('20160729151912'), ('20160801160550'), ('20160801165924'), ('20160801171206'), ('20160802121917'), ('20160802174327'), ('20160803012223'), ('20160803012429'), ('20160803012636'), ('20160803014813'), ('20160803143833'), ('20160804100620'), ('20160804113911'), ('20161004100702'), ('20161018055907'), ('20161018091446'), ('20161018104312'), ('20161018111559'), ('20161018125246'), ('20161020122456'), ('20161020163951'), ('20161021073852'), ('20161021080737'), ('20161021110751'), ('20161021110752'), ('20161021110753'), ('20161021110754'), ('20161026160423'), ('20161027160501'), ('20161103101432'), ('20161103101657'), ('20161104114309'), ('20161107103717'), ('20161107110201'), ('20161110093643'), ('20161110111725'), ('20161110111836'), ('20161111100700'), ('20161115090954'), ('20161123114428'), ('20161124170341'), ('20161205162814'), ('20161206131728'), ('20161207105758'), ('20161207154856'), ('20161207155941');
 
 

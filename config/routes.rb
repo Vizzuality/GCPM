@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { sessions: 'users/sessions', omniauth_callbacks: 'users/omniauth_callbacks' }
+  mount Ckeditor::Engine => '/ckeditor'
   ActiveAdmin.routes(self)
 
   get '/',                      to: 'home#index',         as: 'home'
@@ -7,7 +8,7 @@ Rails.application.routes.draw do
   get '/countries',             to: 'countries#index',    as: 'countries'
   get '/countries/:iso',        to: 'countries#show',     as: 'country'
   get '/cancer-types',          to: 'cancer_types#index', as: 'cancers'
-  get '/cancer-types/:id',      to: 'cancer_types#show',  as: 'cancer'
+  get '/cancer-types/:id',      to: 'cancer_types#show',  as: 'cancer_type'
   get '/projects/:id',          to: 'projects#show',      as: 'project'
   get '/events/:id',            to: 'events#show',        as: 'event'
   get '/organizations/:id',     to: 'organizations#show', as: 'organization'
@@ -16,6 +17,7 @@ Rails.application.routes.draw do
   get '/downloads/user-manual', to: 'downloads#show',     as: 'download_user_manual'
   get '/network/:id',           to: 'users#show',         as: 'user'
   get '/terms-and-conditions',  to: 'terms#index',        as: 'terms'
+  get '/faq',                   to: 'faq#index',          as: 'faqs'
 
   resources :projects, only: :show do
     patch 'relation_request', on: :member
@@ -39,6 +41,10 @@ Rails.application.routes.draw do
     end
 
     resources :events,   controller: 'network_events',   except: :index
+  end
+
+  resources :notifications, only: :show do
+    put :mark_all_as_read, on: :collection
   end
 
   # Network
@@ -79,7 +85,7 @@ Rails.application.routes.draw do
       get '/map/projects/:id', to: 'map#show_project'
       get '/map/download',     to: 'map#csv_download'
 
-      resources :projects,      only: [:show, :update, :create] do
+      resources :projects,      only: [:index, :show, :update, :create] do
         resources :memberships, only: [:index, :create, :destroy]
         post '/memberships/:id', to: 'memberships#update'
       end

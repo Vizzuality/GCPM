@@ -57,7 +57,7 @@ gem 'sql_query'
 gem 'textacular'
 
 # Follows
-gem "acts_as_follower", git: 'https://github.com/tcocca/acts_as_follower'
+gem "acts_as_follower", git: 'https://github.com/rschumann/acts_as_follower'
 
 # Messages
 gem 'mailboxer'
@@ -76,6 +76,7 @@ end
 
 # Active record
 gem 'pg', '~> 0.18'
+gem 'activerecord-import'
 
 group :development, :test do
   gem 'hirb'

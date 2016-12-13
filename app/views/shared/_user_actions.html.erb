@@ -25,25 +25,31 @@
                 user_id = (@user) ? @user.id : nil
             end
           %>
-          <% if user_id %>
+          <% if user_id.present? %>
             <li>
-              <button class="c-btn -secondary -inverse js-btn-toggle-message" data-user="<%= user_id %>" type="button" name="button">Message</button>
-              <div id="form-message-<%= user_id %>" class="c-form-message -arr-right js-form-message">
-                <%= form_for Mailboxer::Message.new, remote: true, url: :message, as: :message do |f| %>
-                <div class="form-row">
-                  <%= f.label :subject, 'Subject' %>
-                  <%= f.text_field :subject %>
+              <% if user_signed_in? %>
+                <button class="c-btn -secondary -inverse js-btn-toggle-message" data-user="<%= user_id %>" type="button" name="button">
+                    Message
+                </button>
+                <div id="form-message-<%= user_id %>" class="c-form-message -arr-right js-form-message">
+                  <%= form_for Mailboxer::Message.new, remote: true, url: :message, as: :message do |f| %>
+                  <div class="form-row">
+                    <%= f.label :subject, 'Subject' %>
+                    <%= f.text_field :subject %>
+                  </div>
+                  <div class="form-row">
+                    <%= f.label :body, 'Message' %>
+                    <%= f.text_area :body %>
+                    <%= f.hidden_field :receiver, value: user_id %>
+                  </div>
+                  <div class="form-row">
+                    <%= f.submit 'Send', class: 'c-btn -secondary' %>
+                  </div>
+                  <% end %>
                 </div>
-                <div class="form-row">
-                  <%= f.label :body, 'Message' %>
-                  <%= f.text_area :body %>
-                  <%= f.hidden_field :receiver, value: user_id %>
-                </div>
-                <div class="form-row">
-                  <%= f.submit 'Send', class: 'c-btn -secondary' %>
-                </div>
-                <% end %>
-              </div>
+              <% else %>
+                <%= link_to 'Message', user_session_path, class: 'c-btn -secondary -inverse' %>
+              <% end %>
             </li>
           <% end %>
         <% end %>
