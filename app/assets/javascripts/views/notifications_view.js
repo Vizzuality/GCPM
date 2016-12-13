@@ -21,8 +21,11 @@
       $(document).on('click', this.handleDocumentClick.bind(this));
     },
 
-    handleClick: function() {
-      this.trigger('toggle');
+    handleClick: function(e) {
+      var isDropdown = this.el.getElementsByClassName('dropdown-content')[0].contains(e.target);
+      if (!isDropdown) {
+        this.trigger('toggle');
+      }
     },
 
     toggleDropdown: function(open) {

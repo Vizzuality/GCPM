@@ -21,6 +21,11 @@
     display: inline-flex;
   }
 
+  &.-notifications {
+    top: 16px;
+    right: 0;
+  }
+
   &.-hidden {
     display: none;
   }
