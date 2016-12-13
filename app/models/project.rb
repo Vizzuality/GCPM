@@ -24,6 +24,8 @@ class Project < ApplicationRecord
   include ActAsFeatured
 
   after_create :notify_admin
+  after_update :notify_users_for_update, if: "status == 'published'"
+  after_create :notify_users_for_create, if: 'created_by.present?'
 
   has_many :memberships
   has_many :research_units,  through: :memberships
@@ -45,7 +47,8 @@ class Project < ApplicationRecord
   has_many :posts, through: :pins
 
   has_and_belongs_to_many :project_types
-  has_and_belongs_to_many :cancer_types
+  has_many :cancer_type_projects
+  has_many :cancer_types, through: :cancer_type_projects
   has_and_belongs_to_many :specialities
 
   accepts_nested_attributes_for :memberships,   allow_destroy: true
@@ -246,5 +249,18 @@ class Project < ApplicationRecord
 
     def notify_admin
       AdminMailer.user_relation_email('project', self.title, 'created').deliver_later
+    end
+
+    def notify_users_for_update
+      users = ActivityFeed.where(actionable_type: 'Project', actionable_id: self.id, action: 'following').pluck(:user_id)
+      Notification.build(users, self, 'was updated') if users.any?
+    end
+
+    def notify_users_for_create
+      users   = ActivityFeed.where(actionable_type: 'User', actionable_id: created_by, action: 'following').pluck(:user_id)
+      if users.any?
+        creator = User.find(created_by).try(:name)
+        Notification.build(users, self, "was created by #{creator}")
+      end
     end
 end

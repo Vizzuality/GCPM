@@ -14,6 +14,8 @@ class Post < ApplicationRecord
   include ActAsFeatured
   belongs_to :user
 
+  after_create :notify_users_for_update
+
   has_many :pins
   has_many :countries,     through: :pins, source: :pinable, source_type: 'Country'
   has_many :projects,      through: :pins, source: :pinable, source_type: 'Project'
@@ -29,4 +31,14 @@ class Post < ApplicationRecord
       end
     end
   end
+
+  private
+
+    def notify_users_for_update
+      users   = ActivityFeed.where(actionable_type: 'User', actionable_id: user_id, action: 'following').pluck(:user_id)
+      if users.any?
+        creator = User.find(user_id).try(:name)
+        Notification.build(users, self, "was created by #{creator}")
+      end
+    end
 end

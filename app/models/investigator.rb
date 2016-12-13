@@ -20,7 +20,8 @@ class Investigator < ApplicationRecord
   include UserRelationable
   include ActAsFeatured
 
-  after_create :notify_admin, if: 'user_id.present?'
+  after_create :notify_admin,            if: 'user_id.present?'
+  after_update :notify_users_for_update, if: 'approved?'
 
   belongs_to :user, inverse_of: :investigator, optional: true
 
@@ -51,7 +52,7 @@ class Investigator < ApplicationRecord
   scope :by_specialities,       -> specialities       { joins(projects: :specialities).where(specialities: { id: specialities }) }
   scope :by_investigators,      -> investigators      { joins(:investigators).where(investigators: { id: investigators }) }
   scope :by_organizations,      -> organizations      { joins(:organizations).where(organizations: { id: organizations }) }
-  scope :by_funding_sources,     -> funding_sources   { joins(projects: :funders).where(funders: { organization_id: funding_sources }) }
+  scope :by_funding_sources,    -> funding_sources   { joins(projects: :funders).where(funders: { organization_id: funding_sources }) }
   scope :by_organization_types, -> organization_types { joins(organizations: :organization_type).where(organization_types: { id: organization_types }) }
   scope :by_countries,          -> countries          { joins([research_units: [address: :country]]).where(countries: { country_iso_3: countries }) }
   scope :by_regions,            -> regions            { joins(projects: :countries).where(countries: { region_iso: regions }) }
@@ -95,5 +96,10 @@ class Investigator < ApplicationRecord
 
     def notify_admin
       AdminMailer.user_relation_email('investigator', self.name, 'created').deliver_later
+    end
+
+    def notify_users_for_update
+      users = ActivityFeed.where(actionable_type: 'Investigator', actionable_id: self.id, action: 'following').pluck(:user_id)
+      Notification.build(users, self, 'was updated') if users.any?
     end
 end

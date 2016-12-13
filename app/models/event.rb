@@ -29,6 +29,9 @@
 class Event < ApplicationRecord
   acts_as_followable
 
+  after_update :notify_users_for_update
+  after_create :notify_users_for_create, if: 'user_id.present?'
+
   belongs_to :user, inverse_of: :events
 
   validates_presence_of :title, :description
@@ -87,5 +90,18 @@ class Event < ApplicationRecord
 
     def assign_slug
       self.slug = self.slug.downcase.parameterize
+    end
+
+    def notify_users_for_update
+      users = ActivityFeed.where(actionable_type: 'Event', actionable_id: self.id, action: 'following').pluck(:user_id)
+      Notification.build(users, self, 'was updated') if users.any?
+    end
+
+    def notify_users_for_create
+      users   = ActivityFeed.where(actionable_type: 'User', actionable_id: user_id, action: 'following').pluck(:user_id)
+      if users.any?
+        creator = User.find(user_id).try(:name)
+        Notification.build(users, self, "was created by #{creator}")
+      end
     end
 end

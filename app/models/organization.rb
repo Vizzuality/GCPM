@@ -15,8 +15,9 @@
 #
 
 class Organization < ApplicationRecord
-
   include ActAsFeatured
+
+  after_update :notify_users_for_update
 
   belongs_to :organization_type
 
@@ -39,13 +40,22 @@ class Organization < ApplicationRecord
 
   include Sluggable
 
-  def self.are_funding_sources
-    Organization.joins(:funders)
+  class << self
+    def are_funding_sources
+      Organization.joins(:funders)
+    end
+
+    def fetch_all(options)
+      organizations = Organization.all
+      organizations = organizations.are_funding_sources if options[:funding_source]
+      organizations.distinct
+    end
   end
 
-  def self.fetch_all(options)
-    organizations = Organization.all
-    organizations = organizations.are_funding_sources if options[:funding_source]
-    organizations.distinct
-  end
+  private
+
+    def notify_users_for_update
+      users = ActivityFeed.where(actionable_type: 'Organization', actionable_id: self.id, action: 'following').pluck(:user_id)
+      Notification.build(users, self, 'was updated') if users.any?
+    end
 end
