@@ -28,7 +28,7 @@ class MapController < ApplicationController
       @items_private_total = private.size
       @items_total = events.size
     elsif params.key?(:data) && params[:data] == 'people'
-      people = Investigator.preload(organizations: :addresses).fetch_all(people_params).order('created_At DESC')
+      people = Investigator.fetch_all(people_params).order('created_At DESC')
       @items = people.limit(limit)
       @more = (people.size > @items.size)
       @items_total = people.size
@@ -49,7 +49,7 @@ class MapController < ApplicationController
   private
 
     def projects_params
-      params.permit(:sortby, :user, :start_date, :end_date, regions:[], countries:[], project_types:[], cancer_types:[], organization_types:[], organizations:[], investigators:[])
+      params.permit(:sortby, :user, :start_date, :end_date, regions:[], countries:[], project_types:[], cancer_types:[], organization_types:[], organizations:[], investigators:[], funding_sources:[])
     end
 
     def investigators_params
@@ -57,7 +57,7 @@ class MapController < ApplicationController
     end
 
     def people_params
-      params.permit(:data, :sortby, :start_date, :end_date, regions:[], countries:[], project_types:[], cancer_types:[], organization_types:[], organizations:[])
+      params.permit(:data, :sortby, :start_date, :end_date, regions:[], countries:[], project_types:[], cancer_types:[], organization_types:[], organizations:[], funding_sources:[])
     end
 
     def sort_param
