@@ -1,0 +1,73 @@
+<% title t('search') %>
+
+<section class="l-content">
+  <div class="wrapper">
+    <div class="row collapse">
+      <div class="column small-12">
+
+          <%= simple_form_for :search, url: searches_path, method: :get do |f| %>
+            <div class="form-row">
+              <div id="search-input" class="c-input">
+                <%= f.input :item, as: :string, label: false, autofocus: true, placeholder: 'Search for...', input_html: { value: @search_item, class: '-large' } %>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="row">
+                <div class="column small-12 medium-4">
+                  <div id="search-type" class="c-select">
+                     <div class="c-spinner -start">
+                      <div class="spinner-box">
+                        <div class="icon"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="c-btn -secondary"><%= t 'search' %></button>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Results: <%#= @search_results.size %> -->
+<div class="l-content">
+  <div class="wrapper">
+    <div class="row collapse">
+      <div class="column small-12">
+        <% if params[:search].present? && params[:search][:item].present? %>
+          <span>Search results for "<%= params[:search][:item] %>"</span>
+          <% if params[:search].present? && params[:search][:type].present? %>
+            <span> in <%= params[:search][:type].to_s.downcase %></span>
+          <% end %>
+          <span> (<%= @search_results.size %>)</span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if @search_results.any? %>
+  <div class="l-grid">
+    <div class="row collapse">
+      <% @search_results.each do |search| %>
+        <div class="column small-12 medium-4">
+          <div class="c-card">
+            <h3 class="-underlined"><%= search.class.name %></h3>
+            <h2><%= link_to search.try(:title) || search.try(:name), build_search_link(search.class.name, search.slug_or_id) %></h2>
+            <% if search.try(:summary).present? || search.try(:description).present? %>
+              <p><%= truncate(search.try(:summary) || search.try(:description), length: 150, omission: '...') %></p>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+  <p>
+    <%#= link_to search.try(:title) || search.try(:name), build_search_link(search.class.name, search.id) %>
+  </p>

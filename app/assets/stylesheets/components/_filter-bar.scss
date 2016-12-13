@@ -1,0 +1,46 @@
+.c-filter-bar {
+  background: $primary-color;
+  color: $inverse-font-color;
+  padding: 15px 0;
+  display: none;
+
+  &.-active {
+    display: block;
+  }
+
+  h3 {
+    margin: 0 0 5px;
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+
+    li {
+      list-style: none;
+      text-transform: uppercase;
+      margin: 0 11px 0 0;
+      font-size: $small-font-size;
+      position: relative;
+
+      &:last-child {
+        &:before {
+          display: none;
+        }
+      }
+
+      &:before {
+        content: "";
+        height: 10px;
+        width: 1px;
+        background: $border-color-1;
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translate(6px,-50%);
+      }
+    }
+  }
+}

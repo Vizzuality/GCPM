@@ -2,42 +2,33 @@
 
   'use strict';
 
-  App.Controller = App.Controller || {};
+  App.Controller.Events = function() {};
 
-  App.Controller.Events = App.Controller.Page.extend({
+  _.extend(App.Controller.Events.prototype, {
 
-    index: function(params) {
-      // Map view
-      var layersActived = [2, 6];
+    show: function(params) {
+      var newParams = _.extend({}, params, {dataType: 'info'});
 
-      var layersSpec = this.layersSpec = new App.Collection.LayersSpec();
-      var map = new App.View.Map({
-        el: '#map',
-        collection: this.layersSpec,
-        options: {
-          basemap: null,
-          apiUrl: '/api/map/events/' + EVENT_ID
-        }
-      });
+      new App.Presenter.TabNav(newParams);
+      new App.Presenter.FollowButton(newParams);
+      new App.Presenter.DatesTimeline(newParams);
+      new App.Presenter.ShowMore(newParams);
 
-      layersSpec.on('change, reset', function() {
-        map.renderLayers();
-      });
-
-      layersSpec.fetch().done(function() {
-        // This method triggers an event called 'reset'
-        layersSpec.filterByIds(layersActived);
-      });
-
-
-      new App.View.EventDetail();
+      if (!gon.isMobile) {
+        new App.Presenter.MapVis(newParams);
+      } else {
+        new App.Presenter.UserActionsMobile(newParams);
+      }
     },
 
     new: function() {
-      new App.View.AddNewEvent();
+      new App.Presenter.EventForm();
+    },
+
+    edit: function() {
+      new App.Presenter.EventForm();
     }
 
   });
-
 
 })(this.App);

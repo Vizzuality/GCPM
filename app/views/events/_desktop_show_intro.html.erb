@@ -1,0 +1,34 @@
+
+<div class="l-app-map">
+  <div id="map" class="c-map"></div>
+</div>
+<%= render "shared/legend_events" %>
+<div class="l-app-title">
+  <div class="wrapper">
+    <div class="row collapse">
+      <div class="column small-8">
+        <h1><%= @event.title %></h1>
+      </div>
+    </div>
+    <div class="row collapse">
+      <div class="column small-12 medium-8">
+        <div class="c-summary-info row -collapse">
+          <div class="column small-12 medium-4 align-middle">
+            <div class="c-avatar -small">
+              <svg class="c-icon icon-collaborators -inverse">
+                <use xlink:href="#icon-collaborators"></use>
+              </svg>
+            </div>
+            <h3><%= @event.participants.present? ? @event.participants.split(',').length : 0 %>
+              Participants</h3>
+          </div>
+        </div>
+      </div>
+      <div class="column small-12 medium-4">
+        <% if (current_user) %>
+          <%= render "shared/user_actions" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

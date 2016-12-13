@@ -1,15 +1,19 @@
 class NetworkProjectsController < ApplicationController
   before_action :authenticate_user!, except: :show
+  load_and_authorize_resource class: 'Project', only: [:new, :create]
 
   before_action :set_user,         only: :show
   before_action :set_current_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_project,      only: [:show, :edit, :update, :destroy]
   before_action :set_selection,    only: [:new, :create, :edit, :update]
+  before_action :set_owner,        only: :show
 
   def show
+    authorize! :show, @project
   end
 
   def edit
+    authorize! :edit, @project
   end
 
   def new
@@ -17,8 +21,9 @@ class NetworkProjectsController < ApplicationController
   end
 
   def update
+    authorize! :update, @project
     if @project.update(project_params)
-      redirect_to project_path(@project), notice: 'Project succesfully updated.'
+      redirect_to project_path(@project.slug_or_id), notice: 'Project succesfully updated.'
     else
       render :edit, notice: "Project can't be updated."
     end
@@ -27,13 +32,14 @@ class NetworkProjectsController < ApplicationController
   def create
     @project = @user.projects.build(project_params)
     if @project.save
-      redirect_to edit_user_project_path(@user, @project, anchor: 'relations', relations: true), notice: 'Project succesfully created.'
+      redirect_to project_path(@project.slug_or_id), notice: 'Project succesfully created.'
     else
       render :new, notice: @project.errors.full_messages
     end
   end
 
   def destroy
+    authorize! :destroy, @project
     if @project.destroy
       redirect_to user_path(@user), notice: 'Project succesfully deleted.'
     else
@@ -47,12 +53,20 @@ class NetworkProjectsController < ApplicationController
       @user = User.find(params[:user_id])
     end
 
+    def set_owner
+      @owner = user_signed_in? && @user.projects.include?(@project)
+    end
+
     def set_current_user
-      @user = current_user
+      @user = if current_user.admin?
+                User.find(params[:user_id])
+              else
+                current_user
+              end
     end
 
     def set_project
-      @project = @user.projects.find(params[:id])
+      @project = Project.set_by_id_or_slug(params[:id])
     end
 
     def set_selection

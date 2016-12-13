@@ -1,0 +1,74 @@
+
+.c-mobile-map-tools {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 3;
+
+  background-color: $light-blue;
+
+  &.-active {
+    > .hidden-tools {
+      height: 175px;
+      background-color: $dark-sky-blue;
+    }
+
+    .more {
+      background-color: $dark-sky-blue;
+    }
+  }
+
+  .c-toolbar {
+    .toolbar-item {
+      flex-grow: 1;
+
+      &.more {
+        padding: 0 18px;
+      }
+
+      & .c-dropdown {
+        padding-left: $inline-space;
+        padding-right: $small-box-space - 3px;
+      }
+
+      & .js-toolbar-action {
+        padding-left: $small-box-space;
+        padding-right: $small-box-space - 3px;
+      }
+
+      .c-icon {
+        transition: opacity .2s $easeOutCubic;
+        margin-right: auto;
+        margin-left: auto;
+
+        .-hidden {
+          opacity: 0;
+        }
+      }
+    }
+  }
+
+  .hidden-tools {
+    width: 100%;
+    height: 0;
+
+    transition: height .2s $easeOutCubic;
+
+    & ul.c-actionbar-mobile {
+      @extend %clearlist;
+      margin: 0;
+
+      .c-btn {
+        width: 100%;
+        padding-left: 15%;
+        text-align: left;
+
+        svg {
+          margin-right: 12px;
+        }
+      }
+    }
+  }
+
+}

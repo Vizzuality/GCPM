@@ -1,0 +1,14 @@
+// Google translate widget
+window['googleTranslateElementInitGFW'] = function() {
+  new google.translate.TranslateElement({
+    pageLanguage: '',
+    includedLanguages: 'ar,es,en,fr,id,pt,ru,zh-CN,de,uk,ro,tr,it,hi,km',
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+    autoDisplay: false
+  },'googleTranslateGCPM');
+};
+
+// Google Analytics
+window.ga = window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', '<%= ENV["GOOGlE_ANALYTICS"]%>', 'auto');
+ga('send', 'pageview');

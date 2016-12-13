@@ -1,0 +1,6 @@
+
+<% if browser.device.mobile? %>
+  <%= render "users/mobile_network" %>
+<% else %>
+  <%= render "users/desktop_network" %>
+<% end %>

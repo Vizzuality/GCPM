@@ -1,0 +1,38 @@
+<section id="networkMobile" class="c-network-menu">
+  <%= render 'mobile_network' %>
+
+  <div class="c-claim -primary -smaller">
+    <h1 class="js-action-network">Join the network</h1>
+  </div>
+</section>
+
+<section class="l-app -main -home -full">
+  <div class="l-app-map">
+    <%= link_to map_path do %>
+      <div id="map" class="c-map"></div>
+    <% end %>
+  </div>
+  <div class="l-app-claim">
+    <div class="c-claim">
+      <h1>Discover projects <br> and much more</h1>
+      <%= link_to 'Explore the map', map_path, class: 'link' %>
+    </div>
+  </div>
+  <% if !browser.device.mobile? %>
+    <div class="l-app-bottombar">
+      <div id="counters">
+        <%= render 'home/counters' %>
+      </div>
+    </div>
+  <% end %>
+</section>
+
+<% if browser.device.mobile? %>
+  <section>
+      <div class="l-app-bottombar">
+        <div id="counters">
+          <%= render 'home/counters' %>
+        </div>
+      </div>
+  </section>
+<% end %>

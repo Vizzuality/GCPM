@@ -1,0 +1,33 @@
+<ul class="c-actionbar-mobile">
+  {{#if visible}}
+    <li class="actionbar-item">
+      <a href="{{link}}" class="c-btn -action">
+        <svg class="c-icon -small -inverse">
+          <use xlink:href="#icon-add"></use>
+        </svg>
+        {{name}}
+      </a>
+    </li>
+  {{/if}}
+
+  <li class="actionbar-item">
+    <button class="c-btn -action js-actionbar-action" data-action="save">
+      <svg class="c-icon -small -inverse">
+        <use xlink:href="#icon-share"></use>
+      </svg>
+      Share
+    </button>
+  </li>
+
+  <li id="download" class="actionbar-item">
+    <a href="#" class="c-btn -action" target="_blank" download>
+      <svg class="c-icon -small -inverse">
+        <use xlink:href="#icon-download"></use>
+      </svg>
+      Download
+    </a>
+  </li>
+
+
+
+</ul>

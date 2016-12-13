@@ -1,0 +1,43 @@
+<%= render 'shared/user_actions_mobile' %>
+
+<div class="l-app-title">
+  <div class="row collapse -centered">
+    <div class="column small-12 medium-8">
+      <h1><%= @organization.name %></h1>
+
+      <div class="row">
+        <div class="column small-12 medium-6">
+          <ul class="c-pipe-list">
+            <li><%= @organization.organization_type.present? ? @organization.organization_type.try(:name) : '' %></li>
+          </ul>
+        </div>
+        <div class="column small-12 medium-6">
+          <ul class="c-pipe-list">
+            <li>
+              <%= @organization.email_address.present? ? @organization.email_address : '' %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-counters">
+    <div class="wrapper">
+      <div class="row">
+        <div class="column small-12">
+          <h3>Projects</h3>
+          <span class="amount"><%= @projects.size %></span>
+        </div>
+        <div class="column small-12">
+          <h3>People</h3>
+          <span class="amount"><%= @people.size %></span>
+        </div>
+        <div class="column small-12">
+          <h3>Posts</h3>
+          <span class="amount"><%= @posts.size %></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

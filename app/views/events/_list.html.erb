@@ -1,0 +1,56 @@
+<% if items.any? %>
+  <% controller_name = controller.controller_name %>
+  <div class="row collapse">
+    <% items.each do |e| %>
+      <div class="column small-12 medium-4">
+        <div class="c-card -events">
+          <% if e.country.present? %>
+            <h3 class="-underlined -alternative">
+              <% country = Country.find_by( country_name: e.country ) %>
+              <!-- TODO: In case country dosen't exist -->
+              <% if country.present? && country.country_iso_3.present? %>
+                <%= link_to prop_or_blank(e.city) + ', ' + prop_or_blank(e.country), country_path(country.country_iso_3) %>
+              <% else %>
+                <%= prop_or_blank(e.city) + ', ' + prop_or_blank(e.country) %>
+              <% end %>
+            </h3>
+          <% end %>
+          <h2><%= link_to e.title, event_path(e.slug_or_id) %></h2>
+          <p><%= truncate(e.description.html_safe, :length => 300) %></p>
+
+          <% if controller_name === 'users' && is_owner?(@user, current_user) %>
+            <% if can? :update, e %>
+              <%= link_to 'Edit', edit_user_event_path(current_user.id, e.slug_or_id), class: 'c-btn -secondary' %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="row collapse">
+    <div class="column small-12">
+      <div class="c-card">
+        <p>No events</p>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<% if more %>
+  <div class="row collapse">
+    <div class="column small-12">
+      <div class="c-card">
+        <% page = @page + 1 %>
+        <%= link_to (t 'show_more'),
+          {
+            :params => request.query_parameters.merge({ page: page })
+          },
+          class: "c-btn -circle",
+          id: 'showMoreButton',
+          remote: true
+        %>
+      </div>
+    </div>
+  </div>
+<% end %>

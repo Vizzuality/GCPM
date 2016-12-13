@@ -1,0 +1,46 @@
+<% investigator = User.find_by_id(@post.user_id) %>
+
+<div class="l-grid">
+  <section class="l-content-section wrapper">
+    <div class="wrapper">
+      <div class="row">
+        <div class="column small-12">
+          <h1><%= @post.title %></h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column small-12 medium-8 align-middle">
+          <div class="investigator">
+            <div class="c-avatar -ph -small"
+                 style="<% if investigator.present? %>
+                        background-image: url(<%= investigator.avatar_url(:thumb) %>)
+                      <% end %>">
+            </div>
+            <p><%= investigator.present? && investigator.try(:name) %></p>
+          </div>
+        </div>
+        <div class="column small-12 medium-4 -align-right">
+          <button class="c-btn -secondary -inverse -mg-left js-share-button" data-actiona="save"><%= t 'share' %></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="l-content-section wrapper">
+    <div class="wrapper">
+      <div class="row">
+        <div class="column small-12">
+          <div class="wrapper">
+            <h2 class="-underlined -primary"><%= t 'description' %></h2>
+            <div class="content"><%= @post.body.html_safe %></div>
+            <% if current_user && current_user.id === @post.user_id %>
+              <%= link_to 'Edit', edit_post_path(@post), class: 'c-btn -secondary' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+

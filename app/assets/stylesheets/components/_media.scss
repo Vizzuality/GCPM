@@ -1,0 +1,13 @@
+.c-media {
+  margin: $base-space 0;
+  text-align: center;
+
+  @media #{$mq-small} {
+    margin: $box-space 0;
+  }
+
+  .thumbnail img {
+    display: block;
+    margin: 0 auto $base-space auto;
+  }
+}

@@ -1,0 +1,77 @@
+<footer class="l-footer-mobile">
+  <div class="wrapper">
+    <div class="row collapse align-middle follow">
+      <div class="column small-12 medium-3">
+        <div class="c-nav -social">
+          <h2><%= t 'follow_us' %></h2>
+          <ul>
+            <li>
+              <a href="https://www.linkedin.com/topic/global-oncology" alt="Linkedin" title="Linkedin">
+                <svg class="c-icon icon-linkedin -primary -hv-opac"><use xlink:href="#icon-linkedin"></use></svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://twitter.com/globalonc" alt="Twitter" title="Twitter">
+                <svg class="c-icon icon-twitter -primary -hv-opac"><use xlink:href="#icon-twitter"></use></svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.facebook.com/globalonc" alt="Facebook" title="Facebook">
+                <svg class="c-icon icon-facebook -primary -hv-opac"><use xlink:href="#icon-facebook"></use></svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="list -primary">
+      <div class="row collapse">
+        <div class="column small-6">
+          <div class="c-translate">
+            <div id="googleTranslateGCPM"></div>
+          </div>
+        </div>
+        <div class="column small-6">
+          <%= link_to 'Search', searches_path %>
+        </div>
+      </div>
+      <div class="row collapse">
+        <div class="column small-6">
+          <%= link_to 'Contact', new_contact_form_path %>
+        </div>
+        <div class="column small-6">
+          <%= link_to t('download'), download_user_manual_path,
+              download: 'user-manual', title: t('user-manual')
+            %>
+        </div>
+      </div>
+      <div class="row collapse">
+        <div class="column small-6">
+          <%= link_to 'FAQ', faqs_path %>
+        </div>
+      </div>
+    </div>
+
+    <div class="list">
+      <div class="row collapse">
+        <div class="column small-6">
+          <%= link_to (t 'map'), map_path %>
+        </div>
+        <div class="column small-6">
+          <%= link_to (t 'cancer_types'), cancers_path %>
+        </div>
+      </div>
+
+      <div class="row collapse">
+        <div class="column small-6">
+          <%= link_to (t 'countries'), countries_path %>
+        </div>
+        <div class="column small-6">
+          <%= link_to (t 'about'), about_path %>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+

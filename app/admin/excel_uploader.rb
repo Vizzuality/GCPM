@@ -1,6 +1,7 @@
 ActiveAdmin.register_page "Excel Upload" do
   menu parent: "Administration", priority: 1
 
+
   controller do
     skip_before_action :verify_authenticity_token
     after_action :reset_keys, only: :import
@@ -8,8 +9,10 @@ ActiveAdmin.register_page "Excel Upload" do
       render 'admin/excel_upload/new', layout: 'active_admin'
     end
     def reset_keys
-      Rake::Task['db:keys'].reenable # in case you're going to invoke the same task second time.
-      Rake::Task['db:keys'].invoke
+      ActiveRecord::Base.connection.tables.each do |t|
+        ActiveRecord::Base.connection.reset_pk_sequence!(t)
+        puts 'reseting ' + t + ' keys'
+      end
     end
   end
    page_action :import, method: :post  do
@@ -25,7 +28,8 @@ ActiveAdmin.register_page "Excel Upload" do
       else
 
         render json: {
-          success: false
+          success: false,
+          errors: importer.errors
         }
 
       end

@@ -1,8 +1,21 @@
-<section class="c-section-index country-index">
-  <div class="search-container wrapper">
-    <input class="c-title -bigger js-search-list" id="search-input" placeholder="<%= t 'search_placeholder' %>" /><br/>
-    <a href="#search-list" class="c-button -filled -color-3"><%= t 'search' %></a>
-    <div id="search-list"></div>
+<% title t('countries') %>
+
+<section class="l-content">
+  <div class="wrapper">
+    <div class="row collapse">
+      <div class="column small-12">
+        <div class="form-row">
+          <div id="search-input"></div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
+<div id="search-list"></div>
+
+<div class="c-spinner -start">
+  <div class="spinner-box">
+    <div class="icon"></div>
+  </div>
+</div>

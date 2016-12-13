@@ -1,0 +1,39 @@
+.c-toolbar {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @media #{$mq-small} {
+    justify-content: flex-end;
+  }
+
+  .toolbar-item {
+    color: $inverse-font-color;
+    display: flex;
+    align-items: center;
+    font-weight: $bold-font-weight;
+
+    .c-icon, svg {
+      vertical-align: -2px;
+      margin-right: 5px;
+    }
+
+    &.-sortby {
+      font-size: $small-font-size;
+      text-transform: uppercase;
+    }
+
+    &.-highlighted {
+
+      @media #{$mq-small} {
+        background-color: $app-bg-color;
+      }
+    }
+
+    &.-hidden {
+      display: none;
+    }
+  }
+}

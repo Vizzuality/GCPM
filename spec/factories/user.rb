@@ -5,5 +5,6 @@ FactoryGirl.define do
     password 'password'
     password_confirmation { |u| u.password }
     confirmed_at { Time.now }
+    name 'Test user'
   end
 end

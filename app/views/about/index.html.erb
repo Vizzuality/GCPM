@@ -1,17 +1,77 @@
-<div class="wrapper" id="about-content">
-	<div class="header-about">
-		<h1>About</H1>
-		<p>The Global Cancer Project Map (GCPM) is an interactive online tool and public resource for the global cancer community. Its purpose is to help visitors initiate partnerships, make informed decisions, and develop collaborations in cancer control.</p>
-	</div>
-	<h2>Examples of what a user can do through the GCPM are:</h2>
-	<ul>
-		<li><span class="icon -share"></span>Share cancer-related projects and events with the global oncology community</li>
-		<li><span class="icon -search"></span>Search for people, projects, and events in a specific country or as related to a specific cancer type</li>
-		<li><span class="icon -connect"></span>Connect with people with similar interests</li>
-		<li><span class="icon -view"></span>View epidemiological heat maps that show cancer burden by country</li>
-		<li><span class="icon -more"></span>And more!</li>
-	</ul>
-	<span class="split-about"></span>
-	<p>For more suggestions on how to get started using the GCPM, see the FAQ.</p>
-	<p>If you would like to contribute to the Global Cancer Project Map, or provide feedback to the management team, we can be reached at <a href="mailto:data@globalonc.org">data@globalonc.org</a>.</p>
-</div>
+<% title 'About' %>
+
+<header class="l-intro">
+  <div class="wrapper">
+    <div class="row">
+      <div class="column small-12 medium-9">
+        <h1>About GCPM 2.0</h1>
+        <p>The Global Cancer (GO) Map is an interactive online tool and public resource for the global cancer community. Its purpose is to help visitors initiate partnerships, make informed decisions, and develop collaborations in cancer control.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article class="l-content">
+  <div class="wrapper">
+    <div class="row">
+      <div class="column small-12 medium-9">
+        <h2>What a user can do through the GCPM</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column small-12 medium-4">
+        <div class="c-media">
+          <div class="thumbnail">
+            <%= image_tag 'about/abouticon-01.svg' %>
+          </div>
+          <p>Share cancer-related projects and events with the global oncology community</p>
+        </div>
+      </div>
+      <div class="column small-12 medium-4">
+        <div class="c-media">
+          <div class="thumbnail">
+            <%= image_tag 'about/abouticon-02.svg' %>
+          </div>
+          <p>Search for people, projects, and events in a specific country or as related to a specific cancer type</p>
+        </div>
+      </div>
+      <div class="column small-12 medium-4">
+        <div class="c-media">
+          <div class="thumbnail">
+            <%= image_tag 'about/abouticon-03.svg' %>
+          </div>
+          <p>Connect with people with similar interests</p>
+        </div>
+      </div>
+      <div class="column small-12 medium-4">
+        <div class="c-media">
+          <div class="thumbnail">
+            <%= image_tag 'about/abouticon-04.svg' %>
+          </div>
+          <p>View epidemiological heat maps that show cancer burden by country</p>
+        </div>
+      </div>
+      <div class="column small-12 medium-4">
+        <div class="c-media">
+          <div class="thumbnail">
+            <%= image_tag 'about/abouticon-05.svg' %>
+          </div>
+          <p>And more!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<article class="l-content">
+  <div class="wrapper">
+    <div class="row">
+      <div class="column small-12 medium-9">
+        <p>For more suggestions on how to get started using the Map, see the <%= link_to 'FAQ', faqs_path %>.</p>
+        <p>If you would like to contribute to the GO Map, or provide feedback to the management team, we can be reached at <a href="mailto:data@globalonc.org">data@globalonc.org</a>.</p>
+        <h2>Acknowledgments</h2>
+        <p>The GO Map was made possible through an initial alliance between the <a href="https://www.cancer.gov/about-nci/organization/cgh">U.S. National Cancer Institute Center for Global Health and Global Oncology, Inc.</a> The American Society for Clinical Oncology and Union for International Cancer Control also contributed scientific and programmatic input. The website was developed by the creative digital agency <a href="http://www.vizzuality.com/" target="_blank">Vizzuality</a>.</p>
+      </div>
+    </div>
+  </div>
+</article>

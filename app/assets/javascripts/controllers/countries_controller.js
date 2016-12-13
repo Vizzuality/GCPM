@@ -2,54 +2,33 @@
 
   'use strict';
 
-  App.Controller = App.Controller || {};
+  App.Controller.Countries = function() {};
 
-  App.Controller.Countries = App.Controller.Page.extend({
+  _.extend(App.Controller.Countries.prototype, {
 
     index: function(params) {
-      /* Countries index search view */
-      var regionsCollection = new App.Collection.Regions();
-      var regionsView = new App.View.SearchList({
-        searchList: regionsCollection,
-        options: {
-          template: HandlebarsTemplates['countries-list'],
-          innerSearchListName: 'countries',
-          itemSearchedCategory: 'country_name',
-          isTwoLevels: true
-        }
-      });
-
-      regionsCollection.fetch();
+      new App.Presenter.CountriesList(params);
     },
 
     show: function(params) {
-      this.params = params;
-      var layersActived = [2, 6];
-      var layersSpec = this.layersSpec = new App.Collection.LayersSpec();
-      var options = {
-        basemap: null,
-        apiUrl: '/api/map/?group=points&countries[]=' + COUNTRY_ID
-      };
-      // Map view
-      var layersCollection = new App.Collection.Layers();
-      var map = new App.View.Map({
-        el: '#map',
-        collection: this.layersSpec,
-        params: this.params,
-        options: options
-      });
+      var newParams = _.extend({}, {
+        data: 'data',
+        iso: params.vars[0]
+      }, params);
 
-      layersSpec.on('change, reset', function() {
-        map.renderLayers();
-      });
+      new App.Presenter.TabNav(newParams);
+      new App.Presenter.CountryData(newParams);
+      new App.Presenter.Widgets(newParams);
+      new App.Presenter.FollowButton(newParams);
+      new App.Presenter.ShowMore(newParams);
 
-      layersSpec.fetch().done(function() {
-        // This method triggers an event called 'reset'
-        layersSpec.filterByIds(layersActived);
-      });
+      if (gon.isMobile) {
+        new App.Presenter.UserActionsMobile(newParams);
+      } else {
+        new App.Presenter.MapVis(newParams);
+      }
     }
 
   });
-
 
 })(this.App);

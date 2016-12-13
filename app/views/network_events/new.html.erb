@@ -1,6 +1,7 @@
-<div class="project_add">
-  <%= simple_form_for [@user, @event], url: user_events_url(@user) do |f| %>
-    <%= render partial: f %>
-    <%= f.button :submit, 'Submit', class: 'f-submit -network' %>
-  <% end %>
+<div class="c-project-form">
+  <div class="wrapper">
+    <div id="newEventView">
+      <%= render 'form', action: 'new' %>
+    </div>
+  </div>
 </div>

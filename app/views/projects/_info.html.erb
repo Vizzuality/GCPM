@@ -1,0 +1,155 @@
+<% title @project.title %>
+<% owner = current_user &&
+  current_user.projects.find_by_id(@project.id) &&
+  current_user.projects.find_by_id(@project.id).project_users.first.is_approved %>
+
+<div class="row collapse">
+  <div class="column row small-12 medium-8">
+    <div class="l-content wrapper">
+      <article class="l-content-article">
+        <%= @project.summary.html_safe %>
+      </article>
+      <% if @owner %>
+        <div class="row -no-mrg align-right">
+          <%= link_to (t 'update_project'), new_project_project_update_path(@project.slug_or_id), class: "c-btn -secondary -inverse" %>
+        </div>
+      <% end %>
+    </div>
+    <% @updates.each do |u| %>
+      <div class="c-card">
+        <div class="row -no-mrg align-justify">
+          <h3 class="-underlined">
+            <%= u.created_at.strftime("%Y / %m / %d - %H : %M") %>
+          </h3>
+          <% if @owner %>
+            <%= link_to edit_project_project_update_path(@project.slug_or_id, u.id) do %>
+              <svg class="c-icon -small icon-edit -hv-opac"><use xlink:href="#icon-edit"></use></svg>
+            <% end %>
+          <% end %>
+        </div>
+        <h2><%= u.title %></h2>
+        <%= u.body.html_safe %>
+      </div>
+    <% end %>
+  </div>
+  <div class="column small-12 medium-4">
+    <aside class="l-sidebar">
+
+      <% if @project.start_date.present? || @project.end_date.present? %>
+        <div id="datesTimeline" class="sidebar-item c-dates-timeline">
+          <div class="dates">
+             <% if @project.start_date.present? %>
+              <div class="date">
+                <h3><%= t 'start_date' %></h3>
+                <span><%= @project.start_date %></span>
+              </div>
+            <% end %>
+            <% if @project.end_date.present? %>
+              <div class="date">
+                <h3><%= t 'end_date' %></h3>
+                <span><%= @project.end_date %></span>
+              </div>
+            <% end %>
+          </div>
+
+          <% if @project.start_date.present? && @project.end_date.present? %>
+            <div class="timeline">
+              <div class="timeline-line"></div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if @project.cancer_types.any? %>
+        <div class="sidebar-item">
+          <h3><%= t 'cancer_types' %></h3>
+          <ul class="c-list">
+            <% @project.cancer_types.distinct.each do |ct| %>
+              <li class="list-item -mg-less"><%= link_to ct.try(:name), cancer_path(ct.slug_or_id) %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <% if @project.project_types.any? %>
+        <div class="sidebar-item">
+          <h3><%= t 'project_types' %></h3>
+          <ul class="c-list">
+            <% @project.project_types.each do |pt| %>
+              <li class="list-item -mg-less"><%= link_to pt.try(:name), "/map?data=projects&project_types[]=#{pt.id}" %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <% if @project.specialities.any? %>
+        <div class="sidebar-item">
+          <h3><%= t 'specialities' %></h3>
+          <ul class="c-list">
+            <% @project.specialities.each do |sp| %>
+              <li class="list-item -mg-less"><%= sp.try(:name) %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <% if @addresses.present? %>
+        <div class="sidebar-item">
+          <h3><%= t 'location' %>(s)</h3>
+          <ul class="c-list">
+            <% @addresses.each do |add| %>
+              <% if add[2].present? %>
+                <li class="list-item -mg-less"><%= link_to "#{add[0]}, #{add[1]}", country_path(add[2]) %></li>
+              <% else %>
+                <%= add[0] %>, <%= add[1] %>
+              <% end %>
+            <% end %>
+        </div>
+      <% end %>
+
+      <% if @organizations.present? %>
+        <div class="sidebar-item">
+          <h3><%= t 'organization' %>(s)</h3>
+          <ul class="c-list">
+            <% @organizations.each do |o| %>
+              <li class="list-item -mg-less"><%= link_to o.name, organization_path(o.slug_or_id) %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <% if @project.funding_sources.any? %>
+        <div class="sidebar-item">
+          <h3><%= t 'funding_source' %>(s)</h3>
+          <ul class="c-list">
+            <% @project.funding_sources.each do |fs| %>
+              <li class="list-item -mg-less"><%= fs.name %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <% if @project.project_leads.any? %>
+        <div class="sidebar-item">
+          <h3><%= t 'project_lead' %>(s)</h3>
+          <ul class="c-list">
+            <% @project.project_leads.each do |pl| %>
+              <li class="list-item -mg-less"><%= link_to pl.name, investigator_path(pl.slug_or_id) %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <% if @project.secondary_investigators.any? %>
+        <div class="sidebar-item">
+          <h3><%= t 'collaborator' %>(s)</h3>
+          <ul class="c-list">
+            <% @project.secondary_investigators.each do |si| %>
+              <li class="list-item -mg-less"><%= link_to si.name, investigator_path(si.slug_or_id) %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+  </aside>
+</div>

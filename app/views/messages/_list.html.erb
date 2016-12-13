@@ -1,0 +1,54 @@
+<% if items && items.size() > 0 %>
+  <div class="row collapse">
+    <% items.each do |conv| %>
+      <div class="column small-12">
+        <% unread = conv.receipts_for(current_user).map{|m| m.is_unread?}.include? true %>
+        <div class="c-card -messages -thin c-conversation<%= unread ? ' -unread' : '' %>" data-conver-id="<%= conv.id %>">
+          <div class="conversation-subject js-subject-action">
+            <% conversation_person = conversation_person(conv) %>
+            <h2><%= conv.subject %></h2>
+            <h3><%= conversation_person.investigator.try(:name) %> (<%= conversation_person.try(:name) %>)</h3>
+          </div>
+          <div class="conversation-body">
+            <ul class="messages">
+              <% conv.messages.each do |m| %>
+                <% message_person = sender(m.sender_id) %>
+                <li class="c-conversations-item <%= (m.sender_id == current_user.id) ? '-mine' : '-theirs' %>">
+                  <div class="sender">
+                    <h3><%= message_person === current_user ? 'You' : message_person.investigator.try(:name) ||  '(' + message_person.try(:name) + ')' %></h3>
+                    <small><%= m.created_at.strftime("%d.%m.%Y") %> <%= m.created_at.strftime("%H:%M")%></small>
+                  </div>
+                  <div class="message">
+                    <%= m.body %>
+                  </div>
+                </li>
+              <% end %>
+            </ul>
+            <div class="message-form">
+              <%= form_for Mailboxer::Message.new, url: :message, remote: true, as: :message do |f| %>
+                <div class="form-row">
+                  <%= f.text_area :body, class: '-border -padding', rows: 5, placeholder: 'Text here your response' %>
+                  <%= f.hidden_field :in_response, value: conv.messages.last.id %>
+                  <%= f.hidden_field :data, value: 'messages' %>
+                  <%= f.submit 'Send', class: 'c-btn -secondary' %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="details">
+          </div>
+          <p></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="row collapse">
+    <div class="column small-12">
+      <div class="c-card">
+        <p>No messages</p>
+      </div>
+    </div>
+  </div>
+<% end %>

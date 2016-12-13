@@ -1,0 +1,17 @@
+{{#if mobile}}
+  {{#if followed}}
+    <svg class="c-icon -normal -secondary">
+      <use xlink:href="#icon-user-minus"></use>
+    </svg>
+  {{else}}
+    <svg class="c-icon -normal -secondary">
+      <use xlink:href="#icon-user-plus"></use>
+    </svg>
+  {{/if}}
+{{else}}
+  {{#if followed}}
+    Unfollow
+  {{else}}
+    Follow
+  {{/if}}
+{{/if}}

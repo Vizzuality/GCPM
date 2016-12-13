@@ -1,0 +1,10 @@
+{{#if filters}}
+  <div class="wrapper">
+    <h3>Filter by:</h3>
+    <ul>
+      {{#each filters}}
+        <li>{{this.value}}</li>
+      {{/each}}
+    </ul>
+  </div>
+{{/if}}

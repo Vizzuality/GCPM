@@ -1,0 +1,8 @@
+<div class="c-project-form">
+  <div class="wrapper">
+    <%= render 'form', action: 'edit' %>
+          <%= link_to 'Delete', project_project_update_path(@project.slug_or_id, @project_update.id), class: 'c-btn -primary -inverse', method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
+      </div>
+  </div>
+</div>

@@ -20,7 +20,7 @@ class NetworkEventsController < ApplicationController
 
   def update
     if @event.update(event_params)
-      redirect_to event_path(@event), notice: 'Event succesfully updated.'
+      redirect_to event_path(@event.slug_or_id), notice: 'Event succesfully updated.'
     else
       render :edit, notice: "Event can't be updated."
     end
@@ -29,15 +29,15 @@ class NetworkEventsController < ApplicationController
   def create
     @event = @user.events.build(event_params)
     if @event.save
-      redirect_to user_path(@user, type: 'events'), notice: 'Event succesfully created.'
+      redirect_to event_path(@event.slug_or_id)
     else
-      render :new, notice: @project.errors.full_messages
+      render :new, error: true
     end
   end
 
   def destroy
     if @event.destroy
-      redirect_to user_path(@user), notice: 'Event succesfully deleted.'
+      redirect_to user_path(@user, { data: 'events' }), notice: 'Event succesfully deleted.'
     else
       redirect_to user_path(@user), notice: "There was an error and event can't be deleted."
     end
@@ -54,7 +54,7 @@ class NetworkEventsController < ApplicationController
     end
 
     def set_event
-      @event = @user.events.find(params[:id])
+      @event = Event.set_by_id_or_slug(params[:id])
     end
 
     def event_params
