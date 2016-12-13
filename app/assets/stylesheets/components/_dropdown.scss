@@ -69,9 +69,15 @@ $dropdown-max-height: 300px;
         li {
           padding: 7px $base-space;
           color: $base-font-color;
+          background-color: $body-bg-color;
+
 
           &:hover {
             color: $primary-color;
+          }
+
+          &.-unread {
+            background-color: $base-bg-color;
           }
 
           p {

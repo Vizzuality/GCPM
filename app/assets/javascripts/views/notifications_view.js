@@ -5,7 +5,8 @@
   App.View.Notifications = Backbone.View.extend({
 
     events: {
-      'click .js-action-notifications': 'handleClick'
+      'click .js-action-notifications': 'handleClick',
+      'click .list li': 'handleClick'
     },
 
     initialize: function() {
@@ -25,6 +26,10 @@
       var isDropdown = this.el.getElementsByClassName('dropdown-content')[0].contains(e.target);
       if (!isDropdown) {
         this.trigger('toggle');
+      } else {
+        // var target = $(e.target);
+        // var item = target.is('li') ? target : target.closest('li');
+        // item.hasClass('-unread') && item.toggleClass('-unread', false);
       }
     },
 
