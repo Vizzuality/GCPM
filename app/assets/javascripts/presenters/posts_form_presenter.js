@@ -1,4 +1,3 @@
-/* global ga */
 (function(App) {
 
   'use strict';
@@ -66,7 +65,7 @@
     setEvents: function() {
       this.postForm.on('cancel', this.closeForm, this);
       this.postForm.on('submit', function(newState) {
-        console.log(newState);
+        console.info(newState);
       }, this);
 
       this.state.on('change', function() {
@@ -123,7 +122,7 @@
         // I need to pass the rest of the params because there are some presenters that need other params
         // Then, inside of each presenter, they will handle its state
         var state = _.extend({}, this.state.toJSON(), {
-          value: this.state.get(child.defaults.name)
+          value: this.state.get(child.options.name)
         });
         child.setState(state, { silent: true });
 

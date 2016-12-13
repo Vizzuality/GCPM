@@ -14,6 +14,12 @@ class PostsController < InheritedResources::Base
   end
 
   def edit
+    gon.server_params = {
+      'post[countries][]': @post.countries.pluck(:id),
+      'post[organizations][]': @post.organizations.pluck(:id),
+      'post[projects][]': @post.projects.pluck(:id),
+      'post[cancer_types][]': @post.cancer_types.pluck(:id)
+    }
   end
 
   def update

@@ -170,12 +170,12 @@
 
   &.-events .marker-icon svg.icon {
     fill: $alternative-color;
-    stroke: #e66d1b;
+    stroke: $alternative-color;
   }
 
   &.-people .marker-icon svg.icon {
     fill: $secondary-color;
-    stroke: #e66d1b;
+    stroke: $secondary-color;
   }
 
   .point-icon {

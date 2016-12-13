@@ -15,7 +15,11 @@
       new App.Presenter.ShowMore(newParams);
 
       if (!gon.isMobile) {
-        new App.Presenter.MapVis(newParams);
+        new App.Presenter.MapVis(newParams, {
+          map: {
+            maxZoom: 13
+          }
+        });
       } else {
         new App.Presenter.UserActionsMobile(newParams);
       }
