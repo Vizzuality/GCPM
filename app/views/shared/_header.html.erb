@@ -20,10 +20,14 @@
                   <div class="dropdown-content notifications">
                     <% if @notifications.empty? %>
                       <ul class="list">
-                        <li>Empty</li>
+                        <li class="-empty">Empty</li>
                       </ul>
                     <% else %>
-                      <%= render @notifications %>
+                      <div class="container">
+                        <ul class="list -filled">
+                          <%= render @notifications %>
+                        </ul>
+                      </div>
                     <% end %>
                   </div>
                 </button>

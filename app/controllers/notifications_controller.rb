@@ -13,7 +13,6 @@ class NotificationsController < ApplicationController
 
   def mark_all_as_read
     current_user.notifications.each { |notification| notification.mark_as_read }
-    redirect_to notifications_path
   end
 
   private

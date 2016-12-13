@@ -43,7 +43,12 @@ $dropdown-max-height: 300px;
       left: 0;
     }
 
+    & .container {
+      position: relative;
+    }
+
     &.notifications {
+      padding: 0;
       width: auto;
       max-height: 300px;
       top: 77px;
@@ -66,18 +71,47 @@ $dropdown-max-height: 300px;
         max-height: $dropdown-max-height - $button-y-padding;
         overflow-x: auto;
 
+        &.-filled {
+          padding-bottom: 50px;
+        }
+
         li {
           padding: 7px $base-space;
           color: $base-font-color;
           background-color: $body-bg-color;
 
+          &:first-child:not(.-empty) {
+            margin-top: 8px;
+          }
 
-          &:hover {
-            color: $primary-color;
+          &.-btn {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: $primary-color;
+            text-align: center;
+
+            a {
+              color: $inverse-font-color;
+
+              &:hover {
+                color: $inverse-font-color;
+                opacity: .5;
+              }
+            }
           }
 
           &.-unread {
             background-color: $base-bg-color;
+          }
+
+          a {
+            display: inline-block;
+            padding: 0;
+
+            &:hover {
+              color: $primary-color;
+            }
           }
 
           p {

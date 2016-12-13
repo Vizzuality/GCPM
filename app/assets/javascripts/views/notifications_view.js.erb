@@ -15,7 +15,8 @@
     },
 
     cache: function() {
-      this.content = this.$el.find('.dropdown-content');
+      this.$content = this.$el.find('.dropdown-content');
+      this.$badge = this.$el.find('.c-badge');
     },
 
     setEvents: function() {
@@ -27,14 +28,15 @@
       if (!isDropdown) {
         this.trigger('toggle');
       } else {
-        // var target = $(e.target);
-        // var item = target.is('li') ? target : target.closest('li');
-        // item.hasClass('-unread') && item.toggleClass('-unread', false);
+        var target = $(e.target);
+        var item = target.is('li') ? target : target.closest('li');
+
+        item.hasClass('js-action-delete') && this.refresh();
       }
     },
 
     toggleDropdown: function(open) {
-      this.content.toggleClass('-open', open);
+      this.$content.toggleClass('-open', open);
     },
 
     handleDocumentClick: function(e) {
@@ -43,6 +45,11 @@
         !isContained && this.trigger('close', this);
       }
     },
+
+    refresh: function() {
+      this.$content.html('<ul class="list -filled"><li class="-empty">Empty</li></ul>');
+      this.$badge.hide();
+    }
 
   });
 

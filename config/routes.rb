@@ -42,7 +42,7 @@ Rails.application.routes.draw do
     resources :events,   controller: 'network_events',   except: :index
   end
 
-  resources :notifications, only: [:index, :show] do
+  resources :notifications, only: :show do
     put :mark_all_as_read, on: :collection
   end
 
