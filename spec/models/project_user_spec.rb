@@ -15,8 +15,8 @@ require 'rails_helper'
 RSpec.describe ProjectUser, type: :model do
   before :each do
     @user      = create(:user)
-    @project_1 = create(:project, title: 'First project',  users: [@user], status: 1)
-    @project_2 = create(:project, title: 'Second project', users: [@user], status: 1)
+    @project_1 = create(:project, title: 'First project',  users: [@user], status: 1, project_types: [create(:project_type, name: "project type 1")], cancer_types: [create(:cancer_type, name: "project type 1")])
+    @project_2 = create(:project, title: 'Second project', users: [@user], status: 1, project_types: [create(:project_type, name: "project type 2")], cancer_types: [create(:cancer_type, name: "project type 2")])
   end
 
   it 'Project user relations size' do

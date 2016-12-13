@@ -30,7 +30,8 @@ RSpec.describe ActivityFeed, type: :model do
     end
 
     it "Activity should be valid for different actionables" do
-      expect(build(:activity, actionable: create(:project))).to      be_valid
+      expect(build(:activity, actionable: create(:project, project_types: [create(:project_type, name: "project type 1")],
+                                                           cancer_types: [create(:cancer_type, name: "cancer type 1")]))).to be_valid
       expect(build(:activity, actionable: create(:organization))).to be_valid
     end
 
@@ -48,7 +49,8 @@ RSpec.describe ActivityFeed, type: :model do
 
   context 'on' do
     it 'should list all activity on an actionable object' do
-      project      = create(:project)
+      project      = create(:project, project_types: [create(:project_type, name: "project type 2")],
+                                      cancer_types: [create(:cancer_type, name: "cancer type 2")])
       organization = create(:organization)
       activity1    = create(:activity, action: 'following', actionable: project)
       activity2    = create(:activity, action: "following", actionable: organization)
@@ -63,7 +65,8 @@ RSpec.describe ActivityFeed, type: :model do
   context 'by' do
     it 'should list all activity of a user' do
       user1     = create(:user)
-      activity1 = create(:activity, user: user1, action: "following", actionable: create(:project))
+      activity1 = create(:activity, user: user1, action: "following", actionable: create(:project, project_types: [create(:project_type, name: "project type 4")],
+                                                                                                   cancer_types: [create(:cancer_type, name: "cancer type 4")]))
       activity2 = create(:activity, user: user1, action: "following", actionable: create(:organization))
       create_list(:activity, 2)
 
@@ -77,7 +80,8 @@ RSpec.describe ActivityFeed, type: :model do
 
   context 'scopes by actionable' do
     it 'should filter by actionable type' do
-      on_project      = create(:activity, actionable: create(:project))
+      on_project      = create(:activity, actionable: create(:project, project_types: [create(:project_type, name: "project type 3")],
+                                                                       cancer_types: [create(:cancer_type, name: "cancer type 3")]))
       on_organization = create(:activity, actionable: create(:organization))
       on_user         = create(:activity, actionable: create(:user))
 

@@ -3,8 +3,10 @@ require 'rails_helper'
 RSpec.describe SearchController, type: :controller do
   before :each do
     create(:cancer_type,  name: 'Breast')
-    create(:project,      title: 'Breast project', status: 'published')
-    create(:project,      title: 'Breast project 2')
+    create(:project,      title: 'Breast project', status: 'published', project_types: [create(:project_type, name: "project type 1")],
+                                                                        cancer_types: [create(:cancer_type, name: "cancer type 1")])
+    create(:project,      title: 'Breast project 2', project_types: [create(:project_type, name: "project type 2")],
+                                                     cancer_types: [create(:cancer_type, name: "cancer type 2")])
     create(:organization, name: 'Breast orga')
   end
 

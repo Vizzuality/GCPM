@@ -12,8 +12,10 @@ require 'rails_helper'
 RSpec.describe Search, type: :model do
   before :each do
     @user = create(:user)
-    create(:project,      title: 'breast cancer project',      status: 1, users: [@user])
-    create(:project,      title: 'breast cancer project 2',    status: 0, users: [@user])
+    create(:project,      title: 'breast cancer project',      status: 1, users: [@user], project_types: [create(:project_type, name: "project type 1")],
+                                                                                          cancer_types: [create(:cancer_type, name: "cancer type 1")])
+    create(:project,      title: 'breast cancer project 2',    status: 0, users: [@user], project_types: [create(:project_type, name: "project type 2")],
+                                                                                          cancer_types: [create(:cancer_type, name: "cancer type 2")])
     create(:cancer_type,  name:  'breast cancer')
     create(:investigator, name:  'breast investigator', user: @user)
     create(:event,        title: 'breast event',        user: @user)
@@ -33,7 +35,7 @@ RSpec.describe Search, type: :model do
 
   it 'Search indexed items count' do
     # Search in projects and organizations, users in two columns
-    expect(Search.all.count).to eq(11)
+    expect(Search.all.count).to eq(13)
   end
 
   it 'Search count' do
