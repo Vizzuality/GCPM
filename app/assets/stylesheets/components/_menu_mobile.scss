@@ -45,6 +45,12 @@
       color: $base-font-color;
     }
 
+    li > span {
+      font-size: 16px;
+      padding: 11px 0;
+      padding-left: $base-space;
+    }
+
     .time {
       display: inline-block;
       margin-left: 7px;

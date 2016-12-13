@@ -13,6 +13,9 @@
     initialize: function() {
       this.state = new StateModel({ active: false });
       this.userMenu = new App.View.UserMenu({ el: '.js-user-menu' });
+      this.notifications = new App.View.NotificationsMobile({
+        el: '#notificationsList'
+      });
 
       this.setSubscriptions();
     },

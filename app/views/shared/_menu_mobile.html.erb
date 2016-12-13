@@ -21,7 +21,9 @@
           <span>Notifications
           </span>
           <% if current_user.notifications_count > 0 %>
-            <span class="c-badge -relative messages-badge <%= current_user.notifications_count %>"><%= current_user.notifications_count %></span>
+            <span class="c-badge -notification -relative messages-badge <%= current_user.notifications_count %>">
+              <%= current_user.notifications_count > 9 ? '9+' : current_user.notifications_count %>
+            </span>
           <% end %>
         </p>
       </li>
@@ -88,15 +90,14 @@
 
     <% if @notifications.empty? %>
       <ul class="list menu-content notifications -hidden">
-        <li class="-empty">No notifications</li>
+        <li class="-empty"><span>No notifications</span></li>
       </ul>
     <% else %>
-      <div class="container  menu-content notifications -hidden">
+      <div id="notificationsList" class="container menu-content notifications -hidden">
         <ul class="list -filled">
           <%= render @notifications %>
         </ul>
-        <li>
-        <button class="c-btn -primary -inverse button">
+        <button class="c-btn -primary -inverse button js-action-delete">
           <%= link_to 'Delete all', mark_all_as_read_notifications_path, method: :put %>
         </button>
       </div>
