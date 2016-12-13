@@ -94,12 +94,14 @@ class Event < ApplicationRecord
 
     def notify_users_for_update
       users = ActivityFeed.where(actionable_type: 'Event', actionable_id: self.id, action: 'following').pluck(:user_id)
-      Notification.build(users, self, 'was updated')
+      Notification.build(users, self, 'was updated') if users.any?
     end
 
     def notify_users_for_create
       users   = ActivityFeed.where(actionable_type: 'User', actionable_id: user_id, action: 'following').pluck(:user_id)
-      creator = User.find(user_id).try(:name)
-      Notification.build(users, self, "was created by #{creator}")
+      if users.any?
+        creator = User.find(user_id).try(:name)
+        Notification.build(users, self, "was created by #{creator}")
+      end
     end
 end

@@ -169,6 +169,6 @@ class User < ApplicationRecord
 
     def notify_users_for_update
       users = ActivityFeed.where(actionable_type: 'User', actionable_id: self.id, action: 'following').pluck(:user_id)
-      Notification.build(users, self, 'was updated')
+      Notification.build(users, self, 'was updated') if users.any?
     end
 end
