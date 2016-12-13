@@ -17,8 +17,6 @@
         el: '.l-header'
       });
 
-      this.notifications = new App.Presenter.Notifications();
-
       this.avatar = new App.View.MobileUserMenu({
         el: '.c-menu-mobile'
       });

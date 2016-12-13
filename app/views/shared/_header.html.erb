@@ -15,7 +15,9 @@
                 <button class="c-dropdown js-action-notifications">
                   <svg class="c-icon -medium -primary"><use xlink:href="#icon-bell"></use></svg>
                   <% if current_user.notifications_count > 0 %>
-                    <div class="c-badge -notifications messages-badge <%= current_user.notifications_count %>"><%= current_user.notifications_count %></div>
+                    <div class="c-badge -notifications messages-badge <%= current_user.notifications_count %>">
+                      <%= current_user.notifications_count > 9 ? '9+' : current_user.notifications_count %>
+                    </div>
                   <% end %>
                   <div class="dropdown-content notifications">
                     <% if @notifications.empty? %>
