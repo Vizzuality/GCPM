@@ -20,7 +20,7 @@ class Investigator < ApplicationRecord
   include UserRelationable
   include ActAsFeatured
 
-  after_create :notify_admin, if: 'user_id.present?'
+  after_create :notify_admin,            if: 'user_id.present?'
   after_update :notify_users_for_update, if: 'approved?'
 
   belongs_to :user, inverse_of: :investigator, optional: true
@@ -100,6 +100,6 @@ class Investigator < ApplicationRecord
 
     def notify_users_for_update
       users = ActivityFeed.where(actionable_type: 'Investigator', actionable_id: self.id, action: 'following').pluck(:user_id)
-      Notification.build(users, self, 'was updated')
+      Notification.build(users, self, 'was updated') if users.any?
     end
 end

@@ -18,6 +18,6 @@ class CancerTypeProject < ApplicationRecord
 
     def notify_users_for_update
       users = ActivityFeed.where(actionable_type: 'CancerType', actionable_id: cancer_type.id, action: 'following').pluck(:user_id)
-      Notification.build(users, project, "was added to cancer type #{cancer_type.name}")
+      Notification.build(users, project, "was added to cancer type #{cancer_type.name}") if users.any?
     end
 end

@@ -17,9 +17,9 @@ class ResearchUnit < ApplicationRecord
   has_many :projects,     through: :memberships
   has_one  :organization, through: :address
 
-  before_create :check_address, if: 'address_id.blank?'
-  after_save    :cleanup_research_units
+  before_create :check_address,           if: 'address_id.blank?'
   after_create  :notify_users_for_update, if: 'organization.present? && investigator.present?'
+  after_save    :cleanup_research_units
 
   validates :investigator_id, uniqueness: { scope: :address_id }
 
@@ -49,7 +49,7 @@ class ResearchUnit < ApplicationRecord
     def notify_users_for_update
       users_organization = ActivityFeed.where(actionable_type: 'Organization', actionable_id: organization.id, action: 'following').pluck(:user_id)
       users_investigator = ActivityFeed.where(actionable_type: 'Investigator', actionable_id: investigator.id, action: 'following').pluck(:user_id)
-      Notification.build(users_organization, investigator, "was added to organization #{organization.name}")
-      Notification.build(users_investigator, organization, "was added to investigator #{investigator.name}")
+      Notification.build(users_organization, investigator, "was added to organization #{organization.name}") if users_organization.any?
+      Notification.build(users_investigator, organization, "was added to investigator #{investigator.name}") if users_investigator.any?
     end
 end
