@@ -36,7 +36,8 @@
     },
 
 
-    triggerSubmit: function() {
+    triggerSubmit: function(e) {
+      debugger;
       this.trigger('submit', this.serializeForm());
     },
 
@@ -134,13 +135,13 @@
     resetAddressInfo: function() {
       var $country = this.$el.find('select[name="event[country]"]');
       var $container = this.$el.find('#countries .select2-selection.select2-selection--single');
-
-      $container.html('<span class="select2-selection__rendered" id="select2-eventcountry-d0-container"><span class="select2-selection__placeholder">All countries</span></span>');
-
       var reset = [this.$address, this.$address2, $country, this.$city, this.$state, this.$postcode];
+
       _.each(reset, function(input) {
         input.val('');
       });
+
+      $container.html('<span class="select2-selection__rendered" id="select2-eventcountry-d0-container"><span class="select2-selection__placeholder">All countries</span></span>');
     }
 
   });
