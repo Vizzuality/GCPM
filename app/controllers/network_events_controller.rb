@@ -22,6 +22,7 @@ class NetworkEventsController < ApplicationController
   def update
     if !@event.online
       render :edit, error: true and return if !@event.country.present? || @event.country == ''
+      render :edit, error: true and return if !@event.city.present? || @event.city == ''
     end
 
     if @event.update(event_params)
@@ -36,6 +37,7 @@ class NetworkEventsController < ApplicationController
 
     if !@event.online
       render :new, error: true and return if !@event.country.present? || @event.country == ''
+      render :new, error: true and return if !@event.city.present? || @event.city == ''
     end
 
     if @event.save
