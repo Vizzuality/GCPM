@@ -12,6 +12,7 @@ class NetworkEventsController < ApplicationController
   end
 
   def edit
+    gon.online = @event.online
   end
 
   def new

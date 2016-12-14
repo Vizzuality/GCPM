@@ -121,7 +121,8 @@ label {
 .hiddeable {
   visibility: none;
   position: absolute;
-  top: -1000px;
+  top: -10000000000px;
+  transition: all .3s $easeOutCubic;
 }
 
 .required {
