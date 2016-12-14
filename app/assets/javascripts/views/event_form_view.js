@@ -36,8 +36,7 @@
     },
 
 
-    triggerSubmit: function(e) {
-      debugger;
+    triggerSubmit: function() {
       this.trigger('submit', this.serializeForm());
     },
 
