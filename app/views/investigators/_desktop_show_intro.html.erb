@@ -9,13 +9,18 @@
   <div class="">
     <div class="row collapse wrapper">
       <div class="column small-12 medium-8">
-        <div class="c-avatar -big -ph -mg-bt"
-             style="<% if inv_user.present? %>
-                      background-image: url(<%= inv_user.avatar_url(:thumb) %>)
-                    <% end %>">
-        </div>
+        <% if @investigator.user.present? && @investigator.user.avatar.present? %>
+          <div class="c-avatar -big -ph -mg-bt"
+               style="background-image: url(<%= inv_user.avatar_url(:thumb) %>)">
+          </div>
+        <% else %>
+          <div class="c-avatar -big -ph -mg-bt">
+            <%= render 'shared/placeholder', person: @investigator, size: '-av-big' %>
+          </div>
+        <% end %>
       </div>
     </div>
+
     <div class="row collapse wrapper">
       <div class="column small-12 medium-8">
         <div class="c-title-btn">
