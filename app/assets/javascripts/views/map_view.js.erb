@@ -23,6 +23,8 @@
       zoom: 3
     },
 
+    template: HandlebarsTemplates['carto_layer_tooltip'],
+
     initialize: function(settings) {
       var opts = (settings && settings.options) || {};
       this.options = _.extend({}, this.defaults, opts);
@@ -103,6 +105,13 @@
       if (this.map && this.map instanceof L.Map) {
         this.map.removeLayer(layerInstance);
       }
+    },
+
+    addCartoTooltip: function(data) {
+      L.popup()
+        .setLatLng(data.latLng)
+        .setContent(this.template(data))
+        .openOn(this.map);
     }
 
   });

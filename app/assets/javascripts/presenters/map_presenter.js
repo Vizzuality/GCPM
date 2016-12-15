@@ -139,15 +139,7 @@
       this.utfGrid = layerOptions.layers.utfGrid;
 
       this.map.addLayer(this.cartoLayer);
-      this.map.addLayer(this.utfGrid, {
-          resolution: 2
-        });
-
-      this.utfGrid.on('click', function (e) {
-        if (e.data) {
-          // console.log(e.data.country);
-        }
-      });
+      this.addUtfGridLayer();
 
       this.setState({
         cartoLayer: layerOptions.name
@@ -155,6 +147,24 @@
       App.trigger('Map:change', _.extend({}, this.getState(), {
         cartoLayer: layerOptions.name
       }));
+    },
+
+    addUtfGridLayer: function() {
+      this.map.addLayer(this.utfGrid, {
+        resolution: 2
+      });
+
+      this.utfGrid.on('click', function (e) {
+        if (e.data) {
+          var data = {
+            title: e.data.country_name ? e.data.country_name : null,
+            value: e.data.value ? e.data.value : 'No data',
+            latLng: e.latlng
+          };
+
+          this.map.addCartoTooltip(data);
+        }
+      }.bind(this));
     },
 
     /**

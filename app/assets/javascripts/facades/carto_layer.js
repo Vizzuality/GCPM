@@ -16,7 +16,6 @@
       var mapconfig = {
         "version": "1.3.1",
         "layers": [{
-          "user_name": "crm",
           "type": "cartodb",
           "options": {
             "cartocss_version": "2.3.0",
@@ -36,24 +35,15 @@
 
       return promise.then(function(data) {
         var tileUrl = 'https://' + this.db + '.carto.com/api/v1/map/' + data.layergroupid + '/0/{z}/{x}/{y}';
-        var layer = new L.tileLayer(this.getUrl('png', tileUrl));
-        var utfGrid = new L.UtfGrid(this.getUrl('grid.json', tileUrl));
+        var pngUrl = tileUrl + '.png'
+        var utfUrl = tileUrl + '.grid.json?callback={cb}';
 
         return {
-          layer: layer,
-          utfGrid: utfGrid
+          layer: new L.tileLayer(pngUrl),
+          utfGrid: new L.UtfGrid(utfUrl)
         };
+
       }.bind(this));
-    },
-
-    getUrl: function(format, minUrl) {
-      var url = minUrl + '.' + format;
-
-      if (format === 'grid.json') {
-        return url + '?callback={cb}';
-      }
-
-      return url;
     }
 
   };
