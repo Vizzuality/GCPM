@@ -132,10 +132,23 @@
      */
     addCartoLayer: function(layerOptions) {
       if (this.cartoLayer) {
+        this.map.removeLayer(this.utfGrid);
         this.map.removeLayer(this.cartoLayer);
       }
-      this.cartoLayer = layerOptions.layer;
+      this.cartoLayer = layerOptions.layers.layer;
+      this.utfGrid = layerOptions.layers.utfGrid;
+
       this.map.addLayer(this.cartoLayer);
+      this.map.addLayer(this.utfGrid, {
+          resolution: 2
+        });
+
+      this.utfGrid.on('click', function (e) {
+        if (e.data) {
+          // console.log(e.data.country);
+        }
+      });
+
       this.setState({
         cartoLayer: layerOptions.name
       }, true);
