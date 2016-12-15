@@ -77,6 +77,10 @@
               {
                 name: 'Incidence, ASR all years Globocan',
                 slug: 'incidence-asr-all-years-globocan'
+              },
+              {
+                name: 'Prevalence, 1-year adults only, Globocan',
+                slug: 'prevalence-1-year-adults-only-globocan'
               }
             ]
           }
