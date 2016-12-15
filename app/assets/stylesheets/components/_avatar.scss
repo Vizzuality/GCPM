@@ -12,7 +12,7 @@
   background-size: cover;
 
   &.-ph {
-    background-image: asset-url('placeholder.png');
+    // background-image: asset-url('placeholder.png');
     background-size: cover;
   }
 
@@ -45,6 +45,10 @@
 
   &.-mg-bt {
     margin-bottom: $base-space;
+  }
+
+  &.-no-bg {
+    background-color: transparent;
   }
 
   img {

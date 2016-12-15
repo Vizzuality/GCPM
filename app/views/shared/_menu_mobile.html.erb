@@ -7,7 +7,15 @@
   <% if user_signed_in? %>
     <div class="js-mobile-user-menu menu-content -default <%= active_page?(user_session_path) ? '-active' : '' %>">
       <button class="user-btn">
-        <div class="c-avatar -normal" style="background-image: url(<%= current_user.avatar_url(:thumb) %>)"></div>
+        <% if current_user.present? && current_user.avatar.present? %>
+         <div class="c-avatar -no-bg -normal"
+               style="background-image: url(<%= current_user.avatar_url(:thumb) %>)">
+          </div>
+        <% else %>
+          <div class="c-avatar -normal -secondary">
+            <%= render 'shared/placeholder', person: current_user, size: '-big' %>
+          </div>
+        <% end %>
       </button>
     </div>
   <% end %>

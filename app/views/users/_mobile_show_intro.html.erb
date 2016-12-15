@@ -6,9 +6,15 @@
   <div class="wrapper">
     <div class="row collapse">
       <div class="column small-12 medium-8">
-        <div class="c-avatar -medium -ph -mg-bt -align-center"
-             style="background-image: url(<%= user.avatar_url(:thumb) %>)">
-        </div>
+        <% if user.avatar.present? %>
+           <div class="c-avatar -medium -ph -mg-bt -align-center -no-bg"
+               style="background-image: url(<%= user.avatar_url(:thumb) %>)">
+          </div>
+        <% else %>
+           <div class="c-avatar -medium -ph -mg-bt -align-center -secondary">
+            <%= render 'shared/placeholder', person: user, size: '-av-big' %>
+          </div>
+        <% end %>
       </div>
     </div>
     <div class="row collapse -centered">

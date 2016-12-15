@@ -19,9 +19,11 @@
       var organizationType = new App.Presenter.OrganizationType();
       var organizationLatitude = new App.Presenter.OrganizationLatitude();
       var organizationLongitude = new App.Presenter.OrganizationLongitude();
+      var organizationCity = new App.Presenter.OrganizationCity();
+
 
       this.children = [organizationName, organizationType, organizationCountry,
-         organizationLatitude, organizationLongitude];
+         organizationLatitude, organizationLongitude, organizationCity];
 
       this.modal = new App.View.Modal();
       this.organizationForm = new App.View.OrganizationForm({

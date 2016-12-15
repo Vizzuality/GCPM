@@ -28,6 +28,21 @@
     height: 24px;
   }
 
+  &.-av-small {
+    width: 30px;
+    height: 30px;
+  }
+
+  &.-av-normal {
+    width: 40px;
+    height: 40px;
+  }
+
+  &.-av-big {
+    width: 120px;
+    height: 120px;
+  }
+
   &.-primary { fill: $dark-sky-blue; }
   &.-secondary { fill: $secondary-color; }
   &.-inverse { fill: $body-bg-color; }

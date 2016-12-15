@@ -132,16 +132,39 @@
      */
     addCartoLayer: function(layerOptions) {
       if (this.cartoLayer) {
+        this.map.removeLayer(this.utfGrid);
         this.map.removeLayer(this.cartoLayer);
       }
-      this.cartoLayer = layerOptions.layer;
+      this.cartoLayer = layerOptions.layers.layer;
+      this.utfGrid = layerOptions.layers.utfGrid;
+
       this.map.addLayer(this.cartoLayer);
+      this.addUtfGridLayer();
+
       this.setState({
         cartoLayer: layerOptions.name
       }, true);
       App.trigger('Map:change', _.extend({}, this.getState(), {
         cartoLayer: layerOptions.name
       }));
+    },
+
+    addUtfGridLayer: function() {
+      this.map.addLayer(this.utfGrid, {
+        resolution: 2
+      });
+
+      this.utfGrid.on('click', function (e) {
+        if (e.data) {
+          var data = {
+            title: e.data.country_name ? e.data.country_name : null,
+            value: e.data.value ? e.data.value : 'No data',
+            latLng: e.latlng
+          };
+
+          this.map.addCartoTooltip(data);
+        }
+      }.bind(this));
     },
 
     /**
