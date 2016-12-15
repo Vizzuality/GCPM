@@ -11,7 +11,6 @@
 
       return this.create();
     },
-
     /* Returns carto layer */
     create: function() {
       var mapconfig = {
@@ -19,26 +18,31 @@
         "layers": [{
           "type": "cartodb",
           "options": {
-            "cartocss_version": "2.1.1",
+            "cartocss_version": "2.3.0",
             "cartocss": this.cartocss,
-            "sql": this.sql
+            "sql": this.sql,
+            "interactivity": ["country_name", "value"]
           }
         }]
       };
 
       var promise = $.ajax({
-        crossOrigin: true,
-        type: 'POST',
-        dataType: 'json',
-        contentType: 'application/json',
-        url: 'https://' + this.db + '.carto.com/api/v1/map',
-        data: JSON.stringify(mapconfig)
+        url: 'https://' + this.db + '.cartodb.com/api/v1/map',
+        data: {
+          config: decodeURIComponent(JSON.stringify(mapconfig))
+        }
       });
 
       return promise.then(function(data) {
-        var tileUrl = 'https://' + this.db + '.carto.com/api/v1/map/' + data.layergroupid + '/{z}/{x}/{y}.png';
-        var layer = L.tileLayer(tileUrl);
-        return layer;
+        var tileUrl = 'https://' + this.db + '.carto.com/api/v1/map/' + data.layergroupid + '/0/{z}/{x}/{y}';
+        var pngUrl = tileUrl + '.png'
+        var utfUrl = tileUrl + '.grid.json?callback={cb}';
+
+        return {
+          layer: new L.tileLayer(pngUrl),
+          utfGrid: new L.UtfGrid(utfUrl)
+        };
+
       }.bind(this));
     }
 

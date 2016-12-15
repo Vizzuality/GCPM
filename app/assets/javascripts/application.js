@@ -10,6 +10,7 @@
 //= require pickadate/picker
 //= require pickadate/picker.date
 //= require PruneCluster/PruneCluster
+//= require leafletUtfGrid/leaflet.utfgrid
 //= require d3
 //= require c3
 

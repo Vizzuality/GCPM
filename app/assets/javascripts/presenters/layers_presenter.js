@@ -120,8 +120,11 @@
         };
 
         /* Create layer */
-        this.fc.getLayer(options).done(function(layer) {
-          App.trigger('Layer:change', {layer: layer, name: element.id});
+        this.fc.getLayer(options).done(function(layers) {
+          App.trigger('Layer:change', {
+            name: element.id,
+            layers: layers
+          });
         }.bind(this));
       } else {
         App.trigger('Layer:remove', null);
