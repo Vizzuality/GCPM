@@ -4,11 +4,15 @@
 <div class="l-app-title">
   <div class="row collapse wrapper">
     <div class="column small-12 medium-8">
-      <div class="c-avatar -medium -ph -mg-bt -align-center"
-           style="<% if inv_user.present? %>
-                    background-image: url(<%= inv_user.avatar_url(:thumb) %>)
-                  <% end %>">
-      </div>
+      <% if @investigator.user.present? && @investigator.user.avatar.present? %>
+        <div class="c-avatar -medium -ph -mg-bt -align-center"
+             style="background-image: url(<%= inv_user.avatar_url(:thumb) %>)">
+        </div>
+      <% else %>
+        <div class="c-avatar -medium -ph -mg-bt -align-center">
+          <%= render 'shared/placeholder', person: @investigator, size: '-av-big' %>
+        </div>
+      <% end %>
     </div>
   </div>
   <div class="row collapse wrapper -centered">

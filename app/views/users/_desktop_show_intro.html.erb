@@ -9,9 +9,15 @@
   <div class="wrapper">
     <div class="row collapse">
       <div class="column small-8">
-        <div class="c-avatar -big -mg-bt"
-             style="background-image: url(<%= user.avatar_url(:thumb) %>)">
-        </div>
+        <% if user.avatar.present? %>
+           <div class="c-avatar -big -mg-bt -no-bg"
+               style="background-image: url(<%= user.avatar_url(:thumb) %>)">
+          </div>
+        <% else %>
+           <div class="c-avatar -big -mg-bt -secondary">
+            <%= render 'shared/placeholder', person: user, size: '-av-big' %>
+          </div>
+        <% end %>
       </div>
     </div>
     <div class="row collapse">

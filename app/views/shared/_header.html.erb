@@ -36,7 +36,15 @@
               </li>
               <li class="js-user-menu <%= active_page?(user_session_path) ? '-active' : '' %>">
                 <button class="user-btn">
-                  <div class="c-avatar" style="background-image: url(<%= current_user.avatar_url(:thumb) %>)"></div>
+                  <% if current_user.present? && current_user.avatar.present? %>
+                   <div class="c-avatar -no-bg"
+                         style="background-image: url(<%= current_user.avatar_url(:thumb) %>)">
+                    </div>
+                  <% else %>
+                    <div class="c-avatar">
+                      <%= render 'shared/placeholder', person: current_user, size: '-av-normal' %>
+                    </div>
+                  <% end %>
                 </button>
                 <%= render 'shared/user_menu' %>
               </li>
