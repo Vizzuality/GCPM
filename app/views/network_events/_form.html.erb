@@ -52,6 +52,18 @@
 
     <div class="form-row row">
       <div class="column small-12 medium-5 medium-offset-1">
+        <h4 class="c-title">Private</h4>
+        <%= f.input :private, as: :radio_buttons, label: false %>
+      </div>
+
+      <div class="column small-12 medium-5">
+        <h4 class="c-title">Online</h4>
+        <%= f.input :online, as: :radio_buttons, label: false, input_html: { class: "js-online" }, checked: @event.online.present? ? @event.online : false %>
+      </div>
+    </div>
+
+    <div class="form-row row">
+      <div class="column small-12 medium-5 medium-offset-1">
         <h4 class="c-title">Website</h4>
         <%= f.input :website, as: :string , placeholder: "http://www.example.org", label: false %>
       </div>
@@ -62,65 +74,57 @@
       </div>
     </div>
 
-    <div class="form-row row">
-      <div class="column small-12 medium-5 medium-offset-1">
-        <h4 class="c-title">Address</h4>
-        <%= f.input :address, as: :string, label: false %>
+    <div class="address-info">
+      <div class="form-row row">
+        <div class="column small-12 medium-5 medium-offset-1">
+          <h4 class="c-title">Address</h4>
+          <%= f.input :address, as: :string, label: false %>
+        </div>
+
+        <div class="column small-12 medium-5">
+          <h4 class="c-title">Address 2</h4>
+          <%= f.input :address2, as: :string, label: false %>
+        </div>
       </div>
 
-      <div class="column small-12 medium-5">
-        <h4 class="c-title">Address 2</h4>
-        <%= f.input :address2, as: :string, label: false %>
+      <div class="form-row"> <div class="form-row row">
+        <div class="column small-12 medium-5 medium-offset-1">
+          <h4 class="c-title">Countries</h4>
+          <% f.input :country, as: :select, collection: Country.all.pluck(:country_name), label: false %>
+          <div id="countries" class="c-select"></div>
+          <p class="required">* Required field</p>
+        </div>
+
+        <div class="column small-12 medium-5">
+          <h4 class="c-title">City</h4>
+          <%= f.input :city, label: false %>
+          <p class="required">* Required field</p>
+        </div>
+      </div>
+
+      <div class="form-row row">
+        <div class="column small-12 medium-5 medium-offset-1">
+          <h4 class="c-title">State</h4>
+          <%= f.input :state, label: false %>
+        </div>
+
+        <div class="column small-12 medium-5">
+          <h4 class="c-title">Postcode</h4>
+          <%= f.input :postcode, label: false %>
+        </div>
+      </div>
+
+      <div class="form-row row">
+        <div class="column small-12 medium-10 medium-offset-1">
+          <h4 class="c-title">Latitude</h4>
+          <p class="hint">Select the location where you want to show your event on the map</p>
+          <div id="map" class="c-map -relative -target"></div>
+          <%= f.hidden_field :latitude, label: false %>
+          <%= f.hidden_field :longitude, label: false %>
+        </div>
       </div>
     </div>
 
-    <div class="form-row"> <div class="form-row row">
-      <div class="column small-12 medium-5 medium-offset-1">
-        <h4 class="c-title">Countries</h4>
-        <% f.input :country, as: :select, collection: Country.all.pluck(:country_name), label: false %>
-        <div id="countries" class="c-select"></div>
-        <p class="required">* Required field</p>
-      </div>
-
-      <div class="column small-12 medium-5">
-        <h4 class="c-title">City</h4>
-        <%= f.input :city, label: false %>
-      </div>
-    </div>
-
-    <div class="form-row row">
-      <div class="column small-12 medium-5 medium-offset-1">
-        <h4 class="c-title">State</h4>
-        <%= f.input :state, label: false %>
-      </div>
-
-      <div class="column small-12 medium-5">
-        <h4 class="c-title">Postcode</h4>
-        <%= f.input :postcode, label: false %>
-      </div>
-    </div>
-
-    <div class="form-row row">
-      <div class="column small-12 medium-10 medium-offset-1">
-        <h4 class="c-title">Latitude</h4>
-        <p class="hint">Select the location where you want to show your event on the map</p>
-        <div id="map" class="c-map -relative -target"></div>
-        <%= f.hidden_field :latitude, label: false %>
-        <%= f.hidden_field :longitude, label: false %>
-      </div>
-    </div>
-
-    <div class="form-row row -mg-big">
-      <div class="column small-12 medium-5 medium-offset-1">
-        <h4 class="c-title">Private</h4>
-        <%= f.input :private, as: :radio_buttons, label: false %>
-      </div>
-
-      <div class="column small-12 medium-5">
-        <h4 class="c-title">Online</h4>
-        <%= f.input :online, as: :radio_buttons, label: false %>
-      </div>
-    </div>
 
     <div class="form-row row -mg-big">
       <div class="column small-12 medium-5 medium-offset-1">

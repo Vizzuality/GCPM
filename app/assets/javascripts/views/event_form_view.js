@@ -5,10 +5,22 @@
   App.View.EventForm = Backbone.View.extend({
 
     events: {
+      'click .js-online': 'handleOnline',
       'submit form': 'triggerSubmit'
     },
 
     initialize: function() {
+      this.cache();
+    },
+
+    cache: function() {
+      this.$addressInfo = this.$el.find('.address-info');
+      this.$online = this.$el.find('.js-online');
+      this.$address = this.$el.find('#event_address');
+      this.$address2 = this.$el.find('#event_address2');
+      this.$city = this.$el.find('#event_city');
+      this.$state = this.$el.find('#event_state');
+      this.$postcode = this.$el.find('#event_postcode');
     },
 
     getLocation: function() {
@@ -19,8 +31,8 @@
     },
 
     setLocation: function(center) {
-      this.$el.find('#event_latitude').val(center.lat.toFixed(2));
-      this.$el.find('#event_longitude').val(center.lng.toFixed(2));
+      this.$el.find('#event_latitude').val(Number(center.lat).toFixed(2));
+      this.$el.find('#event_longitude').val(Number(center.lng).toFixed(2));
     },
 
 
@@ -107,7 +119,30 @@
       });
 
       return body
+    },
+
+    handleOnline: function(e) {
+      this.trigger('online', e.target.value);
+    },
+
+    toggleOnline: function(value) {
+      var boolValue = value == 'true';
+      boolValue && this.resetAddressInfo();
+      this.$addressInfo.toggleClass('hiddeable', boolValue);
+    },
+
+    resetAddressInfo: function() {
+      var $country = this.$el.find('select[name="event[country]"]');
+      var $container = this.$el.find('#countries .select2-selection.select2-selection--single');
+      var reset = [this.$address, this.$address2, $country, this.$city, this.$state, this.$postcode];
+
+      _.each(reset, function(input) {
+        input.val('');
+      });
+
+      $container.html('<span class="select2-selection__rendered" id="select2-eventcountry-d0-container"><span class="select2-selection__placeholder">All countries</span></span>');
     }
+
   });
 
 })(this.App);
