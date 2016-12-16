@@ -26,7 +26,6 @@
     initialize: function(params) {
       this.state = new StateModel(params);
 
-
       var regions = new App.Presenter.Regions({
         label: null,
         addNew: false
@@ -68,6 +67,7 @@
 
       this.modal = new App.View.Modal();
       this.filterForm = new App.View.FilterForm({
+        data: params.data,
         children: this.children
       });
 
@@ -102,6 +102,7 @@
       }, this);
 
       App.on('TabNav:change Breadcrumbs:change Map:change', function(newState){
+        this.filterForm.setData(newState.data);
         this.setState(newState, { silent: true });
       }, this);
     },
