@@ -5,7 +5,7 @@
   var cartoLayerFacade = {
 
     getLayer: function(params) {
-      this.db = params.db || 'crm';
+      this.db = params.db || '<%= RAILS_ENV["CARTODB_ACCOUNT"] %>';
       this.cartocss = params.cartocss;
       this.sql = params.sql;
 
