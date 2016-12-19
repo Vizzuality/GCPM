@@ -14,6 +14,7 @@
 
     initialize: function(settings) {
       this.children = (settings && settings.children)||{};
+      this.data = settings && settings.data ? settings.data : 'projects';
     },
 
     render: function() {
@@ -25,6 +26,8 @@
       _.each(this.children, function(presenter) {
         presenter.setElement(presenter.getElement().selector);
       }, this);
+
+      this.handleFiltersByData();
 
       return this;
     },
@@ -101,7 +104,16 @@
       }.bind(this));
 
       return body
+    },
+
+    setData: function(data) {
+      this.data = data;
+    },
+
+    handleFiltersByData: function() {
+      $('.c-modal .-projects').toggleClass('-hidden', this.data == 'events');
     }
+
   });
 
 })(this.App);

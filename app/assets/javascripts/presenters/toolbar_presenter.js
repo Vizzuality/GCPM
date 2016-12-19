@@ -43,10 +43,12 @@
       return this.state.attributes;
     },
 
-    setActiveFilters: function() {
-      var filters = _.pick(this.getState(), 'countries[]', 'cancer_types[]',
-        'organization_types[]', 'organizations[]', 'project_types[]',
-        'start_date', 'end_date');
+    setActiveFilters: function(state) {
+      var filters = state.get('data') != 'events' ?
+        _.pick(this.getState(), 'regions[]', 'countries[]', 'cancer_types[]',
+          'organization_types[]', 'organizations[]', 'project_types[]', 'funding_sources[]',
+          'start_date', 'end_date') :
+        _.pick(this.getState(), 'regions[]', 'countries[]', 'start_date', 'end_date');
 
       var activeFilters = _.filter(filters, function(value){
         var active;

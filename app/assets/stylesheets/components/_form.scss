@@ -147,3 +147,9 @@ label {
     margin-bottom: $inline-space;
   }
 }
+
+.-projects {
+  &.-hidden {
+    display: none;
+  }
+}
