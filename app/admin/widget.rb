@@ -1,5 +1,6 @@
 ActiveAdmin.register Widget do
   menu parent: "Graphics", priority: 1
+  extend Featurable
 
   permit_params :name, :slug, :graphic_type, :x_axis, :y_axis, :legend, :source, :query
 
@@ -15,7 +16,13 @@ ActiveAdmin.register Widget do
       f.input :query
       f.input :graphic_type, as: :select, collection: ['line', 'map', 'pie', 'bar']
     end
-    f.actions
+    actions do |obj|
+      if obj.featured?
+        link_to("Unfeature", unfeature_admin_project_path(obj))
+      else
+        link_to("Feature", feature_admin_project_path(obj))
+      end
+    end
   end
 
   index do
