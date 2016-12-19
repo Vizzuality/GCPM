@@ -40,7 +40,7 @@
 
       $.when.apply($, promises).done(function() {
         this.setState(params, { silent: true });
-        this.getParsedFilters();
+        this.getParsedFilters(params.data);
       }.bind(this));
     },
 
@@ -56,7 +56,7 @@
     setSubscriptions: function() {
       App.on('FilterForm:change TabNav:change Breadcrumbs:change Map:change', function(newState){
         this.setState(newState, { silent: true });
-        this.getParsedFilters();
+        this.getParsedFilters(newState.data);
       }, this);
     },
 
@@ -74,7 +74,7 @@
       return this.state.attributes
     },
 
-    getParsedFilters: function() {
+    getParsedFilters: function(dataValue) {
       var state = _.pick(this.getState(), 'regions[]', 'countries[]', 'cancer_types[]', 'organizations[]', 'organization_types[]', 'project_types[]', 'funding_sources[]', 'start_date', 'end_date');
       var countries = this.countries.toJSON(),
           regions = this.countries.getRegions();
@@ -101,31 +101,31 @@
           case 'cancer_types[]':
             if (value) {
               _value = this.getValue(value, cancerTypes);
-              return (_value) ? { value: _value } : null;
+              return (_value) ? { value: _value, projects: true } : null;
             }
           break
           case 'organizations[]':
             if (value) {
               _value = this.getValue(value, organizations);
-              return (_value) ? { value: _value } : null;
+              return (_value) ? { value: _value, projects: true } : null;
             }
           break
           case 'organization_types[]':
             if (value) {
               _value = this.getValue(value, organizationTypes);
-              return (_value) ? { value: _value } : null;
+              return (_value) ? { value: _value, projects: true } : null;
             }
           break
           case 'project_types[]':
             if (value) {
               _value = this.getValue(value, projectTypes);
-              return (_value) ? { value: _value } : null;
+              return (_value) ? { value: _value, projects: true } : null;
             }
           break
           case 'funding_sources[]':
             if (value) {
               _value = this.getValue(value, fundingSources);
-              return (_value) ? { value: _value } : null;
+              return (_value) ? { value: _value, projects: true } : null;
             }
           break
           case 'start_date':
@@ -146,7 +146,7 @@
         return null;
       }.bind(this)));
 
-      this.filterBar.updateFilters(data);
+      this.filterBar.updateFilters(data, dataValue);
     },
 
     getValue: function(value, arr) {
