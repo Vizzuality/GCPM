@@ -12,6 +12,7 @@ class NetworkEventsController < ApplicationController
   end
 
   def edit
+    gon.online = @event.online
   end
 
   def new
@@ -19,6 +20,11 @@ class NetworkEventsController < ApplicationController
   end
 
   def update
+    if !@event.online
+      render :edit, error: true and return if !@event.country.present? || @event.country == ''
+      render :edit, error: true and return if !@event.city.present? || @event.city == ''
+    end
+
     if @event.update(event_params)
       redirect_to event_path(@event.slug_or_id), notice: 'Event succesfully updated.'
     else
@@ -28,11 +34,18 @@ class NetworkEventsController < ApplicationController
 
   def create
     @event = @user.events.build(event_params)
+
+    if !@event.online
+      render :new, error: true and return if !@event.country.present? || @event.country == ''
+      render :new, error: true and return if !@event.city.present? || @event.city == ''
+    end
+
     if @event.save
       redirect_to event_path(@event.slug_or_id)
     else
       render :new, error: true
     end
+
   end
 
   def destroy

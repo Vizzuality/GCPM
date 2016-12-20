@@ -8,19 +8,23 @@
 
     initialize: function() {
       this.data = [];
+      this.dataValue = 'projects'
       this.render();
     },
 
-    updateFilters: function(data) {
+    updateFilters: function(data, dataValue) {
       this.data = data;
+      this.dataValue = dataValue;
       this.render();
       this.$el.toggleClass('-active', !!this.data.length);
     },
 
     render: function() {
-      this.$el.html(this.template({
-        filters: this.data
-      }));
+      var obj = {
+        filters: this.data,
+        all: this.dataValue != 'events'
+      };
+      this.$el.html(this.template(obj));
     }
 
   });

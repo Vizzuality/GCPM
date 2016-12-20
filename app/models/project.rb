@@ -82,6 +82,8 @@ class Project < ApplicationRecord
   scope :by_start_date,         -> start_date          { where('projects.start_date > ?', start_date ) }
   scope :by_end_date,           -> end_date            { where('projects.end_date < ?', end_date ) }
   scope :by_user,               -> user                { joins(:project_users).where('project_users.user_id = ? AND project_users.is_approved = ?', user, true ) }
+  scope :by_funding_sources,    -> funding_sources     { joins(:funders).where(funders: { organization_id: funding_sources }) }
+  scope :for_render,            ->                     { includes(:cancer_types, :project_types, :specialities, :countries, :organizations) }
 
   class << self
     def fetch_all(options={})
@@ -97,6 +99,7 @@ class Project < ApplicationRecord
       projects = projects.by_start_date(options[:start_date])                 if options[:start_date]
       projects = projects.by_end_date(options[:end_date])                     if options[:end_date]
       projects = projects.by_user(options[:user])                             if options[:user]
+      projects = projects.by_funding_sources(options[:funding_sources])       if options[:funding_sources].present?
       projects = projects.order('projects.created_at ASC')                    if options[:sortby] && options[:sortby] == 'created_asc'
       projects = projects.order('projects.created_at DESC')                   if options[:sortby] && options[:sortby] == 'created_desc'
       projects = projects.order('projects.title ASC')                         if options[:sortby] && options[:sortby] == 'title_asc'

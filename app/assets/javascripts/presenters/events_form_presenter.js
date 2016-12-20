@@ -3,6 +3,8 @@
 
   'use strict';
 
+  var StateModel = Backbone.Model.extend({});
+
   App.Presenter.EventForm = function() {
     this.initialize.apply(this, arguments);
   };
@@ -10,6 +12,8 @@
   _.extend(App.Presenter.EventForm.prototype, {
 
     initialize: function() {
+      this.state = new StateModel({ online: 'false' });
+
       this.pickdate_start = new App.Presenter.PickadateStart({
         name: 'event[start_date]'
       });
@@ -34,8 +38,8 @@
         }
       });
 
-      this.render();
       this.setEvents();
+      this.render();
     },
 
     render: function() {
@@ -62,17 +66,36 @@
 
       // Location
       this.eventsForm.setLocation(this.eventsForm.getLocation());
+
+      var online = this.eventsForm.$el.find('.js-online').filter("[name='event[online]']:checked").val();
+      online == 'true' && this.handleOnline(online);
     },
 
     setEvents: function() {
+      this.state.on('change', this.toggleOnline, this);
+
       this.eventsForm.on('submit', function() {
         ga('send', 'event', 'Users', 'Add data', 'Add event');
       });
+
+      this.eventsForm.on('online', this.handleOnline, this);
 
       this.view.on('pan', function(){
         var center = this.view.map.getCenter();
         this.eventsForm.setLocation(center);
       }.bind(this));
+    },
+
+    setState: function(newState) {
+      this.state.set(newState);
+    },
+
+    handleOnline: function(value) {
+      this.state.get('online') != value && this.setState({ online: value });
+    },
+
+    toggleOnline: function() {
+      this.eventsForm.toggleOnline(this.state.get('online'));
     }
 
   });

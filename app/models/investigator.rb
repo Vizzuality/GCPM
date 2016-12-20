@@ -52,7 +52,7 @@ class Investigator < ApplicationRecord
   scope :by_specialities,       -> specialities       { joins(projects: :specialities).where(specialities: { id: specialities }) }
   scope :by_investigators,      -> investigators      { joins(:investigators).where(investigators: { id: investigators }) }
   scope :by_organizations,      -> organizations      { joins(:organizations).where(organizations: { id: organizations }) }
-  scope :by_funding_sources,    -> funding_sources   { joins(projects: :funders).where(funders: { organization_id: funding_sources }) }
+  scope :by_funding_sources,    -> funding_sources    { joins(projects: :funders).where(funders: { organization_id: funding_sources }) }
   scope :by_organization_types, -> organization_types { joins(organizations: :organization_type).where(organization_types: { id: organization_types }) }
   scope :by_countries,          -> countries          { joins([research_units: [address: :country]]).where(countries: { country_iso_3: countries }) }
   scope :by_regions,            -> regions            { joins(projects: :countries).where(countries: { region_iso: regions }) }
@@ -60,6 +60,7 @@ class Investigator < ApplicationRecord
   scope :by_end_date,           -> end_date           { joins(:projects).where('projects.end_date < ?', end_date ) }
   scope :by_user,               -> user               { where('investigators.user_id = ? AND investigators.is_approved = ?', user, true ) }
   scope :user_present,          ->                    { where.not(investigators: { user_id: nil } ) }
+  scope :for_render,            ->                    { includes(:organizations, [organizations: :addresses]) }
 
   def graph
     self.projects.includes(:investigators)
@@ -67,7 +68,7 @@ class Investigator < ApplicationRecord
 
   class << self
     def fetch_all(options={})
-      investigators = Investigator.all
+      investigators = Investigator.all.for_render
       investigators = investigators.by_countries(options[:countries])                   if options[:countries]
       investigators = investigators.by_regions(options[:regions])                       if options[:regions]
       investigators = investigators.by_investigators(options[:investigators])           if options[:investigators]
@@ -77,7 +78,7 @@ class Investigator < ApplicationRecord
       investigators = investigators.by_countries(options[:countries])                   if options[:countries]
       investigators = investigators.by_regions(options[:regions])                       if options[:regions]
       investigators = investigators.by_organizations(options[:organizations])           if options[:organizations]
-      investigators = investigators.by_funding_sources(options[:funding_sources])           if options[:funding_sources]
+      investigators = investigators.by_organizations(options[:funding_sources])         if options[:funding_sources]
       investigators = investigators.by_organization_types(options[:organization_types]) if options[:organization_types]
       investigators = investigators.by_start_date(options[:start_date])                 if options[:start_date]
       investigators = investigators.by_end_date(options[:end_date])                     if options[:end_date]

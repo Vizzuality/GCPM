@@ -121,7 +121,8 @@ label {
 .hiddeable {
   visibility: none;
   position: absolute;
-  top: -1000px;
+  top: -10000000000px;
+  transition: all .3s $easeOutCubic;
 }
 
 .required {
@@ -144,5 +145,11 @@ label {
     font-size: $small-font-size;
     color: red;
     margin-bottom: $inline-space;
+  }
+}
+
+.-projects {
+  &.-hidden {
+    display: none;
   }
 }

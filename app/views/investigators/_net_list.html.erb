@@ -4,11 +4,16 @@
       <div class="column small-12 medium-6">
         <div class="c-card -person<% !browser.device.mobile? ? ' -pad-bigger -no-shadow' : '' %>">
           <div class="icons">
-            <div class="c-avatar -ph<% !browser.device.mobile? ? ' -medium -mg-bt' : ' -normal' %>"
-                 style="<% if e.user.present? %>
-                          background-image: url(<%= e.user.avatar_url(:thumb) %>)
-                        <% end %>">
-            </div>
+            <% if e.user.present? && e.user.avatar.present? %>
+               <div class="c-avatar -ph -no-bg<% !browser.device.mobile? ? ' -medium -mg-bt' : ' -normal' %>"
+                   style="background-image: url(<%= e.user.avatar_url(:thumb) %>)">
+              </div>
+            <% else %>
+               <div class="c-avatar -ph<% !browser.device.mobile? ? ' -medium -mg-bt' : ' -normal' %>">
+                <%= render 'shared/placeholder', person: e, size: '-av-normal' %>
+              </div>
+            <% end %>
+
             <% if e.user.present? && is_owner?(@user, current_user) && browser.device.mobile? %>
               <button class="c-btn -icon -secondary js-btn-toggle-message" data-user="<%= e.user.id %>-i" type="button" name="button">
                 <svg class="c-icon -normal -inverse"><use xlink:href="#icon-message"></use></svg>
@@ -37,8 +42,8 @@
           <div>
             <h2><%= link_to e.name, investigator_path(e.slug_or_id) %></h2>
             <% e.organizations.each do |o|%>
-              <h3><%= link_to o.name, organization_path(o.slug) %></h3>
-              <h3><%= o.addresses.map{|a| [a.city, a.country_name]}.uniq.join(', ') %></h3>
+              <h3><%= link_to o.try(:name), organization_path(o.slug_or_id) %></h3>
+              <h3><%= o.addresses.map{|a| [a.try(:city), a.try(:country_name)]}.uniq.join(', ') %></h3>
             <% end %>
 
             <% if e.user.present? && is_owner?(@user, current_user) && !browser.device.mobile? %>

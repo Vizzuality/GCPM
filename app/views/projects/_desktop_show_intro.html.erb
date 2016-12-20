@@ -20,11 +20,15 @@
         <div class="c-summary-info row -collapse">
 
           <div class="column small-12 large-4 align-middle">
-            <div class="c-avatar -small -ph"
-                 style="<% if @project.project_lead.present? && @project.project_lead.user.present? %>
-                          background-image: url(<%= @project.project_lead.user.avatar_url(:thumb) %>)
-                        <% end %>">
-            </div>
+            <% if @project.project_lead.present? && @project.project_lead.user.present? && @project.project_lead.user.avatar.present? %>
+              <div class="c-avatar -small -ph"
+                   style="background-image: url(<%= @project.project_lead.user.avatar_url(:thumb) %>)">
+              </div>
+            <% else %>
+              <div class="c-avatar -small -ph">
+                <%= render 'shared/placeholder', person: @project.project_lead, size: '-big' %>
+              </div>
+            <% end %>
 
             <h3>
               <% if @project.project_lead.present? && @project.project_lead.name != '' %>

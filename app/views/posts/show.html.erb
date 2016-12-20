@@ -11,11 +11,16 @@
       <div class="row">
         <div class="column small-12 medium-8 align-middle">
           <div class="investigator">
-            <div class="c-avatar -ph -small"
-                 style="<% if investigator.present? %>
-                        background-image: url(<%= investigator.avatar_url(:thumb) %>)
-                      <% end %>">
-            </div>
+            <% if investigator.avatar.present? %>
+               <div class="c-avatar -ph -small -no-bg"
+                   style="background-image: url(<%= investigator.avatar_url(:thumb) %>)">
+              </div>
+            <% else %>
+               <div class="c-avatar -ph -small">
+                <%= render 'shared/placeholder', person: investigator, size: '-av-big' %>
+              </div>
+            <% end %>
+
             <p><%= investigator.present? && investigator.try(:name) %></p>
           </div>
         </div>

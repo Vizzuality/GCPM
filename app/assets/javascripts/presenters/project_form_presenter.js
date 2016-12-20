@@ -212,6 +212,7 @@
                 investigator_id: investigator,
                 address_attributes: {
                   country_id: organization.organizationCountry,
+                  city: organization.organizationCity,
                   organization_attributes: {
                     name: organization.organizationName,
                     organization_type_id: organization.organizationType
@@ -240,6 +241,7 @@
                   addresses_attributes: [
                     {
                       country_id: organization.organizationCountry,
+                      city: organization.organizationCity,
                       organization_attributes: {
                         name: organization.organizationName,
                         organization_type_id: organization.organizationType
