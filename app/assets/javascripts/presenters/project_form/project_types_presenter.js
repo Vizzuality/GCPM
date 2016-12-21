@@ -16,6 +16,7 @@
       label: 'Project types',
       placeholder: 'All project types',
       blank: null,
+      required: true,
       addNew: false,
       select2Options: {
         // closeOnSelect: false

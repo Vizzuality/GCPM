@@ -17,6 +17,7 @@
         DOMelement: "#investigator-1",
         name: "investigator-1",
         label: null,
+        required: true,
         addNew: true,
         multiple: false
       });
@@ -24,6 +25,7 @@
         DOMelement: "#organization-1",
         name: "organization-1",
         label: null,
+        required: true,
         addNew: true,
         multiple: false
       });
@@ -31,6 +33,7 @@
         DOMelement: "#address-1",
         name: "address-1",
         label: null,
+        required: true,
         addNew: false,
         multiple: false
       });
