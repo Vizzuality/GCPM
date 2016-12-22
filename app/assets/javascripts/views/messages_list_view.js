@@ -6,14 +6,16 @@
 
     template: HandlebarsTemplates['messages_list'],
 
-    initialize: function(settings) {
-      this.el = settings && settings.el;
+    initialize: function() {
       this.messages = [];
-      this.render();
     },
 
     render: function() {
       this.$el.html(this.template({ messages: this.messages }));
+
+      // Rebinding elements and events
+      this.delegateEvents();
+
       return this;
     },
 
@@ -23,8 +25,6 @@
       } else {
         this.messages = [];
       }
-
-      this.render();
     }
 
   });

@@ -17,7 +17,7 @@
         DOMelement: "#investigator-1",
         name: "investigator-1",
         label: null,
-        required: true,
+        required: this.state.get('required'),
         addNew: true,
         multiple: false
       });
@@ -25,7 +25,7 @@
         DOMelement: "#organization-1",
         name: "organization-1",
         label: null,
-        required: true,
+        required: this.state.get('required'),
         addNew: true,
         multiple: false
       });
@@ -33,7 +33,7 @@
         DOMelement: "#address-1",
         name: "address-1",
         label: null,
-        required: true,
+        required: this.state.get('required'),
         addNew: false,
         multiple: false
       });
@@ -89,7 +89,7 @@
 
       App.on('Organization:change', function(data){
         var selector = data.el.$el.selector;
-        App.trigger('Organization:'+selector, data.state.attributes)
+        App.trigger('Organization:'+selector, data.state.attributes);
       }, this);
     },
 

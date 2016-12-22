@@ -42,12 +42,14 @@
       this.policy = new App.Presenter.Policy();
       this.messagesList = new App.Presenter.MessagesList();
 
-      this.investigatorOrganization = new App.Presenter.InvestigatorOrganization();
+      this.investigatorOrganization = new App.Presenter.InvestigatorOrganization({
+        required: true
+      });
       this.fundingSourcesForm = new App.Presenter.FundingSourcesForm();
 
       this.children = [this.titleInput, this.descTextarea, this.startPickadate,
          this.endPickadate, this.websiteInput, this.projectTypes, this.cancerTypes, this.specialities,
-         this.fundingSources, this.policy, this.messagesList, this.investigatorOrganization];
+         this.fundingSources, this.policy, this.investigatorOrganization];
 
       this.projectForm = new App.View.ProjectForm({
         children: this.children,
@@ -190,56 +192,32 @@
               obj.membership_type = "secondary";
             }
 
-            // NEW INVESTIGATOR RELATIONSHIP
-            if(isNaN(parseInt(investigator))){
-              if(investigator.investigatorUser){
-                investigator.investigatorUser = window.USER_ID;
-              }
-              else{
-                investigator.investigatorUser = undefined;
-              }
-            }
 
-            // EE
-            if(!isNaN(parseInt(investigator)) && !isNaN(parseInt(organization))){
-              obj.research_unit_attributes = {
-                investigator_id: investigator,
-                address_id: address
-              };
-            } // EN
-            else if(!isNaN(parseInt(investigator)) && isNaN(parseInt(organization))){
-              obj.research_unit_attributes = {
-                investigator_id: investigator,
-                address_attributes: {
-                  country_id: organization.organizationCountry,
-                  city: organization.organizationCity,
-                  organization_attributes: {
-                    name: organization.organizationName,
-                    organization_type_id: organization.organizationType
-                  }
+            // NEW INVESTIGATOR RELATIONSHIP
+            if (investigator) {
+              if(isNaN(parseInt(investigator))){
+                if(investigator.investigatorUser){
+                  investigator.investigatorUser = window.USER_ID;
                 }
-              };
-            } // NE
-            else if(isNaN(parseInt(investigator)) && !isNaN(parseInt(organization))){
-              obj.research_unit_attributes = {
-                address_id: address,
-                investigator_attributes: {
-                  user_id: investigator.investigatorUser,
-                  name: investigator.investigatorName,
-                  email: investigator.investigatorEmail,
-                  website: investigator.investigatorWebsite
+                else{
+                  investigator.investigatorUser = undefined;
                 }
-              };
-            } // NN
-            else{
-              obj.research_unit_attributes = {
-                investigator_attributes: {
-                  user_id: investigator.investigatorUser,
-                  name: investigator.investigatorName,
-                  email: investigator.investigatorEmail,
-                  website: investigator.investigatorWebsite,
-                  addresses_attributes: [
-                    {
+              }
+
+              // EE
+              if(!isNaN(parseInt(investigator)) && !isNaN(parseInt(organization))){
+                obj.research_unit_attributes = {
+                  investigator_id: investigator,
+                  address_id: address
+                };
+              } // EN
+              else if(!isNaN(parseInt(investigator)) && isNaN(parseInt(organization))){
+                if (!organization) {
+                  App.trigger("ProjectForm:errors", ['You must select an organization and an address for each investigator']);
+                } else {
+                  obj.research_unit_attributes = {
+                    investigator_id: investigator,
+                    address_attributes: {
                       country_id: organization.organizationCountry,
                       city: organization.organizationCity,
                       organization_attributes: {
@@ -247,11 +225,46 @@
                         organization_type_id: organization.organizationType
                       }
                     }
-                  ]
+                  };
                 }
-              };
+              } // NE
+              else if(!!investigator && isNaN(parseInt(investigator)) && !isNaN(parseInt(organization))){
+                obj.research_unit_attributes = {
+                  address_id: address,
+                  investigator_attributes: {
+                    user_id: investigator.investigatorUser,
+                    name: investigator.investigatorName,
+                    email: investigator.investigatorEmail,
+                    website: investigator.investigatorWebsite
+                  }
+                };
+              } // NN
+              else {
+                if (!organization) {
+                  App.trigger("ProjectForm:errors", ['You must select an organization and an address for each investigator']);
+                } else {
+                  obj.research_unit_attributes = {
+                    investigator_attributes: {
+                      user_id: investigator.investigatorUser,
+                      name: investigator.investigatorName,
+                      email: investigator.investigatorEmail,
+                      website: investigator.investigatorWebsite,
+                      addresses_attributes: [
+                        {
+                          country_id: organization.organizationCountry,
+                          city: organization.organizationCity,
+                          organization_attributes: {
+                            name: organization.organizationName,
+                            organization_type_id: organization.organizationType
+                          }
+                        }
+                      ]
+                    }
+                  };
+                }
+              }
+              this.request.project["memberships"].push(obj);
             }
-            this.request.project["memberships"].push(obj);
           }, this);
         }
       }
@@ -329,14 +342,16 @@
       this.policy = new App.Presenter.Policy();
       this.messagesList = new App.Presenter.MessagesList();
 
-      this.investigatorOrganization = new App.Presenter.InvestigatorOrganization();
+      this.investigatorOrganization = new App.Presenter.InvestigatorOrganization({
+        required: false
+      });
       this.investigatorOrganizationEdit = new App.Presenter.InvestigatorOrganizationEdit();
 
       this.fundingSourcesForm = new App.Presenter.FundingSourcesForm();
 
       this.children = [this.titleInput, this.descTextarea, this.startPickadate,
          this.endPickadate, this.websiteInput, this.projectTypes, this.cancerTypes, this.specialities,
-         this.fundingSources, this.policy, this.messagesList, this.investigatorOrganization,
+         this.fundingSources, this.policy, this.investigatorOrganization,
          this.investigatorOrganizationEdit];
 
       this.projectForm = new App.View.ProjectForm({
