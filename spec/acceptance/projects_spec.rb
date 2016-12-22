@@ -11,8 +11,12 @@ module Api::V1
       let!(:investigator_3)    { FactoryGirl.create(:investigator, name: 'Investigator 3')                                }
       let!(:user)              { FactoryGirl.create(:user, authentication_token: '7Nw1A13xrHrZDHj631MA')                  }
       let!(:country)           { FactoryGirl.create(:country)                                                             }
-      let!(:project)           { FactoryGirl.create(:project, title: 'Project title', users: [user], status: 'published') }
-      let!(:project_2)         { FactoryGirl.create(:project, title: 'Project not owned', status: 'published')            }
+      let!(:project)           { FactoryGirl.create(:project, title: 'Project title', users: [user], status: 'published',
+                                                     project_types: [create(:project_type, name: "project type 1")],
+                                                     cancer_types: [create(:cancer_type, name: "cancer type 1")])         }
+      let!(:project_2)         { FactoryGirl.create(:project, title: 'Project not owned', status: 'published',
+                                                     project_types: [create(:project_type, name: "project type 2")],
+                                                     cancer_types: [create(:cancer_type, name: "cancer type 2")])         }
       let(:r_u_id)             { investigator.research_units.first.id                                                     }
       let(:r_u_id_2)           { investigator_2.research_units.first.id                                                   }
       let!(:membership)        { Membership.create(project_id: project.id,
@@ -62,6 +66,10 @@ module Api::V1
         let(:params_without_f_s_ids) { { "project": {
                                          "title": "Project updated",
                                          "summary": "Lorem ipsum...",
+                                         "start_date": Time.now,
+                                         "end_date": Time.now + 1.days,
+                                         "project_type_ids": ["#{project_type.id}"],
+                                         "cancer_type_ids": ["#{cancer_type.id}"],
                                          "new_funders": [{ "name": "Test funder 1", "email_address": "", "organization_type_id": 1,
                                                            "addresses_attributes": [{"country_id": "#{country.id}",
                                                                                      "latitude": "",
@@ -209,7 +217,11 @@ module Api::V1
       end
 
       context 'Create Project' do
-        let(:create_params) { { "project": { "title": "Project updated", "summary": "Lorem ipsum..." } } }
+        let(:create_params) { { "project": { "title": "Project updated", "summary": "Lorem ipsum...",
+                                             "start_date": Time.now,
+                                             "end_date": Time.now + 1.days,
+                                             "project_type_ids": ["#{project_type.id}"],
+                                             "cancer_type_ids": ["#{cancer_type.id}"], } } }
 
         it 'Allows to create project without relations' do
           post "/api/projects?token=#{user.authentication_token}", params: create_params
@@ -217,8 +229,8 @@ module Api::V1
           expect(status).to eq(201)
           expect(json['title']).to                                   eq('Project updated')
           expect(json['id']).to                                      be_present
-          expect(json['cancer_types']).not_to                        be_present
-          expect(json['project_types']).not_to                       be_present
+          expect(json['cancer_types']).to                            be_present
+          expect(json['project_types']).to                           be_present
           expect(json['funding_sources']).not_to                     be_present
           expect(Project.find_by(title: 'Project updated').users).to be_any
         end
@@ -247,7 +259,7 @@ module Api::V1
           post "/api/projects?token=#{user.authentication_token}", params: params
 
           expect(status).to eq(422)
-          expect(json['message']).to eq(["Summary can't be blank"])
+          expect(json['message']).to eq(["Summary can't be blank", "Start date is not a date", "Start date can't be blank", "End date is not a date", "End date can't be blank", "Cancer types can't be blank", "Project types can't be blank"])
         end
 
         it 'Do not allows to create project with blank title and validate title before creating a new funder' do
@@ -257,7 +269,7 @@ module Api::V1
                                                                                           ] } }
 
           expect(status).to eq(422)
-          expect(json['message']).to eq(["Title can't be blank", "Summary can't be blank", "Slug can't be blank"])
+          expect(json['message']).to eq(["Title can't be blank", "Summary can't be blank", "Start date is not a date", "Start date can't be blank", "End date is not a date", "End date can't be blank", "Cancer types can't be blank", "Project types can't be blank", "Slug can't be blank"])
           expect(Organization.find_by(name: "Second project funder")).to be_nil
         end
       end
@@ -294,14 +306,14 @@ module Api::V1
           get "/api/project-types"
 
           expect(status).to eq(200)
-          expect(json.length).to eq (1)
+          expect(json.length).to eq (3)
         end
 
         it 'Get project-types list' do
           get "/api/cancer-types"
 
           expect(status).to eq(200)
-          expect(json.length).to eq (1)
+          expect(json.length).to eq (3)
         end
 
         it 'Get funding-sources list' do

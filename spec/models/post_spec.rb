@@ -15,7 +15,8 @@ require 'rails_helper'
 RSpec.describe Post, type: :model do
   before :each do
     @post         = create(:post, user: @user)
-    @project      = create(:project)
+    @project      = create(:project, project_types: [create(:project_type, name: "project type 1")],
+                                     cancer_types: [create(:cancer_type, name: "cancer type 1")])
     @organization = create(:organization)
     create(:pin, pinable: @project, post: @post)
     create(:pin, pinable: @organization, post: @post)

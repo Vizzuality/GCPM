@@ -16,6 +16,7 @@
       label: 'Cancer types',
       placeholder: 'All cancer types',
       blank: null,
+      required: true,
       addNew: false,
       select2Options: {
         // closeOnSelect: false

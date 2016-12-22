@@ -5,11 +5,13 @@
   <% else %>
     <svg class="c-icon -inverse <%= size %> icon-user"><use xlink:href="#icon-user"></use></svg>
   <% end %>
-<% else %>
+<% elsif person.class.name == 'Investigator' %>
   <% if person.user.present? %>
     <svg class="c-icon -inverse <%= size %> icon-investigator_user"><use xlink:href="#icon-investigator_user"></use></svg>
   <% else %>
     <svg class="c-icon -inverse <%= size %> icon-investigator"><use xlink:href="#icon-investigator"></use></svg>
   <% end %>
+<% else %>
+  <svg class="c-icon -inverse <%= size %> icon-investigator"><use xlink:href="#icon-investigator"></use></svg>
 <% end %>
 
