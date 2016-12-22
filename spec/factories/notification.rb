@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory(:notification) do
     user
-    association :notificable, factory: :project
+    association :notificable, factory: :cancer_type
   end
 end

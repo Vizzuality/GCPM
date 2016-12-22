@@ -9,9 +9,8 @@
   _.extend(App.Presenter.MessagesList.prototype, {
 
     initialize: function() {
-      this.messagesList = new App.View.MessagesList({
-        el: '#messages-list'
-      });
+      this.modal = new App.View.Modal();
+      this.messagesList = new App.View.MessagesList();
 
       this.setSubscriptions();
     },
@@ -24,6 +23,8 @@
 
     handleChangeList: function(messages) {
       this.messagesList.updateData(messages);
+      this.modal.open(this.messagesList);
+      this.render();
     },
 
     render: function() {

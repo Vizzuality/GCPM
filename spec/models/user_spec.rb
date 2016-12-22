@@ -47,9 +47,9 @@ RSpec.describe User, type: :model do
 
   context "User's projects" do
     before :each do
-      create(:project, title: 'First project', users: [@user], status: 2)
-      create(:project, title: 'Second project', users: [@user], status: 1)
-      create(:project, title: 'Third project', users: [@user], status: 0)
+      create(:project, title: 'First project', users: [@user], status: 2, project_types: [create(:project_type, name: "project type 1")], cancer_types: [create(:cancer_type, name: "project type 1")])
+      create(:project, title: 'Second project', users: [@user], status: 1, project_types: [create(:project_type, name: "project type 2")], cancer_types: [create(:cancer_type, name: "project type 2")])
+      create(:project, title: 'Third project', users: [@user], status: 0, project_types: [create(:project_type, name: "project type 3")], cancer_types: [create(:cancer_type, name: "project type 3")])
     end
 
     it 'Active inactive user projects' do

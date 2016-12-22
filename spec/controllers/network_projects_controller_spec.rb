@@ -5,7 +5,8 @@ RSpec.describe NetworkProjectsController, type: :controller do
     @user       = create(:user)
     @user_first = create(:user)
     @adminuser  = create(:admin_user)
-    @project_2  = create(:project, title: 'Second project', users: [@user])
+    @project_2  = create(:project, title: 'Second project', users: [@user], project_types: [create(:project_type, name: "project type 1")],
+                          cancer_types: [create(:cancer_type, name: "cancer type 1")])
   end
 
   let!(:approve_relation) {
@@ -14,8 +15,10 @@ RSpec.describe NetworkProjectsController, type: :controller do
 
   context 'For authenticated user' do
     before :each do
-      @project_1 = create(:project, title: 'First project', users: [@user_first, @user])
-      @project_3 = create(:project, title: 'Third project', users: [@user], created_by: @user.id)
+      @project_1 = create(:project, title: 'First project', users: [@user_first, @user], project_types: [create(:project_type, name: "project type 2")],
+                                                           cancer_types: [create(:cancer_type, name: "cancer type 2")])
+      @project_3 = create(:project, title: 'Third project', users: [@user], created_by: @user.id, project_types: [create(:project_type, name: "project type 3")],
+                                                           cancer_types: [create(:cancer_type, name: "cancer type 3")])
       sign_in @user
     end
 

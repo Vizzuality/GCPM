@@ -18,6 +18,7 @@
       blank: null,
       addNew: false,
       select2Options: {
+        minimumResultsForSearch: -1
         // closeOnSelect: false
         // It solves the closing of the dropdown menu
         // It adds a lot of UX issues
@@ -96,6 +97,9 @@
              if(options.length > 0){
                this.select.setOptions(options);
                this.select.render();
+               if (options[0]) {
+                 this.select.setValue(options[0].value);
+               }
              }
           }.bind(this)).catch(function(response){
             throw Error(response);
