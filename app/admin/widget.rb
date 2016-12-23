@@ -16,13 +16,7 @@ ActiveAdmin.register Widget do
       f.input :query
       f.input :graphic_type, as: :select, collection: ['line', 'map', 'pie', 'bar']
     end
-    actions do |obj|
-      if obj.featured?
-        link_to("Unfeature", unfeature_admin_project_path(obj))
-      else
-        link_to("Feature", feature_admin_project_path(obj))
-      end
-    end
+    actions
   end
 
   index do
@@ -31,6 +25,12 @@ ActiveAdmin.register Widget do
     column :name
     column :slug
     column :graphic_type
-    actions
+    actions do |obj|
+      if obj.featured?
+        link_to("Unfeature", unfeature_admin_widget_path(obj))
+      else
+        link_to("Feature", feature_admin_widget_path(obj))
+      end
+    end
   end
 end
