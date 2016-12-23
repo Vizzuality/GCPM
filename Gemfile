@@ -22,6 +22,7 @@ gem 'mini_magick'
 gem 'ckeditor'
 gem 'date_validator'
 gem 'browser'
+gem 'truncate_html'
 
 # User login
 gem 'devise'
