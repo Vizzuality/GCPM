@@ -23,6 +23,7 @@
         closePopupOnClick: false
       });
 
+      new App.Presenter.WidgetsFeatured(params);
       new App.Presenter.Notice();
 
       gon.isMobile && new App.Presenter.JoinNetworkMobile();

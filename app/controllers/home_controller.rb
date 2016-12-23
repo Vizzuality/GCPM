@@ -6,6 +6,8 @@ class HomeController < ApplicationController
     @people_total = Investigator.all.distinct.count()
 
     gon.isMobile = browser.device.mobile?
+    gon.carto_account = ENV["CARTODB_ACCOUNT"]
+    gon.carto_key = ENV["CARTODB_KEY"]
 
     if notice
       gon.notice = notice
