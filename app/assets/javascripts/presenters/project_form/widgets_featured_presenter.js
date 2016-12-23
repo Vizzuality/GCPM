@@ -40,7 +40,9 @@
     initialize: function(viewSettings) {
       this.state = new StateModel();
       this.widgetModel = new WidgetFeaturedModel();
-      this.widgets = new App.Collection.Widgets();
+      this.widgets = new App.Collection.Widgets({
+        featured: true
+      });
 
       // Creating view
       this.select = new App.View.Select({
