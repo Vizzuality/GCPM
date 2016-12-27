@@ -111,7 +111,7 @@
         this.select.setOptions(options);
         this.select.render();
         // Initiate the first graph
-        this.select.setValue(this.widgets.at(0).get('slug'));
+        this.widgets.length > 0 && this.select.setValue(this.widgets.at(0).get('slug'));
 
       }.bind(this));
     },
@@ -137,6 +137,7 @@
           }.bind(this));
       } else {
         console.info('Widget is null');
+        this.graph.hideSpinner();
       }
     },
 
