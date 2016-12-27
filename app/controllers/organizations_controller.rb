@@ -16,9 +16,9 @@ class OrganizationsController < ApplicationController
 
     limit = 12 + (@page * 9)
 
-    @events = Event.fetch_all(organizations: @organization.id).order('created_at DESC')
-    @projects = Project.fetch_all(organizations: @organization.id).order('created_at DESC')
-    @people = Investigator.fetch_all(organizations: @organization.id).order('created_at DESC')
+    @events = Event.fetch_all(organizations: @organization.id).order('events.created_at DESC')
+    @projects = Project.fetch_all(organizations: @organization.id).order('projects.created_at DESC')
+    @people = Investigator.fetch_all(organizations: @organization.id).order('organizations.created_at DESC')
     @posts = @organization.posts
 
     if params.key?(:data) && params[:data] == 'events'

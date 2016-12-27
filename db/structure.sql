@@ -2,17 +2,12 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.0
--- Dumped by pg_dump version 9.6.0
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
-SET row_security = off;
 
 --
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
@@ -35,7 +30,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: active_admin_comments; Type: TABLE; Schema: public; Owner: -
+-- Name: active_admin_comments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE active_admin_comments (
@@ -71,7 +66,7 @@ ALTER SEQUENCE active_admin_comments_id_seq OWNED BY active_admin_comments.id;
 
 
 --
--- Name: activity_feeds; Type: TABLE; Schema: public; Owner: -
+-- Name: activity_feeds; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE activity_feeds (
@@ -105,7 +100,7 @@ ALTER SEQUENCE activity_feeds_id_seq OWNED BY activity_feeds.id;
 
 
 --
--- Name: addresses; Type: TABLE; Schema: public; Owner: -
+-- Name: addresses; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE addresses (
@@ -150,7 +145,7 @@ ALTER SEQUENCE addresses_id_seq OWNED BY addresses.id;
 
 
 --
--- Name: admin_users; Type: TABLE; Schema: public; Owner: -
+-- Name: admin_users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE admin_users (
@@ -190,7 +185,7 @@ ALTER SEQUENCE admin_users_id_seq OWNED BY admin_users.id;
 
 
 --
--- Name: agrupations; Type: TABLE; Schema: public; Owner: -
+-- Name: agrupations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE agrupations (
@@ -222,7 +217,7 @@ ALTER SEQUENCE agrupations_id_seq OWNED BY agrupations.id;
 
 
 --
--- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
+-- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE ar_internal_metadata (
@@ -234,7 +229,7 @@ CREATE TABLE ar_internal_metadata (
 
 
 --
--- Name: cancer_types; Type: TABLE; Schema: public; Owner: -
+-- Name: cancer_types; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE cancer_types (
@@ -267,7 +262,7 @@ ALTER SEQUENCE cancer_types_id_seq OWNED BY cancer_types.id;
 
 
 --
--- Name: cancer_types_projects; Type: TABLE; Schema: public; Owner: -
+-- Name: cancer_types_projects; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE cancer_types_projects (
@@ -277,7 +272,7 @@ CREATE TABLE cancer_types_projects (
 
 
 --
--- Name: ckeditor_assets; Type: TABLE; Schema: public; Owner: -
+-- Name: ckeditor_assets; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE ckeditor_assets (
@@ -315,7 +310,7 @@ ALTER SEQUENCE ckeditor_assets_id_seq OWNED BY ckeditor_assets.id;
 
 
 --
--- Name: countries; Type: TABLE; Schema: public; Owner: -
+-- Name: countries; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE countries (
@@ -352,7 +347,7 @@ ALTER SEQUENCE countries_id_seq OWNED BY countries.id;
 
 
 --
--- Name: db_backups; Type: TABLE; Schema: public; Owner: -
+-- Name: db_backups; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE db_backups (
@@ -384,7 +379,7 @@ ALTER SEQUENCE db_backups_id_seq OWNED BY db_backups.id;
 
 
 --
--- Name: events; Type: TABLE; Schema: public; Owner: -
+-- Name: events; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE events (
@@ -433,7 +428,7 @@ ALTER SEQUENCE events_id_seq OWNED BY events.id;
 
 
 --
--- Name: featureds; Type: TABLE; Schema: public; Owner: -
+-- Name: featureds; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE featureds (
@@ -466,7 +461,7 @@ ALTER SEQUENCE featureds_id_seq OWNED BY featureds.id;
 
 
 --
--- Name: follows; Type: TABLE; Schema: public; Owner: -
+-- Name: follows; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE follows (
@@ -501,7 +496,7 @@ ALTER SEQUENCE follows_id_seq OWNED BY follows.id;
 
 
 --
--- Name: funders; Type: TABLE; Schema: public; Owner: -
+-- Name: funders; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE funders (
@@ -533,7 +528,7 @@ ALTER SEQUENCE funders_id_seq OWNED BY funders.id;
 
 
 --
--- Name: identities; Type: TABLE; Schema: public; Owner: -
+-- Name: identities; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE identities (
@@ -566,7 +561,7 @@ ALTER SEQUENCE identities_id_seq OWNED BY identities.id;
 
 
 --
--- Name: investigators; Type: TABLE; Schema: public; Owner: -
+-- Name: investigators; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE investigators (
@@ -602,7 +597,7 @@ ALTER SEQUENCE investigators_id_seq OWNED BY investigators.id;
 
 
 --
--- Name: layer_groups; Type: TABLE; Schema: public; Owner: -
+-- Name: layer_groups; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE layer_groups (
@@ -641,7 +636,7 @@ ALTER SEQUENCE layer_groups_id_seq OWNED BY layer_groups.id;
 
 
 --
--- Name: layers; Type: TABLE; Schema: public; Owner: -
+-- Name: layers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE layers (
@@ -690,7 +685,7 @@ ALTER SEQUENCE layers_id_seq OWNED BY layers.id;
 
 
 --
--- Name: mailboxer_conversation_opt_outs; Type: TABLE; Schema: public; Owner: -
+-- Name: mailboxer_conversation_opt_outs; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE mailboxer_conversation_opt_outs (
@@ -721,7 +716,7 @@ ALTER SEQUENCE mailboxer_conversation_opt_outs_id_seq OWNED BY mailboxer_convers
 
 
 --
--- Name: mailboxer_conversations; Type: TABLE; Schema: public; Owner: -
+-- Name: mailboxer_conversations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE mailboxer_conversations (
@@ -752,7 +747,7 @@ ALTER SEQUENCE mailboxer_conversations_id_seq OWNED BY mailboxer_conversations.i
 
 
 --
--- Name: mailboxer_notifications; Type: TABLE; Schema: public; Owner: -
+-- Name: mailboxer_notifications; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE mailboxer_notifications (
@@ -795,7 +790,7 @@ ALTER SEQUENCE mailboxer_notifications_id_seq OWNED BY mailboxer_notifications.i
 
 
 --
--- Name: mailboxer_receipts; Type: TABLE; Schema: public; Owner: -
+-- Name: mailboxer_receipts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE mailboxer_receipts (
@@ -835,7 +830,7 @@ ALTER SEQUENCE mailboxer_receipts_id_seq OWNED BY mailboxer_receipts.id;
 
 
 --
--- Name: memberships; Type: TABLE; Schema: public; Owner: -
+-- Name: memberships; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE memberships (
@@ -868,7 +863,7 @@ ALTER SEQUENCE memberships_id_seq OWNED BY memberships.id;
 
 
 --
--- Name: notifications; Type: TABLE; Schema: public; Owner: -
+-- Name: notifications; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE notifications (
@@ -904,7 +899,7 @@ ALTER SEQUENCE notifications_id_seq OWNED BY notifications.id;
 
 
 --
--- Name: organization_types; Type: TABLE; Schema: public; Owner: -
+-- Name: organization_types; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE organization_types (
@@ -933,7 +928,7 @@ ALTER SEQUENCE organization_types_id_seq OWNED BY organization_types.id;
 
 
 --
--- Name: organizations; Type: TABLE; Schema: public; Owner: -
+-- Name: organizations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE organizations (
@@ -970,7 +965,7 @@ ALTER SEQUENCE organizations_id_seq OWNED BY organizations.id;
 
 
 --
--- Name: pictures; Type: TABLE; Schema: public; Owner: -
+-- Name: pictures; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE pictures (
@@ -1005,7 +1000,7 @@ ALTER SEQUENCE pictures_id_seq OWNED BY pictures.id;
 
 
 --
--- Name: pins; Type: TABLE; Schema: public; Owner: -
+-- Name: pins; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE pins (
@@ -1038,7 +1033,7 @@ ALTER SEQUENCE pins_id_seq OWNED BY pins.id;
 
 
 --
--- Name: posts; Type: TABLE; Schema: public; Owner: -
+-- Name: posts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE posts (
@@ -1071,7 +1066,7 @@ ALTER SEQUENCE posts_id_seq OWNED BY posts.id;
 
 
 --
--- Name: project_types; Type: TABLE; Schema: public; Owner: -
+-- Name: project_types; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE project_types (
@@ -1102,7 +1097,7 @@ ALTER SEQUENCE project_types_id_seq OWNED BY project_types.id;
 
 
 --
--- Name: project_types_projects; Type: TABLE; Schema: public; Owner: -
+-- Name: project_types_projects; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE project_types_projects (
@@ -1112,7 +1107,7 @@ CREATE TABLE project_types_projects (
 
 
 --
--- Name: project_updates; Type: TABLE; Schema: public; Owner: -
+-- Name: project_updates; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE project_updates (
@@ -1145,7 +1140,7 @@ ALTER SEQUENCE project_updates_id_seq OWNED BY project_updates.id;
 
 
 --
--- Name: project_users; Type: TABLE; Schema: public; Owner: -
+-- Name: project_users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE project_users (
@@ -1178,7 +1173,7 @@ ALTER SEQUENCE project_users_id_seq OWNED BY project_users.id;
 
 
 --
--- Name: projects; Type: TABLE; Schema: public; Owner: -
+-- Name: projects; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE projects (
@@ -1216,7 +1211,7 @@ ALTER SEQUENCE projects_id_seq OWNED BY projects.id;
 
 
 --
--- Name: projects_specialities; Type: TABLE; Schema: public; Owner: -
+-- Name: projects_specialities; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE projects_specialities (
@@ -1248,7 +1243,7 @@ ALTER SEQUENCE projects_specialities_id_seq OWNED BY projects_specialities.id;
 
 
 --
--- Name: research_units; Type: TABLE; Schema: public; Owner: -
+-- Name: research_units; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE research_units (
@@ -1280,7 +1275,7 @@ ALTER SEQUENCE research_units_id_seq OWNED BY research_units.id;
 
 
 --
--- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE schema_migrations (
@@ -1289,7 +1284,7 @@ CREATE TABLE schema_migrations (
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: -
+-- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE users (
@@ -1387,7 +1382,7 @@ UNION
 
 
 --
--- Name: specialities; Type: TABLE; Schema: public; Owner: -
+-- Name: specialities; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE specialities (
@@ -1437,7 +1432,7 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 
 
 --
--- Name: widgets; Type: TABLE; Schema: public; Owner: -
+-- Name: widgets; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE widgets (
@@ -1475,266 +1470,266 @@ ALTER SEQUENCE widgets_id_seq OWNED BY widgets.id;
 
 
 --
--- Name: active_admin_comments id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY active_admin_comments ALTER COLUMN id SET DEFAULT nextval('active_admin_comments_id_seq'::regclass);
 
 
 --
--- Name: activity_feeds id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY activity_feeds ALTER COLUMN id SET DEFAULT nextval('activity_feeds_id_seq'::regclass);
 
 
 --
--- Name: addresses id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY addresses ALTER COLUMN id SET DEFAULT nextval('addresses_id_seq'::regclass);
 
 
 --
--- Name: admin_users id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY admin_users ALTER COLUMN id SET DEFAULT nextval('admin_users_id_seq'::regclass);
 
 
 --
--- Name: agrupations id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY agrupations ALTER COLUMN id SET DEFAULT nextval('agrupations_id_seq'::regclass);
 
 
 --
--- Name: cancer_types id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY cancer_types ALTER COLUMN id SET DEFAULT nextval('cancer_types_id_seq'::regclass);
 
 
 --
--- Name: ckeditor_assets id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY ckeditor_assets ALTER COLUMN id SET DEFAULT nextval('ckeditor_assets_id_seq'::regclass);
 
 
 --
--- Name: countries id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY countries ALTER COLUMN id SET DEFAULT nextval('countries_id_seq'::regclass);
 
 
 --
--- Name: db_backups id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY db_backups ALTER COLUMN id SET DEFAULT nextval('db_backups_id_seq'::regclass);
 
 
 --
--- Name: events id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY events ALTER COLUMN id SET DEFAULT nextval('events_id_seq'::regclass);
 
 
 --
--- Name: featureds id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY featureds ALTER COLUMN id SET DEFAULT nextval('featureds_id_seq'::regclass);
 
 
 --
--- Name: follows id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY follows ALTER COLUMN id SET DEFAULT nextval('follows_id_seq'::regclass);
 
 
 --
--- Name: funders id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY funders ALTER COLUMN id SET DEFAULT nextval('funders_id_seq'::regclass);
 
 
 --
--- Name: identities id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY identities ALTER COLUMN id SET DEFAULT nextval('identities_id_seq'::regclass);
 
 
 --
--- Name: investigators id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY investigators ALTER COLUMN id SET DEFAULT nextval('investigators_id_seq'::regclass);
 
 
 --
--- Name: layer_groups id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY layer_groups ALTER COLUMN id SET DEFAULT nextval('layer_groups_id_seq'::regclass);
 
 
 --
--- Name: layers id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY layers ALTER COLUMN id SET DEFAULT nextval('layers_id_seq'::regclass);
 
 
 --
--- Name: mailboxer_conversation_opt_outs id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY mailboxer_conversation_opt_outs ALTER COLUMN id SET DEFAULT nextval('mailboxer_conversation_opt_outs_id_seq'::regclass);
 
 
 --
--- Name: mailboxer_conversations id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY mailboxer_conversations ALTER COLUMN id SET DEFAULT nextval('mailboxer_conversations_id_seq'::regclass);
 
 
 --
--- Name: mailboxer_notifications id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY mailboxer_notifications ALTER COLUMN id SET DEFAULT nextval('mailboxer_notifications_id_seq'::regclass);
 
 
 --
--- Name: mailboxer_receipts id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY mailboxer_receipts ALTER COLUMN id SET DEFAULT nextval('mailboxer_receipts_id_seq'::regclass);
 
 
 --
--- Name: memberships id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY memberships ALTER COLUMN id SET DEFAULT nextval('memberships_id_seq'::regclass);
 
 
 --
--- Name: notifications id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY notifications ALTER COLUMN id SET DEFAULT nextval('notifications_id_seq'::regclass);
 
 
 --
--- Name: organization_types id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY organization_types ALTER COLUMN id SET DEFAULT nextval('organization_types_id_seq'::regclass);
 
 
 --
--- Name: organizations id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY organizations ALTER COLUMN id SET DEFAULT nextval('organizations_id_seq'::regclass);
 
 
 --
--- Name: pictures id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY pictures ALTER COLUMN id SET DEFAULT nextval('pictures_id_seq'::regclass);
 
 
 --
--- Name: pins id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY pins ALTER COLUMN id SET DEFAULT nextval('pins_id_seq'::regclass);
 
 
 --
--- Name: posts id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY posts ALTER COLUMN id SET DEFAULT nextval('posts_id_seq'::regclass);
 
 
 --
--- Name: project_types id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY project_types ALTER COLUMN id SET DEFAULT nextval('project_types_id_seq'::regclass);
 
 
 --
--- Name: project_updates id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY project_updates ALTER COLUMN id SET DEFAULT nextval('project_updates_id_seq'::regclass);
 
 
 --
--- Name: project_users id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY project_users ALTER COLUMN id SET DEFAULT nextval('project_users_id_seq'::regclass);
 
 
 --
--- Name: projects id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY projects ALTER COLUMN id SET DEFAULT nextval('projects_id_seq'::regclass);
 
 
 --
--- Name: projects_specialities id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY projects_specialities ALTER COLUMN id SET DEFAULT nextval('projects_specialities_id_seq'::regclass);
 
 
 --
--- Name: research_units id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY research_units ALTER COLUMN id SET DEFAULT nextval('research_units_id_seq'::regclass);
 
 
 --
--- Name: specialities id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY specialities ALTER COLUMN id SET DEFAULT nextval('specialities_id_seq'::regclass);
 
 
 --
--- Name: users id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
 --
--- Name: widgets id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY widgets ALTER COLUMN id SET DEFAULT nextval('widgets_id_seq'::regclass);
 
 
 --
--- Name: active_admin_comments active_admin_comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: active_admin_comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY active_admin_comments
@@ -1742,7 +1737,7 @@ ALTER TABLE ONLY active_admin_comments
 
 
 --
--- Name: activity_feeds activity_feeds_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: activity_feeds_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY activity_feeds
@@ -1750,7 +1745,7 @@ ALTER TABLE ONLY activity_feeds
 
 
 --
--- Name: addresses addresses_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: addresses_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY addresses
@@ -1758,7 +1753,7 @@ ALTER TABLE ONLY addresses
 
 
 --
--- Name: admin_users admin_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: admin_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY admin_users
@@ -1766,7 +1761,7 @@ ALTER TABLE ONLY admin_users
 
 
 --
--- Name: agrupations agrupations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: agrupations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY agrupations
@@ -1774,7 +1769,7 @@ ALTER TABLE ONLY agrupations
 
 
 --
--- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY ar_internal_metadata
@@ -1782,7 +1777,7 @@ ALTER TABLE ONLY ar_internal_metadata
 
 
 --
--- Name: cancer_types cancer_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: cancer_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY cancer_types
@@ -1790,7 +1785,7 @@ ALTER TABLE ONLY cancer_types
 
 
 --
--- Name: ckeditor_assets ckeditor_assets_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: ckeditor_assets_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY ckeditor_assets
@@ -1798,7 +1793,7 @@ ALTER TABLE ONLY ckeditor_assets
 
 
 --
--- Name: countries countries_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: countries_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY countries
@@ -1806,7 +1801,7 @@ ALTER TABLE ONLY countries
 
 
 --
--- Name: db_backups db_backups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: db_backups_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY db_backups
@@ -1814,7 +1809,7 @@ ALTER TABLE ONLY db_backups
 
 
 --
--- Name: events events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: events_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY events
@@ -1822,7 +1817,7 @@ ALTER TABLE ONLY events
 
 
 --
--- Name: featureds featureds_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: featureds_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY featureds
@@ -1830,7 +1825,7 @@ ALTER TABLE ONLY featureds
 
 
 --
--- Name: follows follows_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: follows_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY follows
@@ -1838,7 +1833,7 @@ ALTER TABLE ONLY follows
 
 
 --
--- Name: funders funders_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: funders_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY funders
@@ -1846,7 +1841,7 @@ ALTER TABLE ONLY funders
 
 
 --
--- Name: identities identities_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: identities_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY identities
@@ -1854,7 +1849,7 @@ ALTER TABLE ONLY identities
 
 
 --
--- Name: investigators investigators_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: investigators_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY investigators
@@ -1862,7 +1857,7 @@ ALTER TABLE ONLY investigators
 
 
 --
--- Name: layer_groups layer_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: layer_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY layer_groups
@@ -1870,7 +1865,7 @@ ALTER TABLE ONLY layer_groups
 
 
 --
--- Name: layers layers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: layers_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY layers
@@ -1878,7 +1873,7 @@ ALTER TABLE ONLY layers
 
 
 --
--- Name: mailboxer_conversation_opt_outs mailboxer_conversation_opt_outs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: mailboxer_conversation_opt_outs_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY mailboxer_conversation_opt_outs
@@ -1886,7 +1881,7 @@ ALTER TABLE ONLY mailboxer_conversation_opt_outs
 
 
 --
--- Name: mailboxer_conversations mailboxer_conversations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: mailboxer_conversations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY mailboxer_conversations
@@ -1894,7 +1889,7 @@ ALTER TABLE ONLY mailboxer_conversations
 
 
 --
--- Name: mailboxer_notifications mailboxer_notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: mailboxer_notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY mailboxer_notifications
@@ -1902,7 +1897,7 @@ ALTER TABLE ONLY mailboxer_notifications
 
 
 --
--- Name: mailboxer_receipts mailboxer_receipts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: mailboxer_receipts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY mailboxer_receipts
@@ -1910,7 +1905,7 @@ ALTER TABLE ONLY mailboxer_receipts
 
 
 --
--- Name: memberships memberships_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: memberships_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY memberships
@@ -1918,7 +1913,7 @@ ALTER TABLE ONLY memberships
 
 
 --
--- Name: notifications notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY notifications
@@ -1926,7 +1921,7 @@ ALTER TABLE ONLY notifications
 
 
 --
--- Name: organization_types organization_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: organization_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY organization_types
@@ -1934,7 +1929,7 @@ ALTER TABLE ONLY organization_types
 
 
 --
--- Name: organizations organizations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: organizations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY organizations
@@ -1942,7 +1937,7 @@ ALTER TABLE ONLY organizations
 
 
 --
--- Name: pictures pictures_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: pictures_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY pictures
@@ -1950,7 +1945,7 @@ ALTER TABLE ONLY pictures
 
 
 --
--- Name: pins pins_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: pins_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY pins
@@ -1958,7 +1953,7 @@ ALTER TABLE ONLY pins
 
 
 --
--- Name: posts posts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: posts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY posts
@@ -1966,7 +1961,7 @@ ALTER TABLE ONLY posts
 
 
 --
--- Name: project_types project_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: project_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY project_types
@@ -1974,7 +1969,7 @@ ALTER TABLE ONLY project_types
 
 
 --
--- Name: project_updates project_updates_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: project_updates_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY project_updates
@@ -1982,7 +1977,7 @@ ALTER TABLE ONLY project_updates
 
 
 --
--- Name: project_users project_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: project_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY project_users
@@ -1990,7 +1985,7 @@ ALTER TABLE ONLY project_users
 
 
 --
--- Name: projects projects_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: projects_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY projects
@@ -1998,7 +1993,7 @@ ALTER TABLE ONLY projects
 
 
 --
--- Name: projects_specialities projects_specialities_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: projects_specialities_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY projects_specialities
@@ -2006,7 +2001,7 @@ ALTER TABLE ONLY projects_specialities
 
 
 --
--- Name: research_units research_units_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: research_units_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY research_units
@@ -2014,7 +2009,7 @@ ALTER TABLE ONLY research_units
 
 
 --
--- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY schema_migrations
@@ -2022,7 +2017,7 @@ ALTER TABLE ONLY schema_migrations
 
 
 --
--- Name: specialities specialities_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: specialities_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY specialities
@@ -2030,7 +2025,7 @@ ALTER TABLE ONLY specialities
 
 
 --
--- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY users
@@ -2038,7 +2033,7 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: widgets widgets_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: widgets_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY widgets
@@ -2046,511 +2041,511 @@ ALTER TABLE ONLY widgets
 
 
 --
--- Name: act_id_type_action_user_on_activity; Type: INDEX; Schema: public; Owner: -
+-- Name: act_id_type_action_user_on_activity; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX act_id_type_action_user_on_activity ON activity_feeds USING btree (actionable_id, actionable_type, action, user_id);
 
 
 --
--- Name: fk_followables; Type: INDEX; Schema: public; Owner: -
+-- Name: fk_followables; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX fk_followables ON follows USING btree (followable_id, followable_type);
 
 
 --
--- Name: fk_follows; Type: INDEX; Schema: public; Owner: -
+-- Name: fk_follows; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX fk_follows ON follows USING btree (follower_id, follower_type);
 
 
 --
--- Name: idx_ckeditor_assetable; Type: INDEX; Schema: public; Owner: -
+-- Name: idx_ckeditor_assetable; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX idx_ckeditor_assetable ON ckeditor_assets USING btree (assetable_type, assetable_id);
 
 
 --
--- Name: idx_ckeditor_assetable_type; Type: INDEX; Schema: public; Owner: -
+-- Name: idx_ckeditor_assetable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX idx_ckeditor_assetable_type ON ckeditor_assets USING btree (assetable_type, type, assetable_id);
 
 
 --
--- Name: index_active_admin_comments_on_author_type_and_author_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_active_admin_comments_on_author_type_and_author_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_active_admin_comments_on_author_type_and_author_id ON active_admin_comments USING btree (author_type, author_id);
 
 
 --
--- Name: index_active_admin_comments_on_namespace; Type: INDEX; Schema: public; Owner: -
+-- Name: index_active_admin_comments_on_namespace; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_active_admin_comments_on_namespace ON active_admin_comments USING btree (namespace);
 
 
 --
--- Name: index_active_admin_comments_on_resource_type_and_resource_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_active_admin_comments_on_resource_type_and_resource_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_active_admin_comments_on_resource_type_and_resource_id ON active_admin_comments USING btree (resource_type, resource_id);
 
 
 --
--- Name: index_activity_feeds_on_actionable_type_and_actionable_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_activity_feeds_on_actionable_type_and_actionable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_activity_feeds_on_actionable_type_and_actionable_id ON activity_feeds USING btree (actionable_type, actionable_id);
 
 
 --
--- Name: index_activity_feeds_on_user_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_activity_feeds_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_activity_feeds_on_user_id ON activity_feeds USING btree (user_id);
 
 
 --
--- Name: index_addresses_on_country_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_addresses_on_country_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_addresses_on_country_id ON addresses USING btree (country_id);
 
 
 --
--- Name: index_addresses_on_organization_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_addresses_on_organization_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_addresses_on_organization_id ON addresses USING btree (organization_id);
 
 
 --
--- Name: index_admin_users_on_email; Type: INDEX; Schema: public; Owner: -
+-- Name: index_admin_users_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX index_admin_users_on_email ON admin_users USING btree (email);
 
 
 --
--- Name: index_admin_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: -
+-- Name: index_admin_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX index_admin_users_on_reset_password_token ON admin_users USING btree (reset_password_token);
 
 
 --
--- Name: index_agrupations_on_layer_group_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_agrupations_on_layer_group_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_agrupations_on_layer_group_id ON agrupations USING btree (layer_group_id);
 
 
 --
--- Name: index_agrupations_on_layer_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_agrupations_on_layer_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_agrupations_on_layer_id ON agrupations USING btree (layer_id);
 
 
 --
--- Name: index_cancer_types_on_name; Type: INDEX; Schema: public; Owner: -
+-- Name: index_cancer_types_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_cancer_types_on_name ON cancer_types USING gin (to_tsvector('english'::regconfig, (name)::text));
 
 
 --
--- Name: index_cancer_types_on_slug; Type: INDEX; Schema: public; Owner: -
+-- Name: index_cancer_types_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX index_cancer_types_on_slug ON cancer_types USING btree (slug);
 
 
 --
--- Name: index_cancer_types_projects_on_cancer_type_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_cancer_types_projects_on_cancer_type_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_cancer_types_projects_on_cancer_type_id ON cancer_types_projects USING btree (cancer_type_id);
 
 
 --
--- Name: index_cancer_types_projects_on_project_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_cancer_types_projects_on_project_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_cancer_types_projects_on_project_id ON cancer_types_projects USING btree (project_id);
 
 
 --
--- Name: index_events_on_description; Type: INDEX; Schema: public; Owner: -
+-- Name: index_events_on_description; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_events_on_description ON events USING gin (to_tsvector('english'::regconfig, description));
 
 
 --
--- Name: index_events_on_slug; Type: INDEX; Schema: public; Owner: -
+-- Name: index_events_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX index_events_on_slug ON events USING btree (slug);
 
 
 --
--- Name: index_events_on_title; Type: INDEX; Schema: public; Owner: -
+-- Name: index_events_on_title; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_events_on_title ON events USING gin (to_tsvector('english'::regconfig, (title)::text));
 
 
 --
--- Name: index_events_on_user_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_events_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_events_on_user_id ON events USING btree (user_id);
 
 
 --
--- Name: index_featureds_on_featurable_id_and_featurable_type; Type: INDEX; Schema: public; Owner: -
+-- Name: index_featureds_on_featurable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_featureds_on_featurable_id_and_featurable_type ON featureds USING btree (featurable_id, featurable_type);
+CREATE INDEX index_featureds_on_featurable_id ON featureds USING btree (featurable_id);
 
 
 --
--- Name: index_funders_on_organization_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_funders_on_organization_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_funders_on_organization_id ON funders USING btree (organization_id);
 
 
 --
--- Name: index_funders_on_project_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_funders_on_project_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_funders_on_project_id ON funders USING btree (project_id);
 
 
 --
--- Name: index_identities_on_user_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_identities_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_identities_on_user_id ON identities USING btree (user_id);
 
 
 --
--- Name: index_investigators_on_name; Type: INDEX; Schema: public; Owner: -
+-- Name: index_investigators_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_investigators_on_name ON investigators USING gin (to_tsvector('english'::regconfig, (name)::text));
 
 
 --
--- Name: index_investigators_on_slug; Type: INDEX; Schema: public; Owner: -
+-- Name: index_investigators_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX index_investigators_on_slug ON investigators USING btree (slug);
 
 
 --
--- Name: index_investigators_on_user_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_investigators_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_investigators_on_user_id ON investigators USING btree (user_id);
 
 
 --
--- Name: index_mailboxer_conversation_opt_outs_on_conversation_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_mailboxer_conversation_opt_outs_on_conversation_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_mailboxer_conversation_opt_outs_on_conversation_id ON mailboxer_conversation_opt_outs USING btree (conversation_id);
 
 
 --
--- Name: index_mailboxer_conversation_opt_outs_on_unsubscriber_id_type; Type: INDEX; Schema: public; Owner: -
+-- Name: index_mailboxer_conversation_opt_outs_on_unsubscriber_id_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_mailboxer_conversation_opt_outs_on_unsubscriber_id_type ON mailboxer_conversation_opt_outs USING btree (unsubscriber_id, unsubscriber_type);
 
 
 --
--- Name: index_mailboxer_notifications_on_conversation_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_mailboxer_notifications_on_conversation_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_mailboxer_notifications_on_conversation_id ON mailboxer_notifications USING btree (conversation_id);
 
 
 --
--- Name: index_mailboxer_notifications_on_notified_object_id_and_type; Type: INDEX; Schema: public; Owner: -
+-- Name: index_mailboxer_notifications_on_notified_object_id_and_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_mailboxer_notifications_on_notified_object_id_and_type ON mailboxer_notifications USING btree (notified_object_id, notified_object_type);
 
 
 --
--- Name: index_mailboxer_notifications_on_sender_id_and_sender_type; Type: INDEX; Schema: public; Owner: -
+-- Name: index_mailboxer_notifications_on_sender_id_and_sender_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_mailboxer_notifications_on_sender_id_and_sender_type ON mailboxer_notifications USING btree (sender_id, sender_type);
 
 
 --
--- Name: index_mailboxer_notifications_on_type; Type: INDEX; Schema: public; Owner: -
+-- Name: index_mailboxer_notifications_on_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_mailboxer_notifications_on_type ON mailboxer_notifications USING btree (type);
 
 
 --
--- Name: index_mailboxer_receipts_on_notification_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_mailboxer_receipts_on_notification_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_mailboxer_receipts_on_notification_id ON mailboxer_receipts USING btree (notification_id);
 
 
 --
--- Name: index_mailboxer_receipts_on_receiver_id_and_receiver_type; Type: INDEX; Schema: public; Owner: -
+-- Name: index_mailboxer_receipts_on_receiver_id_and_receiver_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_mailboxer_receipts_on_receiver_id_and_receiver_type ON mailboxer_receipts USING btree (receiver_id, receiver_type);
 
 
 --
--- Name: index_memberships_on_membership_type; Type: INDEX; Schema: public; Owner: -
+-- Name: index_memberships_on_membership_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_memberships_on_membership_type ON memberships USING btree (membership_type);
 
 
 --
--- Name: index_memberships_on_project_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_memberships_on_project_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_memberships_on_project_id ON memberships USING btree (project_id);
 
 
 --
--- Name: index_memberships_on_research_unit_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_memberships_on_research_unit_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_memberships_on_research_unit_id ON memberships USING btree (research_unit_id);
 
 
 --
--- Name: index_notifications_on_notificable_type_and_notificable_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_notifications_on_notificable_type_and_notificable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_notifications_on_notificable_type_and_notificable_id ON notifications USING btree (notificable_type, notificable_id);
 
 
 --
--- Name: index_notifications_on_user_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_notifications_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_notifications_on_user_id ON notifications USING btree (user_id);
 
 
 --
--- Name: index_organizations_on_acronym; Type: INDEX; Schema: public; Owner: -
+-- Name: index_organizations_on_acronym; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_organizations_on_acronym ON organizations USING gin (to_tsvector('english'::regconfig, (acronym)::text));
 
 
 --
--- Name: index_organizations_on_grid_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_organizations_on_grid_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_organizations_on_grid_id ON organizations USING btree (grid_id);
 
 
 --
--- Name: index_organizations_on_name; Type: INDEX; Schema: public; Owner: -
+-- Name: index_organizations_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_organizations_on_name ON organizations USING gin (to_tsvector('english'::regconfig, (name)::text));
 
 
 --
--- Name: index_organizations_on_organization_type_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_organizations_on_organization_type_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_organizations_on_organization_type_id ON organizations USING btree (organization_type_id);
 
 
 --
--- Name: index_organizations_on_slug; Type: INDEX; Schema: public; Owner: -
+-- Name: index_organizations_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX index_organizations_on_slug ON organizations USING btree (slug);
 
 
 --
--- Name: index_pins_on_pinable_id_and_pinable_type; Type: INDEX; Schema: public; Owner: -
+-- Name: index_pins_on_pinable_id_and_pinable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_pins_on_pinable_id_and_pinable_type ON pins USING btree (pinable_id, pinable_type);
 
 
 --
--- Name: index_pins_on_pinable_type_and_pinable_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_pins_on_pinable_type_and_pinable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_pins_on_pinable_type_and_pinable_id ON pins USING btree (pinable_type, pinable_id);
 
 
 --
--- Name: index_posts_on_user_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_posts_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_posts_on_user_id ON posts USING btree (user_id);
 
 
 --
--- Name: index_project_types_projects_on_project_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_project_types_projects_on_project_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_project_types_projects_on_project_id ON project_types_projects USING btree (project_id);
 
 
 --
--- Name: index_project_types_projects_on_project_type_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_project_types_projects_on_project_type_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_project_types_projects_on_project_type_id ON project_types_projects USING btree (project_type_id);
 
 
 --
--- Name: index_project_updates_on_project_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_project_updates_on_project_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_project_updates_on_project_id ON project_updates USING btree (project_id);
 
 
 --
--- Name: index_project_users_on_project_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_project_users_on_project_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_project_users_on_project_id ON project_users USING btree (project_id);
 
 
 --
--- Name: index_project_users_on_project_id_and_user_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_project_users_on_project_id_and_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX index_project_users_on_project_id_and_user_id ON project_users USING btree (project_id, user_id);
 
 
 --
--- Name: index_project_users_on_user_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_project_users_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_project_users_on_user_id ON project_users USING btree (user_id);
 
 
 --
--- Name: index_projects_on_slug; Type: INDEX; Schema: public; Owner: -
+-- Name: index_projects_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX index_projects_on_slug ON projects USING btree (slug);
 
 
 --
--- Name: index_projects_on_summary; Type: INDEX; Schema: public; Owner: -
+-- Name: index_projects_on_summary; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_projects_on_summary ON projects USING gin (to_tsvector('english'::regconfig, summary));
 
 
 --
--- Name: index_projects_on_title; Type: INDEX; Schema: public; Owner: -
+-- Name: index_projects_on_title; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_projects_on_title ON projects USING gin (to_tsvector('english'::regconfig, (title)::text));
 
 
 --
--- Name: index_projects_specialities_on_project_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_projects_specialities_on_project_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_projects_specialities_on_project_id ON projects_specialities USING btree (project_id);
 
 
 --
--- Name: index_projects_specialities_on_speciality_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_projects_specialities_on_speciality_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_projects_specialities_on_speciality_id ON projects_specialities USING btree (speciality_id);
 
 
 --
--- Name: index_research_units_on_address_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_research_units_on_address_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_research_units_on_address_id ON research_units USING btree (address_id);
 
 
 --
--- Name: index_research_units_on_investigator_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_research_units_on_investigator_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_research_units_on_investigator_id ON research_units USING btree (investigator_id);
 
 
 --
--- Name: index_users_on_authentication_token; Type: INDEX; Schema: public; Owner: -
+-- Name: index_users_on_authentication_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX index_users_on_authentication_token ON users USING btree (authentication_token);
 
 
 --
--- Name: index_users_on_confirmation_token; Type: INDEX; Schema: public; Owner: -
+-- Name: index_users_on_confirmation_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX index_users_on_confirmation_token ON users USING btree (confirmation_token);
 
 
 --
--- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -
+-- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
 
 
 --
--- Name: index_users_on_name; Type: INDEX; Schema: public; Owner: -
+-- Name: index_users_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_users_on_name ON users USING gin (to_tsvector('english'::regconfig, (name)::text));
 
 
 --
--- Name: index_users_on_position; Type: INDEX; Schema: public; Owner: -
+-- Name: index_users_on_position; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_users_on_position ON users USING gin (to_tsvector('english'::regconfig, ("position")::text));
 
 
 --
--- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: -
+-- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (reset_password_token);
 
 
 --
--- Name: index_users_on_unlock_token; Type: INDEX; Schema: public; Owner: -
+-- Name: index_users_on_unlock_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX index_users_on_unlock_token ON users USING btree (unlock_token);
 
 
 --
--- Name: identities fk_rails_5373344100; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_rails_5373344100; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY identities
@@ -2558,7 +2553,7 @@ ALTER TABLE ONLY identities
 
 
 --
--- Name: notifications fk_rails_b080fb4855; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_rails_b080fb4855; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY notifications
@@ -2566,7 +2561,7 @@ ALTER TABLE ONLY notifications
 
 
 --
--- Name: investigators fk_rails_b1fd6cb9ed; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_rails_b1fd6cb9ed; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY investigators
@@ -2574,7 +2569,7 @@ ALTER TABLE ONLY investigators
 
 
 --
--- Name: mailboxer_conversation_opt_outs mb_opt_outs_on_conversations_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: mb_opt_outs_on_conversations_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY mailboxer_conversation_opt_outs
@@ -2582,7 +2577,7 @@ ALTER TABLE ONLY mailboxer_conversation_opt_outs
 
 
 --
--- Name: mailboxer_notifications notifications_on_conversation_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: notifications_on_conversation_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY mailboxer_notifications
@@ -2590,7 +2585,7 @@ ALTER TABLE ONLY mailboxer_notifications
 
 
 --
--- Name: mailboxer_receipts receipts_on_notification_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: receipts_on_notification_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY mailboxer_receipts
@@ -2601,7 +2596,7 @@ ALTER TABLE ONLY mailboxer_receipts
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO "$user", public;
+SET search_path TO "$user",public;
 
 INSERT INTO schema_migrations (version) VALUES ('20160623091908'), ('20160623092157'), ('20160623093250'), ('20160629161033'), ('20160629161041'), ('20160707072908'), ('20160707073642'), ('20160708083044'), ('20160711105858'), ('20160711114901'), ('20160718224524'), ('20160718225032'), ('20160718232806'), ('20160720162924'), ('20160721141137'), ('20160725182233'), ('20160726110350'), ('20160729093255'), ('20160729125019'), ('20160729151912'), ('20160801160550'), ('20160801165924'), ('20160801171206'), ('20160802121917'), ('20160802174327'), ('20160803012223'), ('20160803012429'), ('20160803012636'), ('20160803014813'), ('20160803143833'), ('20160804100620'), ('20160804113911'), ('20161004100702'), ('20161018055907'), ('20161018091446'), ('20161018104312'), ('20161018111559'), ('20161018125246'), ('20161020122456'), ('20161020163951'), ('20161021073852'), ('20161021080737'), ('20161021110751'), ('20161021110752'), ('20161021110753'), ('20161021110754'), ('20161026160423'), ('20161027160501'), ('20161103101432'), ('20161103101657'), ('20161104114309'), ('20161107103717'), ('20161107110201'), ('20161110093643'), ('20161110111725'), ('20161110111836'), ('20161111100700'), ('20161115090954'), ('20161123114428'), ('20161124170341'), ('20161205162814'), ('20161206131728'), ('20161207105758'), ('20161207154856'), ('20161207155941');
 
