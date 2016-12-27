@@ -21,7 +21,7 @@ class NetworkEventsController < ApplicationController
 
   def update
 
-    if (!@event.start_date.present? || !@event.end_date.present?)
+    if !@event.start_date.present? || !@event.end_date.present?
       gon.error = "Dates"
       render :edit, error: true and return
     end
@@ -49,7 +49,7 @@ class NetworkEventsController < ApplicationController
   def create
     @event = @user.events.build(event_params)
 
-    if (!@event.start_date.present? || !@event.end_date.present?)
+    if !@event.start_date.present? || !@event.end_date.present?
       gon.error = true
       render :new, error: true and return
     end
