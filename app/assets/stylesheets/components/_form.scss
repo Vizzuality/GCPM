@@ -131,6 +131,10 @@ label {
   padding-top: 0;
 }
 
+p.required.-error {
+  color: red;
+}
+
 .error {
   font-size: $small-font-size;
   margin-top: 0;

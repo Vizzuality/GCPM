@@ -20,14 +20,28 @@ class NetworkEventsController < ApplicationController
   end
 
   def update
+
+    if !@event.start_date.present? || !@event.end_date.present?
+      gon.error = "Dates"
+      render :edit, error: true and return
+    end
+
     if !@event.online
-      render :edit, error: true and return if !@event.country.present? || @event.country == ''
-      render :edit, error: true and return if !@event.city.present? || @event.city == ''
+      if !@event.country.present? || @event.country == ''
+        gon.error = true
+        render :edit, error: true and return
+      end
+
+      if !@event.country.present? || @event.country == ''
+        gon.error = true
+        render :edit, error: true and return if !@event.city.present? || @event.city == ''
+      end
     end
 
     if @event.update(event_params)
       redirect_to event_path(@event.slug_or_id), notice: 'Event succesfully updated.'
     else
+      gon.error = true
       render :edit, notice: "Event can't be updated."
     end
   end
@@ -35,15 +49,28 @@ class NetworkEventsController < ApplicationController
   def create
     @event = @user.events.build(event_params)
 
+    if !@event.start_date.present? || !@event.end_date.present?
+      gon.error = true
+      render :new, error: true and return
+    end
+
     if !@event.online
-      render :new, error: true and return if !@event.country.present? || @event.country == ''
-      render :new, error: true and return if !@event.city.present? || @event.city == ''
+      if !@event.country.present? || @event.country == ''
+        gon.error = true
+        render :new, error: true and return
+      end
+
+      if !@event.country.present? || @event.country == ''
+        gon.error = true
+        render :new, error: true and return if !@event.city.present? || @event.city == ''
+      end
     end
 
     if @event.save
       redirect_to event_path(@event.slug_or_id)
     else
-      render :new, error: true
+      gon.error = true
+      render :new, error: true, notice: @event.errors.full_messages
     end
 
   end

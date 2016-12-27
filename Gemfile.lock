@@ -481,6 +481,7 @@ GEM
       activerecord (> 4.0)
       factory_girl (~> 4.5)
       ruby2ruby
+    truncate_html (0.3.2)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (3.0.3)
@@ -580,6 +581,7 @@ DEPENDENCIES
   textacular
   timecop
   to_factory
+  truncate_html
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (~> 3.0)
