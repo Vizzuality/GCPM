@@ -69,6 +69,8 @@
 
       var online = this.eventsForm.$el.find('.js-online').filter("[name='event[online]']:checked").val();
       online == 'true' && this.handleOnline(online);
+
+      gon.error && this.eventsForm.highlightRequired();
     },
 
     setEvents: function() {
