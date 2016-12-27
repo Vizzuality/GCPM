@@ -50,6 +50,16 @@
             </div>
           </div>
 
+        <% when 'post' %>
+          <div class="column small-12 medium-4">
+            <div class="c-card">  <!-- use -inverse if you want to fill the card -->
+              <h3 class="-underlined">
+                Post
+              </h3>
+              <h2><%= link_to featured.title, post_path(featured.slug_or_id) %></h2>
+            </div>
+          </div>
+
         <% when 'investigator' %>
           <div class="column small-12 medium-4">
             <div class="c-card -person">
