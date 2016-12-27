@@ -23,7 +23,7 @@ ActiveAdmin.register Event do
     f.semantic_errors
     f.inputs do
       f.input :title
-      f.input :description
+      f.input :description, as: :ckeditor
       f.input :website, as: :string
       f.input :excerpt
       f.input :participants

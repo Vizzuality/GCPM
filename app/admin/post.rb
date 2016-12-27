@@ -14,7 +14,7 @@ ActiveAdmin.register Post do
     f.semantic_errors
     f.inputs 'Post Details' do
       f.input :title
-      f.input :body
+      f.input :body, as: :ckeditor
       f.input :user
     end
     actions
