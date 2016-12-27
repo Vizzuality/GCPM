@@ -12,6 +12,7 @@ $dropdown-max-height: 300px;
   > span {
     display: inline-block;
     line-height: 52px;
+    white-space: nowrap;
   }
 
   .dropdown-value {
