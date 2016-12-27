@@ -21,6 +21,7 @@
       this.$city = this.$el.find('#event_city');
       this.$state = this.$el.find('#event_state');
       this.$postcode = this.$el.find('#event_postcode');
+      this.$required = this.$el.find('.required');
     },
 
     getLocation: function() {
@@ -141,6 +142,10 @@
       });
 
       $container.html('<span class="select2-selection__rendered" id="select2-eventcountry-d0-container"><span class="select2-selection__placeholder">All countries</span></span>');
+    },
+
+    highlightRequired: function() {
+      this.$required.toggleClass('-error', true);
     }
 
   });
