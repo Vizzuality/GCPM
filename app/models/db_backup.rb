@@ -11,6 +11,7 @@
 
 class DbBackup < ApplicationRecord
   before_save :create_backups
+  before_destroy :delete_files!
   def create_backups
     self.file_name = "#{Time.now.to_formatted_s(:rfc822).parameterize}.bak"
     db = "gcpm_#{Rails.env}"
@@ -34,6 +35,12 @@ class DbBackup < ApplicationRecord
     ActiveRecord::Base.connection.tables.each do |t|
       ActiveRecord::Base.connection.reset_pk_sequence!(t)
       puts 'reseting ' + t + ' keys'
+    end
+  end
+  def delete_files!
+    files = ["#{Rails.root}/db_backups/#{self.file_name}", "#{Rails.root}/db_backups/full_#{self.file_name}"]
+    files.each do |f|
+      File.delete(f) if File.exist?(f)
     end
   end
 end
