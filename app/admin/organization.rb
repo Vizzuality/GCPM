@@ -15,9 +15,13 @@ ActiveAdmin.register Organization do
     id_column
     column :name
     column :acronym
+    column :grid_id
     column :email_address
     column :established
     column :organization_type
+    column :address do |obj|
+      obj.addresses.map{|a| a.id}
+    end
     actions do |obj|
       if obj.featured?
         link_to("Unfeature", unfeature_admin_organization_path(obj))

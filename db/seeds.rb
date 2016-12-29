@@ -37,3 +37,7 @@ end
 OrganizationType.create(name: 'public') unless OrganizationType.find_by(name: 'public')
 OrganizationType.create(name: 'non-profit') unless OrganizationType.find_by(name: 'non-profit')
 OrganizationType.create(name: 'for-profit') unless OrganizationType.find_by(name: 'for-profit')
+
+Country.create(country_name: 'Hong Kong', region_name: 'Eastern Asia', country_iso: "HK", country_iso_3: "HKG", region_iso: "ES", region_centroid: '{"type":"Point", "coordinates":[38.1739069049899,105.293943572632]}', country_centroid: '{"type":"Point", "coordinates":[‎22.286394,114.149139]}') unless Country.find_by(country_name: 'Hong Kong')
+
+
