@@ -23,7 +23,7 @@ class Project < ApplicationRecord
   include UserRelationable
   include ActAsFeatured
 
-  after_create :notify_admin
+  after_create :notify_admin, if: "status == 'under_revision'"
   after_update :notify_users_for_update, if: "status == 'published'"
   after_create :notify_users_for_create, if: 'created_by.present?'
 
@@ -63,7 +63,7 @@ class Project < ApplicationRecord
   validate                :dates_timeline
   validates               :start_date, date: true, presence: true
   validates               :end_date,   date: true, presence: true
-  validates_presence_of   :cancer_types, :project_types
+  validates_presence_of   :cancer_types, :project_types, on: :create
   validates_acceptance_of :terms
 
   include Sluggable
