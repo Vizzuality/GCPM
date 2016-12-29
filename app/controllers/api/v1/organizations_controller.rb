@@ -28,7 +28,7 @@ module Api::V1
       end
 
       def organizations_params
-        params.permit(:funding_source)
+        params.permit(:funding_source, :active, :q)
       end
   end
 end
