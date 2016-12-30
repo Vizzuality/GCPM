@@ -16,6 +16,7 @@ class FundingSourceImporter
       rescue
         @errors << { project: "funding source not found" }
         Rails.logger.info @errors
+        return false
       end
     else
       funding_source = Organization.find_or_initialize_by(name: data['project_funding_source']&.strip)
