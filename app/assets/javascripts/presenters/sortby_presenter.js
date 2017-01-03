@@ -6,9 +6,7 @@
   var StateModel = Backbone.Model.extend({
 
     defaults: {
-      sortby: 'title_asc',
-      type: 'title',
-      direction: 'asc'
+      sortby: 'title_asc'
     }
 
   });
@@ -20,14 +18,15 @@
   _.extend(App.Presenter.SortBy.prototype, {
     initialize: function(params, viewSettings) {
       var sortby = _.pick(params, 'sortby');
-      var specs = sortby.sortby && _.extend(this.splitSortby(sortby.sortby)) || {};
-      this.state = new StateModel(_.extend(specs, sortby, _.pick(params, 'data')));
+      this.state = new StateModel(_.extend({}, sortby, _.pick(params, 'data')));
 
       var dropdownOptions = _.map([
-        { name: 'Title', value: 'title' },
-        { name: 'Submitted Date', value: 'created'}
+        { name: 'Title (A-Z)', value: 'title_asc' },
+        { name: 'Title (Z-A)', value: 'title_desc' },
+        { name: 'Submitted Date (Most recent to earliest)', value: 'created_asc' },
+        { name: 'Submitted Date (Earliest to most recent)', value: 'created_desc'}
       ], function(opt) {
-        opt.selected = this.state.get('sortby').split('_')[0] === opt.value;
+        opt.selected = this.state.get('sortby') === opt.value;
         return opt;
       }, this);
 
@@ -39,8 +38,7 @@
           className: '-sortby',
           contentClassName: gon.isMobile && '-top',
           options: dropdownOptions,
-          arrows: true,
-          direction: specs.direction
+          arrows: false
         }, viewSettings||{})
       });
 
@@ -65,30 +63,18 @@
       ].join(' ');
 
       App.on(eventsNames, function(newState) {
-        var localState = _.pick(this.getState(), 'type', 'direction', 'sortby');
+        var localState = _.pick(this.getState(), 'sortby');
         this.setState(_.extend({}, this.getState(), localState, newState), { silent: true })
       }, this);
     },
 
     onDropdownChange: function(current) {
       var newState = {};
-      var sortby = '';
+      var sortby = current.value;
 
-      if (current.arrows) {
-        var direction = this.state.get('direction') === 'asc' ? 'desc' : 'asc';
-        sortby = this.state.get('type') + '_' + direction ;
+      newState = { sortby: sortby };
 
-        newState = { type: this.state.get('type'), direction: direction, sortby: sortby };
-
-      } else {
-        var type = current.value;
-        sortby =  type + '_' + this.state.get('direction') ;
-
-        newState = { type: type, sortby: sortby, direction: this.state.get('direction') };
-
-      }
-
-      var localState = _.pick(this.getState(), 'type', 'direction', 'sortby');
+      var localState = _.pick(this.getState(), 'sortby');
       this.setState(_.extend({}, this.getState(), localState, newState))
       ga('send', 'event', 'Map', 'Sort by', this.state.get('sortby'));
     },
