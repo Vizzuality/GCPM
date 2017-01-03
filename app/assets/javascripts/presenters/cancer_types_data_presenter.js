@@ -5,6 +5,9 @@
   var StateModel = Backbone.Model.extend();
 
   var IncidenceModel = Backbone.Model.extend({
+
+    info: '<div> <h2>Incidence</h2> <p> GLOBOCAN 2012, IARC -11.8.2014: <a href="http://globocan.iarc.fr/Pages/glossary.aspx">http://globocan.iarc.fr/Pages/glossary.aspx</a> </p> <p>Incidence is the number of new cases arising in a given period in a specified population. This information is collected routinely by cancer registries. It can be expressed as an absolute number of cases per year or as a rate per 100,000 persons per year.<sup>*</sup> The rate provides an approximation of the average risk of developing a cancer. </p> <p> <sup>*</sup> Only age-standardized rates per 100,000 persons per year are shown here </p> </div>',
+
     setUrl: function(id) {
       var cancer_type = id.replace(/-/g, '_');
       var sql = "SELECT "+ cancer_type +"_incidence as value, iso3, country FROM ranking_cancer_avg WHERE "+ cancer_type +"_incidence IS NOT NULL ORDER BY "+ cancer_type +"_incidence DESC LIMIT 10";
@@ -18,6 +21,9 @@
   });
 
   var MortalityModel = Backbone.Model.extend({
+
+    info: '<div> <h2>Mortality</h2> <p> GLOBOCAN 2012, IARC -11.8.2014: <a href="http://globocan.iarc.fr/Pages/glossary.aspx">http://globocan.iarc.fr/Pages/glossary.aspx</a> </p> <p>Mortality is the number of deaths occurring in a given period in a specified population. It can be expressed as an absolute number of deaths per year or as a rate per 100,000 persons per year.<sup>*</sup> </p> <p> <sup>*</sup> Only age-standardized rates per 100,000 persons per year are shown here </p> </div>',
+
     setUrl: function(id) {
       var cancer_type = id.replace(/-/g, '_');
       var sql = "SELECT "+ cancer_type +"_mortality as value, iso3, country FROM ranking_cancer_avg WHERE "+ cancer_type +"_mortality IS NOT NULL ORDER BY "+ cancer_type +"_mortality DESC LIMIT 10";
@@ -32,6 +38,9 @@
   });
 
   var SurvivorsModel = Backbone.Model.extend({
+
+    info: '<div> <h2>Survivors</h2> <p> GLOBOCAN 2012, IARC -11.8.2014: <a href="http://globocan.iarc.fr/Pages/glossary.aspx">http://globocan.iarc.fr/Pages/glossary.aspx</a> </p> <p>Mortality is the number of deaths occurring in a given period in a specified population. It can be expressed as an absolute number of deaths per year or as a rate per 100,000 persons per year.<sup>*</sup> </p> <p> <sup>*</sup> Only age-standardized rates per 100,000 persons per year are shown here </p> </div>',
+
     setUrl: function(id) {
       var cancer_type = id.replace(/-/g, '_');
       // round( CAST(c as numeric), 2 )
@@ -58,6 +67,7 @@
       this.mortality = new MortalityModel();
       this.survivors = new SurvivorsModel();
 
+      this.modal = new App.View.Modal();
 
       this.incidenceRanking = new App.View.Ranking({
         el: '#incidenceRanking'
@@ -78,6 +88,11 @@
 
     setEvents: function() {
       this.state.on('change', this.renderSubviews, this);
+
+      this.incidenceRanking.on('info', function(info){ this.modal.open(info); }, this);
+      this.mortalityRanking.on('info', function(info){ this.modal.open(info); }, this);
+      this.survivorsRanking.on('info', function(info){ this.modal.open(info); }, this);
+
     },
 
     setSubscriptions: function() {
@@ -101,11 +116,11 @@
         this.incidence.fetch()
           .done(function(){
             var incidence = this.incidence.toJSON();
-            this.renderRanking(this.incidenceRanking, '#incidenceRanking', 'Top 10 indidence', incidence);
+            this.renderRanking(this.incidenceRanking, this.incidence, '#incidenceRanking', 'Top 10 indidence', incidence);
           }.bind(this))
 
           .fail(function(){
-            this.renderRanking(this.incidenceRanking, '#incidenceRanking', 'Top 10 indidence', null);
+            this.renderRanking(this.incidenceRanking, this.incidence, '#incidenceRanking', 'Top 10 indidence', null);
           }.bind(this))
 
         // Mortality
@@ -113,11 +128,11 @@
         this.mortality.fetch()
           .done(function(){
             var mortality = this.mortality.toJSON();
-            this.renderRanking(this.mortalityRanking, '#mortalityRanking', 'Top 10 mortality', mortality);
+            this.renderRanking(this.mortalityRanking, this.mortality, '#mortalityRanking', 'Top 10 mortality', mortality);
           }.bind(this))
 
           .fail(function(){
-            this.renderRanking(this.mortalityRanking, '#mortalityRanking', 'Top 10 mortality', null);
+            this.renderRanking(this.mortalityRanking, this.mortality, '#mortalityRanking', 'Top 10 mortality', null);
           }.bind(this))
 
 
@@ -126,20 +141,20 @@
         this.survivors.fetch()
           .done(function(){
             var survivors = this.survivors.toJSON();
-            this.renderRanking(this.survivorsRanking, '#survivorsRanking', 'Top 10 survivors', survivors);
+            this.renderRanking(this.survivorsRanking, this.survivors, '#survivorsRanking', 'Top 10 survivors', survivors);
           }.bind(this))
 
           .fail(function(){
-            this.renderRanking(this.survivorsRanking, '#survivorsRanking', 'Top 10 survivors', null);
+            this.renderRanking(this.survivorsRanking, this.survivors, '#survivorsRanking', 'Top 10 survivors', null);
           }.bind(this))
 
       }
     },
 
-    renderRanking: function(ranking, element, name, data) {
+    renderRanking: function(ranking, model, element, name, data) {
       ranking.setElement(element);
       ranking.cache();
-      ranking.setData(data, name);
+      ranking.setData(model, data, name);
       ranking.render();
     }
 
