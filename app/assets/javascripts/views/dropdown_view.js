@@ -13,8 +13,7 @@
 
     events: {
       'click .js-open': 'toggleDropdown',
-      'click .js-option': 'selectOption',
-      'click .js-arrows-action': 'toggleDirection'
+      'click .js-option': 'selectOption'
     },
 
     template: HandlebarsTemplates['dropdown'],
@@ -34,9 +33,6 @@
         selected: true
       });
       this.$el.html(this.template(this.options));
-      if (this.options.direction && this.options.direction !== 'asc') {
-        this.switchActiveArrow();
-      }
       return this;
     },
 
@@ -62,8 +58,15 @@
     selectOption: function(e) {
       var value = e.currentTarget.getAttribute('data-value');
       var name = e.currentTarget.getAttribute('name');
+
+      // Set the selected
+      this.$el.find('.dropdown-item').removeClass('-selected');
+      $(e.currentTarget).parent().addClass('-selected');
+
+      // Set the selected name
       this.$el.find('.dropdown-value').html(name);
       this.trigger('change', { name: name, value: value });
+
       this.toggleDropdown();
     },
 
@@ -75,17 +78,6 @@
     toggleDropdown: function() {
       this.options.open = !this.options.open;
       this.$el.find('.dropdown-content').toggleClass('-open');
-    },
-
-    toggleDirection: function() {
-      this.trigger('change', { arrows: true });
-      this.switchActiveArrow();
-    },
-
-    switchActiveArrow: function() {
-      var toActive = $('.arrows .c-icon:not(.-active)');
-      $('.arrows .c-icon.-active').removeClass('-active');
-      toActive.addClass('-active');
     }
 
   });

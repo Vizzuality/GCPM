@@ -42,11 +42,13 @@
       });
       var cancerTypes = new App.Presenter.CancerTypes({
         label: null,
-        addNew: false
+        addNew: false,
+        required: false
       });
       var projectTypes = new App.Presenter.ProjectTypes({
         label: null,
-        addNew: false
+        addNew: false,
+        required: false
       });
       var organizationsTypes = new App.Presenter.OrganizationTypes({
         label: null,
