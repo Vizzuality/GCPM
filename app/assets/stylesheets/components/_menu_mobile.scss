@@ -13,13 +13,11 @@
 
   background-color: white;
 
-  & * { display: none; }
 
   &.-active {
     opacity: 1;
     width: 100vw;
 
-    & * { display: inherit; }
     & .back { display: flex; }
     & .notifications a {
       display: flex;

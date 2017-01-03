@@ -25,11 +25,16 @@ $dropdown-max-height: 300px;
     cursor: pointer;
 
     // Ellipsis
-    max-width: 150px;
+    max-width: 90px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     display: block;
+
+    @media #{$mq-small} {
+      max-width: 150px;
+    }
+
   }
 
   .dropdown-content {
@@ -46,9 +51,9 @@ $dropdown-max-height: 300px;
     z-index: 5;
 
     &.-top {
-      top: -200%;
-      transform: translateY(12px);
-      right: 0;
+      top: 0;
+      transform: translateY(-100%);
+      right: auto;
       left: 0;
     }
 
