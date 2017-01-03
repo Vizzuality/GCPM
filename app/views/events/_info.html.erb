@@ -18,7 +18,7 @@
       <% if @event.start_date.present? || @event.end_date.present? %>
         <div id="datesTimeline" class="sidebar-item c-dates-timeline">
           <div class="dates">
-             <% if @event.start_date.present? %>
+            <% if @event.start_date.present? %>
               <div class="date">
                 <h3><%= t 'start_date' %></h3>
                 <span><%= @event.start_date %></span>

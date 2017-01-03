@@ -15,6 +15,20 @@
             </h3>
           <% end %>
           <h2><%= link_to e.title, event_path(e.slug_or_id) %></h2>
+          <p>
+            <% if e.start_date.present? %>
+              <span><%= e.start_date %></span>
+            <% else %>
+              <span>-</span>
+            <% end %>
+            /
+            <% if e.end_date.present? %>
+              <span><%= e.end_date %></span>
+            <% else %>
+              <span>-</span>
+            <% end %>
+          </p>
+          
           <p><%= truncate(e.description.html_safe, :length => 300) %></p>
         </div>
       </div>
