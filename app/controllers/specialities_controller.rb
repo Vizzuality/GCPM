@@ -12,7 +12,7 @@ class SpecialitiesController < ApplicationController
     @filters = %w(projects people)
     @current_type = params.key?(:data) ? params[:data] : 'projects'
 
-    gon.server_params = { 'cancer_types[]': @speciality.id }
+    gon.server_params = { 'specialities[]': @speciality.id }
     gon.carto_account = ENV["CARTODB_ACCOUNT"]
     gon.carto_key = ENV["CARTODB_KEY"]
     gon.isMobile = browser.device.mobile?
