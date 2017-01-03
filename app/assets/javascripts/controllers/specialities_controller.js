@@ -7,9 +7,7 @@
   _.extend(App.Controller.Specialities.prototype, {
 
     show: function(params) {
-      var newParams = _.extend({}, {
-        speciality: params.vars[0]
-      }, params);
+      var newParams = _.extend({}, {}, params);
 
 
       new App.Presenter.TabNav(newParams);
