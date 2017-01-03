@@ -76,6 +76,15 @@ class User < ApplicationRecord
     nil
   end
 
+  def notification_email(object)
+    email
+  end
+
+  def display_name
+    return "#{half_email}" if name.blank?
+    "#{name}"
+  end
+
   def published_projects
     projects.published.includes(:cancer_types)
   end
@@ -170,5 +179,12 @@ class User < ApplicationRecord
     def notify_users_for_update
       users = ActivityFeed.where(actionable_type: 'User', actionable_id: self.id, action: 'following').pluck(:user_id)
       Notification.build(users, self, 'was updated') if users.any?
+    end
+
+    def half_email
+      return "" if email.blank?
+      index = email.index('@')
+      return "" if index.nil? || index.to_i.zero?
+      email[0, index.to_i]
     end
 end

@@ -35,7 +35,7 @@ class Post < ApplicationRecord
   private
 
     def notify_users_for_update
-      users   = ActivityFeed.where(actionable_type: 'User', actionable_id: user_id, action: 'following').pluck(:user_id)
+      users = ActivityFeed.where(actionable_type: 'User', actionable_id: user_id, action: 'following').pluck(:user_id)
       if users.any?
         creator = User.find(user_id).try(:name)
         Notification.build(users, self, "was created by #{creator}")

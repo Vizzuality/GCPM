@@ -63,4 +63,14 @@ RSpec.describe Notification, type: :model do
       expect(Notification.unread.size).to eq 0
     end
   end
+
+  describe "#daily_notifications_task" do
+    it "email notification" do
+      notification = create :notification
+      expect(Notification.unread.size).to eq 1
+
+      Notification.daily_notifications_task
+      expect(notification.reload.emailed_at.to_date).to eq(Time.now.to_date)
+    end
+  end
 end
