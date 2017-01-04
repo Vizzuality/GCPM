@@ -26,8 +26,6 @@ module Gcpm
     config.autoload_paths += %W(#{Rails.root}/app/excel_importer #{Rails.root}/app/excel_importer/entities)
     config.app_generators.scaffold_controller = :scaffold_controller
 
-    config.active_job.queue_adapter = :delayed_job
-
     # config.middleware.use Rack::Cors do
     #   allow do
     #     origins '*'
