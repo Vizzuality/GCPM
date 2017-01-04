@@ -61,6 +61,7 @@ class Investigator < ApplicationRecord
   scope :by_user,               -> user               { where('investigators.user_id = ? AND investigators.is_approved = ?', user, true ) }
   scope :user_present,          ->                    { where.not(investigators: { user_id: nil } ) }
   scope :for_render,            ->                    { includes(:organizations, [organizations: :addresses]) }
+  scope :filter_name,          -> investigator_name  { where('name ILIKE ?', "%#{investigator_name}%") }
 
   def graph
     self.projects.includes(:investigators)
@@ -89,7 +90,8 @@ class Investigator < ApplicationRecord
       investigators = investigators.order('investigators.name DESC')                    if options[:sortby] && options[:sortby] == 'title_desc'
       investigators = investigators.limit(options[:limit])                              if options[:limit]
       investigators = investigators.offset(options[:offset])                            if options[:offset]
-      investigators.uniq
+      investigators = investigators.filter_name(options[:q])                            if options[:q].present?
+      investigators.distinct
     end
   end
 
