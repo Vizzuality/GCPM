@@ -70,7 +70,7 @@ class Notification < ActiveRecord::Base
           user_name     = user.name || user.email
           user_email    = user.email
           summary_items = user.notifications.not_emailed
-          NotificationMailer.daily_summary_email(user_name, user_email, summary_items.to_a).deliver_later
+          NotificationMailer.daily_summary_email(user_name, user_email, summary_items.to_a).deliver_now
           mark_as_emailed(summary_items.pluck(:id))
         end
       end

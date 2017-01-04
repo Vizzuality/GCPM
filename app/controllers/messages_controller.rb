@@ -34,6 +34,12 @@ class MessagesController < ApplicationController
   end
 
   def destroy
+    conversation = Mailboxer::Conversation.find(params[:id])
+    conversation.mark_as_deleted current_user
+    redirect_to user_url(current_user, data: 'messages'), flash: { notice: 'Message deleted' }
+  end
+
+  def destroy_message
     message = Mailboxer::Message.find(params[:id])
     # authorize! :destroy_message, message
     conversation = message.conversation
