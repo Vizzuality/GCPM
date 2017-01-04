@@ -261,7 +261,7 @@ class Project < ApplicationRecord
     end
 
     def notify_users_for_create
-      users   = ActivityFeed.where(actionable_type: 'User', actionable_id: created_by, action: 'following').pluck(:user_id)
+      users = ActivityFeed.where(actionable_type: 'User', actionable_id: created_by, action: 'following').pluck(:user_id)
       if users.any?
         creator = User.find(created_by).try(:name)
         Notification.build(users, self, "was created by #{creator}")

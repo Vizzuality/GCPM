@@ -98,3 +98,10 @@ en:
   your_profile: "Your Profile"
   your_projects: "Your Projects"
   specialities: "Specialities"
+
+  mailboxer:
+    message_mailer:
+      subject_new: 'You have received a new message about %{subject}'
+      subject_reply: 'You have received a new reply about %{subject}'
+    notification_mailer:
+      subject: 'You have received a new reply about %{subject}'
