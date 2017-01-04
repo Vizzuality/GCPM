@@ -77,7 +77,11 @@ class User < ApplicationRecord
   end
 
   def notification_email(object)
-    email
+    if notifications_mailer?
+      email
+    else
+      nil
+    end
   end
 
   def display_name

@@ -66,11 +66,13 @@ class Notification < ActiveRecord::Base
       user_ids = Notification.not_emailed.pluck(:user_id).uniq
       user_ids.each do |user_id|
         user          = User.find(user_id)
-        user_name     = user.name || user.email
-        user_email    = user.email
-        summary_items = user.notifications.not_emailed
-        NotificationMailer.daily_summary_email(user_name, user_email, summary_items.to_a).deliver_later
-        mark_as_emailed(summary_items.pluck(:id))
+        if user.notifications_mailer?
+          user_name     = user.name || user.email
+          user_email    = user.email
+          summary_items = user.notifications.not_emailed
+          NotificationMailer.daily_summary_email(user_name, user_email, summary_items.to_a).deliver_later
+          mark_as_emailed(summary_items.pluck(:id))
+        end
       end
     end
 
