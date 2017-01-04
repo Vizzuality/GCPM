@@ -12,9 +12,11 @@
     },
 
     toggleConversation: function(e) {
-      var conversation = $(e.target).closest('.c-conversation');
-
-      this.trigger('click', { conversation: conversation[0] });
+      var btnRemove = $(e.currentTarget).find('.js-btn-remove')[0];
+      if (!btnRemove.contains(e.target)) {
+        var conversation = $(e.target).closest('.c-conversation');
+        this.trigger('click', { conversation: conversation[0] });
+      }
     },
 
     removeUnreadClass: function(conversation) {
