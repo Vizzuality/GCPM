@@ -10,4 +10,9 @@
 
 class Speciality < ApplicationRecord
   has_and_belongs_to_many :projects
+
+  has_many :pins,  as: :pinable
+  has_many :posts, through: :pins
+
+  include Sluggable
 end

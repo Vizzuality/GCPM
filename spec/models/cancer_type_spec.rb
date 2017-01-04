@@ -17,7 +17,7 @@ RSpec.describe CancerType, type: :model do
     @cancer_type = create(:cancer_type, name: 'Test type')
   end
 
-  context "Valid investigator" do
+  context "Valid cancer type" do
     it 'Slug presentation' do
       expect(@cancer_type).to      be_valid
       expect(@cancer_type.slug).to be_present
@@ -32,13 +32,13 @@ RSpec.describe CancerType, type: :model do
                                        cancer_types: [create(:cancer_type, name: "cancer type 1")])
       @organization = create(:organization)
       @cancer_type  = create(:cancer_type)
-      create(:pin, pinable: @project, post: @post)
+      create(:pin, pinable: @project,      post: @post)
       create(:pin, pinable: @organization, post: @post)
-      create(:pin, pinable: @cancer_type, post: @post)
+      create(:pin, pinable: @cancer_type,  post: @post)
     end
 
     it 'Pins count' do
-      expect(@project.pins.size).to  eq(1)
+      expect(@project.pins.size).to      eq(1)
       expect(@cancer_type.posts.size).to eq(1)
     end
   end

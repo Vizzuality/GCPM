@@ -28,5 +28,10 @@ namespace :assign do
     Event.find_each do |event|
       event.update(event.attributes) if event.slug.blank?
     end
+
+    puts "Assign slugs to specialities"
+    Speciality.find_each do |speciality|
+      speciality.update(speciality.attributes) if speciality.slug.blank?
+    end
   end
 end

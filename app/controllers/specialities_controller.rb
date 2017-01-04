@@ -36,6 +36,6 @@ class SpecialitiesController < ApplicationController
   private
 
     def set_speciality
-      @speciality = Speciality.find(params[:id])
+      @speciality = Speciality.set_by_id_or_slug(params[:id])
     end
 end
