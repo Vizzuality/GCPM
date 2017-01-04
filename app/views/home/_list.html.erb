@@ -20,6 +20,14 @@
                   </span>
                 <% end %>
               </p>
+
+              <p>
+                <% featured.specialities.each do |sp| %>
+                  <span class="c-tag -mg -darker">
+                    <%= link_to sp.name, speciality_path(sp.slug_or_id) %>
+                  </span>
+                <% end %>
+              </p>
             </div>
           </div>
 

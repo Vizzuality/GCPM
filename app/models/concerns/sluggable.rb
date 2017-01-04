@@ -3,7 +3,6 @@ module Sluggable
   extend ActiveSupport::Concern
 
   included do
-
     before_validation :check_slug
 
     validates_uniqueness_of :slug

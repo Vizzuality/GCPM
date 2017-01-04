@@ -30,7 +30,8 @@
       'search(/)':                                 'Search#index',
       'network/:id/events(/)':                     'Events#index',
       'network/:id/events/new(/)':                 'Events#new',
-      'network/:id/events/:id/edit(/)':            'Events#edit'
+      'network/:id/events/:id/edit(/)':            'Events#edit',
+      'specialities/:id(/)':                       'Specialities#show'
     },
 
     initialize: function() {

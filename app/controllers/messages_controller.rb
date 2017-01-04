@@ -6,12 +6,14 @@ class MessagesController < ApplicationController
     @conversations = Mailboxer::Conversation.joins(:receipts).where(mailboxer_receipts: { receiver_id: current_user.id, deleted: false }).uniq.page(params[:page]).per(20)
     # render :whatever
   end
+
   def show
     @user = current_user
     conversation = Mailboxer::Conversation.find(params[:id])
     conversation.receipts_for(current_user).map{|m| m.message.mark_as_read(current_user) if m.message.is_unread?(current_user)}
     @conversation = conversation.messages
   end
+
   def create
     if message_params[:in_response].present?
       message = Mailboxer::Message.find(message_params[:in_response])
@@ -36,7 +38,7 @@ class MessagesController < ApplicationController
     # authorize! :destroy_message, message
     conversation = message.conversation
     conversation.mark_as_deleted current_user
-    redirect_to messages_path(current_user), flash: { notice: "Conversación eliminada." }
+    redirect_to user_url(current_user, data: 'messages'), flash: { notice: 'Message deleted' }
   end
 
   def renderMessages
@@ -57,8 +59,8 @@ class MessagesController < ApplicationController
 
 
   private
+
     def message_params
       params.require(:message).permit(:body, :subject, :receiver, :in_response, :data)
     end
-
 end

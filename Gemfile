@@ -62,6 +62,7 @@ gem "acts_as_follower", git: 'https://github.com/rschumann/acts_as_follower'
 
 # Messages
 gem 'mailboxer'
+gem 'whenever', require: false
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-normalize-css'
