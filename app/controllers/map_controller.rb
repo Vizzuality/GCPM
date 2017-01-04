@@ -70,6 +70,10 @@ class MapController < ApplicationController
         @sortby = 'created_at ASC'
       when 'created_desc'
         @sortby = 'created_at DESC'
+      when 'start_date_asc'
+        @sortby = 'start_date ASC'
+      when 'start_date_desc'
+        @sortby = 'start_date DESC'
       else
         @sortby = 'title ASC'
       end
