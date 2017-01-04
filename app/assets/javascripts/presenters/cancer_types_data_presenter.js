@@ -39,7 +39,7 @@
 
   var SurvivorsModel = Backbone.Model.extend({
 
-    info: '<div> <h2>Survivors</h2> <p>Age-standardized estimates, adults (aged 15-99 years) diagnosed 2005-2009</p> </div>',
+    info: '<div> <h2>Survivors</h2> <p>Values of Cancer Survivors are taken with age-standardized estimates, adults (aged 15-99 years) diagnosed 2005-2009. For Breast Cancer are just for Females.</p> </div>',
 
     setUrl: function(id) {
       var cancer_type = id.replace(/-/g, '_');
