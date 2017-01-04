@@ -8,6 +8,7 @@
     },
 
     events: {
+      'click .js-btn-info': 'onClickInfo',
     },
 
     template: HandlebarsTemplates['ranking'],
@@ -24,9 +25,10 @@
       this.$spinner = this.$el.closest('.l-content').find('.c-spinner');
     },
 
-    setData: function(data, name) {
+    setData: function(model, data, name) {
       this.name = name;
       this.data = data;
+      this.model = model;
     },
 
     render: function() {
@@ -41,7 +43,12 @@
     hideSpinner: function() {
       this.$spinner && this.$spinner.hasClass('-start') &&
         this.$spinner.toggleClass('-start', false);
-    }
+    },
+
+    onClickInfo: function() {
+      var info = this.model.info;
+      this.trigger('info', info);
+    },
 
   });
 
