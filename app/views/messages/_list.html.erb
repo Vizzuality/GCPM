@@ -17,6 +17,7 @@
                   <div class="sender">
                     <h3><%= message_person === current_user ? 'You' : message_person.investigator.try(:name) ||  '(' + message_person.try(:name) + ')' %></h3>
                     <small><%= m.created_at.strftime("%d.%m.%Y") %> <%= m.created_at.strftime("%H:%M")%></small>
+                    <%= link_to 'Delete', delete_message_path(m), method: :delete %>
                   </div>
                   <div class="message">
                     <%= m.body %>
