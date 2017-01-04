@@ -56,6 +56,33 @@ class Notification < ActiveRecord::Base
                                                 WHERE notifications.user_id = users.id)
       SQL
     end
+
+    # On development
+    # whenever --update-crontab --set environment='development'
+    # if /bin/bash: shell_session_update: command not found please run:
+    # rvm get head
+
+    def daily_notifications_task
+      user_ids = Notification.not_emailed.pluck(:user_id).uniq
+      user_ids.each do |user_id|
+        user          = User.find(user_id)
+        if user.notifications_mailer?
+          user_name     = user.name || user.email
+          user_email    = user.email
+          summary_items = user.notifications.not_emailed
+          NotificationMailer.daily_summary_email(user_name, user_email, summary_items.to_a).deliver_later
+          mark_as_emailed(summary_items.pluck(:id))
+        end
+      end
+    end
+
+    def mark_as_emailed(ids)
+      date_now = Time.now.to_formatted_s(:db)
+      ActiveRecord::Base.connection.execute <<-SQL
+        UPDATE notifications SET emailed_at = '#{date_now}'
+                             WHERE notifications.id = ANY(ARRAY#{ids});
+      SQL
+    end
   end
 
   def notificable_title
