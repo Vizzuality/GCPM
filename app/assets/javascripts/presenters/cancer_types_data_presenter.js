@@ -39,7 +39,7 @@
 
   var SurvivorsModel = Backbone.Model.extend({
 
-    info: '<div> <h2>Survivors</h2> <p> GLOBOCAN 2012, IARC -11.8.2014: <a href="http://globocan.iarc.fr/Pages/glossary.aspx">http://globocan.iarc.fr/Pages/glossary.aspx</a> </p> <p>Mortality is the number of deaths occurring in a given period in a specified population. It can be expressed as an absolute number of deaths per year or as a rate per 100,000 persons per year.<sup>*</sup> </p> <p> <sup>*</sup> Only age-standardized rates per 100,000 persons per year are shown here </p> </div>',
+    info: '<div> <h2>Survivors</h2> <p>Age-standardized estimates, adults (aged 15-99 years) diagnosed 2005-2009</p> </div>',
 
     setUrl: function(id) {
       var cancer_type = id.replace(/-/g, '_');
