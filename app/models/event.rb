@@ -73,8 +73,8 @@ class Event < ApplicationRecord
       events = events.order('events.created_at DESC')      if options[:sortby] && options[:sortby] == 'created_desc'
       events = events.order('events.title ASC')            if options[:sortby] && options[:sortby] == 'title_asc'
       events = events.order('events.title DESC')           if options[:sortby] && options[:sortby] == 'title_desc'
-      events = events.order('events.start_date ASC')       if options[:sortby] && options[:sortby] == 'start_date_asc'
-      events = events.order('events.start_date DESC')      if options[:sortby] && options[:sortby] == 'start_date_desc'
+      events = events.order('events.start_date ASC NULLS LAST')       if options[:sortby] && options[:sortby] == 'start_date_asc'
+      events = events.order('events.start_date DESC NULLS LAST')      if options[:sortby] && options[:sortby] == 'start_date_desc'
       events.distinct
     end
 
