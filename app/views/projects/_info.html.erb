@@ -87,7 +87,7 @@
           <h3><%= t 'specialities' %></h3>
           <ul class="c-list">
             <% @project.specialities.each do |sp| %>
-              <li class="list-item -mg-less"><%= sp.try(:name) %></li>
+              <li class="list-item -mg-less"><%= link_to sp.try(:name), speciality_path(sp.slug_or_id) %></li>
             <% end %>
           </ul>
         </div>
