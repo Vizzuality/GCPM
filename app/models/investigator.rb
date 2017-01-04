@@ -44,12 +44,12 @@ class Investigator < ApplicationRecord
 
   include Sluggable
 
-  scope :publihsed,             ->                    { joins(:projects).where(status: :published) }
+  scope :publihsed,             ->                    { joins(:projects).where('projects.status = ?', 1) }
   scope :active,                ->                    { joins(:projects).where('projects.end_date >= ? AND projects.start_date <= ?', Time.now, Time.now).or(where('projects.end_date IS NULL')) }
   scope :inactive,              ->                    { joins(:projects).where('projects.end_date < ?', Time.now).or('projects.start_date > ?', Time.now) }
-  scope :by_project_types,      -> project_types      { joins(projects: :project_types).where(project_types: { id: project_types }) }
-  scope :by_cancer_types,       -> cancer_types       { joins(projects: :cancer_types).where(cancer_types: { id: cancer_types }) }
-  scope :by_specialities,       -> specialities       { joins(projects: :specialities).where(specialities: { id: specialities }) }
+  scope :by_project_types,      -> project_types      { joins(projects: :project_types).where(project_types: { id: project_types }).publihsed }
+  scope :by_cancer_types,       -> cancer_types       { joins(projects: :cancer_types).where(cancer_types: { id: cancer_types }).publihsed }
+  scope :by_specialities,       -> specialities       { joins(projects: :specialities).where(specialities: { id: specialities }).publihsed }
   scope :by_investigators,      -> investigators      { joins(:investigators).where(investigators: { id: investigators }) }
   scope :by_organizations,      -> organizations      { joins(:organizations).where(organizations: { id: organizations }) }
   scope :by_funding_sources,    -> funding_sources    { joins(projects: :funders).where(funders: { organization_id: funding_sources }) }

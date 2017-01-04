@@ -48,6 +48,13 @@
     </div>
   </div>
 
+  <div class="form-row row">
+    <div class="column small-12 medium-5 medium-offset-6">
+      <h4 class="c-title">Email notifications</h4>
+      <%= f.input :notifications_mailer, placeholder: 'Send notifications by email', label: false %>
+    </div>
+  </div>
+
   <% if params[:error] || f.error_notification %>
     <p class="error">* Required field missing.</p>
   <% end %>

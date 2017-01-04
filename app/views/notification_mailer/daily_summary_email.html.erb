@@ -1,0 +1,13 @@
+<p>
+  Dear <%= @name %>,
+</p>
+
+<p>
+  Your daily summary:
+</p>
+
+<% @notifications.each do |notification| %>
+  <p>
+    <%= link_to notification.summary, url_for(notification.notificable) %>
+  </p>
+<% end %>
