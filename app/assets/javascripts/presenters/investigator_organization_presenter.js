@@ -20,6 +20,7 @@
         required: this.state.get('required'),
         addNew: true,
         multiple: false,
+        blank: true,
         select2Options: {
           ajax: {
             url: '/api/investigators',
