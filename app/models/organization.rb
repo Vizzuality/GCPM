@@ -48,7 +48,7 @@ class Organization < ApplicationRecord
       organizations = Organization.all
       organizations = organizations.are_funding_sources if options[:funding_source]
       organizations = organizations.joins(:projects)    if options[:active] && options[:active] = true
-      organizations = organizations.where('name ilike ?', "%#{q}%") if options[:q]
+      organizations = organizations.where('name ilike ?', "%#{options[:q]}%") if options[:q]
       organizations.distinct
     end
   end
