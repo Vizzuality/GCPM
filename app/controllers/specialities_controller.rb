@@ -1,9 +1,6 @@
 class SpecialitiesController < ApplicationController
-  before_action :set_speciality, only: :show
+  before_action :set_speciality
   respond_to :html, :js
-
-  def index
-  end
 
   def show
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1

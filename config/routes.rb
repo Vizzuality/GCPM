@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   resources :projects, only:   :show
   resources :events,   except: :index
   resources :posts
-  resources :specialities, only: [:index, :show]
+  resources :specialities, only: :show
 
   # User profile
   resources :users, only: [:show, :edit, :update], path: :network do
