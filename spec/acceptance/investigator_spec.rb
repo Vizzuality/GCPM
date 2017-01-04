@@ -53,6 +53,16 @@ module Api::V1
         expect(investigator['id']).to   be_present
       end
 
+      it 'Allows to search investigators by name' do
+        get "/api/investigators?q=2"
+
+        investigator = json[0]
+        expect(status).to               eq(200)
+        expect(json.length).to          eq(1)
+        expect(investigator['name']).to be_present
+        expect(investigator['id']).to   be_present
+      end
+
       it 'Allows to access investigator by id' do
         get "/api/investigators/#{investigator_id}?token=#{user.authentication_token}"
 
