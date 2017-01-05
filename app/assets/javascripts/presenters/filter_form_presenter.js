@@ -66,7 +66,7 @@
             }
           }
         }
-        
+
       });
       var cancerTypes = new App.Presenter.CancerTypes({
         label: null,
@@ -198,7 +198,7 @@
         }));
 
         $.when.apply($, promises).done(function() {
-          this.loaded = true;
+          // this.loaded = true;
           this.renderFormElements();
           App.trigger('Modal:loading', { loading: false });
         }.bind(this));
