@@ -18,4 +18,5 @@ class Pin < ApplicationRecord
   scope :on_organizations, -> { where(pinable_type: 'Organization') }
   scope :on_cancer_types,  -> { where(pinable_type: 'CancerType')   }
   scope :on_countries,     -> { where(pinable_type: 'Country')      }
+  scope :on_specialities,  -> { where(pinable_type: 'Speciality')   }
 end
