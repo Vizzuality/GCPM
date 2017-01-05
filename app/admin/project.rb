@@ -4,6 +4,25 @@ ActiveAdmin.register Project do
 
   permit_params :title, :summary, :project_website, :start_date, :end_date, :status, :user_id
 
+  member_action :unpublish, method: :patch do
+    if resource.update(status: 2)
+      redirect_to collection_path, notice: 'Project has been unapproved.'
+    end
+  end
+
+  member_action :publish, method: :patch do
+    if resource.update(status: 1)
+      redirect_to collection_path, notice: 'Project has been approved.'
+    end
+  end
+
+  batch_action :published do |ids|
+    Project.find(ids).each do |project|
+      project.update(status: 1)
+    end
+    redirect_to collection_path, alert: "Projects has been published."
+  end
+
   filter :project_types
   filter :cancer_types
   filter :title
@@ -20,12 +39,11 @@ ActiveAdmin.register Project do
     column :id
     column :title
     column :status
-    actions do |obj|
-      if obj.featured?
-        link_to("Unfeature", unfeature_admin_project_path(obj))
-      else
-        link_to("Feature", feature_admin_project_path(obj))
-      end
+    actions dropdown: true do |obj|
+      item 'Unfeature', unfeature_admin_project_path(obj) if obj.featured?
+      item 'Feature', feature_admin_project_path(obj) unless obj.featured?
+      item 'Unpublish', unpublish_admin_project_path(obj), method: :patch if obj.published?
+      item 'Publish', publish_admin_project_path(obj), method: :patch if obj.unpublished?
     end
   end
 
