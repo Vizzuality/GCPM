@@ -20,6 +20,25 @@
     cursor: pointer;
     position: relative;
 
+    h2 {
+      position: relative;
+      padding: 0 0 0 24px;
+    }
+
+    .btn-remove {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      top: 18px;
+      left: 0;
+      height: 20px;
+      transform: translate(0, -50%);
+
+      &:hover {
+        opacity: 0.75;
+      }
+    }
+
     &:hover {
       color: $secondary-color;
     }
@@ -64,16 +83,6 @@
 .c-conversations-item {
   list-style: none;
   position: relative;
-
-  .btn-remove {
-    position: absolute;
-    top: 12px;
-    right: 15px;
-
-    &:hover {
-      opacity: 0.75;
-    }
-  }
 
   .sender {
     display: flex;

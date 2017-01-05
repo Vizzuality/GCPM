@@ -1,7 +1,5 @@
 lock '3.5.0'
 
-require 'whenever/capistrano'
-
 set :application, 'GCPM'
 set :repo_url, 'git@github.com:Vizzuality/GCPM.git'
 

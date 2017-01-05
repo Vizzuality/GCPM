@@ -6,7 +6,14 @@
         <div class="c-card -messages -thin c-conversation<%= unread ? ' -unread' : '' %>" data-conver-id="<%= conv.id %>">
           <div class="conversation-subject js-subject-action">
             <% conversation_person = conversation_person(conv) %>
-            <h2><%= conv.subject %></h2>
+            <h2>
+              <%= link_to delete_message_path(conv), method: :delete, class: 'btn-remove js-btn-remove'  do %>
+                <svg class="c-icon icon-remove -secondary">
+                  <use xlink:href="#icon-remove"></use>
+                </svg>
+              <% end %>
+              <%= conv.subject %>
+            </h2>
             <h3><%= conversation_person.investigator.try(:name) %> (<%= conversation_person.try(:name) %>)</h3>
           </div>
           <div class="conversation-body">
@@ -14,11 +21,6 @@
               <% conv.messages.each do |m| %>
                 <% message_person = sender(m.sender_id) %>
                 <li class="c-conversations-item <%= (m.sender_id == current_user.id) ? '-mine' : '-theirs' %>">
-                  <%= link_to delete_message_path(m), method: :delete, class: 'btn-remove'  do %>
-                    <svg class="c-icon icon-remove -secondary">
-                      <use xlink:href="#icon-remove"></use>
-                    </svg>
-                  <% end %>
                   <div class="sender">
                     <h3><%= message_person === current_user ? 'You' : message_person.investigator.try(:name) ||  '(' + message_person.try(:name) + ')' %></h3>
                     <small><%= m.created_at.strftime("%d.%m.%Y") %> <%= m.created_at.strftime("%H:%M")%></small>
