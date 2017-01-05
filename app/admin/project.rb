@@ -50,12 +50,12 @@ ActiveAdmin.register Project do
   form do |f|
     semantic_errors
     f.inputs do
+      f.input :status
       f.input :title
       f.input :summary, as: :ckeditor
       f.input :project_website
       f.input :start_date, as: :date_picker
       f.input :end_date, as: :date_picker
-      f.input :status
     end
     f.actions
   end
