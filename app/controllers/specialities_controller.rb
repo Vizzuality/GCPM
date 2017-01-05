@@ -6,7 +6,7 @@ class SpecialitiesController < ApplicationController
     @page = params.key?(:page) && params[:page] ? params[:page].to_i : 1
     @title = t 'map'
 
-    @filters = %w(projects people)
+    @filters = %w(projects people posts)
     @current_type = params.key?(:data) ? params[:data] : 'projects'
 
     gon.server_params = { 'specialities[]': @speciality.id }
@@ -18,10 +18,15 @@ class SpecialitiesController < ApplicationController
 
     @projects = Project.fetch_all(specialities: @speciality.id).order('created_at DESC')
     @people = Investigator.fetch_all(specialities: @speciality.id).order('created_at DESC')
+    @posts = @speciality.posts
 
     if params.key?(:data) && params[:data] == 'people'
       @items = @people.limit(limit)
       @more = (@people.size > @items.size)
+      @items_total = @people.size
+    elsif params.key?(:data) && params[:data] == 'posts'
+      @items = @posts.limit(limit)
+      @more = (@posts.size > @items.size)
       @items_total = @people.size
     else
       # projects by default

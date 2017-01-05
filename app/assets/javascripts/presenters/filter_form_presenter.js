@@ -198,6 +198,8 @@
         }));
 
         $.when.apply($, promises).done(function() {
+          // It seems that even if we load them it will load them again...
+          // That's why I decided to at least, show the modal loading every time...
           // this.loaded = true;
           this.renderFormElements();
           App.trigger('Modal:loading', { loading: false });
