@@ -59,7 +59,7 @@
 
     setPickdate: function() {
       this.$picker = this.$el.find('.pickadate-input')
-        .val(this.state.get('value'))
+        .val(this.state.get('value') || this.$el.data('value'))
         .pickadate(_.extend({}, this.pickadateOptions, {
           container: '#'+this.options.slug+'-container',
           min: this.state.get('min') || undefined,

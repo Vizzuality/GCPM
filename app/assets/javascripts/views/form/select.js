@@ -53,7 +53,7 @@
      * [{ name: 'Title', value: 1 }]
      */
     setValue: function(value) {
-      var val = value || this.state.get('value');
+      var val = value || this.state.get('value') || this.$el.data('value');
 
       if(this.options.select2Options.ajax && !!val) {
         var arrValues = val;
