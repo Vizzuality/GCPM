@@ -18,10 +18,12 @@
           label: false,
           placeholder: 'http://www.example.org',
           name: 'project_website',
-          type: 'url',
+          type: 'text',
           required: false,
           class: 'c-input',
           inputClass: 'c-section-title -one-line',
+          pattern: 'https?://.+',
+          title: 'Please include full url with "http:// or https://"'
         }
       });
 

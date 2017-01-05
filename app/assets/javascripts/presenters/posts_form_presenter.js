@@ -14,7 +14,8 @@
       'post[countries][]': undefined,
       'post[cancer_types][]': undefined,
       'post[organizations][]': undefined,
-      'post[projects][]': undefined
+      'post[projects][]': undefined,
+      'post[specialities][]': undefined
     },
 
     initialize: function(params) {
@@ -31,20 +32,54 @@
       var organizations = new App.Presenter.Organizations({
         label: 'Organizations',
         addNew: false,
-        name: 'post[organizations][]'
+        name: 'post[organizations][]',
+        select2Options: {
+          ajax: {
+            url: '/api/organizations',
+            delay: 150,
+            cache: true,
+            data: function (params) {
+              var query = {
+                q: params.term,
+                page: params.page || 1,
+                active: true
+              }
+              // Query paramters will be ?q=[term]&page=[page]
+              return query;
+            },
+
+            processResults: function (organizations) {
+              return {
+                results: _.sortBy(_.map(organizations, function(org){
+                  return {
+                    text: org.name,
+                    id: org.id
+                  };
+                }), 'text')
+              }
+            }
+          }
+        }
+
       });
       var cancerTypes = new App.Presenter.CancerTypes({
         label: 'Cancer types',
         addNew: false,
-        name: 'post[cancer_types][]'
+        name: 'post[cancer_types][]',
+        required: false
       });
       var projects = new App.Presenter.Projects({
         label: 'Projects',
         addNew: false,
         name: 'post[projects][]'
       });
+      var specialities = new App.Presenter.Specialities({
+        label: 'Specialities',
+        addNew: false,
+        name: 'post[specialities][]'
+      });
 
-      this.children = [countries, organizations, cancerTypes, projects];
+      this.children = [countries, organizations, cancerTypes, projects, specialities];
 
       this.countries = new App.Collection.Countries();
       this.countries.fetch();

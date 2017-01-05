@@ -29,11 +29,12 @@
     initialize: function(viewSettings) {
       this.state = new StateModel();
       this.specialities = new App.Collection.Specialities(); // @TODO
+      this.options = _.extend({}, this.defaults, viewSettings || {});
 
       // Creating view
       this.select = new App.View.Select({
         el: '#specialities',
-        options: _.extend({}, this.defaults, viewSettings || {}),
+        options: this.options,
         state: this.state
       });
 
