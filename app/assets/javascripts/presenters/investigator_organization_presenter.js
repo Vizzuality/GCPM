@@ -19,7 +19,36 @@
         label: null,
         required: this.state.get('required'),
         addNew: true,
-        multiple: false
+        multiple: false,
+        blank: true,
+        select2Options: {
+          ajax: {
+            url: '/api/investigators',
+            delay: 150,
+            cache: true,
+            data: function (params) {
+              var query = {
+                q: params.term,
+                page: params.page || 1,
+                token: window.AUTH_TOKEN
+              }
+              // Query paramters will be ?q=[term]&page=[page]
+              return query;
+            },
+
+            processResults: function (organizations) {
+              return {
+                results: _.sortBy(_.map(organizations, function(org){
+                  return {
+                    text: org.name,
+                    id: org.id
+                  };
+                }), 'text')
+              }
+            }
+          }
+        }
+
       });
       var organization = new App.Presenter.Organization({
         DOMelement: "#organization-1",
