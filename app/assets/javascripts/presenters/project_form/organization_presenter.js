@@ -15,14 +15,34 @@
       name: 'organization',
       label: 'Organization',
       placeholder: 'All organizations',
-      blank: null,
+      blank: true,
       addNew: true,
       select2Options: {
-        // closeOnSelect: false
-        // It solves the closing of the dropdown menu
-        // It adds a lot of UX issues
-        // - Scroll: On select, scroll will go to first highlighted choice => How to resolve the scroll issue https://github.com/select2/select2/issues/1672#issuecomment-240411031
-        // - Click: On each click dropdown will appear and dissapear
+        ajax: {
+          url: '/api/organizations',
+          delay: 150,
+          cache: true,
+          data: function (params) {
+            var query = {
+              q: params.term,
+              page: params.page || 1,
+              active: true
+            }
+            // Query paramters will be ?q=[term]&page=[page]
+            return query;
+          },
+
+          processResults: function (organizations) {
+            return {
+              results: _.sortBy(_.map(organizations, function(org){
+                return {
+                  text: org.name,
+                  id: org.id
+                };
+              }), 'text')
+            }
+          }
+        }
       }
     },
 

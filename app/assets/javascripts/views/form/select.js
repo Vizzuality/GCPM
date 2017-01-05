@@ -54,7 +54,27 @@
      */
     setValue: function(value) {
       var val = value || this.state.get('value');
-      $(this.select.selector).val(val).trigger("change");
+
+      if(this.options.select2Options.ajax && !!val) {
+        var arrValues = val;
+        if (!_.isArray(val)) {
+          arrValues = [val];
+        }
+        _.each(arrValues, function(v){
+          var current = _.findWhere(this.options.options, { id: parseInt(v) });
+          $(this.select.selector).select2("trigger", "select", {
+            data: {
+              id: current.id,
+              text: current.text
+            }
+          });
+        }.bind(this));
+      }
+
+      if (!this.options.select2Options.ajax && !!val) {
+        $(this.select.selector).val(val).trigger("change");
+      }
+
     },
 
     resetValue: function() {

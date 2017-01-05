@@ -38,7 +38,35 @@
       });
       var organizations = new App.Presenter.Organizations({
         label: null,
-        addNew: false
+        addNew: false,
+        select2Options: {
+          ajax: {
+            url: '/api/organizations',
+            delay: 150,
+            cache: true,
+            data: function (params) {
+              var query = {
+                q: params.term,
+                page: params.page || 1,
+                active: true
+              }
+              // Query paramters will be ?q=[term]&page=[page]
+              return query;
+            },
+
+            processResults: function (organizations) {
+              return {
+                results: _.sortBy(_.map(organizations, function(org){
+                  return {
+                    text: org.name,
+                    id: org.id
+                  };
+                }), 'text')
+              }
+            }
+          }
+        }
+        
       });
       var cancerTypes = new App.Presenter.CancerTypes({
         label: null,
