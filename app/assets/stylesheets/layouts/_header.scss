@@ -9,3 +9,15 @@
   max-width: rem(259px);
   margin: $base-space 0;
 }
+
+.menu-button {
+  position: relative;
+  width: 100%;
+
+  .js-hamburger-menu {
+    position: absolute;
+    right: 0;
+    top: -10px;
+    cursor: pointer;
+  }
+}
