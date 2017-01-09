@@ -125,6 +125,10 @@ label {
   transition: all .3s $easeOutCubic;
 }
 
+.-hidden {
+  display: none;
+}
+
 .required {
   font-size: $small-font-size;
   margin-top: 0;

@@ -129,7 +129,7 @@
     toggleOnline: function(value) {
       var boolValue = value == 'true';
       boolValue && this.resetAddressInfo();
-      this.$addressInfo.toggleClass('hiddeable', boolValue);
+      this.$addressInfo.toggleClass('-hidden', boolValue);
     },
 
     resetAddressInfo: function() {
