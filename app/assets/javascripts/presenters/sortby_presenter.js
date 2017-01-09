@@ -9,18 +9,18 @@
     projects: [
       { name: 'Title (A-Z)', value: 'title_asc' },
       { name: 'Title (Z-A)', value: 'title_desc' },
-      { name: 'Submitted Date (Most recent to earliest)', value: 'created_asc' },
-      { name: 'Submitted Date (Earliest to most recent)', value: 'created_desc' }
+      { name: 'Submitted Date (Most recent to earliest)', value: 'created_desc' },
+      { name: 'Submitted Date (Earliest to most recent)', value: 'created_asc' }
     ],
     people: [
       { name: 'Name (A-Z)', value: 'title_asc' },
       { name: 'Name (Z-A)', value: 'title_desc' },
-      { name: 'Submitted Date (Most recent to earliest)', value: 'created_asc' },
-      { name: 'Submitted Date (Earliest to most recent)', value: 'created_desc' }
+      { name: 'Submitted Date (Most recent to earliest)', value: 'created_desc' },
+      { name: 'Submitted Date (Earliest to most recent)', value: 'created_asc' }
     ],
     events: [
-      { name: 'Start Date (Most recent to earliest)', value: 'start_date_asc' },
-      { name: 'Start Date (Earliest to most recent)', value: 'start_date_desc' },
+      { name: 'Start Date (DESC)', value: 'start_date_desc' },
+      { name: 'Start Date (ASC)', value: 'start_date_asc' },
       { name: 'Title (A-Z)', value: 'title_asc' },
       { name: 'Title (Z-A)', value: 'title_desc' }
     ],
