@@ -28,7 +28,7 @@ class MapController < ApplicationController
       @items_private_total = private.size
       @items_total = events.size
     elsif params.key?(:data) && params[:data] == 'people'
-      people = Investigator.fetch_all(people_params).order('created_at DESC')
+      people = Investigator.fetch_all(people_params).order('name ASC')
       @items = people.limit(limit)
       @more = (people.size > @items.size)
       @items_total = people.size
@@ -53,8 +53,7 @@ class MapController < ApplicationController
     end
 
     def events_params
-      # I decide to not allow the sortby param as long as they want to order events always by upcoming events. If it is not the desired behaviour we will need to change a lot of things
-      params.permit(:user, :start_date, :end_date, regions:[], countries:[], project_types:[], cancer_types:[], organization_types:[], organizations:[], investigators:[], funding_sources:[])
+      params.permit(:user, :sortby, :start_date, :end_date, regions:[], countries:[], project_types:[], cancer_types:[], organization_types:[], organizations:[], investigators:[], funding_sources:[])
     end
 
     def investigators_params
