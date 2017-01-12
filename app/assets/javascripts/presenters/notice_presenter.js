@@ -9,7 +9,6 @@
   _.extend(App.Presenter.Notice.prototype, {
 
     initialize: function() {
-      console.log(gon);
       if(gon.notice && gon.notice.show) {
         this.modal = new App.View.Modal({
           className: '-tiny'
