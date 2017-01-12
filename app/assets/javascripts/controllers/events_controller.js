@@ -25,10 +25,6 @@
       }
     },
 
-    index: function() {
-      new App.Presenter.EventForm();
-    },
-
     new: function() {
       new App.Presenter.EventForm();
     },
