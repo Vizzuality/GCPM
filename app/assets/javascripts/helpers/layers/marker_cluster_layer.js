@@ -60,6 +60,7 @@
 
       m.on('click', function() {
         // Compute the  cluster bounds (it's slow : O(n))
+        var maxZoom = 17;
         var markersArea = pruneCluster.Cluster.FindMarkersInArea(cluster.bounds);
         var b = pruneCluster.Cluster.ComputeBounds(markersArea);
 
@@ -70,6 +71,9 @@
 
           var zoomLevelBefore = pruneCluster._map.getZoom();
           var zoomLevelAfter = pruneCluster._map.getBoundsZoom(bounds, false, new L.Point(20, 20, null));
+
+          zoomLevelBefore = (zoomLevelBefore > maxZoom) ? maxZoom : zoomLevelBefore;
+          zoomLevelAfter = (zoomLevelAfter > maxZoom) ? maxZoom : zoomLevelAfter;
 
           // If the zoom level doesn't change
           if (zoomLevelAfter === zoomLevelBefore) {
@@ -85,6 +89,7 @@
           }
           else {
             pruneCluster._map.fitBounds(bounds, {
+              maxZoom: maxZoom,
               paddingTopLeft: [40, 25],
               paddingBottomRight: [60, 25]
             });

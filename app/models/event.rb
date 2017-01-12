@@ -34,7 +34,7 @@ class Event < ApplicationRecord
 
   belongs_to :user, inverse_of: :events
 
-  validates_presence_of :title, :description
+  validates_presence_of :title, :description, :start_date, :end_date
   validates :slug, presence: true, format: { with: /\A[^\s!#$%^&*()（）=+;:'"\[\]\{\}|\\\/<>?,]+\z/,
                                              allow_blank: true,
                                              message: 'Invalid. Slug must contain at least one letter and no special character' }

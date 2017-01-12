@@ -25,16 +25,14 @@
       }
     },
 
-    index: function() {
-      new App.Presenter.EventForm();
-    },
-
     new: function() {
       new App.Presenter.EventForm();
+      new App.Presenter.Notice();
     },
 
     edit: function() {
       new App.Presenter.EventForm();
+      new App.Presenter.Notice();
     }
 
   });

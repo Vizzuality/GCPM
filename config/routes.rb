@@ -45,7 +45,7 @@ Rails.application.routes.draw do
     resources :projects, controller: 'network_projects', except: :index do
       patch 'remove_relation', on: :member
     end
-    resources :events, controller: 'network_events', except: :index
+    resources :events, controller: 'network_events', except: [:index, :show]
   end
 
   resources :notifications, only: :show do
