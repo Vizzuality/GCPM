@@ -20,6 +20,10 @@
       } else {
         new App.Presenter.MapVis(params);
       }
+    },
+
+    signup: function(params) {
+      new App.Presenter.SignUp(params);
     }
 
   });
