@@ -8,9 +8,6 @@ class NetworkEventsController < ApplicationController
   def index
   end
 
-  def show
-  end
-
   def edit
     gon.online = @event.online
   end
@@ -20,29 +17,19 @@ class NetworkEventsController < ApplicationController
   end
 
   def update
-
     if !@event.start_date.present? || !@event.end_date.present?
       gon.error = "Dates"
-      render :edit, error: true and return
     end
 
-    if !@event.online
-      if !@event.country.present? || @event.country == ''
-        gon.error = true
-        render :edit, error: true and return
-      end
-
-      if !@event.country.present? || @event.country == ''
-        gon.error = true
-        render :edit, error: true and return if !@event.city.present? || @event.city == ''
-      end
+    if !@event.online && (!@event.country.present? || @event.country == '')
+      gon.error = true
     end
 
     if @event.update(event_params)
       redirect_to event_path(@event.slug_or_id), notice: 'Event succesfully updated.'
     else
       gon.error = true
-      render :edit, notice: "Event can't be updated."
+      render :edit, notice: @event.errors.full_messages.join(', ')
     end
   end
 
@@ -72,7 +59,6 @@ class NetworkEventsController < ApplicationController
       gon.error = true
       render :new, error: true, notice: @event.errors.full_messages
     end
-
   end
 
   def destroy
