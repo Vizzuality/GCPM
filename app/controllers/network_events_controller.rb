@@ -9,6 +9,10 @@ class NetworkEventsController < ApplicationController
   end
 
   def edit
+    if notice
+      gon.notice = notice
+    end
+
     gon.online = @event.online
   end
 
@@ -17,47 +21,26 @@ class NetworkEventsController < ApplicationController
   end
 
   def update
-    if !@event.start_date.present? || !@event.end_date.present?
-      gon.error = "Dates"
-    end
+    errors = get_errors(event_params)
 
-    if !@event.online && (!@event.country.present? || @event.country == '')
-      gon.error = true
-    end
-
-    if @event.update(event_params)
+    if @event.update(event_params) && errors.count == 0
       redirect_to event_path(@event.slug_or_id), notice: 'Event succesfully updated.'
     else
-      gon.error = true
-      render :edit, notice: @event.errors.full_messages.join(', ')
+      gon.notice = { text: errors.join(''), show: true }
+      render :edit
     end
   end
 
   def create
     @event = @user.events.build(event_params)
 
-    if !@event.start_date.present? || !@event.end_date.present?
-      gon.error = true
-      render :new, error: true and return
-    end
+    errors = get_errors(event_params)
 
-    if !@event.online
-      if !@event.country.present? || @event.country == ''
-        gon.error = true
-        render :new, error: true and return
-      end
-
-      if !@event.country.present? || @event.country == ''
-        gon.error = true
-        render :new, error: true and return if !@event.city.present? || @event.city == ''
-      end
-    end
-
-    if @event.save
+    if errors.count == 0 && @event.save
       redirect_to event_path(@event.slug_or_id)
     else
-      gon.error = true
-      render :new, error: true, notice: @event.errors.full_messages
+      gon.notice = { text: errors.join(''), show: true }
+      render :new
     end
   end
 
@@ -85,5 +68,34 @@ class NetworkEventsController < ApplicationController
 
     def event_params
       params.require(:event).permit!
+    end
+
+    def get_errors(event_params)
+      errors = []
+      if !event_params['title'].present?
+        errors << "<p>Title can't be blank</p>"
+      end
+
+      if !event_params['description'].present?
+        errors << "<p>Description can't be blank</p>"
+      end
+
+      if !event_params['start_date'].present?
+        errors << "<p>Start date can't be blank</p>"
+      end
+
+      if !event_params['end_date'].present?
+        errors << "<p>End date can't be blank</p>"
+      end
+
+      if event_params['online'] == 'false' && (!event_params['country'].present? || event_params['country'] == '')
+        errors << "<p>You must select a country</p>"
+      end
+
+      if event_params['online'] == 'false' && (!event_params['city'].present? || event_params['city'] == '')
+        errors << "<p>You must select a city</p>"
+      end
+
+      return errors
     end
 end
