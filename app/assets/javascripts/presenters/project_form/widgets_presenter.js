@@ -47,7 +47,9 @@
     initialize: function(viewSettings) {
       this.state = new StateModel();
       this.widgetModel = new WidgetModel();
-      this.widgets = new App.Collection.Widgets();
+      this.widgets = new App.Collection.Widgets({
+        innerPage: viewSettings.innerPage
+      });
 
       // Creating view
       this.select = new App.View.Select({

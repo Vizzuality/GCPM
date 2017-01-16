@@ -23,11 +23,20 @@
         if (item.featured != this.options.featured) {
           return null;
         }
+
+        if (this.options.innerPage !== item.inner_page) {
+          if ((this.options.innerPage === 'none' && item.inner_page) ||
+            this.options.innerPage !== 'none') {
+            return null;
+          }
+        }
+
         item.x_axis = (item.x_axis) ? JSON.parse(item.x_axis) : null;
         item.y_axis = (item.y_axis) ? JSON.parse(item.y_axis) : null;
 
         return item;
       }.bind(this)));
+
       return data;
     }
 
