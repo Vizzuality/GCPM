@@ -13,6 +13,7 @@
 #  updated_at   :datetime         not null
 #  x_axis       :text
 #  y_axis       :text
+#  inner_page   :string
 #
 
 class Widget < ApplicationRecord
