@@ -1285,37 +1285,6 @@ CREATE TABLE schema_migrations (
 
 
 --
--- Name: specialities; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE specialities (
-    id integer NOT NULL,
-    name character varying,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: specialities_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE specialities_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: specialities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE specialities_id_seq OWNED BY specialities.id;
-
-
---
 -- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1358,6 +1327,90 @@ CREATE TABLE users (
 --
 
 COMMENT ON COLUMN users.role IS 'User role { user: 0, admin: 1 }';
+
+
+--
+-- Name: searches; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW searches AS
+ SELECT cancer_types.id AS searchable_id,
+    'CancerType'::text AS searchable_type,
+    cancer_types.name AS term
+   FROM cancer_types
+UNION
+ SELECT events.id AS searchable_id,
+    'Event'::text AS searchable_type,
+    events.title AS term
+   FROM events
+UNION
+ SELECT investigators.id AS searchable_id,
+    'Investigator'::text AS searchable_type,
+    investigators.name AS term
+   FROM investigators
+UNION
+ SELECT projects.id AS searchable_id,
+    'Project'::text AS searchable_type,
+    projects.title AS term
+   FROM projects
+  WHERE (projects.status = 1)
+UNION
+ SELECT projects.id AS searchable_id,
+    'Project'::text AS searchable_type,
+    projects.summary AS term
+   FROM projects
+  WHERE (projects.status = 1)
+UNION
+ SELECT organizations.id AS searchable_id,
+    'Organization'::text AS searchable_type,
+    organizations.name AS term
+   FROM organizations
+UNION
+ SELECT organizations.id AS searchable_id,
+    'Organization'::text AS searchable_type,
+    organizations.acronym AS term
+   FROM organizations
+UNION
+ SELECT users.id AS searchable_id,
+    'User'::text AS searchable_type,
+    users.name AS term
+   FROM users
+UNION
+ SELECT users.id AS searchable_id,
+    'User'::text AS searchable_type,
+    users."position" AS term
+   FROM users;
+
+
+--
+-- Name: specialities; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE specialities (
+    id integer NOT NULL,
+    name character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: specialities_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE specialities_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: specialities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE specialities_id_seq OWNED BY specialities.id;
 
 
 --
@@ -2157,10 +2210,10 @@ CREATE INDEX index_events_on_user_id ON events USING btree (user_id);
 
 
 --
--- Name: index_featureds_on_featurable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_featureds_on_featurable_id_and_featurable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_featureds_on_featurable_id ON featureds USING btree (featurable_id);
+CREATE INDEX index_featureds_on_featurable_id_and_featurable_type ON featureds USING btree (featurable_id, featurable_type);
 
 
 --

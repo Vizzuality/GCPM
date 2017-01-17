@@ -18,7 +18,7 @@ class ResearchUnitImporter
     investigator.website = data["#{entity_name}_website"]
 
     if data["#{entity_name}_organization_grid_id"].present?
-      def_address = Address.find_by(grid_id: (data["#{entity_name}_organization_grid_id"]&.strip) + ".0")
+      def_address = Address.find_by(grid_id: (data["#{entity_name}_organization_grid_id"]&.strip))
       unless def_address.present?
         @errors << { organization: "organization not found" }
         Rails.logger.info @errors
