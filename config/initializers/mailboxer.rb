@@ -7,8 +7,8 @@ Mailboxer.setup do |config|
   config.default_from = "no-reply@gcpm.globalonc.org"
 
   #Configures the methods needed by mailboxer
-  config.email_method = :mailboxer_email
-  config.name_method = :name
+  config.email_method = :notification_email
+  config.name_method  = :display_name
 
   #Configures if you use or not a search engine and which one you are using
   #Supported engines: [:solr,:sphinx]

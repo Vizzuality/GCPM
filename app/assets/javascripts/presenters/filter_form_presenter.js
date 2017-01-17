@@ -38,15 +38,45 @@
       });
       var organizations = new App.Presenter.Organizations({
         label: null,
-        addNew: false
+        addNew: false,
+        select2Options: {
+          ajax: {
+            url: '/api/organizations',
+            delay: 150,
+            cache: true,
+            data: function (params) {
+              var query = {
+                q: params.term,
+                page: params.page || 1,
+                active: true
+              }
+              // Query paramters will be ?q=[term]&page=[page]
+              return query;
+            },
+
+            processResults: function (organizations) {
+              return {
+                results: _.sortBy(_.map(organizations, function(org){
+                  return {
+                    text: org.name,
+                    id: org.id
+                  };
+                }), 'text')
+              }
+            }
+          }
+        }
+
       });
       var cancerTypes = new App.Presenter.CancerTypes({
         label: null,
-        addNew: false
+        addNew: false,
+        required: false
       });
       var projectTypes = new App.Presenter.ProjectTypes({
         label: null,
-        addNew: false
+        addNew: false,
+        required: false
       });
       var organizationsTypes = new App.Presenter.OrganizationTypes({
         label: null,
@@ -168,7 +198,9 @@
         }));
 
         $.when.apply($, promises).done(function() {
-          this.loaded = true;
+          // It seems that even if we load them it will load them again...
+          // That's why I decided to at least, show the modal loading every time...
+          // this.loaded = true;
           this.renderFormElements();
           App.trigger('Modal:loading', { loading: false });
         }.bind(this));

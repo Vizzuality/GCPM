@@ -34,7 +34,7 @@ class Event < ApplicationRecord
 
   belongs_to :user, inverse_of: :events
 
-  validates_presence_of :title, :description
+  validates_presence_of :title, :description, :start_date, :end_date
   validates :slug, presence: true, format: { with: /\A[^\s!#$%^&*()（）=+;:'"\[\]\{\}|\\\/<>?,]+\z/,
                                              allow_blank: true,
                                              message: 'Invalid. Slug must contain at least one letter and no special character' }
@@ -73,6 +73,8 @@ class Event < ApplicationRecord
       events = events.order('events.created_at DESC')      if options[:sortby] && options[:sortby] == 'created_desc'
       events = events.order('events.title ASC')            if options[:sortby] && options[:sortby] == 'title_asc'
       events = events.order('events.title DESC')           if options[:sortby] && options[:sortby] == 'title_desc'
+      events = events.order('events.start_date ASC NULLS LAST')       if options[:sortby] && options[:sortby] == 'start_date_asc'
+      events = events.order('events.start_date DESC NULLS LAST')      if options[:sortby] && options[:sortby] == 'start_date_desc'
       events.distinct
     end
 
@@ -98,7 +100,7 @@ class Event < ApplicationRecord
     end
 
     def notify_users_for_create
-      users   = ActivityFeed.where(actionable_type: 'User', actionable_id: user_id, action: 'following').pluck(:user_id)
+      users = ActivityFeed.where(actionable_type: 'User', actionable_id: user_id, action: 'following').pluck(:user_id)
       if users.any?
         creator = User.find(user_id).try(:name)
         Notification.build(users, self, "was created by #{creator}")

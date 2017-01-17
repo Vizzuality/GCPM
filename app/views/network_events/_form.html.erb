@@ -6,7 +6,6 @@
   method: action === 'new' ?
     :post :
     :patch do |f| %>
-  <p class="required">* Required fields</p>
 
   <div class="form-row row">
     <div class="column small-12">
@@ -26,21 +25,14 @@
       </div>
     </div>
 
-    <div class="form-row row">
-      <div class="column small-12 medium-10 medium-offset-1">
-        <h3 class="c-title">Excerpt</h3>
-        <%= f.cktext_area :excerpt, as: :string %>
-      </div>
-    </div>
-
     <div class="form-row">
       <div class="row">
         <div class="column small-12 medium-5 medium-offset-1">
-          <div id="pickadate-start" class="c-pickadate"></div>
+          <div id="pickadate-start" class="c-pickadate" data-value="<%= f.object.start_date %>"></div>
           <p class="required">* Required field</p>
         </div>
         <div class="column small-12 medium-5">
-          <div id="pickadate-end" class="c-pickadate"></div>
+          <div id="pickadate-end" class="c-pickadate" data-value="<%= f.object.end_date %>"></div>
           <p class="required">* Required field</p>
         </div>
       </div>
@@ -71,7 +63,7 @@
       </div>
 
       <div class="column small-12 medium-5">
-        <h4 class="c-title">Participants</h4>
+        <h4 class="c-title">Key Participants</h4>
         <%= f.input :participants, as: :string, placeholder: "George Weinstock, Coralia Bueno Muino", label: false %>
       </div>
     </div>
@@ -93,7 +85,7 @@
         <div class="column small-12 medium-5 medium-offset-1">
           <h4 class="c-title">Countries</h4>
           <% f.input :country, as: :select, collection: Country.all.pluck(:country_name), label: false %>
-          <div id="countries" class="c-select"></div>
+          <div id="countries" class="c-select" data-value="<%= f.object.country %>"></div>
           <p class="required">* Required field</p>
         </div>
 

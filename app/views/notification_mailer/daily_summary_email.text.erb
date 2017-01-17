@@ -1,0 +1,9 @@
+Dear <%= @name %>,<%= "\n" %>
+===============================================
+
+Your daily summary:<%= "\n" %>
+<% @notifications.each do |notification| %>
+  -----------------------------------------------
+  <%= url_for(notification.notificable) %>
+  <%= "\n" %>
+<% end %>

@@ -2,7 +2,8 @@
 .c-menu-mobile {
   position: absolute;
   top: 0;
-  right: 0;
+  // right: 0;
+  left: -100000px;
   height: 100vh;
   width: 0;
   z-index: 6;
@@ -13,13 +14,14 @@
 
   background-color: white;
 
-  & * { display: none; }
 
   &.-active {
+    top: 0;
+    right: 0;
+    left: auto;
     opacity: 1;
     width: 100vw;
 
-    & * { display: inherit; }
     & .back { display: flex; }
     & .notifications a {
       display: flex;

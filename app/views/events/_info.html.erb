@@ -18,7 +18,7 @@
       <% if @event.start_date.present? || @event.end_date.present? %>
         <div id="datesTimeline" class="sidebar-item c-dates-timeline">
           <div class="dates">
-             <% if @event.start_date.present? %>
+            <% if @event.start_date.present? %>
               <div class="date">
                 <h3><%= t 'start_date' %></h3>
                 <span><%= @event.start_date %></span>
@@ -56,7 +56,7 @@
       <% end %>
       <% if @event.participants.present? %>
         <div class="sidebar-item">
-          <h3><%= t 'participants' %>(s)</h3>
+          <h3>Key Participant(s)</h3>
           <ul class="c-list">
             <% @participants.each do |p| %>
               <li class="list-item -mg-less">

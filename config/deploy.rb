@@ -19,6 +19,8 @@ set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/sys
 
 set :rvm_map_bins, fetch(:rvm_map_bins, []).push('rvmsudo')
 
+set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
+
 namespace :deploy do
   after :finishing, 'deploy:cleanup'
   after 'deploy:publishing', 'deploy:symlink:linked_files', 'deploy:symlink:linked_dirs', 'deploy:restart'

@@ -1,4 +1,4 @@
-$dropdown-width: 182px;
+$dropdown-width: 250px;
 $dropdown-max-height: 300px;
 
 .c-dropdown {
@@ -23,6 +23,18 @@ $dropdown-max-height: 300px;
     margin: 0 0 0 ($button-x-padding / 2);
     font-weight: $base-font-weight;
     cursor: pointer;
+
+    // Ellipsis
+    max-width: 90px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+
+    @media #{$mq-small} {
+      max-width: 150px;
+    }
+
   }
 
   .dropdown-content {
@@ -36,11 +48,12 @@ $dropdown-max-height: 300px;
     //TODO: Set this by JS
     top: 52px;
     right: 0;
+    z-index: 5;
 
     &.-top {
-      top: -200%;
-      transform: translateY(12px);
-      right: 0;
+      top: 0;
+      transform: translateY(-100%);
+      right: auto;
       left: 0;
     }
 
@@ -131,10 +144,20 @@ $dropdown-max-height: 300px;
       text-align: left;
       cursor: pointer;
 
+      &.-selected {
+        & a {
+          color: darken($app-bg-color, 25%);
+        }
+      }
+
       & a {
         display: block;
         color: $app-bg-color;
-        font-weight: $bold-font-weight
+        font-weight: $bold-font-weight;
+
+        &:hover {
+          color: darken($app-bg-color, 25%);
+        }
       }
     }
 

@@ -3,15 +3,28 @@
 
   'use strict';
 
-  var StateModel = Backbone.Model.extend({
+  var StateModel = Backbone.Model.extend();
 
-    defaults: {
-      sortby: 'title_asc',
-      type: 'title',
-      direction: 'asc'
-    }
-
-  });
+  var dataSpecs = {
+    projects: [
+      { name: 'Title (A-Z)', value: 'title_asc' },
+      { name: 'Title (Z-A)', value: 'title_desc' },
+      { name: 'Submitted Date (Most recent to earliest)', value: 'created_desc' },
+      { name: 'Submitted Date (Earliest to most recent)', value: 'created_asc' }
+    ],
+    people: [
+      { name: 'Name (A-Z)', value: 'title_asc' },
+      { name: 'Name (Z-A)', value: 'title_desc' },
+      { name: 'Submitted Date (Most recent to earliest)', value: 'created_desc' },
+      { name: 'Submitted Date (Earliest to most recent)', value: 'created_asc' }
+    ],
+    events: [
+      { name: 'Start Date (DESC)', value: 'start_date_desc' },
+      { name: 'Start Date (ASC)', value: 'start_date_asc' },
+      { name: 'Title (A-Z)', value: 'title_asc' },
+      { name: 'Title (Z-A)', value: 'title_desc' }
+    ],
+  };
 
   App.Presenter.SortBy = function() {
     this.initialize.apply(this, arguments);
@@ -20,14 +33,13 @@
   _.extend(App.Presenter.SortBy.prototype, {
     initialize: function(params, viewSettings) {
       var sortby = _.pick(params, 'sortby');
-      var specs = sortby.sortby && _.extend(this.splitSortby(sortby.sortby)) || {};
-      this.state = new StateModel(_.extend(specs, sortby, _.pick(params, 'data')));
 
-      var dropdownOptions = _.map([
-        { name: 'Title', value: 'title' },
-        { name: 'Submitted Date', value: 'created'}
-      ], function(opt) {
-        opt.selected = this.state.get('sortby').split('_')[0] === opt.value;
+      this.state = new StateModel(_.extend({},
+        { sortby: params.data && params.data === 'events' ? 'start_date_desc' : 'title_asc' },
+        sortby, _.pick(params, 'data')));
+
+      this.dropdownOptions = _.map(dataSpecs[params.data || 'projects'], function(opt) {
+        opt.selected = this.state.get('sortby') === opt.value;
         return opt;
       }, this);
 
@@ -35,13 +47,13 @@
       this.dropdown = new App.View.Dropdown({
         el: '#sortby',
         options: _.extend({}, {
-          label: 'Sort by',
-          className: '-sortby',
-          contentClassName: gon.isMobile && '-top',
-          options: dropdownOptions,
-          arrows: true,
-          direction: specs.direction
-        }, viewSettings||{})
+            label: 'Sort by',
+            className: '-sortby',
+            contentClassName: gon.isMobile && '-top',
+            options: this.dropdownOptions,
+            arrows: false
+          },
+          viewSettings || {})
       });
 
       this.setEvents();
@@ -56,6 +68,19 @@
       this.state.on('change', function() {
         App.trigger('SortBy:change', this.getState());
       }, this);
+
+      App.on('TabNav:change', function() {
+        this.setState(_.extend({}, this.getState(),
+          { sortby: this.state.get('data') === 'events' ? 'start_date_desc' : 'title_asc' }
+        ));
+
+        var options = _.map(dataSpecs[this.state.get('data') || 'projects'], function(opt) {
+          opt.selected = this.state.get('sortby') === opt.value;
+          return opt;
+        }, this);
+
+        this.dropdown.setOptions(options);
+      }.bind(this));
     },
 
     setSubscriptions: function() {
@@ -65,31 +90,19 @@
       ].join(' ');
 
       App.on(eventsNames, function(newState) {
-        var localState = _.pick(this.getState(), 'type', 'direction', 'sortby');
+        var localState = _.pick(this.getState(), 'sortby');
         this.setState(_.extend({}, this.getState(), localState, newState), { silent: true })
       }, this);
     },
 
     onDropdownChange: function(current) {
       var newState = {};
-      var sortby = '';
+      var sortby = current.value;
 
-      if (current.arrows) {
-        var direction = this.state.get('direction') === 'asc' ? 'desc' : 'asc';
-        sortby = this.state.get('type') + '_' + direction ;
+      newState = { sortby: sortby };
 
-        newState = { type: this.state.get('type'), direction: direction, sortby: sortby };
-
-      } else {
-        var type = current.value;
-        sortby =  type + '_' + this.state.get('direction') ;
-
-        newState = { type: type, sortby: sortby, direction: this.state.get('direction') };
-
-      }
-
-      var localState = _.pick(this.getState(), 'type', 'direction', 'sortby');
-      this.setState(_.extend({}, this.getState(), localState, newState))
+      var localState = _.pick(this.getState(), 'sortby');
+      this.setState(_.extend({}, this.getState(), localState, newState));
       ga('send', 'event', 'Map', 'Sort by', this.state.get('sortby'));
     },
 

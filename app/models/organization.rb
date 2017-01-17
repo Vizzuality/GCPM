@@ -37,6 +37,8 @@ class Organization < ApplicationRecord
   validates_presence_of   :name
   validates               :email_address, format: { with: Devise.email_regexp }, allow_blank: true, on: :create
 
+  scope :filter_name, -> organization_name { where('name ILIKE ?', "%#{organization_name}%") }
+
   include Sluggable
 
   class << self
@@ -46,9 +48,9 @@ class Organization < ApplicationRecord
 
     def fetch_all(options)
       organizations = Organization.all
-      organizations = organizations.are_funding_sources if options[:funding_source]
-      organizations = organizations.joins(:projects)    if options[:active] && options[:active] = true
-      organizations = organizations.where('name ilike ?', "%#{q}%") if options[:q]
+      organizations = organizations.are_funding_sources      if options[:funding_source]
+      organizations = organizations.joins(:projects)         if options[:active] && options[:active] = true
+      organizations = organizations.filter_name(options[:q]) if options[:q].present?
       organizations.distinct
     end
   end

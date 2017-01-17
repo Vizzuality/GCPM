@@ -23,7 +23,7 @@
           <p>
             <% p.specialities.each do |sp| %>
               <span class="c-tag -mg -darker">
-                <%= sp.name %>
+                <%= link_to sp.name, speciality_path(sp.slug_or_id) %>
               </span>
             <% end %>
           </p>

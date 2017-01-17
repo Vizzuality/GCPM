@@ -15,7 +15,7 @@ class MapController < ApplicationController
     limit = 12 + (@page * 9)
 
     if params.key?(:data) && params[:data] == 'events'
-      events = Event.fetch_all(projects_params).order(sort_param)
+      events = Event.fetch_all(events_params).order('start_date DESC NULLS LAST')
       # Get public and private events
       public , private = [], []
       events.each do |event|
@@ -28,7 +28,7 @@ class MapController < ApplicationController
       @items_private_total = private.size
       @items_total = events.size
     elsif params.key?(:data) && params[:data] == 'people'
-      people = Investigator.fetch_all(people_params).order('created_At DESC')
+      people = Investigator.fetch_all(people_params).order('name ASC')
       @items = people.limit(limit)
       @more = (people.size > @items.size)
       @items_total = people.size
@@ -52,6 +52,10 @@ class MapController < ApplicationController
       params.permit(:sortby, :user, :start_date, :end_date, regions:[], countries:[], project_types:[], cancer_types:[], organization_types:[], organizations:[], investigators:[], funding_sources:[])
     end
 
+    def events_params
+      params.permit(:user, :sortby, :start_date, :end_date, regions:[], countries:[], project_types:[], cancer_types:[], organization_types:[], organizations:[], investigators:[], funding_sources:[])
+    end
+
     def investigators_params
       params.permit(:data, :sortby, :start_date, :end_date, regions:[], countries:[], project_types:[], cancer_types:[], organization_types:[], organizations:[])
     end
@@ -70,6 +74,10 @@ class MapController < ApplicationController
         @sortby = 'created_at ASC'
       when 'created_desc'
         @sortby = 'created_at DESC'
+      when 'start_date_asc'
+        @sortby = 'start_date ASC NULLS LAST'
+      when 'start_date_desc'
+        @sortby = 'start_date DESC NULLS LAST'
       else
         @sortby = 'title ASC'
       end

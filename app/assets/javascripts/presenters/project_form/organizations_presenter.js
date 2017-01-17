@@ -18,11 +18,6 @@
       blank: null,
       addNew: true,
       select2Options: {
-        // closeOnSelect: false
-        // It solves the closing of the dropdown menu
-        // It adds a lot of UX issues
-        // - Scroll: On select, scroll will go to first highlighted choice => How to resolve the scroll issue https://github.com/select2/select2/issues/1672#issuecomment-240411031
-        // - Click: On each click dropdown will appear and dissapear
       }
     },
 
@@ -60,8 +55,8 @@
       return this.organizations.fetch().done(function() {
         var options = this.organizations.map(function(type) {
           return {
-            name: type.attributes.name,
-            value: type.attributes.id
+            text: type.attributes.name,
+            id: type.attributes.id
           };
         });
         this.select.setOptions(options);

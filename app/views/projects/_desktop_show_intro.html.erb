@@ -12,9 +12,9 @@
         <h1><%= @project.title %></h1>
 
         <% if user_signed_in? && current_user.projects.include?(@project) %>
-          <%= link_to (t 'not_me'), remove_relation_project_path(@project), method: :patch, class: 'c-btn -transparent' %>
+          <%= link_to 'It doesn\'t belong to me', remove_relation_project_path(@project), method: :patch, class: 'c-btn -transparent' %>
         <% elsif user_signed_in? %>
-          <%= link_to (t 'this_is_me'), relation_request_project_path(@project), method: :patch, class: 'c-btn -transparent' %>
+          <%= link_to 'Claim project', relation_request_project_path(@project), method: :patch, class: 'c-btn -transparent' %>
         <% end %>
 
         <div class="c-summary-info row -collapse">

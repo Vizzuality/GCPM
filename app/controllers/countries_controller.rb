@@ -17,7 +17,7 @@ class CountriesController < ApplicationController
 
     limit = 12 + (@page * 9)
 
-    @events = Event.fetch_all(countries: params[:iso]).distinct.order('created_at DESC')
+    @events = Event.fetch_all(countries: params[:iso]).distinct.order('start_date DESC NULLS LAST')
     @projects = Project.fetch_all(countries: params[:iso]).distinct.order('created_at DESC')
     @people = Investigator.fetch_all(countries: params[:iso]).distinct.order('created_at DESC')
     @posts = @country.posts

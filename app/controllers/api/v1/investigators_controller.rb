@@ -4,11 +4,10 @@ module Api::V1
 
     before_action :set_investigator,       only: [:show, :update, :graph]
     before_action :check_permissions,      only: :update
-    skip_before_action :set_user_by_token, only: :graph
+    skip_before_action :set_user_by_token, only: [:graph, :index, :show]
 
     def index
-      # ToDo: implementation of investigator search by name
-      investigators = Investigator.all
+      investigators = Investigator.fetch_all(investigators_params)
       render json: investigators, each_serializer: InvestigatorArraySerializer
     end
 
@@ -53,6 +52,10 @@ module Api::V1
         params.require(:investigator).permit!.tap do |investigator_params|
           investigator_params[:user_id] = @user.id if params.require(:investigator)[:assign_to_user].present?
         end
+      end
+
+      def investigators_params
+        params.permit(:q)
       end
   end
 end

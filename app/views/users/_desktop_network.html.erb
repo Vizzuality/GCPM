@@ -114,7 +114,7 @@
           <div class="wrapper list">
             <ul class="c-list -mg-bottom">
               <% @followCancerTypes.each do |ct| %>
-                <li class="list-item -uppercase"><%= link_to ct.name, cancer_path(slug: ct.slug), class: '-uppercase' %></li>
+                <li class="list-item -uppercase"><%= link_to ct.name, cancer_path(id: ct.slug), class: '-uppercase' %></li>
               <% end %>
             </ul>
           </div>

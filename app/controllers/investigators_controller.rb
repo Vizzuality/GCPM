@@ -30,7 +30,7 @@ class InvestigatorsController < ApplicationController
 
     @projects = Project.fetch_all(investigators: @investigator.id).order('created_at DESC')
     @posts = Post.where(user_id: @investigator.id)
-    @events = Event.fetch_all(user: @investigator_user && @investigator_user.id || -1).order('created_at DESC')
+    @events = Event.fetch_all(user: @investigator_user && @investigator_user.id || -1).order('start_date DESC NULLS LAST')
 
     if params.key?(:data) && params[:data] == 'posts'
       @items = @posts.first(limit)

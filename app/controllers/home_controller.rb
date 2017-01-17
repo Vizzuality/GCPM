@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   def index
     @featureds = Featured.featurables
-    @projects_total = Project.all.distinct.count()
+    @projects_total = Project.fetch_all({}).count()
     @events_total = Event.all.distinct.count()
     @people_total = Investigator.all.distinct.count()
 

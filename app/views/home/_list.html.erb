@@ -20,6 +20,14 @@
                   </span>
                 <% end %>
               </p>
+
+              <p>
+                <% featured.specialities.each do |sp| %>
+                  <span class="c-tag -mg -darker">
+                    <%= link_to sp.name, speciality_path(sp.slug_or_id) %>
+                  </span>
+                <% end %>
+              </p>
             </div>
           </div>
 
@@ -37,6 +45,20 @@
               <% end %>
               <h2><%= link_to featured.title, event_path(featured.slug_or_id) %></h2>
               <p><%= truncate(featured.description.html_safe, :length => 300) %></p>
+              <p>
+                <% if featured.start_date.present? %>
+                  <span><%= featured.start_date %></span>
+                <% else %>
+                  <span>-</span>
+                <% end %>
+                /
+                <% if featured.end_date.present? %>
+                  <span><%= featured.end_date %></span>
+                <% else %>
+                  <span>-</span>
+                <% end %>
+              </p>
+
             </div>
           </div>
 
