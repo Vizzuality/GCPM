@@ -5,14 +5,15 @@
   var StateModel = Backbone.Model.extend();
 
   var WidgetModel = Backbone.Model.extend({
-    setUrl: function(iso, sql) {
+    setUrl: function(iso, sql, innerPage) {
       _.templateSettings = {
         interpolate: /\{\{(.+?)\}\}/g
       };
 
       var urlTemplate = _.template(sql);
-      var sql_parsed = urlTemplate({COUNTRY_ISO: iso });
-      debugger;
+      var sql_parsed = innerPage === 'countries' ?
+        urlTemplate({COUNTRY_ISO: iso }) :
+        urlTemplate({CANCER_TYPE_ID: iso });
 
       this.url = 'https://' + gon.carto_account + '.carto.com/api/v2/sql/?q=' + sql_parsed + '&api_key=' + gon.carto_key;
     },
@@ -51,6 +52,7 @@
       this.widgets = new App.Collection.Widgets({
         innerPage: viewSettings.innerPage
       });
+      this.innerPage = viewSettings.innerPage;
 
       // Creating view
       this.select = new App.View.Select({
@@ -67,7 +69,6 @@
       });
 
       this.modal = new App.View.Modal();
-
 
       this.setEvents();
       this.setSubscriptions();
@@ -108,7 +109,10 @@
      */
     fetchWidgets: function() {
       return this.widgets.fetch({add: true}).done(function() {
-        var options = this.widgets.map(function(widget) {
+        this.filtered = new App.Collection.Widgets();
+        this.filtered.add(this.widgets.filterExceptRanking());
+
+        var options = this.filtered.map(function(widget) {
           return {
             name: widget.attributes.name,
             value: widget.attributes.slug
@@ -119,7 +123,7 @@
         this.select.setOptions(options);
         this.select.render();
         // Initiate the first graph
-        this.select.setValue(this.widgets.at(0).get('slug'));
+        this.select.setValue(this.filtered.at(0).get('slug'));
 
       }.bind(this));
     },
@@ -127,13 +131,14 @@
     fetchWidget: function(widget) {
       if (widget) {
         // GET the Widget config
-        var widgetConf = this.widgets.findWhere({
+        var widgetConf = this.filtered.findWhere({
           slug: widget
         });
 
         // FETCH the CARTO 'query'
         // before upgrading the view
-        this.widgetModel.setUrl(gon.server_params['countries[]'], widgetConf.get('query'));
+        this.widgetModel.setUrl(gon.server_params[this.innerPage === 'countries' ?
+          'countries[]' : 'cancer_types[]'], widgetConf.get('query'), this.innerPage);
 
         this.widgetModel
           .clear({ silent: true })

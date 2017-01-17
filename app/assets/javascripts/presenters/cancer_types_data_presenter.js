@@ -70,35 +70,58 @@
     renderSubviews: function() {
       if (this.state.get('data') === 'data') {
         this.widgets.fetch({add: true}).done(function() {
-          var modelsRanking = [];
+          this.modelsRanking = [];
           this.typesRanking = [];
+          this.rankingWidgets = [];
+          this.graphWidgets = [];
           this.cancerWidgets = this.widgets.toJSON();
 
-          _.each(this.cancerWidgets, function(widget) {
-            this.cancerModel = new CancerModel();
-            this.renderRankingContainer(widget.slug);
-
-            this.typeRanking = new App.View.Ranking({
-              el: '#' + widget.slug
+          this.filterWidgets(this.cancerWidgets);
+          if (this.graphWidgets.length > 0) {
+            new App.Presenter.Widgets({
+              data: 'data',
+              innerPage: 'cancer_types'
             });
-            this.typesRanking.push(this.typeRanking);
+            $('#graphicWidgets').toggleClass('-hidden', false);
+          }
 
-            this.cancerModel.info = widget.source;
-            this.cancerModel.setUrl(this.state.attributes.cancer_type, widget.query);
-            this.cancerModel.options = {
-              slug: widget.slug,
-              type: this.typeRanking,
-              name: widget.name
-            };
-            modelsRanking.push(this.cancerModel);
+          this.setModelsArray(this.rankingWidgets);
+          this.fetchModels(this.modelsRanking);
 
-          }.bind(this));
-
-          this.fetchModels(modelsRanking);
           this.setModelsEvents(this.typesRanking);
 
         }.bind(this));
       }
+    },
+
+    setModelsArray: function(rankingWidgets) {
+      _.each(rankingWidgets, function(widget) {
+        this.cancerModel = new CancerModel();
+        this.renderRankingContainer(widget.slug);
+
+        this.typeRanking = new App.View.Ranking({
+          el: '#' + widget.slug
+        });
+        this.typesRanking.push(this.typeRanking);
+
+        this.cancerModel.info = widget.source;
+        this.cancerModel.setUrl(this.state.attributes.cancer_type, widget.query);
+        this.cancerModel.options = {
+          slug: widget.slug,
+          type: this.typeRanking,
+          name: widget.name
+        };
+        this.modelsRanking.push(this.cancerModel);
+
+      }.bind(this));
+    },
+
+    filterWidgets: function(cancerWidgets) {
+      _.each(cancerWidgets, function(widget) {
+        widget.graphic_type === 'ranking' ?
+          this.rankingWidgets.push(widget) :
+          this.graphWidgets.push(widget);
+      }.bind(this));
     },
 
     fetchModels: function(modelsRanking) {

@@ -20,7 +20,7 @@
 
     parse: function(response) {
       var data = _.compact(_.map(response, function(item){
-        if (item.featured != this.options.featured) {
+        if (this.options.innerPage === 'none' && item.featured != this.options.featured) {
           return null;
         }
 
@@ -38,6 +38,12 @@
       }.bind(this)));
 
       return data;
+    },
+
+    filterExceptRanking: function() {
+      return this.filter(function(widget) {
+        return widget.get('graphic_type') !== 'ranking';
+      }.bind(this));
     }
 
   });
