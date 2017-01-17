@@ -12,6 +12,7 @@
 
       var urlTemplate = _.template(sql);
       var sql_parsed = urlTemplate({COUNTRY_ISO: iso });
+      debugger;
 
       this.url = 'https://' + gon.carto_account + '.carto.com/api/v2/sql/?q=' + sql_parsed + '&api_key=' + gon.carto_key;
     },
