@@ -10,8 +10,9 @@ class FundingSourceImporter
 
   def import!
     if data['project_funding_source_grid_id'].present?
-      funding_source = Organization.find_by(grid_id: data['project_funding_source_grid_id']&.strip)
+      address = Address.find_by(grid_id: data['project_funding_source_grid_id']&.strip)
       begin
+        funding_source = address.organization
         @funding_source_id = funding_source.id
       rescue
         @errors << { project: "funding source not found" }
