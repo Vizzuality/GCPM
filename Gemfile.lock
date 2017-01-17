@@ -359,6 +359,9 @@ GEM
       rails-assets-d3 (~> 3.5.0)
     rails-assets-d3 (3.5.17)
     rails-assets-fuse (2.5.0)
+    rails-assets-jquery (3.1.1)
+    rails-assets-jquery-tokeninput (1.7.0)
+      rails-assets-jquery (>= 1.5)
     rails-assets-leaflet (1.0.1)
     rails-assets-moment (2.15.2)
     rails-assets-normalize-css (5.0.0)
@@ -563,6 +566,7 @@ DEPENDENCIES
   rails-assets-c3 (= 0.4.11)!
   rails-assets-d3 (~> 3.5.17)!
   rails-assets-fuse!
+  rails-assets-jquery-tokeninput!
   rails-assets-leaflet!
   rails-assets-moment!
   rails-assets-normalize-css!
@@ -594,4 +598,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.13.6
+   1.13.7

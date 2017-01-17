@@ -16,9 +16,7 @@
       label: 'Organizations',
       placeholder: 'All organizations',
       blank: null,
-      addNew: true,
-      select2Options: {
-      }
+      addNew: true
     },
 
     initialize: function(viewSettings) {
@@ -27,7 +25,7 @@
       this.options = _.extend({}, this.defaults, viewSettings || {});
 
       // Creating view
-      this.select = new App.View.Select({
+      this.autocomplete = new App.View.Autocomplete({
         el: '#organizations',
         options: this.options,
         state: this.state
@@ -44,7 +42,7 @@
         App.trigger('Organizations:change', this.state.attributes);
       }, this);
 
-      this.select.on('change', this.setState, this);
+      this.autocomplete.on('change', this.setState, this);
     },
 
     /**
@@ -52,19 +50,20 @@
      * @return {Promise}
      */
     fetchData: function() {
-      return this.organizations.fetch().done(function() {
-        var options = this.organizations.map(function(type) {
-          return {
-            text: type.attributes.name,
-            id: type.attributes.id
-          };
-        });
-        this.select.setOptions(options);
-      }.bind(this));
+      return false;
+      // return this.organizations.fetch().done(function() {
+      //   var options = this.organizations.map(function(type) {
+      //     return {
+      //       name: type.attributes.name,
+      //       id: type.attributes.id
+      //     };
+      //   });
+      //   this.autocomplete.setOptions(options);
+      // }.bind(this));
     },
 
     render: function() {
-      this.select.render();
+      this.autocomplete.render();
     },
 
     /**
@@ -80,8 +79,8 @@
      * @param {DOM|String} el
      */
     setElement: function(el) {
-      this.select.setElement(el);
-      this.select.render();
+      this.autocomplete.setElement(el);
+      this.autocomplete.render();
     },
 
     /**
@@ -89,7 +88,7 @@
      * @return {DOM}
      */
     getElement: function() {
-      return this.select.$el;
+      return this.autocomplete.$el;
     }
 
   });

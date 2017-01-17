@@ -7,6 +7,7 @@
 //= require URIjs
 //= require fuse
 //= require select2
+//= require jquery-tokeninput
 //= require pickadate/picker
 //= require pickadate/picker.date
 //= require PruneCluster/PruneCluster

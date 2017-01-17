@@ -61,10 +61,10 @@
           arrValues = [val];
         }
         _.each(arrValues, function(v){
-          var current = _.findWhere(this.options.options, { id: parseInt(v) });
+          var current = _.findWhere(this.options.options, { value: parseInt(v) });
           $(this.select.selector).select2("trigger", "select", {
             data: {
-              id: current.id,
+              id: current.value,
               text: current.text
             }
           });

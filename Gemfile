@@ -74,6 +74,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-leaflet'
   gem 'rails-assets-fuse'
   gem 'rails-assets-URIjs'
+  gem 'rails-assets-jquery-tokeninput', source: 'https://rails-assets.org'
 end
 
 # Active record
