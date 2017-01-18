@@ -41,6 +41,11 @@
     margin-left: $inline-space / 2;
   }
 
+  &.-mini {
+    padding: 5px;
+    font-size: 10px;
+  }
+
   &.-primary {
     color: $inverse-font-color;
     background-color: $primary-color;

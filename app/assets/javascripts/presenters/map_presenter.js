@@ -119,7 +119,8 @@
           this.map.addLayer(this.currentLayer);
           if (bounds && !this.options.noAnimateBounds) {
             this.map.map.fitBounds(bounds, {
-              padding: [50, 50]
+              padding: [50, 50],
+              maxZoom: 5
             });
           }
         }

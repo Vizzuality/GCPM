@@ -121,11 +121,10 @@ module Api::V1
           expect(json['memberships'][0]['address']).to         be_present
         end
 
-        it 'Not allow to access not owned project' do
-          get "/api/projects/#{project_2_id}?token=#{user.authentication_token}"
+        it 'Allow to access project without auth token for not owned project' do
+          get "/api/projects/#{project_2_id}"
 
-          expect(status).to eq(401)
-          expect(json['message']).to eq("You don't have permission to access this project")
+          expect(status).to eq(200)
         end
       end
 
