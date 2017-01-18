@@ -61,7 +61,7 @@ class Investigator < ApplicationRecord
   scope :by_user,               -> user               { where('investigators.user_id = ? AND investigators.is_approved = ?', user, true ) }
   scope :user_present,          ->                    { where.not(investigators: { user_id: nil } ) }
   scope :for_render,            ->                    { includes(:organizations, [organizations: :addresses]) }
-  scope :filter_name,          -> investigator_name  { where('name ILIKE ?', "%#{investigator_name}%") }
+  scope :filter_name,          -> investigator_name   { where('investigators.name ILIKE ?', "%#{investigator_name}%") }
 
   def graph
     self.projects.includes(:investigators)
