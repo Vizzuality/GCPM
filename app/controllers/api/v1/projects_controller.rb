@@ -61,7 +61,7 @@ module Api::V1
         params.permit(:countries, :regions, :investigators, :project_types,
                       :cancer_types, :specialities, :organizations,
                       :organization_types, :start_date, :end_date,
-                      :user, :limit, :offset)
+                      :user, :limit, :offset, :q)
       end
 
       def set_user_project
