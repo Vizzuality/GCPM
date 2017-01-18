@@ -18,15 +18,15 @@
       blank: true,
       addNew: true,
       select2Options: {
+        minimumInputLength: 3,
         ajax: {
           url: '/api/organizations',
           delay: 150,
-          cache: true,
+          cache: false,
           data: function (params) {
             var query = {
               q: params.term,
-              page: params.page || 1,
-              active: true
+              page: params.page || 1
             }
             // Query paramters will be ?q=[term]&page=[page]
             return query;
@@ -74,6 +74,10 @@
         this.organizationForm.openForm();
       }, this);
 
+      this.select.on('setValues', function(values){
+        this.setValues(values);
+      }, this);
+
       this.select.on('change', function(newState){
         this.setState(newState);
         App.trigger('Organization:change', {state:this.state, el:this.select});
@@ -99,18 +103,7 @@
      * @return {Promise}
      */
     fetchData: function() {
-      if(this.organizations.length > 0){
-        return this.organizations;
-      }
-      return this.organizations.fetch({add: true}).done(function() {
-        var options = this.organizations.map(function(type) {
-          return {
-            name: type.attributes.name,
-            value: type.attributes.id
-          };
-        });
-        this.select.setOptions(options);
-      }.bind(this));
+      return true;
     },
 
     render: function() {
@@ -127,6 +120,25 @@
 
     setValue: function(values){
       this.select.$el.find("select").val(values).trigger("change");
+    },
+
+    setValues: function(values) {
+      _.each(values, function(v){
+        if (v) {
+          this.organizationModel = new App.Model.Organization({
+            id: v
+          });
+          this.organizationModel.fetch().done(function(model){
+            $(this.select.select.selector).select2("trigger", "select", {
+              data: {
+                id: model.id,
+                text: model.name
+              }
+            });
+          }.bind(this));
+        }
+        // var current = _.findWhere(this.options.options, { id: parseInt(v) }) || _.findWhere(this.options.options, { value: parseInt(v) });
+      }.bind(this));
     },
 
     setFetchedValues: function(value){

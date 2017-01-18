@@ -18,11 +18,32 @@
       blank: null,
       addNew: true,
       select2Options: {
-        // closeOnSelect: false
-        // It solves the closing of the dropdown menu
-        // It adds a lot of UX issues
-        // - Scroll: On select, scroll will go to first highlighted choice => How to resolve the scroll issue https://github.com/select2/select2/issues/1672#issuecomment-240411031
-        // - Click: On each click dropdown will appear and dissapear
+        minimumInputLength: 3,
+        ajax: {
+          url: '/api/projects',
+          delay: 150,
+          cache: false,
+          data: function (params) {
+            var query = {
+              q: params.term,
+              page: params.page || 1,
+              active: true
+            }
+            // Query paramters will be ?q=[term]&page=[page]
+            return query;
+          },
+
+          processResults: function (organizations) {
+            return {
+              results: _.sortBy(_.map(organizations, function(org){
+                return {
+                  text: org.name,
+                  id: org.id
+                };
+              }), 'text')
+            }
+          }
+        }
       }
     },
 
@@ -49,6 +70,10 @@
         App.trigger('Projects:change', this.state.attributes);
       }, this);
 
+      this.select.on('setValues', function(values){
+        this.setValues(values);
+      }, this);
+
       this.select.on('change', this.setState, this);
     },
 
@@ -70,6 +95,25 @@
 
     render: function() {
       this.select.render();
+    },
+
+    setValues: function(values) {
+      _.each(values, function(v){
+        if (v) {
+          this.projectModel = new App.Model.Project({
+            id: v
+          });
+          this.projectModel.fetch().done(function(model){
+            $(this.select.select.selector).select2("trigger", "select", {
+              data: {
+                id: model.id,
+                text: model.name
+              }
+            });
+          }.bind(this));
+        }
+        // var current = _.findWhere(this.options.options, { id: parseInt(v) }) || _.findWhere(this.options.options, { value: parseInt(v) });
+      }.bind(this));
     },
 
     /**

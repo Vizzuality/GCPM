@@ -40,18 +40,22 @@
         label: null,
         addNew: false,
         select2Options: {
+          minimumInputLength: 3,
           ajax: {
             url: '/api/organizations',
             delay: 150,
-            cache: true,
+            cache: false,
             data: function (params) {
-              var query = {
-                q: params.term,
-                page: params.page || 1,
-                active: true
+              if (!!params.term && params.term.length > 2) {
+                var query = {
+                  q: params.term,
+                  page: params.page || 1,
+                  active: true
+                }
+                // Query paramters will be ?q=[term]&page=[page]
+                return query;
               }
-              // Query paramters will be ?q=[term]&page=[page]
-              return query;
+              return false;
             },
 
             processResults: function (organizations) {

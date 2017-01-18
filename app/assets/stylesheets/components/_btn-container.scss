@@ -9,6 +9,9 @@
     margin: 0;
   }
 
+  &.-right {
+    justify-content: flex-end;
+  }
 
   > li {
     width: 100%;

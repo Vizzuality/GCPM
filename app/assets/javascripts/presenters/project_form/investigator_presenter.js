@@ -18,11 +18,32 @@
       blank: null,
       addNew: true,
       select2Options: {
-        // closeOnSelect: false
-        // It solves the closing of the dropdown menu
-        // It adds a lot of UX issues
-        // - Scroll: On select, scroll will go to first highlighted choice => How to resolve the scroll issue https://github.com/select2/select2/issues/1672#issuecomment-240411031
-        // - Click: On each click dropdown will appear and dissapear
+        minimumInputLength: 3,
+        ajax: {
+          url: '/api/investigators',
+          delay: 150,
+          cache: false,
+          data: function (params) {
+            var query = {
+              q: params.term,
+              page: params.page || 1,
+              token: window.AUTH_TOKEN
+            }
+            // Query paramters will be ?q=[term]&page=[page]
+            return query;
+          },
+
+          processResults: function (investigators) {
+            return {
+              results: _.sortBy(_.map(investigators, function(inv){
+                return {
+                  text: inv.name,
+                  id: inv.id
+                };
+              }), 'text')
+            }
+          }
+        }
       }
     },
 
@@ -33,7 +54,9 @@
       // Creating view
       this.select = new App.View.Select({
         el: viewSettings.DOMelement,
-        options: _.extend({}, this.defaults, viewSettings || {}),
+        options: _.extend({
+          options: []
+        }, this.defaults, viewSettings || {}),
         state: this.state
       });
       this.DOMelementId = viewSettings.DOMelement.split("-")[1];
@@ -54,9 +77,17 @@
         this.investigatorForm.openForm();
       }, this);
 
+      this.select.on('setValues', function(values){
+        this.setValues(values);
+      }, this);
+
       this.select.on('change', function(newState){
-        this.setState(newState);
+        if (this.state.get('value') && newState.value && (this.state.get('value')[0] != newState.value[0])) {
+          this.new = false;
+        }
+
         App.trigger('Investigator:change', this.state.attributes);
+        this.setState(newState);
       }, this);
 
     },
@@ -70,6 +101,7 @@
         this.select.options.options.unshift(newOption);
         this.select.render();
         this.setValue(newOption.value);
+        this.new = true;
       }, this);
     },
 
@@ -78,20 +110,7 @@
      * @return {Promise}
      */
     fetchData: function() {
-      if(this.investigators.length > 0){
-        return this.investigators;
-      }
-      else{
-        return this.investigators.fetch({add: true}).done(function() {
-          var options = this.investigators.map(function(type) {
-            return {
-              name: type.attributes.name,
-              value: type.attributes.id
-            };
-          });
-          this.select.setOptions(options);
-        }.bind(this));
-      }
+      return true;
     },
 
     render: function() {
@@ -109,6 +128,37 @@
     setValue: function(value){
       this.select.$el.find("select").val(value).trigger("change");
     },
+
+    setValues: function(values) {
+      if (this.new) {
+        var model = this.select.options.options[0];
+        $(this.select.select.selector).select2("trigger", "select", {
+          data: {
+            id: model.value,
+            text: model.name
+          }
+        });
+
+      } else {
+        _.each(values, function(v){
+          if (v) {
+            this.investigatorModel = new App.Model.Investigator({
+              id: v
+            });
+            this.investigatorModel.fetch().done(function(model){
+              $(this.select.select.selector).select2("trigger", "select", {
+                data: {
+                  id: model.id,
+                  text: model.name
+                }
+              });
+            }.bind(this));
+          }
+          // var current = _.findWhere(this.options.options, { id: parseInt(v) }) || _.findWhere(this.options.options, { value: parseInt(v) });
+        }.bind(this));
+      }
+    },
+
 
     setFetchedValues: function(value){
       this.select.$el.find("select").val(value).trigger("change");
