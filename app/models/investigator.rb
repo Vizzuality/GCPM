@@ -61,7 +61,8 @@ class Investigator < ApplicationRecord
   scope :by_user,               -> user               { where('investigators.user_id = ? AND investigators.is_approved = ?', user, true ) }
   scope :user_present,          ->                    { where.not(investigators: { user_id: nil } ) }
   scope :for_render,            ->                    { includes(:organizations, [organizations: :addresses]) }
-  scope :filter_name,          -> investigator_name   { where('investigators.name ILIKE ?', "%#{investigator_name}%") }
+  scope :filter_name,           -> investigator_name  { where('investigators.name ILIKE ?', "%#{investigator_name}%") }
+  scope :order_by_name,         ->                    { order('investigators.name ASC') }
 
   def graph
     self.projects.includes(:investigators)
@@ -69,7 +70,7 @@ class Investigator < ApplicationRecord
 
   class << self
     def fetch_all(options={})
-      investigators = Investigator.all.for_render
+      investigators = Investigator.all.for_render.order_by_name
       investigators = investigators.by_countries(options[:countries])                   if options[:countries]
       investigators = investigators.by_regions(options[:regions])                       if options[:regions]
       investigators = investigators.by_investigators(options[:investigators])           if options[:investigators]
