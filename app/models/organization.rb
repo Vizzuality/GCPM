@@ -37,7 +37,7 @@ class Organization < ApplicationRecord
   validates_presence_of   :name
   validates               :email_address, format: { with: Devise.email_regexp }, allow_blank: true, on: :create
 
-  scope :filter_name, -> organization_name { where('name ILIKE ?', "%#{organization_name}%") }
+  scope :filter_name, -> organization_name { where('organizations.name ILIKE ?', "%#{organization_name}%") }
 
   include Sluggable
 
