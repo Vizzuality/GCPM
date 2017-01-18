@@ -102,7 +102,6 @@
           this.projectModel = new App.Model.Project({
             id: v
           });
-          debugger;
           this.projectModel.fetch({
             data: {
               token: window.AUTH_TOKEN
