@@ -79,6 +79,10 @@
       }, this);
 
       this.select.on('change', function(newState){
+        if (this.state.get('value') && newState.value && (this.state.get('value')[0] != newState.value[0])) {
+          this.new = false;
+        }
+
         this.setState(newState);
         App.trigger('Organization:change', {state:this.state, el:this.select});
       }, this);
@@ -95,6 +99,7 @@
         this.select.render();
         // Auto set value
         this.setValue(newOption.value);
+        this.new = true;
       }, this);
     },
 
@@ -123,22 +128,34 @@
     },
 
     setValues: function(values) {
-      _.each(values, function(v){
-        if (v) {
-          this.organizationModel = new App.Model.Organization({
-            id: v
-          });
-          this.organizationModel.fetch().done(function(model){
-            $(this.select.select.selector).select2("trigger", "select", {
-              data: {
-                id: model.id,
-                text: model.name
-              }
+      if (this.new) {
+        var model = this.select.options.options[0];
+        $(this.select.select.selector).select2("trigger", "select", {
+          data: {
+            id: model.value,
+            text: model.name
+          }
+        });
+
+      } else {
+
+        _.each(values, function(v){
+          if (v) {
+            this.organizationModel = new App.Model.Organization({
+              id: v
             });
-          }.bind(this));
-        }
-        // var current = _.findWhere(this.options.options, { id: parseInt(v) }) || _.findWhere(this.options.options, { value: parseInt(v) });
-      }.bind(this));
+            this.organizationModel.fetch().done(function(model){
+              $(this.select.select.selector).select2("trigger", "select", {
+                data: {
+                  id: model.id,
+                  text: model.name
+                }
+              });
+            }.bind(this));
+          }
+          // var current = _.findWhere(this.options.options, { id: parseInt(v) }) || _.findWhere(this.options.options, { value: parseInt(v) });
+        }.bind(this));
+      }
     },
 
     setFetchedValues: function(value){

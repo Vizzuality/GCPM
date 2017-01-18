@@ -33,11 +33,11 @@
             return query;
           },
 
-          processResults: function (organizations) {
+          processResults: function (projects) {
             return {
-              results: _.sortBy(_.map(organizations, function(org){
+              results: _.sortBy(_.map(projects, function(org){
                 return {
-                  text: org.name,
+                  text: org.title,
                   id: org.id
                 };
               }), 'text')
