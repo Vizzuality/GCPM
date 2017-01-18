@@ -26,8 +26,7 @@
           data: function (params) {
             var query = {
               q: params.term,
-              page: params.page || 1,
-              active: true
+              page: params.page || 1
             }
             // Query paramters will be ?q=[term]&page=[page]
             return query;
@@ -103,7 +102,12 @@
           this.projectModel = new App.Model.Project({
             id: v
           });
-          this.projectModel.fetch().done(function(model){
+          debugger;
+          this.projectModel.fetch({
+            data: {
+              token: window.AUTH_TOKEN
+            }
+          }).done(function(model){
             $(this.select.select.selector).select2("trigger", "select", {
               data: {
                 id: model.id,
