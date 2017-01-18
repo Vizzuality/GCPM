@@ -1,9 +1,9 @@
 module Api::V1
   class ProjectsController < ApiController
     include ApiAuthenticable
-    skip_before_action :set_user_by_token, only: :index
-
-    before_action :set_user_project, only: [:show, :update]
+    skip_before_action :set_user_by_token, only: [:index, :show]
+    before_action :set_project,      only: :show
+    before_action :set_user_project, only: :update
 
     def index
       @projects = Project.fetch_all(filter_params)
@@ -64,9 +64,12 @@ module Api::V1
                       :user, :limit, :offset, :q)
       end
 
+      def set_project
+        @project = Project.set_by_id_or_slug(params[:id])
+      end
+
       def set_user_project
         @project = Project.set_by_id_or_slug(params[:id])
-
         if @user.projects.include?(@project)
           return
         else
