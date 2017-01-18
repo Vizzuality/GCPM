@@ -18,11 +18,32 @@
       blank: null,
       addNew: true,
       select2Options: {
-        // closeOnSelect: false
-        // It solves the closing of the dropdown menu
-        // It adds a lot of UX issues
-        // - Scroll: On select, scroll will go to first highlighted choice => How to resolve the scroll issue https://github.com/select2/select2/issues/1672#issuecomment-240411031
-        // - Click: On each click dropdown will appear and dissapear
+        minimumInputLength: 3,
+        ajax: {
+          url: '/api/organizations?funding_source=true',
+          delay: 150,
+          cache: false,
+          data: function (params) {
+            var query = {
+              funding_source: true,
+              q: params.term,
+              page: params.page || 1
+            }
+            // Query paramters will be ?q=[term]&page=[page]
+            return query;
+          },
+
+          processResults: function (organizations) {
+            return {
+              results: _.sortBy(_.map(organizations, function(org){
+                return {
+                  text: org.name,
+                  id: org.id
+                };
+              }), 'text')
+            }
+          }
+        }
       }
     },
 
@@ -47,6 +68,10 @@
     setEvents: function() {
       this.select.on('new', function(){
         App.trigger('FundingSources:new');
+      }, this);
+
+      this.select.on('setValues', function(values){
+        this.setValues(values);
       }, this);
 
       this.select.on('change', function(newState){
@@ -76,15 +101,7 @@
      * @return {Promise}
      */
     fetchData: function() {
-      return this.fundingSources.fetch({add: true}).done(function() {
-        var options = this.fundingSources.map(function(type) {
-          return {
-            name: type.attributes.name,
-            value: type.attributes.id
-          };
-        });
-        this.select.setOptions(options);
-      }.bind(this));
+      return true;
     },
 
     render: function() {
@@ -101,6 +118,25 @@
 
     setValue: function(values){
       this.select.$el.find("select").val(values).trigger("change");
+    },
+
+    setValues: function(values) {
+      _.each(values, function(v){
+        if (v) {
+          this.organizationModel = new App.Model.Organization({
+            id: v
+          });
+          this.organizationModel.fetch().done(function(model){
+            $(this.select.select.selector).select2("trigger", "select", {
+              data: {
+                id: model.id,
+                text: model.name
+              }
+            });
+          }.bind(this));
+        }
+        // var current = _.findWhere(this.options.options, { id: parseInt(v) }) || _.findWhere(this.options.options, { value: parseInt(v) });
+      }.bind(this));
     },
 
     setFetchedValues: function(values){

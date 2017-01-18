@@ -19,7 +19,8 @@
     },
 
     events: {
-      'change select': 'triggerChange'
+      'change select': 'triggerChange',
+      'click .js-btn-add-new': 'triggerNew'
     },
 
     template: HandlebarsTemplates['form/select'],
@@ -60,15 +61,7 @@
         if (!_.isArray(val)) {
           arrValues = [val];
         }
-        _.each(arrValues, function(v){
-          var current = _.findWhere(this.options.options, { id: parseInt(v) });
-          $(this.select.selector).select2("trigger", "select", {
-            data: {
-              id: current.id,
-              text: current.text
-            }
-          });
-        }.bind(this));
+        this.trigger('setValues', arrValues);
       }
 
       if (!this.options.select2Options.ajax && !!val) {
@@ -98,15 +91,11 @@
     triggerChange: function(e) {
       var selectedOptions = e.currentTarget.selectedOptions;
       var currentOptions = _.pluck(selectedOptions, 'value');
-      var index = currentOptions.indexOf("Add new");
-      if (index > -1){
-        //currentOptions.splice(index, 1);
-        this.render();
-        this.trigger('new');
-      }
-      else{
-        this.trigger('change', {value: currentOptions });
-      }
+      this.trigger('change', { value: currentOptions });
+    },
+
+    triggerNew: function() {
+      this.trigger('new');
     }
 
   });

@@ -178,8 +178,8 @@
           this.request.project["memberships"] = [];
           _.each(this.investigatorOrganization.elements, function(element) {
             var id = element.id;
-            var investigator = JSON.parse(this.state.attributes["investigator-"+id]);
-            var organization = JSON.parse(this.state.attributes["organization-"+id]);
+            var investigator = (this.state.attributes["investigator-"+id]) ? JSON.parse(this.state.attributes["investigator-"+id]) : null;
+            var organization = (this.state.attributes["organization-"+id]) ? JSON.parse(this.state.attributes["organization-"+id]) : null;
             var address = this.state.attributes["address-"+id];
             var lead = this.state.attributes["lead"];
             var obj = {};
@@ -406,7 +406,7 @@
       this.projectTypes.setFetchedValues(this.project.project_types);
       this.cancerTypes.setFetchedValues(this.project.cancer_types);
       this.specialities.setFetchedValues(this.project.specialities);
-      this.fundingSources.setFetchedValues(this.project.funding_sources);
+      this.fundingSources.setValues(_.pluck(this.project.funding_sources, 'id'));
       this.investigatorOrganizationEdit.setValue(this.project.memberships);
     },
 
