@@ -13,7 +13,8 @@
     show: function(params) {
       var newParams = _.extend({}, {
         data: 'data',
-        cancer_type: params.vars[0]
+        cancer_type: params.vars[0],
+        innerPage: 'cancer_types'
       }, params);
 
 

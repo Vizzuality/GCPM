@@ -41,7 +41,8 @@
       this.state = new StateModel();
       this.widgetModel = new WidgetFeaturedModel();
       this.widgets = new App.Collection.Widgets({
-        featured: true
+        featured: true,
+        innerPage: 'none'
       });
 
       // Creating view
