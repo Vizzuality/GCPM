@@ -19,4 +19,8 @@ module RoutesHelper
   def cancer_url(options)
     cancer_type_url(options)
   end
+
+  def path_exists?(options)
+    Rails.application.routes.url_helpers.respond_to?(options)
+  end
 end

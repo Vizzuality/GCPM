@@ -96,6 +96,6 @@ class NetworkEventsController < ApplicationController
         errors << "<p>You must select a city</p>"
       end
 
-      return errors
+      errors
     end
 end
