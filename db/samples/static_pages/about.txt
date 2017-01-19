@@ -20,7 +20,7 @@
       <div class="column small-12 medium-4">
         <div class="c-media">
           <div class="thumbnail">
-            <img src='/assets/about/abouticon-01-c9ba227282399e40cdd275ed2431a5bb36ebf8383b74f129196c9bf87edf1bab.svg' />
+            <img src='/images/about/abouticon-01.svg' />
           </div>
           <p>Share cancer-related projects and events with the global oncology community</p>
         </div>
@@ -28,7 +28,7 @@
       <div class="column small-12 medium-4">
         <div class="c-media">
           <div class="thumbnail">
-            <img src='/assets/about/abouticon-02-c28e4ad424ad26e8a270096395fcadd8b96ffc456b4ee5a02533b535406b447f.svg' />
+            <img src='/images/about/abouticon-02.svg' />
           </div>
           <p>Search for people, projects, and events in a specific country or as related to a specific cancer type</p>
         </div>
@@ -36,7 +36,7 @@
       <div class="column small-12 medium-4">
         <div class="c-media">
           <div class="thumbnail">
-            <img src='/assets/about/abouticon-03-4f01a45944abe714ed5cdfd464c6fb6e2379b03e9779ef48f1b6413731e29def.svg' />
+            <img src='/images/about/abouticon-03.svg' />
           </div>
           <p>Connect with people with similar interests</p>
         </div>
@@ -44,7 +44,7 @@
       <div class="column small-12 medium-4">
         <div class="c-media">
           <div class="thumbnail">
-            <img src='/assets/about/abouticon-04-31946a90467344ef9c7348d0ac7e7c3a98a827a766a0edbd68a4e8d11140b48e.svg' />
+            <img src='/images/about/abouticon-04.svg' />
           </div>
           <p>View epidemiological heat maps that show cancer burden by country</p>
         </div>
@@ -52,7 +52,7 @@
       <div class="column small-12 medium-4">
         <div class="c-media">
           <div class="thumbnail">
-            <img src='/assets/about/abouticon-05-6023a546ccfb75f810d86f76b0f14ede8cfe2c7122eb2eece57509fecd4cbe34.svg' />
+            <img src='/images/about/abouticon-05.svg' />
           </div>
           <p>And more!</p>
         </div>
