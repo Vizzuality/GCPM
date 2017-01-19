@@ -27,16 +27,12 @@ class StaticPage < ApplicationRecord
   class << self
     def load_routes
       if StaticPage.table_exists?
-        StaticPage.available_pages.each do |page|
+        StaticPage.published.each do |page|
           Rails.application.routes.draw do
             get page.slug, to: 'static_pages#show', as: page.path, id: page.slug
           end
         end
       end
-    end
-
-    def available_pages
-      all.published
     end
   end
 
