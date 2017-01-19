@@ -20,10 +20,6 @@ Rails.application.routes.draw do
   get '/investigators/:id',     to: 'investigators#show', as: 'investigator'
   get '/downloads/user-manual', to: 'downloads#show',     as: 'download_user_manual'
   get '/network/:id',           to: 'users#show',         as: 'user'
-  # To removed:
-  # get '/about-old',                to: 'about#index'
-  # get '/faq-old',                  to: 'faq#index'
-  # get '/terms-and-conditions-old', to: 'terms#index'
 
   resources :projects, only: :show do
     patch 'relation_request', on: :member
