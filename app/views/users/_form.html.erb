@@ -75,4 +75,15 @@
   </div>
 </div>
 
+<div class="form-row row">
+  <div class="column small-12 medium-5 medium-offset-1">
+    <ul class="c-shared-links">
+      <li>
+        <h3>Cancel my account</h3>
+        <p>Unhappy? <%= link_to "Cancel my account", registration_path(@user), data: { confirm: "Are you sure?" }, method: :delete %></p>
+      </li>
+    </ul>
+  </div>
+</div>
+
 <%= javascript_include_tag Ckeditor.cdn_url %>

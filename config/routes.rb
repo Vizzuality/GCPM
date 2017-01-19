@@ -18,11 +18,8 @@ Rails.application.routes.draw do
   get '/events/:id',            to: 'events#show',        as: 'event'
   get '/organizations/:id',     to: 'organizations#show', as: 'organization'
   get '/investigators/:id',     to: 'investigators#show', as: 'investigator'
-  get '/about',                 to: 'about#index',        as: 'about'
   get '/downloads/user-manual', to: 'downloads#show',     as: 'download_user_manual'
   get '/network/:id',           to: 'users#show',         as: 'user'
-  get '/terms-and-conditions',  to: 'terms#index',        as: 'terms'
-  get '/faq',                   to: 'faq#index',          as: 'faqs'
 
   resources :projects, only: :show do
     patch 'relation_request', on: :member
@@ -110,6 +107,8 @@ Rails.application.routes.draw do
       get '/widgets',                 to: 'widgets#index',      as: 'widgets'
     end
   end
+
+  StaticPage.load_routes
 
   root to: 'home#index'
 end

@@ -1,6 +1,7 @@
 class PostsController < InheritedResources::Base
   load_and_authorize_resource
 
+  before_action :set_user,    only: [:new, :create, :edit, :update]
   before_action :check_user, only: [:new, :create, :index]
 
   def index
@@ -45,11 +46,15 @@ class PostsController < InheritedResources::Base
   end
 
   private
+    def set_user
+      @user = current_user
+    end
 
     def post_params
       params.require(:post).permit(:title, :body, :user_id, { organizations: [] }, { cancer_types: [] }, { projects: [] }, { countries: [] }, { specialities: [] })
                            .except(:organizations, :cancer_types, :projects, :countries, :specialities)
     end
+
 
     def pins_params
       params.require(:post).permit(:title, :body, :user_id, { organizations: [] }, { cancer_types: [] }, { projects: [] }, { countries: [] }, { specialities: [] })

@@ -1419,6 +1419,41 @@ ALTER SEQUENCE specialities_id_seq OWNED BY specialities.id;
 
 
 --
+-- Name: static_pages; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE static_pages (
+    id integer NOT NULL,
+    name character varying,
+    slug character varying,
+    path_prefix character varying,
+    body text,
+    published boolean DEFAULT true,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: static_pages_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE static_pages_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: static_pages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE static_pages_id_seq OWNED BY static_pages.id;
+
+
+--
 -- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -1452,7 +1487,8 @@ CREATE TABLE widgets (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     x_axis text,
-    y_axis text
+    y_axis text,
+    inner_page character varying
 );
 
 
@@ -1718,6 +1754,13 @@ ALTER TABLE ONLY research_units ALTER COLUMN id SET DEFAULT nextval('research_un
 --
 
 ALTER TABLE ONLY specialities ALTER COLUMN id SET DEFAULT nextval('specialities_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY static_pages ALTER COLUMN id SET DEFAULT nextval('static_pages_id_seq'::regclass);
 
 
 --
@@ -2028,6 +2071,14 @@ ALTER TABLE ONLY schema_migrations
 
 ALTER TABLE ONLY specialities
     ADD CONSTRAINT specialities_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: static_pages_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY static_pages
+    ADD CONSTRAINT static_pages_pkey PRIMARY KEY (id);
 
 
 --
@@ -2509,6 +2560,20 @@ CREATE UNIQUE INDEX index_specialities_on_slug ON specialities USING btree (slug
 
 
 --
+-- Name: index_static_pages_on_path_prefix; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_static_pages_on_path_prefix ON static_pages USING btree (path_prefix);
+
+
+--
+-- Name: index_static_pages_on_slug; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_static_pages_on_slug ON static_pages USING btree (slug);
+
+
+--
 -- Name: index_users_on_authentication_token; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -2611,6 +2676,6 @@ ALTER TABLE ONLY mailboxer_receipts
 
 SET search_path TO "$user", public;
 
-INSERT INTO schema_migrations (version) VALUES ('20160623091908'), ('20160623092157'), ('20160623093250'), ('20160629161033'), ('20160629161041'), ('20160707072908'), ('20160707073642'), ('20160708083044'), ('20160711105858'), ('20160711114901'), ('20160718224524'), ('20160718225032'), ('20160718232806'), ('20160720162924'), ('20160721141137'), ('20160725182233'), ('20160726110350'), ('20160729093255'), ('20160729125019'), ('20160729151912'), ('20160801160550'), ('20160801165924'), ('20160801171206'), ('20160802121917'), ('20160802174327'), ('20160803012223'), ('20160803012429'), ('20160803012636'), ('20160803014813'), ('20160803143833'), ('20160804100620'), ('20160804113911'), ('20161004100702'), ('20161018055907'), ('20161018091446'), ('20161018104312'), ('20161018111559'), ('20161018125246'), ('20161020122456'), ('20161020163951'), ('20161021073852'), ('20161021080737'), ('20161021110751'), ('20161021110752'), ('20161021110753'), ('20161021110754'), ('20161026160423'), ('20161027160501'), ('20161103101432'), ('20161103101657'), ('20161104114309'), ('20161107103717'), ('20161107110201'), ('20161110093643'), ('20161110111725'), ('20161110111836'), ('20161111100700'), ('20161115090954'), ('20161123114428'), ('20161124170341'), ('20161205162814'), ('20161206131728'), ('20161207105758'), ('20161207154856'), ('20161207155941'), ('20161230115447'), ('20170104111949');
+INSERT INTO schema_migrations (version) VALUES ('20160623091908'), ('20160623092157'), ('20160623093250'), ('20160629161033'), ('20160629161041'), ('20160707072908'), ('20160707073642'), ('20160708083044'), ('20160711105858'), ('20160711114901'), ('20160718224524'), ('20160718225032'), ('20160718232806'), ('20160720162924'), ('20160721141137'), ('20160725182233'), ('20160726110350'), ('20160729093255'), ('20160729125019'), ('20160729151912'), ('20160801160550'), ('20160801165924'), ('20160801171206'), ('20160802121917'), ('20160802174327'), ('20160803012223'), ('20160803012429'), ('20160803012636'), ('20160803014813'), ('20160803143833'), ('20160804100620'), ('20160804113911'), ('20161004100702'), ('20161018055907'), ('20161018091446'), ('20161018104312'), ('20161018111559'), ('20161018125246'), ('20161020122456'), ('20161020163951'), ('20161021073852'), ('20161021080737'), ('20161021110751'), ('20161021110752'), ('20161021110753'), ('20161021110754'), ('20161026160423'), ('20161027160501'), ('20161103101432'), ('20161103101657'), ('20161104114308'), ('20161104114309'), ('20161107103717'), ('20161107110201'), ('20161110093643'), ('20161110111836'), ('20161111100700'), ('20161115090954'), ('20161123114428'), ('20161124170341'), ('20161205162814'), ('20161206131728'), ('20161207105758'), ('20161207154856'), ('20161207155941'), ('20161230115447'), ('20170116150713'), ('20170118105416');
 
 

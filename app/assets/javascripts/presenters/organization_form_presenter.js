@@ -17,10 +17,22 @@
       var organizationName = new App.Presenter.OrganizationName();
       var organizationCountry = new App.Presenter.OrganizationCountry();
       var organizationType = new App.Presenter.OrganizationType();
-      var organizationLatitude = new App.Presenter.OrganizationLatitude();
+      var organizationLatitude = new App.Presenter.OrganizationLatitude({
+
+      });
       var organizationLongitude = new App.Presenter.OrganizationLongitude();
       var organizationCity = new App.Presenter.OrganizationCity();
 
+      this.map = new App.View.Map({
+        el: '#map',
+        options: {
+          nocreate: true,
+          zoom: 3,
+          minZoom: 3,
+          center: [52,7],
+          basemap: 'secondary'
+        }
+      });
 
       this.children = [organizationName, organizationType, organizationCountry,
          organizationLatitude, organizationLongitude, organizationCity];
@@ -44,6 +56,11 @@
         App.trigger('OrganizationForm:submit'+this.DOMelementId, this.state.attributes);
         this.closeForm();
       }, this);
+
+      this.map.on('pan', function(e){
+        this.organizationForm.setLocation(e.target.getCenter());
+      }.bind(this));
+
     },
 
     /**
@@ -117,6 +134,9 @@
         // Render the child
         child.render();
       }.bind(this));
+
+      this.map.setElement('#map');
+      this.map.createMap();
     }
 
   });

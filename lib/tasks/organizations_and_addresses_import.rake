@@ -2,7 +2,7 @@ namespace :organizations_and_addresses do
   desc "Imports a SQL backup of organizations and addresses"
   task import: :environment do
     tables = ["organizations", "addresses"]
-    ActiveRecord::Base.connection.tables.each do |t|
+    tables.each do |t|
       ActiveRecord::Migration.drop_table t.to_sym, force: :cascade
     end
     file = "#{Rails.root.to_s.gsub(/ /, '\ ')}/data/organizations_and_addresses.bak"

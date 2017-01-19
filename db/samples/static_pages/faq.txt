@@ -1,5 +1,3 @@
-<% title 'FAQ' %>
-
 <header class="l-intro">
   <div class="wrapper">
     <div class="row">

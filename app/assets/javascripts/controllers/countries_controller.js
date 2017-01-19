@@ -13,7 +13,8 @@
     show: function(params) {
       var newParams = _.extend({}, {
         data: 'data',
-        iso: params.vars[0]
+        iso: params.vars[0],
+        innerPage: 'countries'
       }, params);
 
       new App.Presenter.TabNav(newParams);

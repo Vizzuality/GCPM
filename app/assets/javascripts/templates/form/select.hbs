@@ -6,6 +6,7 @@
     {{label}}
   </label>
 {{/if}}
+
 <select
   {{#if multiple}}multiple="true"{{/if}}
   {{#if name}}name="{{name}}"{{/if}}
@@ -17,13 +18,16 @@
   {{#if blank}}
     <option></option>
   {{/if}}
-  {{#if addNew}}
-    <option id="add-new-{{name}}" class="add-new">Add new</option>
-  {{/if}}
   {{#each options}}
     <option value="{{value}}" {{#if selected}}selected{{/if}}>{{name}}</option>
   {{/each}}
 </select>
+{{#if addNew}}
+  <div class="select-buttons">
+    <button type="button" id="add-new-{{name}}" class="c-btn -filled -secondary -mini js-btn-add-new">Add new</button>
+  </div>
+{{/if}}
+
 {{#if required}}
   <p class="c-required">* Field required</p>
 {{/if}}

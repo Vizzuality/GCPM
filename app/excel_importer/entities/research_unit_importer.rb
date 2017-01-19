@@ -18,12 +18,14 @@ class ResearchUnitImporter
     investigator.website = data["#{entity_name}_website"]
 
     if data["#{entity_name}_organization_grid_id"].present?
-      def_address = Address.find_by(grid_id: (data["#{entity_name}_organization_grid_id"]&.strip) + ".0")
+      def_address = Address.find_by(grid_id: (data["#{entity_name}_organization_grid_id"]&.strip))
+      address = def_address
       unless def_address.present?
         @errors << { organization: "organization not found" }
         Rails.logger.info @errors
         return false
       end
+      organization = def_address.organization
     else
       organization = Organization.find_or_initialize_by(name: data["#{entity_name}_organization_name"]&.strip)
       organization_type = self.validate_organization_type(data["#{entity_name}_organization_type"])
@@ -45,27 +47,31 @@ class ResearchUnitImporter
 
       unless organization.valid?
         @errors << { organization: organization.errors.full_messages }
+        return false
       end
 
       unless investigator.valid?
         @errors << { investigator: investigator.errors.full_messages }
+        return false
       end
 
       unless address.valid?
         @errors << { address: address.errors.full_messages }
-      end
-
-      if @errors.compact.flatten.blank?
-        organization.organization_type = organization_type
-        organization.save!
-        investigator.save!
-        def_address = Address.find_or_initialize_by(organization_id: organization.id, latitude: address.latitude, longitude: address.longitude, country_name: address.country_name, country_code: address.country_code, city: address.city, line_1: address.line_1)
-        def_address.save!
-      else
-        Rails.logger.info @errors
         return false
       end
     end
+
+    if @errors.compact.flatten.blank?
+      organization.organization_type = organization_type
+      organization.save!
+      investigator.save!
+      def_address = Address.find_or_initialize_by(organization_id: organization.id, latitude: address.latitude, longitude: address.longitude, country_name: address.country_name, country_code: address.country_code, city: address.city, line_1: address.line_1)
+      def_address.save!
+    else
+      Rails.logger.info @errors
+      return false
+    end
+
     if @errors.compact.flatten.blank?
       research_unit = ResearchUnit.find_or_initialize_by(address_id: def_address.id, investigator_id: investigator.id)
       research_unit.save!
