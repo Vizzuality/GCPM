@@ -105,7 +105,6 @@
             body[key] = el.value || null;
         }
       }.bind(this));
-      console.log(body);
       return body
     }
   });
