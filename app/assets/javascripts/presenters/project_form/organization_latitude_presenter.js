@@ -19,10 +19,10 @@
       this.Input = new App.View.Input({
         el: '#organizationlatitude',
         options: {
-          label: 'Organization Latitude',
+          label: null,
           placeholder: '',
           name: 'organizationLatitude',
-          type: 'number',
+          type: 'hidden',
           required: false,
           class: 'c-input',
           min: -90,
