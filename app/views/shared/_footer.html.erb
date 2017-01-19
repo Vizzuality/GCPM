@@ -38,7 +38,7 @@
               %>
             </li>
             <li class="c-translate">
-              <%= link_to 'FAQ', faq_path if Rails.application.routes.url_helpers.respond_to?(:faq_path) %>
+              <%= link_to 'FAQ', faq_path if path_exists?(:faq_path) %>
             </li>
           </ul>
           <ul>

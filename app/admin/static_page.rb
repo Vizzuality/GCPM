@@ -10,7 +10,7 @@ ActiveAdmin.register StaticPage do
     column :name
     column :slug
     column :path_prefix
-    coulmn :published
+    column :published
     actions
   end
 

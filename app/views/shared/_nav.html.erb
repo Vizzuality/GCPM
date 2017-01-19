@@ -7,7 +7,7 @@
 <li class="<%= active_page?(cancers_path) ? '-active' : '' %>">
   <%= link_to (t 'cancer_types'), cancers_path %>
 </li>
-<% if Rails.application.routes.url_helpers.respond_to?(:about_path) %>
+<% if path_exists?(:about_path) %>
   <li class="<%= active_page?(about_path) ? '-active' : '' %>">
     <%= link_to (t 'about'), about_path %>
   </li>

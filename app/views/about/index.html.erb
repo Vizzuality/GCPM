@@ -67,7 +67,7 @@
   <div class="wrapper">
     <div class="row">
       <div class="column small-12 medium-9">
-        <p><%= link_to 'Terms and Conditions', terms_path if Rails.application.routes.url_helpers.respond_to?(:terms_path) %>.</p>
+        <p><%= link_to 'Terms and Conditions', terms_path if path_exists?(:terms_path) %>.</p>
         <p>For more suggestions on how to get started using the Map, see the <%= link_to 'FAQ', faq_path %>.</p>
         <p>If you would like to contribute to the GO Map, or provide feedback to the management team, we can be reached at <a href="mailto:data@globalonc.org">data@globalonc.org</a>.</p>
         <h2>Acknowledgments</h2>

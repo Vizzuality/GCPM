@@ -112,13 +112,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # Static pages
-  # if StaticPage.table_exists?
-  #   StaticPage.available_pages.each do |page|
-  #     get "#{page.slug}", to: 'static_pages#show', as: "#{page.path_or_slug}", id: "#{page.slug}"
-  #   end
-  # end
-
   StaticPage.load_routes
 
   root to: 'home#index'
