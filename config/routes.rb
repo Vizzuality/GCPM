@@ -21,9 +21,9 @@ Rails.application.routes.draw do
   get '/downloads/user-manual', to: 'downloads#show',     as: 'download_user_manual'
   get '/network/:id',           to: 'users#show',         as: 'user'
   # To removed:
-  # get '/about-old',                to: 'about#index', as: 'about'
-  # get '/faq-old',                  to: 'faq#index',   as: 'faqs'
-  # get '/terms-and-conditions-old', to: 'terms#index', as: 'terms'
+  # get '/about-old',                to: 'about#index'
+  # get '/faq-old',                  to: 'faq#index'
+  # get '/terms-and-conditions-old', to: 'terms#index'
 
   resources :projects, only: :show do
     patch 'relation_request', on: :member
