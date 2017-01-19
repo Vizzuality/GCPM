@@ -28,6 +28,18 @@
       return this;
     },
 
+    getLocation: function() {
+      return {
+        lat: this.$el.find('input[name="organizationLatitude"]').val() || 52,
+        lng: this.$el.find('#event_longitude').val() || 7
+      }
+    },
+
+    setLocation: function(center) {
+      this.$el.find('input[name="organizationLatitude"]').val(Number(center.lat).toFixed(2));
+      this.$el.find('input[name="organizationLongitude"]').val(Number(center.lng).toFixed(2));
+    },
+
     triggerCancel: function() {
       this.trigger('cancel');
     },
@@ -93,7 +105,6 @@
             body[key] = el.value || null;
         }
       }.bind(this));
-
       return body
     }
   });
