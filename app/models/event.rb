@@ -84,8 +84,8 @@ class Event < ApplicationRecord
     end
 
     def order_by_upcoming
-      order('case when start_date >= CURRENT_DATE then start_date end asc,
-             case when start_date < CURRENT_DATE then start_date end desc')
+      order('CASE WHEN start_date >= CURRENT_DATE THEN start_date END ASC,
+             CASE WHEN start_date  < CURRENT_DATE THEN start_date END DESC NULLS LAST')
     end
   end
 
