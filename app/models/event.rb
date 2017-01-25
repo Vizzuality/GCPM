@@ -63,7 +63,8 @@ class Event < ApplicationRecord
 
   class << self
     def fetch_all(options={})
-      events = Event.all.order_by_upcoming
+      events = Event.all
+      events = events.order_by_upcoming                          unless options[:sortby].present? && options[:sortby] != 'upcoming'
       events = events.by_countries(options[:countries])          if options[:countries]
       events = events.by_regions(options[:regions])              if options[:regions]
       events = events.by_user(options[:user])                    if options[:user]
