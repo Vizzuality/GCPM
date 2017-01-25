@@ -15,7 +15,7 @@ class MapController < ApplicationController
     limit = 12 + (@page * 9)
 
     if params.key?(:data) && params[:data] == 'events'
-      events = Event.fetch_all(events_params).order('start_date DESC NULLS LAST')
+      events = Event.fetch_all(events_params)
       # Get public and private events
       public , private = [], []
       events.each do |event|

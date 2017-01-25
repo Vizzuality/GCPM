@@ -19,8 +19,7 @@
       { name: 'Submitted Date (Earliest to most recent)', value: 'created_asc' }
     ],
     events: [
-      { name: 'Start Date (DESC)', value: 'start_date_desc' },
-      { name: 'Start Date (ASC)', value: 'start_date_asc' },
+      { name: 'Upcoming events', value: 'upcoming' },
       { name: 'Title (A-Z)', value: 'title_asc' },
       { name: 'Title (Z-A)', value: 'title_desc' }
     ],
@@ -35,7 +34,7 @@
       var sortby = _.pick(params, 'sortby');
 
       this.state = new StateModel(_.extend({},
-        { sortby: params.data && params.data === 'events' ? 'start_date_desc' : 'title_asc' },
+        { sortby: params.data && params.data === 'events' ? 'upcoming' : 'title_asc' },
         sortby, _.pick(params, 'data')));
 
       this.dropdownOptions = _.map(dataSpecs[params.data || 'projects'], function(opt) {
@@ -71,7 +70,7 @@
 
       App.on('TabNav:change', function() {
         this.setState(_.extend({}, this.getState(),
-          { sortby: this.state.get('data') === 'events' ? 'start_date_desc' : 'title_asc' }
+          { sortby: this.state.get('data') === 'events' ? 'upcoming' : 'title_asc' }
         ));
 
         var options = _.map(dataSpecs[this.state.get('data') || 'projects'], function(opt) {

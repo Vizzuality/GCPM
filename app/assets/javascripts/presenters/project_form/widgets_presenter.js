@@ -5,15 +5,15 @@
   var StateModel = Backbone.Model.extend();
 
   var WidgetModel = Backbone.Model.extend({
-    setUrl: function(iso, sql, innerPage) {
+    setUrl: function(slug, sql, innerPage) {
       _.templateSettings = {
         interpolate: /\{\{(.+?)\}\}/g
       };
 
       var urlTemplate = _.template(sql);
       var sql_parsed = innerPage === 'countries' ?
-        urlTemplate({COUNTRY_ISO: iso }) :
-        urlTemplate({CANCER_TYPE_ID: iso });
+        urlTemplate({COUNTRY_ISO: slug }) :
+        urlTemplate({CANCER_TYPE: slug.replace(/-/g, '_') });
 
       this.url = 'https://' + gon.carto_account + '.carto.com/api/v2/sql/?q=' + sql_parsed + '&api_key=' + gon.carto_key;
     },
@@ -138,7 +138,7 @@
         // FETCH the CARTO 'query'
         // before upgrading the view
         this.widgetModel.setUrl(gon.server_params[this.innerPage === 'countries' ?
-          'countries[]' : 'cancer_types[]'], widgetConf.get('query'), this.innerPage);
+          'countries[]' : 'cancer_types_name'], widgetConf.get('query'), this.innerPage);
 
         this.widgetModel
           .clear({ silent: true })
