@@ -63,24 +63,29 @@ class Event < ApplicationRecord
 
   class << self
     def fetch_all(options={})
-      events = Event.all
-      events = events.by_countries(options[:countries])    if options[:countries]
-      events = events.by_regions(options[:regions])        if options[:regions]
-      events = events.by_user(options[:user])              if options[:user]
-      events = events.by_start_date(options[:start_date])  if options[:start_date]
-      events = events.by_end_date(options[:end_date])      if options[:end_date]
-      events = events.order('events.created_at ASC')       if options[:sortby] && options[:sortby] == 'created_asc'
-      events = events.order('events.created_at DESC')      if options[:sortby] && options[:sortby] == 'created_desc'
-      events = events.order('events.title ASC')            if options[:sortby] && options[:sortby] == 'title_asc'
-      events = events.order('events.title DESC')           if options[:sortby] && options[:sortby] == 'title_desc'
-      events = events.order('events.start_date ASC NULLS LAST')       if options[:sortby] && options[:sortby] == 'start_date_asc'
-      events = events.order('events.start_date DESC NULLS LAST')      if options[:sortby] && options[:sortby] == 'start_date_desc'
-      events.distinct
+      events = Event.all.order_by_upcoming
+      events = events.by_countries(options[:countries])          if options[:countries]
+      events = events.by_regions(options[:regions])              if options[:regions]
+      events = events.by_user(options[:user])                    if options[:user]
+      events = events.by_start_date(options[:start_date])        if options[:start_date]
+      events = events.by_end_date(options[:end_date])            if options[:end_date]
+      events = events.order('events.created_at ASC')             if options[:sortby] && options[:sortby] == 'created_asc'
+      events = events.order('events.created_at DESC')            if options[:sortby] && options[:sortby] == 'created_desc'
+      events = events.order('events.title ASC')                  if options[:sortby] && options[:sortby] == 'title_asc'
+      events = events.order('events.title DESC')                 if options[:sortby] && options[:sortby] == 'title_desc'
+      events = events.order('events.start_date ASC NULLS LAST')  if options[:sortby] && options[:sortby] == 'start_date_asc'
+      events = events.order('events.start_date DESC NULLS LAST') if options[:sortby] && options[:sortby] == 'start_date_desc'
+      events
     end
 
     def set_by_id_or_slug(param)
       object_id = where(slug: param).or(where(id: param)).pluck(:id).min
       find(object_id) if object_id.present?
+    end
+
+    def order_by_upcoming
+      order('case when start_date >= CURRENT_DATE then start_date end asc,
+             case when start_date < CURRENT_DATE then start_date end desc')
     end
   end
 

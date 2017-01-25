@@ -37,9 +37,9 @@ class Notification < ActiveRecord::Base
       rebuild_counters
     end
 
-    def build_summary(notificable, summary_action)
-      summary  = "The #{notificable.model_name.human} "
-      summary += notificable_title(notificable)
+    def build_summary(notificable=nil, summary_action=nil)
+      summary  = "The #{notificable.model_name.human} " if notificable.present?
+      summary += notificable_title(notificable)         if notificable.present?
       summary += ' '
       summary += summary_action
       summary
@@ -86,15 +86,15 @@ class Notification < ActiveRecord::Base
   end
 
   def notificable_title
-    summary
+    self.summary
   end
 
   def notificable_group
-    notificable.model_name.human
+    self.notificable.model_name.human if notificable.present?
   end
 
   def timestamp
-    notificable.updated_at.to_formatted_s(:short)
+    self.notificable.updated_at.to_formatted_s(:short) if notificable.present?
   end
 
   def mark_as_read
