@@ -19,8 +19,7 @@
       { name: 'Submitted Date (Earliest to most recent)', value: 'created_asc' }
     ],
     events: [
-      { name: 'Start Date (DESC)', value: 'start_date_desc' },
-      { name: 'Start Date (ASC)', value: 'start_date_asc' },
+      { name: 'Upcoming events', value: 'upcoming' },
       { name: 'Title (A-Z)', value: 'title_asc' },
       { name: 'Title (Z-A)', value: 'title_desc' }
     ],
