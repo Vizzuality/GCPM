@@ -16,7 +16,7 @@
     getGroups: function() {
       var groups = _.groupBy(
         _.filter(this.toJSON(), function(layer){
-          return layer.layer_group
+          return layer.layer_group && layer.layer_group.slug !== 'human-development-index';
         }), function(layer) {
         return layer.layer_group.name;
       });

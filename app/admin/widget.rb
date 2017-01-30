@@ -2,19 +2,20 @@ ActiveAdmin.register Widget do
   menu parent: "Graphics", priority: 1
   extend Featurable
 
-  permit_params :name, :slug, :graphic_type, :x_axis, :y_axis, :legend, :source, :query
+  permit_params :name, :slug, :graphic_type, :x_axis, :y_axis, :legend, :source, :query, :inner_page
 
   form do |f|
     f.semantic_errors
     f.inputs 'Widget Details' do
       f.input :name
+      f.input :inner_page , as: :select, collection: ['none', 'countries', 'cancer_types']
       f.input :slug
       f.input :x_axis
       f.input :y_axis
       f.input :legend
       f.input :source
       f.input :query
-      f.input :graphic_type, as: :select, collection: ['line', 'map', 'pie', 'bar']
+      f.input :graphic_type, as: :select, collection: ['line', 'map', 'pie', 'bar', 'ranking']
     end
     actions
   end

@@ -13,11 +13,12 @@
 #  updated_at   :datetime         not null
 #  x_axis       :text
 #  y_axis       :text
+#  inner_page   :string
 #
 
 class WidgetSerializer < ActiveModel::Serializer
   cache key: "widget"
-  attributes :name, :slug, :graphic_type, :x_axis, :y_axis, :query, :legend, :source, :featured
+  attributes :name, :slug, :graphic_type, :x_axis, :y_axis, :query, :legend, :source, :featured, :inner_page
   def featured
     object.featured?
   end

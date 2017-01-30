@@ -15,7 +15,7 @@ class MapController < ApplicationController
     limit = 12 + (@page * 9)
 
     if params.key?(:data) && params[:data] == 'events'
-      events = Event.fetch_all(events_params).order('start_date DESC NULLS LAST')
+      events = Event.fetch_all(events_params)
       # Get public and private events
       public , private = [], []
       events.each do |event|
@@ -28,7 +28,7 @@ class MapController < ApplicationController
       @items_private_total = private.size
       @items_total = events.size
     elsif params.key?(:data) && params[:data] == 'people'
-      people = Investigator.fetch_all(people_params).order('name ASC')
+      people = Investigator.fetch_all(people_params)
       @items = people.limit(limit)
       @more = (people.size > @items.size)
       @items_total = people.size

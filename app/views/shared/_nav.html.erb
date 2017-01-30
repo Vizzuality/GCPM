@@ -7,9 +7,11 @@
 <li class="<%= active_page?(cancers_path) ? '-active' : '' %>">
   <%= link_to (t 'cancer_types'), cancers_path %>
 </li>
-<li class="<%= active_page?(about_path) ? '-active' : '' %>">
-  <%= link_to (t 'about'), about_path %>
-</li>
+<% if path_exists?(:about_path) %>
+  <li class="<%= active_page?(about_path) ? '-active' : '' %>">
+    <%= link_to (t 'about'), about_path %>
+  </li>
+<% end %>
 
 <% if browser.device.mobile? %>
   <li class="<%= active_page?(searches_path) ? '-active' : '' %>">

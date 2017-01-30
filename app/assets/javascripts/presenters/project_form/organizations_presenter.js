@@ -44,6 +44,10 @@
         App.trigger('Organizations:change', this.state.attributes);
       }, this);
 
+      this.select.on('setValues', function(values){
+        this.setValues(values);
+      }, this);
+
       this.select.on('change', this.setState, this);
     },
 
@@ -52,19 +56,39 @@
      * @return {Promise}
      */
     fetchData: function() {
-      return this.organizations.fetch().done(function() {
-        var options = this.organizations.map(function(type) {
-          return {
-            text: type.attributes.name,
-            id: type.attributes.id
-          };
-        });
-        this.select.setOptions(options);
-      }.bind(this));
+      return true;
+      // return this.organizations.fetch().done(function() {
+      //   var options = this.organizations.map(function(type) {
+      //     return {
+      //       text: type.attributes.name,
+      //       id: type.attributes.id
+      //     };
+      //   });
+      //   this.select.setOptions(options);
+      // }.bind(this));
     },
 
     render: function() {
       this.select.render();
+    },
+
+    setValues: function(values) {
+      _.each(values, function(v){
+        if (v) {
+          this.organizationModel = new App.Model.Organization({
+            id: v
+          });
+          this.organizationModel.fetch().done(function(model){
+            $(this.select.select.selector).select2("trigger", "select", {
+              data: {
+                id: model.id,
+                text: model.name
+              }
+            });
+          }.bind(this));
+        }
+        // var current = _.findWhere(this.options.options, { id: parseInt(v) }) || _.findWhere(this.options.options, { value: parseInt(v) });
+      }.bind(this));
     },
 
     /**

@@ -5,12 +5,14 @@ class AddSlugToProjectsInvestigatorsCancerTypesOrganizationsAndEvents < ActiveRe
     add_column :cancer_types,  :slug, :string
     add_column :events,        :slug, :string
     add_column :organizations, :slug, :string
+    add_column :specialities,  :slug, :string
 
     add_index :projects,      :slug, unique: true
     add_index :investigators, :slug, unique: true
     add_index :cancer_types,  :slug, unique: true
     add_index :events,        :slug, unique: true
     add_index :organizations, :slug, unique: true
+    add_index :specialities, :slug, unique: true
 
     Rake::Task['assign:slugs'].invoke unless Rails.env.test?
   end
