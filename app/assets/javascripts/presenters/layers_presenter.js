@@ -59,9 +59,7 @@
         this.layersList = {
           groups: {
             groups: true,
-            elements: _.groupBy(this.layersCollection.getGroup('disability-adjusted-life-year'), function(layer) {
-              return layer.layer_group.name;
-            })
+            elements: this.layersCollection.getGroups()
           },
           individual: {
             individual: true,
