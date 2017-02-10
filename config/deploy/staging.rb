@@ -5,3 +5,4 @@ set :ssh_options, {
   password: fetch(:password)
 }
  set :branch, 'staging'
+ set :deploy_to, '~/gcpm-staging'
