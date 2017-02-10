@@ -4,3 +4,5 @@ set :ssh_options, {
   auth_methods: %w(publickey password),
   password: fetch(:password)
 }
+ set :branch, 'staging'
+ set :deploy_to, '~/gcpm-staging'

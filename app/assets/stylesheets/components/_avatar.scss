@@ -1,0 +1,57 @@
+
+.c-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: $primary-color;
+  color: $inverse-font-color;
+  background-position: center;
+  background-size: cover;
+
+  &.-ph {
+    // background-image: asset-url('placeholder.png');
+    background-size: cover;
+  }
+
+  &.-align-center {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &.-small {
+    width: 38px;
+    height: 38px;
+  }
+
+  &.-normal {
+    width: 70px;
+    height: 70px;
+  }
+
+  &.-medium {
+    width: 120px;
+    height: 120px;
+    font-size: $medium-font-size;
+  }
+
+  &.-big {
+    width: 150px;
+    height: 150px;
+    font-size: $big-font-size;
+  }
+
+  &.-mg-bt {
+    margin-bottom: $base-space;
+  }
+
+  &.-no-bg {
+    background-color: transparent;
+  }
+
+  img {
+    border-radius: 50%;
+  }
+}

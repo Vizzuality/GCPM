@@ -1,0 +1,76 @@
+<header class="l-intro">
+  <div class="wrapper">
+    <div class="row">
+      <div class="column small-12 medium-9">
+        <h1>About The Global Oncology Map</h1>
+        <p>The Global Oncology (GO) Map is an interactive online tool and public resource for the global cancer community. Its purpose is to help visitors initiate partnerships, make informed decisions, and develop collaborations in cancer control.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article class="l-content">
+  <div class="wrapper">
+    <div class="row">
+      <div class="column small-12 medium-9">
+        <h2>What a user can do through The GO Map</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column small-12 medium-4">
+        <div class="c-media">
+          <div class="thumbnail">
+            <img src='/images/about/abouticon-01.svg' />
+          </div>
+          <p>Share cancer-related projects and events with the global oncology community</p>
+        </div>
+      </div>
+      <div class="column small-12 medium-4">
+        <div class="c-media">
+          <div class="thumbnail">
+            <img src='/images/about/abouticon-02.svg' />
+          </div>
+          <p>Search for people, projects, and events in a specific country or as related to a specific cancer type</p>
+        </div>
+      </div>
+      <div class="column small-12 medium-4">
+        <div class="c-media">
+          <div class="thumbnail">
+            <img src='/images/about/abouticon-03.svg' />
+          </div>
+          <p>Connect with people with similar interests</p>
+        </div>
+      </div>
+      <div class="column small-12 medium-4">
+        <div class="c-media">
+          <div class="thumbnail">
+            <img src='/images/about/abouticon-04.svg' />
+          </div>
+          <p>View epidemiological heat maps that show cancer burden by country</p>
+        </div>
+      </div>
+      <div class="column small-12 medium-4">
+        <div class="c-media">
+          <div class="thumbnail">
+            <img src='/images/about/abouticon-05.svg' />
+          </div>
+          <p>And more!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<article class="l-content">
+  <div class="wrapper">
+    <div class="row">
+      <div class="column small-12 medium-9">
+        <p><a href='/terms-and-conditions'>Terms and Conditions</a>.</p>
+        <p>For more suggestions on how to get started using the Map, see the <a href='/faq'>FAQ</a>.</p>
+        <p>If you would like to contribute to the GO Map, or provide feedback to the management team, we can be reached at <a href="mailto:data@globalonc.org">data@globalonc.org</a>.</p>
+        <h2>Acknowledgments</h2>
+        <p>The GO Map was made possible through an initial alliance between the <a href="https://www.cancer.gov/about-nci/organization/cgh">U.S. National Cancer Institute Center for Global Health </a> and <a href="http://globalonc.org/">Global Oncology, Inc</a>. The American Society for Clinical Oncology and Union for International Cancer Control also contributed scientific and programmatic input. The website was developed by the creative digital agency <a href="http://www.vizzuality.com/" target="_blank">Vizzuality</a>.</p>
+      </div>
+    </div>
+  </div>
+</article>

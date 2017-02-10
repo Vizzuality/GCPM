@@ -3,6 +3,8 @@ countries.id as location_id,
 countries.country_name as location_name,
 countries.country_centroid as centroid,
 countries.country_iso_3 as iso,
+COALESCE(sum(CASE WHEN memberships.membership_type = 0 THEN 1 ELSE 0 END),1) AS project_leads,
+COALESCE(sum(CASE WHEN memberships.membership_type = 1 THEN 1 ELSE 0 END),1) AS collaborators,
 'country' as type
 from projects
  inner join memberships on memberships.project_id = projects.id
@@ -11,6 +13,9 @@ from projects
     inner join countries on addresses.country_id = countries.id
     <% if @params[:organizations] || @params[:organization_types] %>
       inner join organizations on addresses.organization_id = organizations.id
+    <% end %>
+    <% if @params[:funding_sources] %>
+      inner join funders on funders.project_id = projects.id
     <% end %>
     <% if @params[:organization_types] %>
       inner join organization_types on organization_types.id = organizations.organization_type_id
@@ -26,12 +31,22 @@ from projects
       inner join cancer_types_projects on cancer_types_projects.project_id = projects.id
       inner join cancer_types on cancer_types_projects.cancer_type_id = cancer_types.id
     <% end %>
+    <% if @params[:specialities] %>
+      inner join projects_pecialities on projects_pecialities.project_id = projects.id
+      inner join specialities on projects_specialities.speciality_id = specialities.id
+    <% end %>
+    <% if @params[:user] %>
+      inner join project_users on projects.id = project_users.project_id
+    <% end %>
     where projects.status = 1
     <% if @params[:countries] %>
-      and countries.id in     <%= "#{'(' + @params[:countries].join(',') + ')'}" %>
+      and countries.country_iso_3 in      <%= @params[:countries].to_s.gsub('[', '(').gsub(']',')').gsub('"',"'") %>
     <% end %>
     <% if @params[:organizations] %>
       and organizations.id in <%= "#{'(' + @params[:organizations].join(',') + ')'}" %>
+    <% end %>
+    <% if @params[:funding_sources] %>
+      and funders.organization_id in <%= "#{'(' + @params[:funding_sources].join(',') + ')'}" %>
     <% end %>
     <% if @params[:organization_types] %>
       and organization_types.id in <%= "#{'(' + @params[:organization_types].join(',') + ')'}" %>
@@ -45,6 +60,9 @@ from projects
     <% if @params[:cancer_types] %>
       and cancer_types.id in <%= "#{'(' + @params[:cancer_types].join(',') + ')'}" %>
     <% end %>
+    <% if @params[:specialities] %>
+      and specialities.id in <%= "#{'(' + @params[:cancer_types].join(',') + ')'}" %>
+    <% end %>
     <% if @params[:regions] %>
       and countries.region_iso in <%= @params[:regions].to_s.gsub('[', '(').gsub(']',')').gsub('"',"'") %>
     <% end %>
@@ -55,6 +73,6 @@ from projects
       and (projects.end_date < date(<%= quote @params[:end_date] %>))
     <% end %>
     <% if @params[:user] %>
-      and projects.user_id = <%= quote @params[:user] %>
+      and project_users.user_id = <%= quote @params[:user] %> and project_users.is_approved = true
     <% end %>
 group by location_id, location_name, centroid, iso

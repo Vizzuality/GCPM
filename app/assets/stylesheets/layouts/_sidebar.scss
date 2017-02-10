@@ -1,0 +1,29 @@
+.l-sidebar {
+  width: 100%;
+  height: 100%;
+  border-left: 1px solid $border-color-1;
+  padding: $small-box-space;
+
+  @media #{$mq-small} {
+    padding: $box-space;
+
+  }
+
+  &.-no-pad {
+    padding: 0;
+  }
+
+  .sidebar-item {
+    margin-bottom: $base-space;
+
+    > h3 {
+      margin-bottom: 6px;
+    }
+  }
+
+  .list-item {
+    & a:hover {
+      color: $primary-color;
+    }
+  }
+}

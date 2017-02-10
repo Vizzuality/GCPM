@@ -1,93 +1,77 @@
-<div class="c-header">
+<header class="l-header">
   <div class="wrapper">
-    <div class="desktop-menu">
-      <div class="logo">
-        <%= link_to(home_path) do %>
-          <h1>Global cancer project map</h1>
+    <div class="row collapse">
+      <div class="column small-6 align-middle">
+        <%= link_to root_path, id: 'logo' do %>
+          <%= image_tag 'global-oncology-logo.svg' %>
         <% end %>
       </div>
-      <ul>
-        <li class="<%= active_page?(map_path) ? '-active' : '' %>"><%= link_to (t 'map'), map_path %></a></li>
-        <li class="<%= active_page?(countries_path) ? '-active' : '' %>"><%= link_to (t 'countries'), countries_path %></a></li>
-        <!-- <li class="<%#= active_page?(cancers_path) ? '-active' : '' %>"><%#= link_to (t 'cancer_types'), cancers_path %></a></li> -->
-        <li class="<%= active_page?(about_path) ? '-active' : '' %>"><%= link_to (t 'about'), about_path %></a></li>
-        <li><img src="" class="btn-search"></li>
-        <% if user_signed_in? %>
-          <li class="user-avatar">
-            <div class="c-user-profile-picture <%= @isProfile ? "-active" : "" %>">
-              <div class="initials"><%= current_user.name ? current_user.name[0] : 'U' %></div>
-              <!-- <img src="" alt="{User name}'s profile picture'" /> -->
-              <!-- Notifications to set (set element on mobile too) -->
-              <% if true %>
-                <div class="c-badge">7</div>
-              <% end %>
-              <div class="c-user-dropdown-menu js-user-dropdown-menu">
-                <ul class="user-profile menu-section">
-                  <li class="item"><%= link_to (t 'your_profile'), user_path(current_user), {:class => "item-link", :method => :get} %></li>
-                  <li class="item"><%= link_to (t 'logout'), destroy_user_session_path, {:class => "item-link", :method => :delete} %></li>
-                </ul>
+      <div class="column small-6 align-middle">
+        <nav class="c-nav -main">
+          <ul>
+            <%= render "shared/nav" %>
+            <% if user_signed_in? %>
+              <li id="notifications">
+                <button class="c-dropdown js-action-notifications">
+                  <svg class="c-icon -medium -primary"><use xlink:href="#icon-bell"></use></svg>
+                  <% if current_user.notifications_count > 0 %>
+                    <div class="c-badge -notifications messages-badge <%= current_user.notifications_count %>">
+                      <%= current_user.notifications_count > 9 ? '9+' : current_user.notifications_count %>
+                    </div>
+                  <% end %>
+                  <div class="dropdown-content notifications">
+                    <% if @notifications.empty? %>
+                      <ul class="list">
+                        <li class="-empty">No notifications</li>
+                      </ul>
+                    <% else %>
+                      <div class="container">
+                        <ul class="list -filled">
+                          <% @notifications.each do |notification|  %>
+                            <li class="">
+                              <%= link_to notification do %>
+                                <p class="group">
+                                  <strong><%= notification.notificable_group %> </strong>
+                                  <span class="time"><%= notification.timestamp %></span>
+                                </p>
+                                <p><%= notification.notificable_title %></p>
+                              <% end %>
+                            </li>
 
-                <ul class="user-tools menu-section -color-2">
-                  <li class="item"><%= link_to (t 'add_project'), new_user_project_path(current_user), {:class => "item-link", :method => :get} %></li>
-                  <li class="item"><%= link_to (t 'add_event'), new_user_event_path(current_user), {:class => "item-link", :method => :get} %></li>
-                </ul>
-              </div>
-            </div>
-          </li>
-        <% else %>
-          <li class="<%= active_page?(user_session_path) ? '-active' : '' %>"><%= link_to (t 'login'), user_session_path %></a></li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-
-  <div class="mobile-drawer js-mobile-drawer">
-    <ul class="menu">
-      <% if user_signed_in? %>
-          <li class="user-avatar">
-            <div class="c-user-profile-picture -big <%= @isProfile ? "-active" : "" %>">
-              <div class="initials">LK</div>
-              <!-- <img src="" alt="{User name}'s profile picture'" /> -->
-              <!-- Notifications to set (set element on mobile too) -->
-              <% if true %>
-                <div class="c-badge">7</div>
-              <% end %>
-            </div>
-          </li>
-        <% else %>
-          <li class="<%= active_page?(user_session_path) ? '-active' : '' %>"><%= link_to (t 'login'), user_session_path %></a></li>
-        <% end %>
-      <li class="<%= active_page?(map_path) ? '-active' : '' %>"><%= link_to (t 'map'), map_path %></a></li>
-      <li class="<%= active_page?(countries_path) ? '-active' : '' %>"><%= link_to (t 'countries'), countries_path %></a></li>
-      <!-- <li class="<%#= active_page?(cancers_path) ? '-active' : '' %>"><%#= link_to (t 'cancer_types'), cancers_path %></a></li> -->
-      <li class="<%= active_page?(about_path) ? '-active' : '' %>"><%= link_to (t 'about'), about_path %></a></li>
-    </ul>
-    <% if user_signed_in? %>
-      <ul class="menu user-profile">
-        <li class="item"><%= link_to (t 'your_profile'), user_path(current_user), {:class => "item-link", :method => :get} %></li>
-        <li class="item"><%= link_to (t 'logout'), destroy_user_session_path, {:class => "item-link", :method => :delete} %></li>
-      </ul>
-
-      <ul class="menu user-tools -color-1">
-        <li class="item"><%= link_to (t 'add_project'), new_user_project_path(current_user), {:class => "item-link", :method => :get} %></li>
-        <li class="item"><%= link_to (t 'add_event'), new_user_event_path(current_user), {:class => "item-link", :method => :get} %></li>
-      </ul>
-    <% end %>
-  </div>
-
-  <div class="wrapper">
-    <div class="mobile-menu">
-      <div class="logo">
-        <%= link_to(home_path) do %>
-          <h1>Global cancer project map</h1>
-        <% end %>
-      </div>
-      <div class="hamburger-menu js-hamburger-menu">
-        <span></span>
-        <span></span>
-        <span></span>
+                            <% if !browser.device.mobile? %>
+                              <li class="-btn js-action-delete">
+                                <%= link_to 'Delete all', mark_all_as_read_notifications_path, method: :put %>
+                              </li>
+                            <% end %>
+                          <% end %>
+                        </ul>
+                      </div>
+                    <% end %>
+                  </div>
+                </button>
+              </li>
+              <li class="js-user-menu <%= active_page?(user_session_path) ? '-active' : '' %>">
+                <button class="user-btn">
+                  <% if current_user.present? && current_user.avatar.present? %>
+                   <div class="c-avatar -no-bg"
+                         style="background-image: url(<%= current_user.avatar_url(:thumb) %>)">
+                    </div>
+                  <% else %>
+                    <div class="c-avatar">
+                      <%= render 'shared/placeholder', person: current_user, size: '-av-normal' %>
+                    </div>
+                  <% end %>
+                </button>
+                <%= render 'shared/user_menu' %>
+              </li>
+            <% else %>
+              <li class="<%= active_page?(user_session_path) ? '-active' : '' %>">
+                <%= link_to (t 'login'), user_session_path %></a>
+              </li>
+            <% end %>
+          </ul>
+        </nav>
       </div>
     </div>
   </div>
-
-</div>
+</header>

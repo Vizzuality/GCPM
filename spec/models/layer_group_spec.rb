@@ -13,6 +13,7 @@
 #  info             :text
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  layer_group_name :string
 #
 
 require 'rails_helper'

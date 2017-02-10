@@ -20,6 +20,7 @@
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  country_id       :integer
+#  grid_id          :string
 #
 
 require 'rails_helper'

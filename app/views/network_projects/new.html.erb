@@ -1,6 +1,7 @@
-<div class="project_add">
-	<%= simple_form_for [@user, @project], url: user_projects_url(@user) do |f| %>
-	  <%= render partial: f %>
-	  <span class="pre-submit"><%= f.button :submit, 'Submit', class: 'f-submit -network' %></span>
-	<% end %>
-</div>
+<script>
+var AUTH_TOKEN = "<%= @user.authentication_token %>"
+var USER_ID = "<%= @user.id %>"
+var INVESTIGATOR_PRESENT = "<%= @user.investigator.present? %>"
+</script>
+
+<div id="project_form" class="c-project-form"></div>

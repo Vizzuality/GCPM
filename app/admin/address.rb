@@ -7,6 +7,7 @@ ActiveAdmin.register Address do
   index do
     selectable_column
     column :id
+    column :grid_id
     column :city
     column :country
     column :organization
@@ -15,6 +16,7 @@ ActiveAdmin.register Address do
   form do |f|
     f.semantic_errors
     f.inputs do
+      f.input :grid_id
       f.input :organization
       f.input :primary
       f.input :city

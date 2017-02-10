@@ -1,0 +1,101 @@
+.c-tabnav {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: auto;
+  z-index: 1;
+
+  @media #{$mq-small} {
+    overflow: hidden;
+  }
+
+  &.-primary {
+    &:after {
+      background: linear-gradient(left, transparent, $primary-color);
+    }
+  }
+
+  &.-no-gradient {
+    &:after { display: none; }
+    &:before { display: none; }
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    right: $small-box-space;
+    top: 0;
+    width: 22px;
+    height: 100%;
+    z-index: 2;
+    background: linear-gradient(left, transparent, $secondary-color);
+
+    @media #{$mq-small} {
+      display: none;
+    }
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: $small-box-space;
+    top: 0;
+    width: 12px;
+    height: 100%;
+    z-index: 2;
+    background: linear-gradient(right, transparent, $secondary-color);
+
+    @media #{$mq-small} {
+      display: none;
+    }
+  }
+
+  .tabnav-item {
+    position: relative;
+    color: $inverse-font-color;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+
+    @media #{$mq-small} {
+      font-size: $medium-font-size;
+    }
+
+    a {
+      display: block;
+      position: relative;
+      padding: 8px $inline-space;
+      margin: 4px;
+      color: $inverse-font-color;
+
+      @media #{$mq-small} {
+        padding: 10px $inline-space;
+        margin: 0;
+        min-width: 130px;
+      }
+
+      &:hover {
+        background-color: darken($primary-color, 5%);
+      }
+
+      &.-secondary {
+        &:hover {
+          background-color: darken($secondary-color, 5%);
+        }
+      }
+
+      &.-active {
+        color: $base-font-color !important;
+        background-color: $body-bg-color !important;
+        box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15), 0 1px 0 0 rgba(0, 0, 0, 0.05);
+      }
+    }
+  }
+}
+
+.l-app.-main .c-tabnav {
+  .tabnav-item {
+    background-color: $app-bg-color;
+  }
+}

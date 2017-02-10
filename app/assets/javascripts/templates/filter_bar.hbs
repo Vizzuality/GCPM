@@ -1,0 +1,16 @@
+{{#if filters}}
+  <div class="wrapper">
+    <h3>Filter by:</h3>
+    <ul>
+      {{#if all}}
+        {{#each filters}}
+          <li>{{this.value}}</li>
+        {{/each}}
+      {{else}}
+        {{#each filters}}
+          {{#unless projects}}<li>{{this.value}}</li>{{/unless}}
+        {{/each}}
+      {{/if}}
+    </ul>
+  </div>
+{{/if}}

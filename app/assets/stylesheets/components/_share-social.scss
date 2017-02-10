@@ -1,0 +1,10 @@
+.c-share-social {
+  display: flex;
+  justify-content: center;
+
+  a {
+    display: block;
+    margin-top: $inline-space;
+    margin-right: $inline-space;
+  }
+}

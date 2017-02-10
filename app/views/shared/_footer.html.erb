@@ -1,19 +1,51 @@
-<div class="l-footer">
+<footer class="l-footer">
   <div class="wrapper">
-    <div class="container">
-      <ul class="medias">
-        <li class="-big"><%= t 'follow_us' %></li>
-        <li class="-notext -linkedin"><a href="https://www.linkedin.com/topic/global-oncology" target="_blank" rel="noreferrer" title="Linked In">Linked In</a></li>
-        <li class="-notext -twitter"><a href="https://twitter.com/globalonc" target="_blank" rel="noreferrer" title="Twitter">Twitter</a></li>
-        <li class="-notext -facebook"><a href="https://www.facebook.com/globalonc" target="_blank" rel="noreferrer" title="Facebook">Facebook</a></li>
-      </ul>
-      <ul class="menu">
-        <li><%= link_to (t 'download'), download_user_manual_path, class: "-color-1", download: 'User Manual', data: {turbolinks: false}, title: "User Manual" %></a></li>
-        <li><%= link_to (t 'map'), map_path %></a></li>
-        <li><%= link_to (t 'countries'), countries_path %></a></li>
-        <!-- <li><%= link_to (t 'cancer_types'), cancers_path %></a></li> -->
-        <li><%= link_to (t 'about'), about_path %></a></li>
-      </ul>
+    <div class="row collapse align-middle">
+      <div class="column small-12 medium-3">
+        <div class="c-nav -social">
+          <h2><%= t 'follow_us' %></h2>
+          <ul>
+            <li>
+              <a href="https://www.linkedin.com/topic/global-oncology" alt="Linkedin" title="Linkedin">
+                <svg class="c-icon icon-linkedin -primary -hv-opac"><use xlink:href="#icon-linkedin"></use></svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://twitter.com/globalonc" alt="Twitter" title="Twitter">
+                <svg class="c-icon icon-twitter -primary -hv-opac"><use xlink:href="#icon-twitter"></use></svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.facebook.com/globalonc" alt="Facebook" title="Facebook">
+                <svg class="c-icon icon-facebook -primary -hv-opac"><use xlink:href="#icon-facebook"></use></svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="column small-12 medium-9 align-right">
+        <div class="c-nav align-right">
+          <ul class="-inverse">
+            <li class="c-translate">
+              <div id="googleTranslateGCPM"></div>
+            </li>
+            <li class="c-translate">
+              <%= link_to 'Contact', new_contact_form_path %>
+            </li>
+            <li id="userManualDownload">
+              <%= link_to t('download'), download_user_manual_path,
+                download: 'user-manual', title: t('user-manual')
+              %>
+            </li>
+            <li class="c-translate">
+              <%= link_to 'FAQ', faq_path if path_exists?(:faq_path) %>
+            </li>
+          </ul>
+          <ul>
+            <%= render "shared/nav" %>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</footer>

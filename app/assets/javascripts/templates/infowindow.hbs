@@ -1,0 +1,94 @@
+<div class="c-infowindow">
+  {{#if project}}
+    <h3><a href="/projects/{{project}}">{{title}}</a></h3>
+    {{#if investigator}}
+      <div class="investigator">
+        <a href="/investigators/{{#if investigator_slug}}{{investigator_slug}}{{else}}{{investigator}}{{/if}}">{{investigator_name}}</a>
+        <span class="c-tag">{{#if is_project_lead}}Project lead{{else}}Collaborator{{/if}}</span>
+      </div>
+      <div class="organization">
+        {{#if organization}}
+          <a href="/organizations/{{#if organization_slug}}{{organization_slug}}{{else}}{{organization}}{{/if}}">{{organization_name}}</a>
+        {{/if}}
+        {{#if location_city}}
+          <p>{{location_city}}, {{location_country_name}}</p>
+        {{/if}}
+      </div>
+    {{/if}}
+  {{/if}}
+  {{#if event}}
+    <h3><a href="/events/{{event}}">{{title}}</a></h3>
+    {{#if start_date}}
+      {{#if end_date}}
+        <p>{{#if start_date}}{{start_date}}{{else}}-{{/if}} / {{#if end_date}}{{end_date}}{{else}}-{{/if}}</p>
+      {{/if}}
+    {{/if}}
+    <div class="organization">
+      {{#if city}}
+        <p>{{city}}, {{location_name}}</p>
+      {{/if}}
+    </div>
+  {{/if}}
+  {{#if resource_id}}
+    <h3><a href="/investigators/{{#if resource_slug}}{{resource_slug}}{{else}}{{resource_id}}{{/if}}">{{resource_name}}</a></h3>
+    {{#if organization}}
+      <div class="organization">
+        {{#if organization}}
+          <a href="/organizations/{{#if organization_slug}}{{organization_slug}}{{else}}{{organization}}{{/if}}">{{organization_name}}</a>
+        {{/if}}
+        {{#if location_city}}
+          <p>{{location_city}}, {{location_country_name}}</p>
+        {{/if}}
+      </div>
+    {{/if}}
+  {{/if}}
+  {{#if events}}
+    <h3>{{events}} events</h3>
+  {{/if}}
+  {{#if widget}}
+    <h3>{{operator_name}}
+      {{#if city}}<span>{{city}}</span>{{/if}}
+    </h3>
+    <div class="row collapse">
+      <div class="column small-12">
+        <table class="c-table">
+          <tbody>
+            <tr>
+              <td>Unit type</td>
+              <td>{{unit_type}}</td>
+            </tr>
+            <tr>
+              <td>Unit type group</td>
+              <td>{{unit_type_group}}</td>
+            </tr>
+            <tr>
+              <td>Radionuclide teletherapy</td>
+              <td>{{unit_use}}</td>
+            </tr>
+            <tr>
+              <td>Particle accelerator</td>
+              <td>{{#if particle_accelerator}}true{{else}}false{{/if}}</td>
+            </tr>
+            <tr>
+              <td>Linear accelerator</td>
+              <td>{{#if linear_accelerator}}true{{else}}false{{/if}}</td>
+            </tr>
+            <tr>
+              <td>Radionuclide teletherapy</td>
+              <td>{{#if radionuclide_teletherapy}}true{{else}}false{{/if}}</td>
+            </tr>
+            <tr>
+              <td>Simulator</td>
+              <td>{{#if simulator}}true{{else}}false{{/if}}</td>
+            </tr>
+            <tr>
+              <td>X Ray generator</td>
+              <td>{{#if x_ray_generator}}true{{else}}false{{/if}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  {{/if}}
+
+</div>

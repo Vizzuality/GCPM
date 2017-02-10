@@ -2,42 +2,33 @@
 
   'use strict';
 
-  App.Controller = App.Controller || {};
+  App.Controller.Project = function() {};
 
-  App.Controller.Projects = App.Controller.Page.extend({
-
-    index: function(params) {
-      // Map view
-      // Layer active 6 eventual until basemap fixed
-      var layersActived = [2, 6];
-
-      var layersSpec = this.layersSpec = new App.Collection.LayersSpec();
-      var map = new App.View.Map({
-        el: '#map',
-        collection: this.layersSpec,
-        options: {
-          basemap: null,
-          apiUrl: '/api/map/projects/' + PROJECT_ID
-        }
-      });
-
-      layersSpec.on('change, reset', function() {
-        map.renderLayers();
-      });
-
-      layersSpec.fetch().done(function() {
-        // This method triggers an event called 'reset'
-        layersSpec.filterByIds(layersActived);
-      });
-
-      new App.View.ProjectDetail();
-    },
+  _.extend(App.Controller.Project.prototype, {
 
     new: function() {
-      new App.View.AddNewProject();
+      new App.Presenter.CreateProjectForm();
+    },
+
+    edit: function(params){
+      new App.Presenter.EditProjectForm(params);
+    },
+
+    show: function(params) {
+      var newParams = _.extend({}, params, {dataType: 'info'});
+
+      new App.Presenter.TabNav(newParams);
+      new App.Presenter.FollowButton(newParams);
+      new App.Presenter.DatesTimeline(newParams);
+      new App.Presenter.Notice();
+
+      if (!gon.isMobile) {
+        new App.Presenter.MapVis(newParams);
+      } else {
+        new App.Presenter.UserActionsMobile(newParams);
+      }
     }
 
   });
-
 
 })(this.App);

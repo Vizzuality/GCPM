@@ -1,0 +1,50 @@
+
+.c-network-menu {
+
+  h1 {
+    margin-bottom: 0;
+  }
+
+  &.-open {
+    .menu {
+      width: 100%;
+      left: 0;
+    }
+  }
+
+  .icon-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+
+  .menu {
+    position: absolute;
+    top: 0;
+    left: -200%;
+    width: 0;
+    bottom: 0;
+    z-index: 5;
+    transition: all .2s $easeOutCubic;
+
+    box-shadow: 0 4px 4px 4px rgba(0, 0, 0, 0.2);
+    background-color: $body-bg-color;
+  }
+
+  .menu-list {
+    @extend %clearlist;
+    padding: 44px 0;
+
+    li {
+      display: flex;
+
+      a {
+        width: 100%;
+        padding: 10px $inline-space * 2;
+        font-size: 18px;
+        font-family: $base-font-family-light;
+        color: $primary-color;
+      }
+    }
+  }
+}

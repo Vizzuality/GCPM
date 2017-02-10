@@ -1,0 +1,38 @@
+<% title @organization.name %>
+
+<section class="l-app -full -secondary">
+  <% if !browser.device.mobile? %>
+    <%= render "desktop_show_intro" %>
+  <% else %>
+    <%= render "mobile_show_intro" %>
+  <% end %>
+
+  <div class="l-app-navbar">
+    <div class="wrapper">
+      <div class="row collapse">
+        <div class="column small-12">
+          <ul class="c-tabnav" id="dataTabNav">
+             <% @filters.each do |filter| %>
+              <li class="tabnav-item">
+                <%= link_to t(filter),
+                  map_path(request.query_parameters.merge({ data: filter })),
+                  class: "-secondary js-btn-mapmenu-type",
+                  remote: true,
+                  data: { datatype: filter }
+                %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="l-grid" id="content">
+  <% if @current_type == 'posts' %>
+    <%= render 'posts/list', items: @items, more: @more %>
+  <% else %>
+    <%= render 'projects/list', items: @items, more: @more %>
+  <% end %>
+</div>

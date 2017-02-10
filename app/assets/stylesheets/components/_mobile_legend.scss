@@ -1,0 +1,61 @@
+
+.c-mobile-legend {
+
+  .legend-bar {
+    width: 100%;
+    background-color: $primary-color;
+  }
+
+  .arrow-btn {
+      width: 44px;
+      height: 44px;
+      padding: 0;
+
+    &.js-action-legend {
+      position: absolute;
+      top: $small-box-space + 35px;
+      right: 15px;
+      border: 0;
+    }
+
+    &.js-legend-close {
+      margin-left: 12px;
+
+    }
+  }
+
+  .arrow {
+    display: inline-block;
+    border-right: 2px solid white;
+    border-top: 2px solid white;
+    transform: rotate(45deg);
+    width: 12px;
+    height: 12px;
+    margin-right: 4px;
+
+    &.-left {
+      transform: rotate(-135deg);
+      border-right: 2px solid white;
+      border-top: 2px solid white;
+    }
+  }
+
+  .legend-mobile {
+    position: absolute;
+    width: 0;
+    top: 35px;
+    right: 0;
+    bottom: 0;
+    background: $body-bg-color;
+
+    transition: width .2s $easeOutCubic;
+
+    &.-main {
+      max-width: 100%;
+    }
+
+    &.-active {
+      width: 100%;
+    }
+  }
+}

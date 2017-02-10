@@ -1,6 +1,20 @@
-(function(App) {
-  'use strict';
-  App.Events.trigger('remote:load', {
-    content: "<%= j render(:partial => @current_type) %>"
+(function() {
+  'use strict'
+  <% template = @current_type == 'network' ? "network" : "#{@current_type}/list" %>
+  var htmlContent = "<%= escape_javascript render(partial: template, locals: { items: @items, more: @more }) %>";
+  $('#content').html(htmlContent);
+
+  var $messagesBadge = $('.messages-badge');
+  var unreadCount = '<%= current_user.unread_inbox_count %>';
+
+  $messagesBadge.toggleClass('-hidden', !gon.unreadCount);
+
+
+  App.trigger('Remote:load', {
+    data: '<%= @current_type %>',
+    messages: {
+      count: '<%= current_user.unread_inbox_count %>'
+    }
   });
-})(this.App);
+
+})();

@@ -1,0 +1,225 @@
+
+.c-legend {
+  position: absolute;
+  top: $base-space;
+  right: $base-space;
+  padding: $button-y-padding $button-x-padding;
+  color: $inverse-font-color;
+  background-color: rgba($secondary-color, 0.7);
+
+  > ul {
+    border-top: 1px solid $border-color-1;
+    margin: 0;
+    padding: 0;
+
+    &:first-child {
+      border-top: none;
+    }
+  }
+
+  li {
+    list-style: none;
+  }
+
+  &.-main {
+    top: 35px + $base-space;
+    box-shadow: $box-shadow;
+    background-color: $body-bg-color;
+    color: $base-font-color;
+    max-width: 300px;
+    padding: 0;
+
+    .marker-legend {
+      display: block;
+      padding: ($button-x-padding/2) $button-x-padding;
+      > li {
+        margin: 0;
+        padding: ($base-space/2) 0;
+      }
+    }
+  }
+
+  .legend-label {
+    text-transform: uppercase;
+    font-size: $small-font-size;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+
+  // MARKER LEGEND
+  .marker-legend {
+    display: flex;
+    margin: 0;
+
+    > li {
+      display: flex;
+      align-items: center;
+      letter-spacing: 1px;
+
+      line-height: 1;
+
+      justify-content: flex-start;
+      margin: 0 $inline-space 0 0;
+      padding: 0;
+
+      &:first-child {
+        margin-top: 0;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+        margin-right: 0;
+      }
+    }
+  }
+
+  .legend-icon {
+    position: relative;
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+
+    .circle-icon {
+      width: 12px;
+      height: 12px;
+      border-radius: 100%;
+    }
+
+    .square-icon {
+      position: relative;
+      top: 3px;
+      width: 12px;
+      height: 4px;
+      border: 1px solid transparent;
+    }
+
+    .cluster-icon {
+      width: 12px;
+      height: 12px;
+      border: 1px solid transparent;
+      border-radius: 100%;
+      background-color: $body-bg-color;
+    }
+
+    .marker-icon {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 12px;
+      height: 12px;
+    }
+
+    // Projects
+    &.-projects {
+      .circle-icon {
+        background-color: #007BCE;
+      }
+      .cluster-icon {
+        border-color: $primary-color;
+      }
+      .marker-icon {
+        fill: $primary-color;
+      }
+      .square-icon {
+        border-color: $primary-color;
+      }
+    }
+
+    // People
+    &.-people {
+      .circle-icon {
+        background-color: $secondary-color;
+      }
+      .cluster-icon {
+        border-color: $secondary-color;
+      }
+      .marker-icon {
+        fill: $secondary-color;
+      }
+      .square-icon {
+        border-color: $secondary-color;
+      }
+    }
+
+    // Events
+    &.-events {
+      .circle-icon {
+        background-color: $alternative-color;
+      }
+      .cluster-icon {
+        border-color: $alternative-color;
+      }
+      .marker-icon {
+        fill: $alternative-color;
+      }
+      .square-icon {
+        border-color: $alternative-color;
+      }
+    }
+
+    // Collaborators
+    &.-collaborators {
+      .circle-icon {
+        background-color: $secondary-color;
+      }
+    }
+
+    &.-points {
+      .circle-icon {
+        background-color: $body-bg-color;
+      }
+    }
+  }
+
+
+  // LAYER LEGEND
+  .layer-legend {
+    display: block;
+    margin: 0;
+    padding: ($button-x-padding/2) $button-x-padding;
+
+    > li {
+      padding: ($base-space/2) 0;
+
+      .name {
+        display: block;
+        font-size: $small-font-size;
+        font-weight: $bold-font-weight;
+        line-height: 1.25;
+
+        & button {
+          margin-left: 8px;
+        }
+      }
+
+      .legend {
+        font-size: $small-font-size;
+        padding: 4px 0 0 ($button-x-padding/2);
+
+        > li {
+          display: flex;
+          align-items: center;
+
+          .square {
+            display: inline-block;
+            width: 9px;
+            height: 9px;
+            margin: 0 5px 0 0;
+            box-shadow: 0 0 0 1px $border-color-1 inset;
+          }
+
+          .value {
+
+          }
+        }
+      }
+
+      .metrics {
+        font-size: $small-font-size;
+        margin: 0;
+        padding: 5px ($button-x-padding/2);
+        line-height: 1.2;
+      }
+    }
+  }
+}

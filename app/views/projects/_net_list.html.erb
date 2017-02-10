@@ -1,0 +1,37 @@
+<% if items && items.size() > 0 %>
+  <div class="row collapse -no-mrg">
+    <% items.each do |p| %>
+      <div class="column small-12 medium-6">
+        <div class="c-card -projects<% !browser.device.mobile? ? ' -pad-bigger' : '' %>">
+          <h3 class="-underlined">
+            <a href="/investigators/<%= p.project_leads.first.try(:slug) ? p.project_leads.first.try(:slug) : p.project_leads.first.try(:id) %>">
+              <%= p.project_leads.first.try(:name) %>
+            </a>
+          </h3>
+          <h2><%= link_to p.title, project_path(p.slug_or_id) %></h2>
+          <p>
+            <% p.cancer_types.each do |t| %>
+              <span class="c-tag -mg">
+                <%= link_to t.name, cancer_path(t.slug_or_id) %>
+              </span>
+            <% end %>
+          </p>
+
+          <p>
+            <% p.specialities.each do |sp| %>
+              <span class="c-tag -mg -darker">
+                <%= link_to sp.name, speciality_path(sp.slug_or_id) %>
+              </span>
+            <% end %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+    <% if items.size() % 2 != 0 %>
+      <div class="column small-12 medium-6 -extra">
+        <div class="c-card -pad-bigger -projects">
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

@@ -1,0 +1,147 @@
+.l-app {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  min-height: 50vh;
+
+  .l-app-map {
+    position: relative;
+    flex: 1;
+    z-index: 0;
+    overflow: hidden;
+    min-height: 380px;
+
+    @media #{$mq-small} {
+      height: calc(100vh - 94px); // 100vh - header height
+      min-height: initial;
+    }
+
+    .c-map {
+      height: 100%;
+      background-color: $secondary-color;
+    }
+
+  }
+
+  &.-main {
+    .c-map {
+      background-color: $primary-color;
+    }
+    .l-app-navbar {
+      background-color: rgba($primary-color, .7);
+    }
+  }
+
+  &.-full {
+    height: auto;
+
+    @media #{$mq-small} {
+      height: calc(100vh - 94px); // 100vh - header height
+    }
+  }
+
+  &.-secondary {
+    background-color: $secondary-color;
+  }
+
+  .l-app-upperbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba($primary-color, .7);
+    z-index: 1;
+
+    display: flex;
+    justify-content: space-between;
+
+    #layers {
+      position: relative;
+    }
+  }
+
+  .l-app-claim {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    @media #{$mq-small} {
+      top: 37%;
+      left: $box-space;
+      bottom: inherit;
+      right: inherit;
+      transform: translate(0, -50%);
+    }
+  }
+
+  .l-app-navbar {
+    position: relative;
+    background-color: rgba($secondary-color, .7);
+
+    @media #{$mq-small} {
+      margin-top: -52px;
+    }
+  }
+
+  .l-app-title {
+    position: relative;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    padding-top: $base-space * 3;
+    color: $inverse-font-color;
+    background-image: linear-gradient(to top, #68299b, rgba(103, 40, 155, 0));
+
+    @media #{$mq-small} {
+      position: absolute;
+      pointer-events: none;
+      padding: ($box-space * 1.5) 0;
+      text-align: inherit;
+    }
+
+    .-centered {
+      text-align: center;
+    }
+
+    .c-btn, .-clickable {
+      pointer-events: all;
+    }
+
+    * {
+      color: $inverse-font-color;
+    }
+
+    .c-counters {
+      border-top: 1px solid rgba(255, 255, 255, 0.31);
+    }
+  }
+
+  .l-app-bottombar {
+  }
+}
+
+
+.l-app-intro {
+  position: relative;
+  flex: 1;
+  z-index: 0;
+  background-color: $secondary-color;
+  padding-top: $base-space*2;
+  padding-bottom: $base-space*2;
+
+  @media #{$mq-small} {
+    padding-top: $box-space;
+    padding-bottom: $box-space*2;
+  }
+
+  h1 {
+    font-size: $big-font-size + 10px;
+    color: $inverse-font-color;
+
+    @media #{$mq-small} {
+      font-size: $large-font-size;
+    }
+  }
+}

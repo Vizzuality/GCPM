@@ -1,31 +1,26 @@
 module RoutesHelper
-  def add_address_path(name, f, association, class_name=nil)
-    form_name = 'address_relation_form'
-    common_nested_path(form_name, name, f, association, class_name)
-  end
-
-  def add_membership_path(name, f, association, class_name=nil)
-    form_name = 'membership_relation_form'
-    common_nested_path(form_name, name, f, association, class_name)
-  end
-
-  def add_membership_orga_path(name, f, association, class_name=nil)
-    form_name = 'membership_orga_relation_form'
-    common_nested_path(form_name, name, f, association, class_name)
-  end
-
-  def add_membership_address_path(name, f, association, class_name=nil)
-    form_name = 'membership_address_relation_form'
-    common_nested_path(form_name, name, f, association, class_name)
-  end
-
-  def common_nested_path(form_name, name, f, association, class_name=nil)
-    new_object = f.object.send(association).klass.new
-    id         = new_object.object_id
-
-    fields = f.fields_for(association, new_object, child_index: id) do |actions_form|
-      render(form_name, f: actions_form)
+  def build_search_link(class_name, search_object_id)
+    case class_name.to_s
+    when 'Project'      then project_path(search_object_id)
+    when 'Investigator' then investigator_path(search_object_id)
+    when 'CancerType'   then cancer_path(search_object_id)
+    when 'Event'        then event_path(search_object_id)
+    when 'Organization' then organization_path(search_object_id)
+    when 'User'         then user_path(search_object_id)
+    else
+      '#'
     end
-    link_to(name, '', class: class_name, data: { id: id, fields: fields.gsub("\n", '') })
+  end
+
+  def cancer_path(options)
+    cancer_type_path(options)
+  end
+
+  def cancer_url(options)
+    cancer_type_url(options)
+  end
+
+  def path_exists?(options)
+    Rails.application.routes.url_helpers.respond_to?(options)
   end
 end

@@ -1,0 +1,20 @@
+<header class="l-header">
+  <div class="wrapper">
+    <div class="row collapse">
+      <div class="column small-10 align-middle">
+        <%= link_to root_path, id: 'logo' do %>
+          <%= image_tag 'global-oncology-logo.svg' %>
+        <% end %>
+      </div>
+      <div class="column small-2 align-middle">
+        <nav class="menu-button -main">
+          <svg class="c-icon icon-menu -primary js-hamburger-menu -big">
+            <use xlink:href="#icon-menu"></use>
+          </svg>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+<%= render 'shared/menu_mobile' %>

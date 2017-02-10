@@ -1,0 +1,122 @@
+.c-claim {
+  position: relative;
+  padding: $base-space $small-box-space;
+  color: $inverse-font-color;
+  background-color: $primary-color;
+
+  @media #{$mq-small} {
+    padding: $base-space * 2;
+  }
+
+  &.-primary {
+    background-color: $inverse-font-color;
+    color: $primary-color;
+  }
+
+  h1 {
+    font-size: $big-font-size;
+    line-height: 1.3;
+    margin-bottom: $inline-space;
+
+    @media #{$mq-small} {
+      font-size: $large-font-size;
+      line-height: 1.2;
+      margin-bottom: 0;
+    }
+  }
+
+  .link {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: $button-y-padding $button-x-padding;
+
+    background-color: $body-bg-color;
+
+    text-transform: uppercase;
+    color: $primary-color;
+    letter-spacing: 1px;
+
+
+    @media #{$mq-small} {
+      position: absolute;
+      display: inherit;
+      bottom: 0;
+      left: 0;
+      transform: translateY(100%);
+    }
+  }
+
+  ul {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0;
+    margin: 30px 0 0;
+
+    > li {
+      list-style: none;
+      margin: 0 20px 0 0;
+
+      &:last-child {
+        margin: 0;
+      }
+    }
+
+    .claim-link {
+      width: 200px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      color: $primary-color;
+
+      > * {
+        margin: 0 0 0 20px;
+        &:first-child {
+          margin: 0;
+        }
+      }
+
+      .icon {
+        flex-shrink: 0;
+        width: 46px;
+        height: 46px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #007bcd;
+        border-radius: 50%;
+      }
+
+      p {
+        font-size: 16px;
+        line-height: 1.5;
+      }
+
+      &:hover {
+        .icon {
+          background: darken(#007bcd, 5%);
+        }
+
+        p {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  &.-smaller {
+    padding-top: $box-space/2;
+    padding-bottom: $box-space/2 + 5px;
+
+    h1 {
+      font-size: $big-font-size;
+    }
+
+    .claim-link {
+      p {
+        line-height: 1.3;
+      }
+    }
+  }
+}

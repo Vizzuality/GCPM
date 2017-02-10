@@ -1,0 +1,208 @@
+.c-btn {
+  @extend %reset-btn;
+  padding: $button-y-padding $inline-space;
+  color: white;
+  display: inline-block;
+
+  font-size: $small-font-size;
+  font-weight: bold;
+  line-height: 1.2;
+  text-transform: uppercase;
+
+  border-radius: 0;
+
+  @media #{$mq-small} {
+    padding: $button-y-padding $button-x-padding;
+  }
+
+  &.-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 0;
+    width: 140px;
+    height: 140px;
+    color: $base-font-color;
+    text-align: center;
+    border: 1px solid $border-color-1;
+    border-radius: 100%;
+  }
+
+  &.-thin {
+    padding: ($button-y-padding / 2) ($button-x-padding / 2);
+  }
+
+  &.-extra-thin {
+    padding: $button-y-padding 0;
+  }
+
+  &.-mg-left {
+    margin-left: $inline-space / 2;
+  }
+
+  &.-mini {
+    padding: 5px;
+    font-size: 10px;
+  }
+
+  &.-primary {
+    color: $inverse-font-color;
+    background-color: $primary-color;
+
+    &.-inverse {
+      color: $primary-color;
+      background-color: $inverse-font-color;
+      border: 1px solid $primary-color;
+    }
+
+    &:hover {
+      box-shadow: $box-shadow-2;
+    }
+  }
+
+  // Global
+  &.-secondary {
+    color: $inverse-font-color;
+    background-color: $secondary-color;
+    border: 1px solid $secondary-color;
+
+    &.-border {
+      border: 1px solid $inverse-font-color;
+    }
+
+    &.-inverse {
+      background-color: $inverse-font-color;
+      color: $secondary-color;
+    }
+
+    &:hover {
+      box-shadow: $box-shadow-2;
+    }
+  }
+
+  // Alternative
+  &.-alternative {
+    color: $inverse-font-color;
+    background-color: $alternative-color;
+
+    &.-inverse {
+      color: $alternative-color;
+      background-color: $inverse-font-color;
+      border: 1px solid $alternative-color;
+    }
+
+    &:hover {
+      box-shadow: $box-shadow-2;
+    }
+  }
+
+  // Transparent
+  &.-transparent {
+    color: $inverse-font-color;
+    background-color: transparent;
+    border: 1px solid $inverse-font-color;
+
+    &:hover {
+      box-shadow: $box-shadow-2;
+    }
+  }
+
+  &.-action {
+    &:hover {
+      background-color: darken($primary-color, 5%);
+    }
+  }
+
+  // Social login
+  &.-linkedin {
+    background-color: #0077b5;
+  }
+  &.-google {
+    background-color: #ea4335;
+  }
+
+  &.-with-icon {
+    display: flex;
+    > * {
+      margin: 0 5px 0 0;
+      &:last-child { margin: 0;}
+    }
+  }
+
+  &.-facebook {
+    background: #3b5998;
+    &:hover {
+      background: darken(#3b5998, 5%);
+    }
+  }
+
+  &.-twitter {
+    background: #55acee;
+    &:hover {
+      background: darken(#55acee, 5%);
+    }
+  }
+
+  &.-linkedin {
+    background: #007bb5;
+    &:hover {
+      background: darken(#007bb5, 5%);
+    }
+  }
+
+  &.-round-icon {
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    margin: ($button-y-padding / 2) ($button-x-padding / 2);
+  }
+
+  &.-icon {
+    border-radius: 100%;
+    padding: 0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+
+    &.-tiny {
+      padding: 2px;
+    }
+
+    svg {
+      display: block;
+      margin: auto;
+
+      &.-hidden {
+        display: none;
+      }
+    }
+
+    &.-active {
+      svg {
+        display: none;
+        &.-hidden {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .notification-bubble {
+    font-size: 9px;
+    color: #5aade4;
+    background: white;
+    width: 14px;
+    height: 14px;
+    line-height: 14px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 50%;
+    display: inline-block;
+    transform: translate(-3px,-8px);
+  }
+}

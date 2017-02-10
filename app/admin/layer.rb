@@ -4,7 +4,7 @@ ActiveAdmin.register Layer do
   permit_params :layer_group_id, :name, :slug, :layer_type, :zindex,
                 :active, :order, :color, :info, :interactivity, :query,
                 :layer_provider, :css, :published, :opacity, :locate_layer,
-                :icon_class, :legend
+                :icon_class, :legend, :source
 
   form do |f|
     f.semantic_errors
@@ -23,6 +23,7 @@ ActiveAdmin.register Layer do
       f.input :css
       f.input :locate_layer
       f.input :legend
+      f.input :source
     end
     f.actions
   end

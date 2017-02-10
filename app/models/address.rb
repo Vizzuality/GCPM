@@ -20,6 +20,7 @@
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  country_id       :integer
+#  grid_id          :string
 #
 
 class Address < ApplicationRecord
@@ -31,7 +32,7 @@ class Address < ApplicationRecord
 
   before_save :assign_country
 
-  accepts_nested_attributes_for :organization, allow_destroy: true
+  accepts_nested_attributes_for :organization
 
   def assign_country
     if self.country.present?

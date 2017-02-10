@@ -1,0 +1,57 @@
+
+<section class="l-app -main -full">
+  <div class="l-app-upperbar wrapper">
+    <div class="c-breadcrumbs" id="breadcrumbs"></div>
+    <div id="actionbar"></div>
+  </div>
+
+  <div class="l-app-map">
+    <div id="map" class="c-map"></div>
+    <div id="timeline" class="c-timeline"></div>
+  </div>
+
+  <div id="legend" class="c-legend -main"></div>
+
+  <div class="l-app-navbar">
+    <div class="wrapper">
+      <div class="row collapse">
+        <div class="column small-12 medium-6">
+          <ul class="c-tabnav -no-gradient" id="dataTabNav">
+             <% @filters.each do |filter| %>
+              <li class="tabnav-item">
+                <%= link_to t(filter),
+                  map_path(request.query_parameters.merge({ data: filter })),
+                  class: "js-btn-mapmenu-type",
+                  remote: true,
+                  data: { datatype: filter }
+                %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="column small-12 medium-6">
+          <div id="toolbar"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="l-app-bottombar">
+    <div id="filterBarView" class="c-filter-bar">
+
+    </div>
+    <div id="counters">
+      <%= render 'map/counters' %>
+    </div>
+  </div>
+</section>
+
+<div class="l-grid" id="content">
+  <% if @current_type == 'events' %>
+    <%= render 'events/list', items: @items, more: @more %>
+  <% elsif @current_type == 'projects' %>
+    <%= render 'projects/list', items: @items, more: @more %>
+  <% else @current_type %>
+    <%= render 'investigators/list', items: @items, more: @more %>
+  <% end %>
+</div>

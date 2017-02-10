@@ -1,0 +1,111 @@
+.c-conversation {
+  &.-unread {
+    background-color: $base-bg-color;
+  }
+
+  &.-active {
+    .conversation-subject {
+
+      &:after {
+        transform: translate(0, -50%) rotate(-135deg);
+      }
+    }
+
+    .conversation-body {
+      display: block;
+    }
+  }
+
+  .conversation-subject {
+    cursor: pointer;
+    position: relative;
+
+    h2 {
+      position: relative;
+      padding: 0 0 0 24px;
+    }
+
+    .btn-remove {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      top: 18px;
+      left: 0;
+      height: 20px;
+      transform: translate(0, -50%);
+
+      &:hover {
+        opacity: 0.75;
+      }
+    }
+
+    &:hover {
+      color: $secondary-color;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      top: 50%;
+      right: $inline-space;
+      transition: all .2s $easeInOutSine;
+      transform: translate(0, -50%) rotate(45deg);
+      border-bottom: 2px solid $secondary-color;
+      border-right: 2px solid $secondary-color;
+    }
+  }
+
+  .conversation-body {
+    display: none;
+    margin-top: $inline-space;
+
+    .messages {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      background: rgba(0,0,0,.05);
+
+      > li {
+        padding: 16px;
+        border-top: 1px solid $border-color-1;
+
+        &:first-child {
+          margin: 0;
+          border-top: none;
+        }
+      }
+    }
+  }
+}
+
+.c-conversations-item {
+  list-style: none;
+  position: relative;
+
+  .sender {
+    display: flex;
+    align-items: center;
+
+    > * {
+      margin: 0 $inline-space 0 0;
+      &:last-child { margin: 0; }
+    }
+  }
+
+  .message {
+    margin: 0 30px 0 10px;
+  }
+
+  &.-mine {
+    // text-align: right;
+    // .sender {
+    //   justify-content: flex-end;
+    // }
+  }
+
+  &.-theirs {
+    background: rgba(0,0,0,.05);
+  }
+}
