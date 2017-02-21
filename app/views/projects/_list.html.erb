@@ -13,7 +13,7 @@
           <h2><%= link_to p.title, project_path(p.slug_or_id) %></h2>
 
           <p>
-            <% p.cancer_types.each do |t| %>
+            <% p.cancer_types.uniq{|t| t.slug_or_id}.each do |t| %>
               <span class="c-tag -mg">
                 <%= link_to t.name, cancer_path(t.slug_or_id) %>
               </span>
@@ -21,7 +21,7 @@
           </p>
 
           <p>
-            <% p.specialities.each do |sp| %>
+            <% p.specialities.uniq{|sp| sp.slug_or_id}.each do |sp| %>
               <span class="c-tag -mg -darker">
                 <%= link_to sp.name, speciality_path(sp.slug_or_id) %>
               </span>
