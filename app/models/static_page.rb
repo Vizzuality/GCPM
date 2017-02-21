@@ -15,7 +15,7 @@
 class StaticPage < ApplicationRecord
   include Sluggable
 
-  before_validation :check_path_and_route
+  before_validation :check_path_and_route, if: 'self.slug_changed? || self.path_prefix_changed?'
 
   validates_presence_of   :name, :body
   validates_uniqueness_of :name, :slug, :path_prefix

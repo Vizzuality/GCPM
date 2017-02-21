@@ -9,9 +9,6 @@ set :rvm_type, :auto
 set :rvm_ruby_version, '2.3.1'
 set :rvm_roles, [:app, :web, :db]
 
-set :branch, 'master'
-set :deploy_to, '~/gcpm'
-
 set :keep_releases, 5
 
 set :linked_files, %w{.env}
