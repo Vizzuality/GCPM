@@ -148,6 +148,29 @@
           </ul>
         </div>
       </article>
+
+      <article class="c-network-list" data-name="organizations">
+        <div class="l-content wrapper js-toggle-list">
+          <h2>
+            <%= t 'organizations' %>
+            <svg class="c-icon icon-arrow -medium -secondary">
+              <use xlink:href="#icon-arrow"></use>
+            </svg>
+          </h2>
+        </div>
+        <div class="wrapper list">
+          <ul class="c-list -mg-bottom">
+            <% if @followOrganizations.any? %>
+              <% @followOrganizations.each do |o| %>
+                <li class="list-item -uppercase"><%= link_to o.name, organization_path(id: o.slug), class: '-uppercase' %></li>
+              <% end %>
+            <% else %>
+              <p>No cancer types</p>
+            <% end %>
+          </ul>
+        </div>
+      </article>
+
     </aside>
   </div>
 </div>
