@@ -120,6 +120,25 @@
           </div>
         <% end %>
       </article>
+
+      <article>
+        <div class="l-content wrapper">
+          <h2><%= t 'organizations' %></h2>
+          <% if !@followOrganizations.any? %>
+            <p>No organizations</p>
+          <% end %>
+        </div>
+
+        <% if @followOrganizations.any? %>
+          <div class="wrapper list">
+            <ul class="c-list -mg-bottom">
+              <% @followOrganizations.each do |o| %>
+                <li class="list-item -uppercase"><%= link_to o.name, organization_path(id: o.slug), class: '-uppercase' %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      </article>
     </aside>
   </div>
 </div>
