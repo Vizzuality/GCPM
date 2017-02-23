@@ -28,6 +28,10 @@
         el: '.simple_form'
       });
 
+      this.mapSearch = new App.View.MapSearch({
+        el: '#map-search'
+      });
+
       this.view = new App.View.Map({
         el: '#map',
         options: {
@@ -82,6 +86,14 @@
       });
 
       this.eventsForm.on('online', this.handleOnline, this);
+
+      this.mapSearch.on('center', function(center) {
+        this.view.map.panTo(center);
+      }.bind(this));
+
+      this.mapSearch.on('bounds', function(bounds) {
+        this.view.map.fitBounds(bounds);
+      }.bind(this));
 
       this.view.on('pan', function(){
         var center = this.view.map.getCenter();

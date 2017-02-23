@@ -41,9 +41,6 @@
     createMap: function() {
       this.map = L.map(this.el.id, this.options);
       this.setBasemap();
-      if (this.options.search) {
-        this.setSearchBox();
-      }
       this.addListeners();
     },
 
@@ -76,73 +73,6 @@
         this.basemap.addTo(this.map);
       }
     },
-
-    setSearchBox: function() {
-      var input = $('#map-search-input')[0];
-
-      this.autocomplete = new google.maps.places.Autocomplete(input, {
-        types: ['geocode']
-      });
-      this.autocomplete.addListener('place_changed', this.onPlaceSelected.bind(this));
-    },
-
-    onPlaceSelected: function() {
-      var place = this.autocomplete.getPlace();
-      if (place !== undefined && place.geometry) {
-        if (place.geometry.viewport) {
-          console.log(place.geometry.viewport);
-          this.map.fitBounds(place.geometry.viewport);
-          if (place.geometry.location) {
-            // this.addMarker(place.geometry.location.lat(), place.geometry.location.lng());
-          }
-        }
-
-        if (place.geometry.location && !place.geometry.viewport) {
-          this.map.panTo(place.geometry.location.lat(), place.geometry.location.lng());
-          // this.addMarker(place.geometry.location.lat(), place.geometry.location.lng());
-        }
-      }
-    },
-
-
-    // setSearchBox: function() {
-    //   var geocoder = new google.maps.Geocoder();
-    //
-    // 	function googleGeocoding(text, callResponse) {
-    // 		geocoder.geocode({address: text}, callResponse);
-    // 	}
-    //
-    // 	function formatJSON(rawjson) {
-    // 		var json = {},
-    // 			key, loc, disp = [];
-    //
-    // 		for(var i in rawjson) {
-    // 			key = rawjson[i].formatted_address;
-    //
-    // 			loc = L.latLng( rawjson[i].geometry.location.lat(), rawjson[i].geometry.location.lng() );
-    //
-    // 			json[ key ]= loc;	//key,value format
-    // 		}
-    //
-    // 		return json;
-    // 	}
-    //
-    // 	new L.Control.Search({
-  	// 		sourceData: googleGeocoding,
-  	// 		formatData: formatJSON,
-  	// 		markerLocation: true,
-    //     marker: false,
-    // 		autoType: true,
-    //     autoCollapse: false,
-    //     tipAutoSubmit: false,
-    // 		minLength: 2,
-    //     collapsed: false,
-    //     initial: false,
-    //     zoom: 15
-  	// 	})
-    //   .setPosition('topright')
-    //   .addTo(this.map);
-    // },
 
     /**
      * Listeners
