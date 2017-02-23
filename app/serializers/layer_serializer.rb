@@ -36,7 +36,7 @@ class LayerSerializer < ActiveModel::Serializer
   def sources
     object.sources
   end
-  def layer_group
-    object.layer_groups.first
+  def layer_groups
+    object.layer_groups
   end
 end
