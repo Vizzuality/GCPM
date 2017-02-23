@@ -30,7 +30,8 @@
           zoom: 3,
           minZoom: 3,
           center: [52,7],
-          basemap: 'secondary'
+          basemap: 'secondary',
+          search: true
         }
       });
 

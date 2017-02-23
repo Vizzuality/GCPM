@@ -34,7 +34,8 @@
           zoom: 3,
           minZoom: 3,
           center: this.eventsForm.getLocation(),
-          basemap: 'secondary'
+          basemap: 'secondary',
+          search: true
         }
       });
 

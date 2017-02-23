@@ -196,4 +196,37 @@
       display: inherit;
     }
   }
+
+  .leaflet-control-search {
+    width: 250px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+
+    .search-input {
+      padding: 0 12px;
+      border: none;
+    }
+
+    .search-cancel {
+      position: absolute;
+      top: 0;
+      right: 6px;
+      font-size: 23px;
+    }
+
+    .search-tooltip {
+      margin: 0;
+      padding: 0;
+      background: white;
+      list-style: none;
+
+      .search-tip {
+        list-style: none;
+        padding: 6px 12px;
+
+        &:hover, &.search-tip-select {
+          background: darken(white, 5%);
+        }
+      }
+    }
+  }
 }
