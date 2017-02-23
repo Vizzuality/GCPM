@@ -60,8 +60,9 @@
       var slug = this.state.get('cartoLayer');
       var layer = this.layersCollection.getLayer(slug);
       var active = false;
+
       if (layer) {
-        active = !!(layer.layer_group && layer.layer_group.slug === 'human-development-index');
+        active = !!(layer.layer_groups && _.contains(_.pluck(layer.layer_groups, 'slug'), 'human-development-index'))
       }
       this.toggleTimeline(active);
     },
