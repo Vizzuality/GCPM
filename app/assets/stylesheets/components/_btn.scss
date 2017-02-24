@@ -112,6 +112,12 @@
     &:hover {
       background-color: darken($primary-color, 5%);
     }
+
+    &.-secondary-action {
+      &:hover {
+        background-color: darken($secondary-color, 5%);
+      }
+    }
   }
 
   // Social login
