@@ -15,6 +15,7 @@
 #
 
 class Organization < ApplicationRecord
+  acts_as_followable
   include ActAsFeatured
 
   after_update :notify_users_for_update

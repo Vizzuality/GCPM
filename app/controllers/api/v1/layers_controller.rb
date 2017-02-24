@@ -3,7 +3,7 @@ module Api
     class LayersController < ApiController
       def index
         @layers = Layer.preload(:layer_groups).fetch_all(layers_params)
-        render json: @layers, meta: { total_layers: @layers.size }, each_serializer: LayerSerializer, include: 'layer_group'
+        render json: @layers, meta: { total_layers: @layers.size }, each_serializer: LayerSerializer, include: 'layer_groups'
       end
 
       private

@@ -20,6 +20,7 @@
       new App.Presenter.TabNav(newParams);
       new App.Presenter.CountryData(newParams);
       new App.Presenter.Widgets(newParams);
+      new App.Presenter.Toolbar(params);
       new App.Presenter.FollowButton(newParams);
       new App.Presenter.ShowMore(newParams);
 

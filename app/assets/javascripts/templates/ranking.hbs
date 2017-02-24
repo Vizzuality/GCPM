@@ -13,7 +13,7 @@
           Country
         </th>
         <th class="-right">
-          Percentage
+          Rate
         </th>
       </tr>
     </thead>
@@ -21,7 +21,7 @@
       {{#each data}}
       <tr>
         <td><a href="/countries/{{this.iso3}}">{{this.country}}</a></td>
-        <td class="-right">{{this.value}}%</td>
+        <td class="-right">{{this.value}}</td>
       </li>
       {{/each}}
     </tbody>

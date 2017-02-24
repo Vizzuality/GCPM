@@ -60,9 +60,9 @@ class Project < ApplicationRecord
 
   validates_presence_of   :title, :summary
   validates_uniqueness_of :title
-  validate                :dates_timeline
-  validates               :start_date, date: true, presence: true
-  validates               :end_date,   date: true, presence: true
+  # validate                :dates_timeline
+  # validates               :start_date, date: true, presence: true
+  # validates               :end_date,   date: true, presence: true
   validates_presence_of   :cancer_types, :project_types, on: :create
   validates_acceptance_of :terms
 

@@ -20,6 +20,7 @@
       this.organizationTypes = new App.Collection.OrganizationTypes();
       this.projectTypes = new App.Collection.ProjectTypes();
       this.fundingSources = new App.Collection.FundingSources();
+      this.specialities = new App.Collection.Specialities();
 
       this.filterBar = new App.View.FilterBar({
         el: '#filterBarView'
@@ -35,7 +36,8 @@
         this.organizationTypes.fetch(),
         this.projectTypes.fetch(),
         this.organizationTypes.fetch(),
-        this.fundingSources.fetch()
+        this.fundingSources.fetch(),
+        this.specialities.fetch()
       ];
 
       $.when.apply($, promises).done(function() {
@@ -75,7 +77,7 @@
     },
 
     getParsedFilters: function(dataValue) {
-      var state = _.pick(this.getState(), 'regions[]', 'countries[]', 'cancer_types[]', 'organizations[]', 'organization_types[]', 'project_types[]', 'funding_sources[]', 'start_date', 'end_date');
+      var state = _.pick(this.getState(), 'regions[]', 'countries[]', 'cancer_types[]', 'organizations[]', 'organization_types[]', 'project_types[]', 'funding_sources[]', 'specialities[]', 'start_date', 'end_date');
       var countries = this.countries.toJSON(),
           regions = this.countries.getRegions();
       var _value = null;
@@ -85,6 +87,7 @@
       var organizationTypes = this.organizationTypes.toJSON();
       var projectTypes = this.projectTypes.toJSON();
       var fundingSources = this.fundingSources.toJSON();
+      var specialities = this.specialities.toJSON();
 
       var data = _.compact(_.map(state, function(value, key) {
         switch(key) {
@@ -125,6 +128,12 @@
           case 'funding_sources[]':
             if (value) {
               _value = this.getValue(value, fundingSources);
+              return (_value) ? { value: _value, projects: true } : null;
+            }
+          break
+          case 'specialities[]':
+            if (value) {
+              _value = this.getValue(value, specialities);
               return (_value) ? { value: _value, projects: true } : null;
             }
           break

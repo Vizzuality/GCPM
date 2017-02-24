@@ -11,7 +11,7 @@
   <div class="l-app-navbar">
     <div class="wrapper">
       <div class="row collapse">
-        <div class="column small-12">
+        <div class="column small-12 medium-6">
           <ul class="c-tabnav" id="dataTabNav">
              <% @filters.each do |filter| %>
               <li class="tabnav-item">
@@ -24,6 +24,20 @@
               </li>
             <% end %>
           </ul>
+        </div>
+        <div class="column small-12 medium-6">
+          <div>
+            <ul class="c-toolbar">
+              <li id="download"class="toolbar-item -sortby">
+                <a href="/api/map/download?data=projects&countries[]=<%= @country.country_iso_3 %>" class="c-btn -action -secondary-action" target="_blank" download>
+                  <svg class="c-icon -small -inverse">
+                    <use xlink:href="#icon-download"></use>
+                  </svg>
+                  Download
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

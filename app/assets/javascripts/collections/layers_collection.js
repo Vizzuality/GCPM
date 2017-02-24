@@ -14,19 +14,23 @@
     },
 
     getGroups: function() {
-      var groups = _.groupBy(
-        _.filter(this.toJSON(), function(layer){
-          return layer.layer_group && layer.layer_group.slug !== 'human-development-index';
-        }), function(layer) {
-        return layer.layer_group.name;
-      });
+      var groups = _.uniq(_.filter(_.flatten(_.pluck(this.toJSON(), 'layer_groups')), function(group){
+        return group.slug !== 'human-development-index';
+      }), 'name');
 
-      return groups;
+      var layersGrouped = {};
+      _.each(groups, function(group) {
+        layersGrouped[group.name] = _.filter(this.toJSON(), function(layer) {
+          return _.contains(_.pluck(layer.layer_groups, 'slug'), group.slug);
+        });
+      }.bind(this));
+
+      return layersGrouped;
     },
 
     getGroup: function(groupSlug) {
       var group = _.filter(this.toJSON(), function(layer){
-        return layer.layer_group && layer.layer_group.slug === groupSlug
+        return _.contains(_.pluck(layer.layer_groups, 'slug'), groupSlug);
       });
       return group;
     }
