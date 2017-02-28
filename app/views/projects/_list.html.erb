@@ -1,0 +1,77 @@
+<% if items && items.size() > 0 %>
+  <% controller_name = controller.controller_name %>
+  <div class="row collapse">
+    <% items.each do |p| %>
+      <div class="column small-12 medium-4">
+        <div class="c-card -projects">
+          <h3 class="-underlined">
+            <a href="/investigators/<%= p.project_leads.first.try(:slug) ? p.project_leads.first.try(:slug) : p.project_leads.first.try(:id) %>">
+              <%= p.project_leads.first.try(:name) %>
+            </a>
+          </h3>
+
+          <h2><%= link_to p.title, project_path(p.slug_or_id) %></h2>
+
+          <p>
+            <% p.cancer_types.uniq{|t| t.slug_or_id}.each do |t| %>
+              <span class="c-tag -mg">
+                <%= link_to t.name, cancer_path(t.slug_or_id) %>
+              </span>
+            <% end %>
+          </p>
+
+          <p>
+            <% p.specialities.uniq{|sp| sp.slug_or_id}.each do |sp| %>
+              <span class="c-tag -mg -darker">
+                <%= link_to sp.name, speciality_path(sp.slug_or_id) %>
+              </span>
+            <% end %>
+          </p>
+
+          <% if controller_name === 'users' %>
+            <% if check_panding_project_user_status(p, current_user.id) %>
+              <span class="pending">
+                <svg class="c-icon icon-pending -medium"><use xlink:href="#icon-pending"></use></svg>
+                Pending of Confirmation
+              </span>
+            <% end %>
+            <% if can? :update, p %>
+              <%= link_to 'Edit', edit_user_project_path(current_user.id, p.slug_or_id), class: 'c-btn -secondary' %>
+            <% end %>
+            <% if can? :destroy, p %>
+              <%= link_to (t 'delete'), user_project_path(current_user.id, p.slug_or_id),
+                class: 'c-btn -secondary -inverse',
+                method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="row collapse">
+    <div class="column small-12">
+      <div class="c-card">
+        <p>No projects</p>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<% if more %>
+  <div class="row collapse">
+    <div class="column small-12">
+      <div class="c-card">
+        <% page = @page + 1 %>
+        <%= link_to (t 'show_more'),
+          {
+            :params => request.query_parameters.merge({ page: page })
+          },
+          class: "c-btn -circle",
+          id: 'showMoreButton',
+          remote: true
+        %>
+      </div>
+    </div>
+  </div>
+<% end %>

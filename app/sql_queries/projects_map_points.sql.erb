@@ -1,21 +1,36 @@
 select
 projects.id as project,
 projects.title as title,
+investigators.name as investigator_name,
+investigators.slug as investigator_slug,
+investigators.id as investigator,
 countries.country_name as location_name,
-'{"type":"point","coordinates":[' || addresses.latitude || ',' || addresses.longitude || ']}' as centroid,
+addresses.country_name as location_country_name,
+addresses.city as location_city,
+addresses.line_1 as location_line_1,
+addresses.line_2 as location_line_2,
+addresses.line_3 as location_line_3,
+addresses.postcode as location_postcode,
+addresses.state as location_state,
+organizations.id as organization,
+organizations.name as organization_name,
+organizations.slug as organization_slug,
+'{"type":"Point","coordinates":[' || addresses.latitude || ',' || addresses.longitude || ']}' as centroid,
 countries.country_iso_3 as iso,
 'point' as type,
 case when (memberships.membership_type = 0) then true else false end as is_project_lead
 from projects
- inner join memberships on memberships.project_id = projects.id
+    inner join memberships on memberships.project_id = projects.id
     inner join research_units on memberships.research_unit_id = research_units.id
+    inner join investigators on investigators.id = research_units.investigator_id
     inner join addresses on research_units.address_id = addresses.id
     inner join countries on addresses.country_id = countries.id
-     <% if @params[:organizations] || @params[:organization_types] %>
-      inner join organizations on addresses.organization_id = organizations.id
-    <% end %>
+    inner join organizations on organizations.id = addresses.organization_id
     <% if @params[:organization_types] %>
       inner join organization_types on organization_types.id = organizations.organization_type_id
+    <% end %>
+    <% if @params[:funding_sources] %>
+      inner join funders on funders.project_id = projects.id
     <% end %>
     <% if @params[:project_types] %>
       inner join project_types_projects on project_types_projects.project_id = projects.id
@@ -25,21 +40,37 @@ from projects
       inner join cancer_types_projects on cancer_types_projects.project_id = projects.id
       inner join cancer_types on cancer_types_projects.cancer_type_id = cancer_types.id
     <% end %>
+    <% if @params[:specialities] %>
+      inner join projects_specialities on projects_specialities.project_id = projects.id
+      inner join specialities on projects_specialities.speciality_id = specialities.id
+    <% end %>
+    <% if @params[:user] %>
+      inner join project_users on projects.id = project_users.project_id
+    <% end %>
     where projects.status = 1
     <% if @params[:countries] %>
-      and countries.id in     <%= "#{'(' + @params[:countries].join(',') + ')'}" %>
+      and countries.country_iso_3 in     <%= @params[:countries].to_s.gsub('[', '(').gsub(']',')').gsub('"',"'") %>
     <% end %>
     <% if @params[:organizations] %>
       and organizations.id in <%= "#{'(' + @params[:organizations].join(',') + ')'}" %>
     <% end %>
+    <% if @params[:funding_sources] %>
+      and funders.organization_id in <%= "#{'(' + @params[:funding_sources].join(',') + ')'}" %>
+    <% end %>
     <% if @params[:organization_types] %>
       and organization_types.id in <%= "#{'(' + @params[:organization_types].join(',') + ')'}" %>
+    <% end %>
+    <% if @params[:investigators] %>
+      and investigators.id in <%= "#{'(' + @params[:investigators].join(',') + ')'}" %>
     <% end %>
     <% if @params[:project_types] %>
       and project_types.id in <%= "#{'(' + @params[:project_types].join(',') + ')'}" %>
     <% end %>
     <% if @params[:cancer_types] %>
       and cancer_types.id in <%= "#{'(' + @params[:cancer_types].join(',') + ')'}" %>
+    <% end %>
+    <% if @params[:specialities] %>
+      and specialities.id in <%= "#{'(' + @params[:specialities].join(',') + ')'}" %>
     <% end %>
     <% if @params[:regions] %>
       and countries.region_iso in <%= @params[:regions].to_s.gsub('[', '(').gsub(']',')').gsub('"',"'") %>
@@ -51,6 +82,6 @@ from projects
       and (projects.end_date < date(<%= quote @params[:end_date] %>))
     <% end %>
     <% if @params[:user] %>
-      and projects.user_id = <%= quote @params[:user] %>
+      and project_users.user_id = <%= quote @params[:user] %> and project_users.is_approved = true
     <% end %>
-group by project, title, location_name, centroid, iso, is_project_lead
+group by project, title, location_name, location_country_name, location_city, location_line_1, location_line_2, location_line_3, location_postcode, location_state, centroid, iso, investigator_name, investigator_slug, investigator, is_project_lead, organization_name, organization_slug, organization

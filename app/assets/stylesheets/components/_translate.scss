@@ -1,0 +1,31 @@
+.c-translate {
+  .goog-te-gadget-simple {
+    font-size: 0.875rem;
+    font-family: inherit;
+    color: #5aade4;
+    font-family: "Montserrat", Arial, sans-serif;
+    background: transparent;
+    border: none;
+    padding: 0;
+
+    > img {
+      display: none;
+    }
+
+    > span {
+      vertical-align: baseline !important;
+    }
+
+    .goog-te-menu-value {
+      margin: 0;
+
+      > * {
+        display: none;
+
+        &:first-child {
+          display: inline;
+        }
+      }
+    }
+  }
+}

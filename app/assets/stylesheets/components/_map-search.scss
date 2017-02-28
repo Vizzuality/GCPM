@@ -1,0 +1,11 @@
+.c-map-search {
+  position: absolute;
+  top: 23px;
+  right: 23px;
+  z-index: 1000;
+  width: 300px;
+
+  input {
+    padding: 0 12px;
+  }
+}

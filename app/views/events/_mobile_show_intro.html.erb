@@ -1,0 +1,26 @@
+<%= render 'shared/user_actions_mobile', direction: '-vertical' %>
+
+<div class="l-app-title">
+  <div class="wrapper">
+    <div class="row collapse -centered">
+      <div class="column small-12 medium-8">
+        <h1><%= @event.title %></h1>
+      </div>
+    </div>
+    <div class="row collapse">
+      <div class="column small-8">
+        <div class="c-summary-info row -collapse">
+          <div class="column small-12 medium-4 align-middle">
+            <div class="c-avatar -small">
+              <svg class="c-icon icon-collaborators -inverse">
+                <use xlink:href="#icon-collaborators"></use>
+              </svg>
+            </div>
+            <h3><%= @event.participants.present? ? @event.participants.split(',').length : 0 %>
+              Key Participants</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

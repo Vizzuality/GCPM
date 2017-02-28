@@ -2,22 +2,34 @@
 
   'use strict';
 
-  App.Controller = App.Controller || {};
+  App.Controller.Map = function() {};
 
-  App.Controller.Map = App.Controller.Page.extend({
+  _.extend(App.Controller.Map.prototype, {
 
     index: function(params) {
-      console.log(params);
-      // this.map = App.View.Map({ el: '#map' });
-      // this.layersSpec = App.Collection.Layers();
-      // this.layersSpec.fetch({ data: params }).done(this._addLayers);
-    },
+      new App.Presenter.Remote();
+      new App.Presenter.Map(params);
+      new App.Presenter.Legend(params);
+      new App.Presenter.TabNav(params);
+      new App.Presenter.Actionbar(params);
+      new App.Presenter.Toolbar(params);
+      new App.Presenter.FilterForm(params);
+      new App.Presenter.FilterBar(params);
+      new App.Presenter.Breadcrumbs(params);
+      new App.Presenter.Layers(params);
+      new App.Presenter.SortBy(params);
+      new App.Presenter.ShowMore(params);
+      new App.Presenter.Share(params);
+      new App.Presenter.Download(params);
+      new App.Presenter.Timeline(params);
 
-    _addLayers: function() {
-      this.map.renderLayers(this.layersSpec.toJSON());
+      if (gon.isMobile) {
+        new App.Presenter.ActionLayerMobile(params);
+        new App.Presenter.ActionLegendMobile(params);
+        new App.Presenter.ToolbarMobile(params);
+      }
     }
 
   });
-
 
 })(this.App);

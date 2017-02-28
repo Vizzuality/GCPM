@@ -1,0 +1,185 @@
+$dropdown-width: 250px;
+$dropdown-max-height: 300px;
+
+.c-dropdown {
+  position: relative;
+  display: inline-flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 $button-x-padding;
+  height: 100%;
+
+  > span {
+    display: inline-block;
+    line-height: 52px;
+    white-space: nowrap;
+  }
+
+  .dropdown-value {
+    display: flex;
+    align-items: center;
+
+    border-bottom: $body-bg-color 1px solid;
+    margin: 0 0 0 ($button-x-padding / 2);
+    font-weight: $base-font-weight;
+    cursor: pointer;
+
+    // Ellipsis
+    max-width: 90px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+
+    @media #{$mq-small} {
+      max-width: 150px;
+    }
+
+  }
+
+  .dropdown-content {
+    background-color: $body-bg-color;
+    display: none;
+    position: absolute;
+    box-shadow: $box-shadow;
+    width: $dropdown-width;
+    padding: ($button-y-padding / 2) 0;
+
+    //TODO: Set this by JS
+    top: 52px;
+    right: 0;
+    z-index: 5;
+
+    &.-top {
+      top: 0;
+      transform: translateY(-100%);
+      right: auto;
+      left: 0;
+    }
+
+    & .container {
+      position: relative;
+    }
+
+    &.notifications {
+      padding: 0;
+      width: auto;
+      max-height: 300px;
+      top: 77px;
+      box-shadow: 0px 0px 4px 0 rgba(0, 0, 0, 0.2);
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: -8px;
+        right: 11px;
+        width: 16px;
+        height: 16px;
+        transform: rotate(45deg);
+        box-shadow: -1px -1px 1px 0 rgba(0, 0, 0, 0.2);
+        background-color: $body-bg-color;
+      }
+
+      .list {
+        text-align: left;
+        max-height: $dropdown-max-height - $button-y-padding;
+        overflow-x: auto;
+
+        &.-filled {
+          padding-bottom: 50px;
+        }
+
+        li {
+          padding: 7px $base-space;
+          color: $base-font-color;
+          background-color: $body-bg-color;
+
+          &:first-child:not(.-empty) {
+            margin-top: 8px;
+          }
+
+          &.-btn {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: $primary-color;
+            text-align: center;
+
+            a {
+              color: $inverse-font-color;
+
+              &:hover {
+                color: $inverse-font-color;
+              }
+            }
+          }
+
+          &.-unread {
+            background-color: $base-bg-color;
+          }
+
+          a {
+            display: inline-block;
+            padding: 0;
+
+            &:hover {
+              color: $primary-color;
+            }
+          }
+
+          p {
+            margin: 0;
+          }
+        }
+      }
+    }
+
+    ul {
+      @extend %clearlist;
+    }
+
+    .dropdown-item {
+      padding: ($button-y-padding / 2) $button-x-padding;
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
+
+      &.-selected {
+        & a {
+          color: darken($app-bg-color, 25%);
+        }
+      }
+
+      & a {
+        display: block;
+        color: $app-bg-color;
+        font-weight: $bold-font-weight;
+
+        &:hover {
+          color: darken($app-bg-color, 25%);
+        }
+      }
+    }
+
+    &.-open {
+      display: block;
+    }
+  }
+
+  .arrows {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: $inline-space;
+    cursor: pointer;
+
+    .c-icon {
+      fill: white;
+
+      &.-active {
+        opacity: .5;
+      }
+    }
+  }
+}

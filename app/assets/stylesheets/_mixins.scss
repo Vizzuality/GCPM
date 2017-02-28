@@ -1,14 +1,59 @@
-// Clearfix
-@mixin clearfix() {
-  &:before,
-  &:after {
-    content: " "; // 1
-    display: table; // 2
-    visibility: hidden;
-    font-size: 0;
-    height: 0;
-  }
-  &:after {
-    clear: both;
-  }
+@function rem($px, $font-initial: 16px) {
+  @return ($px / $font-initial) * 1rem;
+}
+
+%clearlist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+%reset-btn {
+  padding: 0;
+  -webkit-appearance: none;
+  border: 1px solid transparent;
+  background: none;
+  outline: none;
+  box-shadow: none;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: inherit;
+}
+
+// // Clearfix
+// @mixin clearfix() {
+//   &:before,
+//   &:after {
+//     content: " "; // 1
+//     display: table; // 2
+//     visibility: hidden;
+//     font-size: 0;
+//     height: 0;
+//   }
+//   &:after {
+//     clear: both;
+//   }
+// }
+
+
+// Keyframes
+@mixin keyframes($name) {
+  @-o-keyframes $name { @content };
+  @-moz-keyframes $name { @content };
+  @-webkit-keyframes $name { @content };
+  @-keyframes $name { @content };
+}
+
+
+// Animation
+@mixin animation($name,$duration,$count: 1,$function: linear,$direction: normal,$fill : none,$delay : 0s, $play: running){
+  animation-name: $name;
+  animation-duration: $duration;
+  animation-iteration-count: $count;
+  animation-timing-function: $function;
+  animation-direction: $direction;
+  animation-fill-mode:$fill;
+  animation-delay:$delay;
+  animation-play-state: $play;
 }

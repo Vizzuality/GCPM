@@ -1,0 +1,123 @@
+(function(App) {
+
+  'use strict';
+
+  var basemapSpec = {
+    main: {
+      url: '<%= ENV["BASEMAP_URL"] %>',
+      options: {}
+    },
+    secondary: {
+      url: '<%= ENV["ALT_BASEMAP_URL"] %>',
+      options: {}
+    }
+  };
+
+  App.View.Map = Backbone.View.extend({
+
+    defaults: {
+      center: [0, 0],
+      scrollWheelZoom: false,
+      basemap: null,
+      attributionControl: false,
+      zoom: 3,
+      maxZoom: 17,
+      search: false
+    },
+
+    template: HandlebarsTemplates['carto_layer_tooltip'],
+
+    initialize: function(settings) {
+      var opts = (settings && settings.options) || {};
+      this.options = _.extend({}, this.defaults, opts);
+
+      if (!this.options.nocreate) this.createMap();
+
+    },
+
+    /**
+     * Creating leaflet map
+     */
+    createMap: function() {
+      this.map = L.map(this.el.id, this.options);
+      this.setBasemap();
+      this.addListeners();
+    },
+
+    /**
+     * Communicate map status
+     * @return {[type]} [description]
+     */
+    getState: function() {
+      var center = this.map.getCenter();
+      return {
+        zoom: this.map.getZoom(),
+        lat: center.lat,
+        lng: center.lng
+      };
+    },
+
+    /**
+     * Add basemap to map
+     */
+    setBasemap: function() {
+      var basemapConfig = basemapSpec[this.options.basemap];
+      if (!this.map || !(this.map instanceof L.Map)) {
+        throw new Error('There isn\'t a valid map object');
+      }
+      if (this.basemap) {
+        this.map.removeLayer(this.basemap);
+      }
+      if (this.options.basemap) {
+        this.basemap = L.tileLayer(basemapConfig.url, basemapConfig.options);
+        this.basemap.addTo(this.map);
+      }
+    },
+
+    /**
+     * Listeners
+     */
+    addListeners: function() {
+      this.map.on('zoomend', function(e){
+        this.trigger('pan', e);
+      }.bind(this));
+      this.map.on('dragend', function(e){
+        this.trigger('pan', e);
+      }.bind(this));
+    },
+
+    removeListeners: function() {
+      this.map.off('zoomend');
+      this.map.off('dragend');
+    },
+
+    /**
+     * Add layer on map
+     * @param {Object} layerInstance A valid Leaflet layer
+     */
+    addLayer: function(layerInstance) {
+      if (this.map && this.map instanceof L.Map) {
+        this.map.addLayer(layerInstance);
+      }
+    },
+
+    /**
+     * Remove layer on map
+     * @param {Object} layerInstance A valid Leaflet layer
+     */
+    removeLayer: function(layerInstance) {
+      if (this.map && this.map instanceof L.Map) {
+        this.map.removeLayer(layerInstance);
+      }
+    },
+
+    addCartoTooltip: function(data) {
+      L.popup()
+        .setLatLng(data.latLng)
+        .setContent(this.template(data))
+        .openOn(this.map);
+    }
+
+  });
+
+})(this.App);

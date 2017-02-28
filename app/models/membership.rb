@@ -17,10 +17,14 @@ class Membership < ApplicationRecord
   belongs_to :research_unit
 
   has_one :investigator, through: :research_unit
+  has_one :address,      through: :research_unit
   has_one :organization, through: :research_unit
 
-  validates_presence_of :project_id, :research_unit_id
+  after_save :cleanup_memberships
+
   validates :project_id, uniqueness: { scope: :research_unit_id }
+
+  accepts_nested_attributes_for :research_unit
 
   def address
     if research_unit && research_unit.address.present?
@@ -29,4 +33,11 @@ class Membership < ApplicationRecord
       {}
     end
   end
+
+  private
+
+    def cleanup_memberships
+      invalid_membership = Membership.where(research_unit_id: nil)
+      invalid_membership.delete_all if invalid_membership.any?
+    end
 end

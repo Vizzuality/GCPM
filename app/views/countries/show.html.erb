@@ -1,67 +1,59 @@
-<section class="country">
-  <div class="c-section-intro -color-4">
-    <div id="map" class="map c-map -detail">
-      <div class="c-map-intro-legend">
-        <ul class="legend-list">
-          <li class="item"><div class="icon -first"></div><%= t 'project_leads' %></li>
-          <li class="item"><div class="icon -second"></div><%= t 'collaborators' %></li>
-        </ul>
-        <div class="viel"></div>
-      </div>
-    </div>
-    <div class="intro-info">
-      <div class="info">
-        <h1 class="c-title -big"><%= @country.country_name %></h1>
-        <div class="c-numbers-grid">
-          <div class="number-info">
-            <label class="title">Projects</label>
-            <p class="number">18</p>
-          </div>
-          <div class="number-info">
-            <label class="title">Organizations</label>
-            <p class="number">12</p>
-          </div>
-          <div class="number-info">
-            <label class="title">Events</label>
-            <p class="number">12</p>
-          </div>
-          <div class="number-info">
-            <label class="title">Daly datasets</label>
-            <p class="number">5</p>
+
+<% title @country.country_name %>
+
+<section class="l-app -full -secondary">
+  <% if !browser.device.mobile? %>
+    <%= render "desktop_show_intro" %>
+  <% else %>
+    <%= render "mobile_show_intro" %>
+  <% end %>
+
+  <div class="l-app-navbar">
+    <div class="wrapper">
+      <div class="row collapse">
+        <div class="column small-12 medium-6">
+          <ul class="c-tabnav" id="dataTabNav">
+             <% @filters.each do |filter| %>
+              <li class="tabnav-item">
+                <%= link_to t(filter),
+                  map_path(request.query_parameters.merge({ data: filter })),
+                  class: "-secondary js-btn-mapmenu-type",
+                  remote: true,
+                  data: { datatype: filter }
+                %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="column small-12 medium-6">
+          <div>
+            <ul class="c-toolbar">
+              <li id="download"class="toolbar-item -sortby">
+                <a href="/api/map/download?data=projects&countries[]=<%= @country.country_iso_3 %>" class="c-btn -action -secondary-action" target="_blank" download>
+                  <svg class="c-icon -small -inverse">
+                    <use xlink:href="#icon-download"></use>
+                  </svg>
+                  Download
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-      <div class="c-buttons-group">
-        <a href="/" class="c-button -inverse -filled btn-large">Follow</a>
-        <div class="row-buttons">
-          <a href="/" class="c-button -inverse">+ Project</a>
-          <a href="/" class="c-button -inverse">+ Post</a>
-          <a href="/" class="c-button -inverse">+ Event</a>
-        </div>
-      </div>
-      <ul class="c-section-menu wrapper -color-0">
-        <li><%= link_to (t 'projects'), country_path(request.query_parameters.merge({ type: 'org-project-markers' })), :class => !params['type'] ? '-active' : active_param?('type','org-project-markers') %></li>
-        <li><%= link_to (t 'people'), country_path(request.query_parameters.merge({ type: 'org-people-markers' })), :class => active_param?('type','org-people-markers') %></li>
-        <li><%= link_to (t 'events'), country_path(request.query_parameters.merge({ type: 'org-event-markers' })), :class => active_param?('type','org-event-markers') %></li>
-      </ul>
     </div>
   </div>
-
-  <!-- Data tab not showing at the moment  -->
-  <!-- <div class="country-data">
-    <div class="c-legend-map-container">
-      <div class="c-map"></div>
-
-      <div class="c-map-legend">
-        <h3 class="c-title -normal">Radiothearpy coverage and untreated deaths in pain</h3>
-        <ul class="legend">
-          <li class="item"><div class="legend-icon -color-1"></div>To be defined</li>
-          <li class="item"><div class="legend-icon -color-2"></div>To be defined</li>
-          <li class="item"><div class="legend-icon -color-3"></div>To be defined</li>
-          <li class="item"><div class="legend-icon -color-4"></div>To be defined</li>
-          <li class="item"><div class="legend-icon -color-5"></div>To be defined</li>
-        </ul>
-      </div>
-    </div>
-  </div> -->
 </section>
+
+<div class="l-grid" id="content">
+  <% if @current_type == 'events' %>
+    <%= render 'events/list', items: @items, more: @more %>
+  <% elsif @current_type == 'projects' %>
+    <%= render 'projects/list', items: @items, more: @more %>
+  <% elsif @current_type == 'data' %>
+    <%= render 'data/countries'%>
+  <% elsif @current_type == 'posts' %>
+    <%= render 'posts/list', items: @items, more: @more %>
+  <% else @current_type %>
+    <%= render 'investigators/list', items: @items, more: @more %>
+  <% end %>
+</div>

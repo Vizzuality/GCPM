@@ -23,6 +23,7 @@
 #  icon_class     :string
 #  published      :boolean          default(TRUE)
 #  legend         :text
+#  source         :text
 #
 
 require 'rails_helper'

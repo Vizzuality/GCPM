@@ -36,6 +36,16 @@ module Api::V1
         expect(country['name']).to be_present
         expect(country['id']).to   be_present
       end
+
+      it 'Allows to search organizations by name' do
+        get "/api/organizations?q=test"
+
+        organization = json[0]
+        expect(status).to               eq(200)
+        expect(json.length).to          eq(1)
+        expect(organization['name']).to be_present
+        expect(organization['id']).to   be_present
+      end
     end
   end
 end

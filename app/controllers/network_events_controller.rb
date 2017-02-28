@@ -8,10 +8,12 @@ class NetworkEventsController < ApplicationController
   def index
   end
 
-  def show
-  end
-
   def edit
+    if notice
+      gon.notice = notice
+    end
+
+    gon.online = @event.online
   end
 
   def new
@@ -19,25 +21,32 @@ class NetworkEventsController < ApplicationController
   end
 
   def update
-    if @event.update(event_params)
-      redirect_to event_path(@event), notice: 'Event succesfully updated.'
+    errors = get_errors(event_params)
+
+    if @event.update(event_params) && errors.count == 0
+      redirect_to event_path(@event.slug_or_id), notice: 'Event succesfully updated.'
     else
-      render :edit, notice: "Event can't be updated."
+      gon.notice = { text: errors.join(''), show: true }
+      render :edit
     end
   end
 
   def create
     @event = @user.events.build(event_params)
-    if @event.save
-      redirect_to user_path(@user, type: 'events'), notice: 'Event succesfully created.'
+
+    errors = get_errors(event_params)
+
+    if errors.count == 0 && @event.save
+      redirect_to event_path(@event.slug_or_id)
     else
-      render :new, notice: @project.errors.full_messages
+      gon.notice = { text: errors.join(''), show: true }
+      render :new
     end
   end
 
   def destroy
     if @event.destroy
-      redirect_to user_path(@user), notice: 'Event succesfully deleted.'
+      redirect_to user_path(@user, { data: 'events' }), notice: 'Event succesfully deleted.'
     else
       redirect_to user_path(@user), notice: "There was an error and event can't be deleted."
     end
@@ -54,10 +63,39 @@ class NetworkEventsController < ApplicationController
     end
 
     def set_event
-      @event = @user.events.find(params[:id])
+      @event = Event.set_by_id_or_slug(params[:id])
     end
 
     def event_params
       params.require(:event).permit!
+    end
+
+    def get_errors(event_params)
+      errors = []
+      if !event_params['title'].present?
+        errors << "<p>Title can't be blank</p>"
+      end
+
+      if !event_params['description'].present?
+        errors << "<p>Description can't be blank</p>"
+      end
+
+      if !event_params['start_date'].present?
+        errors << "<p>Start date can't be blank</p>"
+      end
+
+      if !event_params['end_date'].present?
+        errors << "<p>End date can't be blank</p>"
+      end
+
+      if event_params['online'] == 'false' && (!event_params['country'].present? || event_params['country'] == '')
+        errors << "<p>You must select a country</p>"
+      end
+
+      if event_params['online'] == 'false' && (!event_params['city'].present? || event_params['city'] == '')
+        errors << "<p>You must select a city</p>"
+      end
+
+      errors
     end
 end

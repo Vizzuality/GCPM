@@ -11,16 +11,18 @@ class ProjectImporter
 
   def import!
     project = Project.find_or_initialize_by(id: project_id)
-    project.title = data['project_title']
+    project.title = data['project_title']&.strip
     project.project_website = data['project_website']
     project.summary = data['project_summary']
     project.start_date = data['project_start_date']
     project.end_date = data['project_end_date']
-    project_types = self.validate_project_types(data['project_types'])
-    cancer_types = self.validate_cancer_types(data['project_cancer_types'])
+    project_types = self.validate_project_types(data['project_types']) if data['project_types'].present?
+    cancer_types = self.validate_cancer_types(data['project_cancer_types']) if data['project_cancer_types'].present?
+    specialities = self.validate_specialities(data['specialities']) if data['specialities'].present?
+    project.project_types = project_types if project_types
+    project.cancer_types = cancer_types if cancer_types
+    project.specialities = specialities if specialities
     if project.valid? && @errors == []
-      project.project_types = project_types
-      project.cancer_types = cancer_types
       project.status = 1
       project.save!
       return true
@@ -33,7 +35,7 @@ class ProjectImporter
 
   def validate_project_types(project_types)
     return if project_types.blank?
-    pt = project_types.split('|').map{|e| e.strip.downcase}
+    pt = project_types.split('|').map{|e| e.downcase}
     master_pt = ProjectType.all.pluck(:name).map{|e| e.downcase}
     wrong_types = pt - master_pt
     if wrong_types != []
@@ -47,7 +49,7 @@ class ProjectImporter
 
   def validate_cancer_types(cancer_types)
     return if cancer_types.blank?
-    ct = cancer_types.split('|').map{|e| e.strip.downcase}
+    ct = cancer_types.split('|').map{|e| e.downcase}
     master_ct = CancerType.all.pluck(:name).map{|e| e.downcase}
     wrong_types = ct - master_ct
     if wrong_types != []
@@ -56,6 +58,20 @@ class ProjectImporter
     else
       cancer_types = CancerType.where('lower(name) in (?)', ct)
       cancer_types
+    end
+  end
+
+  def validate_specialities(specialities)
+    return if specialities.blank?
+    sp = specialities.split('|').map{|e| e.downcase}
+    master_sp = Speciality.all.pluck(:name).map{|e| e.downcase}
+    wrong_types = sp - master_sp
+    if wrong_types != []
+      @errors << { specialities: "Unknow speciality(-ies) #{wrong_types}" }
+      return
+    else
+      specialities = Speciality.where('lower(name) in (?)', ct)
+      specialities
     end
   end
 

@@ -1,0 +1,84 @@
+
+<div class="row collapse">
+  <div class="column small-12 medium-8">
+    <div class="l-content wrapper">
+      <article class="l-content-article">
+        <%= @event.description.html_safe %>
+      </article>
+      <div class="row -no-mrg align-right wrapper">
+        <% if current_user && current_user.events.include?(@event) %>
+          <%= link_to (t 'edit'), edit_user_event_path(current_user.id, @event.slug_or_id), class: "c-btn -secondary -inverse" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="column small-12 medium-4">
+    <aside class="l-sidebar">
+      <% if @event.start_date.present? || @event.end_date.present? %>
+        <div id="datesTimeline" class="sidebar-item c-dates-timeline">
+          <div class="dates">
+            <% if @event.start_date.present? %>
+              <div class="date">
+                <h3><%= t 'start_date' %></h3>
+                <span><%= @event.start_date %></span>
+              </div>
+            <% end %>
+            <% if @event.end_date.present? %>
+              <div class="date">
+                <h3><%= t 'end_date' %></h3>
+                <span><%= @event.end_date %></span>
+              </div>
+            <% end %>
+          </div>
+
+          <% if @event.start_date.present? && @event.end_date.present? %>
+            <div class="timeline">
+              <div class="timeline-line"></div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if @event.country.present? %>
+        <div class="sidebar-item">
+          <h3><%= t 'location' %>(s)</h3>
+          <ul class="c-list">
+            <li class="list-item -mg-less">
+              <% if @country %>
+                <%= link_to "#{@event.city} , #{@event.country}", country_path(@country.country_iso_3) %>
+              <% else %>
+                <%= @event.city %>, <%= @event.country %>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      <% end %>
+      <% if @event.participants.present? %>
+        <div class="sidebar-item">
+          <h3>Key Participant(s)</h3>
+          <ul class="c-list">
+            <% @participants.each do |p| %>
+              <li class="list-item -mg-less">
+                <% if p[:investigator] %>
+                  <%= link_to "#{p[:name]}", investigator_path(p[:investigator].slug_or_id) %>
+                <% else %>
+                  <%= p[:name] %>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <% if @event.website.present? %>
+        <div class="sidebar-item">
+          <h3><%= t 'website' %></h3>
+          <ul class="c-list">
+            <li class="list-item -mg-less"><a href="<%= @event.website %>" target="_blank"><%= @event.website %></a></li>
+          </ul>
+        </div>
+      <% end %>
+    </aside>
+  </div>
+</div>

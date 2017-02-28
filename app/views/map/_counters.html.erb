@@ -1,0 +1,44 @@
+<div class="c-counters -<%= @current_type %>">
+  <div class="wrapper">
+    <div class="row">
+
+      <% if @current_type == 'projects' %>
+        <div class="column small-12 medium-4">
+          <h3>
+            <%= t @current_type %>
+          </h3>
+          <span class="amount"><%= @items_total %></span>
+        </div>
+        <div class="column small-12 medium-4">
+          <h3>Project leads</h3>
+          <span class="amount"><%= @project_leads %></span>
+        </div>
+        <div class="column small-12 medium-4">
+          <h3>Collaborators</h3>
+          <span class="amount"><%= @collaborators %></span>
+        </div>
+
+      <% elsif @current_type == 'events' %>
+        <div class="column small-12 medium-4">
+          <h3>Total</h3>
+          <span class="amount"><%= @items_total %></span>
+        </div>
+        <div class="column small-12 medium-4">
+          <h3>Public events</h3>
+          <span class="amount"><%= @items_public_total %></span>
+        </div>
+        <div class="column small-12 medium-4">
+          <h3>Private events</h3>
+          <span class="amount"><%= @items_private_total %></span>
+        </div>
+
+      <% elsif @current_type == 'people' %>
+        <div class="column small-12">
+          <h3>People</h3>
+          <span class="amount"><%= @items_total %></span>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

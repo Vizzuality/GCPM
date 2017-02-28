@@ -28,6 +28,10 @@
 #  pubmed                 :string
 #  authentication_token   :string
 #  token_expires_at       :datetime
+#  role                   :integer          default("user"), not null
+#  avatar                 :string
+#  notifications_count    :integer          default(0)
+#  notifications_mailer   :boolean          default(TRUE)
 #
 
 require 'rails_helper'
@@ -43,10 +47,9 @@ RSpec.describe User, type: :model do
 
   context "User's projects" do
     before :each do
-      @user = create(:user)
-      create(:project, title: 'First project', user_id: @user.id, status: 2)
-      create(:project, title: 'Second project', user_id: @user.id, status: 1)
-      create(:project, title: 'Third project', user_id: @user.id, status: 0)
+      create(:project, title: 'First project', users: [@user], status: 2, project_types: [create(:project_type, name: "project type 1")], cancer_types: [create(:cancer_type, name: "project type 1")])
+      create(:project, title: 'Second project', users: [@user], status: 1, project_types: [create(:project_type, name: "project type 2")], cancer_types: [create(:cancer_type, name: "project type 2")])
+      create(:project, title: 'Third project', users: [@user], status: 0, project_types: [create(:project_type, name: "project type 3")], cancer_types: [create(:cancer_type, name: "project type 3")])
     end
 
     it 'Active inactive user projects' do

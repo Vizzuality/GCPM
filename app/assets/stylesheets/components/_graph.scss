@@ -1,0 +1,149 @@
+.c-graph {
+  width: 100%;
+  min-height: 320px;
+  padding: 0 50px 0 0;
+  position: relative;
+
+  &.-map {
+    min-height: 500px;
+  }
+
+  .graph-header {
+    h2 {
+      display: flex;
+      align-items: flex-start;
+      margin: 0 0 20px;
+
+      button {
+        margin: 5px 10px 0 0;
+      }
+    }
+  }
+
+  .graph-box {
+
+  }
+
+  .c3 {
+    line {
+      fill: none;
+      stroke: #a3b0b8;
+    }
+
+    path {
+      fill: none;
+      stroke: #a3b0b8;
+    }
+
+    // g {
+    //   &.tick {
+    //     fill: #a3b0b8;
+    //   }
+    // }
+
+    // TOOLTIP
+    .c3-tooltip {
+      box-shadow: $box-shadow-2;
+
+      th {
+        padding: 10px 8px 5px;
+        color: $base-font-color;
+        background-color: white;
+        font-weight: 500;
+        // text-transform: capitalize;
+      }
+
+      tr {
+        border: none;
+      }
+
+      td {
+        padding: 5px 10px;
+        border: none;
+      }
+    }
+  }
+
+  &.-map {
+    .point-icon {
+      background: white;
+      border: 0;
+      border-radius: 100%;
+      box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.2);
+
+      &.-alternative {
+      }
+    }
+
+
+    .prunecluster,
+    .bubble-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+
+      background-color: white;
+
+      border-radius: 100%;
+
+      box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.3);
+      transition: all .3s ease;
+
+      &:hover {
+        box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.5);
+        z-index: 1000 !important;
+      }
+
+      .marker-arc {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      &.prunecluster {
+        color: #007bcd;
+        font-size: 18px;
+        background-color: white;
+        border: 1px solid #007bcd;
+
+        &.-points-cluster-icon {
+          color: $base-font-color;
+          border: 0;
+          font-size: $small-font-size;
+          line-height: 0.8;
+        }
+      }
+    }
+  }
+}
+
+
+// .c3 text {
+//   fill: $black;
+//   fill-opacity: .8;
+// }
+//
+// .c3-legend-background {
+//   stroke: transparent;
+//   fill: transparent;
+// }
+//
+// .c3-legend-item {
+//   fill-opacity: .8;
+//   font-family: $font-family-1;
+//   font-weight: 400;
+//   transform: translatey(-20px);
+// }
+//
+// .c3-text {
+//   fill: $black !important;
+//   opacity: .3 !important;
+// }
+//
+// .c3-legend-item {
+//   display: none;
+// }

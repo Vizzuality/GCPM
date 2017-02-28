@@ -1,0 +1,31 @@
+
+.c-pipe-list {
+  @extend %clearlist;
+
+  display: flex;
+  padding-bottom: $base-space;
+  justify-content: center;
+
+  @media #{$mq-small} {
+    justify-content: flex-start;
+  }
+
+  li {
+    padding: 0 ($base-space / 2);
+    border-right: 1px solid white;
+    line-height: $small-font-size;
+    text-transform: capitalize;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      border: 0;
+    }
+
+    & .-hv:hover {
+      opacity: .5;
+    }
+  }
+}

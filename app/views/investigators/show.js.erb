@@ -1,0 +1,21 @@
+(function() {
+
+  'use strict'
+  <%
+    case @current_type
+      when 'network'
+        template = "users/network"
+      when 'data'
+        template = "data/investigators"
+      else
+        template = "#{@current_type}/list"
+    end
+  %>
+
+  var htmlContent = "<%= escape_javascript render(partial: template, locals: { items: @items, more: @more }) %>";
+
+  document.getElementById('content').innerHTML = htmlContent;
+
+  App.trigger('Remote:load', { data: '<%= @current_type %>' });
+
+})();

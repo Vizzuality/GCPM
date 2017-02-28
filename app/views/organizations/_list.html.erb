@@ -1,0 +1,38 @@
+<% if items && items.size() > 0 %>
+  <div class="row collapse">
+    <% items.each do |o| %>
+      <div class="column small-12 medium-4">
+        <div class="c-card">
+          <h3 class="-underlined">
+            Organization
+          </h3>
+          <h2><%= link_to o.name, organization_path(o.slug_or_id) %></h2>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="row collapse">
+    <div class="column small-12">
+      <div class="c-card">
+        <p>No organizations</p>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<% if more %>
+  <div class="row collapse">
+    <div class="column small-12">
+      <div class="c-card">
+        <% page = @page + 1 %>
+        <%= link_to (t 'show_more'),
+          map_path(request.query_parameters.merge({ page: page })),
+          class: "c-btn -circle",
+          id: 'showMoreButton',
+          remote: true
+        %>
+      </div>
+    </div>
+  </div>
+<% end %>

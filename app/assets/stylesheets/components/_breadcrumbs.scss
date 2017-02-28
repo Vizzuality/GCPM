@@ -1,0 +1,76 @@
+.c-breadcrumbs {
+
+  > ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    padding-right: 15px;
+
+    > li a {
+      display: block;
+      padding: 8px 21px 8px 31px;
+      position: relative;
+
+      color: $inverse-font-color;
+      font-size: $small-font-size;
+      font-weight: bold;
+      text-transform: uppercase;
+      white-space: nowrap;
+
+      background-color: $app-bg-color;
+
+      &:hover {
+        background-color: darken($primary-color, 5%);
+        &:after{
+          background-color: darken($primary-color, 5%);
+        }
+      }
+
+      &:after {
+        display: block;
+        position: absolute;
+        content: " ";
+        width: 20px;
+        height: 20px;
+        top: 7px;
+        right: -10px;
+
+        border: 1px solid transparent;
+        border-right: 1px solid rgba($inverse-font-color, 0.5);
+        border-top: 1px solid rgba($inverse-font-color, 0.5);
+
+        background-color: $app-bg-color;
+
+        transform: rotate(45deg) skew(15deg, 15deg);
+        z-index: 1;
+      }
+
+      span {
+        display: block;
+        max-width: 50px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        @media #{$mq-small} {
+          max-width: none;
+          overflow: initial;
+          text-overflow: initial;
+        }
+      }
+    }
+
+    > li:last-child a {
+      cursor: default;
+      color: $base-font-color;
+      background-color: $body-bg-color;
+
+      &:after {
+        border-right-color: $body-bg-color;
+        border-top-color: $body-bg-color;
+        background-color: $body-bg-color;
+      }
+    }
+  }
+}

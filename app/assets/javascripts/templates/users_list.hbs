@@ -1,0 +1,18 @@
+
+<ul class="c-list -row-items">
+  {{#each items as |item|}}
+    <li class="list-item">
+      <a href="/network/{{item.id}}">
+        {{#if item.photo}}
+          <div class="c-avatar -small -no-bg" style="background-image: url({{item.photo}})"></div>
+        {{else}}
+          <div class="c-avatar -small">
+            <svg class="c-icon -inverse -av-small icon-user"><use xlink:href="#icon-user"></use></svg>
+          </div>
+        {{/if}}
+
+        <span>{{item.name}}</span>
+      </a>
+    </li>
+  {{/each}}
+</ul>

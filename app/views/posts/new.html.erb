@@ -1,0 +1,14 @@
+<script>
+var AUTH_TOKEN = "<%= @user.authentication_token %>"
+</script>
+
+<div class="l-content">
+  <div class="wrapper">
+    <div class="row">
+      <div class="column small-12 medium-8 large-6">
+        <h1>New Post</h1>
+        <%= render 'form', post: @post %>
+      </div>
+    </div>
+  </div>
+</div>

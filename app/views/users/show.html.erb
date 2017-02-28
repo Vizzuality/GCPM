@@ -1,89 +1,51 @@
+<% user = @user %>
+<% title user.name %>
+<% owner = is_owner?(user, current_user) %>
 
-<section class="country">
-  <div class="c-section-intro -color-4">
-    <div id="map" class="map c-map -detail">
-      <div class="c-map-intro-legend">
-        <ul class="legend-list">
-          <li class="item"><div class="icon -first"></div><%= t 'you' %></li>
-          <li class="item"><div class="icon -second"></div><%= t 'collaborators' %></li>
-        </ul>
-        <div class="viel"></div>
-      </div>
-    </div>
+<section class="l-app -full -secondary">
+  <% if !browser.device.mobile? %>
+    <%= render "desktop_show_intro", owner: owner, user: user %>
+  <% else %>
+    <%= render "mobile_show_intro", owner: owner, user: user %>
+  <% end %>
 
-    <div class="intro-info">
-      <div class="info">
-        <div class="c-personal-info">
-          <div class="c-user-profile-picture -huge">
-            <div class="initials"><%=  @user.name ? @user.name[0] : 'U' %></div>
-            <!-- <img src="" alt="<%= @user.name %>'s profile picture'" /> -->
-          </div>
-          <div class="data-container">
-            <h1 class="c-title -big"><%= @user.name ? @user.name : User %>
-              <svg class="c-svg -medium icon icon-">
-                <use xlink:href="#icon-"></use>
-              </svg>
-            </h1>
-            <div class="professional-data">
-              <ul class="work-info">
-                <li>Cedars-Sinai Medical Center
-                  <svg class="c-svg icon icon-">
-                    <use xlink:href="#icon-"></use>
-                  </svg>
-                </li>
-                <li>Director
-                  <svg class="c-svg icon icon-">
-                    <use xlink:href="#icon-"></use>
-                  </svg>
-                </li>
-              </ul>
-              <ul class="follow">
-                <li><span>0</span> Following</li>
-                <li><span>0</span> Followers</li>
-              </ul>
-              <ul class="contact">
-                <li>@twitter
-                  <svg class="c-svg icon icon-">
-                    <use xlink:href="#icon-"></use>
-                  </svg>
-                </li>
-                <li>LinkedIn 
-                  <svg class="c-svg icon icon-">
-                    <use xlink:href="#icon-"></use>
-                  </svg>
-                </li>
-              </ul>
-            </div>
-          </div>
+  <div class="l-app-navbar">
+    <div class="wrapper">
+      <div class="row collapse">
+        <div class="column small-12">
+          <ul class="c-tabnav" id="dataTabNav">
+             <% @filters.each do |filter| %>
+              <li class="tabnav-item">
+                <%= link_to t(filter),
+                  map_path(request.query_parameters.merge({ data: filter })),
+                  class: "-secondary js-btn-mapmenu-type",
+                  remote: true,
+                  data: { datatype: filter }
+                %>
+                <% if filter === 'messages' %>
+                  <div class="c-badge <%= filter + '-badge' %><%= current_user.unread_inbox_count === 0 ? ' -hidden' : '' %>"><%= current_user.unread_inbox_count %></div>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
         </div>
       </div>
-
-      <div class="c-buttons-group">
-        <a class="c-button -inverse -filled btn-large"><%= t 'share_my_info' %></a>
-        <div class="row-buttons">
-          <%= link_to "Add " + (t 'projects'), new_user_project_path(user_id: current_user.id), { :class => "c-button -inverse" } if user_signed_in? && @user == current_user %>
-          <%= link_to "Add " + (t 'posts'), "#", { :class => "c-button -inverse" } %>
-          <%= link_to "Add " + (t 'events'), new_user_event_path(user_id: current_user.id), { :class => "c-button -inverse" } if user_signed_in? && @user == current_user %>
-        </div>
-      </div>
-
-      <ul class="c-section-menu wrapper -color-0">
-        <% @filters.each do |filter| %>
-          <li>
-            <%= link_to (t filter),
-              user_path(request.query_parameters.merge({ type: filter })),
-              class: active_param?('type', filter),
-              remote: true,
-              data: {magic: true} %>
-          </li>
-        <% end %>
-      </ul>
     </div>
   </div>
-  <div id="content">
-    <%= render(:partial => @current_type) %>
-  </div>
-
-
 </section>
 
+<div class="l-grid" id="content">
+  <% if @current_type === 'projects' %>
+    <%= render 'projects/list', items: @items, more: @more %>
+  <% elsif @current_type === 'events' %>
+    <%= render 'events/list', items: @items, more: @more %>
+  <% elsif @current_type === 'posts' %>
+    <%= render 'posts/list', items: @items, more: @more %>
+  <% elsif @current_type === 'messages' %>
+    <% if owner %>
+      <%= render 'messages/list', items: @items, more: @more %>
+    <% end %>
+  <% elsif @current_type === 'network' %>
+    <%= render 'network' %>
+  <% end %>
+</div>

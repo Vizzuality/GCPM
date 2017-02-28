@@ -1,0 +1,24 @@
+
+<%= simple_form_for(@post) do |f| %>
+  <% f.error_notification %>
+    <div class="form-row">
+      <%= f.input :title %>
+      <p class="required">* Required field</p>
+    </div>
+    <div class="form-row">
+      <%= f.cktext_area :body %>
+      <p class="required">* Required field</p>
+    </div>
+    <% if params[:error] || f.error_notification %>
+      <p class="error">* Required field missing.</p>
+    <% end %>
+    <div class="form-row">
+      <div id="postForm"></div>
+    </div>
+    <div class="form-row">
+      <%= f.button :submit, "Submit", class: 'c-btn -primary' %>
+    </div>
+
+<% end %>
+
+<%= javascript_include_tag Ckeditor.cdn_url %>

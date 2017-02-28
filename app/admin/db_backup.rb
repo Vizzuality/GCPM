@@ -6,7 +6,10 @@ ActiveAdmin.register DbBackup do
   filter :created_at
 
   action_item :restore, only: :show do
-    link_to 'Restore this backup', restore_admin_db_backup_path, data: {confirm: 'Are you sure?'}
+    link_to 'Restore this backup', restore_admin_db_backup_path, data: { confirm: 'Are you sure?' }
+  end
+  action_item :download, only: :show do
+    link_to 'Download this backup', download_admin_db_backup_path
   end
 
   index do
@@ -31,18 +34,8 @@ ActiveAdmin.register DbBackup do
     redirect_to resource_path, notice: "Backup restored!"
   end
 
-# See permitted parameters documentation:
-# https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-#
-# permit_params :list, :of, :attributes, :on, :model
-#
-# or
-#
-# permit_params do
-#   permitted = [:permitted, :attributes]
-#   permitted << :other if params[:action] == 'create' && current_user.admin?
-#   permitted
-# end
-
-
+  member_action :download, method: :get do
+    file_name = "#{Rails.root}/db_backups/full_#{resource.file_name}"
+    send_file(file_name, type: "application/octet-stream", disposition: "attachment")
+  end
 end

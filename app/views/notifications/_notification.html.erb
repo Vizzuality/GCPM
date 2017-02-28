@@ -1,0 +1,15 @@
+<li class="">
+  <%= link_to notification do %>
+    <p class="group">
+      <strong><%= notification.notificable_group %> </strong>
+      <span class="time"><%= notification.timestamp %></span>
+    </p>
+    <p><%= notification.notificable_title %></p>
+  <% end %>
+</li>
+
+<% if !browser.device.mobile? %>
+  <li class="-btn js-action-delete">
+    <%= link_to 'Delete all', mark_all_as_read_notifications_path, method: :put %>
+  </li>
+<% end %>

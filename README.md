@@ -4,96 +4,76 @@ TODO: Write a project description
 
 ## Requirements:
 
-* Ruby 2.3.0 [How to install](https://gorails.com/setup/osx/10.10-yosemite)
+* NodeJs 4+ [How to install](https://nodejs.org/en/download/)
+* Ruby 2.3.1 [How to install](https://gorails.com/setup/osx/10.10-yosemite)
 * PostgreSQL 9+ [How to install](http://exponential.io/blog/2015/02/21/install-postgresql-on-mac-os-x-via-brew/)
 * Cron or similar tool is required for periodically sending notification emails
 
 ## Installation
 
-Install global dependencies:
-
-    gem install bundler
-
 Install project dependencies:
 
-    bundle install
+```
+gem install bundler && bundle install
+```
 
 Set up environment variables by copying `.env.sample` to `.env` and filling up the necessary values accordingly
 See also the [CartoDB integration](#cartodb-integration) section for information on how to configure your CartoDB account.
 
 To set up the database, run:
 
-    bundle exec rake db:create
-    bundle exec rake db:migrate
+		bundle exec rake db:create
+		bundle exec rake db:migrate
 
+To add existing data, run:
 
-### Using Docker (recommended)
-
-Very useful for **development**, it ensures everybody have the same environment. Also you can test production environment.
-You can install Docker from [here](https://www.docker.com).
-
-Building docker container:
-
-```bash
-docker-compose build
-```
-
-Runing container:
-
-```bash
-docker-compose up
-```
-
-Maybe, first time you will need run these tasks:
-
-```bash
-docker-compose run web rake db:create
-docker-compose run web rake db:migrate
-```
+		bundle exec rake db:seed
+		bundle exec rake db:geo
+		bundle exec rake events:create
+		bundle exec rake layers:import
 
 ## Running
 
 To run application:
 
-    bundle exec rails server
-
+		bundle exec rails server
 
 To send periodic notification emails to users, run the following `rake` task using `cron` or a similar tool:
 
-    rake notifications:send
+		rake notifications:send
 
 
 ## Development
 
 ## Test
 
-  Run rspec:
+	Run rspec:
 
 ```ruby
-  bin/rspec
+	bin/rspec
 ```
-  Run teaspoon:
+	Run teaspoon:
 
 ```ruby
-  rake teaspoon
+	rake teaspoon
 ```
-  Run cucumber:
+	Run cucumber:
 
 ```ruby
-  rake cucumber
+	rake cucumber
 ```
-  Run all (cucumber, spec):
+	Run all (cucumber, spec):
 
 ```ruby
-  rake
+	rake
 ```
 
 capybara-webkit depends on a WebKit implementation from Qt (version >= 4.8), a cross-platform development toolkit. You'll need to download the Qt libraries to build and install the gem. [more](https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit)
 
 OS X Mavericks:
 
-    brew update
-    brew install qt
+		brew update
+		brew install qt
 
 In cucumber, tag scenarios with '@javascript' to run them using a headless WebKit browser.
 

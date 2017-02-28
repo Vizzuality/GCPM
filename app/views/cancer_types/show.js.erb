@@ -1,0 +1,20 @@
+(function() {
+
+  <%
+    case @current_type
+      when 'people'
+        template = "investigators/list"
+      when 'data'
+        template = "data/cancer_types"
+      else
+        template = "#{@current_type}/list"
+    end
+  %>
+
+  var htmlContent = "<%= escape_javascript render(partial: template, locals: { items: @items, more: @more }) %>";
+
+  document.getElementById('content').innerHTML = htmlContent;
+
+  App.trigger('Remote:load');
+
+})();

@@ -1,0 +1,26 @@
+.c-btn-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0 0 20px;
+  pointer-events: all;
+
+  &:last-child {
+    margin: 0;
+  }
+
+  &.-right {
+    justify-content: flex-end;
+  }
+
+  > li {
+    width: 100%;
+    margin: 0 5px;
+    list-style: none;
+
+    * {
+      width: 100%;
+      white-space: nowrap;
+    }
+  }
+}

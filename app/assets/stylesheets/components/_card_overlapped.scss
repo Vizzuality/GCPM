@@ -1,0 +1,55 @@
+
+.c-card-overlapped {
+  position: relative;
+  width: 100%;
+
+  @media #{$mq-small} {
+    top: -$box-space;
+    padding: 0 $box-space;
+  }
+
+  .overlapped-content {
+    padding-top: $base-space;
+    padding-bottom: $base-space;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+
+    @media #{$mq-small} {
+      padding-top: $box-space;
+      padding-bottom: $box-space;
+    }
+
+    h2 {
+      margin-bottom: $base-space;
+
+      @media #{$mq-small} {
+        margin-bottom: $box-space;
+      }
+    }
+
+    .column {
+      margin-bottom: $base-space;
+
+      @media #{$mq-small} {
+        margin-bottom: $box-space;
+      }
+    }
+
+    .form-group {
+      margin-right: 5%;
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: center;
+
+      .c-btn {
+        margin-right: $inline-space;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}

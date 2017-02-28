@@ -1,0 +1,33 @@
+{{#if label}}
+  <label
+    {{#if name}}for="{{name}}"{{/if}}
+    {{#if labelClass}}class="{{labelClass}}"{{/if}}
+  >
+    {{label}}
+  </label>
+{{/if}}
+
+<select
+  {{#if multiple}}multiple="true"{{/if}}
+  {{#if name}}name="{{name}}"{{/if}}
+  {{#if inputClass}}class="{{inputClass}}"{{/if}}
+  {{#if value}}value="{{value}}"{{/if}}
+  {{#if required}}required="true"{{/if}}
+  {{#if placeholder}}data-placeholder="{{placeholder}}"{{/if}}
+>
+  {{#if blank}}
+    <option></option>
+  {{/if}}
+  {{#each options}}
+    <option value="{{value}}" {{#if selected}}selected{{/if}}>{{name}}</option>
+  {{/each}}
+</select>
+{{#if addNew}}
+  <div class="select-buttons">
+    <button type="button" id="add-new-{{name}}" class="c-btn -filled -secondary -mini js-btn-add-new">Add new</button>
+  </div>
+{{/if}}
+
+{{#if required}}
+  <p class="c-required">* Field required</p>
+{{/if}}

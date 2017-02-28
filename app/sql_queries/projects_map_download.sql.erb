@@ -1,0 +1,78 @@
+select distinct
+  projects.id as project,
+  projects.title as title,
+  projects.summary as summary,
+  coalesce(projects.project_website, '') as web_site,
+  coalesce(projects.start_date::text, '') as start_date,
+  coalesce(projects.end_date::text, '') as end_date,
+  string_agg(distinct coalesce(investigators.name, ''), ' | ') as investigator_names,
+  string_agg(distinct coalesce(organizations.name, ''), ' | ') as organization_names,
+  string_agg(distinct coalesce(organization_types.name, ''), ' | ') as organization_type_names,
+  string_agg(distinct coalesce(countries.country_name, ''), ' | ') as country_names,
+  string_agg(distinct coalesce(project_types.name, ''), ' | ') as project_type_names,
+  string_agg(distinct coalesce(cancer_types.name, ''), ' | ') as cancer_type_names
+
+from projects
+  inner join memberships on memberships.project_id = projects.id
+  inner join research_units on memberships.research_unit_id = research_units.id
+  inner join investigators on investigators.id = research_units.investigator_id
+  inner join addresses on research_units.address_id = addresses.id
+  inner join countries on addresses.country_id = countries.id
+  inner join organizations on organizations.id = addresses.organization_id
+  inner join organization_types on organization_types.id = organizations.organization_type_id
+  inner join project_types_projects on project_types_projects.project_id = projects.id
+  inner join project_types on project_types_projects.project_type_id = project_types.id
+  inner join cancer_types_projects on cancer_types_projects.project_id = projects.id
+  inner join cancer_types on cancer_types_projects.cancer_type_id = cancer_types.id
+  <% if @params[:specialities] %>
+      inner join projects_specialities on projects_specialities.project_id = projects.id
+      inner join specialities on projects_specialities.speciality_id = specialities.id
+  <% end %>
+  <% if @params[:funding_sources] %>
+      inner join funders on funders.project_id = projects.id
+  <% end %>
+where projects.status = 1
+  <% if @params[:countries] %>
+    and countries.country_iso_3 in <%= @params[:countries].to_s.gsub('[', '(').gsub(']',')').gsub('"',"'") %>
+  <% end %>
+  <% if @params[:organizations] %>
+    and organizations.id in <%= "#{'(' + @params[:organizations].join(',') + ')'}" %>
+  <% end %>
+  <% if @params[:funding_sources] %>
+    and funders.organization_id in <%= "#{'(' + @params[:funding_sources].join(',') + ')'}" %>
+  <% end %>
+  <% if @params[:organization_types] %>
+    and organization_types.id in <%= "#{'(' + @params[:organization_types].join(',') + ')'}" %>
+  <% end %>
+  <% if @params[:investigators] %>
+    and investigators.id in <%= "#{'(' + @params[:investigators].join(',') + ')'}" %>
+  <% end %>
+  <% if @params[:project_types] %>
+    and project_types.id in <%= "#{'(' + @params[:project_types].join(',') + ')'}" %>
+  <% end %>
+  <% if @params[:cancer_types] %>
+    and cancer_types.id in <%= "#{'(' + @params[:cancer_types].join(',') + ')'}" %>
+  <% end %>
+  <% if @params[:specialities] %>
+      and specialities.id in <%= "#{'(' + @params[:specialities].join(',') + ')'}" %>
+    <% end %>
+  <% if @params[:regions] %>
+    and countries.region_iso in <%= @params[:regions].to_s.gsub('[', '(').gsub(']',')').gsub('"',"'") %>
+  <% end %>
+  <% if @params[:start_date] %>
+    and (projects.start_date > date(<%= quote @params[:start_date] %>))
+  <% end %>
+  <% if @params[:end_date] %>
+    and (projects.end_date < date(<%= quote @params[:end_date] %>))
+  <% end %>
+  <% if @params[:user] %>
+    and projects.user_id = <%= quote @params[:user] %>
+  <% end %>
+
+group by
+  project,
+  title,
+  summary,
+  web_site,
+  start_date,
+  end_date

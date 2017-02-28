@@ -1,0 +1,115 @@
+
+<div class="c-menu-mobile">
+  <svg class="c-icon icon-close -medium -primary js-menu-close">
+    <use xlink:href="#icon-close"></use>
+  </svg>
+
+  <% if user_signed_in? %>
+    <div class="js-mobile-user-menu menu-content -default <%= active_page?(user_session_path) ? '-active' : '' %>">
+      <button class="user-btn">
+        <% if current_user.present? && current_user.avatar.present? %>
+         <div class="c-avatar -no-bg -normal"
+               style="background-image: url(<%= current_user.avatar_url(:thumb) %>)">
+          </div>
+        <% else %>
+          <div class="c-avatar -normal -secondary">
+            <%= render 'shared/placeholder', person: current_user, size: '-big' %>
+          </div>
+        <% end %>
+      </button>
+    </div>
+  <% end %>
+
+  <ul class="menu-content -default">
+    <%= render "shared/nav" %>
+
+    <% if user_signed_in? %>
+      <li id="notifications">
+        <p class="btn js-mobile-notifications">
+          <span>Notifications
+          </span>
+          <% if current_user.notifications_count > 0 %>
+            <span class="c-badge -notification -relative messages-badge <%= current_user.notifications_count %>">
+              <%= current_user.notifications_count > 9 ? '9+' : current_user.notifications_count %>
+            </span>
+          <% end %>
+        </p>
+      </li>
+    <% end %>
+  </ul>
+
+  <% if user_signed_in? %>
+    <button class="c-btn -primary button">
+      <%= link_to (t 'logout'), destroy_user_session_path, :method => 'delete' %>
+    </button>
+  <% else %>
+    <button class="c-btn -primary button">
+      <%= link_to (t 'login'), user_session_path %></a>
+    </button>
+  <% end %>
+
+
+  <% if user_signed_in? %>
+    <!-- User menu content -->
+    <div class="back js-mobile-user-menu menu-content user-actions -hidden">
+      <svg class="c-icon icon-arrow -medium -primary">
+        <use xlink:href="#icon-arrow"></use>
+      </svg>
+      Back
+    </div>
+
+    <div class="user-actions menu-content -hidden">
+      <ul>
+        <li class="<%= active_page?(user_session_path) ? '-active' : '' %>">
+          <%= link_to (t 'network'), user_path(:data => 'network', :id => current_user.id) %>
+        </li>
+        <li class="<%= active_page?(user_session_path) ? '-active' : '' %>">
+          <%= link_to (t 'projects'), user_path(:data => 'projects', :id => current_user.id) %>
+        </li>
+        <li class="<%= active_page?(user_session_path) ? '-active' : '' %>">
+          <%= link_to (t 'posts'), user_path(:data => 'posts', :id => current_user.id) %>
+        </li>
+        <li class="<%= active_page?(user_session_path) ? '-active' : '' %>">
+          <%= link_to (t 'events'), user_path(:data => 'events', :id => current_user.id) %>
+        </li>
+        <li class="<%= active_page?(user_session_path) ? '-active' : '' %>">
+          <%= link_to user_path(:data => 'messages', :id => current_user.id) do %>
+            <span>
+              <%= t 'messages' %>
+              <div class="c-badge -relative messages-badge <%= current_user.unread_inbox_count > 0 ? '' : '-hidden' %>"><%= current_user.unread_inbox_count %></div>
+            </span>
+          <% end %>
+        </li>
+      </ul>
+
+      <button class="c-btn -primary -inverse button">
+        <%= link_to (t 'edit_profile'), edit_user_path(current_user.id) %>
+      </button>
+    </div>
+
+
+  <!-- Notifications -->
+    <div class="back js-mobile-notifications menu-content notifications -hidden">
+      <svg class="c-icon icon-arrow -medium -primary">
+        <use xlink:href="#icon-arrow"></use>
+      </svg>
+      Back
+    </div>
+
+    <% if @notifications.empty? %>
+      <ul class="list menu-content notifications -hidden">
+        <li class="-empty"><span>No notifications</span></li>
+      </ul>
+    <% else %>
+      <div id="notificationsList" class="container menu-content notifications -hidden">
+        <ul class="list -filled">
+          <%= render @notifications %>
+        </ul>
+        <button class="c-btn -primary -inverse button js-action-delete">
+          <%= link_to 'Delete all', mark_all_as_read_notifications_path, method: :put %>
+        </button>
+      </div>
+    <% end %>
+  <% end %>
+
+</div>
