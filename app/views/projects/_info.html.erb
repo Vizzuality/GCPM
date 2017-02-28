@@ -123,7 +123,7 @@
           <h3><%= t 'funding_source' %>(s)</h3>
           <ul class="c-list">
             <% @project.funding_sources.each do |fs| %>
-              <li class="list-item -mg-less"><%= fs.name %></li>
+              <li class="list-item -mg-less"><%= link_to fs.name, organization_path(fs.slug_or_id) %></li>
             <% end %>
           </ul>
         </div>
