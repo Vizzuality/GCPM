@@ -114,6 +114,7 @@
           element.id = element.id + '-' + this.state.get('year');
         }
         var layer = this.layersCollection.getLayer(element.id);
+
         ga('send', 'event', 'Map', 'Toggle', this.getLayerName(layer));
 
         var options = {
@@ -148,8 +149,8 @@
 
     // HELPER
     getLayerName: function(layer) {
-      if (layer.layer_group) {
-        return layer.layer_group.name + ' ' + layer.name
+      if (layer.layer_groups && layer.layer_groups.length) {
+        return layer.layer_groups[0].name + ' ' + layer.name
       }
       return layer.name
     }

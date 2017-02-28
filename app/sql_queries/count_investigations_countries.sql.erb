@@ -32,11 +32,11 @@ from projects
       inner join cancer_types on cancer_types_projects.cancer_type_id = cancer_types.id
     <% end %>
     <% if @params[:specialities] %>
-      inner join projects_pecialities on projects_pecialities.project_id = projects.id
+      inner join projects_specialities on projects_specialities.project_id = projects.id
       inner join specialities on projects_specialities.speciality_id = specialities.id
     <% end %>
     <% if @params[:specialities] %>
-      and specialities.id in <%= "#{'(' + @params[:cancer_types].join(',') + ')'}" %>
+      and specialities.id in <%= "#{'(' + @params[:specialities].join(',') + ')'}" %>
     <% end %>
     <% if @params[:user] %>
       inner join project_users on projects.id = project_users.project_id

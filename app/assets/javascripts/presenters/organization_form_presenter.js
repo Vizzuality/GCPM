@@ -23,6 +23,13 @@
       var organizationLongitude = new App.Presenter.OrganizationLongitude();
       var organizationCity = new App.Presenter.OrganizationCity();
 
+      this.mapSearch = new App.View.MapSearch({
+        el: '#map-search',
+        options: {
+          nocreate: true
+        }
+      });
+
       this.map = new App.View.Map({
         el: '#map',
         options: {
@@ -56,6 +63,14 @@
         App.trigger('OrganizationForm:submit'+this.DOMelementId, this.state.attributes);
         this.closeForm();
       }, this);
+
+      this.mapSearch.on('center', function(center) {
+        this.map.map.panTo(center);
+      }.bind(this));
+
+      this.mapSearch.on('bounds', function(bounds) {
+        this.map.map.fitBounds(bounds);
+      }.bind(this));
 
       this.map.on('pan', function(e){
         this.organizationForm.setLocation(e.target.getCenter());
@@ -135,8 +150,14 @@
         child.render();
       }.bind(this));
 
-      this.map.setElement('#map');
-      this.map.createMap();
+      setTimeout(function() {
+        this.map.setElement('#map');
+        this.map.createMap();
+
+        this.mapSearch.setElement('#map-search');
+        this.mapSearch.setSearchBox();
+      }.bind(this), 100)
+
     }
 
   });

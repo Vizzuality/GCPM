@@ -46,7 +46,7 @@
     setActiveFilters: function(state) {
       var filters = state.get('data') != 'events' ?
         _.pick(this.getState(), 'regions[]', 'countries[]', 'cancer_types[]',
-          'organization_types[]', 'organizations[]', 'project_types[]', 'funding_sources[]',
+          'organization_types[]', 'organizations[]', 'project_types[]', 'funding_sources[]', 'specialities[]',
           'start_date', 'end_date') :
         _.pick(this.getState(), 'regions[]', 'countries[]', 'start_date', 'end_date');
 

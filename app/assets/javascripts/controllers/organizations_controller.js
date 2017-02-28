@@ -12,6 +12,7 @@
     show: function(params) {
       new App.Presenter.TabNav(params);
       new App.Presenter.ShowMore(params);
+      new App.Presenter.FollowButton(params);
 
       if (gon.isMobile) {
         new App.Presenter.UserActionsMobile(params);

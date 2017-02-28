@@ -39,6 +39,12 @@ class OrganizationsController < ApplicationController
       @items_total = @projects.size
     end
 
+    if current_user
+      @followed = current_user.following?(@organization)
+      @followed_id = @organization.id
+      @followed_resource = 'Organization'
+    end
+
     respond_with(@items)
   end
 

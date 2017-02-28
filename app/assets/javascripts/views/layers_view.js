@@ -38,32 +38,25 @@
           this.data.cartoLayer = 'human-development-index';
         }
 
-        var current = $('.c-layers .layers-content').find('input[value=' + this.data.cartoLayer + ']');
+        var currents = $('.c-layers .layers-content').find('input[value=' + this.data.cartoLayer + ']');
 
-        if (current && current.length > 0) {
-          this.current = current[0];
-          this.current.checked = true;
+        if (currents && currents.length > 0) {
+          this.currents = currents;
+          _.each(this.currents, function(current){
+            current.checked = true;
+          })
         }
 
       }
       return this;
     },
 
-    triggerChange: function() {
-      this.trigger('change', this.current);
-    },
-
     handleRadio: function(e) {
-      var radio = e.target;
-
-      if(this.current && radio.getAttribute('id') === this.current.getAttribute('id')) {
-        radio.checked = false;
-        this.current = null;
+      if ($(e.currentTarget).is(':checked')) {
+        this.trigger('change', e.currentTarget);
       } else {
-        this.current = radio;
+        this.trigger('change', null);
       }
-
-      this.triggerChange();
 
       // Close layers window when selecting one
       if (gon.isMobile) {

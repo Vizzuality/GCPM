@@ -17,7 +17,6 @@
 #
 
 class WidgetSerializer < ActiveModel::Serializer
-  cache key: "widget"
   attributes :name, :slug, :graphic_type, :x_axis, :y_axis, :query, :legend, :source, :featured, :inner_page
   def featured
     object.featured?
