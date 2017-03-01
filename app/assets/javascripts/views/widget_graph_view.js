@@ -77,7 +77,7 @@
             }
           },
           legend: {
-            show: false
+            position: 'bottom'
           },
           axis: {
             x: {
