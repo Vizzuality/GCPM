@@ -70,7 +70,7 @@ class ProjectImporter
       @errors << { specialities: "Unknow speciality(-ies) #{wrong_types}" }
       return
     else
-      specialities = Speciality.where('lower(name) in (?)', ct)
+      specialities = Speciality.where('lower(name) in (?)', sp)
       specialities
     end
   end
