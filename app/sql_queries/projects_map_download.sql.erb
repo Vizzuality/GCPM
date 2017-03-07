@@ -17,7 +17,7 @@ from projects
   inner join investigators on investigators.id = research_units.investigator_id
   inner join addresses on research_units.address_id = addresses.id
   inner join countries on addresses.country_id = countries.id
-  inner join organizations on organizations.id = addresses.organization_id
+  inner join organizations on addresses.organization_id = organizations.id
   inner join project_types_projects on project_types_projects.project_id = projects.id
   inner join project_types on project_types_projects.project_type_id = project_types.id
   inner join cancer_types_projects on cancer_types_projects.project_id = projects.id

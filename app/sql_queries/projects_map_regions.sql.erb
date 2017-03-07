@@ -10,9 +10,7 @@ from projects
     inner join research_units on memberships.research_unit_id = research_units.id
     inner join addresses on research_units.address_id = addresses.id
     inner join countries on addresses.country_id = countries.id
-     <% if @params[:organizations] || @params[:organization_types] %>
-      inner join organizations on addresses.organization_id = organizations.id
-    <% end %>
+    inner join organizations on addresses.organization_id = organizations.id
     <% if @params[:funding_sources] %>
       inner join funders on funders.project_id = projects.id
     <% end %>
