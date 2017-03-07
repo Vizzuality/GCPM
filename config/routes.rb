@@ -83,7 +83,7 @@ Rails.application.routes.draw do
       resources :map,                only: [:index]
       resources :users,              only: [:index]
 
-      get '/map/projects/:id', to: 'map#show_project'
+      get '/map/projects/:id', to: 'map#index'
       get '/map/download',     to: 'map#csv_download'
 
       resources :projects, only: [:index, :show, :update, :create] do
