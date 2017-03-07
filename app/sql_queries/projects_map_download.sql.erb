@@ -22,9 +22,12 @@ from projects
   inner join project_types on project_types_projects.project_type_id = project_types.id
   inner join cancer_types_projects on cancer_types_projects.project_id = projects.id
   inner join cancer_types on cancer_types_projects.cancer_type_id = cancer_types.id
+  <% if @params[:organization_types] %>
+    inner join organization_types on organization_types.id = organizations.organization_type_id
+  <% end %>
   <% if @params[:specialities] %>
-      inner join projects_specialities on projects_specialities.project_id = projects.id
-      inner join specialities on projects_specialities.speciality_id = specialities.id
+    inner join projects_specialities on projects_specialities.project_id = projects.id
+    inner join specialities on projects_specialities.speciality_id = specialities.id
   <% end %>
   <% if @params[:funding_sources] %>
       inner join funders on funders.project_id = projects.id
@@ -35,6 +38,9 @@ where projects.status = 1
   <% end %>
   <% if @params[:organizations] %>
     and organizations.id in <%= "#{'(' + @params[:organizations].join(',') + ')'}" %>
+  <% end %>
+  <% if @params[:organization_types] %>
+    and organization_types.id in <%= "#{'(' + @params[:organization_types].join(',') + ')'}" %>
   <% end %>
   <% if @params[:funding_sources] %>
     and funders.organization_id in <%= "#{'(' + @params[:funding_sources].join(',') + ')'}" %>
