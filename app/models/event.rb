@@ -29,6 +29,8 @@
 class Event < ApplicationRecord
   acts_as_followable
 
+  before_validation :sanitize_web, if: 'website.present?'
+
   after_update :notify_users_for_update
   after_create :notify_users_for_create, if: 'user_id.present?'
 
@@ -98,6 +100,12 @@ class Event < ApplicationRecord
 
     def assign_slug
       self.slug = self.slug.downcase.parameterize
+    end
+
+    def sanitize_web
+      unless self.website.blank? || self.website.start_with?('http://') || self.website.start_with?('https://')
+        self.website = "http://#{self.website}"
+      end
     end
 
     def notify_users_for_update

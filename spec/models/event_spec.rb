@@ -30,14 +30,15 @@ require 'rails_helper'
 
 RSpec.describe Event, type: :model do
   before :each do
-    @event = create(:event, title: 'Test event')
+    @event = create(:event, title: 'Test event', website: 'test-web.org')
   end
 
   context "Valid investigator" do
     it 'Slug presentation' do
-      expect(@event).to      be_valid
-      expect(@event.slug).to be_present
-      expect(@event.slug).to eq('test-event')
+      expect(@event).to         be_valid
+      expect(@event.slug).to    be_present
+      expect(@event.slug).to    eq('test-event')
+      expect(@event.website).to eq('http://test-web.org')
     end
   end
 end
