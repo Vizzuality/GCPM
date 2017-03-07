@@ -16,6 +16,7 @@ class ResearchUnitImporter
     investigator = Investigator.find_or_initialize_by(name: data["#{entity_name}_name"]&.strip)
     investigator.email = data["#{entity_name}_email_address"]
     investigator.website = data["#{entity_name}_website"]
+    puts investigator.valid?
 
     if data["#{entity_name}_organization_grid_id"].present?
       def_address = Address.find_by(grid_id: (data["#{entity_name}_organization_grid_id"]&.strip))
@@ -49,16 +50,16 @@ class ResearchUnitImporter
         @errors << { organization: organization.errors.full_messages }
         return false
       end
+    end
 
-      unless investigator.valid?
-        @errors << { investigator: investigator.errors.full_messages }
-        return false
-      end
+    unless investigator.valid?
+      @errors << { investigator: investigator.errors.full_messages }
+      return false
+    end
 
-      unless address.valid?
-        @errors << { address: address.errors.full_messages }
-        return false
-      end
+    unless address.valid?
+      @errors << { address: address.errors.full_messages }
+      return false
     end
 
     if @errors.compact.flatten.blank?

@@ -8,7 +8,7 @@
 #  project_website :text
 #  start_date      :date
 #  end_date        :date
-#  status          :integer
+#  status          :integer          default("under_revision")
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  slug            :string

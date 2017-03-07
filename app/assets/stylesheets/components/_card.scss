@@ -89,9 +89,6 @@
       @media #{$mq-small} {
         font-family: $base-font-family;
         width: 100%;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
       }
     }
 
