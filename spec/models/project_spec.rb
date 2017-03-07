@@ -8,7 +8,7 @@
 #  project_website :text
 #  start_date      :date
 #  end_date        :date
-#  status          :integer
+#  status          :integer          default("under_revision")
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  slug            :string
@@ -75,7 +75,7 @@ RSpec.describe Project, type: :model do
       @project_reject = Project.new(title: 'Project one', summary: 'Lorem ipsum..')
 
       @project_reject.valid?
-      expect {@project_reject.save!}.to raise_error(ActiveRecord::RecordInvalid, "Validation failed: Title has already been taken, Start date is not a date, Start date can't be blank, End date is not a date, End date can't be blank, Cancer types can't be blank, Project types can't be blank")
+      expect {@project_reject.save!}.to raise_error(ActiveRecord::RecordInvalid, "Validation failed: Title has already been taken, Cancer types can't be blank, Project types can't be blank")
     end
 
     context 'Related projects' do

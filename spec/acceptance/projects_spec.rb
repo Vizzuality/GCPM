@@ -258,7 +258,7 @@ module Api::V1
           post "/api/projects?token=#{user.authentication_token}", params: params
 
           expect(status).to eq(422)
-          expect(json['message']).to eq(["Summary can't be blank", "Start date is not a date", "Start date can't be blank", "End date is not a date", "End date can't be blank", "Cancer types can't be blank", "Project types can't be blank"])
+          expect(json['message']).to eq(["Summary can't be blank", "Cancer types can't be blank", "Project types can't be blank"])
         end
 
         it 'Do not allows to create project with blank title and validate title before creating a new funder' do
@@ -268,7 +268,7 @@ module Api::V1
                                                                                           ] } }
 
           expect(status).to eq(422)
-          expect(json['message']).to eq(["Title can't be blank", "Summary can't be blank", "Start date is not a date", "Start date can't be blank", "End date is not a date", "End date can't be blank", "Cancer types can't be blank", "Project types can't be blank", "Slug can't be blank"])
+          expect(json['message']).to eq(["Title can't be blank", "Summary can't be blank", "Cancer types can't be blank", "Project types can't be blank", "Slug can't be blank"])
           expect(Organization.find_by(name: "Second project funder")).to be_nil
         end
       end
