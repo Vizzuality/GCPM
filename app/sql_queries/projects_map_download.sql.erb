@@ -7,7 +7,6 @@ select distinct
   coalesce(projects.end_date::text, '') as end_date,
   string_agg(distinct coalesce(investigators.name, ''), ' | ') as investigator_names,
   string_agg(distinct coalesce(organizations.name, ''), ' | ') as organization_names,
-  string_agg(distinct coalesce(organization_types.name, ''), ' | ') as organization_type_names,
   string_agg(distinct coalesce(countries.country_name, ''), ' | ') as country_names,
   string_agg(distinct coalesce(project_types.name, ''), ' | ') as project_type_names,
   string_agg(distinct coalesce(cancer_types.name, ''), ' | ') as cancer_type_names
@@ -19,7 +18,6 @@ from projects
   inner join addresses on research_units.address_id = addresses.id
   inner join countries on addresses.country_id = countries.id
   inner join organizations on organizations.id = addresses.organization_id
-  inner join organization_types on organization_types.id = organizations.organization_type_id
   inner join project_types_projects on project_types_projects.project_id = projects.id
   inner join project_types on project_types_projects.project_type_id = project_types.id
   inner join cancer_types_projects on cancer_types_projects.project_id = projects.id
@@ -40,9 +38,6 @@ where projects.status = 1
   <% end %>
   <% if @params[:funding_sources] %>
     and funders.organization_id in <%= "#{'(' + @params[:funding_sources].join(',') + ')'}" %>
-  <% end %>
-  <% if @params[:organization_types] %>
-    and organization_types.id in <%= "#{'(' + @params[:organization_types].join(',') + ')'}" %>
   <% end %>
   <% if @params[:investigators] %>
     and investigators.id in <%= "#{'(' + @params[:investigators].join(',') + ')'}" %>
