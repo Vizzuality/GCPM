@@ -36,7 +36,6 @@
       <div class="row">
         <div class="column small-12">
           <div class="wrapper">
-            <h2 class="-underlined -primary"><%= t 'description' %></h2>
             <div class="content"><%= @post.body.html_safe %></div>
             <% if current_user && current_user.id === @post.user_id %>
               <%= link_to 'Edit', edit_post_path(@post), class: 'c-btn -secondary' %>
@@ -47,5 +46,3 @@
     </div>
   </section>
 </div>
-
-
