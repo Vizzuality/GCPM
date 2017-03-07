@@ -55,7 +55,7 @@ class Investigator < ApplicationRecord
   scope :by_funding_sources,    -> funding_sources    { joins(projects: :funders).where(funders: { organization_id: funding_sources }) }
   scope :by_organization_types, -> organization_types { joins(organizations: :organization_type).where(organization_types: { id: organization_types }) }
   scope :by_countries,          -> countries          { joins([research_units: [address: :country]]).where(countries: { country_iso_3: countries }) }
-  scope :by_regions,            -> regions            { joins(projects: :countries).where(countries: { region_iso: regions }) }
+  scope :by_regions,            -> regions            { joins(research_units: [address: :country]).where(countries: { region_iso: regions }) }
   scope :by_start_date,         -> start_date         { joins(:projects).where('projects.start_date > ?', start_date ) }
   scope :by_end_date,           -> end_date           { joins(:projects).where('projects.end_date < ?', end_date ) }
   scope :by_user,               -> user               { where('investigators.user_id = ? AND investigators.is_approved = ?', user, true ) }
