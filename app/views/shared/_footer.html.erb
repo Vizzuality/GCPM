@@ -32,10 +32,8 @@
             <li class="c-translate">
               <%= link_to 'Contact', new_contact_form_path %>
             </li>
-            <li id="userManualDownload">
-              <%= link_to t('download'), download_user_manual_path,
-                download: 'user-manual', title: t('user-manual')
-              %>
+            <li>
+              <%= link_to 'User Manual', user_manual_path if path_exists?(:user_manual) %>
             </li>
             <li class="c-translate">
               <%= link_to 'FAQ', faq_path if path_exists?(:faq_path) %>
