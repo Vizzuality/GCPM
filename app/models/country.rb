@@ -31,7 +31,7 @@ class Country < ApplicationRecord
     self.projects.uniq.size
   end
   def organizations_count
-    self.organizations.uniq.size
+    self.organizations.joins(:projects).uniq.size
   end
   def events_count
     Event.where(country: c.country_name).uniq.size
