@@ -12,8 +12,15 @@ module Sluggable
 
 
     def self.set_by_id_or_slug(param)
-      object_id = where(slug: param).or(where(id: param)).pluck(:id).min
-      find(object_id) if object_id.present?
+      if check_if_id(param)
+        find(param)
+      else
+        find_by(slug: param)
+      end
+    end
+
+    def self.check_if_id(param)
+      param.to_s == param.to_i.to_s
     end
 
     private
