@@ -48,6 +48,9 @@ from projects
       inner join project_users on projects.id = project_users.project_id
     <% end %>
     where projects.status = 1
+    <% if @params[:id].present? %>
+      and projects.id = <%= @params[:id] %>
+    <% end %>
     <% if @params[:countries] %>
       and countries.country_iso_3 in     <%= @params[:countries].to_s.gsub('[', '(').gsub(']',')').gsub('"',"'") %>
     <% end %>

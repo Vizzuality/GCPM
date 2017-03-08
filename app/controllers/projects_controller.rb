@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project
+  before_action :check_availability, only: :show
   before_action :set_user, only: [:remove_relation, :relation_request]
 
   respond_to :html, :js
@@ -79,6 +80,12 @@ class ProjectsController < ApplicationController
 
     def set_project
       @project = Project.preload(:organizations).set_by_id_or_slug(params[:id])
+    end
+
+    def check_availability
+      if @project.blank? || @project.status != 'published'
+        redirect_to root_url, notice: 'Project not available.'
+      end
     end
 
     def set_user
