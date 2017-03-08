@@ -92,7 +92,7 @@ class Investigator < ApplicationRecord
       investigators = investigators.limit(options[:limit])                              if options[:limit]
       investigators = investigators.offset(options[:offset])                            if options[:offset]
       investigators = investigators.filter_name(options[:q])                            if options[:q].present?
-      investigators.distinct
+      investigators = investigators.joins(:projects).where(projects: {status: 1}).distinct
     end
   end
 
