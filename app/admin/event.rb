@@ -47,7 +47,8 @@ ActiveAdmin.register Event do
   csv do
     column(:id)
     column(:title)
-    column('creator') { |event| event.user.display_name if event.user.present? }
+    column('creator(name)')    { |event| event.user.display_name if event.user.present? }
+    column('creator(user_id)') { |event| event.user.id if event.user.present?           }
     column(:description)
     column(:website)
     column(:excerpt)
