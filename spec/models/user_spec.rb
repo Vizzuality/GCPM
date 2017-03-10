@@ -32,6 +32,7 @@
 #  avatar                 :string
 #  notifications_count    :integer          default(0)
 #  notifications_mailer   :boolean          default(TRUE)
+#  is_active              :boolean          default(TRUE)
 #
 
 require 'rails_helper'

@@ -203,6 +203,8 @@ ActiveAdmin.setup do |config|
   # Force the use of quotes
   # config.csv_options = { force_quotes: true }
 
+  config.download_links = [:csv]
+
   # == Menu System
   #
   # You can add a navigation menu to be used in your application, or configure a provided menu

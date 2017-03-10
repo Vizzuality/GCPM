@@ -1,11 +1,12 @@
 ActiveAdmin.register User do
   menu parent: 'Network', priority: 1
 
-  permit_params :email, :name, :position, :twitter_account, :linkedin_account, :pubmed, :role
+  permit_params :email, :name, :position, :twitter_account, :linkedin_account, :pubmed, :role, :is_active
 
   filter :name
   filter :email
   filter :role, as: :select, collection: [['User', 0], ['Admin', 1]]
+  filter :is_active
 
   index do
     selectable_column
@@ -13,6 +14,7 @@ ActiveAdmin.register User do
     column :name
     column :email
     column :role
+    column :is_active
     actions
   end
 
@@ -25,6 +27,7 @@ ActiveAdmin.register User do
       f.input :linkedin_account
       f.input :pubmed
       f.input :role
+      f.input :is_active
     end
     f.actions
   end
