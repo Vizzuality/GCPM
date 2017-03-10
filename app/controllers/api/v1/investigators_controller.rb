@@ -55,7 +55,9 @@ module Api::V1
       end
 
       def investigators_params
-        params.permit(:q)
+        permited_params = params.permit(:q, :getall)
+        permited_params.merge!(getall: true) unless permited_params[:getall] || permited_params[:getall] == true
+        permited_params
       end
   end
 end

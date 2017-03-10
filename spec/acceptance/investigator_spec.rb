@@ -53,6 +53,13 @@ module Api::V1
         expect(investigator['id']).to   be_present
       end
 
+      it 'Do not show investigators without active projects' do
+        get "/api/investigators?getall=false&token=#{user.authentication_token}"
+
+        expect(status).to      eq(200)
+        expect(json.length).to eq(0)
+      end
+
       it 'Allows to search investigators by name' do
         get "/api/investigators?q=2"
 

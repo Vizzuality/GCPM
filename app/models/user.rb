@@ -32,6 +32,7 @@
 #  avatar                 :string
 #  notifications_count    :integer          default(0)
 #  notifications_mailer   :boolean          default(TRUE)
+#  is_active              :boolean          default(TRUE)
 #
 
 class User < ApplicationRecord
@@ -103,6 +104,14 @@ class User < ApplicationRecord
 
   def unread_messages
     Mailboxer::Receipt.recipient(self).is_unread.not_trash.count
+  end
+
+  def active_for_authentication?
+    super and self.is_active?
+  end
+
+  def inactive_message
+    'You are not allowed to sign in.'
   end
 
   class << self
