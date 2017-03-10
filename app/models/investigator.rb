@@ -70,6 +70,8 @@ class Investigator < ApplicationRecord
 
   class << self
     def fetch_all(options={})
+      getall_true = options[:getall] if options.present? && options[:getall] && options[:getall] == true
+
       investigators = Investigator.all.for_render.order_by_name
       investigators = investigators.by_countries(options[:countries])                   if options[:countries]
       investigators = investigators.by_regions(options[:regions])                       if options[:regions]
@@ -92,7 +94,11 @@ class Investigator < ApplicationRecord
       investigators = investigators.limit(options[:limit])                              if options[:limit]
       investigators = investigators.offset(options[:offset])                            if options[:offset]
       investigators = investigators.filter_name(options[:q])                            if options[:q].present?
-      investigators = investigators.joins(:projects).where(projects: {status: 1}).distinct
+      investigators = if getall_true.present?
+                        investigators.distinct
+                      else
+                        investigators.joins(:projects).where(projects: { status: 1 }).distinct
+                      end
     end
   end
 
