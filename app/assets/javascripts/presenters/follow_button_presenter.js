@@ -63,6 +63,7 @@
       var followed = this.follow.get('followed');
       this.follow.set('followed', !followed);
       ga('send', 'event', 'Subscribe', 'Follow', 'Follow '+ this.follow.get('follow_resource') + ' ' +  this.follow.get('follow_id'));
+      window.location.reload();
     },
 
     followError: function() {
