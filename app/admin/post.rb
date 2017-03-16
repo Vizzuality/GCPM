@@ -34,6 +34,11 @@ ActiveAdmin.register Post do
     end
   end
 
-
-
+  csv do
+    column(:id)
+    column(:title)
+    column('creator(name)')    { |post| post.user.display_name if post.user.present? }
+    column('creator(user_id)') { |post| post.user.id if post.user.present?           }
+    column(:body)
+  end
 end
