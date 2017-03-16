@@ -60,4 +60,18 @@ ActiveAdmin.register Project do
     f.actions
   end
 
+  csv do
+    column(:id)
+    column(:title)
+    column('creator(name)')    { |project| project.creator.display_name if project.creator.present? }
+    column('creator(user_id)') { |project| project.creator.id if project.creator.present?           }
+    column(:summary)
+    column(:project_website)
+    column(:start_date)
+    column(:end_date)
+    column(:status)
+    column(:slug)
+    column(:created_at)
+    column(:updated_at)
+  end
 end
