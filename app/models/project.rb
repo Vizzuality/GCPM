@@ -28,7 +28,8 @@ class Project < ApplicationRecord
   after_create :notify_users_for_create, if: 'created_by.present?'
 
   belongs_to :creator, class_name: 'User',
-                       foreign_key: 'created_by'
+                       foreign_key: 'created_by',
+                       optional: true
 
   has_many :memberships
   has_many :research_units,  through: :memberships
