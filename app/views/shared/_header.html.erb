@@ -12,7 +12,7 @@
             <%= render "shared/nav" %>
             <% if user_signed_in? %>
               <li id="notifications">
-                <button class="c-dropdown js-action-notifications">
+                <div class="c-dropdown js-action-notifications">
                   <svg class="c-icon -medium -primary"><use xlink:href="#icon-bell"></use></svg>
                   <% if current_user.notifications_count > 0 %>
                     <div class="c-badge -notifications messages-badge <%= current_user.notifications_count %>">
@@ -22,7 +22,9 @@
                   <div class="dropdown-content notifications">
                     <% if @notifications.empty? %>
                       <ul class="list">
-                        <li class="-empty">No notifications</li>
+                        <li class="-empty">
+                          No notifications
+                        </li>
                       </ul>
                     <% else %>
                       <div class="container">
@@ -37,18 +39,17 @@
                                 <p><%= notification.notificable_title %></p>
                               <% end %>
                             </li>
-
-                            <% if !browser.device.mobile? %>
-                              <li class="-btn js-action-delete">
-                                <%= link_to 'Delete all', mark_all_as_read_notifications_path, method: :put %>
-                              </li>
-                            <% end %>
                           <% end %>
                         </ul>
                       </div>
+                      <% if !browser.device.mobile? %>
+                        <div class="delete-btn js-action-delete">
+                          <%= link_to 'Delete all', mark_all_as_read_notifications_path, method: :put %>
+                        </div>
+                      <% end %>
                     <% end %>
                   </div>
-                </button>
+                </div>
               </li>
               <li class="js-user-menu <%= active_page?(user_session_path) ? '-active' : '' %>">
                 <button class="user-btn">
