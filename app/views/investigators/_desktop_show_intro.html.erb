@@ -24,7 +24,7 @@
     <div class="row collapse wrapper">
       <div class="column small-12 medium-8">
         <div class="c-title-btn">
-          <h1><%= @investigator.try(:name) %></h1>
+          <h2><%= @investigator.try(:name) %></h2>
           <% if user_signed_in? && current_user.investigator == @investigator %>
             <%= link_to (t 'not_me'), remove_relation_investigator_path(@investigator), method: :patch, class: 'c-btn -transparent' %>
           <% elsif user_signed_in? && current_user.investigator.blank? && @investigator.user.blank? %>

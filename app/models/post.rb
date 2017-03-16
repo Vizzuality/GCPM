@@ -28,7 +28,7 @@ class Post < ApplicationRecord
   def build_pins(options)
     options.each do |pinable_type, pinable_ids|
       pinable_ids.each do |pinable_id|
-        Pin.create(pinable_type: pinable_type.classify, pinable_id: pinable_id, post_id: self.id)
+        Pin.where(pinable_type: pinable_type.classify, pinable_id: pinable_id, post_id: self.id).first_or_create
       end
     end
   end
