@@ -27,6 +27,9 @@ class Project < ApplicationRecord
   after_update :notify_users_for_update, if: "status == 'published'"
   after_create :notify_users_for_create, if: 'created_by.present?'
 
+  belongs_to :creator, class_name: 'User',
+                       foreign_key: 'created_by'
+
   has_many :memberships
   has_many :research_units,  through: :memberships
   has_many :organizations,   through: :memberships
