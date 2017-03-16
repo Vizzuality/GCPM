@@ -13,7 +13,7 @@ class DataExtractor
 
   def extract_project
     # Imports project
-    project_attributes = row.slice('project_title', 'project_website', 'project_summary', 'project_start_date', 'project_end_date', 'project_cancer_types', 'project_types', 'specialities')
+    project_attributes = row.slice('project_title', 'project_website', 'project_summary', 'project_start_date', 'project_end_date', 'project_cancer_types', 'project_types', 'specialties')
     return if project_attributes.values.compact.blank?
     project = ProjectImporter.new(project_index, project_attributes)
     unless project.import!

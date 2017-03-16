@@ -18,7 +18,7 @@ class ProjectImporter
     project.end_date = data['project_end_date']
     project_types = self.validate_project_types(data['project_types']) if data['project_types'].present?
     cancer_types = self.validate_cancer_types(data['project_cancer_types']) if data['project_cancer_types'].present?
-    specialities = self.validate_specialities(data['specialities']) if data['specialities'].present?
+    specialities = self.validate_specialities(data['specialties']) if data['specialties'].present?
     project.project_types = project_types if project_types
     project.cancer_types = cancer_types if cancer_types
     project.specialities = specialities if specialities

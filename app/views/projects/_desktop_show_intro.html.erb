@@ -9,7 +9,7 @@
   <div class="wrapper">
     <div class="row collapse">
       <div class="column small-12 medium-8">
-        <h1><%= @project.title %></h1>
+        <h2><%= @project.title %></h2>
 
         <% if user_signed_in? && current_user.projects.include?(@project) %>
           <%= link_to 'It doesn\'t belong to me', remove_relation_project_path(@project), method: :patch, class: 'c-btn -transparent' %>

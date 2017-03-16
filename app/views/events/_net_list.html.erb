@@ -28,8 +28,8 @@
               <span>-</span>
             <% end %>
           </p>
-          
-          <p><%= truncate(e.description.html_safe, :length => 300) %></p>
+
+          <p><%= truncate_html(e.description, :length => 300, :omission => "...").html_safe %></p>
         </div>
       </div>
     <% end %>
