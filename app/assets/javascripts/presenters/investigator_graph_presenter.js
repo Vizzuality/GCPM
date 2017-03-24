@@ -43,7 +43,6 @@
 
     dataSuccess: function(data) {
       this.hideSpinner();
-
       this.investigatorGraph = new App.View.InvestigatorGraph({
         el: '#graph',
         data: this.setData(data)
@@ -57,11 +56,11 @@
     },
 
     setData: function(data) {
-      var renamedData = _.map(data, function(proj) {
+      var renamedData = _.uniq(_.map(data, function(proj) {
         var newProject = _.extend({}, proj);
         newProject.children = proj.investigators;
         return newProject;
-      });
+      }), 'id');
 
       return {
         name: gon.server_params['name'],
