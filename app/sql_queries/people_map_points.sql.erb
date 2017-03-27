@@ -1,4 +1,5 @@
 select distinct on (memberships.membership_type, investigators.id)
+projects.id as project,
 investigators.id as resource_id,
 investigators.name as resource_name,
 investigators.slug as resource_slug,
@@ -45,6 +46,9 @@ from investigators
       inner join project_users on projects.id = project_users.project_id
     <% end %>
     where projects.status = 1
+    <% if @params[:id].present? %>
+      and projects.id = <%= @params[:id] %>
+    <% end %>
     <% if @params[:countries] %>
       and countries.country_iso_3 in     <%= @params[:countries].to_s.gsub('[', '(').gsub(']',')').gsub('"',"'") %>
     <% end %>
@@ -78,5 +82,5 @@ from investigators
     <% if @params[:user] %>
       and project_users.user_id = <%= quote @params[:user] %> and project_users.is_approved = true
     <% end %>
-group by resource_id, resource_name, resource_slug, location_name, location_country_name, location_city, location_line_1, location_line_2, location_line_3, location_postcode, location_state, organization_name, organization_slug, organization, centroid, iso, memberships.membership_type
+group by project, resource_id, resource_name, resource_slug, location_name, location_country_name, location_city, location_line_1, location_line_2, location_line_3, location_postcode, location_state, organization_name, organization_slug, organization, centroid, iso, memberships.membership_type
 order by memberships.membership_type desc
