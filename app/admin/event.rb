@@ -65,8 +65,8 @@ ActiveAdmin.register Event do
     column(:latitude)
     column(:longitude)
     column(:postcode)
+    column(:slug)
     column(:created_at)
     column(:updated_at)
-    column(:slug)
   end
 end

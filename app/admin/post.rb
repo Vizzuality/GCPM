@@ -40,5 +40,7 @@ ActiveAdmin.register Post do
     column('creator(name)')    { |post| post.user.display_name if post.user.present? }
     column('creator(user_id)') { |post| post.user.id if post.user.present?           }
     column(:body)
+    column(:created_at)
+    column(:updated_at)
   end
 end
