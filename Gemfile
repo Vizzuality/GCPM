@@ -28,7 +28,6 @@ gem 'truncate_html'
 gem 'devise'
 
 # Omniauth
-gem 'omniauth'
 gem 'omniauth-linkedin'
 gem 'omniauth-google-oauth2'
 gem 'bcrypt'
