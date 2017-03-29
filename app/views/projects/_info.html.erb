@@ -133,7 +133,7 @@
         <div class="sidebar-item">
           <h3><%= t 'project_lead' %>(s)</h3>
           <ul class="c-list">
-            <% @project.project_leads.each do |pl| %>
+            <% @project.project_leads.distinct.each do |pl| %>
               <li class="list-item -mg-less"><%= link_to pl.name, investigator_path(pl.slug_or_id) %></li>
             <% end %>
           </ul>
@@ -144,7 +144,7 @@
         <div class="sidebar-item">
           <h3><%= t 'collaborator' %>(s)</h3>
           <ul class="c-list">
-            <% @project.secondary_investigators.each do |si| %>
+            <% @project.secondary_investigators.distinct.each do |si| %>
               <li class="list-item -mg-less"><%= link_to si.name, investigator_path(si.slug_or_id) %></li>
             <% end %>
           </ul>

@@ -10,6 +10,7 @@ module Api::V1
       let!(:investigator_2)    { FactoryGirl.create(:investigator, name: 'Investigator 2', address_ids: [address.id])     }
       let!(:investigator_3)    { FactoryGirl.create(:investigator, name: 'Investigator 3')                                }
       let!(:user)              { FactoryGirl.create(:user, authentication_token: '7Nw1A13xrHrZDHj631MA')                  }
+      let!(:admin)             { FactoryGirl.create(:user, authentication_token: '7Nw1A13xrHrZDHj631MB', role: 'admin')   }
       let!(:country)           { FactoryGirl.create(:country)                                                             }
       let!(:project)           { FactoryGirl.create(:project, title: 'Project title', users: [user], status: 'published',
                                                      project_types: [create(:project_type, name: "project type 1")],
@@ -131,6 +132,14 @@ module Api::V1
       context 'Update Project' do
         it 'Allows to update project' do
           put "/api/projects/#{project_slug}?token=#{user.authentication_token}", params: params
+
+          expect(status).to eq(200)
+          expect(json['title']).to eq('Project updated')
+          expect(json['id']).to    be_present
+        end
+
+        it 'Allows to update project by admin' do
+          put "/api/projects/#{project_slug}?token=#{admin.authentication_token}", params: params
 
           expect(status).to eq(200)
           expect(json['title']).to eq('Project updated')
