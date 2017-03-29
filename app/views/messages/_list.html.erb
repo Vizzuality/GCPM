@@ -18,7 +18,7 @@
           </div>
           <div class="conversation-body">
             <ul class="messages">
-              <% conv.messages.each do |m| %>
+              <% conv.messages.order('created_at ASC').each do |m| %>
                 <% message_person = sender(m.sender_id) %>
                 <li class="c-conversations-item <%= (m.sender_id == current_user.id) ? '-mine' : '-theirs' %>">
                   <div class="sender">
