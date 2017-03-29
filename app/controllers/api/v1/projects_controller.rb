@@ -70,7 +70,7 @@ module Api::V1
 
       def set_user_project
         @project = Project.set_by_id_or_slug(params[:id])
-        if @user.projects.include?(@project)
+        if @project.users.include?(@user) || @user.admin?
           return
         else
           render json: { success: false, message: "You don't have permission to access this project" }, status: 401
