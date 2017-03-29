@@ -23,15 +23,15 @@ class Organization < ApplicationRecord
   belongs_to :organization_type
 
   has_many :addresses
-  has_many :research_units, through: :addresses
-  has_many :investigators,  through: :research_units, foreign_key: 'investigator_id'
-  has_many :memberships,    through: :research_units
-  has_many :projects,       through: :memberships
+  has_many :research_units, through: :addresses, dependent: :nullify
+  has_many :investigators,  through: :research_units, foreign_key: 'investigator_id', dependent: :nullify
+  has_many :memberships,    through: :research_units, dependent: :nullify
+  has_many :projects,       through: :memberships, dependent: :nullify
   has_many :pins,           as: :pinable
   has_many :posts,          through: :pins
 
   has_many :funders
-  has_many :funded_projects, through: :funders, source: :project
+  has_many :funded_projects, through: :funders, source: :project, dependent: :nullify
 
   accepts_nested_attributes_for :addresses, allow_destroy: true
 
