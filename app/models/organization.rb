@@ -22,7 +22,7 @@ class Organization < ApplicationRecord
 
   belongs_to :organization_type
 
-  has_many :addresses
+  has_many :addresses,      dependent: :destroy
   has_many :research_units, through: :addresses, dependent: :nullify
   has_many :investigators,  through: :research_units, foreign_key: 'investigator_id', dependent: :nullify
   has_many :memberships,    through: :research_units, dependent: :nullify
