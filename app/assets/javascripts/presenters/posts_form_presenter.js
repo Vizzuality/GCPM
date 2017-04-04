@@ -20,6 +20,7 @@
 
     initialize: function(params) {
       this.state = new StateModel(params);
+
       var countries = new App.Presenter.Countries({
         multiple: true,
         select2Options: {},
@@ -29,6 +30,7 @@
         name: 'post[countries][]',
         valueName: 'id'
       });
+
       var organizations = new App.Presenter.Organizations({
         label: 'Organizations',
         addNew: false,
@@ -64,19 +66,21 @@
             }
           }
         }
-
       });
+
       var cancerTypes = new App.Presenter.CancerTypes({
         label: 'Cancer types',
         addNew: false,
         name: 'post[cancer_types][]',
         required: false
       });
+
       var projects = new App.Presenter.Projects({
         label: 'Projects',
         addNew: false,
         name: 'post[projects][]'
       });
+
       var specialities = new App.Presenter.Specialities({
         label: 'Specialities',
         addNew: false,
