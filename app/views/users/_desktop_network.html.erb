@@ -2,7 +2,7 @@
   <div class="column small-12 medium-8 -column">
     <article>
       <div class="l-content -br-bottom wrapper -no-br">
-        <h2><%= t 'investigators' %></h2>
+        <h2><%= t 'investigators' %> (<%= @followPeople.size %>)</h2>
 
         <% if !@followPeople.any? %>
           <div class="list">
@@ -17,7 +17,7 @@
 
     <article>
       <div class="l-content -br-bottom wrapper">
-        <h2><%= t 'users' %></h2>
+        <h2><%= t 'users' %> (<%= @followUser.size %>)</h2>
 
         <% if !@followUser.any? %>
           <div class="list">
@@ -32,7 +32,7 @@
 
     <article>
       <div class="l-content -br-bottom wrapper">
-        <h2><%= t 'projects' %></h2>
+        <h2><%= t 'projects' %> (<%= @followProjects.size %>)</h2>
 
         <% if @followProjects.size <= 0 %>
           <div class="list">
@@ -47,7 +47,7 @@
 
     <article>
       <div class="l-content -no-br wrapper<%= @followEvents.any? ? ' -br-bottom' : '' %>">
-        <h2><%= t 'events' %></h2>
+        <h2><%= t 'events' %> (<%= @followEvents.size %>)</h2>
 
         <% if !@followEvents.any? %>
           <div class="list">
@@ -85,7 +85,7 @@
 
       <article>
         <div class="l-content wrapper">
-          <h2><%= t 'countries' %></h2>
+          <h2><%= t 'countries' %> (<%= @followCountries.size %>)</h2>
           <% if !@followCountries.any? %>
             <p>No countries</p>
           <% end %>
@@ -104,7 +104,7 @@
 
       <article>
         <div class="l-content wrapper">
-          <h2><%= t 'cancer_types' %></h2>
+          <h2><%= t 'cancer_types' %> (<%= @followCancerTypes.size %>)</h2>
           <% if !@followCancerTypes.any? %>
             <p>No cancer types</p>
           <% end %>
@@ -123,7 +123,7 @@
 
       <article>
         <div class="l-content wrapper">
-          <h2><%= t 'organizations' %></h2>
+          <h2><%= t 'organizations' %> (<%= @followOrganizations.size %>)</h2>
           <% if !@followOrganizations.any? %>
             <p>No organizations</p>
           <% end %>
