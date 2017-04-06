@@ -42,6 +42,11 @@
       this.map = L.map(this.el.id, this.options);
       this.setBasemap();
       this.addListeners();
+
+      // Set the map to the center yo trigger a pan
+      this.trigger('pan', {
+        target: this.map
+      });
     },
 
     /**

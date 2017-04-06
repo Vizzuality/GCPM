@@ -1,4 +1,10 @@
 <% controller_name = controller && controller.controller_name %>
+<%
+  countries = @country ? @country.id : nil
+  cancer_types = @cancer_type ? @cancer_type.id : nil
+  projects = @project ? @project.id : nil
+  organizations = @organization ? @organization.id : nil
+%>
 <div>
   <% if not_me_and_section?(controller_name, @user.present? && @user, get_not_null_user(@investigator)) %>
     <ul class="c-btn-container js-messages-actions-view">
@@ -57,7 +63,7 @@
   <% end %>
   <ul class="c-btn-container">
     <li><%= link_to '+ Project', (user_signed_in?) ? new_user_project_path(user_id: current_user.id) : user_session_path, class: 'c-btn -transparent -extra-thin' %></li>
-    <li><%= link_to '+ Post', (user_signed_in?) ? new_post_path : user_session_path, class: 'c-btn -transparent -extra-thin' %></li>
+    <li><%= link_to '+ Post', (user_signed_in?) ? new_post_path('post[countries][]': countries, 'post[projects][]': projects, 'post[cancer_types][]': cancer_types, 'post[organizations][]': organizations) : user_session_path, class: 'c-btn -transparent -extra-thin' %></li>
     <li><%= link_to '+ Event', (user_signed_in?) ? new_user_event_path(user_id: current_user.id) : user_session_path, class: 'c-btn -transparent -extra-thin' %></li>
   </ul>
 </div>
