@@ -25,7 +25,7 @@
     <article class="c-network-list" data-name="investigators">
       <div class="l-content -br-bottom wrapper js-toggle-list">
         <h2>
-          <%= t 'investigators' %>
+          <%= t 'investigators' %> (<%= @followPeople.size %>)
           <svg class="c-icon icon-arrow -medium -secondary">
             <use xlink:href="#icon-arrow"></use>
           </svg>
@@ -45,7 +45,7 @@
     <article class="c-network-list" data-name="users">
       <div class="l-content -br-bottom wrapper js-toggle-list">
         <h2>
-          <%= t 'users' %>
+          <%= t 'users' %> (<%= @followUser.size %>)
           <svg class="c-icon icon-arrow -medium -secondary">
             <use xlink:href="#icon-arrow"></use>
           </svg>
@@ -65,7 +65,7 @@
     <article class="c-network-list" data-name="projects">
       <div class="l-content -br-bottom wrapper js-toggle-list">
         <h2>
-          <%= t 'projects' %>
+          <%= t 'projects' %> (<%= @followProjects.size %>)
           <svg class="c-icon icon-arrow -medium -secondary">
             <use xlink:href="#icon-arrow"></use>
           </svg>
@@ -85,7 +85,7 @@
     <article class="c-network-list" data-name="events">
       <div class="l-content -no-br wrapper js-toggle-list<%= @followEvents.any? ? ' -br-bottom' : '' %>">
         <h2>
-          <%= t 'events' %>
+          <%= t 'events' %> (<%= @followEvents.size %>)
           <svg class="c-icon icon-arrow -medium -secondary">
             <use xlink:href="#icon-arrow"></use>
           </svg>
@@ -108,7 +108,7 @@
       <article class="c-network-list" data-name="countries">
         <div class="l-content wrapper js-toggle-list">
           <h2>
-            <%= t 'countries' %>
+            <%= t 'countries' %> (<%= @followCountries.size %>)
             <svg class="c-icon icon-arrow -medium -secondary">
               <use xlink:href="#icon-arrow"></use>
             </svg>
@@ -130,7 +130,7 @@
       <article class="c-network-list" data-name="cancerTypes">
         <div class="l-content wrapper js-toggle-list">
           <h2>
-            <%= t 'cancer_types' %>
+            <%= t 'cancer_types' %> (<%= @followCancerTypes.size %>)
             <svg class="c-icon icon-arrow -medium -secondary">
               <use xlink:href="#icon-arrow"></use>
             </svg>
@@ -152,7 +152,7 @@
       <article class="c-network-list" data-name="organizations">
         <div class="l-content wrapper js-toggle-list">
           <h2>
-            <%= t 'organizations' %>
+            <%= t 'organizations' %> (<%= @followOrganizations.size %>)
             <svg class="c-icon icon-arrow -medium -secondary">
               <use xlink:href="#icon-arrow"></use>
             </svg>
