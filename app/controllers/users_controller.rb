@@ -59,8 +59,8 @@ class UsersController < ApplicationController
       @followed_resource = 'User'
     end
 
-    @following = @user.follow_count || 0
-    @followers = @user.followers_count || 0
+    @following = @user.following_users_count || 0
+    @followers = @user.followers_by_type_count('User') || 0
 
     respond_with(@items)
   end
