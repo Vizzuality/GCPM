@@ -28,6 +28,9 @@
           <button class="c-btn -secondary -inverse -mg-left js-share-button" data-actiona="save"><%= t 'share' %></button>
         </div>
       </div>
+      <div class="column small-12 align-middle">
+        <p>Last update: <%= @post.updated_at.strftime("%d-%m-%Y") %></p>
+      </div>
     </div>
   </section>
 
