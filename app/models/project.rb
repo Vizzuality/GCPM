@@ -25,7 +25,8 @@ class Project < ApplicationRecord
 
   after_create :notify_admin, if: "status == 'under_revision'"
   after_update :notify_users_for_update, if: "status == 'published'"
-  after_create :notify_users_for_create, if: 'created_by.present?'
+  after_create :notify_users_for_create, if: "created_by.present? && status == 'published'"
+  after_update :touch_cancer_types,      if: "status_changed? && status == 'published'"
 
   belongs_to :creator, class_name: 'User',
                        foreign_key: 'created_by',
@@ -259,6 +260,10 @@ class Project < ApplicationRecord
 
     def notify_admin
       AdminMailer.user_relation_email('project', self.title, 'created').deliver_later
+    end
+
+    def touch_cancer_types
+      CancerTypeProject.each_touch(self.id)
     end
 
     def notify_users_for_update

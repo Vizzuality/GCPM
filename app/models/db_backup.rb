@@ -15,10 +15,10 @@ class DbBackup < ApplicationRecord
   def create_backups
     self.file_name = "#{Time.now.to_formatted_s(:rfc822).parameterize}.bak"
     db = "gcpm_#{Rails.env}"
-    cmd = "pg_dump -t organization_types -t organizations -t admin_users -t addresses -t active_admin_comments -t countries -t cancer_types -t project_types -t project_types_projects -t cancer_types_projects -t research_units -t memberships -t agrupations -t layer_groups -t funders -t projects -t layers -t events -t follows -t posts -t ckeditor_assets -t identities -t project_updates -t users -t mailboxer_receipts -t mailboxer_notifications -t project_users -t mailboxer_conversations -t mailboxer_conversation_opt_outs -t investigators -t specialities -t projects_specialities -t widgets -t featureds -t pictures -t pins -t activity_feeds -t notifications --host localhost --username postgres --verbose --clean --no-owner --no-acl --format=c #{db} > #{Rails.root.to_s.gsub(/ /, '\ ')}/db_backups/#{self.file_name}"
+    cmd = "PGPASSWORD=#{ENV["GCPM_DATABASE_PASSWORD"]} pg_dump -t organization_types -t organizations -t admin_users -t addresses -t active_admin_comments -t countries -t cancer_types -t project_types -t project_types_projects -t cancer_types_projects -t research_units -t memberships -t agrupations -t layer_groups -t funders -t projects -t layers -t events -t follows -t posts -t ckeditor_assets -t identities -t project_updates -t users -t mailboxer_receipts -t mailboxer_notifications -t project_users -t mailboxer_conversations -t mailboxer_conversation_opt_outs -t investigators -t specialities -t projects_specialities -t widgets -t featureds -t pictures -t pins -t activity_feeds -t notifications --host localhost --username postgres --verbose --clean --no-owner --no-acl --format=c #{db} > #{Rails.root.to_s.gsub(/ /, '\ ')}/db_backups/#{self.file_name}"
     puts cmd
     system cmd
-    cmd_full = "pg_dump --host localhost --username postgres --verbose --clean --no-owner --no-acl --format=c #{db} > #{Rails.root.to_s.gsub(/ /, '\ ')}/db_backups/full_#{self.file_name}"
+    cmd_full = "PGPASSWORD=#{ENV["GCPM_DATABASE_PASSWORD"]} pg_dump --host localhost --username postgres --verbose --clean --no-owner --no-acl --format=c #{db} > #{Rails.root.to_s.gsub(/ /, '\ ')}/db_backups/full_#{self.file_name}"
     puts cmd_full
     system cmd_full
   end
