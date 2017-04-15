@@ -19,10 +19,17 @@ class Search < ActiveRecord::Base
 
   def results
     if @term.present?
-      self.class.where('LOWER(searches.term) LIKE LOWER(?)
-                        AND
-                        LOWER(searches.searchable_type) LIKE LOWER(?)',
-                        "%#{@term}%", "%#{@type}%").preload(:searchable).map(&:searchable).uniq
+      sanitized_term = ActiveRecord::Base.send(:sanitize_sql_array, ["to_tsquery('english', ?)", @term.gsub(/\s/,'+')])
+      results = self.class.where("to_tsvector('english', searches.term) @@ #{sanitized_term} AND
+                                  LOWER(searches.searchable_type) LIKE LOWER(?)",
+                                  "%#{@type}%").preload(:searchable).map(&:searchable).uniq
+      if results.empty?
+        results = self.class.where('LOWER(searches.term) LIKE LOWER(?)
+                                    AND
+                                    LOWER(searches.searchable_type) LIKE LOWER(?)',
+                                    "%#{@term}%", "%#{@type}%").preload(:searchable).map(&:searchable).uniq
+      end
+      results
     else
       Search.none
     end

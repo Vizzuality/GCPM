@@ -51,6 +51,7 @@ ActiveAdmin.register Investigator do
       f.input :email
       f.input :website
     end
+    f.actions
   end
 
 end
