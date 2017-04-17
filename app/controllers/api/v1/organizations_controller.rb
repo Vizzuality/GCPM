@@ -3,7 +3,6 @@ module Api::V1
     before_action :set_organization, except: [:index, :index_countries]
 
     def index
-      # ToDo: implementation of organization search by name
       organizations = Organization.fetch_all(organizations_params)
       render json: organizations, each_serializer: OrganizationArraySerializer
     end

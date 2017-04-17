@@ -35,25 +35,26 @@ class Organization < ApplicationRecord
 
   accepts_nested_attributes_for :addresses, allow_destroy: true
 
-  validates_presence_of   :name
-  validates               :email_address, format: { with: Devise.email_regexp }, allow_blank: true, on: :create
+  validates_presence_of :name
+  validates             :email_address, format: { with: Devise.email_regexp }, allow_blank: true, on: :create
 
-  scope :filter_name, -> organization_name { where('organizations.name ILIKE ?', "%#{organization_name}%") }
+  scope :filter_name,         -> name { where('organizations.name ILIKE ?', "%#{name}%") }
+  scope :are_funding_sources, ->      { joins(:funders)                                  }
 
   include Sluggable
 
   class << self
-    def are_funding_sources
-      Organization.joins(:funders)
-    end
-
     def fetch_all(options)
-      organizations = Organization.all
-      organizations = organizations.are_funding_sources      if options[:funding_source]
-      organizations = organizations.joins(:projects)         if options[:active] && options[:active] = true
+      organizations = Organization.includes(:funders, :projects)
+      organizations = organizations.are_funding_sources      if options[:funding_source].present?
+      organizations = organizations.joins(:projects)         if options[:active].present? && options[:active] == true
       organizations = organizations.filter_name(options[:q]) if options[:q].present?
       organizations.distinct
     end
+  end
+
+  def is_funder?
+    funders.any?
   end
 
   private
