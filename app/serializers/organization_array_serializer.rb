@@ -1,5 +1,5 @@
 class OrganizationArraySerializer < ActiveModel::Serializer
-  attributes :id, :name, :country_iso_3, :region_name, :region_iso, :funder
+  attributes :id, :name, :country_iso_3, :region_name, :region_iso
 
   def region_name
     object.try(:region_name)
@@ -11,9 +11,5 @@ class OrganizationArraySerializer < ActiveModel::Serializer
 
   def country_iso_3
     object.try(:country_iso_3)
-  end
-
-  def funder
-    object.is_funder?
   end
 end

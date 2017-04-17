@@ -23,15 +23,15 @@ class Organization < ApplicationRecord
   belongs_to :organization_type
 
   has_many :addresses,      dependent: :destroy
-  has_many :research_units, through: :addresses, dependent: :nullify
-  has_many :investigators,  through: :research_units, foreign_key: 'investigator_id', dependent: :nullify
-  has_many :memberships,    through: :research_units, dependent: :nullify
-  has_many :projects,       through: :memberships, dependent: :nullify
+  has_many :research_units, through: :addresses
+  has_many :investigators,  through: :research_units, foreign_key: 'investigator_id'
+  has_many :memberships,    through: :research_units
+  has_many :projects,       through: :memberships
   has_many :pins,           as: :pinable
   has_many :posts,          through: :pins
 
   has_many :funders
-  has_many :funded_projects, through: :funders, source: :project, dependent: :nullify
+  has_many :funded_projects, through: :funders, source: :project
 
   accepts_nested_attributes_for :addresses, allow_destroy: true
 
@@ -47,7 +47,7 @@ class Organization < ApplicationRecord
     def fetch_all(options)
       organizations = Organization.includes(:funders, :projects)
       organizations = organizations.are_funding_sources      if options[:funding_source].present?
-      organizations = organizations.joins(:projects)         if options[:active].present? && options[:active] == true
+      organizations = organizations.joins(:projects)         if options[:active].present?
       organizations = organizations.filter_name(options[:q]) if options[:q].present?
       organizations.distinct
     end
