@@ -17,9 +17,7 @@
       var organizationName = new App.Presenter.OrganizationName();
       var organizationCountry = new App.Presenter.OrganizationCountry();
       var organizationType = new App.Presenter.OrganizationType();
-      var organizationLatitude = new App.Presenter.OrganizationLatitude({
-
-      });
+      var organizationLatitude = new App.Presenter.OrganizationLatitude({});
       var organizationLongitude = new App.Presenter.OrganizationLongitude();
       var organizationCity = new App.Presenter.OrganizationCity();
 
@@ -73,6 +71,7 @@
       }.bind(this));
 
       this.map.on('pan', function(e){
+        this.organizationForm.setLatLngError(false);
         this.organizationForm.setLocation(e.target.getCenter());
       }.bind(this));
 
