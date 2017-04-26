@@ -10,7 +10,8 @@
       </div>
       <div class="row">
         <div class="column small-12 medium-8 align-middle">
-          <div class="investigator">
+
+          <%= link_to user_path(:data => 'network', :id => investigator.id), class: 'investigator' do %>
             <% if investigator.avatar.present? %>
                <div class="c-avatar -ph -small -no-bg"
                    style="background-image: url(<%= investigator.avatar_url(:thumb) %>)">
@@ -20,9 +21,9 @@
                 <%= render 'shared/placeholder', person: investigator, size: '-av-big' %>
               </div>
             <% end %>
-
             <p><%= investigator.present? && investigator.try(:name) %></p>
-          </div>
+          <% end%>
+
         </div>
         <div class="column small-12 medium-4 -align-right">
           <button class="c-btn -secondary -inverse -mg-left js-share-button" data-actiona="save"><%= t 'share' %></button>
