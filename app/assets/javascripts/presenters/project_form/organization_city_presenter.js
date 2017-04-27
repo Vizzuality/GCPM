@@ -23,7 +23,7 @@
           placeholder: '',
           name: 'organizationCity',
           type: 'text',
-          required: false,
+          required: true,
           class: 'c-input'
         }
       });

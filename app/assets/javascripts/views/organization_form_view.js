@@ -40,6 +40,10 @@
       this.$el.find('input[name="organizationLongitude"]').val(Number(center.lng).toFixed(2));
     },
 
+    setLatLngError: function(bool) {
+      this.$el.find('#latLngError').toggleClass('c-required', bool);
+    },
+
     triggerCancel: function() {
       this.trigger('cancel');
     },
@@ -48,7 +52,15 @@
       if (e) {
         e.preventDefault();
       }
-      this.trigger('submit', this.serializeForm());
+
+      var lat = this.$el.find('input[name="organizationLatitude"]').val();
+      var lng = this.$el.find('input[name="organizationLongitude"]').val();
+
+      if (lat && lng) {
+        this.trigger('submit', this.serializeForm());
+      } else {
+        this.setLatLngError(true);
+      }
     },
 
     /**
