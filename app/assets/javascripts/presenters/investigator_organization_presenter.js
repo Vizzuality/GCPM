@@ -17,7 +17,7 @@
         DOMelement: "#investigator-1",
         name: "investigator-1",
         label: null,
-        required: this.state.get('required'),
+        required: true,
         addNew: true,
         multiple: false,
         blank: true
@@ -26,7 +26,7 @@
         DOMelement: "#organization-1",
         name: "organization-1",
         label: null,
-        required: this.state.get('required'),
+        required: true,
         addNew: true,
         multiple: false
       });
@@ -34,7 +34,7 @@
         DOMelement: "#address-1",
         name: "address-1",
         label: null,
-        required: this.state.get('required'),
+        required: true,
         addNew: false,
         multiple: false
       });
@@ -49,8 +49,10 @@
         el: '#investigatororganization'
       });
 
-      var elementOneChildren = [investigator, organization, address, lead];
-      this.investigatorOrganization.createElement(elementOneChildren);
+      if (this.state.get('visible')) {
+        var elementOneChildren = [investigator, organization, address, lead];
+        this.investigatorOrganization.createElement(elementOneChildren);
+      }
       this.elements = this.investigatorOrganization.elements;
 
       this.setEvents();
@@ -62,7 +64,7 @@
      */
     setEvents: function() {
       this.investigatorOrganization.on('deleteElement', function(elementId){
-        if(this.elements.length === 1){
+        if(this.state.get('visible') && this.elements.length === 1){
           return false;
         }
 
@@ -104,6 +106,10 @@
 
 
     render: function(){
+
+      if (!this.elements.length) {
+        this.investigatorOrganization.render();
+      }
 
       _.each(this.elements, function(element) {
 
@@ -156,6 +162,7 @@
         DOMelement: "#investigator-"+this.investigatorOrganization.elementId,
         name:"investigator-"+this.investigatorOrganization.elementId,
         label: null,
+        required: true,
         addNew: true,
         multiple: false
       });
@@ -163,6 +170,7 @@
         DOMelement: "#organization-"+this.investigatorOrganization.elementId,
         name:"organization-"+this.investigatorOrganization.elementId,
         label: null,
+        required: true,
         addNew: true,
         multiple: false
       });
@@ -170,6 +178,7 @@
         DOMelement: "#address-"+this.investigatorOrganization.elementId,
         name: "address-"+this.investigatorOrganization.elementId,
         label: null,
+        required: true,
         addNew: false,
         multiple: false
       });

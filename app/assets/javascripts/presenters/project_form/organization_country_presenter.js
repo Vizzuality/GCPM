@@ -16,15 +16,9 @@
       label: 'Organization Country',
       required: true,
       placeholder: 'All Countries',
-      blank: null,
+      blank: true,
       addNew: false,
-      select2Options: {
-        // closeOnSelect: false
-        // It solves the closing of the dropdown menu
-        // It adds a lot of UX issues
-        // - Scroll: On select, scroll will go to first highlighted choice => How to resolve the scroll issue https://github.com/select2/select2/issues/1672#issuecomment-240411031
-        // - Click: On each click dropdown will appear and dissapear
-      }
+      select2Options: {}
     },
 
     initialize: function(viewSettings) {

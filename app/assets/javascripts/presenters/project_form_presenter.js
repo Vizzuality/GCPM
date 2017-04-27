@@ -43,6 +43,7 @@
       this.messagesList = new App.Presenter.MessagesList();
 
       this.investigatorOrganization = new App.Presenter.InvestigatorOrganization({
+        visible: true,
         required: true
       });
       this.fundingSourcesForm = new App.Presenter.FundingSourcesForm();
@@ -343,7 +344,8 @@
       this.messagesList = new App.Presenter.MessagesList();
 
       this.investigatorOrganization = new App.Presenter.InvestigatorOrganization({
-        required: false
+        visible: false,
+        required: true
       });
       this.investigatorOrganizationEdit = new App.Presenter.InvestigatorOrganizationEdit();
 
