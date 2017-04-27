@@ -118,7 +118,7 @@
       var uri = new URI();
       var params = _.omit(this.getParams(), 'vars', 'dataSingular', 'userId', 'group', 'direction', 'type', 'dataType');
       uri.query(this._serializeParams(params));
-      this.navigate(uri.path().slice(1) + uri.search(), { trigger: false });
+      this.navigate(uri.path().slice(1) + uri.search(), { trigger: false, replace: true });
     },
 
     /**
