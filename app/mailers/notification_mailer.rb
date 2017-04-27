@@ -4,7 +4,7 @@ class NotificationMailer < ApplicationMailer
     @email         = user_email
     @notifications = summary_items
 
-    @subject = 'This happens in Your network.'
+    @subject = 'Happening in your network'
 
     mail(to: @email, subject: @subject)
   end
