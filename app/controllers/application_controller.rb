@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :null_session, only: Proc.new { |c| c.json_request? }
 
-  http_basic_authenticate_with name: ENV['ACCESS_USER'], password: ENV['ACCESS_PASSWORD'] if ENV['ACCESS'].include?('private')
+  http_basic_authenticate_with name: ENV['ACCESS_USER'], password: ENV['ACCESS_PASSWORD'] if ENV['ACCESS'] == 'private'
 
   before_action :expire_xhr_requests
   before_action :build_user_data
