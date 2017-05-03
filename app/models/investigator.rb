@@ -27,10 +27,10 @@ class Investigator < ApplicationRecord
 
   has_many :research_units
 
-  has_many :addresses,     through: :research_units, dependent: :nullify
-  has_many :organizations, through: :addresses, dependent: :nullify
-  has_many :memberships,   through: :research_units, dependent: :nullify
-  has_many :projects,      through: :memberships, dependent: :nullify
+  has_many :addresses,     through: :research_units
+  has_many :organizations, through: :addresses
+  has_many :memberships,   through: :research_units
+  has_many :projects,      through: :memberships
 
   accepts_nested_attributes_for :organizations
   accepts_nested_attributes_for :addresses
