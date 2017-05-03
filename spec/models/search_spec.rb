@@ -12,19 +12,22 @@ require 'rails_helper'
 RSpec.describe Search, type: :model do
   before :each do
     @user = create(:user)
-    create(:project,      title: 'breast cancer project',      status: 1, users: [@user], project_types: [create(:project_type, name: "project type 1")],
+    create(:project,      title: 'breast cancer project',   status: 1, users: [@user], project_types: [create(:project_type, name: "project type 1")],
                                                                                           cancer_types: [create(:cancer_type, name: "cancer type 1")])
-    create(:project,      title: 'breast cancer project 2',    status: 0, users: [@user], project_types: [create(:project_type, name: "project type 2")],
+    create(:project,      title: 'breast cancer project 2', status: 0, users: [@user], project_types: [create(:project_type, name: "project type 2")],
                                                                                           cancer_types: [create(:cancer_type, name: "cancer type 2")])
     create(:cancer_type,  name:  'breast cancer')
     create(:investigator, name:  'breast investigator', user: @user)
     create(:event,        title: 'breast event',        user: @user)
     create(:organization, name:  'breast orga')
     create(:user,         name:  'Tytus Roble Doble')
+    create(:project,      title: 'Vanderbilt-Emory-Cornell-Duke Consortium for Global Health Fellows (VECDor)', status: 1, users: [@user], project_types: [create(:project_type, name: "project type 3")],
+                          cancer_types: [create(:cancer_type, name: "cancer type 3")])
 
     @term   = 'breast'
     @term_2 = 'Breast cancer'
     @term_3 = "Roble"
+    @term_4 = "Vanderbilt-Emory-Cornell-Duke Consortium for Global Health Fellows (VECDor)"
     @type_1 = 'Investigator'
     @type_2 = 'CancerType'
     @type_3 = 'project'
@@ -35,7 +38,7 @@ RSpec.describe Search, type: :model do
 
   it 'Search indexed items count' do
     # Search in projects and organizations, users in two columns
-    expect(Search.all.count).to eq(13)
+    expect(Search.all.count).to eq(16)
   end
 
   it 'Search count' do
@@ -46,6 +49,11 @@ RSpec.describe Search, type: :model do
   it 'Search for specific string' do
     search = Search.new(@term_2)
     expect(search.results.count).to eq(2)
+  end
+
+  it 'Search for special string' do
+    search = Search.new(@term_4)
+    expect(search.results.count).to eq(1)
   end
 
   context "Search by types" do

@@ -13,7 +13,7 @@ class Search < ActiveRecord::Base
   belongs_to :searchable, polymorphic: true
 
   def initialize(term, type=nil)
-    @term = term
+    @term = term.delete('()')
     @type = type
   end
 
