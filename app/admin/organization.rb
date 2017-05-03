@@ -45,7 +45,7 @@ ActiveAdmin.register Organization do
       f.has_many :addresses, heading: 'Addresses', allow_destroy: true, new_record: true do |address|
         address.input :primary
         address.input :city
-        address.input :country, as: :select, collection: Country.all.map{|c| [c.country_name]}
+        address.input :country, as: :select, collection: Country.all.map{ |c| [c.country_name, c.id] }
         address.input :latitude
         address.input :longitude
         address.input :line_1, as: :string
