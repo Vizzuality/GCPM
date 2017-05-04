@@ -106,7 +106,14 @@
               .done(function(){
                 var country = this.country.toJSON();
                 var countryPolygon = L.geoJson(country);
-                map.fitBounds(countryPolygon.getBounds(), {
+                var bounds = countryPolygon.getBounds();
+                debugger;
+                bounds._northEast.lng += 360;
+                bounds._southWest.lng += 360;
+
+                console.log(bounds);
+
+                map.fitBounds(bounds, {
                   // paddingTopLeft: [100, 100],
                   // paddingBottomRight: [100, 200]
                 });

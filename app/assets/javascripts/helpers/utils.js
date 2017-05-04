@@ -115,7 +115,13 @@
         return svgNode.xml;
       }
       return "";
+    },
+
+    validLng: function(lng) {
+      return lng + 360;
     }
+
+
 
   }
 

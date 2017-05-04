@@ -21,7 +21,7 @@
 
     pruneCluster.BuildLeafletIcon = function(feature) {
       var location = feature.geometry.coordinates;
-      var marker = new PruneCluster.Marker(location[0], location[1]); // lat, lng
+      var marker = new PruneCluster.Marker(location[0], location[1] + 360); // lat, lng
       marker.data.feature = feature;
       return marker;
     };
