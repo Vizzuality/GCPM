@@ -72,7 +72,7 @@ class Investigator < ApplicationRecord
     def fetch_all(options={})
       getall_true = options[:getall] if options.present? && options[:getall] && options[:getall] == true
 
-      investigators = Investigator.all.for_render.order_by_name
+      investigators = Investigator.all.for_render
       investigators = investigators.by_countries(options[:countries])                   if options[:countries]
       investigators = investigators.by_regions(options[:regions])                       if options[:regions]
       investigators = investigators.by_investigators(options[:investigators])           if options[:investigators]
@@ -91,6 +91,7 @@ class Investigator < ApplicationRecord
       investigators = investigators.order('investigators.created_at DESC')              if options[:sortby] && options[:sortby] == 'created_desc'
       investigators = investigators.order('investigators.name ASC')                     if options[:sortby] && options[:sortby] == 'title_asc'
       investigators = investigators.order('investigators.name DESC')                    if options[:sortby] && options[:sortby] == 'title_desc'
+      investigators = investigators.order_by_name                                       if !options[:sortby]
       investigators = investigators.limit(options[:limit])                              if options[:limit]
       investigators = investigators.offset(options[:offset])                            if options[:offset]
       investigators = investigators.filter_name(options[:q])                            if options[:q].present?
