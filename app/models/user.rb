@@ -46,7 +46,7 @@ class User < ApplicationRecord
   enum role: { user: 0, admin: 1 }
   TEMP_EMAIL_PREFIX = 'change@tmp'
   TEMP_EMAIL_REGEX = /\Achange@tmp/
-
+  attr_accessor :terms
   mount_uploader :avatar, AvatarUploader
 
   acts_as_followable
@@ -70,6 +70,7 @@ class User < ApplicationRecord
   validates_uniqueness_of :email
   validates_presence_of   :name
   validates_format_of     :email, without: TEMP_EMAIL_REGEX, on: :update
+  validates_acceptance_of :terms
 
   accepts_nested_attributes_for :projects
 
