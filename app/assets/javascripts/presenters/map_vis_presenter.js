@@ -6,11 +6,11 @@
 
   var CountryModel = Backbone.Model.extend({
     setUrl: function(iso) {
-      var sql = "SELECT the_geom "+
+      var sql = "SELECT st_asgeojson(bbox_the_geom) "+
                 "FROM canceratlas_downloadabledata "+
                 "WHERE iso3='" + iso + "'";
 
-      this.url = 'https://' + gon.carto_account + '.carto.com/api/v2/sql/?q=' + sql + '&api_key=' + gon.carto_key + '&format=GeoJSON';
+      this.url = 'https://' + gon.carto_account + '.carto.com/api/v2/sql/?q=' + sql + '&api_key=' + gon.carto_key;
     }
   });
 
@@ -103,13 +103,10 @@
           if (this.state.get('iso')) {
             this.country.setUrl(this.state.get('iso'));
             this.country.fetch()
-              .done(function(){
-                var country = this.country.toJSON();
-                var countryPolygon = L.geoJson(country);
-                map.fitBounds(countryPolygon.getBounds(), {
-                  // paddingTopLeft: [100, 100],
-                  // paddingBottomRight: [100, 200]
-                });
+              .done(function(data){
+                var st_asgeojson = JSON.parse(data.rows[0].st_asgeojson);
+                var countryEnvelop = L.geoJson(st_asgeojson);
+                map.fitBounds(countryEnvelop.getBounds());
               }.bind(this));
           }
 
