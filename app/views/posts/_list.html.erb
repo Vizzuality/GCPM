@@ -10,7 +10,7 @@
             <% if controller_name === 'users' && is_owner?(@user, current_user) %>
               <%= link_to 'Edit', edit_post_path(p.id), class: "c-btn -secondary" %>
             <% end %>
-            <p>Last update: <%= p.updated_at.strftime("%d-%m-%Y") %></p>
+            <p>Last update: <%= p.updated_at.strftime("%Y-%m-%d") %></p>
           </div>
         </div>
       </div>

@@ -19,7 +19,7 @@
       <div class="c-card">
         <div class="row -no-mrg align-justify">
           <h3 class="-underlined">
-            <%= u.created_at.strftime("%Y / %m / %d - %H : %M") %>
+            <%= u.created_at.strftime("%Y-%m-%d") %>
           </h3>
           <% if @owner %>
             <%= link_to edit_project_project_update_path(@project.slug_or_id, u.id) do %>

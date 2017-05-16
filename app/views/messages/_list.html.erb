@@ -23,7 +23,7 @@
                 <li class="c-conversations-item <%= (m.sender_id == current_user.id) ? '-mine' : '-theirs' %>">
                   <div class="sender">
                     <h3><%= message_person === current_user ? 'You' : message_person.investigator.try(:name) ||  '(' + message_person.try(:name) + ')' %></h3>
-                    <small><%= m.created_at.strftime("%d.%m.%Y") %> <%= m.created_at.strftime("%H:%M")%></small>
+                    <small><%= m.created_at.strftime("%Y-%m-%d") %> <%= m.created_at.strftime("%H:%M")%></small>
                   </div>
                   <div class="message">
                     <%= m.body %>
