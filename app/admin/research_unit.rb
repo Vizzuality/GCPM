@@ -14,7 +14,7 @@ ActiveAdmin.register ResearchUnit do
     actions
   end
 
-  filter :investigator
+  filter :investigator_name, as: :string
 
    form do |f|
     f.semantic_errors
