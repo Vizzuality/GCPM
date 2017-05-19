@@ -8,7 +8,7 @@ ActiveAdmin.register ResearchUnit do
   index do
     selectable_column
     column :organization do |o|
-      o.organization.name
+      o.organization.name if o.organization
     end
     column :investigator
     actions
