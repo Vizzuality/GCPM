@@ -20,7 +20,7 @@ ActiveAdmin.register ResearchUnit do
     f.semantic_errors
     f.inputs do
       f.input :investigator_id, as: :select, collection: Investigator.all.map{ |i| [i.name, i.id] }
-      f.input :address_id, as: :select, collection: Address.eager_load(:organization).order('organizations.name').map{ |i| ["#{i.organization.name} - #{i.country_name}", i.id] }
+      f.input :address_id, as: :select, collection: Address.eager_load(:organization).order('organizations.name').map{ |i| ["#{i.organization.name if i.organization} - #{i.country_name}", i.id] }
     end
     f.actions
   end
