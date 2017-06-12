@@ -1,7 +1,7 @@
 ActiveAdmin.register Address do
   menu parent: "Entities"
 
-  permit_params :city, :country, :primary, :latitude, :longitude, :line_1, :line_2, :line_3, :postcode, :state, :state_code, :organization_id
+  permit_params :city, :country, :primary, :latitude, :longitude, :line_1, :line_2, :line_3, :postcode, :state, :state_code, :organization_id, :country_name
   filter :country
   filter :city
   index do
@@ -20,7 +20,7 @@ ActiveAdmin.register Address do
       f.input :organization
       f.input :primary
       f.input :city
-      f.input :country, as: :select, collection: Country.all.map{|c| [c.country_name]}
+      f.input :country_name, as: :select, collection: Country.all.map{|c| [c.country_name]}
       f.input :latitude
       f.input :longitude
       f.input :line_1, as: :string

@@ -1,7 +1,7 @@
 ActiveAdmin.register User do
   menu parent: 'Network', priority: 1
 
-  permit_params :email, :name, :position, :twitter_account, :linkedin_account, :pubmed, :role, :is_active
+  permit_params :email, :name, :position, :twitter_account, :linkedin_account, :pubmed, :role, :is_active, :terms
 
   filter :name
   filter :email
@@ -28,6 +28,7 @@ ActiveAdmin.register User do
       f.input :pubmed
       f.input :role
       f.input :is_active
+      f.input :terms, as: :boolean
     end
     f.actions
   end

@@ -1,3 +1,5 @@
+<% title 'Sign up' %>
+
 <div class="l-content">
   <div class="wrapper">
     <div class="row">
@@ -22,6 +24,13 @@
           </div>
           <div class="form-row">
             <%= f.input :password_confirmation, required: true %>
+          </div>
+
+          <div class="form-row">
+            <%= f.input :terms, as: :boolean, required: true %>
+            <span>
+              Click here if you have read, understood, and agree to <a href="/terms-of-use">The GO Map websites Terms of Use</a> and <a href="/privacy-policy">Privacy Policy</a>
+            </span>
           </div>
 
           <div class="form-actions">
