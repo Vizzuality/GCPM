@@ -19,7 +19,7 @@ class Search < ActiveRecord::Base
 
   def results
     if @term.present?
-      sanitized_term = ActiveRecord::Base.send(:sanitize_sql_array, ["to_tsquery('english', ?)", @term.gsub(/\s/,'+')])
+      sanitized_term = ActiveRecord::Base.send(:sanitize_sql_array, ["to_tsquery('english', ?)", CGI.escape(@term.gsub(/[^0-9a-z ]/i, ''))])
       results = self.class.where("to_tsvector('english', searches.term) @@ #{sanitized_term} AND
                                   LOWER(searches.searchable_type) LIKE LOWER(?)",
                                   "%#{@type}%").preload(:searchable).map(&:searchable).uniq
