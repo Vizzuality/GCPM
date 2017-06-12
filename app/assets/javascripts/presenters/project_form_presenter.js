@@ -193,7 +193,6 @@
               obj.membership_type = "secondary";
             }
 
-
             // NEW INVESTIGATOR RELATIONSHIP
             if (investigator) {
               if(isNaN(parseInt(investigator))){
@@ -221,6 +220,8 @@
                     address_attributes: {
                       country_id: organization.organizationCountry,
                       city: organization.organizationCity,
+                      latitude: organization.organizationLatitude,
+                      longitude: organization.organizationLongitude,
                       organization_attributes: {
                         name: organization.organizationName,
                         organization_type_id: organization.organizationType
@@ -254,6 +255,9 @@
                         {
                           country_id: organization.organizationCountry,
                           city: organization.organizationCity,
+                          latitude: organization.organizationLatitude,
+                          longitude: organization.organizationLongitude,
+
                           organization_attributes: {
                             name: organization.organizationName,
                             organization_type_id: organization.organizationType
