@@ -33,9 +33,9 @@
         options: {
           name: 'investigators',
           type: 'text',
-          label: 'Investigators',
+          label: 'People',
           inputClass: 'c-section-title -one-line',
-          placeholder: 'Investigators'
+          placeholder: 'All people'
         }
       });
 

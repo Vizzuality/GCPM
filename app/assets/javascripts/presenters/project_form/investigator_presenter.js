@@ -13,8 +13,8 @@
     defaults: {
       multiple: false,
       name: 'investigator',
-      label: 'Investigator',
-      placeholder: 'All investigators',
+      label: 'People',
+      placeholder: 'All collaborators',
       blank: null,
       addNew: true,
       select2Options: {

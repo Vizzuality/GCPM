@@ -21,7 +21,7 @@
           value: 'Project'
         },
         {
-          name: 'Investigator',
+          name: 'Project Lead/Collaborator',
           value: 'Investigator'
         },
         {
