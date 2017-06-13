@@ -56,7 +56,7 @@
       <% @search_results.each do |search| %>
         <div class="column small-12 medium-4">
           <div class="c-card">
-            <h3 class="-underlined"><%= search.class.name %></h3>
+            <h3 class="-underlined"><%= (search.class.name == 'Investigator') ? 'Project Lead/Collaborator' : search.class.name %></h3>
             <h2><%= link_to search.try(:title) || search.try(:name), build_search_link(search.class.name, search.slug_or_id) %></h2>
             <% if search.try(:summary).present? || search.try(:description).present? %>
               <p><%= truncate_html(search.try(:summary) || search.try(:description), :length => 150, :omission => "...").html_safe %></p>

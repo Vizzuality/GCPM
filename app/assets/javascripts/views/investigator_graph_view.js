@@ -38,9 +38,9 @@
 
     addLegend: function() {
       this.$el.html(this.template({
-        current: 'Current investigator',
+        current: 'Current Project Lead/Collaborator',
         rects: 'Project',
-        others: 'Investigator / Colaborator'
+        others: 'Collaborator'
       }));
     },
 
