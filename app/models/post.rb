@@ -25,6 +25,8 @@ class Post < ApplicationRecord
 
   validates_presence_of :title, :body
 
+  default_scope { order('created_at DESC') }
+
   def build_pins(options)
     options.each do |pinable_type, pinable_ids|
       pinable_ids.each do |pinable_id|
